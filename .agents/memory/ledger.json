@@ -1,0 +1,204 @@
+{
+  "project": "VID Platform",
+  "updated_at": "2026-09-24T12:35:00+05:30",
+  "status": "Phase 0 Complete - Plugins & Memory Suite Installed",
+  "installed_plugins_count": 28,
+  "plugins": [
+    {
+      "id": "mcp-local-memory",
+      "name": "mcp-local-memory",
+      "category": "Memory",
+      "skill": "local-memory",
+      "description": "Lightweight local memory server, entities/relations/time-based recall across sessions."
+    },
+    {
+      "id": "codex-honcho",
+      "name": "Honcho",
+      "category": "Memory",
+      "skill": "honcho-memory",
+      "description": "Captures each session and injects relevant context back at session start via persistent conclusions."
+    },
+    {
+      "id": "metabrain",
+      "name": "metabrain",
+      "category": "Memory",
+      "skill": "metabrain",
+      "description": "SQLite memory server where patterns graduate into hypotheses then preferences."
+    },
+    {
+      "id": "knowl",
+      "name": "Knowl",
+      "category": "Memory",
+      "skill": "knowl",
+      "description": "Local-first project memory over MCP, retires facts when they change, hybrid search."
+    },
+    {
+      "id": "memesh",
+      "name": "MeMesh",
+      "category": "Memory",
+      "skill": "memesh",
+      "description": "Shared SQLite memory across Claude Code, Codex, Gemini, Antigravity, and Cursor."
+    },
+    {
+      "id": "wingman",
+      "name": "Wingman",
+      "category": "Memory",
+      "skill": "wingman",
+      "description": "Repo-local project memory + data-contract checks before agents edit code."
+    },
+    {
+      "id": "unforgit",
+      "name": "Unforgit",
+      "category": "Memory",
+      "skill": "unforgit",
+      "description": "Git-backed memory for decisions, conventions, gotchas, playbooks committed with the codebase."
+    },
+    {
+      "id": "brooks-lint",
+      "name": "Brooks Lint",
+      "category": "Code Quality",
+      "skill": "brooks-lint",
+      "description": "Code review grounded in classic engineering books, severity labels."
+    },
+    {
+      "id": "river-review",
+      "name": "River Review",
+      "category": "Code Quality",
+      "skill": "river-review",
+      "description": "Perspective-based review agent (security, performance, architecture, testing) that verifies findings against the actual diff."
+    },
+    {
+      "id": "codex-reviewer",
+      "name": "Codex Reviewer",
+      "category": "Code Quality",
+      "skill": "codex-reviewer",
+      "description": "Second-pass review of another agent's plan/implementation."
+    },
+    {
+      "id": "debt-ops",
+      "name": "debt-ops",
+      "category": "Code Quality",
+      "skill": "debt-ops",
+      "description": "Catches AI-introduced tech debt at write-time, logs every deferral."
+    },
+    {
+      "id": "megalinter",
+      "name": "MegaLinter",
+      "category": "Code Quality",
+      "skill": "megalinter",
+      "description": "100+ linters/formatters across 69+ languages in one pass."
+    },
+    {
+      "id": "tailtest",
+      "name": "tailtest",
+      "category": "Testing",
+      "skill": "tailtest",
+      "description": "Auto-detects changed files and writes/runs tests, 8 languages, zero config."
+    },
+    {
+      "id": "falsegreen-skill",
+      "name": "falsegreen-skill",
+      "category": "Testing",
+      "skill": "falsegreen",
+      "description": "Finds tests that stay green even when the code they cover is broken."
+    },
+    {
+      "id": "flaky-detector",
+      "name": "Flaky Detector",
+      "category": "Testing",
+      "skill": "flaky-detector",
+      "description": "Reruns your test suite N times, reports per-test flakiness %."
+    },
+    {
+      "id": "test-gap",
+      "name": "Test Gap",
+      "category": "Testing",
+      "skill": "test-gap",
+      "description": "Finds lines in your diff with no test coverage."
+    },
+    {
+      "id": "agent-guard",
+      "name": "Agent Guard",
+      "category": "Security",
+      "skill": "agent-guard",
+      "description": "Real-time secret-leak guardrails via Git hooks + CI."
+    },
+    {
+      "id": "secret-guard",
+      "name": "Secret Guard",
+      "category": "Security",
+      "skill": "secret-guard",
+      "description": "Pre-commit secret scanner (pattern + entropy detection)."
+    },
+    {
+      "id": "axonflow",
+      "name": "AxonFlow",
+      "category": "Security",
+      "skill": "axonflow",
+      "description": "Runtime policy enforcement on agent terminal commands + PII detection."
+    },
+    {
+      "id": "hol-guard",
+      "name": "HOL Guard",
+      "category": "Security",
+      "skill": "hol-guard",
+      "description": "Antivirus scanner for plugins/MCP servers/skills themselves before trusting them."
+    },
+    {
+      "id": "spec-driven",
+      "name": "Spec-Driven Development",
+      "category": "SDLC Discipline",
+      "skill": "spec-driven",
+      "description": "Requirements -> Design -> Tasks workflow with acceptance criteria and post-implementation testing."
+    },
+    {
+      "id": "dev-skills",
+      "name": "Dev Skills",
+      "category": "SDLC Discipline",
+      "skill": "dev-skills",
+      "description": "Specs, plans, TDD, debugging, verification, review as enforced skills."
+    },
+    {
+      "id": "ai-native-sdlc",
+      "name": "AI-Native SDLC",
+      "category": "SDLC Discipline",
+      "skill": "ai-native-sdlc",
+      "description": "Plan/design/build/test/deploy/maintain with human approval gates baked in."
+    },
+    {
+      "id": "commit-narrator",
+      "name": "Commit Narrator",
+      "category": "Automation",
+      "skill": "commit-narrator",
+      "description": "Generates semantic commit messages (with the why) from staged diffs."
+    },
+    {
+      "id": "pr-storyteller",
+      "name": "PR Storyteller",
+      "category": "Automation",
+      "skill": "pr-storyteller",
+      "description": "Auto-writes PR title + body + test plan from your commits/diff."
+    },
+    {
+      "id": "docflow",
+      "name": "Docflow",
+      "category": "Automation",
+      "skill": "docflow",
+      "description": "Scaffolds and keeps a docs tree current, blocks finishing until docs are updated."
+    },
+    {
+      "id": "token-optimizer",
+      "name": "token-optimizer",
+      "category": "Optimization",
+      "skill": "token-optimizer",
+      "description": "Diff-only re-reads, paths-only search, local ledger tracking actual token ROI per tool."
+    },
+    {
+      "id": "espresso",
+      "name": "Espresso",
+      "category": "Optimization",
+      "skill": "espresso",
+      "description": "Output compression + global rules stack, detects existing setup and only installs what's missing."
+    }
+  ]
+}

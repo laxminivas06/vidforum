@@ -1,0 +1,9 @@
+{
+  "name": "Agent Guard",
+  "id": "agent-guard",
+  "version": "1.0.0",
+  "category": "Security",
+  "description": "Real-time secret-leak guardrails via Git hooks + CI.",
+  "repository": "https://github.com/JeongJaeSoon/agent-guard",
+  "skills": "./skills/agent-guard"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Flaky Detector",
+  "id": "flaky-detector",
+  "version": "1.0.0",
+  "category": "Testing",
+  "description": "Reruns your test suite N times, reports per-test flakiness %.",
+  "repository": "https://github.com/hashgraph-online/awesome-ai-plugins",
+  "skills": "./skills/flaky-detector"
+}

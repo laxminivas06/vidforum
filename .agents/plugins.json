@@ -1,0 +1,88 @@
+{
+  "entries": [
+    {
+      "path": ".agents/plugins/mcp-local-memory"
+    },
+    {
+      "path": ".agents/plugins/codex-honcho"
+    },
+    {
+      "path": ".agents/plugins/metabrain"
+    },
+    {
+      "path": ".agents/plugins/knowl"
+    },
+    {
+      "path": ".agents/plugins/memesh"
+    },
+    {
+      "path": ".agents/plugins/wingman"
+    },
+    {
+      "path": ".agents/plugins/unforgit"
+    },
+    {
+      "path": ".agents/plugins/brooks-lint"
+    },
+    {
+      "path": ".agents/plugins/river-review"
+    },
+    {
+      "path": ".agents/plugins/codex-reviewer"
+    },
+    {
+      "path": ".agents/plugins/debt-ops"
+    },
+    {
+      "path": ".agents/plugins/megalinter"
+    },
+    {
+      "path": ".agents/plugins/tailtest"
+    },
+    {
+      "path": ".agents/plugins/falsegreen-skill"
+    },
+    {
+      "path": ".agents/plugins/flaky-detector"
+    },
+    {
+      "path": ".agents/plugins/test-gap"
+    },
+    {
+      "path": ".agents/plugins/agent-guard"
+    },
+    {
+      "path": ".agents/plugins/secret-guard"
+    },
+    {
+      "path": ".agents/plugins/axonflow"
+    },
+    {
+      "path": ".agents/plugins/hol-guard"
+    },
+    {
+      "path": ".agents/plugins/spec-driven"
+    },
+    {
+      "path": ".agents/plugins/dev-skills"
+    },
+    {
+      "path": ".agents/plugins/ai-native-sdlc"
+    },
+    {
+      "path": ".agents/plugins/commit-narrator"
+    },
+    {
+      "path": ".agents/plugins/pr-storyteller"
+    },
+    {
+      "path": ".agents/plugins/docflow"
+    },
+    {
+      "path": ".agents/plugins/token-optimizer"
+    },
+    {
+      "path": ".agents/plugins/espresso"
+    }
+  ]
+}

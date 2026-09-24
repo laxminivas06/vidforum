@@ -1,0 +1,9 @@
+{
+  "name": "River Review",
+  "id": "river-review",
+  "version": "1.0.0",
+  "category": "Code Quality",
+  "description": "Perspective-based review agent (security, performance, architecture, testing) that verifies findings against the actual diff.",
+  "repository": "https://github.com/s977043/river-review",
+  "skills": "./skills/river-review"
+}

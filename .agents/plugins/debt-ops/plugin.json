@@ -1,0 +1,9 @@
+{
+  "name": "debt-ops",
+  "id": "debt-ops",
+  "version": "1.0.0",
+  "category": "Code Quality",
+  "description": "Catches AI-introduced tech debt at write-time, logs every deferral.",
+  "repository": "https://github.com/bcanfield/agentic-tech-debt",
+  "skills": "./skills/debt-ops"
+}

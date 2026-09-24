@@ -1,0 +1,9 @@
+{
+  "name": "falsegreen-skill",
+  "id": "falsegreen-skill",
+  "version": "1.0.0",
+  "category": "Testing",
+  "description": "Finds tests that stay green even when the code they cover is broken.",
+  "repository": "https://github.com/vinicq/falsegreen-skill",
+  "skills": "./skills/falsegreen"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Commit Narrator",
+  "id": "commit-narrator",
+  "version": "1.0.0",
+  "category": "Automation",
+  "description": "Generates semantic commit messages (with the why) from staged diffs.",
+  "repository": "https://github.com/hashgraph-online/awesome-ai-plugins",
+  "skills": "./skills/commit-narrator"
+}

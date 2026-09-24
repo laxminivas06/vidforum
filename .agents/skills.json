@@ -1,0 +1,88 @@
+{
+  "entries": [
+    {
+      "path": ".agents/plugins/mcp-local-memory/skills/local-memory"
+    },
+    {
+      "path": ".agents/plugins/codex-honcho/skills/honcho-memory"
+    },
+    {
+      "path": ".agents/plugins/metabrain/skills/metabrain"
+    },
+    {
+      "path": ".agents/plugins/knowl/skills/knowl"
+    },
+    {
+      "path": ".agents/plugins/memesh/skills/memesh"
+    },
+    {
+      "path": ".agents/plugins/wingman/skills/wingman"
+    },
+    {
+      "path": ".agents/plugins/unforgit/skills/unforgit"
+    },
+    {
+      "path": ".agents/plugins/brooks-lint/skills/brooks-lint"
+    },
+    {
+      "path": ".agents/plugins/river-review/skills/river-review"
+    },
+    {
+      "path": ".agents/plugins/codex-reviewer/skills/codex-reviewer"
+    },
+    {
+      "path": ".agents/plugins/debt-ops/skills/debt-ops"
+    },
+    {
+      "path": ".agents/plugins/megalinter/skills/megalinter"
+    },
+    {
+      "path": ".agents/plugins/tailtest/skills/tailtest"
+    },
+    {
+      "path": ".agents/plugins/falsegreen-skill/skills/falsegreen"
+    },
+    {
+      "path": ".agents/plugins/flaky-detector/skills/flaky-detector"
+    },
+    {
+      "path": ".agents/plugins/test-gap/skills/test-gap"
+    },
+    {
+      "path": ".agents/plugins/agent-guard/skills/agent-guard"
+    },
+    {
+      "path": ".agents/plugins/secret-guard/skills/secret-guard"
+    },
+    {
+      "path": ".agents/plugins/axonflow/skills/axonflow"
+    },
+    {
+      "path": ".agents/plugins/hol-guard/skills/hol-guard"
+    },
+    {
+      "path": ".agents/plugins/spec-driven/skills/spec-driven"
+    },
+    {
+      "path": ".agents/plugins/dev-skills/skills/dev-skills"
+    },
+    {
+      "path": ".agents/plugins/ai-native-sdlc/skills/ai-native-sdlc"
+    },
+    {
+      "path": ".agents/plugins/commit-narrator/skills/commit-narrator"
+    },
+    {
+      "path": ".agents/plugins/pr-storyteller/skills/pr-storyteller"
+    },
+    {
+      "path": ".agents/plugins/docflow/skills/docflow"
+    },
+    {
+      "path": ".agents/plugins/token-optimizer/skills/token-optimizer"
+    },
+    {
+      "path": ".agents/plugins/espresso/skills/espresso"
+    }
+  ]
+}

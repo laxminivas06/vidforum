@@ -1,0 +1,9 @@
+{
+  "name": "Knowl",
+  "id": "knowl",
+  "version": "1.0.0",
+  "category": "Memory",
+  "description": "Local-first project memory over MCP, retires facts when they change, hybrid search.",
+  "repository": "https://github.com/dat999zx/knowl",
+  "skills": "./skills/knowl"
+}

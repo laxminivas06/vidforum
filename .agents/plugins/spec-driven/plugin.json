@@ -1,0 +1,9 @@
+{
+  "name": "Spec-Driven Development",
+  "id": "spec-driven",
+  "version": "1.0.0",
+  "category": "SDLC Discipline",
+  "description": "Requirements -> Design -> Tasks workflow with acceptance criteria and post-implementation testing.",
+  "repository": "https://github.com/Habib0x0/spec-driven-plugin",
+  "skills": "./skills/spec-driven"
+}

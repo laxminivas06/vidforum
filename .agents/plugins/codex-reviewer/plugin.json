@@ -1,0 +1,9 @@
+{
+  "name": "Codex Reviewer",
+  "id": "codex-reviewer",
+  "version": "1.0.0",
+  "category": "Code Quality",
+  "description": "Second-pass review of another agent's plan/implementation.",
+  "repository": "https://github.com/schuettc/codex-reviewer",
+  "skills": "./skills/codex-reviewer"
+}

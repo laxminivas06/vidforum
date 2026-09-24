@@ -1,0 +1,9 @@
+{
+  "name": "PR Storyteller",
+  "id": "pr-storyteller",
+  "version": "1.0.0",
+  "category": "Automation",
+  "description": "Auto-writes PR title + body + test plan from your commits/diff.",
+  "repository": "https://github.com/hashgraph-online/awesome-ai-plugins",
+  "skills": "./skills/pr-storyteller"
+}

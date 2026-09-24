@@ -1,0 +1,9 @@
+{
+  "name": "Secret Guard",
+  "id": "secret-guard",
+  "version": "1.0.0",
+  "category": "Security",
+  "description": "Pre-commit secret scanner (pattern + entropy detection).",
+  "repository": "https://github.com/hashgraph-online/awesome-ai-plugins",
+  "skills": "./skills/secret-guard"
+}

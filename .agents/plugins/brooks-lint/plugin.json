@@ -1,0 +1,9 @@
+{
+  "name": "Brooks Lint",
+  "id": "brooks-lint",
+  "version": "1.0.0",
+  "category": "Code Quality",
+  "description": "Code review grounded in classic engineering books, severity labels.",
+  "repository": "https://github.com/hyhmrright/brooks-lint",
+  "skills": "./skills/brooks-lint"
+}

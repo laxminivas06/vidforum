@@ -1,0 +1,9 @@
+{
+  "name": "Espresso",
+  "id": "espresso",
+  "version": "1.0.0",
+  "category": "Optimization",
+  "description": "Output compression + global rules stack, detects existing setup and only installs what's missing.",
+  "repository": "https://github.com/mirkobozzetto/espresso",
+  "skills": "./skills/espresso"
+}

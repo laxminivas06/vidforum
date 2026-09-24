@@ -1,0 +1,9 @@
+{
+  "name": "Wingman",
+  "id": "wingman",
+  "version": "1.0.0",
+  "category": "Memory",
+  "description": "Repo-local project memory + data-contract checks before agents edit code.",
+  "repository": "https://github.com/lsshym/wingman.ai",
+  "skills": "./skills/wingman"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "AxonFlow",
+  "id": "axonflow",
+  "version": "1.0.0",
+  "category": "Security",
+  "description": "Runtime policy enforcement on agent terminal commands + PII detection.",
+  "repository": "https://github.com/getaxonflow/axonflow-codex-plugin",
+  "skills": "./skills/axonflow"
+}

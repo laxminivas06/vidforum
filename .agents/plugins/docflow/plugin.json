@@ -1,0 +1,9 @@
+{
+  "name": "Docflow",
+  "id": "docflow",
+  "version": "1.0.0",
+  "category": "Automation",
+  "description": "Scaffolds and keeps a docs tree current, blocks finishing until docs are updated.",
+  "repository": "https://github.com/MedAdemBHA/docflow",
+  "skills": "./skills/docflow"
+}

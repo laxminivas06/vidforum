@@ -1,0 +1,9 @@
+{
+  "name": "MeMesh",
+  "id": "memesh",
+  "version": "1.0.0",
+  "category": "Memory",
+  "description": "Shared SQLite memory across Claude Code, Codex, Gemini, Antigravity, and Cursor.",
+  "repository": "https://github.com/PCIRCLE-AI/memesh",
+  "skills": "./skills/memesh"
+}

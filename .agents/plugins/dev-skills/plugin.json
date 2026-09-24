@@ -1,0 +1,9 @@
+{
+  "name": "Dev Skills",
+  "id": "dev-skills",
+  "version": "1.0.0",
+  "category": "SDLC Discipline",
+  "description": "Specs, plans, TDD, debugging, verification, review as enforced skills.",
+  "repository": "https://github.com/Jason-chen-coder/dev-skills",
+  "skills": "./skills/dev-skills"
+}

@@ -120,4 +120,43 @@ graph TD
 - **Verified Build & Git Push:** Production build compiled (`32/32 static routes`), remote synchronized on `laxminivas06/vidforum:main` (Commit `e2d98b7`).
 
 ---
+
+## 5. Backend & Supabase Database Architecture Implementation (2026-09-25)
+
+### 5.1 Cloud Database Infrastructure (Supabase PostgreSQL)
+- **Host & Deployment:** Supabase PostgreSQL Pooler (`aws-0-ap-northeast-2.pooler.supabase.com:5432/postgres`), SSL connection pool configured in `backend/src/config/database.ts`.
+- **Complete Schema (127 Tables):** Migrated all 16 architectural domains covering core tenancy, security, academics, admissions, students, guardians, faculty, attendance, examinations, finance, documents, timetable, HRMS, AI Yantra, and optional extensions.
+- **Extensions Active:** `uuid-ossp`, `pgcrypto`, `btree_gist`, `pg_trgm`.
+- **Security & RLS Helper Functions:** Deployed in `public` schema (`my_institution_ids()`, `has_permission()`, `is_assigned_faculty()`, `is_guardian_of()`) avoiding Supabase `auth` schema restrictions while maintaining strict tenant isolation.
+- **Audit & Consistency Triggers:** 
+  - `log_audit_event()` with table-aware primary key branching (`institutions.id` vs `institution_id`).
+  - `enforce_tenant_consistency()` ensuring child records never reference parents from another tenant.
+- **Comprehensive Seed Data (`backend/db/seed.sql`):** Seeded 3 subscription plans, 4 institutions (Springfield, Cambridge, St. Mary's, Oakridge), module toggles, standard RBAC roles, academic tree (Science, Commerce, Grade 10/11/12, Sections A/B, Physics/Math/English), faculty roster & class assignments, student master records, parent guardians, Kanban admission applications, fee structures, and initial invoices.
+
+### 5.2 Backend Layered MVC Engine (Node.js 22 + Express + TypeScript)
+- **Design Pattern:** Layered MVC adhering strictly to `routes -> controllers -> services -> repositories -> PostgreSQL`.
+- **Infrastructure & Middleware:**
+  - `tenant.middleware.ts`: Extracts and enforces `institution_id` on all tenant-owned requests.
+  - `auth.middleware.ts`: Bearer JWT token verification with decoded claims injection.
+  - `rbac.middleware.ts`: Multi-tier role and permission gatekeeper.
+  - `error.middleware.ts`: Centralized error interceptor producing standard envelope `{ success: false, error: { message, code } }`.
+- **Implemented MVC Modules:**
+  - **Admissions:** `admissions.routes.ts` $\to$ `admissions.controller.ts` $\to$ `admissions.service.ts` $\to$ `admissions.repository.ts` (enquiries, Kanban status transitions, document verification, atomic approval-to-student creation).
+  - **Students:** `student.routes.ts` $\to$ `student.controller.ts` $\to$ `student.service.ts` $\to$ `student.repository.ts` (Single Student Master Entity 360° profile aggregation across personal, guardians, academic, fees, attendance).
+  - **Institutions:** `institution.routes.ts` $\to$ `institution.controller.ts` $\to$ `institution.service.ts` $\to$ `institution.repository.ts` (Tenant management, subscription plans, module toggle flags).
+  - **Academics:** `academics.routes.ts` $\to$ `academics.controller.ts` $\to$ `academics.service.ts` $\to$ `academics.repository.ts` (departments, courses, classes, sections, subjects).
+  - **Faculty:** `faculty.routes.ts` $\to$ `faculty.controller.ts` $\to$ `faculty.service.ts` $\to$ `faculty.repository.ts` (faculty roster, workload counter, section/subject assignments).
+  - **Finance:** `finance.routes.ts` $\to$ `finance.controller.ts` $\to$ `finance.service.ts` $\to$ `finance.repository.ts` (fee structures, student fee ledgers, payment checkout, invoices, receipts).
+  - **Operational Routes:** `attendance.routes.ts`, `examinations.routes.ts`, `documents.routes.ts`, `hrms.routes.ts`, `timetable.routes.ts`, `ai-yantra.routes.ts`, `optional-modules.routes.ts`.
+
+### 5.3 Frontend-to-Backend Integration & Offline Resilience
+- **TanStack Query Hooks:** Implemented in `frontend/lib/api/hooks.ts`:
+  - `useInstitutions()`, `useAdmissions()`, `useAcademics()`, `useFaculty()`, `useFinance()`.
+- **Offline / Mock Fallback:** Automatic resilient failover to mock datasets if backend is unreachable or undergoing maintenance, ensuring continuous UI operability.
+
+### 5.4 Repository Sync & Git Checkpoints
+- **Commit `ca303cf`:** "Implemented Backend and DB" (101 files, 13,267 insertions).
+- **Remote:** Synchronized with `https://github.com/laxminivas06/vidforum.git` on branch `main`.
+
+---
 *End of MEMORY.md*

@@ -49,5 +49,24 @@
 - **Decision:** All AI capabilities are routed through these three specific workspaces, isolating their execution environments from direct unrestricted database queries.
 - **Rationale:** Preserves strict product boundaries and guarantees that AI operations remain context-bounded and safe.
 
+### [ADR-008] Node.js 22 + TypeScript + Express Layered MVC Architecture
+- **Date & Timestamp:** 2026-09-25T17:15:00+05:30
+- **Context:** Ensuring backend architecture scales predictably, maintains strict separation of concerns, and matches the specifications in `/docs/TECH_SPEC.md`.
+- **Decision:** Adopt a Layered MVC pattern where requests flow strictly through:
+  `Routes (Endpoint & Middleware)` $\to$ `Controllers (HTTP parsing & Responses)` $\to$ `Services (Domain logic & Transactions)` $\to$ `Repositories (Raw SQL / pg Pool)` $\to$ `PostgreSQL`.
+- **Rationale:** Prevents HTTP concerns from leaking into database queries, simplifies unit testing of business logic, and guarantees uniform error envelopes across all modules.
+
+### [ADR-009] Supabase Cloud PostgreSQL with Public Schema Helper Functions for RLS
+- **Date & Timestamp:** 2026-09-25T17:45:00+05:30
+- **Context:** Supabase restricts custom function creation in the `auth` schema (`permission denied for schema auth`), but Row-Level Security (RLS) policies require helper functions like `my_institution_ids()` and `has_permission()` that inspect `auth.uid()`.
+- **Decision:** Define RLS helper functions in the `public` schema (`public.my_institution_ids()`, `public.has_permission()`, `public.is_assigned_faculty()`, `public.is_guardian_of()`) with `SECURITY DEFINER` and have them query `auth.uid()` from the execution context.
+- **Rationale:** Satisfies Supabase permission constraints without sacrificing security or tenant isolation.
+
+### [ADR-010] Zero-Downtime TanStack Query Hooks with Resilient Mock Fallback
+- **Date & Timestamp:** 2026-09-25T18:10:00+05:30
+- **Context:** The frontend needs live connectivity to `http://localhost:5000/api/v1/` while remaining fully usable and interactive even during server restarts, initial offline development, or build pipelines.
+- **Decision:** Wrap backend API calls inside custom TanStack Query hooks (`useInstitutions`, `useAdmissions`, `useAcademics`, `useFaculty`, `useFinance`) with a seamless try/catch fallback to the offline mock dataset.
+- **Rationale:** Ensures zero UI breakage or blank screens during backend deployments, cold starts, or transient network failures.
+
 ---
 *End of DECISIONS.md*

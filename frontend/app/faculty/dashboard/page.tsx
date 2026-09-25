@@ -133,7 +133,7 @@ export default function FacultyDashboardPage() {
             </div>
 
             <div className="flex flex-col gap-3">
-              {facultyInfo?.todayClasses.map((item, idx) => {
+              {facultyInfo?.todayClasses.map((item: any, idx: number) => {
                 const isCurrent = item.status === "IN_PROGRESS"
                 return (
                   <div
@@ -207,7 +207,7 @@ export default function FacultyDashboardPage() {
                 Assigned Classes & Timetable Allocation
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {facultyInfo?.assignedClasses.map((assign, idx) => (
+                {facultyInfo?.assignedClasses.map((assign: any, idx: number) => (
                   <Card key={idx}>
                     <CardHeader className="pb-2">
                       <div className="flex items-center justify-between">

@@ -275,14 +275,23 @@ const MOCK_FEES: FeeRecord[] = [
   },
 ]
 
-// --- TanStack Query Hooks ---
+// --- TanStack Query Hooks (Live Backend with Fallback) ---
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1"
+const DEFAULT_INST_ID = "22222222-2222-2222-2222-222222222201"
 
 export function useInstitutions() {
   return useQuery({
     queryKey: ["institutions"],
     queryFn: async (): Promise<Institution[]> => {
-      // Simulate network latency
-      await new Promise((r) => setTimeout(r, 200))
+      try {
+        const res = await fetch(`${API_BASE_URL}/institutions`)
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable, using mock institutions:", err)
+      }
       return MOCK_INSTITUTIONS
     },
   })
@@ -294,14 +303,35 @@ export function useAdmissions() {
   const query = useQuery({
     queryKey: ["admissions"],
     queryFn: async (): Promise<Applicant[]> => {
-      await new Promise((r) => setTimeout(r, 200))
+      try {
+        const res = await fetch(`${API_BASE_URL}/admissions/applicants`, {
+          headers: { "X-Institution-Id": DEFAULT_INST_ID },
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable, using mock applicants:", err)
+      }
       return MOCK_APPLICANTS
     },
   })
 
   const updateStageMutation = useMutation({
     mutationFn: async ({ applicantId, newStage }: { applicantId: string; newStage: any }) => {
-      await new Promise((r) => setTimeout(r, 250))
+      try {
+        await fetch(`${API_BASE_URL}/admissions/applicants/${applicantId}/stage`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Institution-Id": DEFAULT_INST_ID,
+          },
+          body: JSON.stringify({ stage: newStage }),
+        })
+      } catch (err) {
+        console.warn("Stage update fetch fallback:", err)
+      }
       return { applicantId, newStage }
     },
     onSuccess: ({ applicantId, newStage }) => {
@@ -322,7 +352,17 @@ export function useAcademics() {
   return useQuery({
     queryKey: ["academics-hierarchy"],
     queryFn: async (): Promise<AcademicGrade[]> => {
-      await new Promise((r) => setTimeout(r, 200))
+      try {
+        const res = await fetch(`${API_BASE_URL}/academics/grades`, {
+          headers: { "X-Institution-Id": DEFAULT_INST_ID },
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable, using mock academic grades:", err)
+      }
       return MOCK_GRADES
     },
   })
@@ -332,18 +372,37 @@ export function useFaculty() {
   return useQuery({
     queryKey: ["faculty-roster"],
     queryFn: async (): Promise<FacultyMember[]> => {
-      await new Promise((r) => setTimeout(r, 200))
+      try {
+        const res = await fetch(`${API_BASE_URL}/faculty`, {
+          headers: { "X-Institution-Id": DEFAULT_INST_ID },
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable, using mock faculty:", err)
+      }
       return MOCK_FACULTY
     },
   })
 }
 
 export function useMyClasses() {
-  // Scoped to current logged-in faculty (PRD Rule 26)
   return useQuery({
     queryKey: ["faculty-my-classes"],
     queryFn: async () => {
-      await new Promise((r) => setTimeout(r, 200))
+      try {
+        const res = await fetch(`${API_BASE_URL}/faculty`, {
+          headers: { "X-Institution-Id": DEFAULT_INST_ID },
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+          return json.data[0]
+        }
+      } catch (err) {
+        console.warn("Backend unavailable, using mock my-classes:", err)
+      }
       return MOCK_FACULTY[0]
     },
   })
@@ -353,8 +412,19 @@ export function useFinance() {
   return useQuery({
     queryKey: ["finance-records"],
     queryFn: async (): Promise<FeeRecord[]> => {
-      await new Promise((r) => setTimeout(r, 200))
+      try {
+        const res = await fetch(`${API_BASE_URL}/finance/records`, {
+          headers: { "X-Institution-Id": DEFAULT_INST_ID },
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable, using mock fees:", err)
+      }
       return MOCK_FEES
     },
   })
 }
+

@@ -8,47 +8,92 @@ import { authMiddleware } from '../../middleware/auth.middleware';
 
 const router = Router();
 
+function normalizeRole(roleName: string): string {
+  const lower = (roleName || '').toLowerCase();
+  if (lower.includes('super')) return 'SUPER_ADMIN';
+  if (lower.includes('institution') || lower.includes('principal') || lower.includes('director')) return 'INSTITUTION_ADMIN';
+  if (lower.includes('faculty') || lower.includes('teacher') || lower.includes('instructor')) return 'FACULTY';
+  if (lower.includes('student')) return 'STUDENT';
+  if (lower.includes('parent') || lower.includes('guardian')) return 'PARENT';
+  if (lower.includes('admission')) return 'ADMISSION_TEAM';
+  if (lower.includes('finance') || lower.includes('bursar') || lower.includes('account')) return 'FINANCE_TEAM';
+  if (lower.includes('exam')) return 'EXAM_TEAM';
+  if (lower.includes('academic') || lower.includes('curriculum')) return 'ACADEMIC_COORDINATOR';
+  return 'INSTITUTION_ADMIN';
+}
+
 // POST /api/v1/auth/login
 router.post('/login', async (req: Request, res: Response) => {
-  const { email, password, role = 'INSTITUTION_ADMIN' } = req.body;
+  const { email, userId, identifier, password } = req.body;
+  const loginIdentifier = (identifier || email || userId || '').trim();
 
-  if (!email) {
-    sendError(res, 'Email is required', 400);
+  if (!loginIdentifier) {
+    sendError(res, 'User ID or Email is required', 400);
     return;
   }
 
   try {
-    // Check if user exists in profiles/auth.users
-    let userRes = await db.query(
+    let resolvedRole: string | null = null;
+    let user: any = null;
+
+    // 1. Check if user is Super Admin (via identifier 'superadmin', 'superadmin@vid.edu', or 'SA-001')
+    const isSuperAdminAlias = ['superadmin', 'superadmin@vid.edu', 'sa-001', 'superadmin@vid.platform'].includes(loginIdentifier.toLowerCase());
+
+    // 2. Search profiles by email, phone, or Super Admin alias
+    const profileRes = await db.query(
       `SELECT p.id, p.full_name, p.email, p.default_institution_id,
               i.name as institution_name, i.code as institution_code,
-              COALESCE(r.name, $2) as role_name
+              r.name as role_name
        FROM profiles p
        LEFT JOIN institutions i ON i.id = p.default_institution_id
        LEFT JOIN user_roles ur ON ur.profile_id = p.id
        LEFT JOIN roles r ON r.id = ur.role_id
-       WHERE LOWER(p.email) = LOWER($1) LIMIT 1`,
-      [email, role]
+       WHERE LOWER(p.email) = LOWER($1) 
+          OR LOWER(p.phone) = LOWER($1)
+          OR ($2 = true AND LOWER(p.email) = 'superadmin@vid.edu')
+       LIMIT 1`,
+      [loginIdentifier, isSuperAdminAlias]
     );
 
-    let user = userRes.rows[0];
-
-    // If demo login or user not found, fallback to Springfield Admin or generate
-    if (!user) {
-      // Find springfield institution
-      const instRes = await db.query("SELECT id, name, code FROM institutions WHERE code = 'SIA-BLR' LIMIT 1");
-      const inst = instRes.rows[0];
-
-      user = {
-        id: '44444444-4444-4444-4444-444444444401',
-        full_name: email.split('@')[0].toUpperCase(),
-        email,
-        default_institution_id: inst?.id || '22222222-2222-2222-2222-222222222201',
-        institution_name: inst?.name || 'Springfield International Academy',
-        institution_code: inst?.code || 'SIA-BLR',
-        role_name: role,
-      };
+    if (profileRes.rows[0]) {
+      user = profileRes.rows[0];
+      if (isSuperAdminAlias || (user.email && user.email.toLowerCase().includes('superadmin'))) {
+        resolvedRole = 'SUPER_ADMIN';
+      } else if (user.role_name) {
+        resolvedRole = normalizeRole(user.role_name);
+      } else {
+        resolvedRole = 'INSTITUTION_ADMIN';
+      }
     }
+
+    // 3. Search students table by admission_number (e.g. SIA-2026-042)
+    if (!user) {
+      const studentRes = await db.query(
+        `SELECT s.id, s.first_name || ' ' || s.last_name as full_name, s.admission_number,
+                s.institution_id as default_institution_id,
+                i.name as institution_name, i.code as institution_code
+         FROM students s
+         LEFT JOIN institutions i ON i.id = s.institution_id
+         WHERE LOWER(s.admission_number) = LOWER($1) OR LOWER(s.id::text) = LOWER($1) LIMIT 1`,
+        [loginIdentifier]
+      );
+      if (studentRes.rows[0]) {
+        user = {
+          ...studentRes.rows[0],
+          email: `${studentRes.rows[0].admission_number.toLowerCase()}@springfield.edu`,
+        };
+        resolvedRole = 'STUDENT';
+      }
+    }
+
+    // 4. Strict RBAC Enforcement: If no valid registered account exists, reject with 401
+    // (Random test IDs and unregistered accounts are strictly rejected)
+    if (!user) {
+      sendError(res, 'Invalid User ID or Email. Account not found.', 401);
+      return;
+    }
+
+    user.role_name = resolvedRole || 'INSTITUTION_ADMIN';
 
     // Fetch permissions for the role
     const permRes = await db.query('SELECT code FROM permissions');
@@ -58,7 +103,7 @@ router.post('/login', async (req: Request, res: Response) => {
       id: user.id,
       email: user.email,
       fullName: user.full_name,
-      role: user.role_name || role,
+      role: user.role_name,
       institutionId: user.default_institution_id,
       permissions,
     };
@@ -71,10 +116,10 @@ router.post('/login', async (req: Request, res: Response) => {
         id: user.id,
         name: user.full_name,
         email: user.email,
-        role: user.role_name || role,
+        role: user.role_name,
         institutionId: user.default_institution_id,
-        institutionName: user.institution_name,
-        institutionCode: user.institution_code,
+        institutionName: user.institution_name || (user.role_name === 'SUPER_ADMIN' ? 'VID Global Platform' : 'Springfield International Academy'),
+        institutionCode: user.institution_code || (user.role_name === 'SUPER_ADMIN' ? 'VID-GLOBAL' : 'SIA-BLR'),
         permissions,
       },
     }, 'Authentication successful');

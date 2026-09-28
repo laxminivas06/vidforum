@@ -205,6 +205,7 @@ npm start        # Starts production Next.js server
 - [AppFlow.md](file:///c:/Users/Jagan%20Mohan%20Reddy/OneDrive/Desktop/VID_School/vidforum/docs/AppFlow.md) — Screen inventory and route navigation hierarchy
 - [Design.md](file:///c:/Users/Jagan%20Mohan%20Reddy/OneDrive/Desktop/VID_School/vidforum/docs/Design.md) — Design system tokens and component guidelines
 - [VID_Database_Architecture.md](file:///c:/Users/Jagan%20Mohan%20Reddy/OneDrive/Desktop/VID_School/vidforum/docs/VID_Database_Architecture.md) — 16 PostgreSQL domains and 127 table schemas
+- [about_plugins.md](file:///c:/Users/Jagan%20Mohan%20Reddy/OneDrive/Desktop/VID_School/vidforum/docs/about_plugins.md) — 28 Custom Agent Plugins, Workflows, and Skills Matrix
 
 ---
 

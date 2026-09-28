@@ -1,10 +1,13 @@
 "use client"
 
 import React, { useState } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useAuth } from "@/contexts/AuthContext"
 import { Sidebar } from "@/components/ui/Sidebar"
 import { Topbar } from "@/components/ui/Topbar"
-import { RoleType } from "@/config/navigation"
+import { PermissionDenied, Button } from "@/components/ui"
+import { ArrowLeft } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface AppShellProps {
@@ -15,6 +18,39 @@ export interface AppShellProps {
   fullWidth?: boolean
 }
 
+// Institution-specific workspaces that Super Admins CANNOT access (PRD RBAC isolation)
+const INSTITUTION_WORKSPACES = [
+  "/admissions",
+  "/academics",
+  "/faculty",
+  "/attendance",
+  "/examinations",
+  "/finance",
+  "/documents",
+  "/hrms",
+  "/timetable",
+  "/students",
+  "/app",
+  "/voice-agent",
+  "/ai-attendance",
+  "/ai-tutor",
+  "/events",
+  "/transport",
+  "/hostel",
+  "/library",
+  "/sports",
+  "/inventory",
+]
+
+// Platform-level workspaces that non-Super Admins CANNOT access
+const PLATFORM_SUPER_ADMIN_WORKSPACES = [
+  "/institutions",
+  "/plans",
+  "/monitoring",
+  "/ai-config",
+  "/billing",
+]
+
 export const AppShell: React.FC<AppShellProps> = ({
   pageTitle,
   breadcrumbs = [],
@@ -22,9 +58,24 @@ export const AppShell: React.FC<AppShellProps> = ({
   rightHeaderAction,
   fullWidth = false,
 }) => {
-  const { user, role, enabledModules, institutionName, logout, switchRole } = useAuth()
+  const { user, role, enabledModules, institutionName, logout } = useAuth()
+  const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isCollapsed, setIsCollapsed] = useState(false)
+
+  // Enforce Workspace Scoping
+  const isSuperAdmin = role === "SUPER_ADMIN"
+  const isBlockedForSuperAdmin =
+    isSuperAdmin &&
+    INSTITUTION_WORKSPACES.some(
+      (prefix) => pathname === prefix || pathname?.startsWith(prefix + "/")
+    )
+
+  const isBlockedForInstitutionStaff =
+    !isSuperAdmin &&
+    PLATFORM_SUPER_ADMIN_WORKSPACES.some(
+      (prefix) => pathname === prefix || pathname?.startsWith(prefix + "/")
+    )
 
   return (
     <div className="flex min-h-screen bg-canvas">
@@ -45,35 +96,10 @@ export const AppShell: React.FC<AppShellProps> = ({
           institutionName={institutionName}
           pageTitle={pageTitle}
           breadcrumbs={breadcrumbs}
-          userName={user?.name || "Dr. Alistair Vance"}
+          userName={user?.name || (isSuperAdmin ? "VID Platform Super Admin" : "Dr. Alistair Vance")}
           userRole={role.replace("_", " ")}
           onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
-          rightActions={
-            <div className="flex items-center gap-2">
-              {/* Quick Role Switcher Pill for Testing / Demonstration */}
-              <div className="hidden xl:flex items-center gap-1.5 bg-subtle border border-border-default/80 rounded-full px-2.5 py-1 text-xs text-text-secondary">
-                <span className="text-[10px] uppercase font-semibold text-text-muted">
-                  Perspective:
-                </span>
-                <select
-                  value={role}
-                  onChange={(e) => switchRole(e.target.value as RoleType)}
-                  className="bg-transparent text-xs font-semibold text-text-primary focus:outline-none cursor-pointer"
-                >
-                  <option value="INSTITUTION_ADMIN">Institution Admin</option>
-                  <option value="SUPER_ADMIN">Super Admin</option>
-                  <option value="FACULTY">Faculty</option>
-                  <option value="ADMISSION_TEAM">Admissions</option>
-                  <option value="FINANCE_TEAM">Finance</option>
-                  <option value="EXAM_TEAM">Examinations</option>
-                  <option value="ACADEMIC_COORDINATOR">Academics</option>
-                  <option value="STUDENT">Student</option>
-                  <option value="PARENT">Parent</option>
-                </select>
-              </div>
-              {rightHeaderAction}
-            </div>
-          }
+          rightActions={rightHeaderAction}
         />
 
         <main
@@ -82,7 +108,33 @@ export const AppShell: React.FC<AppShellProps> = ({
             !fullWidth && "max-w-content mx-auto"
           )}
         >
-          {children}
+          {isBlockedForSuperAdmin ? (
+            <div className="flex flex-col items-center justify-center py-12">
+              <PermissionDenied
+                requiredPermission="platform.super_admin_isolation"
+                message="As a Platform Super Administrator, your workspace is dedicated to platform-level tenant and system infrastructure. Institution-level workspaces (Admissions, Academics, Faculty, Finance, etc.) are strictly isolated to school staff."
+              />
+              <Link href="/dashboard" className="mt-4">
+                <Button size="default" variant="primary" leadingIcon={<ArrowLeft className="w-4 h-4" />}>
+                  Return to Super Admin Platform Console
+                </Button>
+              </Link>
+            </div>
+          ) : isBlockedForInstitutionStaff ? (
+            <div className="flex flex-col items-center justify-center py-12">
+              <PermissionDenied
+                requiredPermission="platform.super_admin"
+                message="This workspace is restricted exclusively to the VID Platform Super Administrator."
+              />
+              <Link href="/dashboard" className="mt-4">
+                <Button size="default" variant="primary" leadingIcon={<ArrowLeft className="w-4 h-4" />}>
+                  Return to Dashboard
+                </Button>
+              </Link>
+            </div>
+          ) : (
+            children
+          )}
         </main>
       </div>
     </div>

@@ -39,10 +39,41 @@ import { useInstitutions, useAdmissions, useFinance } from "@/lib/api/hooks"
 import { Institution, Applicant } from "@/types"
 
 export default function DashboardPage() {
-  const { role, institutionName, user } = useAuth()
+  const { role } = useAuth()
 
   if (role === "SUPER_ADMIN") {
     return <SuperAdminDashboard />
+  }
+
+  if (role === "INSTITUTION_ADMIN") {
+    return <InstitutionAdminDashboard />
+  }
+
+  if (typeof window !== "undefined") {
+    if (role === "FACULTY") {
+      window.location.href = "/faculty/dashboard"
+      return null
+    }
+    if (role === "STUDENT" || role === "PARENT") {
+      window.location.href = "/students/cccccccc-cccc-cccc-cccc-cccccccccc01"
+      return null
+    }
+    if (role === "ADMISSION_TEAM") {
+      window.location.href = "/admissions"
+      return null
+    }
+    if (role === "FINANCE_TEAM") {
+      window.location.href = "/finance/dashboard"
+      return null
+    }
+    if (role === "EXAM_TEAM") {
+      window.location.href = "/examinations/schedules"
+      return null
+    }
+    if (role === "ACADEMIC_COORDINATOR") {
+      window.location.href = "/academics/hierarchy"
+      return null
+    }
   }
 
   return <InstitutionAdminDashboard />

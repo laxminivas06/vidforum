@@ -1,6 +1,6 @@
 "use client"
 
-import React, { createContext, useContext, useState, useEffect } from "react"
+import React, { createContext, useContext, useState } from "react"
 import { RoleType } from "@/config/navigation"
 import { PermissionDenied } from "@/components/ui"
 
@@ -23,7 +23,12 @@ export interface AuthContextType {
   enabledModules: string[]
   isAuthenticated: boolean
   hasPermission: (permission: string) => boolean
-  login: (email: string, role?: RoleType, institutionSlug?: string) => Promise<void>
+  login: (
+    identifier: string,
+    password?: string,
+    explicitRole?: RoleType,
+    institutionSlug?: string
+  ) => Promise<RoleType>
   logout: () => void
   switchRole: (newRole: RoleType) => void
   toggleOptionalModule: (moduleKey: string) => void
@@ -67,6 +72,89 @@ const ALL_PERMISSIONS = [
   "inventory.manage",
 ]
 
+const SUPER_ADMIN_PERMISSIONS = [
+  "platform.read",
+  "platform.write",
+  "platform.admin",
+  "institutions.manage",
+  "users.manage",
+  "security.manage",
+  "telemetry.read",
+  "billing.manage",
+  "plans.manage",
+  "ai.config.global",
+]
+
+const ROLE_PERMISSIONS: Record<RoleType, string[]> = {
+  SUPER_ADMIN: SUPER_ADMIN_PERMISSIONS,
+  INSTITUTION_ADMIN: ALL_PERMISSIONS.filter((p) => !p.startsWith("platform.")),
+  FACULTY: [
+    "faculty.view_assigned",
+    "attendance.create",
+    "attendance.verify",
+    "examinations.manage",
+    "examinations.marks.entry",
+    "timetable.manage",
+    "ai.tutor.access",
+    "documents.read",
+  ],
+  STUDENT: [
+    "student.profile.view",
+    "attendance.view",
+    "examinations.view",
+    "finance.read",
+    "timetable.manage",
+    "ai.tutor.access",
+    "documents.read",
+  ],
+  PARENT: [
+    "parent.children.view",
+    "attendance.view",
+    "examinations.view",
+    "finance.read",
+    "finance.collect",
+    "documents.read",
+  ],
+  ADMISSION_TEAM: [
+    "admissions.read",
+    "admissions.write",
+    "admissions.approve",
+    "documents.read",
+    "documents.generate",
+  ],
+  FINANCE_TEAM: [
+    "finance.read",
+    "finance.collect",
+    "finance.manage",
+    "documents.read",
+    "documents.generate",
+  ],
+  EXAM_TEAM: [
+    "examinations.manage",
+    "examinations.import",
+    "examinations.marks.entry",
+    "documents.read",
+  ],
+  ACADEMIC_COORDINATOR: [
+    "academics.manage",
+    "timetable.manage",
+    "faculty.view_assigned",
+    "documents.read",
+  ],
+}
+
+// Known registered accounts lookup for offline resilience
+const KNOWN_ACCOUNTS: Record<string, { role: RoleType; name: string; instName: string }> = {
+  "superadmin": { role: "SUPER_ADMIN", name: "VID Platform Super Admin", instName: "VID Global Platform" },
+  "superadmin@vid.edu": { role: "SUPER_ADMIN", name: "VID Platform Super Admin", instName: "VID Global Platform" },
+  "sa-001": { role: "SUPER_ADMIN", name: "VID Platform Super Admin", instName: "VID Global Platform" },
+  "admin@springfield.edu": { role: "INSTITUTION_ADMIN", name: "Dr. Alistair Vance", instName: "Springfield International Academy" },
+  "revathi.raman@springfield.edu": { role: "FACULTY", name: "Mrs. Revathi Raman", instName: "Springfield International Academy" },
+  "arvind.rao@springfield.edu": { role: "FACULTY", name: "Dr. Arvind Rao", instName: "Springfield International Academy" },
+  "sia-2026-042": { role: "STUDENT", name: "Aarav Sharma", instName: "Springfield International Academy" },
+  "sia-2026-043": { role: "STUDENT", name: "Rhea Nair", instName: "Springfield International Academy" },
+}
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -84,37 +172,147 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   ])
   const [permissions, setPermissions] = useState<string[]>(ALL_PERMISSIONS)
 
+  // Hydrate session from localStorage to ensure session persistence across reloads
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const savedUserStr = localStorage.getItem("vid_session_user")
+        const savedRole = localStorage.getItem("vid_session_role") as RoleType | null
+        if (savedUserStr && savedRole) {
+          const parsedUser = JSON.parse(savedUserStr)
+          setUser(parsedUser)
+          setRole(savedRole)
+          setPermissions(ROLE_PERMISSIONS[savedRole] || ALL_PERMISSIONS)
+        }
+      } catch (err) {
+        console.warn("Failed to hydrate auth session from storage", err)
+      }
+    }
+  }, [])
+
   const hasPermission = (permission: string): boolean => {
-    if (role === "SUPER_ADMIN") return true
+    if (role === "SUPER_ADMIN") {
+      // Super Admin ONLY has platform-level permissions, NOT institution operations
+      return (
+        permission.startsWith("platform.") ||
+        permission.startsWith("institutions.") ||
+        permission.startsWith("users.") ||
+        permission.startsWith("security.") ||
+        permission.startsWith("billing.") ||
+        permission.startsWith("telemetry.") ||
+        permission.startsWith("plans.") ||
+        permission.startsWith("ai.config.")
+      )
+    }
+    if (role === "INSTITUTION_ADMIN") return !permission.startsWith("platform.")
     return permissions.includes(permission)
   }
 
   const login = async (
-    email: string,
-    targetRole: RoleType = "INSTITUTION_ADMIN",
+    identifier: string,
+    password?: string,
+    explicitRole?: RoleType,
     institutionSlug = "springfield"
-  ) => {
-    const newUser: UserProfile = {
-      id: `usr-${Date.now()}`,
-      name: email.split("@")[0].replace(".", " ").toUpperCase(),
-      email,
-      role: targetRole,
-      institutionId: `inst-${institutionSlug}`,
-      institutionName: `${institutionSlug.charAt(0).toUpperCase() + institutionSlug.slice(1)} Academy`,
+  ): Promise<RoleType> => {
+    const cleanId = (identifier || "").trim().toLowerCase()
+    if (!cleanId) {
+      throw new Error("User ID or Email is required.")
     }
-    setUser(newUser)
-    setRole(targetRole)
+
+    try {
+      const res = await fetch("http://localhost:5000/api/v1/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ identifier: cleanId, password, role: explicitRole }),
+      })
+      const data = await res.json()
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || data.error?.message || "Invalid User ID or Email. Account not found.")
+      }
+
+      if (data.data?.user) {
+        const backendUser = data.data.user
+        const resolvedRole = (backendUser.role || explicitRole || "INSTITUTION_ADMIN") as RoleType
+
+        const loggedInUser: UserProfile = {
+          id: backendUser.id,
+          name: backendUser.name || cleanId.toUpperCase(),
+          email: backendUser.email || cleanId,
+          role: resolvedRole,
+          institutionId: backendUser.institutionId || `inst-${institutionSlug}`,
+          institutionName: backendUser.institutionName || (resolvedRole === "SUPER_ADMIN" ? "VID Global Platform" : "Springfield International Academy"),
+        }
+
+        setUser(loggedInUser)
+        setRole(resolvedRole)
+        setPermissions(backendUser.permissions || ROLE_PERMISSIONS[resolvedRole] || ALL_PERMISSIONS)
+
+        if (typeof window !== "undefined") {
+          localStorage.setItem("vid_session_user", JSON.stringify(loggedInUser))
+          localStorage.setItem("vid_session_role", resolvedRole)
+        }
+
+        return resolvedRole
+      }
+    } catch (err: any) {
+      if (err.message && (err.message.includes("Invalid") || err.message.includes("not found"))) {
+        throw err
+      }
+      // If network failed, check known registered accounts
+      const known = KNOWN_ACCOUNTS[cleanId]
+      if (known) {
+        const loggedInUser: UserProfile = {
+          id: `usr-${cleanId}`,
+          name: known.name,
+          email: cleanId.includes("@") ? cleanId : `${cleanId}@springfield.edu`,
+          role: known.role,
+          institutionId: `inst-${institutionSlug}`,
+          institutionName: known.instName,
+        }
+        setUser(loggedInUser)
+        setRole(known.role)
+        setPermissions(ROLE_PERMISSIONS[known.role] || ALL_PERMISSIONS)
+
+        if (typeof window !== "undefined") {
+          localStorage.setItem("vid_session_user", JSON.stringify(loggedInUser))
+          localStorage.setItem("vid_session_role", known.role)
+        }
+
+        return known.role
+      }
+      throw new Error("Invalid User ID or Email. Account not found.")
+    }
+
+    throw new Error("Invalid User ID or Email. Account not found.")
   }
 
   const logout = () => {
     setUser(null)
+    setRole("INSTITUTION_ADMIN")
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("vid_session_user")
+      localStorage.removeItem("vid_session_role")
+      window.location.href = "/login"
+    }
   }
 
   const switchRole = (newRole: RoleType) => {
+    // Strictly isolate Super Admin: Cannot switch perspective into institution roles
+    if (role === "SUPER_ADMIN" && newRole !== "SUPER_ADMIN") {
+      console.warn("Super Admin workspace isolation: cannot switch to institution roles.")
+      return
+    }
     setRole(newRole)
     if (user) {
-      setUser({ ...user, role: newRole })
+      const updated = { ...user, role: newRole }
+      setUser(updated)
+      if (typeof window !== "undefined") {
+        localStorage.setItem("vid_session_user", JSON.stringify(updated))
+        localStorage.setItem("vid_session_role", newRole)
+      }
     }
+    setPermissions(ROLE_PERMISSIONS[newRole] || ALL_PERMISSIONS)
   }
 
   const toggleOptionalModule = (moduleKey: string) => {

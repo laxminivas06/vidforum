@@ -158,5 +158,37 @@ graph TD
 - **Commit `ca303cf`:** "Implemented Backend and DB" (101 files, 13,267 insertions).
 - **Remote:** Synchronized with `https://github.com/laxminivas06/vidforum.git` on branch `main`.
 
+
+---
+
+## 6. Codebase Knowledge Graph & Token-Preservation Engine (Graphify)
+
+### 6.1 Knowledge Graph Architecture & Artifacts
+The entire codebase (183 files, ~85k words across Next.js frontend, Node/Express MVC backend, Supabase PostgreSQL schemas, and architecture documentation) is indexed into a persistent, multi-tiered Knowledge Graph using the `graphify` engine:
+- **Graph Database (`graphify-out/graph.json`):** 1,213 nodes, 2,904 edges, 88 clustered communities (GraphRAG-ready).
+- **Interactive Visualizer (`graphify-out/graph.html`):** Standalone browser explorer with community clustering, search, node inspection, and shortest path traversal.
+- **Agent-Navigable Wiki (`graphify-out/wiki/index.md`):** 98 modular markdown articles with back-references, community breakdowns, and cross-cutting connections.
+- **Audit & Topology Report (`graphify-out/GRAPH_REPORT.md`):** High-level architectural analysis including God Nodes (`frontend/package.json`, `backend/db/schema.sql`, `frontend/components/student/StudentProfile.tsx`, `docs/PRD.md`), surprising bridges, and diagnostic health score.
+- **Incremental Cache & Manifest (`graphify-out/cache/`, `graphify-out/manifest.json`):** SHA256 hashes of all AST and semantic inputs allowing sub-second incremental graph updates.
+
+### 6.2 Token-Preservation Operating Directive
+To eliminate token waste and avoid repeatedly loading raw source files into LLM context:
+1. **Pre-Analysis Query:** Always query the knowledge graph first:
+   ```powershell
+   python -m graphify query "<question>"
+   ```
+2. **Context Navigation:** Check `graphify-out/wiki/index.md` or `graphify-out/GRAPH_REPORT.md` to pinpoint exact file and symbol locations.
+3. **Shortest Path & Explanations:**
+   ```powershell
+   python -m graphify path "<SymbolA>" "<SymbolB>"
+   python -m graphify explain "<Symbol>"
+   ```
+4. **Post-Change Incremental Sync:**
+   After modifying code files, run:
+   ```powershell
+   python -m graphify --update
+   ```
+   This re-indexes ONLY modified files in milliseconds via tree-sitter AST, keeping the graph synchronized with zero token waste.
+
 ---
 *End of MEMORY.md*

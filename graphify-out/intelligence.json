@@ -1,0 +1,36 @@
+{
+  "hotspots": [
+    {
+      "label": "LoginPage()",
+      "risk": 0.527,
+      "type": "FUNCTION"
+    },
+    {
+      "label": "SecurityPage()",
+      "risk": 0.405,
+      "type": "FUNCTION"
+    },
+    {
+      "label": "HostelPage()",
+      "risk": 0.39,
+      "type": "FUNCTION"
+    },
+    {
+      "label": "AttendanceSessionsPage()",
+      "risk": 0.309,
+      "type": "FUNCTION"
+    },
+    {
+      "label": "AdmissionsRepository",
+      "risk": 0.284,
+      "type": "CLASS"
+    }
+  ],
+  "blast_radius": {
+    "Document: Vid Database Architecture": 47,
+    "query": 28,
+    "Document: Design": 25,
+    "Document: Tech Spec": 23,
+    "Document: Tasks": 22
+  }
+}

@@ -1,0 +1,27 @@
+# [Skill: secret-guard & Scan Targets] Cluster
+
+> 3 nodes · cohesion 0.67
+
+## Key Concepts
+
+- [Skill: secret-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (2 connections)
+- [Scan Targets](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
+- [Secret Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
+
+## Relationships
+
+- [[[Skill: pr-storyteller & PR Storyteller Skill] Cluster]] (4 shared connections)
+
+## Source Files
+
+- [.agents/plugins/secret-guard/skills/secret-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md)
+
+## Audit Trail
+
+- EXTRACTED: 4 (100%)
+- INFERRED: 0 (0%)
+- AMBIGUOUS: 0 (0%)
+
+---
+
+*Part of the graphify knowledge wiki. See [[index]] to navigate.*

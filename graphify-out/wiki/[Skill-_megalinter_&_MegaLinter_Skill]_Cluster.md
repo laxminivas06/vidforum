@@ -1,0 +1,27 @@
+# [Skill: megalinter & MegaLinter Skill] Cluster
+
+> 3 nodes · cohesion 0.67
+
+## Key Concepts
+
+- [Skill: megalinter](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (2 connections)
+- [MegaLinter Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (1 connections)
+- [Target Toolchains](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (1 connections)
+
+## Relationships
+
+- [[[Skill: hol-guard & Audit Checks] Cluster]] (4 shared connections)
+
+## Source Files
+
+- [.agents/plugins/megalinter/skills/megalinter/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md)
+
+## Audit Trail
+
+- EXTRACTED: 4 (100%)
+- INFERRED: 0 (0%)
+- AMBIGUOUS: 0 (0%)
+
+---
+
+*Part of the graphify knowledge wiki. See [[index]] to navigate.*

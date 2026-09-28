@@ -1,37 +1,25 @@
 # lucide-react
 
-> God node · 40 connections · `frontend/package.json`
+> 1 nodes · cohesion 1.00
 
-**Community:** [Frontend App Routes & UI Workspaces](Frontend_App_Routes_&_UI_Workspaces.md)
+## Key Concepts
 
-## Connections by Relation
+- [lucide-react](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L14) (0 connections)
 
-### imports
-- frontend/package.json `EXTRACTED`
+## Relationships
 
-### imports_from
-- app/dashboard/page.tsx `EXTRACTED`
-- finance/dashboard/page.tsx `EXTRACTED`
-- institutions/page.tsx `EXTRACTED`
-- faculty/dashboard/page.tsx `EXTRACTED`
-- staff/page.tsx `EXTRACTED`
-- campaigns/page.tsx `EXTRACTED`
-- sessions/page.tsx `EXTRACTED`
-- settings/page.tsx `EXTRACTED`
-- vault/page.tsx `EXTRACTED`
-- schedules/page.tsx `EXTRACTED`
-- admissions/page.tsx `EXTRACTED`
-- hierarchy/page.tsx `EXTRACTED`
-- analytics/page.tsx `EXTRACTED`
-- StudentProfile.tsx `EXTRACTED`
-- Card.tsx `EXTRACTED`
-- ai-attendance/monitoring/page.tsx `EXTRACTED`
-- billing/page.tsx `EXTRACTED`
-- matrix/page.tsx `EXTRACTED`
-- transport/page.tsx `EXTRACTED`
-- ai-config/page.tsx `EXTRACTED`
-- *…and 19 more `imports_from` connection(s) not listed (lowest-degree first to go)*
+- No strong cross-community connections detected
+
+## Source Files
+
+- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
+
+## Audit Trail
+
+- EXTRACTED: 0 (0%)
+- INFERRED: 0 (0%)
+- AMBIGUOUS: 0 (0%)
 
 ---
 
-*Part of the graphify knowledge wiki. See [index](index.md) to navigate.*
+*Part of the graphify knowledge wiki. See [[index]] to navigate.*

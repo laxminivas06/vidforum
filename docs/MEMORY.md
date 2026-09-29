@@ -56,8 +56,32 @@ All 28 plugins are installed locally in `.agents/plugins/` with manifests (`plug
 | 24 | **Commit Narrator** | Git Automation | Generating semantic commit messages explaining the *why* | `commit-narrator` |
 | 25 | **PR Storyteller** | Git Automation | Synthesizing PR titles, summaries, and test plans | `pr-storyteller` |
 | 26 | **Docflow** | Git Automation | Enforcing docs freshness and updating changelogs | `docflow` |
-| 27 | **token-optimizer**| Token Cost | Line-range file views, scoped ripgrep searches | `token-optimizer` |
 | 28 | **Espresso** | Token Cost | Output compression, concise answers, zero boilerplate | `espresso` |
+| 29 | **Ponytail** | Code Minimalism | YAGNI extremist, native-platform-first, shortest working diffs | `ponytail` (Intensity: **Ultra**) |
+
+### 2.1 Ponytail Ultra Operating Matrix
+**Active Mode:** `ULTRA` (Permanent across sessions per user instruction 2026-09-29)
+
+#### Where Ponytail Ultra MUST be applied:
+1. **Frontend UI Development:**
+   - **Reuse Existing Primitives:** Always import from `@/components/ui/` (`Button`, `Card`, `Table`, `Badge`, `Form`, `ProgressBar`, `ConfirmDialog`, `States`). Never re-create ad-hoc wrappers or duplicate components.
+   - **Native Platform First:** Use native HTML5 elements (`<dialog>`, `<input type="date">`, standard CSS flex/grid) over installing or configuring heavy NPM packages.
+   - **Zero Speculative Abstractions:** No single-use interfaces, no multi-level prop adapters for components used in only one place, no premature state machines.
+2. **Backend API & Service Layer:**
+   - **Direct & Thin Flow:** Thin controller mapping request $\to$ service $\to$ repository. No speculative intermediate mapper layers when a direct SQL row or object mapping is sufficient.
+   - **Minimal SQL Footprint:** Query only the exact columns needed by the client; avoid over-fetching and unnecessary multi-table joins when single table lookups suffice.
+3. **Bug Fixing & Root-Cause Resolution:**
+   - Always fix at the single shared bottleneck or root function rather than placing repetitive defensive checks across multiple calling files.
+4. **File Footprint & Diff Size:**
+   - The shortest working diff that achieves the functional requirement wins. Delete dead code and bloat before adding new lines.
+5. **Output Discipline:**
+   - Code first. Followed by at most 3 concise lines on what was deliberately skipped or deferred.
+
+#### Where Ponytail Ultra is STRICTLY FORBIDDEN:
+- **Tenant Isolation:** Never bypass `institution_id` checks or `tenantMiddleware` to "simplify" a query.
+- **Role-Based Access Control (RBAC):** Never remove or simplify role checks or resource-level authorization.
+- **Student Master Entity Constraint:** Never create a separate student workspace or duplicate student record.
+- **Data Integrity & Audit:** Never bypass pre-commit validation (e.g. Exam Excel import verification or AI face attendance verification queue) or audit logging.
 
 ---
 

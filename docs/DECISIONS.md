@@ -68,5 +68,12 @@
 - **Decision:** Wrap backend API calls inside custom TanStack Query hooks (`useInstitutions`, `useAdmissions`, `useAcademics`, `useFaculty`, `useFinance`) with a seamless try/catch fallback to the offline mock dataset.
 - **Rationale:** Ensures zero UI breakage or blank screens during backend deployments, cold starts, or transient network failures.
 
+### [ADR-011] Permanent Activation of Ponytail Ultra Mode
+- **Date & Timestamp:** 2026-09-29T19:48:00+05:30
+- **Context:** User explicitly requested enabling the Ponytail plugin with intensity level **Ultra** across the codebase, saving it to orchestration guidelines (`AGENTS.md`) and persistent memory (`docs/MEMORY.md`).
+- **Decision:** Activate Ponytail Ultra permanently. Enforce YAGNI minimalism, reuse existing `@/components/ui/` primitives, prioritize native platform features, write the shortest working diffs, and eliminate all speculative abstractions or boilerplate.
+- **Boundaries:** Ponytail Ultra is strictly forbidden from compromising multi-tenant `institution_id` isolation, role/permission security checks, student master single-entity constraints, or pre-commit data validation queues.
+- **Rationale:** Keeps token consumption minimal, diffs reviewable, and prevents architectural bloat across both frontend and backend.
+
 ---
 *End of DECISIONS.md*

@@ -4,15 +4,11 @@
 
 ## Key Concepts
 
-- [Document: Data](file:///C:/Antigravityyyyy/VID_School/.kilo/agents/data.md) (0 connections)
+- **frontend_components_ui_index_badge** (0 connections)
 
 ## Relationships
 
 - No strong cross-community connections detected
-
-## Source Files
-
-- [.kilo/agents/data.md](file:///C:/Antigravityyyyy/VID_School/.kilo/agents/data.md)
 
 ## Audit Trail
 

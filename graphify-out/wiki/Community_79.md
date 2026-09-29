@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [server.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/server.ts#L1) (1 connections)
-- [bootstrap()](file:///C:/Antigravityyyyy/VID_School/backend/src/server.ts#L5) (1 connections)
+- [env.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/env.ts#L1) (1 connections)
+- [env](file:///C:/Antigravityyyyy/VID_School/backend/src/config/env.ts#L6) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\server.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/server.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\config\env.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/env.ts)
 
 ## Audit Trail
 

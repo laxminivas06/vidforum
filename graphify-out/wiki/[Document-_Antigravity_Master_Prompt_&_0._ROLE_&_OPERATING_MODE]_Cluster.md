@@ -26,7 +26,7 @@
 
 ## Relationships
 
-- [[[FacultyController & FacultyRepository] Cluster]] (36 shared connections)
+- [[[Document: Appflow & 1. Overview & Navigation Architecture] Cluster]] (36 shared connections)
 
 ## Source Files
 

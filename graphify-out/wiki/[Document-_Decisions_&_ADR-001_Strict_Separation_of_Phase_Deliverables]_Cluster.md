@@ -20,7 +20,7 @@
 
 ## Relationships
 
-- [[[ICON_MAP & IconComponent] Cluster]] (24 shared connections)
+- [[[VID Platform Educational Ecosystem Specification & Academics & Curriculum] Cluster]] (24 shared connections)
 
 ## Source Files
 

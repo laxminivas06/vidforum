@@ -20,7 +20,7 @@
 
 ## Relationships
 
-- [[[[activeTab, setActiveTab] & isActive] Cluster]] (24 shared connections)
+- [[[Document: Decisions & ADR-001 Strict Separation of Phase Deliverables] Cluster]] (24 shared connections)
 
 ## Source Files
 

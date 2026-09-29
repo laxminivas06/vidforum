@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [api.v1.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts#L1) (2 connections)
-- [dbOk](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts#L23) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts#L19) (1 connections)
+- [layout.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx#L1) (2 connections)
+- [metadata](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx#L6) (1 connections)
+- [RootLayout()](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx#L11) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\routes\api.v1.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\layout.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx)
 
 ## Audit Trail
 

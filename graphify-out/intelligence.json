@@ -1,36 +1,36 @@
 {
   "hotspots": [
     {
-      "label": "LoginPage()",
-      "risk": 0.527,
+      "label": "AuthProvider()",
+      "risk": 0.603,
       "type": "FUNCTION"
     },
     {
       "label": "SecurityPage()",
-      "risk": 0.405,
+      "risk": 0.417,
       "type": "FUNCTION"
     },
     {
       "label": "HostelPage()",
-      "risk": 0.39,
+      "risk": 0.399,
       "type": "FUNCTION"
     },
     {
       "label": "AttendanceSessionsPage()",
-      "risk": 0.309,
+      "risk": 0.29,
       "type": "FUNCTION"
     },
     {
-      "label": "AdmissionsRepository",
-      "risk": 0.284,
-      "type": "CLASS"
+      "label": "SportsPage()",
+      "risk": 0.275,
+      "type": "FUNCTION"
     }
   ],
   "blast_radius": {
+    "institutions": 73,
     "Document: Vid Database Architecture": 47,
-    "query": 28,
-    "Document: Design": 25,
-    "Document: Tech Spec": 23,
-    "Document: Tasks": 22
+    "query": 29,
+    "profiles": 26,
+    "Document: Design": 25
   }
 }

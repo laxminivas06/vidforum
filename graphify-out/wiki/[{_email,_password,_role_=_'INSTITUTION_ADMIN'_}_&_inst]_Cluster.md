@@ -1,36 +1,63 @@
 # [{ email, password, role = 'INSTITUTION_ADMIN' } & inst] Cluster
 
-> 14 nodes · cohesion 0.14
+> 15 nodes · cohesion 0.17
 
 ## Key Concepts
 
-- [auth.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L1) (13 connections)
-- [user](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L34) (2 connections)
-- [{ email, password, role = 'INSTITUTION_ADMIN' }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L13) (1 connections)
-- [inst](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L40) (1 connections)
-- [institution](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L100) (1 connections)
-- [instRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L39) (1 connections)
-- [{ newRole }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L113) (1 connections)
-- [permissions](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L55) (1 connections)
-- [permRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L54) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L9) (1 connections)
-- [token](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L66) (1 connections)
-- [tokenPayload](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L57) (1 connections)
-- [updatedPayload](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L119) (1 connections)
-- [userRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L22) (1 connections)
+- [StudentController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L5) (4 connections)
+- [StudentRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L3) (4 connections)
+- [StudentService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L3) (4 connections)
+- [.getStudentById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L24) (3 connections)
+- [.getStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L6) (3 connections)
+- [.promote()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L36) (3 connections)
+- [.findStudentMasterById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L57) (3 connections)
+- [.findStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L4) (3 connections)
+- [.promote()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L135) (3 connections)
+- [.getStudentMaster()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L8) (3 connections)
+- [.listStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L4) (3 connections)
+- [.promoteStudent()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L16) (3 connections)
+- [student.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L1) (1 connections)
+- [student.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L1) (1 connections)
+- [student.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L1) (1 connections)
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class StudentController {
+        +student.controller.ts()
+        +.getStudents()
+        +.getStudentById()
+        +.promote()
+    }
+    class StudentRepository {
+        +student.repository.ts()
+        +.findStudents()
+        +.findStudentMasterById()
+        +.promote()
+    }
+    class StudentService {
+        +student.service.ts()
+        +.listStudents()
+        +.getStudentMaster()
+        +.promoteStudent()
+    }
+```
 
 ## Relationships
 
-- [[Community 999]] (1 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\auth\auth.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 27 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 24 (57%)
+- INFERRED: 18 (43%)
 - AMBIGUOUS: 0 (0%)
 
 ---

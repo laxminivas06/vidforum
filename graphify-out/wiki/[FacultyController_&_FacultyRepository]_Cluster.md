@@ -1,42 +1,20 @@
 # [FacultyController & FacultyRepository] Cluster
 
-> 12 nodes · cohesion 0.20
+> 11 nodes · cohesion 0.18
 
 ## Key Concepts
 
-- [FacultyController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L5) (3 connections)
-- [.getFaculty()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L6) (3 connections)
-- [.getFacultyById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L16) (3 connections)
-- [FacultyRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L3) (3 connections)
-- [.findFacultyById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L41) (3 connections)
-- [.findFacultyByInstitution()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L4) (3 connections)
-- [FacultyService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L3) (3 connections)
-- [.getFacultyList()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L4) (3 connections)
-- [.getFacultyMember()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L43) (3 connections)
-- [faculty.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L1) (1 connections)
-- [faculty.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L1) (1 connections)
-- [faculty.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L1) (1 connections)
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class FacultyController {
-        +faculty.controller.ts()
-        +.getFaculty()
-        +.getFacultyById()
-    }
-    class FacultyRepository {
-        +faculty.repository.ts()
-        +.findFacultyByInstitution()
-        +.findFacultyById()
-    }
-    class FacultyService {
-        +faculty.service.ts()
-        +.getFacultyList()
-        +.getFacultyMember()
-    }
-```
+- [ai-yantra.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L1) (10 connections)
+- [campaign](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L44) (1 connections)
+- [campRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L38) (1 connections)
+- [guardRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L47) (1 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L15) (1 connections)
+- [recRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L53) (1 connections)
+- [reply](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L107) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L16) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L6) (1 connections)
+- [{ studentId, message, subject = 'Mathematics' }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L104) (1 connections)
+- [{ title, scriptTemplate, targetFilter }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L35) (1 connections)
 
 ## Relationships
 
@@ -44,14 +22,12 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\faculty\faculty.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\faculty\faculty.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\faculty\faculty.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\ai-yantra\ai-yantra.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 18 (60%)
-- INFERRED: 12 (40%)
+- EXTRACTED: 20 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

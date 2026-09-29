@@ -44,6 +44,24 @@ export class InstitutionService {
     }
     return await institutionRepository.upsertModule(inst.id, moduleCode, isEnabled);
   }
+
+  async createInstitution(data: any) {
+    const row = await institutionRepository.create(data);
+    return {
+      id: row.id,
+      name: row.name,
+      code: row.code,
+      domain: row.settings?.domain || `${row.code.toLowerCase().replace('-', '')}.vid.edu`,
+      status: row.status.toUpperCase(),
+      plan: data.plan || 'ENTERPRISE',
+      studentsCount: 0,
+      facultyCount: 0,
+      createdAt: row.created_at?.toISOString ? row.created_at.toISOString().split('T')[0] : '2026-09-29',
+      region: row.address || 'India',
+      boardAffiliation: row.settings?.boardAffiliation,
+      contactEmail: row.contact_email,
+    };
+  }
 }
 
 export const institutionService = new InstitutionService();

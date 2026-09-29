@@ -2,7 +2,7 @@
 
 > God node · 23 connections · [docs/TECH_SPEC.md](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md)
 
-**Community:** [[[Document: Antigravity Master Prompt & 0. ROLE & OPERATING MODE] Cluster]]
+**Community:** [[[columns & [searchQuery, setSearchQuery]] Cluster]]
 
 ## Connections by Relation
 

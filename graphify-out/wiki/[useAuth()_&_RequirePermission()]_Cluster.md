@@ -1,45 +1,43 @@
 # [useAuth() & RequirePermission()] Cluster
 
-> 20 nodes · cohesion 0.11
+> 21 nodes · cohesion 0.10
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L1) (9 connections)
-- [AuthContext.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L1) (6 connections)
-- [useAuth()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L150) (5 connections)
-- [RequirePermission()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L164) (2 connections)
-- [DashboardPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L41) (2 connections)
-- [LoginPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L9) (2 connections)
-- [RootPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/page.tsx#L7) (2 connections)
-- [ALL_PERMISSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L41) (1 connections)
-- [AuthContext](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L70) (1 connections)
-- [AuthProvider()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L72) (1 connections)
-- [DEFAULT_USER](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L32) (1 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L1) (1 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/page.tsx#L1) (1 connections)
-- [applicantColumns](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L61) (1 connections)
-- [[confirmDialogOpen, setConfirmDialogOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L58) (1 connections)
-- [{ data: applicants, isLoading: appsLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L56) (1 connections)
-- [{ data: fees }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L57) (1 connections)
-- [instColumns](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L399) (1 connections)
-- [{ institutionName }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L55) (1 connections)
-- [[selectedAction, setSelectedAction]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L59) (1 connections)
+- [Document: Readme](file:///C:/Antigravityyyyy/VID_School/README.md) (20 connections)
+- [1. Prerequisites](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [2. Environment Variables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [3. Running the Development Servers](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [4. Running in Production](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📡 API Reference Snapshot (/api/v1/)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [🏛 Architecture & Tech Stack](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Build and Start Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Build and Start Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📚 Complete Specifications & Documentation](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [🛡️ Core Architectural Pillars & Non-Negotiables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📊 Current Implementation Progress (As of 2026-09-25)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [🚀 Getting Started](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [In vidforum/backend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [In vidforum/frontend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Or using nodemon:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📁 Repository Directory Structure](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Running Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Running Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Stack Highlights](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [VID (Virtual Identification) — Educational Management Ecosystem](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[handleAdvanceStage() & handleEnroll()] Cluster]] (40 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\(auth)\login\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\contexts\AuthContext.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx)
+- [README.md](file:///C:/Antigravityyyyy/VID_School/README.md)
 
 ## Audit Trail
 
-- EXTRACTED: 35 (85%)
-- INFERRED: 6 (15%)
+- EXTRACTED: 40 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

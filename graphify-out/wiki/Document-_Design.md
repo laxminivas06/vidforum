@@ -2,7 +2,7 @@
 
 > God node · 25 connections · [docs/Design.md](file:///C:/Antigravityyyyy/VID_School/docs/Design.md)
 
-**Community:** [[[Document: Appflow & 1. Overview & Navigation Architecture] Cluster]]
+**Community:** [[[Document: Tasks & 1.1 Project Scaffolding & Infrastructure] Cluster]]
 
 ## Connections by Relation
 

@@ -1,37 +1,33 @@
 # institutions
 
-> God node · 74 connections · `backend/db/schema.sql`
+> God node · 73 connections · [backend\db\schema.sql](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql)
 
-**Community:** [Academic Entities & Institutional Domains](Academic_Entities_&_Institutional_Domains.md)
+**Community:** [[Community 999]]
 
 ## Connections by Relation
 
-### contains
-- schema.sql `EXTRACTED`
-
-### references
-- students `EXTRACTED`
-- profiles `EXTRACTED`
-- staff `EXTRACTED`
-- academic_years `EXTRACTED`
-- classes `EXTRACTED`
-- attendance_records `EXTRACTED`
-- payments `EXTRACTED`
-- sections `EXTRACTED`
-- subjects `EXTRACTED`
-- timetable_entries `EXTRACTED`
-- admissions `EXTRACTED`
-- faculty_assignments `EXTRACTED`
-- invoices `EXTRACTED`
-- applications `EXTRACTED`
-- marks `EXTRACTED`
-- student_academic_history `EXTRACTED`
-- student_fees `EXTRACTED`
-- attendance_sessions `EXTRACTED`
-- documents `EXTRACTED`
-- exams `EXTRACTED`
-- *…and 53 more `references` connection(s) not listed (lowest-degree first to go)*
+### FK_REFS
+- [[profiles]] `EXTRACTED`
+- [[students]] `EXTRACTED`
+- [[staff]] `EXTRACTED`
+- [[academic_years]] `EXTRACTED`
+- [[classes]] `EXTRACTED`
+- [[subjects]] `EXTRACTED`
+- [[sections]] `EXTRACTED`
+- [[timetable_entries]] `EXTRACTED`
+- [[applications]] `EXTRACTED`
+- [[payments]] `EXTRACTED`
+- [[admissions]] `EXTRACTED`
+- [[fee_structures]] `EXTRACTED`
+- [[departments]] `EXTRACTED`
+- [[student_academic_history]] `EXTRACTED`
+- [[student_promotions]] `EXTRACTED`
+- [[faculty_assignments]] `EXTRACTED`
+- [[attendance_sessions]] `EXTRACTED`
+- [[attendance_records]] `EXTRACTED`
+- [[exams]] `EXTRACTED`
+- [[marks]] `EXTRACTED`
 
 ---
 
-*Part of the graphify knowledge wiki. See [index](index.md) to navigate.*
+*Part of the graphify knowledge wiki. See [[index]] to navigate.*

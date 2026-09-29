@@ -44,6 +44,15 @@ export class InstitutionController {
       next(error);
     }
   }
+
+  async createInstitution(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const institution = await institutionService.createInstitution(req.body);
+      sendSuccess(res, institution, 'Institution provisioned successfully');
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const institutionController = new InstitutionController();

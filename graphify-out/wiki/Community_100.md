@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [Badge()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Badge.tsx#L10) (1 connections)
-- [Badge.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Badge.tsx#L1) (1 connections)
+- [SettingsShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx#L1) (1 connections)
+- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx#L58) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Badge.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Badge.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\SettingsShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx)
 
 ## Audit Trail
 

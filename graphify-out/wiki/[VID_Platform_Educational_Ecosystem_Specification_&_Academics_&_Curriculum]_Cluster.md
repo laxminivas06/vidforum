@@ -21,7 +21,7 @@
 
 ## Relationships
 
-- [[[isTableLoading & mobileSubtitleCol] Cluster]] (26 shared connections)
+- [[[API_BASE_URL & DEFAULT_INST_ID] Cluster]] (26 shared connections)
 
 ## Source Files
 

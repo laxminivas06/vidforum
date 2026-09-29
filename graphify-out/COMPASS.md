@@ -1,19 +1,19 @@
-# Architectural Compass - C:\Antigravityyyyy\VID_School (2026-09-28)
+# Architectural Compass - C:\Antigravityyyyy\VID_School (2026-09-29)
 
 > [!NOTE]
 > This is a token-optimized summary. For deep logic, see GRAPH_REPORT.md.
 
 ## Core Abstractions (God Nodes)
-1. `Document: Vid Database Architecture` (47 edges)
-2. `query` (28 edges)
-3. `Document: Design` (25 edges)
-4. `Document: Tech Spec` (23 edges)
-5. `Document: Tasks` (22 edges)
-6. `Document: Prd` (21 edges)
-7. `sendSuccess()` (20 edges)
-8. `Document: Readme` (20 edges)
-9. `Document: Appflow` (18 edges)
-10. `Document: Antigravity Master Prompt` (18 edges)
+1. `institutions` (73 edges)
+2. `Document: Vid Database Architecture` (47 edges)
+3. `query` (29 edges)
+4. `profiles` (26 edges)
+5. `Document: Design` (25 edges)
+6. `students` (24 edges)
+7. `Document: Tech Spec` (23 edges)
+8. `Document: Tasks` (22 edges)
+9. `sendSuccess()` (21 edges)
+10. `Document: Prd` (21 edges)
 
 ## System Layers
 - **L0: Global/Entry**: 

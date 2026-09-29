@@ -47,6 +47,34 @@ export class InstitutionRepository {
     return res.rows[0] || null;
   }
 
+  async create(data: {
+    name: string;
+    code: string;
+    domain: string;
+    plan?: string;
+    region?: string;
+    boardAffiliation?: string;
+    contactEmail?: string;
+  }) {
+    const settings = {
+      domain: data.domain,
+      boardAffiliation: data.boardAffiliation,
+    };
+    const query = `
+      INSERT INTO institutions (code, name, status, address, contact_email, settings)
+      VALUES ($1, $2, 'active', $3, $4, $5)
+      RETURNING *
+    `;
+    const res = await db.query(query, [
+      data.code,
+      data.name,
+      data.region || 'India',
+      data.contactEmail || null,
+      JSON.stringify(settings),
+    ]);
+    return res.rows[0];
+  }
+
   async findModules(institutionId: string) {
     const res = await db.query(
       'SELECT module_code, is_enabled, config FROM module_configurations WHERE institution_id = $1',

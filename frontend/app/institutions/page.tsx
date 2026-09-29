@@ -30,12 +30,14 @@ import {
 } from "lucide-react"
 import { useInstitutions } from "@/lib/api/hooks"
 import { Institution } from "@/types"
+import { ProvisionTenantModal } from "@/components/institutions/ProvisionTenantModal"
 
 export default function InstitutionsPage() {
   const { data: institutions = [], isLoading } = useInstitutions()
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedInst, setSelectedInst] = useState<Institution | null>(null)
   const [suspendDialogOpen, setSuspendDialogOpen] = useState(false)
+  const [isProvisionOpen, setIsProvisionOpen] = useState(false)
 
   const filtered = institutions.filter(
     (i) =>
@@ -128,6 +130,7 @@ export default function InstitutionsPage() {
           size="dense"
           variant="primary"
           leadingIcon={<Plus className="w-3.5 h-3.5" />}
+          onClick={() => setIsProvisionOpen(true)}
         >
           Provision New Tenant
         </Button>
@@ -214,6 +217,18 @@ export default function InstitutionsPage() {
                 <span className="text-text-secondary">Subscription Plan:</span>
                 <span className="font-semibold text-brand-primary">{selectedInst.plan}</span>
               </div>
+              {selectedInst.boardAffiliation && (
+                <div className="flex justify-between">
+                  <span className="text-text-secondary">Affiliation:</span>
+                  <span className="font-semibold text-text-primary">{selectedInst.boardAffiliation}</span>
+                </div>
+              )}
+              {selectedInst.contactEmail && (
+                <div className="flex justify-between">
+                  <span className="text-text-secondary">Admin Contact:</span>
+                  <span className="font-mono text-text-primary">{selectedInst.contactEmail}</span>
+                </div>
+              )}
               <div className="flex justify-between">
                 <span className="text-text-secondary">Provisioned On:</span>
                 <span className="font-mono text-text-secondary">{selectedInst.createdAt}</span>
@@ -222,6 +237,15 @@ export default function InstitutionsPage() {
           </div>
         )}
       </SlideOver>
+
+      {/* Provision New Tenant Modal */}
+      <ProvisionTenantModal
+        isOpen={isProvisionOpen}
+        onClose={() => setIsProvisionOpen(false)}
+        onSuccess={(newInst) => {
+          setSelectedInst(newInst)
+        }}
+      />
 
       {/* Suspend Confirmation Dialog */}
       <ConfirmDialog

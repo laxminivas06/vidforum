@@ -1,6 +1,6 @@
 # sendSuccess()
 
-> God node · 20 connections · [C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts#L19)
+> God node · 21 connections · [C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts#L19)
 
 ## Call Trace Diagram
 
@@ -33,6 +33,7 @@ sequenceDiagram
     participant P24 as .getSubjects()
     participant P25 as .getApplicants()
     participant P26 as .toggleModule()
+    participant P27 as .createInstitution()
     P0->>+ P1: calls
     P1-->>- P0: return
     P1->>+ P0: calls
@@ -95,6 +96,8 @@ sequenceDiagram
     P25-->>- P0: return
     P0->>+ P26: calls
     P26-->>- P0: return
+    P0->>+ P27: calls
+    P27-->>- P0: return
 ```
 
 ## Connections by Relation
@@ -119,6 +122,7 @@ sequenceDiagram
 - [[.getSubjects()]] `INFERRED`
 - [[.getApplicants()]] `INFERRED`
 - [[.toggleModule()]] `INFERRED`
+- [[.createInstitution()]] `INFERRED`
 
 ### contains
 - [[api-response.ts]] `EXTRACTED`

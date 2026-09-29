@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [next](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L15) (0 connections)
+- [react](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L16) (0 connections)
 
 ## Relationships
 

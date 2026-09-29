@@ -11,6 +11,9 @@ export interface Institution {
   facultyCount: number
   createdAt: string
   region: string
+  boardAffiliation?: string
+  contactEmail?: string
+  contactPhone?: string
 }
 
 export type AdmissionStage = 

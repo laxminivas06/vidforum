@@ -1,42 +1,43 @@
 # [Document: Readme & 1. Prerequisites] Cluster
 
-> 21 nodes · cohesion 0.10
+> 22 nodes · cohesion 0.10
 
 ## Key Concepts
 
-- [Document: Readme](file:///C:/Antigravityyyyy/VID_School/README.md) (20 connections)
-- [1. Prerequisites](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [2. Environment Variables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [3. Running the Development Servers](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [4. Running in Production](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [📡 API Reference Snapshot (/api/v1/)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [🏛 Architecture & Tech Stack](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Build and Start Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Build and Start Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [📚 Complete Specifications & Documentation](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [🛡️ Core Architectural Pillars & Non-Negotiables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [📊 Current Implementation Progress (As of 2026-09-25)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [🚀 Getting Started](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [In vidforum/backend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [In vidforum/frontend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Or using nodemon:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [📁 Repository Directory Structure](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Running Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Running Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Stack Highlights](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [VID (Virtual Identification) — Educational Management Ecosystem](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [ProvisionTenantModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L1) (21 connections)
+- [autoGenerateCode()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L90) (2 connections)
+- [handleNameChange()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L68) (2 connections)
+- [handleSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L155) (2 connections)
+- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L132) (2 connections)
+- [[boardAffiliation, setBoardAffiliation]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L55) (1 connections)
+- [[code, setCode]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L54) (1 connections)
+- [[contactEmail, setContactEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L56) (1 connections)
+- [[contactPhone, setContactPhone]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L57) (1 connections)
+- [createInstitutionMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L65) (1 connections)
+- [[customDomain, setCustomDomain]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L60) (1 connections)
+- [effectiveDomain](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L101) (1 connections)
+- [[errors, setErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L62) (1 connections)
+- [[isCustomDomain, setIsCustomDomain]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L61) (1 connections)
+- [isSelected](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L445) (1 connections)
+- [[name, setName]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L53) (1 connections)
+- [PLAN_OPTIONS](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L33) (1 connections)
+- [[plan, setPlan]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L59) (1 connections)
+- [POPULAR_BOARDS](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L39) (1 connections)
+- [REGION_OPTIONS](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L26) (1 connections)
+- [[region, setRegion]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L58) (1 connections)
+- [[submittedSuccess, setSubmittedSuccess]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L63) (1 connections)
 
 ## Relationships
 
-- [[[Document: Decisions & ADR-001 Strict Separation of Phase Deliverables] Cluster]] (40 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [README.md](file:///C:/Antigravityyyyy/VID_School/README.md)
+- [C:\Antigravityyyyy\VID_School\frontend\components\institutions\ProvisionTenantModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 40 (100%)
+- EXTRACTED: 46 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -26,7 +26,7 @@
 
 ## Relationships
 
-- [[[errorCount & { examId, subjectId }] Cluster]] (36 shared connections)
+- [[[useAuth() & RequirePermission()] Cluster]] (36 shared connections)
 
 ## Source Files
 

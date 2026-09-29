@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [@types/bcryptjs](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L25) (0 connections)
+- [@types/cors](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L26) (0 connections)
 
 ## Relationships
 

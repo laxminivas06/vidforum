@@ -2,7 +2,7 @@
 
 > God node · 21 connections · [docs/PRD.md](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md)
 
-**Community:** [[[{ email, password, role = 'INSTITUTION_ADMIN' } & inst] Cluster]]
+**Community:** [[[Document: Readme & 1. Prerequisites] Cluster]]
 
 ## Connections by Relation
 
@@ -13,7 +13,6 @@
 - [[2. Target Users & Personas]] `EXTRACTED`
 - [[3.1 Workspace Classification Matrix]] `EXTRACTED`
 - [[3.2 The Student Master Entity]] `EXTRACTED`
-- [[3.3 The 30 Non-Negotiable Rules]] `EXTRACTED`
 - [[3. Product Scope & Modular Architecture]] `EXTRACTED`
 - [[4. Development Phases & Release Strategy]] `EXTRACTED`
 - [[5.1 Super Admin]] `EXTRACTED`
@@ -27,6 +26,7 @@
 - [[Phase 2: Core Operational Workspaces]] `EXTRACTED`
 - [[Phase 3: AI Yantra Intelligence Layer]] `EXTRACTED`
 - [[Phase 4: Optional Modules & Mobile Experience]] `EXTRACTED`
+- [[Product Requirements Document (PRD): VID (Virtual Identification)]] `EXTRACTED`
 
 ---
 

@@ -6,6 +6,9 @@ const router = Router();
 // GET /api/v1/institutions
 router.get('/', institutionController.getInstitutions.bind(institutionController));
 
+// POST /api/v1/institutions
+router.post('/', institutionController.createInstitution.bind(institutionController));
+
 // GET /api/v1/institutions/:id
 router.get('/:id', institutionController.getInstitutionById.bind(institutionController));
 

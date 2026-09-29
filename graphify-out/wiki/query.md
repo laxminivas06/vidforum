@@ -1,6 +1,6 @@
 # query
 
-> God node · 28 connections · [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L14)
+> God node · 29 connections · [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L14)
 
 ## Call Trace Diagram
 
@@ -34,12 +34,13 @@ sequenceDiagram
     participant P25 as .recordPayment()
     participant P26 as .getSummary()
     participant P27 as .findAll()
-    participant P28 as .findStudents()
-    participant P29 as .findStudentMasterById()
-    participant P30 as .promote()
-    participant P31 as .getSectionsByClass()
-    participant P32 as .getSubjectsByClass()
-    participant P33 as .getHierarchy()
+    participant P28 as .create()
+    participant P29 as .findStudents()
+    participant P30 as .findStudentMasterById()
+    participant P31 as .promote()
+    participant P32 as .getSectionsByClass()
+    participant P33 as .getSubjectsByClass()
+    participant P34 as .getHierarchy()
     P0->>+ P1: calls
     P1-->>- P0: return
     P1->>+ P0: calls
@@ -104,14 +105,14 @@ sequenceDiagram
     P26-->>- P0: return
     P0->>+ P27: calls
     P27-->>- P0: return
+    P0->>+ P28: calls
+    P28-->>- P0: return
     P0->>+ P4: calls
     P4-->>- P0: return
     P0->>+ P7: calls
     P7-->>- P0: return
     P0->>+ P9: calls
     P9-->>- P0: return
-    P0->>+ P28: calls
-    P28-->>- P0: return
     P0->>+ P29: calls
     P29-->>- P0: return
     P0->>+ P30: calls
@@ -122,6 +123,8 @@ sequenceDiagram
     P32-->>- P0: return
     P0->>+ P33: calls
     P33-->>- P0: return
+    P0->>+ P34: calls
+    P34-->>- P0: return
 ```
 
 ## Connections by Relation
@@ -145,8 +148,8 @@ sequenceDiagram
 - [[.recordPayment()]] `INFERRED`
 - [[.getSummary()]] `INFERRED`
 - [[.findAll()]] `INFERRED`
+- [[.create()]] `INFERRED`
 - [[.findModules()]] `INFERRED`
-- [[.getStats()]] `INFERRED`
 
 ### contains
 - [[timetable.routes.ts]] `EXTRACTED`

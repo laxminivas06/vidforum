@@ -10,7 +10,7 @@
 
 ## Relationships
 
-- [[[Skill: agent-guard & Agent Guard Skill] Cluster]] (4 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

@@ -1,7 +1,7 @@
 # Graph Report - C:\Antigravityyyyy\VID_School  (2026-09-29)
 
 ## Corpus Check
-- 100 files · ~200,980 words
+- 100 files · ~203,871 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary

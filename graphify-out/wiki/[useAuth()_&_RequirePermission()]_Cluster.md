@@ -28,7 +28,7 @@
 
 ## Relationships
 
-- [[[handleAdvanceStage() & handleEnroll()] Cluster]] (40 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

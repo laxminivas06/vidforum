@@ -10,7 +10,7 @@
 
 ## Relationships
 
-- [[[Skill: hol-guard & Audit Checks] Cluster]] (4 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

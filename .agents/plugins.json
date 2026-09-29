@@ -83,6 +83,12 @@
     },
     {
       "path": ".agents/plugins/espresso"
+    },
+    {
+      "path": ".agents/plugins/a11y-audit"
+    },
+    {
+      "path": ".agents/plugins/openapi-gen"
     }
   ]
 }

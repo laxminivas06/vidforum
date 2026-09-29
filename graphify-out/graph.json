@@ -8000,7 +8000,7 @@
       "source_location": "L14",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_lucide_react"
     },
@@ -8015,7 +8015,7 @@
       "source_location": "L15",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_next"
     },
@@ -8030,7 +8030,7 @@
       "source_location": "L16",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_react"
     },
@@ -8045,7 +8045,7 @@
       "source_location": "L30",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "backend_package_json_ref_types_node"
     },
@@ -8060,7 +8060,7 @@
       "source_location": "L33",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "backend_package_json_ref_typescript"
     },
@@ -8075,7 +8075,7 @@
       "source_location": "L22",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "backend_package_json_ref_zod"
     },
@@ -8090,7 +8090,7 @@
       "source_location": "L14",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_bcryptjs"
     },
@@ -8105,7 +8105,7 @@
       "source_location": "L15",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_cors"
     },
@@ -8120,7 +8120,7 @@
       "source_location": "L16",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_dotenv"
     },
@@ -8135,7 +8135,7 @@
       "source_location": "L18",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_helmet"
     },
@@ -8150,7 +8150,7 @@
       "source_location": "L20",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_morgan"
     },
@@ -8165,7 +8165,7 @@
       "source_location": "L21",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_pg"
     },
@@ -8180,7 +8180,7 @@
       "source_location": "L32",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_tsx"
     },
@@ -8195,7 +8195,7 @@
       "source_location": "L25",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_types_bcryptjs"
     },
@@ -8210,7 +8210,7 @@
       "source_location": "L26",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_types_cors"
     },
@@ -8225,7 +8225,7 @@
       "source_location": "L27",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_types_express"
     },
@@ -8240,7 +8240,7 @@
       "source_location": "L28",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "ref_types_jsonwebtoken"
@@ -8256,7 +8256,7 @@
       "source_location": "L29",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_types_morgan"
     },
@@ -8271,7 +8271,7 @@
       "source_location": "L31",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_types_pg"
     },
@@ -8286,7 +8286,7 @@
       "source_location": "L22",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "frontend_package_json_ref_types_node"
     },
@@ -8301,7 +8301,7 @@
       "source_location": "L28",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "frontend_package_json_ref_typescript"
     },
@@ -8316,7 +8316,7 @@
       "source_location": "L19",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "frontend_package_json_ref_zod"
     },
@@ -8331,7 +8331,7 @@
       "source_location": "L25",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_autoprefixer"
     },
@@ -8346,7 +8346,7 @@
       "source_location": "L13",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_clsx"
     },
@@ -8361,7 +8361,7 @@
       "source_location": "L26",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_postcss"
     },
@@ -8376,7 +8376,7 @@
       "source_location": "L17",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_react_dom"
     },
@@ -8391,7 +8391,7 @@
       "source_location": "L18",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_tailwind_merge"
     },
@@ -8406,7 +8406,7 @@
       "source_location": "L27",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_tailwindcss"
     },
@@ -8421,7 +8421,7 @@
       "source_location": "L23",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_types_react"
     },
@@ -8436,7 +8436,7 @@
       "source_location": "L24",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_types_react_dom"
     },
@@ -8451,7 +8451,7 @@
       "source_location": "L17",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_express"
     },
@@ -8466,7 +8466,7 @@
       "source_location": "L12",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "ref_tanstack_react_query"
     },
@@ -8481,7 +8481,7 @@
       "source_location": "L19",
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "ref_jsonwebtoken"
@@ -8500,7 +8500,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_10_rbac_permissions"
     },
@@ -8518,7 +8518,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_11_academic_data_model"
     },
@@ -8536,7 +8536,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_12_workspace_data_ownership_model"
     },
@@ -8554,7 +8554,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_13_normalization_analysis"
     },
@@ -8572,7 +8572,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_14_primary_key_strategy"
     },
@@ -8590,7 +8590,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_15_constraints"
     },
@@ -8608,7 +8608,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_16_delete_update_strategy"
     },
@@ -8626,7 +8626,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_17_audit_strategy"
     },
@@ -8644,7 +8644,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_18_indexing_strategy"
     },
@@ -8662,7 +8662,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_19_supabase_rls_design"
     },
@@ -8680,7 +8680,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_1_executive_summary"
     },
@@ -8698,7 +8698,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_20_node_js_express_backend_integration"
     },
@@ -8716,7 +8716,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_21_transaction_design"
     },
@@ -8734,7 +8734,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_22_database_functions_and_triggers"
     },
@@ -8752,7 +8752,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_23_database_views"
     },
@@ -8770,7 +8770,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_24_complete_er_diagram"
     },
@@ -8788,7 +8788,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_25_final_database_architecture"
     },
@@ -8806,7 +8806,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_26_30_production_sql_rls_sql_function"
     },
@@ -8824,7 +8824,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_2_requirements_extracted_from_pdf_cond"
     },
@@ -8842,7 +8842,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_31_migration_order"
     },
@@ -8860,7 +8860,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_32_api_backend_mapping"
     },
@@ -8878,7 +8878,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_33_performance_review"
     },
@@ -8896,7 +8896,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "docs_vid_database_architecture_34_security_review"
@@ -8915,7 +8915,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_35_requirement_traceability_by_module"
     },
@@ -8933,7 +8933,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_36_final_production_checklist"
     },
@@ -8951,7 +8951,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_3_assumptions_and_ambiguities"
     },
@@ -8969,7 +8969,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_4_domain_model"
     },
@@ -8987,7 +8987,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_5_complete_entity_field_specification"
     },
@@ -9005,7 +9005,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_6_relationship_model_key_cardinalities"
     },
@@ -9023,7 +9023,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_7_multi_tenant_architecture"
     },
@@ -9041,7 +9041,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_8_supabase_architecture"
     },
@@ -9059,7 +9059,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "docs_vid_database_architecture_9_authentication_architecture"
@@ -9078,7 +9078,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_academic_structure_student_core"
     },
@@ -9096,7 +9096,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_admissions_student_lifecycle"
     },
@@ -9114,7 +9114,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_ai_yantra"
     },
@@ -9132,7 +9132,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_attendance"
     },
@@ -9150,7 +9150,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_attendancerecords"
     },
@@ -9168,7 +9168,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_canonical_shared_core_entities_used_by"
     },
@@ -9186,7 +9186,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "docs_vid_database_architecture_core_auth_rbac"
@@ -9205,7 +9205,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_examinations"
     },
@@ -9223,7 +9223,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_finance"
     },
@@ -9241,7 +9241,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_institutions"
     },
@@ -9259,7 +9259,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "docs_vid_database_architecture_payments_invoices"
@@ -9278,7 +9278,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_profiles"
     },
@@ -9296,7 +9296,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_students"
     },
@@ -9314,7 +9314,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_vid_multi_tenant_education_erp_databas"
     },
@@ -9332,7 +9332,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_workspace_specific_entities"
     },
@@ -9350,7 +9350,7 @@
       "source_url": null,
       "level": 0,
       "granularity": "low",
-      "heat": 0.187,
+      "heat": 0.177,
       "owner": "unowned",
       "id": "docs_vid_database_architecture_vid_database_architecture"
     },
@@ -9368,7 +9368,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_10_accessibility_baseline"
     },
@@ -9386,7 +9386,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_11_what_this_design_system_deliberately"
     },
@@ -9404,7 +9404,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_1_design_philosophy"
     },
@@ -9422,7 +9422,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_2_1_core_palette"
     },
@@ -9440,7 +9440,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_2_2_accent_status_colors"
     },
@@ -9458,7 +9458,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_2_3_dark_elements_used_not_a_dark_mode"
     },
@@ -9476,7 +9476,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_2_color_system"
     },
@@ -9494,7 +9494,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_3_typography"
     },
@@ -9512,7 +9512,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_4_spacing_layout_grid"
     },
@@ -9530,7 +9530,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_5_10_slide_over_detail_panel"
     },
@@ -9548,7 +9548,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_5_1_sidebar_navigation"
     },
@@ -9566,7 +9566,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_5_2_topbar_breadcrumb"
     },
@@ -9584,7 +9584,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_5_3_two_pane_settings_layout"
     },
@@ -9602,7 +9602,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_5_4_cards"
     },
@@ -9620,7 +9620,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_5_5_tables_cards_responsive"
     },
@@ -9638,7 +9638,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_5_6_forms"
     },
@@ -9656,7 +9656,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_5_7_buttons"
     },
@@ -9674,7 +9674,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_5_8_badges_status_pills"
     },
@@ -9692,7 +9692,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_5_9_progress_indicators"
     },
@@ -9710,7 +9710,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_5_core_components"
     },
@@ -9728,7 +9728,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_6_iconography"
     },
@@ -9746,7 +9746,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_7_required_ui_states_every_screen"
     },
@@ -9764,7 +9764,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_8_responsive_breakpoints"
     },
@@ -9782,7 +9782,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_9_motion_interaction"
     },
@@ -9800,7 +9800,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_design_vid_virtual_identification_design_sy"
     },
@@ -9818,7 +9818,7 @@
       "source_url": null,
       "level": 0,
       "granularity": "low",
-      "heat": 0.126,
+      "heat": 0.116,
       "owner": "unowned",
       "id": "docs_design_design"
     },
@@ -9836,7 +9836,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_1_1_backend_architecture_layered_mvc"
     },
@@ -9854,7 +9854,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_1_technical_stack_selection_justifica"
     },
@@ -9872,7 +9872,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_2_high_level_architecture_diagram"
     },
@@ -9890,7 +9890,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_3_repository_folder_structure"
     },
@@ -9908,7 +9908,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_4_1_schema_definition_across_16_core_dom"
     },
@@ -9926,7 +9926,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_4_database_schema_multi_tenant_data_m"
     },
@@ -9944,7 +9944,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_5_1_route_inventory_section_26_mapping"
     },
@@ -9962,7 +9962,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_5_2_sample_request_response_schemas"
     },
@@ -9980,7 +9980,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_5_api_contracts_endpoint_specificatio"
     },
@@ -9998,7 +9998,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "docs_tech_spec_6_authentication_security_tenant_iso"
@@ -10017,7 +10017,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_7_responsive_ui_specification_breakpo"
     },
@@ -10035,7 +10035,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_8_third_party_integrations_environmen"
     },
@@ -10053,7 +10053,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_admission_approval_to_student_creatio"
     },
@@ -10071,7 +10071,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_ai_yantra_intelligence"
     },
@@ -10089,7 +10089,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_cache_message_broker_job_queue"
     },
@@ -10107,7 +10107,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_detailed_entity_specifications"
     },
@@ -10125,7 +10125,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_external_integrations"
     },
@@ -10143,7 +10143,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_multi_tenant_postgresql_database"
     },
@@ -10161,7 +10161,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_object_storage"
     },
@@ -10179,7 +10179,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_platform_server"
     },
@@ -10197,7 +10197,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_required_environment_variables_env"
     },
@@ -10215,7 +10215,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_technical_specification_vid_virtual_id"
     },
@@ -10233,7 +10233,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "docs_tech_spec_timetable_conflict_detection"
     },
@@ -10251,7 +10251,7 @@
       "source_url": null,
       "level": 0,
       "granularity": "low",
-      "heat": 0.171,
+      "heat": 0.151,
       "owner": "unowned",
       "id": "docs_tech_spec_tech_spec"
     },
@@ -10269,7 +10269,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_1_1_project_scaffolding_infrastructure"
     },
@@ -10287,7 +10287,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "docs_tasks_1_2_auth_multi_tenancy_rbac_engine"
@@ -10306,7 +10306,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "docs_tasks_1_3_super_admin_institution_admin_cons"
@@ -10325,7 +10325,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_1_4_academics_hierarchy_faculty_mappin"
     },
@@ -10343,7 +10343,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_1_5_admissions_workspace_central_stude"
     },
@@ -10361,7 +10361,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_2_1_attendance_workspace"
     },
@@ -10379,7 +10379,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_2_2_examinations_workspace_excel_impor"
     },
@@ -10397,7 +10397,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_2_3_finance_fee_management_workspace"
     },
@@ -10415,7 +10415,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_2_4_documents_timetable_hrms"
     },
@@ -10433,7 +10433,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_3_1_yantra_voice_agent"
     },
@@ -10451,7 +10451,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_3_2_yantra_ai_attendance"
     },
@@ -10469,7 +10469,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_3_3_yantra_ai_tutor"
     },
@@ -10487,7 +10487,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_4_1_modular_optional_workspaces"
     },
@@ -10505,7 +10505,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_4_2_dedicated_parent_student_experienc"
     },
@@ -10523,7 +10523,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_development_tasks_breakdown_vid_platfor"
     },
@@ -10541,7 +10541,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_implementation_progress_ledger_as_of_20"
     },
@@ -10559,7 +10559,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_phase_0_project_initiation_architectu"
     },
@@ -10577,7 +10577,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_phase_1_foundation_scaffold_mvp_core"
     },
@@ -10595,7 +10595,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_phase_2_core_operational_workspaces"
     },
@@ -10613,7 +10613,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_phase_3_ai_yantra_intelligence_layer"
     },
@@ -10631,7 +10631,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_phase_4_optional_workspaces_mobile_pa"
     },
@@ -10649,7 +10649,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_tasks_phase_5_testing_auditing_verification"
     },
@@ -10667,7 +10667,7 @@
       "source_url": null,
       "level": 0,
       "granularity": "low",
-      "heat": 0.218,
+      "heat": 0.188,
       "owner": "unowned",
       "id": "docs_tasks_tasks"
     },
@@ -10685,7 +10685,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_1_1_problem_statement"
     },
@@ -10703,7 +10703,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_1_2_core_principle_philosophy"
     },
@@ -10721,7 +10721,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_1_executive_summary_product_vision"
     },
@@ -10739,7 +10739,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_2_target_users_personas"
     },
@@ -10757,7 +10757,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_3_1_workspace_classification_matrix"
     },
@@ -10775,7 +10775,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_3_2_the_student_master_entity"
     },
@@ -10793,7 +10793,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_3_product_scope_modular_architecture"
     },
@@ -10811,7 +10811,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_4_development_phases_release_strategy"
     },
@@ -10829,7 +10829,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "docs_prd_5_1_super_admin"
@@ -10848,7 +10848,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "docs_prd_5_2_institution_admin"
@@ -10867,7 +10867,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_5_3_admissions_team"
     },
@@ -10885,7 +10885,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_5_4_academic_coordinator_faculty"
     },
@@ -10903,7 +10903,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_5_user_stories_per_feature_phase_1_mvp"
     },
@@ -10921,7 +10921,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_6_out_of_scope_items_strict_boundaries"
     },
@@ -10939,7 +10939,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_7_open_questions_engineering_assumpti"
     },
@@ -10957,7 +10957,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_phase_1_mvp_core_foundation_immediate"
     },
@@ -10975,7 +10975,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_phase_2_core_operational_workspaces"
     },
@@ -10993,7 +10993,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_phase_3_ai_yantra_intelligence_layer"
     },
@@ -11011,7 +11011,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_phase_4_optional_modules_mobile_exper"
     },
@@ -11029,7 +11029,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_product_requirements_document_prd_vid"
     },
@@ -11047,7 +11047,7 @@
       "source_url": null,
       "level": 0,
       "granularity": "low",
-      "heat": 0.116,
+      "heat": 0.106,
       "owner": "unowned",
       "id": "docs_prd_prd"
     },
@@ -11065,7 +11065,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_prd_3_3_the_30_non_negotiable_rules"
     },
@@ -11083,7 +11083,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_1_prerequisites"
     },
@@ -11101,7 +11101,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_2_environment_variables"
     },
@@ -11119,7 +11119,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_3_running_the_development_servers"
     },
@@ -11137,7 +11137,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_4_running_in_production"
     },
@@ -11155,7 +11155,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_api_reference_snapshot_api_v1"
     },
@@ -11173,7 +11173,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_architecture_tech_stack"
     },
@@ -11191,7 +11191,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_build_and_start_backend"
     },
@@ -11209,7 +11209,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_build_and_start_frontend"
     },
@@ -11227,7 +11227,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_complete_specifications_documentatio"
     },
@@ -11245,7 +11245,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_core_architectural_pillars_non_nego"
     },
@@ -11263,7 +11263,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_current_implementation_progress_as_of"
     },
@@ -11281,7 +11281,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_getting_started"
     },
@@ -11299,7 +11299,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_in_vidforum_backend"
     },
@@ -11317,7 +11317,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_in_vidforum_frontend"
     },
@@ -11335,7 +11335,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_or_using_nodemon"
     },
@@ -11353,7 +11353,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_repository_directory_structure"
     },
@@ -11371,7 +11371,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_running_backend"
     },
@@ -11389,7 +11389,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_running_frontend"
     },
@@ -11407,7 +11407,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_stack_highlights"
     },
@@ -11425,7 +11425,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.161,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "readme_vid_virtual_identification_education"
     },
@@ -11443,7 +11443,7 @@
       "source_url": null,
       "level": 0,
       "granularity": "low",
-      "heat": 0.213,
+      "heat": 0.183,
       "owner": "unowned",
       "id": "readme_readme"
     },
@@ -11461,7 +11461,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_appflow_1_overview_navigation_architecture"
     },
@@ -11479,7 +11479,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "docs_appflow_2_1_authentication"
@@ -11498,7 +11498,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "docs_appflow_2_2_super_admin_console_super_admin"
@@ -11517,7 +11517,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "docs_appflow_2_3_institution_admin_workspace_insti"
@@ -11536,7 +11536,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_appflow_2_4_core_workspaces_core"
     },
@@ -11554,7 +11554,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_appflow_2_5_ai_yantra_services_ai_yantra"
     },
@@ -11572,7 +11572,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_appflow_2_6_optional_modular_workspaces_optio"
     },
@@ -11590,7 +11590,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_appflow_2_7_central_student_master_profile_stu"
     },
@@ -11608,7 +11608,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_appflow_2_8_mobile_parent_student_portal_mo"
     },
@@ -11626,7 +11626,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_appflow_2_complete_route_hierarchy_screen_inv"
     },
@@ -11644,7 +11644,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_appflow_3_1_login_tenant_resolution"
     },
@@ -11662,7 +11662,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "docs_appflow_3_2_institution_admin_settings_shell_tw"
@@ -11681,7 +11681,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_appflow_3_3_admissions_workspace_kanban_slide"
     },
@@ -11699,7 +11699,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_appflow_3_4_student_master_profile_shell"
     },
@@ -11717,7 +11717,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_appflow_3_deep_dive_screen_specifications"
     },
@@ -11735,7 +11735,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_appflow_4_navigation_optional_module_matrix"
     },
@@ -11753,7 +11753,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_appflow_5_development_phases"
     },
@@ -11771,7 +11771,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "docs_appflow_vid_virtual_identification_applicati"
     },
@@ -11789,7 +11789,7 @@
       "source_url": null,
       "level": 0,
       "granularity": "low",
-      "heat": 0.107,
+      "heat": 0.097,
       "owner": "unowned",
       "id": "docs_appflow_appflow"
     },
@@ -11807,7 +11807,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_0_role_operating_mode"
     },
@@ -11825,7 +11825,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_1_project_brief"
     },
@@ -11843,7 +11843,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_2_required_deliverables_create_these"
     },
@@ -11861,7 +11861,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_4_tech_stack_constraints"
     },
@@ -11879,7 +11879,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_5_working_agreement_check_in_cadence"
     },
@@ -11897,7 +11897,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_6_agent_memory_usage"
     },
@@ -11915,7 +11915,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_7_definition_of_done_v1"
     },
@@ -11933,7 +11933,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_ai_yantra_boundary"
     },
@@ -11951,7 +11951,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_docs_decisions_md"
     },
@@ -11969,7 +11969,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_docs_prd_md"
     },
@@ -11987,7 +11987,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_docs_tasks_md"
     },
@@ -12005,7 +12005,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_docs_techspec_md"
     },
@@ -12023,7 +12023,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_documentation_architecture_reconciliat"
     },
@@ -12041,7 +12041,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_documentation_reconciliation"
     },
@@ -12059,7 +12059,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_master_prompt_antigravity_full_stack_b"
     },
@@ -12077,7 +12077,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "reference_docs_antigravity_master_prompt_multi_tenant_security"
@@ -12096,7 +12096,7 @@
       "source_url": null,
       "level": 0,
       "granularity": "low",
-      "heat": 0.157,
+      "heat": 0.137,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_antigravity_master_prompt"
     },
@@ -12114,7 +12114,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_3_development_rules_apply_throughout"
     },
@@ -12132,7 +12132,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "reference_docs_antigravity_master_prompt_backend_architecture_rules"
     },
@@ -12416,7 +12416,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_decisions_adr_001_strict_separation_of_phase_deliv"
     },
@@ -12434,7 +12434,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_decisions_adr_002_multi_tenancy_via_shared_databas"
     },
@@ -12452,7 +12452,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_decisions_adr_003_central_student_master_record_vs"
     },
@@ -12470,7 +12470,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_decisions_adr_004_two_tier_rbac_with_resource_leve"
     },
@@ -12488,7 +12488,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_decisions_adr_005_full_stack_monorepo_structure_b"
     },
@@ -12506,7 +12506,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_decisions_adr_006_pre_commit_validation_pipeline_f"
     },
@@ -12524,7 +12524,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_decisions_adr_007_strict_3_workspace_boundary_for"
     },
@@ -12542,7 +12542,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_decisions_adr_008_node_js_22_typescript_expres"
     },
@@ -12560,7 +12560,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_decisions_adr_009_supabase_cloud_postgresql_with_p"
     },
@@ -12578,7 +12578,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_decisions_adr_010_zero_downtime_tanstack_query_hoo"
     },
@@ -12596,7 +12596,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_decisions_architectural_technical_decisions_log"
     },
@@ -12614,7 +12614,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.131,
       "owner": "unowned",
       "id": "docs_decisions_decision_records"
     },
@@ -12632,7 +12632,7 @@
       "source_url": null,
       "level": 0,
       "granularity": "low",
-      "heat": 0.141,
+      "heat": 0.161,
       "owner": "unowned",
       "id": "docs_decisions_decisions"
     },
@@ -12884,7 +12884,7 @@
       "source_url": null,
       "level": 0,
       "granularity": "low",
-      "heat": 0.077,
+      "heat": 0.067,
       "owner": "unowned",
       "id": "agents_rules_plugin_orchestrator_plugin_orchestrator"
     },
@@ -12902,7 +12902,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_rules_plugin_orchestrator_1_memory_phase_start_of_session_pre"
     },
@@ -12920,7 +12920,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_rules_plugin_orchestrator_2_planning_sdlc_phase"
     },
@@ -12938,7 +12938,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_rules_plugin_orchestrator_3_implementation_testing_phase"
     },
@@ -12956,7 +12956,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_rules_plugin_orchestrator_4_code_quality_review_phase"
     },
@@ -12974,7 +12974,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "agents_rules_plugin_orchestrator_5_security_git_phase"
@@ -12993,7 +12993,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "agents_rules_plugin_orchestrator_6_token_output_optimization"
@@ -13012,7 +13012,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_rules_plugin_orchestrator_plugin_orchestration_rules"
     },
@@ -13030,7 +13030,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "agents_1_operating_mode_standards"
     },
@@ -13048,7 +13048,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "agents_2_active_plugin_ecosystem_memory"
     },
@@ -13066,7 +13066,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "agents_3_working_agreement_checklist"
     },
@@ -13084,7 +13084,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.091,
       "owner": "unowned",
       "id": "agents_vid_platform_agent_operating_guidelines"
     },
@@ -13102,7 +13102,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.069,
+      "heat": 0.099,
       "owner": "unowned",
       "id": "agents_agents"
     },
@@ -13121,7 +13121,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.066,
+      "heat": 0.056,
       "owner": "unowned",
       "id": "agents_plugins_brooks_lint_skills_brooks_lint_skill_brooks_lint"
     },
@@ -13139,7 +13139,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_brooks_lint_skills_brooks_lint_skill_brooks_lint_skill"
     },
@@ -13157,7 +13157,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_brooks_lint_skills_brooks_lint_skill_guiding_principles"
     },
@@ -13175,7 +13175,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_brooks_lint_skills_brooks_lint_skill_severity_classifications"
     },
@@ -13194,7 +13194,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.066,
+      "heat": 0.056,
       "owner": "unowned",
       "id": "agents_plugins_codex_honcho_skills_honcho_memory_skill_honcho_memory"
     },
@@ -13212,7 +13212,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_codex_honcho_skills_honcho_memory_skill_honcho_memory_skill"
     },
@@ -13230,7 +13230,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_codex_honcho_skills_honcho_memory_skill_when_to_pull_memory"
     },
@@ -13248,7 +13248,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_codex_honcho_skills_honcho_memory_skill_when_to_save_memory"
     },
@@ -13267,7 +13267,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.066,
+      "heat": 0.056,
       "owner": "unowned",
       "id": "agents_plugins_mcp_local_memory_skills_local_memory_skill_local_memory"
     },
@@ -13285,7 +13285,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_mcp_local_memory_skills_local_memory_skill_key_actions"
     },
@@ -13303,7 +13303,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_mcp_local_memory_skills_local_memory_skill_local_memory_skill"
     },
@@ -13321,7 +13321,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_mcp_local_memory_skills_local_memory_skill_when_to_use"
     },
@@ -13340,7 +13340,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_agent_guard_skills_agent_guard_skill_agent_guard"
     },
@@ -13358,7 +13358,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_agent_guard_skills_agent_guard_skill_agent_guard_skill"
     },
@@ -13376,7 +13376,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_agent_guard_skills_agent_guard_skill_enforcement"
     },
@@ -13395,7 +13395,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_ai_native_sdlc_skills_ai_native_sdlc_skill_ai_native_sdlc"
     },
@@ -13413,7 +13413,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_ai_native_sdlc_skills_ai_native_sdlc_skill_ai_native_sdlc_skill"
     },
@@ -13431,7 +13431,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_ai_native_sdlc_skills_ai_native_sdlc_skill_gates"
     },
@@ -13450,7 +13450,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_axonflow_skills_axonflow_skill_axonflow"
     },
@@ -13468,7 +13468,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_axonflow_skills_axonflow_skill_axonflow_skill"
     },
@@ -13486,7 +13486,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_axonflow_skills_axonflow_skill_policies"
     },
@@ -13505,7 +13505,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_codex_reviewer_skills_codex_reviewer_skill_codex_reviewer"
     },
@@ -13523,7 +13523,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_codex_reviewer_skills_codex_reviewer_skill_checklist"
     },
@@ -13541,7 +13541,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_codex_reviewer_skills_codex_reviewer_skill_codex_reviewer_skill"
     },
@@ -13560,7 +13560,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_commit_narrator_skills_commit_narrator_skill_commit_narrator"
     },
@@ -13578,7 +13578,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_commit_narrator_skills_commit_narrator_skill_commit_narrator_skill"
     },
@@ -13596,7 +13596,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_commit_narrator_skills_commit_narrator_skill_format"
     },
@@ -13615,7 +13615,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_debt_ops_skills_debt_ops_skill_debt_ops"
     },
@@ -13633,7 +13633,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_debt_ops_skills_debt_ops_skill_debt_ops_skill"
     },
@@ -13651,7 +13651,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_debt_ops_skills_debt_ops_skill_rules"
     },
@@ -13670,7 +13670,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_docflow_skills_docflow_skill_docflow"
     },
@@ -13688,7 +13688,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_docflow_skills_docflow_skill_docflow_skill"
     },
@@ -13706,7 +13706,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_docflow_skills_docflow_skill_policy"
     },
@@ -13725,7 +13725,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_espresso_skills_espresso_skill_espresso"
     },
@@ -13743,7 +13743,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_espresso_skills_espresso_skill_espresso_skill"
     },
@@ -13761,7 +13761,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_espresso_skills_espresso_skill_guidelines"
     },
@@ -13780,7 +13780,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_falsegreen_skill_skills_falsegreen_skill_falsegreen"
     },
@@ -13798,7 +13798,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_falsegreen_skill_skills_falsegreen_skill_falsegreen_skill"
     },
@@ -13816,7 +13816,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_falsegreen_skill_skills_falsegreen_skill_patterns_to_flag"
     },
@@ -13835,7 +13835,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_flaky_detector_skills_flaky_detector_skill_flaky_detector"
     },
@@ -13853,7 +13853,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_flaky_detector_skills_flaky_detector_skill_flaky_detector_skill"
     },
@@ -13871,7 +13871,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_flaky_detector_skills_flaky_detector_skill_instructions"
     },
@@ -13890,7 +13890,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_hol_guard_skills_hol_guard_skill_hol_guard"
     },
@@ -13908,7 +13908,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_hol_guard_skills_hol_guard_skill_audit_checks"
     },
@@ -13926,7 +13926,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_hol_guard_skills_hol_guard_skill_hol_guard_skill"
     },
@@ -13945,7 +13945,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_knowl_skills_knowl_skill_knowl"
     },
@@ -13963,7 +13963,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_knowl_skills_knowl_skill_knowl_project_memory_skill"
     },
@@ -13981,7 +13981,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_knowl_skills_knowl_skill_procedures"
     },
@@ -14000,7 +14000,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_megalinter_skills_megalinter_skill_megalinter"
     },
@@ -14018,7 +14018,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_megalinter_skills_megalinter_skill_megalinter_skill"
     },
@@ -14036,7 +14036,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_megalinter_skills_megalinter_skill_target_toolchains"
     },
@@ -14055,7 +14055,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_memesh_skills_memesh_skill_memesh"
     },
@@ -14073,7 +14073,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_memesh_skills_memesh_skill_execution_guide"
     },
@@ -14091,7 +14091,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_memesh_skills_memesh_skill_memesh_shared_memory_skill"
     },
@@ -14110,7 +14110,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_metabrain_skills_metabrain_skill_metabrain"
     },
@@ -14128,7 +14128,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_metabrain_skills_metabrain_skill_metabrain_skill"
     },
@@ -14146,7 +14146,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_metabrain_skills_metabrain_skill_workflow"
     },
@@ -14165,7 +14165,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_pr_storyteller_skills_pr_storyteller_skill_pr_storyteller"
     },
@@ -14183,7 +14183,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_pr_storyteller_skills_pr_storyteller_skill_pr_storyteller_skill"
     },
@@ -14201,7 +14201,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_pr_storyteller_skills_pr_storyteller_skill_structure"
     },
@@ -14220,7 +14220,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_river_review_skills_river_review_skill_river_review"
     },
@@ -14238,7 +14238,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_river_review_skills_river_review_skill_review_lenses"
     },
@@ -14256,7 +14256,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_river_review_skills_river_review_skill_river_review_skill"
     },
@@ -14275,7 +14275,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_secret_guard_skills_secret_guard_skill_secret_guard"
     },
@@ -14293,7 +14293,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_secret_guard_skills_secret_guard_skill_scan_targets"
     },
@@ -14311,7 +14311,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_secret_guard_skills_secret_guard_skill_secret_guard_skill"
     },
@@ -14330,7 +14330,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_spec_driven_skills_spec_driven_skill_spec_driven"
     },
@@ -14348,7 +14348,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_spec_driven_skills_spec_driven_skill_lifecycle_stages"
     },
@@ -14366,7 +14366,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_spec_driven_skills_spec_driven_skill_spec_driven_development_skill"
     },
@@ -14385,7 +14385,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_tailtest_skills_tailtest_skill_tailtest"
     },
@@ -14403,7 +14403,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_tailtest_skills_tailtest_skill_procedure"
     },
@@ -14421,7 +14421,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_tailtest_skills_tailtest_skill_tailtest_skill"
     },
@@ -14440,7 +14440,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_test_gap_skills_test_gap_skill_test_gap"
     },
@@ -14458,7 +14458,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_test_gap_skills_test_gap_skill_checks"
     },
@@ -14476,7 +14476,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_test_gap_skills_test_gap_skill_test_gap_skill"
     },
@@ -14495,7 +14495,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "agents_plugins_token_optimizer_skills_token_optimizer_skill_token_optimizer"
@@ -14514,7 +14514,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "agents_plugins_token_optimizer_skills_token_optimizer_skill_best_practices"
@@ -14533,7 +14533,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "agents_plugins_token_optimizer_skills_token_optimizer_skill_token_optimizer_skill"
@@ -14553,7 +14553,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_unforgit_skills_unforgit_skill_unforgit"
     },
@@ -14571,7 +14571,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_unforgit_skills_unforgit_skill_guidelines"
     },
@@ -14589,7 +14589,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_unforgit_skills_unforgit_skill_unforgit_skill"
     },
@@ -14608,7 +14608,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "agents_plugins_wingman_skills_wingman_skill_wingman"
     },
@@ -14626,7 +14626,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_wingman_skills_wingman_skill_pre_edit_verification_checklis"
     },
@@ -14644,7 +14644,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_wingman_skills_wingman_skill_wingman_data_contract_skill"
     },
@@ -14663,7 +14663,7 @@
       "source_url": null,
       "level": 1,
       "granularity": "low",
-      "heat": 0.066,
+      "heat": 0.056,
       "owner": "unowned",
       "id": "agents_plugins_dev_skills_skills_dev_skills_skill_dev_skills"
     },
@@ -14681,7 +14681,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_plugins_dev_skills_skills_dev_skills_skill_core_workflows"
     },
@@ -14699,7 +14699,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_workflows_graphify_workflow_graphify"
     },
@@ -14717,7 +14717,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "agents_workflows_graphify_graphify"
     },
@@ -14735,7 +14735,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "agents_rules_graphify_graphify"
     },
@@ -14753,7 +14753,7 @@
       "source_url": null,
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.048,
       "owner": "unowned",
       "id": "kilo_agents_data_data"
     },
@@ -23921,8 +23921,8 @@
       "source_file": "C:\\Antigravityyyyy\\VID_School\\backend\\src\\modules\\institutions\\institution.service.ts",
       "source_location": "L49",
       "weight": 1.0,
-      "_src": "institution_service_institutionservice_createinstitution",
-      "_tgt": "institution_repository_institutionrepository_create",
+      "_src": "institution_repository_institutionrepository_create",
+      "_tgt": "institution_service_institutionservice_createinstitution",
       "source": "institution_repository_institutionrepository_create",
       "target": "institution_service_institutionservice_createinstitution"
     },

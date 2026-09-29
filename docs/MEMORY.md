@@ -56,8 +56,11 @@ All 28 plugins are installed locally in `.agents/plugins/` with manifests (`plug
 | 24 | **Commit Narrator** | Git Automation | Generating semantic commit messages explaining the *why* | `commit-narrator` |
 | 25 | **PR Storyteller** | Git Automation | Synthesizing PR titles, summaries, and test plans | `pr-storyteller` |
 | 26 | **Docflow** | Git Automation | Enforcing docs freshness and updating changelogs | `docflow` |
+| 27 | **token-optimizer**| Token Cost | Line-range file views, scoped ripgrep searches | `token-optimizer` |
 | 28 | **Espresso** | Token Cost | Output compression, concise answers, zero boilerplate | `espresso` |
 | 29 | **Ponytail** | Code Minimalism | YAGNI extremist, native-platform-first, shortest working diffs | `ponytail` (Intensity: **Ultra**) |
+| 30 | **a11y-audit** | Quality & a11y | WCAG 2.1 AA accessibility & touch-target audits (PRD Rule 29) | `a11y-audit` |
+| 31 | **openapi-gen** | API Sync | Contract sync between Express /api/v1 and TanStack Query | `openapi-gen` |
 
 ### 2.1 Ponytail Ultra Operating Matrix
 **Active Mode:** `ULTRA` (Permanent across sessions per user instruction 2026-09-29)

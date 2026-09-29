@@ -21,7 +21,7 @@
 
 ## Relationships
 
-- [[[API_BASE_URL & DEFAULT_INST_ID] Cluster]] (26 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

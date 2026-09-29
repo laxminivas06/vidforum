@@ -2,7 +2,7 @@
 
 > God node · 21 connections · [docs/PRD.md](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md)
 
-**Community:** [[[Document: Readme & 1. Prerequisites] Cluster]]
+**Community:** [[[handleAdvanceStage() & handleEnroll()] Cluster]]
 
 ## Connections by Relation
 

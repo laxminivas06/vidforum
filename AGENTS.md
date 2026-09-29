@@ -23,10 +23,10 @@ Specialized plugins installed in `.agents/plugins/` and global customizations:
 Refer to [docs/MEMORY.md](file:///c:/Antigravityyyyy/VID_School/docs/MEMORY.md) for the complete plugin matrix and persistent context:
 - **Minimalism & Speed:** `ponytail` (Intensity: **Ultra** — YAGNI, native platform first, shortest diff).
 - **Memory:** `honcho-memory`, `wingman`, `unforgit`, `local-memory`, `knowl`, `metabrain`, `memesh`.
-- **Quality & Review:** `brooks-lint`, `river-review`, `codex-reviewer`, `debt-ops`, `megalinter`.
+- **Quality & Review:** `brooks-lint`, `river-review`, `codex-reviewer`, `debt-ops`, `megalinter`, `a11y-audit`.
 - **Testing:** `tailtest`, `falsegreen`, `flaky-detector`, `test-gap`.
 - **Security:** `secret-guard`, `agent-guard`, `axonflow`, `hol-guard`.
-- **SDLC Discipline:** `spec-driven`, `dev-skills`, `ai-native-sdlc`.
+- **SDLC Discipline:** `spec-driven`, `dev-skills`, `ai-native-sdlc`, `openapi-gen`.
 - **Git & Docs:** `commit-narrator`, `pr-storyteller`, `docflow`.
 - **Token Economy:** `token-optimizer`, `espresso`.
 

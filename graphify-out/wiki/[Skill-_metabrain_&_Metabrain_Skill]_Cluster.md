@@ -10,7 +10,7 @@
 
 ## Relationships
 
-- [[[Skill: memesh & Execution Guide] Cluster]] (4 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

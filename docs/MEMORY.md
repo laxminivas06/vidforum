@@ -223,4 +223,12 @@ To eliminate token waste and avoid repeatedly loading raw source files into LLM 
    This re-indexes ONLY modified files in milliseconds via tree-sitter AST, keeping the graph synchronized with zero token waste.
 
 ---
+
+## 7. Cloud Database Direct Persistence & User Administration
+- **Direct Database Mutations:** All newly provisioned tenants (`POST /api/v1/institutions`), institute administrators (`POST /api/v1/institutions/:id/admins`), and platform users (`POST /api/v1/users`) directly execute PostgreSQL `INSERT` queries into `institutions`, `auth.users`, `profiles`, and `user_roles`, bypassing mock-only stores.
+- **Audit Trigger Isolation:** During bulk purge migrations, user audit triggers (`trg_audit_log`) must be temporarily bypassed with `ALTER TABLE institutions DISABLE TRIGGER trg_audit_log` to prevent cascade foreign key circular loops.
+- **User Edit Capability:** Supported via `PATCH /api/v1/users/:id`, allowing selective updates to user full name, email, system role, tenancy assignment, and active/inactive status with immediate synchronization across PostgreSQL, TanStack Query cache (`["platform-users"]`), and the UI table.
+- **Single Source of Truth:** `useInstitutions()` and `usePlatformUsers()` prioritize live Supabase PostgreSQL responses, retaining localStorage solely as an offline fallback when network is unavailable.
+
+---
 *End of MEMORY.md*

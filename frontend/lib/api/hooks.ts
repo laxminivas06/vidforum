@@ -234,36 +234,27 @@ export function useInstitutions() {
   return useQuery({
     queryKey: ["institutions"],
     queryFn: async (): Promise<Institution[]> => {
-      let savedCustom: Institution[] = []
+      try {
+        const res = await fetch(`${API_BASE_URL}/institutions`)
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          // Cloud database is the canonical master
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable, falling back to local storage:", err)
+      }
+
+      // Offline fallback only
       if (typeof window !== "undefined") {
         try {
           const raw = localStorage.getItem("vid_custom_institutions")
-          if (raw) savedCustom = JSON.parse(raw)
+          if (raw) return JSON.parse(raw)
         } catch (e) {
           console.warn("Failed to parse custom institutions", e)
         }
       }
-
-      let backendList: Institution[] = []
-      try {
-        const res = await fetch(`${API_BASE_URL}/institutions`)
-        const json = await res.json()
-        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-          backendList = json.data
-        }
-      } catch (err) {
-        console.warn("Backend unavailable, using mock institutions:", err)
-      }
-
-      const baseList = backendList.length > 0 ? backendList : MOCK_INSTITUTIONS
-      const merged = [...savedCustom, ...baseList]
-      const seen = new Set<string>()
-      return merged.filter((item) => {
-        const key = (item.code || item.id || "").toLowerCase()
-        if (seen.has(key)) return false
-        seen.add(key)
-        return true
-      })
+      return []
     },
   })
 }
@@ -291,36 +282,16 @@ export function useCreateInstitution() {
         contactEmail: newInst.contactEmail || "admin@institution.edu",
       }
 
-      try {
-        const res = await fetch(`${API_BASE_URL}/institutions`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        })
-        const json = await res.json()
-        if (json.success && json.data) {
-          return json.data
-        }
-      } catch (err) {
-        console.warn("Backend unavailable, falling back to local cache:", err)
+      const res = await fetch(`${API_BASE_URL}/institutions`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success || !json.data) {
+        throw new Error(json.error?.message || json.message || "Failed to create institution in cloud database")
       }
-
-      // Fallback created object for offline/mock resilience
-      const fallbackInstitution: Institution = {
-        id: `inst-${Date.now()}`,
-        name: payload.name,
-        code: payload.code,
-        domain: payload.domain,
-        status: "ACTIVE",
-        plan: payload.plan as any,
-        studentsCount: 0,
-        facultyCount: 0,
-        createdAt: new Date().toISOString().split("T")[0],
-        region: payload.region,
-        boardAffiliation: payload.boardAffiliation,
-        contactEmail: payload.contactEmail,
-      }
-      return fallbackInstitution
+      return json.data
     },
     onSuccess: (newInstitution) => {
       if (typeof window !== "undefined") {
@@ -337,11 +308,7 @@ export function useCreateInstitution() {
         }
       }
 
-      queryClient.setQueryData(["institutions"], (old: Institution[] | undefined) => {
-        if (!old) return [newInstitution]
-        const withoutDup = old.filter((i) => i.id !== newInstitution.id && i.code !== newInstitution.code)
-        return [newInstitution, ...withoutDup]
-      })
+      queryClient.invalidateQueries({ queryKey: ["institutions"] })
     },
   })
 }
@@ -476,6 +443,121 @@ export function useCreateInstitutionAdmin() {
 
       queryClient.invalidateQueries({ queryKey: ["institution-admins", variables.institutionId] })
       queryClient.invalidateQueries({ queryKey: ["users"] })
+      queryClient.invalidateQueries({ queryKey: ["platform-users"] })
+    },
+  })
+}
+
+export interface PlatformUserItem {
+  id: string
+  name: string
+  email: string
+  role: string
+  institution: string
+  status: "ACTIVE" | "INACTIVE"
+  institutionId?: string | null
+  createdAt?: string
+}
+
+export function usePlatformUsers() {
+  return useQuery({
+    queryKey: ["platform-users"],
+    queryFn: async (): Promise<PlatformUserItem[]> => {
+      let backendList: PlatformUserItem[] = []
+      try {
+        const res = await fetch(`${API_BASE_URL}/users`)
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          backendList = json.data.map((u: any) => ({
+            id: u.id,
+            name: u.name,
+            email: u.email,
+            role: (u.role || "FACULTY").toUpperCase().replace(/\s+/g, "_"),
+            institution: u.institution || "VID Global Platform",
+            status: (u.status || "ACTIVE").toUpperCase() as "ACTIVE" | "INACTIVE",
+            institutionId: u.institutionId,
+            createdAt: u.createdAt ? new Date(u.createdAt).toISOString().split("T")[0] : undefined,
+          }))
+        }
+      } catch (err) {
+        console.warn("Backend users unavailable, falling back to local:", err)
+      }
+
+      let localUsers: PlatformUserItem[] = []
+      if (typeof window !== "undefined") {
+        try {
+          const raw = localStorage.getItem("vid_platform_users")
+          if (raw) localUsers = JSON.parse(raw)
+        } catch (e) {
+          // ignore
+        }
+      }
+
+      const combined = backendList.length > 0 ? backendList : localUsers
+      const seen = new Set<string>()
+      return combined.filter((u) => {
+        const key = (u.email || u.id).toLowerCase()
+        if (seen.has(key)) return false
+        seen.add(key)
+        return true
+      })
+    },
+  })
+}
+
+export function useCreatePlatformUser() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (payload: {
+      name: string
+      email: string
+      role: string
+      institutionName: string
+    }): Promise<PlatformUserItem> => {
+      const res = await fetch(`${API_BASE_URL}/users`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.error?.message || json.message || "Failed to create user")
+      }
+      return json.data
+    },
+    onSuccess: (newUser) => {
+      queryClient.invalidateQueries({ queryKey: ["platform-users"] })
+    },
+  })
+}
+
+export function useUpdatePlatformUser() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (payload: {
+      id: string
+      name?: string
+      email?: string
+      role?: string
+      institutionName?: string
+      status?: "ACTIVE" | "INACTIVE"
+    }): Promise<PlatformUserItem> => {
+      const { id, ...data } = payload
+      const res = await fetch(`${API_BASE_URL}/users/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.error?.message || json.message || "Failed to update user")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["platform-users"] })
     },
   })
 }

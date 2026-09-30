@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: wingman](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md) (2 connections)
-- [Pre-Edit Verification Checklist](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md) (1 connections)
-- [Wingman Data-Contract Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md) (1 connections)
+- [Skill: unforgit](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (2 connections)
+- [Guidelines](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (1 connections)
+- [Unforgit Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: wingman & Pre-Edit Verification Checklist] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/wingman/skills/wingman/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md)
+- [.agents/plugins/unforgit/skills/unforgit/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md)
 
 ## Audit Trail
 

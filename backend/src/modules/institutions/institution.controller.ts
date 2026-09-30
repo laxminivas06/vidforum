@@ -57,7 +57,7 @@ export class InstitutionController {
   async getAdmins(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const id = req.params.id as string;
-      const admins = institutionService.getInstitutionAdmins(id);
+      const admins = await institutionService.getInstitutionAdmins(id);
       sendSuccess(res, admins);
     } catch (error) {
       next(error);

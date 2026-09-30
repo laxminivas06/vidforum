@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: megalinter](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (2 connections)
-- [MegaLinter Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (1 connections)
-- [Target Toolchains](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (1 connections)
+- [Skill: knowl](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (2 connections)
+- [Knowl Project Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (1 connections)
+- [Procedures](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: megalinter & MegaLinter Skill] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/megalinter/skills/megalinter/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md)
+- [.agents/plugins/knowl/skills/knowl/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md)
 
 ## Audit Trail
 

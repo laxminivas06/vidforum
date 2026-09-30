@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- **frontend_components_ui_index_statcard** (0 connections)
+- **frontend_components_ui_index_spotheropanel** (0 connections)
 
 ## Relationships
 

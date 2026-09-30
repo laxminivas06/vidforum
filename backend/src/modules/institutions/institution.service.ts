@@ -37,9 +37,9 @@ export class InstitutionService {
         contactEmail: row.contactEmail,
       }));
 
-      // Merge with in-memory provisioned institutions without duplicates
+      // Return database institutions as primary source of truth
       const seen = new Set<string>();
-      return [...this.inMemoryInstitutions, ...dbList].filter((item) => {
+      return [...dbList, ...this.inMemoryInstitutions].filter((item) => {
         const key = (item.code || item.id || '').toLowerCase();
         if (seen.has(key)) return false;
         seen.add(key);
@@ -113,17 +113,19 @@ export class InstitutionService {
       name: row?.name || data.name,
       code: row?.code || data.code,
       domain: data.domain || `${data.code.toLowerCase().replace('-', '')}.vid.edu`,
-      status: 'ACTIVE',
+      status: (row?.status || 'ACTIVE').toUpperCase(),
       plan: data.plan || 'ENTERPRISE',
       studentsCount: 0,
       facultyCount: 0,
-      createdAt: new Date().toISOString().split('T')[0],
+      createdAt: row?.created_at ? new Date(row.created_at).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
       region: data.region || 'India',
       boardAffiliation: data.boardAffiliation || 'State Board',
       contactEmail: data.contactEmail || '',
     };
 
-    this.inMemoryInstitutions.unshift(newInst);
+    if (!row) {
+      this.inMemoryInstitutions.unshift(newInst);
+    }
     return newInst;
   }
 
@@ -138,7 +140,32 @@ export class InstitutionService {
       throw new Error('User ID and email are required');
     }
 
-    const inst = this.inMemoryInstitutions.find((i) => i.id === institutionId || i.code === institutionId);
+    let inst: any = null;
+    try {
+      inst = await institutionRepository.findByIdOrCode(institutionId);
+    } catch (e) {
+      // ignore
+    }
+    if (!inst) {
+      inst = this.inMemoryInstitutions.find((i) => i.id === institutionId || i.code === institutionId);
+    }
+
+    const targetInstId = inst?.id || institutionId;
+    const targetInstName = inst?.name || 'Partner Institution';
+    const targetInstCode = inst?.code || 'INST';
+
+    // Directly persist to Cloud PostgreSQL
+    try {
+      await institutionRepository.createAdmin({
+        userId: data.userId.trim().toLowerCase(),
+        name: data.name?.trim() || data.userId.trim(),
+        email: data.email.trim().toLowerCase(),
+        institutionId: targetInstId,
+        workspaces: Array.isArray(data.workspaces) ? data.workspaces : [],
+      });
+    } catch (dbErr) {
+      console.warn('Database admin persistence error:', (dbErr as any)?.message);
+    }
 
     const admin: StoredInstituteAdmin = {
       id: `adm-${Date.now()}`,
@@ -146,9 +173,9 @@ export class InstitutionService {
       name: data.name?.trim() || data.userId.trim(),
       email: data.email.trim().toLowerCase(),
       password: data.password || 'admin123',
-      institutionId: inst?.id || institutionId,
-      institutionName: inst?.name || 'Partner Institution',
-      institutionCode: inst?.code || 'INST',
+      institutionId: targetInstId,
+      institutionName: targetInstName,
+      institutionCode: targetInstCode,
       workspaces: Array.isArray(data.workspaces) ? data.workspaces : [],
       createdAt: new Date().toISOString(),
     };
@@ -172,7 +199,27 @@ export class InstitutionService {
     };
   }
 
-  getInstitutionAdmins(institutionId: string): StoredInstituteAdmin[] {
+  async getInstitutionAdmins(institutionId: string): Promise<StoredInstituteAdmin[]> {
+    try {
+      const dbAdmins = await institutionRepository.findAdmins(institutionId);
+      if (dbAdmins && dbAdmins.length > 0) {
+        return dbAdmins.map((row: any) => ({
+          id: row.id,
+          userId: row.userId || row.email,
+          name: row.name,
+          email: row.email,
+          password: '••••••••',
+          institutionId: row.institutionId,
+          institutionName: row.institutionName,
+          institutionCode: row.institutionCode,
+          workspaces: Array.isArray(row.workspaces) ? row.workspaces : [],
+          createdAt: row.createdAt ? new Date(row.createdAt).toISOString() : new Date().toISOString(),
+        }));
+      }
+    } catch (e) {
+      console.warn('Database query for institution admins unavailable:', (e as any)?.message);
+    }
+
     return this.instituteAdmins.filter(
       (a) => a.institutionId === institutionId || a.institutionCode === institutionId
     );

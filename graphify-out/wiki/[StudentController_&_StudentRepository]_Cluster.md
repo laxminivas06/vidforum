@@ -1,28 +1,29 @@
 # [StudentController & StudentRepository] Cluster
 
-> 19 nodes · cohesion 0.11
+> 20 nodes · cohesion 0.10
 
 ## Key Concepts
 
-- [Document: Appflow](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (18 connections)
-- [1. Overview & Navigation Architecture](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.1 Authentication](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.2 Super Admin Console (/(super-admin))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.3 Institution Admin Workspace (/(institution-admin))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.4 Core Workspaces (/(core))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.5 AI Yantra Services (/(ai-yantra))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.6 Optional Modular Workspaces (/(optional))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.7 Central Student Master Profile (/students/id)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.8 Mobile Parent & Student Portal (/(mobile)/app)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2. Complete Route Hierarchy & Screen Inventory](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.1 Login & Tenant Resolution](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.2 Institution Admin Settings Shell (Two-Pane)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.3 Admissions Workspace (Kanban & Slide-Over)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.4 Student Master Profile Shell](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3. Deep-Dive Screen Specifications](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [4. Navigation & Optional Module Matrix (/config/navigation.ts)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [5. Development Phases](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [VID (Virtual Identification) — Application Flow & Architecture Document](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1) (19 connections)
+- [API_BASE_URL](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L230) (1 connections)
+- [DEFAULT_INST_ID](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L231) (1 connections)
+- [MOCK_APPLICANTS](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L10) (1 connections)
+- [MOCK_FACULTY](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L144) (1 connections)
+- [MOCK_FEES](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L184) (1 connections)
+- [MOCK_GRADES](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L106) (1 connections)
+- [MOCK_INSTITUTIONS](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L7) (1 connections)
+- [useAcademics()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L616) (1 connections)
+- [useAdmissions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L565) (1 connections)
+- [useCreateInstitution()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L262) (1 connections)
+- [useCreateInstitutionAdmin()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L362) (1 connections)
+- [useCreatePlatformUser()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L508) (1 connections)
+- [useFaculty()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L636) (1 connections)
+- [useFinance()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L676) (1 connections)
+- [useInstitutionAdmins()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L316) (1 connections)
+- [useInstitutions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L233) (1 connections)
+- [useMyClasses()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L656) (1 connections)
+- [usePlatformUsers()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L462) (1 connections)
+- [useUpdatePlatformUser()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L535) (1 connections)
 
 ## Relationships
 
@@ -30,11 +31,11 @@
 
 ## Source Files
 
-- [docs/AppFlow.md](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md)
+- [C:\Antigravityyyyy\VID_School\frontend\lib\api\hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 36 (100%)
+- EXTRACTED: 38 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: hol-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md) (2 connections)
-- [Audit Checks](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md) (1 connections)
-- [HOL Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md) (1 connections)
+- [Skill: flaky-detector](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (2 connections)
+- [Flaky Detector Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (1 connections)
+- [Instructions](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: hol-guard & Audit Checks] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/hol-guard/skills/hol-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md)
+- [.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md)
 
 ## Audit Trail
 

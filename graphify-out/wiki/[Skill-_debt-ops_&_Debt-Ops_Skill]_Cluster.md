@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: commit-narrator](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (2 connections)
-- [Commit Narrator Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (1 connections)
-- [Format](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (1 connections)
+- [Skill: codex-reviewer](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md) (2 connections)
+- [Checklist](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md) (1 connections)
+- [Codex Reviewer Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: commit-narrator & Commit Narrator Skill] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md)
+- [.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md)
 
 ## Audit Trail
 

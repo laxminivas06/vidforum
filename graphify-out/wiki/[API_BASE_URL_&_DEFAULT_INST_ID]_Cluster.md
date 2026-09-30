@@ -1,63 +1,41 @@
 # [API_BASE_URL & DEFAULT_INST_ID] Cluster
 
-> 15 nodes · cohesion 0.17
+> 19 nodes · cohesion 0.11
 
 ## Key Concepts
 
-- [FinanceController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts#L5) (4 connections)
-- [FinanceRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L3) (4 connections)
-- [FinanceService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L3) (4 connections)
-- [.getRecords()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts#L6) (3 connections)
-- [.getSummary()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts#L35) (3 connections)
-- [.recordPayment()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts#L16) (3 connections)
-- [.findFeeRecordsByInstitution()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L4) (3 connections)
-- [.getSummary()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L51) (3 connections)
-- [.recordPayment()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L36) (3 connections)
-- [.getCollectionSummary()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L34) (3 connections)
-- [.getFeeRecords()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L4) (3 connections)
-- [.processPayment()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L8) (3 connections)
-- [finance.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts#L1) (1 connections)
-- [finance.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L1) (1 connections)
-- [finance.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L1) (1 connections)
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class FinanceController {
-        +finance.controller.ts()
-        +.getRecords()
-        +.recordPayment()
-        +.getSummary()
-    }
-    class FinanceRepository {
-        +finance.repository.ts()
-        +.findFeeRecordsByInstitution()
-        +.recordPayment()
-        +.getSummary()
-    }
-    class FinanceService {
-        +finance.service.ts()
-        +.getFeeRecords()
-        +.processPayment()
-        +.getCollectionSummary()
-    }
-```
+- [Document: Antigravity Master Prompt](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (18 connections)
+- [0. ROLE & OPERATING MODE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [1. PROJECT BRIEF](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [2. REQUIRED DELIVERABLES — CREATE THESE FILES FIRST](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [3. DEVELOPMENT RULES (apply throughout, no exceptions)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [4. TECH STACK CONSTRAINTS](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [5. WORKING AGREEMENT / CHECK-IN CADENCE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [6. AGENT MEMORY USAGE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [7. DEFINITION OF DONE (v1)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [AI Yantra Boundary](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [Backend Architecture Rules](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [/docs/DECISIONS.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [/docs/PRD.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [/docs/TASKS.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [/docs/TECHSPEC.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [Documentation / Architecture Reconciliation](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [Documentation Reconciliation](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [MASTER PROMPT — Antigravity Full-Stack Build](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [Multi-Tenant Security](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[{ email, password, role = 'INSTITUTION_ADMIN' } & inst] Cluster]] (36 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts)
+- [Reference_docs/antigravity-master-prompt.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md)
 
 ## Audit Trail
 
-- EXTRACTED: 24 (57%)
-- INFERRED: 18 (43%)
+- EXTRACTED: 36 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

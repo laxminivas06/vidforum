@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: secret-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (2 connections)
-- [Scan Targets](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
-- [Secret Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
+- [Skill: river-review](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md) (2 connections)
+- [Review Lenses](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md) (1 connections)
+- [River Review Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: secret-guard & Scan Targets] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/secret-guard/skills/secret-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md)
+- [.agents/plugins/river-review/skills/river-review/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md)
 
 ## Audit Trail
 

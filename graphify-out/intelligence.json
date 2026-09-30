@@ -7,7 +7,7 @@
     },
     {
       "label": "InstitutionService",
-      "risk": 0.392,
+      "risk": 0.494,
       "type": "CLASS"
     },
     {
@@ -16,20 +16,20 @@
       "type": "FUNCTION"
     },
     {
+      "label": "InstitutionRepository",
+      "risk": 0.277,
+      "type": "CLASS"
+    },
+    {
       "label": "HostelPage()",
       "risk": 0.27,
       "type": "FUNCTION"
-    },
-    {
-      "label": "Document: Memory",
-      "risk": 0.238,
-      "type": "UNKNOWN"
     }
   ],
   "blast_radius": {
     "institutions": 73,
     "Document: Vid Database Architecture": 47,
-    "query": 29,
+    "query": 33,
     "profiles": 26,
     "Document: Design": 25
   }

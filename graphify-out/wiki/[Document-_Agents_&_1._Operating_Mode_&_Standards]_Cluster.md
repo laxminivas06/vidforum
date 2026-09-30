@@ -1,14 +1,15 @@
 # [Document: Agents & 1. Operating Mode & Standards] Cluster
 
-> 5 nodes · cohesion 0.40
+> 6 nodes · cohesion 0.33
 
 ## Key Concepts
 
-- [users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L1) (4 connections)
-- [{ name, email, role = 'FACULTY', institutionName }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L33) (1 connections)
-- [newUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L40) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L10) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L5) (1 connections)
+- [ConfirmDialog.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L1) (5 connections)
+- [activeCancelText](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L42) (1 connections)
+- [activeConfirmText](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L41) (1 connections)
+- [activeDestructive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L43) (1 connections)
+- [handleClose](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L40) (1 connections)
+- [isDialogOpen](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L39) (1 connections)
 
 ## Relationships
 
@@ -16,11 +17,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\ConfirmDialog.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 8 (100%)
+- EXTRACTED: 10 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

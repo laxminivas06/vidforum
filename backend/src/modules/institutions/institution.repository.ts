@@ -55,24 +55,110 @@ export class InstitutionRepository {
     region?: string;
     boardAffiliation?: string;
     contactEmail?: string;
+    contactPhone?: string;
   }) {
+    let planId: string = '11111111-1111-1111-1111-111111111103';
+    const planUpper = (data.plan || 'ENTERPRISE').toUpperCase();
+    if (planUpper === 'BASIC') {
+      planId = '11111111-1111-1111-1111-111111111101';
+    } else if (planUpper === 'PRO') {
+      planId = '11111111-1111-1111-1111-111111111102';
+    }
+
     const settings = {
       domain: data.domain,
-      boardAffiliation: data.boardAffiliation,
+      boardAffiliation: data.boardAffiliation || 'State Board',
+      currency: 'INR',
+      timezone: 'Asia/Kolkata',
     };
     const query = `
-      INSERT INTO institutions (code, name, status, address, contact_email, settings)
-      VALUES ($1, $2, 'active', $3, $4, $5)
+      INSERT INTO institutions (code, name, status, plan_id, address, contact_email, contact_phone, settings)
+      VALUES ($1, $2, 'active', $3, $4, $5, $6, $7)
       RETURNING *
     `;
     const res = await db.query(query, [
-      data.code,
-      data.name,
+      data.code.trim().toUpperCase(),
+      data.name.trim(),
+      planId,
       data.region || 'India',
-      data.contactEmail || null,
+      data.contactEmail?.trim() || null,
+      data.contactPhone?.trim() || null,
       JSON.stringify(settings),
     ]);
     return res.rows[0];
+  }
+
+  async createAdmin(data: {
+    userId: string;
+    name?: string;
+    email: string;
+    institutionId: string;
+    workspaces: string[];
+  }) {
+    const adminRoleId = '33333333-3333-3333-3333-333333333301';
+    const client = await db.getClient();
+    try {
+      await client.query('BEGIN');
+      const cleanEmail = data.email.trim().toLowerCase();
+      const displayName = data.name?.trim() || data.userId.trim();
+
+      let userRes = await client.query('SELECT id FROM auth.users WHERE LOWER(email) = LOWER($1)', [cleanEmail]);
+      let profileId = userRes.rows[0]?.id;
+
+      if (!profileId) {
+        const insertAuth = await client.query(`
+          INSERT INTO auth.users (id, email, raw_user_meta_data, created_at, updated_at)
+          VALUES (gen_random_uuid(), $1, $2, now(), now())
+          RETURNING id
+        `, [cleanEmail, JSON.stringify({ full_name: displayName })]);
+        profileId = insertAuth.rows[0].id;
+      }
+
+      await client.query(`
+        INSERT INTO profiles (id, full_name, email, default_institution_id, status)
+        VALUES ($1, $2, $3, $4, 'active')
+        ON CONFLICT (id) DO UPDATE
+          SET full_name = EXCLUDED.full_name, default_institution_id = EXCLUDED.default_institution_id, updated_at = now()
+      `, [profileId, displayName, cleanEmail, data.institutionId]);
+
+      await client.query(`
+        DELETE FROM user_roles WHERE profile_id = $1 AND role_id = $2
+      `, [profileId, adminRoleId]);
+
+      await client.query(`
+        INSERT INTO user_roles (id, profile_id, role_id, institution_id, scope, granted_at)
+        VALUES (gen_random_uuid(), $1, $2, $3, $4, now())
+      `, [profileId, adminRoleId, data.institutionId, JSON.stringify({ workspaces: data.workspaces })]);
+
+      await client.query('COMMIT');
+      return { profileId };
+    } catch (err) {
+      await client.query('ROLLBACK');
+      throw err;
+    } finally {
+      client.release();
+    }
+  }
+
+  async findAdmins(institutionId: string) {
+    const res = await db.query(`
+      SELECT 
+        p.id,
+        p.email as "userId",
+        p.full_name as name,
+        p.email,
+        ur.institution_id as "institutionId",
+        i.name as "institutionName",
+        i.code as "institutionCode",
+        COALESCE(ur.scope->'workspaces', '[]'::jsonb) as workspaces,
+        p.created_at as "createdAt"
+      FROM profiles p
+      JOIN user_roles ur ON ur.profile_id = p.id
+      LEFT JOIN institutions i ON i.id = ur.institution_id
+      WHERE ur.institution_id = $1 OR i.code = $1
+      ORDER BY p.created_at DESC
+    `, [institutionId]);
+    return res.rows;
   }
 
   async findModules(institutionId: string) {

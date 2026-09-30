@@ -1,33 +1,34 @@
 # [columns & [searchQuery, setSearchQuery]] Cluster
 
-> 24 nodes · cohesion 0.08
+> 25 nodes · cohesion 0.08
 
 ## Key Concepts
 
-- [Document: Tech Spec](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (23 connections)
-- [1.1 Backend Architecture — Layered MVC](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [1. Technical Stack Selection & Justification](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [2. High-Level Architecture Diagram](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [3. Repository & Folder Structure](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [4.1 Schema Definition across 16 Core Domains](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [4. Database Schema & Multi-Tenant Data Model](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [5.1 Route Inventory (Section 26 Mapping)](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [5.2 Sample Request & Response Schemas](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [5. API Contracts & Endpoint Specification](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [6. Authentication, Security & Tenant Isolation](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [7. Responsive UI Specification & Breakpoints](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [8. Third-Party Integrations & Environment Variables](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Admission Approval $\to$ Student Creation Pipeline](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [AI Yantra Intelligence](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Cache & Message Broker / Job Queue](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Detailed Entity Specifications:](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [External Integrations](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Multi-Tenant PostgreSQL Database](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Object Storage](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Platform & Server](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Required Environment Variables (.env)](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Technical Specification: VID (Virtual Identification) Platform](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Timetable Conflict Detection](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L1) (24 connections)
+- [cleanEmail](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L43) (1 connections)
+- [client](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L34) (1 connections)
+- [current](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L143) (1 connections)
+- [currentRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L132) (1 connections)
+- [displayName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L44) (1 connections)
+- [id](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L128) (1 connections)
+- [insertAuth](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L80) (1 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L47) (1 connections)
+- [instName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L48) (1 connections)
+- [instRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L50) (1 connections)
+- [{ name, email, role = 'FACULTY', institutionName }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L36) (1 connections)
+- [{ name, email, role, institutionName, status }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L129) (1 connections)
+- [newUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L105) (1 connections)
+- [normalizedRole](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L61) (1 connections)
+- [profileId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L77) (1 connections)
+- [profileUpdate](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L191) (1 connections)
+- [resolvedRoleName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L71) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L10) (1 connections)
+- [roleId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L70) (1 connections)
+- [roleRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L62) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L5) (1 connections)
+- [updatedStatus](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L188) (1 connections)
+- [updatedUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L228) (1 connections)
+- [userRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L76) (1 connections)
 
 ## Relationships
 
@@ -35,11 +36,11 @@
 
 ## Source Files
 
-- [docs/TECH_SPEC.md](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 46 (100%)
+- EXTRACTED: 48 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

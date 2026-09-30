@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: metabrain](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md) (2 connections)
-- [Metabrain Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md) (1 connections)
-- [Workflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md) (1 connections)
+- [Skill: memesh](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md) (2 connections)
+- [Execution Guide](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md) (1 connections)
+- [MeMesh Shared Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: metabrain & Metabrain Skill] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/metabrain/skills/metabrain/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md)
+- [.agents/plugins/memesh/skills/memesh/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md)
 
 ## Audit Trail
 

@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: knowl](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (2 connections)
-- [Knowl Project Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (1 connections)
-- [Procedures](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (1 connections)
+- [Skill: hol-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md) (2 connections)
+- [Audit Checks](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md) (1 connections)
+- [HOL Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: knowl & Knowl Project Memory Skill] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/knowl/skills/knowl/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md)
+- [.agents/plugins/hol-guard/skills/hol-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md)
 
 ## Audit Trail
 

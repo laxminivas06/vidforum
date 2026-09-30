@@ -1,11 +1,11 @@
 # Document: Graphify & Workflow: graphify
 
-> 2 nodes · cohesion 2.00
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [Skill: dev-skills](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/dev-skills/skills/dev-skills/SKILL.md) (3 connections)
-- [Core Workflows](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/dev-skills/skills/dev-skills/SKILL.md) (1 connections)
+- [utils.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts#L1) (1 connections)
+- [cn()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts#L4) (1 connections)
 
 ## Relationships
 
@@ -13,11 +13,11 @@
 
 ## Source Files
 
-- [.agents/plugins/dev-skills/skills/dev-skills/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/dev-skills/skills/dev-skills/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\frontend\lib\utils.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 3 (100%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -6,7 +6,7 @@
 ## Core Abstractions (God Nodes)
 1. `institutions` (73 edges)
 2. `Document: Vid Database Architecture` (47 edges)
-3. `query` (29 edges)
+3. `query` (33 edges)
 4. `profiles` (26 edges)
 5. `Document: Design` (25 edges)
 6. `students` (24 edges)

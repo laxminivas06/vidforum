@@ -4,10 +4,10 @@
 
 ## Key Concepts
 
-- [Skill: brooks-lint](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (3 connections)
-- [Brooks Lint Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (1 connections)
-- [Guiding Principles](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (1 connections)
-- [Severity Classifications](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (1 connections)
+- [ProgressBar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L1) (3 connections)
+- [heights](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L25) (1 connections)
+- [percentage](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L23) (1 connections)
+- [variants](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L31) (1 connections)
 
 ## Relationships
 
@@ -15,7 +15,7 @@
 
 ## Source Files
 
-- [.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\ProgressBar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx)
 
 ## Audit Trail
 

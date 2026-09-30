@@ -1,25 +1,26 @@
 # [heights & percentage] Cluster
 
-> 4 nodes · cohesion 0.50
+> 5 nodes · cohesion 0.60
 
 ## Key Concepts
 
-- [hrms.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L1) (3 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L11) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L12) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L6) (1 connections)
+- [event_registrations](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (6 connections)
+- [events](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (4 connections)
+- [event_attendance](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (2 connections)
+- [event_participants](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (2 connections)
+- [event_certificates](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[Community 999]] (15 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts)
+- [backend\db\schema.sql](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql)
 
 ## Audit Trail
 
-- EXTRACTED: 6 (100%)
+- EXTRACTED: 15 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

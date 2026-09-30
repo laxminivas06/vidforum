@@ -1,6 +1,6 @@
 # sendSuccess()
 
-> God node · 23 connections · [C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts#L19)
+> God node · 24 connections · [C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts#L19)
 
 ## Call Trace Diagram
 
@@ -27,15 +27,16 @@ sequenceDiagram
     participant P18 as .getStats()
     participant P19 as .getAdmins()
     participant P20 as .addAdmin()
-    participant P21 as .getStudents()
-    participant P22 as .getStudentById()
-    participant P23 as .promote()
-    participant P24 as .getHierarchy()
-    participant P25 as .getClasses()
-    participant P26 as .getSubjects()
-    participant P27 as .getApplicants()
-    participant P28 as .toggleModule()
-    participant P29 as .createInstitution()
+    participant P21 as .updateStatus()
+    participant P22 as .getStudents()
+    participant P23 as .getStudentById()
+    participant P24 as .promote()
+    participant P25 as .getHierarchy()
+    participant P26 as .getClasses()
+    participant P27 as .getSubjects()
+    participant P28 as .getApplicants()
+    participant P29 as .toggleModule()
+    participant P30 as .createInstitution()
     P0->>+ P1: calls
     P1-->>- P0: return
     P1->>+ P0: calls
@@ -104,6 +105,8 @@ sequenceDiagram
     P28-->>- P0: return
     P0->>+ P29: calls
     P29-->>- P0: return
+    P0->>+ P30: calls
+    P30-->>- P0: return
 ```
 
 ## Connections by Relation
@@ -122,13 +125,13 @@ sequenceDiagram
 - [[.getStats()]] `INFERRED`
 - [[.getAdmins()]] `INFERRED`
 - [[.addAdmin()]] `INFERRED`
+- [[.updateStatus()]] `INFERRED`
 - [[.getStudents()]] `INFERRED`
 - [[.getStudentById()]] `INFERRED`
 - [[.promote()]] `INFERRED`
 - [[.getHierarchy()]] `INFERRED`
 - [[.getClasses()]] `INFERRED`
 - [[.getSubjects()]] `INFERRED`
-- [[.getApplicants()]] `INFERRED`
 
 ### contains
 - [[api-response.ts]] `EXTRACTED`

@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [tailwind.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/tailwind.config.js#L1) (0 connections)
+- [postcss.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/postcss.config.js#L1) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\tailwind.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/tailwind.config.js)
+- [C:\Antigravityyyyy\VID_School\frontend\postcss.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/postcss.config.js)
 
 ## Audit Trail
 

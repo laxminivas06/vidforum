@@ -4,15 +4,15 @@
 
 ## Key Concepts
 
-- [Card.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L1) (8 connections)
-- [activeDelta](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L122) (1 connections)
-- [activeDeltaType](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L123) (1 connections)
-- [Card](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L11) (1 connections)
-- [CardContent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L74) (1 connections)
-- [CardDescription](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L62) (1 connections)
-- [CardFooter](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L82) (1 connections)
-- [CardHeader](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L38) (1 connections)
-- [CardTitle](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L50) (1 connections)
+- [documents.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L1) (8 connections)
+- [certificateId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L58) (1 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L11) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L12) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L6) (1 connections)
+- [sRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L42) (1 connections)
+- [student](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L57) (1 connections)
+- [{ studentId, purpose = 'General Purpose' }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L39) (1 connections)
+- [verificationUrl](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L59) (1 connections)
 
 ## Relationships
 
@@ -20,7 +20,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Card.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\documents\documents.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts)
 
 ## Audit Trail
 

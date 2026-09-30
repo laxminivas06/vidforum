@@ -208,6 +208,18 @@ export class InstitutionRepository {
     );
     return res.rows[0];
   }
+
+  async updateStatus(idOrCode: string, status: 'active' | 'inactive' | 'suspended') {
+    const res = await db.query(
+      `UPDATE institutions 
+       SET status = $1, updated_at = now() 
+       WHERE id::text = $2 OR code = $2 
+       RETURNING *`,
+      [status.toLowerCase(), idOrCode]
+    );
+    return res.rows[0] || null;
+  }
 }
 
 export const institutionRepository = new InstitutionRepository();
+

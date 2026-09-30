@@ -231,6 +231,46 @@ export class InstitutionService {
       (a) => a.userId.toLowerCase() === clean || a.email.toLowerCase() === clean
     );
   }
+
+  async updateInstitutionStatus(idOrCode: string, status: string) {
+    const normalized = (status || 'active').toLowerCase() as 'active' | 'inactive' | 'suspended';
+    if (!['active', 'inactive', 'suspended'].includes(normalized)) {
+      throw new Error(`Invalid status: ${status}. Must be active, inactive, or suspended.`);
+    }
+
+    let updatedRow: any = null;
+    try {
+      updatedRow = await institutionRepository.updateStatus(idOrCode, normalized);
+    } catch (err) {
+      console.warn('Database institution status update failed:', (err as any)?.message);
+    }
+
+    // Also update any matching in-memory entry
+    const memoryInst = this.inMemoryInstitutions.find(
+      (i) => i.id === idOrCode || i.code?.toLowerCase() === idOrCode.toLowerCase()
+    );
+    if (memoryInst) {
+      memoryInst.status = normalized.toUpperCase();
+    }
+
+    if (updatedRow) {
+      return {
+        id: updatedRow.id,
+        code: updatedRow.code,
+        name: updatedRow.name,
+        status: updatedRow.status.toUpperCase(),
+        domain: updatedRow.settings?.domain || `${updatedRow.code.toLowerCase().replace('-', '')}.vid.edu`,
+        updatedAt: updatedRow.updated_at,
+      };
+    }
+
+    if (memoryInst) {
+      return memoryInst;
+    }
+
+    throw new Error('Institution not found');
+  }
 }
 
 export const institutionService = new InstitutionService();
+

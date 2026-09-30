@@ -1,26 +1,26 @@
 # [[isCollapsed, setIsCollapsed] & [isMobileMenuOpen, setIsMobileMenuOpen]] Cluster
 
-> 5 nodes · cohesion 0.60
+> 5 nodes · cohesion 0.40
 
 ## Key Concepts
 
-- [event_registrations](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (6 connections)
-- [events](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (4 connections)
-- [event_attendance](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (2 connections)
-- [event_participants](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (2 connections)
-- [event_certificates](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (1 connections)
+- [Document: Agents](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (4 connections)
+- [1. Operating Mode & Standards](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
+- [2. Active Plugin Ecosystem & Memory](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
+- [3. Working Agreement Checklist](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
+- [VID Platform: Agent Operating Guidelines](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
 
 ## Relationships
 
-- [[Community 999]] (15 shared connections)
+- [[[instId & result] Cluster]] (8 shared connections)
 
 ## Source Files
 
-- [backend\db\schema.sql](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql)
+- [AGENTS.md](file:///C:/Antigravityyyyy/VID_School/AGENTS.md)
 
 ## Audit Trail
 
-- EXTRACTED: 15 (100%)
+- EXTRACTED: 8 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

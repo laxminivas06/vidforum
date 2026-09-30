@@ -1,27 +1,48 @@
 # [VID Platform Educational Ecosystem Specification & Academics & Curriculum] Cluster
 
-> 14 nodes · cohesion 0.14
+> 15 nodes · cohesion 0.17
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L1) (13 connections)
-- [[academicYear, setAcademicYear]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L42) (1 connections)
-- [[activeSection, setActiveSection]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L37) (1 connections)
-- [[boardAffiliation, setBoardAffiliation]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L40) (1 connections)
-- [[confirmToggleModule, setConfirmToggleModule]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L44) (1 connections)
-- [[contactEmail, setContactEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L41) (1 connections)
-- [handleSave()](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L63) (1 connections)
-- [{
-    institutionName,
-    enabledModules,
-    toggleOptionalModule,
-  }](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L31) (1 connections)
-- [isEnabled](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L225) (1 connections)
-- [[isSaved, setIsSaved]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L43) (1 connections)
-- [optionalModulesList](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L46) (1 connections)
-- [[schoolCode, setSchoolCode]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L39) (1 connections)
-- [[schoolName, setSchoolName]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L38) (1 connections)
-- [sections](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L55) (1 connections)
+- [FinanceController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts#L5) (4 connections)
+- [FinanceRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L3) (4 connections)
+- [FinanceService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L3) (4 connections)
+- [.getRecords()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts#L6) (3 connections)
+- [.getSummary()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts#L35) (3 connections)
+- [.recordPayment()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts#L16) (3 connections)
+- [.findFeeRecordsByInstitution()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L4) (3 connections)
+- [.getSummary()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L51) (3 connections)
+- [.recordPayment()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L36) (3 connections)
+- [.getCollectionSummary()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L34) (3 connections)
+- [.getFeeRecords()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L4) (3 connections)
+- [.processPayment()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L8) (3 connections)
+- [finance.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts#L1) (1 connections)
+- [finance.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L1) (1 connections)
+- [finance.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L1) (1 connections)
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class FinanceController {
+        +finance.controller.ts()
+        +.getRecords()
+        +.recordPayment()
+        +.getSummary()
+    }
+    class FinanceRepository {
+        +finance.repository.ts()
+        +.findFeeRecordsByInstitution()
+        +.recordPayment()
+        +.getSummary()
+    }
+    class FinanceService {
+        +finance.service.ts()
+        +.getFeeRecords()
+        +.processPayment()
+        +.getCollectionSummary()
+    }
+```
 
 ## Relationships
 
@@ -29,12 +50,14 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\settings\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 26 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 24 (57%)
+- INFERRED: 18 (43%)
 - AMBIGUOUS: 0 (0%)
 
 ---

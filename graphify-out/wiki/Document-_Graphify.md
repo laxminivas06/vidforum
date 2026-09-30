@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [@tanstack/react-query](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L12) (0 connections)
+- [express](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L17) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
+- [backend/package.json](file:///C:/Antigravityyyyy/VID_School/backend/package.json)
 
 ## Audit Trail
 

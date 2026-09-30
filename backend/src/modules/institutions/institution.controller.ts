@@ -73,6 +73,18 @@ export class InstitutionController {
       next(error);
     }
   }
+
+  async updateStatus(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const id = req.params.id as string;
+      const { status = 'suspended' } = req.body;
+      const institution = await institutionService.updateInstitutionStatus(id, status);
+      sendSuccess(res, institution, `Institution status updated to ${institution.status}`);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const institutionController = new InstitutionController();
+

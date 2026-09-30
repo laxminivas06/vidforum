@@ -313,6 +313,48 @@ export function useCreateInstitution() {
   })
 }
 
+export function useUpdateInstitutionStatus() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (payload: {
+      id: string
+      status: "active" | "inactive" | "suspended"
+    }): Promise<any> => {
+      const res = await fetch(`${API_BASE_URL}/institutions/${payload.id}/status`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: payload.status }),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.error?.message || json.message || "Failed to update institution status")
+      }
+      return json.data
+    },
+    onSuccess: (updatedInst) => {
+      if (typeof window !== "undefined") {
+        try {
+          const raw = localStorage.getItem("vid_custom_institutions")
+          if (raw) {
+            const current = JSON.parse(raw)
+            const updated = current.map((i: any) =>
+              i.id === updatedInst.id || i.code === updatedInst.code
+                ? { ...i, status: updatedInst.status }
+                : i
+            )
+            localStorage.setItem("vid_custom_institutions", JSON.stringify(updated))
+          }
+        } catch (e) {
+          // ignore
+        }
+      }
+
+      queryClient.invalidateQueries({ queryKey: ["institutions"] })
+    },
+  })
+}
+
 export function useInstitutionAdmins(institutionId?: string) {
   return useQuery({
     queryKey: ["institution-admins", institutionId],

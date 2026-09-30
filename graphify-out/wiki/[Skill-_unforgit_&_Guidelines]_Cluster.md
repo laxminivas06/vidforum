@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [Skill: test-gap](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (2 connections)
-- [Checks](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (1 connections)
-- [Test Gap Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (1 connections)
+- [Skill: tailtest](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (2 connections)
+- [Procedure](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (1 connections)
+- [Tailtest Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [.agents/plugins/test-gap/skills/test-gap/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md)
+- [.agents/plugins/tailtest/skills/tailtest/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md)
 
 ## Audit Trail
 

@@ -1,23 +1,48 @@
 # [Document: Decisions & ADR-001 Strict Separation of Phase Deliverables] Cluster
 
-> 14 nodes · cohesion 0.15
+> 15 nodes · cohesion 0.17
 
 ## Key Concepts
 
-- [AddInstituteAdminModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L1) (13 connections)
-- [handleSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L89) (2 connections)
-- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L61) (2 connections)
-- [createAdminMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L34) (1 connections)
-- [[email, setEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L37) (1 connections)
-- [[errors, setErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L42) (1 connections)
-- [handleDeselectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L57) (1 connections)
-- [handleSelectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L53) (1 connections)
-- [handleToggleWorkspace()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L47) (1 connections)
-- [isChecked](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L271) (1 connections)
-- [[password, setPassword]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L38) (1 connections)
-- [[selectedWorkspaces, setSelectedWorkspaces]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L39) (1 connections)
-- [[successBanner, setSuccessBanner]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L43) (1 connections)
-- [[userId, setUserId]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L36) (1 connections)
+- [StudentController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L5) (4 connections)
+- [StudentRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L3) (4 connections)
+- [StudentService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L3) (4 connections)
+- [.getStudentById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L24) (3 connections)
+- [.getStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L6) (3 connections)
+- [.promote()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L36) (3 connections)
+- [.findStudentMasterById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L57) (3 connections)
+- [.findStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L4) (3 connections)
+- [.promote()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L135) (3 connections)
+- [.getStudentMaster()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L8) (3 connections)
+- [.listStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L4) (3 connections)
+- [.promoteStudent()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L16) (3 connections)
+- [student.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L1) (1 connections)
+- [student.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L1) (1 connections)
+- [student.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L1) (1 connections)
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class StudentController {
+        +student.controller.ts()
+        +.getStudents()
+        +.getStudentById()
+        +.promote()
+    }
+    class StudentRepository {
+        +student.repository.ts()
+        +.findStudents()
+        +.findStudentMasterById()
+        +.promote()
+    }
+    class StudentService {
+        +student.service.ts()
+        +.listStudents()
+        +.getStudentMaster()
+        +.promoteStudent()
+    }
+```
 
 ## Relationships
 
@@ -25,12 +50,14 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\institutions\AddInstituteAdminModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 28 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 24 (57%)
+- INFERRED: 18 (43%)
 - AMBIGUOUS: 0 (0%)
 
 ---

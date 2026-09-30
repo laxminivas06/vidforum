@@ -1,4 +1,4 @@
-export type StatusType = "ACTIVE" | "PENDING" | "SUSPENDED" | "ARCHIVED"
+export type StatusType = "ACTIVE" | "PENDING" | "SUSPENDED" | "ARCHIVED" | "INACTIVE"
 
 export interface Institution {
   id: string

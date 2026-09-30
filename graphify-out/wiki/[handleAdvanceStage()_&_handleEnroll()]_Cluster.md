@@ -1,43 +1,44 @@
 # [handleAdvanceStage() & handleEnroll()] Cluster
 
-> 22 nodes · cohesion 0.10
+> 23 nodes · cohesion 0.09
 
 ## Key Concepts
 
-- [ProvisionTenantModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L1) (21 connections)
-- [autoGenerateCode()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L90) (2 connections)
-- [handleNameChange()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L68) (2 connections)
-- [handleSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L155) (2 connections)
-- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L132) (2 connections)
-- [[boardAffiliation, setBoardAffiliation]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L55) (1 connections)
-- [[code, setCode]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L54) (1 connections)
-- [[contactEmail, setContactEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L56) (1 connections)
-- [[contactPhone, setContactPhone]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L57) (1 connections)
-- [createInstitutionMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L65) (1 connections)
-- [[customDomain, setCustomDomain]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L60) (1 connections)
-- [effectiveDomain](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L101) (1 connections)
-- [[errors, setErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L62) (1 connections)
-- [[isCustomDomain, setIsCustomDomain]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L61) (1 connections)
-- [isSelected](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L445) (1 connections)
-- [[name, setName]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L53) (1 connections)
-- [PLAN_OPTIONS](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L33) (1 connections)
-- [[plan, setPlan]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L59) (1 connections)
-- [POPULAR_BOARDS](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L39) (1 connections)
-- [REGION_OPTIONS](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L26) (1 connections)
-- [[region, setRegion]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L58) (1 connections)
-- [[submittedSuccess, setSubmittedSuccess]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L63) (1 connections)
+- [Document: Tasks](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (22 connections)
+- [1.1 Project Scaffolding & Infrastructure](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [1.2 Auth, Multi-Tenancy & RBAC Engine](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [1.3 Super Admin & Institution Admin Consoles](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [1.4 Academics Hierarchy & Faculty Mapping](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [1.5 Admissions Workspace & Central Student Master Entity](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [2.1 Attendance Workspace](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [2.2 Examinations Workspace & Excel Import Engine](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [2.3 Finance & Fee Management Workspace](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [2.4 Documents & Timetable & HRMS](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [3.1 Yantra Voice Agent](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [3.2 Yantra AI Attendance](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [3.3 Yantra AI Tutor](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [4.1 Modular Optional Workspaces](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [4.2 Dedicated Parent & Student Experience](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Development Tasks Breakdown: VID Platform](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Implementation Progress Ledger (As of 2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Phase 0: Project Initiation & Architecture Baseline](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Phase 1: Foundation Scaffold & MVP Core (Phase 1 Target)](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Phase 2: Core Operational Workspaces](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Phase 3: AI Yantra Intelligence Layer](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Phase 4: Optional Workspaces & Mobile Parent/Student Experience](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Phase 5: Testing, Auditing, Verification & Deployment](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Document: Readme & 1. Prerequisites] Cluster]] (44 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\institutions\ProvisionTenantModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx)
+- [docs/TASKS.md](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md)
 
 ## Audit Trail
 
-- EXTRACTED: 46 (100%)
+- EXTRACTED: 44 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -24,4 +24,8 @@ router.get('/:id/admins', institutionController.getAdmins.bind(institutionContro
 // POST /api/v1/institutions/:id/admins
 router.post('/:id/admins', institutionController.addAdmin.bind(institutionController));
 
+// PATCH /api/v1/institutions/:id/status
+router.patch('/:id/status', institutionController.updateStatus.bind(institutionController));
+
 export default router;
+

@@ -1,6 +1,6 @@
 # query
 
-> God node · 33 connections · [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L14)
+> God node · 34 connections · [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L14)
 
 ## Call Trace Diagram
 
@@ -39,13 +39,14 @@ sequenceDiagram
     participant P30 as .create()
     participant P31 as .findAdmins()
     participant P32 as .upsertModule()
-    participant P33 as .findStudents()
-    participant P34 as .findStudentMasterById()
-    participant P35 as .promote()
-    participant P36 as purgeDummyData()
-    participant P37 as .getSectionsByClass()
-    participant P38 as .getSubjectsByClass()
-    participant P39 as .getHierarchy()
+    participant P33 as .updateStatus()
+    participant P34 as .findStudents()
+    participant P35 as .findStudentMasterById()
+    participant P36 as .promote()
+    participant P37 as purgeDummyData()
+    participant P38 as .getSectionsByClass()
+    participant P39 as .getSubjectsByClass()
+    participant P40 as .getHierarchy()
     P0->>+ P1: calls
     P1-->>- P0: return
     P1->>+ P0: calls
@@ -138,6 +139,8 @@ sequenceDiagram
     P38-->>- P0: return
     P0->>+ P39: calls
     P39-->>- P0: return
+    P0->>+ P40: calls
+    P40-->>- P0: return
 ```
 
 ## Connections by Relation

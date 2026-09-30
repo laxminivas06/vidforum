@@ -31,16 +31,19 @@ import {
   UserPlus,
   Mail,
 } from "lucide-react"
-import { useInstitutions, useInstitutionAdmins } from "@/lib/api/hooks"
+import { useInstitutions, useInstitutionAdmins, useUpdateInstitutionStatus } from "@/lib/api/hooks"
 import { Institution } from "@/types"
 import { ProvisionTenantModal } from "@/components/institutions/ProvisionTenantModal"
 import { AddInstituteAdminModal } from "@/components/institutions/AddInstituteAdminModal"
 
 export default function InstitutionsPage() {
   const { data: institutions = [], isLoading } = useInstitutions()
+  const updateStatusMutation = useUpdateInstitutionStatus()
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedInst, setSelectedInst] = useState<Institution | null>(null)
   const [suspendDialogOpen, setSuspendDialogOpen] = useState(false)
+  const [actionType, setActionType] = useState<"suspend" | "activate">("suspend")
+  const [isSubmittingStatus, setIsSubmittingStatus] = useState(false)
   const [isProvisionOpen, setIsProvisionOpen] = useState(false)
   const [isAddAdminOpen, setIsAddAdminOpen] = useState(false)
 
@@ -95,36 +98,58 @@ export default function InstitutionsPage() {
     {
       header: "Status",
       key: "status",
-      render: (item) => (
-        <Badge variant={item.status === "ACTIVE" ? "positive" : "warning"}>
-          {item.status}
-        </Badge>
-      ),
+      render: (item) => {
+        const isAct = item.status === "ACTIVE"
+        const isSusp = item.status === "SUSPENDED"
+        return (
+          <Badge variant={isAct ? "positive" : isSusp ? "warning" : "neutral"}>
+            {item.status}
+          </Badge>
+        )
+      },
     },
     {
       header: "Actions",
       key: "id",
-      render: (item) => (
-        <div className="flex items-center gap-2">
-          <Button
-            size="dense"
-            variant="secondary"
-            onClick={() => setSelectedInst(item)}
-          >
-            Inspect
-          </Button>
-          <Button
-            size="dense"
-            variant="ghost"
-            onClick={() => {
-              setSelectedInst(item)
-              setSuspendDialogOpen(true)
-            }}
-          >
-            Suspend
-          </Button>
-        </div>
-      ),
+      render: (item) => {
+        const isSuspendedOrInactive = item.status === "SUSPENDED" || item.status === "INACTIVE"
+        return (
+          <div className="flex items-center gap-2">
+            <Button
+              size="dense"
+              variant="secondary"
+              onClick={() => setSelectedInst(item)}
+            >
+              Inspect
+            </Button>
+            {isSuspendedOrInactive ? (
+              <Button
+                size="dense"
+                variant="secondary"
+                onClick={() => {
+                  setSelectedInst(item)
+                  setActionType("activate")
+                  setSuspendDialogOpen(true)
+                }}
+              >
+                Activate
+              </Button>
+            ) : (
+              <Button
+                size="dense"
+                variant="ghost"
+                onClick={() => {
+                  setSelectedInst(item)
+                  setActionType("suspend")
+                  setSuspendDialogOpen(true)
+                }}
+              >
+                Suspend
+              </Button>
+            )}
+          </div>
+        )
+      },
     },
   ]
 
@@ -346,18 +371,41 @@ export default function InstitutionsPage() {
         onSuccess={() => refetchAdmins()}
       />
 
-      {/* Suspend Confirmation Dialog */}
+      {/* Suspend / Reactivate Confirmation Dialog */}
       <ConfirmDialog
         open={suspendDialogOpen}
-        title="Suspend Institutional Tenant"
-        description={`Are you sure you want to suspend tenant access for ${selectedInst?.name}? All users and staff on domain ${selectedInst?.domain} will be locked out immediately.`}
-        confirmLabel="Suspend Tenant"
-        danger
-        onConfirm={() => {
-          setSuspendDialogOpen(false)
-          setSelectedInst(null)
+        title={actionType === "suspend" ? "Suspend Institutional Tenant" : "Reactivate Institutional Tenant"}
+        description={
+          actionType === "suspend"
+            ? `Are you sure you want to suspend tenant access for ${selectedInst?.name}? All users and staff on domain ${selectedInst?.domain} will be blocked from accessing their workspace immediately.`
+            : `Are you sure you want to reactivate ${selectedInst?.name}? Tenant workspaces and operational services will be restored immediately.`
+        }
+        confirmLabel={
+          isSubmittingStatus
+            ? "Updating Cloud DB..."
+            : actionType === "suspend"
+            ? "Suspend Tenant"
+            : "Reactivate Tenant"
+        }
+        danger={actionType === "suspend"}
+        onConfirm={async () => {
+          if (!selectedInst) return
+          try {
+            setIsSubmittingStatus(true)
+            await updateStatusMutation.mutateAsync({
+              id: selectedInst.id,
+              status: actionType === "suspend" ? "suspended" : "active",
+            })
+            setSuspendDialogOpen(false)
+            setSelectedInst(null)
+          } catch (err) {
+            console.error("Failed to update institution status in cloud DB:", err)
+          } finally {
+            setIsSubmittingStatus(false)
+          }
         }}
         onCancel={() => {
+          if (isSubmittingStatus) return
           setSuspendDialogOpen(false)
           setSelectedInst(null)
         }}

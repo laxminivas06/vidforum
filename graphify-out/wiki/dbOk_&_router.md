@@ -1,24 +1,25 @@
 # dbOk & router
 
-> 3 nodes · cohesion 0.67
+> 4 nodes · cohesion 0.50
 
 ## Key Concepts
 
-- [database.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts#L1) (2 connections)
-- [db](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts#L22) (1 connections)
-- [pool](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts#L4) (1 connections)
+- [Skill: local-memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (3 connections)
+- [Key Actions](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (1 connections)
+- [Local Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (1 connections)
+- [When to Use](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[Community 46]] (6 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\config\database.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts)
+- [.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md)
 
 ## Audit Trail
 
-- EXTRACTED: 4 (100%)
+- EXTRACTED: 6 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

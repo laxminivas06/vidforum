@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [utils.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts#L1) (1 connections)
-- [cn()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts#L4) (1 connections)
+- [QueryProvider.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx#L1) (1 connections)
+- [QueryProvider()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx#L6) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\lib\utils.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\contexts\QueryProvider.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx)
 
 ## Audit Trail
 

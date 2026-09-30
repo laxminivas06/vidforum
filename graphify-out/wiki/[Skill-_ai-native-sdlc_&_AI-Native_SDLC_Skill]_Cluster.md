@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [workspaces.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L1) (2 connections)
-- [isPathAllowedForWorkspaces()](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L115) (1 connections)
-- [PLATFORM_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L9) (1 connections)
+- [navigation.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L1) (2 connections)
+- [getFilteredNavigation()](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L192) (1 connections)
+- [NAVIGATION_CONFIG](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L27) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\config\workspaces.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\config\navigation.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts)
 
 ## Audit Trail
 

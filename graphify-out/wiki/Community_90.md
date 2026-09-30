@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-attendance/monitoring/page.tsx#L1) (1 connections)
-- [CAMERA_DECKS](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-attendance/monitoring/page.tsx#L25) (1 connections)
+- [next.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/next.config.js#L1) (1 connections)
+- [nextConfig](file:///C:/Antigravityyyyy/VID_School/frontend/next.config.js#L2) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\ai-attendance\monitoring\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-attendance/monitoring/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\next.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/next.config.js)
 
 ## Audit Trail
 

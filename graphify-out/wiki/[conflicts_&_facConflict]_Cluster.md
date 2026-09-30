@@ -4,18 +4,18 @@
 
 ## Key Concepts
 
-- [AppShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L1) (11 connections)
-- [INSTITUTION_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L22) (1 connections)
-- [isBlockedByWorkspaceRestriction](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L98) (1 connections)
-- [isBlockedForInstitutionStaff](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L92) (1 connections)
-- [isBlockedForSuperAdmin](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L86) (1 connections)
-- [[isCollapsed, setIsCollapsed]](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L67) (1 connections)
-- [[isMobileMenuOpen, setIsMobileMenuOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L66) (1 connections)
-- [isSuperAdmin](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L85) (1 connections)
-- [pathname](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L64) (1 connections)
-- [PLATFORM_SUPER_ADMIN_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L46) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L65) (1 connections)
-- [{ user, role, enabledModules, institutionName, logout, isInitialized }](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L63) (1 connections)
+- [attendance.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L1) (11 connections)
+- [client](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L56) (1 connections)
+- [{ id }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L92) (1 connections)
+- [{ id: sessionId }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L58) (1 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L11) (1 connections)
+- [params](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L34) (1 connections)
+- [query](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L14) (1 connections)
+- [{ records }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L59) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L46) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L6) (1 connections)
+- [{ sectionId, date }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L12) (1 connections)
+- [verifiedBy](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L93) (1 connections)
 
 ## Relationships
 
@@ -23,7 +23,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\layout\AppShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\attendance\attendance.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts)
 
 ## Audit Trail
 

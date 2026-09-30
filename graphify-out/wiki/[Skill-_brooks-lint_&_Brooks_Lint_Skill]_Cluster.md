@@ -4,10 +4,10 @@
 
 ## Key Concepts
 
-- [optional-modules.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L1) (3 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L11) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L12) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L6) (1 connections)
+- [hrms.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L1) (3 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L11) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L12) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L6) (1 connections)
 
 ## Relationships
 
@@ -15,7 +15,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\optional-modules\optional-modules.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts)
 
 ## Audit Trail
 

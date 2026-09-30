@@ -30,11 +30,13 @@ import {
   CheckCircle2,
   UserPlus,
   Mail,
+  SlidersHorizontal,
 } from "lucide-react"
 import { useInstitutions, useInstitutionAdmins, useUpdateInstitutionStatus } from "@/lib/api/hooks"
 import { Institution } from "@/types"
 import { ProvisionTenantModal } from "@/components/institutions/ProvisionTenantModal"
 import { AddInstituteAdminModal } from "@/components/institutions/AddInstituteAdminModal"
+import { EditAdminWorkspacesModal } from "@/components/institutions/EditAdminWorkspacesModal"
 
 export default function InstitutionsPage() {
   const { data: institutions = [], isLoading } = useInstitutions()
@@ -46,6 +48,8 @@ export default function InstitutionsPage() {
   const [isSubmittingStatus, setIsSubmittingStatus] = useState(false)
   const [isProvisionOpen, setIsProvisionOpen] = useState(false)
   const [isAddAdminOpen, setIsAddAdminOpen] = useState(false)
+  const [selectedAdminForEdit, setSelectedAdminForEdit] = useState<any | null>(null)
+  const [isEditWorkspacesOpen, setIsEditWorkspacesOpen] = useState(false)
 
   const { data: instituteAdmins = [], refetch: refetchAdmins } = useInstitutionAdmins(selectedInst?.id)
 
@@ -330,8 +334,21 @@ export default function InstitutionsPage() {
 
                       {/* Permitted Workspaces */}
                       <div className="pt-1 border-t border-border-subtle">
-                        <div className="text-[10px] text-text-secondary uppercase font-mono mb-1">
-                          Permitted Workspaces ({adm.workspaces?.length || 0}):
+                        <div className="flex items-center justify-between mb-1">
+                          <div className="text-[10px] text-text-secondary uppercase font-mono">
+                            Permitted Workspaces ({adm.workspaces?.length || 0}):
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedAdminForEdit(adm)
+                              setIsEditWorkspacesOpen(true)
+                            }}
+                            className="text-[10px] font-semibold text-brand-primary hover:text-brand-primary-hover hover:underline flex items-center gap-1"
+                          >
+                            <SlidersHorizontal className="w-2.5 h-2.5" />
+                            <span>Edit Workspaces</span>
+                          </button>
                         </div>
                         <div className="flex flex-wrap gap-1">
                           {(adm.workspaces || []).map((wsId: string) => (
@@ -368,6 +385,18 @@ export default function InstitutionsPage() {
         isOpen={isAddAdminOpen}
         institution={selectedInst}
         onClose={() => setIsAddAdminOpen(false)}
+        onSuccess={() => refetchAdmins()}
+      />
+
+      {/* Edit Admin Workspaces Modal */}
+      <EditAdminWorkspacesModal
+        isOpen={isEditWorkspacesOpen}
+        institution={selectedInst}
+        admin={selectedAdminForEdit}
+        onClose={() => {
+          setIsEditWorkspacesOpen(false)
+          setSelectedAdminForEdit(null)
+        }}
         onSuccess={() => refetchAdmins()}
       />
 

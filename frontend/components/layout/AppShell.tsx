@@ -126,6 +126,8 @@ export const AppShell: React.FC<AppShellProps> = ({
           userRole={role.replace("_", " ")}
           onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
           rightActions={rightHeaderAction}
+          assignedWorkspaces={user?.assignedWorkspaces}
+          currentPath={pathname}
         />
 
         <main

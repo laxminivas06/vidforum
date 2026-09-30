@@ -11,6 +11,7 @@ export interface AuthenticatedUser {
   role: string;
   institutionId: string;
   permissions: string[];
+  assignedWorkspaces?: string[];
 }
 
 declare global {
@@ -78,6 +79,7 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
       role: decoded.role,
       institutionId: decoded.institutionId,
       permissions: decoded.permissions || [],
+      assignedWorkspaces: decoded.assignedWorkspaces || [],
     };
     req.institutionId = req.user.institutionId;
     next();

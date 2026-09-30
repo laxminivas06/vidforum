@@ -84,6 +84,18 @@ export class InstitutionController {
       next(error);
     }
   }
+
+  async updateAdminWorkspaces(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const id = req.params.id as string;
+      const adminId = req.params.adminId as string;
+      const { workspaces = [] } = req.body;
+      const result = await institutionService.updateAdminWorkspaces(id, adminId, workspaces);
+      sendSuccess(res, result, 'Admin workspaces updated and persisted to Cloud DB');
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const institutionController = new InstitutionController();

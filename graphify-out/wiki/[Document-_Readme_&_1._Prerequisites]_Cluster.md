@@ -31,7 +31,7 @@
 
 ## Relationships
 
-- [[[Document: Prd & 1.1 Problem Statement] Cluster]] (46 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

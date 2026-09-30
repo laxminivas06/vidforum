@@ -1,23 +1,23 @@
 # Community 108
 
-> 2 nodes · cohesion 1.00
+> 2 nodes · cohesion 2.00
 
 ## Key Concepts
 
-- [Document: Graphify](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md) (1 connections)
-- [Workflow: graphify](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md) (1 connections)
+- [Skill: dev-skills](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/dev-skills/skills/dev-skills/SKILL.md) (3 connections)
+- [Core Workflows](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/dev-skills/skills/dev-skills/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[Community 107]] (2 shared connections)
+- [[Community 107]] (3 shared connections)
 
 ## Source Files
 
-- [.agents/workflows/graphify.md](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md)
+- [.agents/plugins/dev-skills/skills/dev-skills/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/dev-skills/skills/dev-skills/SKILL.md)
 
 ## Audit Trail
 
-- EXTRACTED: 2 (100%)
+- EXTRACTED: 3 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

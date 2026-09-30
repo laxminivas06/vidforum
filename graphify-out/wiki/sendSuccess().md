@@ -1,6 +1,6 @@
 # sendSuccess()
 
-> God node · 24 connections · [C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts#L19)
+> God node · 25 connections · [C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts#L19)
 
 ## Call Trace Diagram
 
@@ -37,6 +37,7 @@ sequenceDiagram
     participant P28 as .getApplicants()
     participant P29 as .toggleModule()
     participant P30 as .createInstitution()
+    participant P31 as .updateAdminWorkspaces()
     P0->>+ P1: calls
     P1-->>- P0: return
     P1->>+ P0: calls
@@ -107,6 +108,8 @@ sequenceDiagram
     P29-->>- P0: return
     P0->>+ P30: calls
     P30-->>- P0: return
+    P0->>+ P31: calls
+    P31-->>- P0: return
 ```
 
 ## Connections by Relation

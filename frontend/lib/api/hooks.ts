@@ -490,6 +490,70 @@ export function useCreateInstitutionAdmin() {
   })
 }
 
+export function useUpdateAdminWorkspaces() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (payload: {
+      institutionId: string
+      adminId: string
+      workspaces: string[]
+    }) => {
+      const res = await fetch(
+        `${API_BASE_URL}/institutions/${payload.institutionId}/admins/${encodeURIComponent(payload.adminId)}/workspaces`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ workspaces: payload.workspaces }),
+        }
+      )
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to update workspaces in Cloud DB")
+      }
+      return json.data
+    },
+    onSuccess: (_, variables) => {
+      if (typeof window !== "undefined") {
+        try {
+          const raw = localStorage.getItem("vid_institute_admins")
+          if (raw) {
+            const list = JSON.parse(raw)
+            const updated = list.map((a: any) => {
+              if (
+                a.id === variables.adminId ||
+                a.userId?.toLowerCase() === variables.adminId.toLowerCase() ||
+                a.email?.toLowerCase() === variables.adminId.toLowerCase()
+              ) {
+                return { ...a, workspaces: variables.workspaces }
+              }
+              return a
+            })
+            localStorage.setItem("vid_institute_admins", JSON.stringify(updated))
+          }
+
+          const rawSession = localStorage.getItem("vid_session_user")
+          if (rawSession) {
+            const sessionUser = JSON.parse(rawSession)
+            if (
+              sessionUser.id === variables.adminId ||
+              sessionUser.email?.toLowerCase() === variables.adminId.toLowerCase()
+            ) {
+              sessionUser.assignedWorkspaces = variables.workspaces
+              localStorage.setItem("vid_session_user", JSON.stringify(sessionUser))
+            }
+          }
+        } catch (e) {
+          console.warn("Failed to update local storage for workspaces", e)
+        }
+      }
+
+      queryClient.invalidateQueries({ queryKey: ["institution-admins", variables.institutionId] })
+      queryClient.invalidateQueries({ queryKey: ["institutions"] })
+    },
+  })
+}
+
 export interface PlatformUserItem {
   id: string
   name: string

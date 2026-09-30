@@ -33,7 +33,7 @@
 
 ## Relationships
 
-- [[[Document: Tasks & 1.1 Project Scaffolding & Infrastructure] Cluster]] (50 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

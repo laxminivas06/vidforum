@@ -41,7 +41,7 @@ export class InstitutionRepository {
       `SELECT i.*, p.code as plan_code, p.name as plan_name 
        FROM institutions i 
        LEFT JOIN subscription_plans p ON p.id = i.plan_id 
-       WHERE i.id = $1 OR i.code = $1`,
+       WHERE i.id::text = $1::text OR i.code = $1::text`,
       [idOrCode]
     );
     return res.rows[0] || null;
@@ -159,6 +159,24 @@ export class InstitutionRepository {
       ORDER BY p.created_at DESC
     `, [institutionId]);
     return res.rows;
+  }
+
+  async updateAdminWorkspaces(institutionId: string, adminIdOrEmail: string, workspaces: string[]) {
+    const inst = await this.findByIdOrCode(institutionId);
+    const instId = inst?.id || institutionId;
+
+    const res = await db.query(
+      `UPDATE user_roles ur
+       SET scope = (COALESCE(ur.scope, '{}'::jsonb) || jsonb_build_object('workspaces', $1::jsonb))
+       FROM profiles p
+       WHERE ur.profile_id = p.id
+         AND (p.id::text = $2 OR LOWER(p.email) = LOWER($2))
+         AND (ur.institution_id = $3 OR ur.institution_id IS NULL)
+       RETURNING p.id, p.email, p.full_name as name, ur.scope->'workspaces' as workspaces`,
+      [JSON.stringify(workspaces), adminIdOrEmail.trim(), instId]
+    );
+
+    return res.rows[0] || null;
   }
 
   async findModules(institutionId: string) {

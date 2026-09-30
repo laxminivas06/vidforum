@@ -225,6 +225,38 @@ export class InstitutionService {
     );
   }
 
+  async updateAdminWorkspaces(institutionId: string, adminIdOrEmail: string, workspaces: string[]) {
+    const cleanWorkspaces = Array.isArray(workspaces) ? workspaces : [];
+
+    // Directly update Cloud PostgreSQL DB
+    let dbUpdated = null;
+    try {
+      dbUpdated = await institutionRepository.updateAdminWorkspaces(institutionId, adminIdOrEmail, cleanWorkspaces);
+    } catch (err) {
+      console.warn('Database updateAdminWorkspaces error:', (err as any)?.message);
+    }
+
+    // Also update in-memory state if found
+    const cleanIdentifier = adminIdOrEmail.trim().toLowerCase();
+    const adminIndex = this.instituteAdmins.findIndex(
+      (a) =>
+        a.id.toLowerCase() === cleanIdentifier ||
+        a.userId.toLowerCase() === cleanIdentifier ||
+        a.email.toLowerCase() === cleanIdentifier
+    );
+
+    if (adminIndex !== -1) {
+      this.instituteAdmins[adminIndex].workspaces = cleanWorkspaces;
+    }
+
+    return {
+      success: true,
+      adminId: adminIdOrEmail,
+      workspaces: cleanWorkspaces,
+      dbUpdated: !!dbUpdated,
+    };
+  }
+
   findAdminByIdentifier(identifier: string): StoredInstituteAdmin | undefined {
     const clean = identifier.trim().toLowerCase();
     return this.instituteAdmins.find(

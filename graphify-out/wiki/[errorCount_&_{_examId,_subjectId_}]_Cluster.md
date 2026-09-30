@@ -1,35 +1,34 @@
 # [errorCount & { examId, subjectId }] Cluster
 
-> 14 nodes · cohesion 0.14
+> 13 nodes · cohesion 0.15
 
 ## Key Concepts
 
-- [VID Platform Educational Ecosystem Specification](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (13 connections)
-- [Academics & Curriculum](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Admissions & Enrollment](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Alumni Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Attendance Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Communication & Notifications](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Examination & Grading](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Fee & Financial Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Hostel Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Human Resources & Payroll](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Learning Management System (LMS)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Library Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Student Information System (SIS)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Transportation Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Document: Memory](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (12 connections)
+- [1.1 Architecture & Stack Contract](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [1.2 Core Development Directives](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [1. Project Context & Durable Conclusions (Honcho / Wingman / Knowl)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [2. Installed Plugin Suite (28 Plugins Matrix)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [3. Workflow Activation Guide](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [4. Frontend Implementation & Stitch Conversion State (2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.1 Cloud Database Infrastructure (Supabase PostgreSQL)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.2 Backend Layered MVC Engine (Node.js 22 + Express + TypeScript)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.3 Frontend-to-Backend Integration & Offline Resilience](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.4 Repository Sync & Git Checkpoints](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5. Backend & Supabase Database Architecture Implementation (2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [Persistent Agent Memory & Plugin Ecosystem: VID Platform](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
 
 ## Relationships
 
-- [[[Document: Memory & 1.1 Architecture & Stack Contract] Cluster]] (26 shared connections)
+- [[[campaign & campRes] Cluster]] (24 shared connections)
 
 ## Source Files
 
-- [Reference_docs/VID Platform.pdf](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf)
+- [docs/MEMORY.md](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md)
 
 ## Audit Trail
 
-- EXTRACTED: 26 (100%)
+- EXTRACTED: 24 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

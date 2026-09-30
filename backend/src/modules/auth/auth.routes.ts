@@ -81,7 +81,7 @@ router.post('/login', async (req: Request, res: Response) => {
       const profileRes = await db.query(
         `SELECT p.id, p.full_name, p.email, p.default_institution_id,
                 i.name as institution_name, i.code as institution_code,
-                r.name as role_name
+                r.name as role_name, ur.scope
          FROM profiles p
          LEFT JOIN institutions i ON i.id = p.default_institution_id
          LEFT JOIN user_roles ur ON ur.profile_id = p.id
@@ -170,12 +170,18 @@ router.post('/login', async (req: Request, res: Response) => {
       permissions = ['platform.all'];
     }
 
+    const assignedWorkspaces: string[] =
+      (user?.scope && Array.isArray((user.scope as any).workspaces))
+        ? (user.scope as any).workspaces
+        : [];
+
     const tokenPayload = {
       id: user.id,
       email: user.email,
       fullName: user.full_name,
       role: user.role_name,
       institutionId: user.default_institution_id,
+      assignedWorkspaces,
       permissions,
     };
 
@@ -191,6 +197,7 @@ router.post('/login', async (req: Request, res: Response) => {
         institutionId: user.default_institution_id,
         institutionName: user.institution_name || (user.role_name === 'SUPER_ADMIN' ? 'VID Global Platform' : 'Springfield International Academy'),
         institutionCode: user.institution_code || (user.role_name === 'SUPER_ADMIN' ? 'VID-GLOBAL' : 'SIA-BLR'),
+        assignedWorkspaces,
         permissions,
       },
     }, 'Authentication successful');

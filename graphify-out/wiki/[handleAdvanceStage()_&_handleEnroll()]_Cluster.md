@@ -30,7 +30,7 @@
 
 ## Relationships
 
-- [[[Document: Readme & 1. Prerequisites] Cluster]] (44 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

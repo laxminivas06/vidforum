@@ -1,17 +1,18 @@
 # [Document: Plugin Orchestrator & 1. Memory Phase (Start of Session & Pre-Edit)] Cluster
 
-> 8 nodes · cohesion 0.25
+> 9 nodes · cohesion 0.22
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L1) (7 connections)
-- [activeGrade](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L31) (1 connections)
-- [{ data: grades = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L28) (1 connections)
-- [isSelected](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L83) (1 connections)
-- [pct](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L176) (1 connections)
-- [[selectedGradeId, setSelectedGradeId]](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L29) (1 connections)
-- [totalCapacity](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L85) (1 connections)
-- [totalStudents](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L84) (1 connections)
+- [Card.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L1) (8 connections)
+- [activeDelta](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L122) (1 connections)
+- [activeDeltaType](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L123) (1 connections)
+- [Card](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L11) (1 connections)
+- [CardContent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L74) (1 connections)
+- [CardDescription](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L62) (1 connections)
+- [CardFooter](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L82) (1 connections)
+- [CardHeader](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L38) (1 connections)
+- [CardTitle](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L50) (1 connections)
 
 ## Relationships
 
@@ -19,11 +20,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\academics\hierarchy\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Card.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 14 (100%)
+- EXTRACTED: 16 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

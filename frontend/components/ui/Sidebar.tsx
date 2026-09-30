@@ -144,7 +144,31 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Nav Groups Scrollable Area */}
-      <div className="flex-1 overflow-y-auto px-3 py-4 space-y-6">
+      <div className="flex-1 overflow-y-auto px-3 py-3 space-y-5">
+        {/* Workspace Scoping Indicator for Institute Admin */}
+        {role === "INSTITUTION_ADMIN" && !collapsed && (
+          <div className="px-1 mb-3 shrink-0">
+            <div className="p-2 rounded-xl bg-surface border border-border-default/80 flex items-center justify-between shadow-xs">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-5 h-5 rounded-md bg-action-black/5 dark:bg-white/10 flex items-center justify-center shrink-0">
+                  <Layers className="w-3 h-3 text-brand-primary" />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-[11px] font-bold text-text-primary block truncate leading-tight">
+                    Permitted Workspaces
+                  </span>
+                  <span className="text-[10px] text-text-secondary block leading-tight">
+                    {assignedWorkspaces ? `${assignedWorkspaces.length} active` : "All platform"}
+                  </span>
+                </div>
+              </div>
+              <Badge variant="neutral" className="text-[9px] font-mono shrink-0 px-1 py-0">
+                {assignedWorkspaces ? `${assignedWorkspaces.length}` : "13"}
+              </Badge>
+            </div>
+          </div>
+        )}
+
         {navigationGroups.map((group, groupIdx) => (
           <div key={groupIdx} className="space-y-1">
             {!collapsed && (

@@ -202,7 +202,7 @@ export function getFilteredNavigation(
         if (item.optionalModuleKey && !enabledModules.includes(item.optionalModuleKey)) {
           return false
         }
-        if (role === "INSTITUTION_ADMIN" && assignedWorkspaces && assignedWorkspaces.length > 0) {
+        if (role === "INSTITUTION_ADMIN" && assignedWorkspaces !== undefined) {
           if (!isPathAllowedForWorkspaces(item.href, assignedWorkspaces)) {
             return false
           }

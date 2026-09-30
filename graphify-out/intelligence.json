@@ -1,36 +1,36 @@
 {
   "hotspots": [
     {
-      "label": "AuthProvider()",
-      "risk": 0.593,
-      "type": "FUNCTION"
-    },
-    {
       "label": "InstitutionService",
-      "risk": 0.568,
+      "risk": 0.612,
       "type": "CLASS"
     },
     {
+      "label": "AuthProvider()",
+      "risk": 0.572,
+      "type": "FUNCTION"
+    },
+    {
       "label": "InstitutionRepository",
-      "risk": 0.284,
+      "risk": 0.29,
       "type": "CLASS"
     },
     {
       "label": "SecurityPage()",
-      "risk": 0.279,
+      "risk": 0.275,
       "type": "FUNCTION"
     },
     {
       "label": "HostelPage()",
-      "risk": 0.268,
+      "risk": 0.263,
       "type": "FUNCTION"
     }
   ],
   "blast_radius": {
     "institutions": 73,
     "Document: Vid Database Architecture": 47,
-    "query": 34,
+    "query": 36,
     "profiles": 26,
-    "Document: Design": 25
+    "sendSuccess()": 25
   }
 }

@@ -2,7 +2,7 @@
 
 > God node · 22 connections · [docs/TASKS.md](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md)
 
-**Community:** [[[Document: Readme & 1. Prerequisites] Cluster]]
+**Community:** [[[handleAdvanceStage() & handleEnroll()] Cluster]]
 
 ## Connections by Relation
 

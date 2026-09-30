@@ -4,22 +4,22 @@
 
 ## Key Concepts
 
-- [Document: Plugin Orchestrator](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (7 connections)
-- [1. Memory Phase (Start of Session & Pre-Edit)](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [2. Planning & SDLC Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [3. Implementation & Testing Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [4. Code Quality & Review Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [5. Security & Git Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [6. Token & Output Optimization](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [Plugin Orchestration Rules](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [index.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L1) (7 connections)
+- [cn()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L72) (1 connections)
+- [containerRef](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L128) (1 connections)
+- [filteredOptions](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L132) (1 connections)
+- [handleClickOutside()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L139) (1 connections)
+- [[isOpen, setIsOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L126) (1 connections)
+- [[searchTerm, setSearchTerm]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L127) (1 connections)
+- [selectedOption](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L130) (1 connections)
 
 ## Relationships
 
-- [[[[activeTab, setActiveTab] & isActive] Cluster]] (14 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/rules/plugin-orchestrator.md](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Form\index.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx)
 
 ## Audit Trail
 

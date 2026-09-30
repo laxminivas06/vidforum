@@ -1,42 +1,43 @@
 # [Document: Antigravity Master Prompt & 0. ROLE & OPERATING MODE] Cluster
 
-> 21 nodes · cohesion 0.10
+> 22 nodes · cohesion 0.09
 
 ## Key Concepts
 
-- [hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1) (20 connections)
-- [API_BASE_URL](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L230) (1 connections)
-- [DEFAULT_INST_ID](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L231) (1 connections)
-- [MOCK_APPLICANTS](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L10) (1 connections)
-- [MOCK_FACULTY](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L144) (1 connections)
-- [MOCK_FEES](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L184) (1 connections)
-- [MOCK_GRADES](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L106) (1 connections)
-- [MOCK_INSTITUTIONS](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L7) (1 connections)
-- [useAcademics()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L658) (1 connections)
-- [useAdmissions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L607) (1 connections)
-- [useCreateInstitution()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L262) (1 connections)
-- [useCreateInstitutionAdmin()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L404) (1 connections)
-- [useCreatePlatformUser()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L550) (1 connections)
-- [useFaculty()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L678) (1 connections)
-- [useFinance()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L718) (1 connections)
-- [useInstitutionAdmins()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L358) (1 connections)
-- [useInstitutions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L233) (1 connections)
-- [useMyClasses()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L698) (1 connections)
-- [usePlatformUsers()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L504) (1 connections)
-- [useUpdateInstitutionStatus()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L316) (1 connections)
-- [useUpdatePlatformUser()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L577) (1 connections)
+- [Document: Prd](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (21 connections)
+- [1.1 Problem Statement](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [1.2 Core Principle & Philosophy](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [1. Executive Summary & Product Vision](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [2. Target Users & Personas](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [3.1 Workspace Classification Matrix](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [3.2 The Student Master Entity](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [3.3 The 30 Non-Negotiable Rules](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [3. Product Scope & Modular Architecture](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [4. Development Phases & Release Strategy](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [5.1 Super Admin](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [5.2 Institution Admin](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [5.3 Admissions Team](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [5.4 Academic Coordinator & Faculty](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [5. User Stories per Feature (Phase 1 MVP Highlights)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [6. Out-of-Scope Items (Strict Boundaries)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [7. Open Questions & Engineering Assumptions](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Phase 1: MVP Core Foundation (Immediate Focus)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Phase 2: Core Operational Workspaces](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Phase 3: AI Yantra Intelligence Layer](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Phase 4: Optional Modules & Mobile Experience](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Product Requirements Document (PRD): VID (Virtual Identification)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Document: Appflow & 1. Overview & Navigation Architecture] Cluster]] (42 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\lib\api\hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts)
+- [docs/PRD.md](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md)
 
 ## Audit Trail
 
-- EXTRACTED: 40 (100%)
+- EXTRACTED: 42 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

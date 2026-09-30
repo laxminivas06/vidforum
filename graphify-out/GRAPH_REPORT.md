@@ -1,12 +1,12 @@
 # Graph Report - C:\Antigravityyyyy\VID_School  (2026-09-30)
 
 ## Corpus Check
-- 105 files · ~221,186 words
+- 107 files · ~224,328 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1125 nodes · 1182 edges · 176 communities detected
-- Extraction: 91% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 111 edges (avg confidence: 0.8)
+- 1154 nodes · 1214 edges · 176 communities detected
+- Extraction: 91% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 114 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
@@ -190,10 +190,10 @@
 ## God Nodes (most connected - your core abstractions)
 1. `institutions` - 73 edges
 2. `Document: Vid Database Architecture` - 47 edges
-3. `query` - 34 edges
+3. `query` - 36 edges
 4. `profiles` - 26 edges
-5. `Document: Design` - 25 edges
-6. `sendSuccess()` - 24 edges
+5. `sendSuccess()` - 25 edges
+6. `Document: Design` - 25 edges
 7. `students` - 24 edges
 8. `Document: Tech Spec` - 23 edges
 9. `Document: Tasks` - 22 edges
@@ -202,14 +202,14 @@
 ## Surprising Connections (you probably didn't know these)
 - `purgeDummyData()` --calls--> `query`  [INFERRED]
   C:\Antigravityyyyy\VID_School\backend\scripts\purge-dummy-institutions.js → C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.routes.ts
+- `run()` --calls--> `query`  [INFERRED]
+  C:\Antigravityyyyy\VID_School\backend\scripts\verify-workspaces-e2e.js → C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.routes.ts
 - `errorMiddleware()` --calls--> `sendError()`  [INFERRED]
   C:\Antigravityyyyy\VID_School\backend\src\middleware\error.middleware.ts → C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts
 - `verify()` --calls--> `query`  [INFERRED]
   C:\Antigravityyyyy\VID_School\backend\scripts\verify-cloud-e2e.js → C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.routes.ts
 - `verify()` --calls--> `authMiddleware()`  [INFERRED]
   C:\Antigravityyyyy\VID_School\backend\scripts\verify-cloud-e2e.js → C:\Antigravityyyyy\VID_School\backend\src\middleware\auth.middleware.ts
-- `authMiddleware()` --calls--> `query`  [INFERRED]
-  C:\Antigravityyyyy\VID_School\backend\src\middleware\auth.middleware.ts → C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.routes.ts
 
 ## Hyperedges (group relationships)
 - **Single Student Master Record Architecture** — docs_appflow_2_7_central_student_master_profile_stu, docs_appflow_2_8_mobile_parent_student_portal_mo, docs_appflow_3_4_student_master_profile_shell, docs_decisions_adr_003_central_student_master_record_vs, docs_memory_persistent_agent_memory_plugin_ecosyst [INFERRED 0.95]
@@ -220,22 +220,22 @@
 ### Community 0 - "Community 0"
 
 Cohesion: 0.04
-Nodes (116): academic_years, admission_documents, admissions, ai_attendance_events, ai_voice_calls, ai_voice_campaigns, ai_voice_recipients, ai_voice_templates (+108 more)
+Nodes (121): academic_years, admission_documents, admissions, ai_attendance_events, ai_voice_calls, ai_voice_campaigns, ai_voice_recipients, ai_voice_templates (+113 more)
 
 ### Community 1 - "Community 1"
 
 Cohesion: 0.03
-Nodes (33): AcademicsController, AcademicsRepository, AcademicsService, AdmissionsController, AdmissionsRepository, AdmissionsService, STAGE_MAP_TO_DB, STAGE_MAP_TO_UI (+25 more)
+Nodes (25): AcademicsController, AcademicsRepository, AcademicsService, AdmissionsController, sendError(), sendSuccess(), authMiddleware(), errorMiddleware() (+17 more)
 
 ### Community 2 - "Community 2"
 
 Cohesion: 0.04
-Nodes (48): 10. RBAC / Permissions, 11. Academic Data Model, 12. Workspace/Data Ownership Model, 13. Normalization Analysis, 14. Primary Key Strategy, 15. Constraints, 16. Delete/Update Strategy, 17. Audit Strategy (+40 more)
+Nodes (41): ALL_PERMISSIONS, AuthContext, DEFAULT_USER, KNOWN_ACCOUNTS, RequirePermission(), ROLE_PERMISSIONS, SUPER_ADMIN_PERMISSIONS, useAuth() (+33 more)
 
 ### Community 3 - "Community 3"
 
 Cohesion: 0.04
-Nodes (39): ALL_PERMISSIONS, AuthContext, DEFAULT_USER, KNOWN_ACCOUNTS, RequirePermission(), ROLE_PERMISSIONS, SUPER_ADMIN_PERMISSIONS, useAuth() (+31 more)
+Nodes (48): 10. RBAC / Permissions, 11. Academic Data Model, 12. Workspace/Data Ownership Model, 13. Normalization Analysis, 14. Primary Key Strategy, 15. Constraints, 16. Delete/Update Strategy, 17. Audit Strategy (+40 more)
 
 ### Community 4 - "Community 4"
 
@@ -244,8 +244,8 @@ Nodes (39): adminCount, columns, createUserMutation, { data: dbUsers = [], isLoa
 
 ### Community 5 - "Community 5"
 
-Cohesion: 0.07
-Nodes (23): { data: applicants = [], isLoading, updateStage }, DAYS, [enrollingApplicant, setEnrollingApplicant], [error, setError], filteredApplicants, handleAdvanceStage(), handleEnroll(), handleReject() (+15 more)
+Cohesion: 0.05
+Nodes (27): AdmissionsRepository, AdmissionsService, STAGE_MAP_TO_DB, STAGE_MAP_TO_UI, { data: applicants = [], isLoading, updateStage }, DAYS, [enrollingApplicant, setEnrollingApplicant], [error, setError] (+19 more)
 
 ### Community 6 - "Community 6"
 
@@ -275,12 +275,12 @@ Nodes (21): autoGenerateCode(), [boardAffiliation, setBoardAffiliation], [code, 
 ### Community 11 - "Community 11"
 
 Cohesion: 0.09
-Nodes (22): 1.1 Problem Statement, 1.2 Core Principle & Philosophy, 1. Executive Summary & Product Vision, 2. Target Users & Personas, 3.1 Workspace Classification Matrix, 3.2 The Student Master Entity, 3.3 The 30 Non-Negotiable Rules, 3. Product Scope & Modular Architecture (+14 more)
+Nodes (7): API_BASE_URL, DEFAULT_INST_ID, MOCK_APPLICANTS, MOCK_FACULTY, MOCK_FEES, MOCK_GRADES, MOCK_INSTITUTIONS
 
 ### Community 12 - "Community 12"
 
-Cohesion: 0.1
-Nodes (7): API_BASE_URL, DEFAULT_INST_ID, MOCK_APPLICANTS, MOCK_FACULTY, MOCK_FEES, MOCK_GRADES, MOCK_INSTITUTIONS
+Cohesion: 0.09
+Nodes (22): 1.1 Problem Statement, 1.2 Core Principle & Philosophy, 1. Executive Summary & Product Vision, 2. Target Users & Personas, 3.1 Workspace Classification Matrix, 3.2 The Student Master Entity, 3.3 The 30 Non-Negotiable Rules, 3. Product Scope & Modular Architecture (+14 more)
 
 ### Community 13 - "Community 13"
 
@@ -289,8 +289,8 @@ Nodes (21): 1. Prerequisites, 2. Environment Variables, 3. Running the Developme
 
 ### Community 14 - "Community 14"
 
-Cohesion: 0.11
-Nodes (17): customAdmin, { email, userId, identifier, password }, institution, instRes, isSuperAdminAlias, loginIdentifier, { newRole }, permissions (+9 more)
+Cohesion: 0.1
+Nodes (18): assignedWorkspaces, customAdmin, { email, userId, identifier, password }, institution, instRes, isSuperAdminAlias, loginIdentifier, { newRole } (+10 more)
 
 ### Community 15 - "Community 15"
 
@@ -304,16 +304,6 @@ Nodes (19): 0. ROLE & OPERATING MODE, 1. PROJECT BRIEF, 2. REQUIRED DELIVERABLES
 
 ### Community 17 - "Community 17"
 
-Cohesion: 0.17
-Nodes (3): FinanceController, FinanceRepository, FinanceService
-
-### Community 18 - "Community 18"
-
-Cohesion: 0.17
-Nodes (3): StudentController, StudentRepository, StudentService
-
-### Community 19 - "Community 19"
-
 Cohesion: 0.14
 Nodes (12): [academicYear, setAcademicYear], [activeSection, setActiveSection], [boardAffiliation, setBoardAffiliation], [confirmToggleModule, setConfirmToggleModule], [contactEmail, setContactEmail], {
     institutionName,
@@ -321,35 +311,45 @@ Nodes (12): [academicYear, setAcademicYear], [activeSection, setActiveSection], 
     toggleOptionalModule,
   }, isEnabled, [isSaved, setIsSaved] (+4 more)
 
-### Community 20 - "Community 20"
+### Community 18 - "Community 18"
 
 Cohesion: 0.15
 Nodes (10): createAdminMutation, [email, setEmail], [errors, setErrors], handleSubmit(), isChecked, [password, setPassword], [selectedWorkspaces, setSelectedWorkspaces], [successBanner, setSuccessBanner] (+2 more)
 
-### Community 21 - "Community 21"
+### Community 19 - "Community 19"
 
 Cohesion: 0.14
 Nodes (14): Academics & Curriculum, Admissions & Enrollment, Alumni Management, Attendance Management, Communication & Notifications, Examination & Grading, Fee & Financial Management, Hostel Management (+6 more)
 
-### Community 22 - "Community 22"
+### Community 20 - "Community 20"
 
 Cohesion: 0.15
 Nodes (13): ADR-001 Strict Separation of Phase Deliverables, ADR-002 Multi-Tenancy via Shared Database with Institution-ID & RLS, ADR-003 Central Student Master Record vs Workspace, ADR-004 Two-Tier RBAC with Resource-Level Context Verification, ADR-005 Full-Stack Monorepo Structure (backend/ + frontend/), ADR-006 Pre-Commit Validation Pipeline for Excel Exam Imports, ADR-007 Strict 3-Workspace Boundary for AI Yantra, ADR-008 Node.js 22 + TypeScript + Express Layered MVC Architecture (+5 more)
 
-### Community 23 - "Community 23"
+### Community 21 - "Community 21"
 
 Cohesion: 0.15
 Nodes (13): 1.1 Architecture & Stack Contract, 1.2 Core Development Directives, 1. Project Context & Durable Conclusions (Honcho / Wingman / Knowl), 2. Installed Plugin Suite (28 Plugins Matrix), 3. Workflow Activation Guide, 4. Frontend Implementation & Stitch Conversion State (2026-09-25), 5.1 Cloud Database Infrastructure (Supabase PostgreSQL), 5.2 Backend Layered MVC Engine (Node.js 22 + Express + TypeScript) (+5 more)
 
-### Community 24 - "Community 24"
+### Community 22 - "Community 22"
 
 Cohesion: 0.17
 Nodes (11): client, { id }, { id: sessionId }, instId, params, query, { records }, result (+3 more)
 
-### Community 25 - "Community 25"
+### Community 23 - "Community 23"
 
 Cohesion: 0.17
 Nodes (11): errorCount, { examId, subjectId }, { examId, subjectId, rows }, instId, params, query, result, router (+3 more)
+
+### Community 24 - "Community 24"
+
+Cohesion: 0.2
+Nodes (3): FacultyController, FacultyRepository, FacultyService
+
+### Community 25 - "Community 25"
+
+Cohesion: 0.17
+Nodes (7): [error, setError], initial, isChecked, [isSubmitting, setIsSubmitting], [selectedWorkspaces, setSelectedWorkspaces], [successBanner, setSuccessBanner], updateWorkspacesMutation
 
 ### Community 26 - "Community 26"
 
@@ -364,77 +364,77 @@ Nodes (10): campaign, campRes, guardRes, instId, recRes, reply, result, router (
 ### Community 28 - "Community 28"
 
 Cohesion: 0.2
-Nodes (7): [activeRollCall, setActiveRollCall], [attendanceRecords, setAttendanceRecords], { data: facultyInfo, isLoading }, isCurrent, isPresent, [rollCallSuccess, setRollCallSuccess], sampleStudents
+Nodes (9): conflicts, facConflict, { facultyId, roomId, dayOfWeek, startTime, endTime }, instId, params, result, roomConflict, router (+1 more)
 
 ### Community 29 - "Community 29"
 
-Cohesion: 0.22
-Nodes (8): certificateId, instId, result, router, sRes, student, { studentId, purpose = 'General Purpose' }, verificationUrl
+Cohesion: 0.2
+Nodes (7): [activeRollCall, setActiveRollCall], [attendanceRecords, setAttendanceRecords], { data: facultyInfo, isLoading }, isCurrent, isPresent, [rollCallSuccess, setRollCallSuccess], sampleStudents
 
 ### Community 30 - "Community 30"
 
 Cohesion: 0.22
-Nodes (8): activeDelta, activeDeltaType, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle
+Nodes (8): certificateId, instId, result, router, sRes, student, { studentId, purpose = 'General Purpose' }, verificationUrl
 
 ### Community 31 - "Community 31"
 
-Cohesion: 0.25
-Nodes (7): activeGrade, { data: grades = [], isLoading }, isSelected, pct, [selectedGradeId, setSelectedGradeId], totalCapacity, totalStudents
+Cohesion: 0.22
+Nodes (8): activeDelta, activeDeltaType, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle
 
 ### Community 32 - "Community 32"
 
 Cohesion: 0.25
-Nodes (6): isTableLoading, mobileSubtitleCol, mobileTitleCol, [sortDir, setSortDir], sortedData, [sortKey, setSortKey]
+Nodes (7): activeGrade, { data: grades = [], isLoading }, isSelected, pct, [selectedGradeId, setSelectedGradeId], totalCapacity, totalStudents
 
 ### Community 33 - "Community 33"
 
 Cohesion: 0.25
-Nodes (5): containerRef, filteredOptions, [isOpen, setIsOpen], [searchTerm, setSearchTerm], selectedOption
+Nodes (6): isTableLoading, mobileSubtitleCol, mobileTitleCol, [sortDir, setSortDir], sortedData, [sortKey, setSortKey]
 
 ### Community 34 - "Community 34"
 
 Cohesion: 0.25
-Nodes (8): 1. Memory Phase (Start of Session & Pre-Edit), 2. Planning & SDLC Phase, 3. Implementation & Testing Phase, 4. Code Quality & Review Phase, 5. Security & Git Phase, 6. Token & Output Optimization, Plugin Orchestration Rules, Document: Plugin Orchestrator
+Nodes (5): containerRef, filteredOptions, [isOpen, setIsOpen], [searchTerm, setSearchTerm], selectedOption
 
 ### Community 35 - "Community 35"
+
+Cohesion: 0.25
+Nodes (8): 1. Memory Phase (Start of Session & Pre-Edit), 2. Planning & SDLC Phase, 3. Implementation & Testing Phase, 4. Code Quality & Review Phase, 5. Security & Git Phase, 6. Token & Output Optimization, Plugin Orchestration Rules, Document: Plugin Orchestrator
+
+### Community 36 - "Community 36"
 
 Cohesion: 0.29
 Nodes (5): ICON_MAP, IconComponent, isActive, navigationGroups, pathname
 
-### Community 36 - "Community 36"
-
-Cohesion: 0.33
-Nodes (5): [activeTab, setActiveTab], isActive, MOCK_STUDENT, student, tabs
-
 ### Community 37 - "Community 37"
 
-Cohesion: 0.33
-Nodes (5): activeLeftIcon, activeRightIcon, baseStyles, sizes, variants
+Cohesion: 0.29
+Nodes (5): activeWorkspace, dropdownRef, isCurrent, [isWorkspaceDropdownOpen, setIsWorkspaceDropdownOpen], permittedWorkspaces
 
 ### Community 38 - "Community 38"
 
 Cohesion: 0.33
-Nodes (5): activeCancelText, activeConfirmText, activeDestructive, handleClose, isDialogOpen
+Nodes (5): [activeTab, setActiveTab], isActive, MOCK_STUDENT, student, tabs
 
 ### Community 39 - "Community 39"
+
+Cohesion: 0.33
+Nodes (5): activeLeftIcon, activeRightIcon, baseStyles, sizes, variants
+
+### Community 40 - "Community 40"
+
+Cohesion: 0.33
+Nodes (5): activeCancelText, activeConfirmText, activeDestructive, handleClose, isDialogOpen
+
+### Community 41 - "Community 41"
 
 Cohesion: 0.4
 Nodes (3): activeFooter, isPanelOpen, widths
 
-### Community 40 - "Community 40"
+### Community 42 - "Community 42"
 
 Cohesion: 0.4
 Nodes (5): 1. Operating Mode & Standards, 2. Active Plugin Ecosystem & Memory, 3. Working Agreement Checklist, Document: Agents, VID Platform: Agent Operating Guidelines
-
-### Community 41 - "Community 41"
-
-Cohesion: 0.6
-Nodes (5): event_attendance, event_certificates, event_participants, event_registrations, events
-
-### Community 42 - "Community 42"
-
-Cohesion: 0.5
-Nodes (3): instId, result, router
 
 ### Community 43 - "Community 43"
 
@@ -444,207 +444,207 @@ Nodes (3): instId, result, router
 ### Community 44 - "Community 44"
 
 Cohesion: 0.5
-Nodes (3): heights, percentage, variants
+Nodes (3): instId, result, router
 
 ### Community 45 - "Community 45"
 
 Cohesion: 0.5
-Nodes (4): Skill: brooks-lint, Brooks Lint Skill, Guiding Principles, Severity Classifications
+Nodes (3): heights, percentage, variants
 
 ### Community 46 - "Community 46"
 
-Cohesion: 0.5
-Nodes (4): Skill: honcho-memory, Honcho Memory Skill, When to Pull Memory, When to Save Memory
+Cohesion: 0.67
+Nodes (3): getWorkspaceForPath(), isPathAllowedForWorkspaces(), PLATFORM_WORKSPACES
 
 ### Community 47 - "Community 47"
 
 Cohesion: 0.5
-Nodes (4): Key Actions, Skill: local-memory, Local Memory Skill, When to Use
+Nodes (4): Skill: brooks-lint, Brooks Lint Skill, Guiding Principles, Severity Classifications
 
 ### Community 48 - "Community 48"
 
-Cohesion: 0.67
-Nodes (2): db, pool
+Cohesion: 0.5
+Nodes (4): Skill: honcho-memory, Honcho Memory Skill, When to Pull Memory, When to Save Memory
 
 ### Community 49 - "Community 49"
 
-Cohesion: 0.67
-Nodes (0): 
+Cohesion: 0.5
+Nodes (4): Key Actions, Skill: local-memory, Local Memory Skill, When to Use
 
 ### Community 50 - "Community 50"
 
 Cohesion: 0.67
-Nodes (2): dbOk, router
+Nodes (2): db, pool
 
 ### Community 51 - "Community 51"
 
 Cohesion: 0.67
-Nodes (1): metadata
+Nodes (0): 
 
 ### Community 52 - "Community 52"
 
 Cohesion: 0.67
-Nodes (1): MOCK_SESSIONS
+Nodes (2): dbOk, router
 
 ### Community 53 - "Community 53"
 
 Cohesion: 0.67
-Nodes (1): MOCK_EXAMS
+Nodes (1): metadata
 
 ### Community 54 - "Community 54"
 
 Cohesion: 0.67
-Nodes (1): MOCK_CAMPAIGNS
+Nodes (1): MOCK_SESSIONS
 
 ### Community 55 - "Community 55"
 
 Cohesion: 0.67
-Nodes (1): NAVIGATION_CONFIG
+Nodes (1): MOCK_EXAMS
 
 ### Community 56 - "Community 56"
 
 Cohesion: 0.67
-Nodes (1): PLATFORM_WORKSPACES
+Nodes (1): MOCK_CAMPAIGNS
 
 ### Community 57 - "Community 57"
 
 Cohesion: 0.67
-Nodes (3): Skill: agent-guard, Agent Guard Skill, Enforcement
+Nodes (1): NAVIGATION_CONFIG
 
 ### Community 58 - "Community 58"
 
 Cohesion: 0.67
-Nodes (3): Skill: ai-native-sdlc, AI-Native SDLC Skill, Gates
+Nodes (3): Skill: agent-guard, Agent Guard Skill, Enforcement
 
 ### Community 59 - "Community 59"
 
 Cohesion: 0.67
-Nodes (3): Skill: axonflow, AxonFlow Skill, Policies
+Nodes (3): Skill: ai-native-sdlc, AI-Native SDLC Skill, Gates
 
 ### Community 60 - "Community 60"
 
 Cohesion: 0.67
-Nodes (3): Checklist, Skill: codex-reviewer, Codex Reviewer Skill
+Nodes (3): Skill: axonflow, AxonFlow Skill, Policies
 
 ### Community 61 - "Community 61"
 
 Cohesion: 0.67
-Nodes (3): Skill: commit-narrator, Commit Narrator Skill, Format
+Nodes (3): Checklist, Skill: codex-reviewer, Codex Reviewer Skill
 
 ### Community 62 - "Community 62"
 
 Cohesion: 0.67
-Nodes (3): Skill: debt-ops, Debt-Ops Skill, Rules
+Nodes (3): Skill: commit-narrator, Commit Narrator Skill, Format
 
 ### Community 63 - "Community 63"
 
 Cohesion: 0.67
-Nodes (3): Skill: docflow, Docflow Skill, Policy
+Nodes (3): Skill: debt-ops, Debt-Ops Skill, Rules
 
 ### Community 64 - "Community 64"
 
 Cohesion: 0.67
-Nodes (3): Skill: espresso, Espresso Skill, Guidelines
+Nodes (3): Skill: docflow, Docflow Skill, Policy
 
 ### Community 65 - "Community 65"
 
 Cohesion: 0.67
-Nodes (3): Skill: falsegreen, Falsegreen Skill, Patterns to Flag
+Nodes (3): Skill: espresso, Espresso Skill, Guidelines
 
 ### Community 66 - "Community 66"
 
 Cohesion: 0.67
-Nodes (3): Skill: flaky-detector, Flaky Detector Skill, Instructions
+Nodes (3): Skill: falsegreen, Falsegreen Skill, Patterns to Flag
 
 ### Community 67 - "Community 67"
 
 Cohesion: 0.67
-Nodes (3): Audit Checks, Skill: hol-guard, HOL Guard Skill
+Nodes (3): Skill: flaky-detector, Flaky Detector Skill, Instructions
 
 ### Community 68 - "Community 68"
 
 Cohesion: 0.67
-Nodes (3): Skill: knowl, Knowl Project Memory Skill, Procedures
+Nodes (3): Audit Checks, Skill: hol-guard, HOL Guard Skill
 
 ### Community 69 - "Community 69"
 
 Cohesion: 0.67
-Nodes (3): Skill: megalinter, MegaLinter Skill, Target Toolchains
+Nodes (3): Skill: knowl, Knowl Project Memory Skill, Procedures
 
 ### Community 70 - "Community 70"
 
 Cohesion: 0.67
-Nodes (3): Execution Guide, Skill: memesh, MeMesh Shared Memory Skill
+Nodes (3): Skill: megalinter, MegaLinter Skill, Target Toolchains
 
 ### Community 71 - "Community 71"
 
 Cohesion: 0.67
-Nodes (3): Skill: metabrain, Metabrain Skill, Workflow
+Nodes (3): Execution Guide, Skill: memesh, MeMesh Shared Memory Skill
 
 ### Community 72 - "Community 72"
 
 Cohesion: 0.67
-Nodes (3): Skill: pr-storyteller, PR Storyteller Skill, Structure
+Nodes (3): Skill: metabrain, Metabrain Skill, Workflow
 
 ### Community 73 - "Community 73"
 
 Cohesion: 0.67
-Nodes (3): Review Lenses, Skill: river-review, River Review Skill
+Nodes (3): Skill: pr-storyteller, PR Storyteller Skill, Structure
 
 ### Community 74 - "Community 74"
 
 Cohesion: 0.67
-Nodes (3): Scan Targets, Skill: secret-guard, Secret Guard Skill
+Nodes (3): Review Lenses, Skill: river-review, River Review Skill
 
 ### Community 75 - "Community 75"
 
 Cohesion: 0.67
-Nodes (3): Lifecycle Stages, Skill: spec-driven, Spec-Driven Development Skill
+Nodes (3): Scan Targets, Skill: secret-guard, Secret Guard Skill
 
 ### Community 76 - "Community 76"
 
 Cohesion: 0.67
-Nodes (3): Procedure, Skill: tailtest, Tailtest Skill
+Nodes (3): Lifecycle Stages, Skill: spec-driven, Spec-Driven Development Skill
 
 ### Community 77 - "Community 77"
 
 Cohesion: 0.67
-Nodes (3): Checks, Skill: test-gap, Test Gap Skill
+Nodes (3): Procedure, Skill: tailtest, Tailtest Skill
 
 ### Community 78 - "Community 78"
 
 Cohesion: 0.67
-Nodes (3): Best Practices, Skill: token-optimizer, Token Optimizer Skill
+Nodes (3): Checks, Skill: test-gap, Test Gap Skill
 
 ### Community 79 - "Community 79"
 
 Cohesion: 0.67
-Nodes (3): Guidelines, Skill: unforgit, Unforgit Skill
+Nodes (3): Best Practices, Skill: token-optimizer, Token Optimizer Skill
 
 ### Community 80 - "Community 80"
 
 Cohesion: 0.67
-Nodes (3): Pre-Edit Verification Checklist, Skill: wingman, Wingman Data-Contract Skill
+Nodes (3): Guidelines, Skill: unforgit, Unforgit Skill
 
 ### Community 81 - "Community 81"
 
-Cohesion: 1.0
-Nodes (1): app
+Cohesion: 0.67
+Nodes (3): Pre-Edit Verification Checklist, Skill: wingman, Wingman Data-Contract Skill
 
 ### Community 82 - "Community 82"
 
 Cohesion: 1.0
-Nodes (0): 
+Nodes (1): app
 
 ### Community 83 - "Community 83"
 
 Cohesion: 1.0
-Nodes (1): env
+Nodes (0): 
 
 ### Community 84 - "Community 84"
 
 Cohesion: 1.0
-Nodes (1): router
+Nodes (1): env
 
 ### Community 85 - "Community 85"
 
@@ -674,17 +674,17 @@ Nodes (1): router
 ### Community 90 - "Community 90"
 
 Cohesion: 1.0
-Nodes (1): nextConfig
+Nodes (1): router
 
 ### Community 91 - "Community 91"
 
 Cohesion: 1.0
-Nodes (1): CAMERA_DECKS
+Nodes (1): nextConfig
 
 ### Community 92 - "Community 92"
 
 Cohesion: 1.0
-Nodes (0): 
+Nodes (1): CAMERA_DECKS
 
 ### Community 93 - "Community 93"
 
@@ -694,12 +694,12 @@ Nodes (0):
 ### Community 94 - "Community 94"
 
 Cohesion: 1.0
-Nodes (1): events
+Nodes (0): 
 
 ### Community 95 - "Community 95"
 
 Cohesion: 1.0
-Nodes (0): 
+Nodes (1): events
 
 ### Community 96 - "Community 96"
 
@@ -734,22 +734,22 @@ Nodes (0):
 ### Community 102 - "Community 102"
 
 Cohesion: 1.0
-Nodes (1): routes
+Nodes (0): 
 
 ### Community 103 - "Community 103"
 
 Cohesion: 1.0
-Nodes (0): 
+Nodes (1): routes
 
 ### Community 104 - "Community 104"
 
 Cohesion: 1.0
-Nodes (1): isActive
+Nodes (0): 
 
 ### Community 105 - "Community 105"
 
 Cohesion: 1.0
-Nodes (0): 
+Nodes (1): isActive
 
 ### Community 106 - "Community 106"
 
@@ -758,18 +758,18 @@ Nodes (0):
 
 ### Community 107 - "Community 107"
 
-Cohesion: 2.0
-Nodes (2): Core Workflows, Skill: dev-skills
+Cohesion: 1.0
+Nodes (0): 
 
 ### Community 108 - "Community 108"
 
-Cohesion: 1.0
-Nodes (2): Document: Graphify, Workflow: graphify
+Cohesion: 2.0
+Nodes (2): Core Workflows, Skill: dev-skills
 
 ### Community 109 - "Community 109"
 
 Cohesion: 1.0
-Nodes (0): 
+Nodes (2): Document: Graphify, Workflow: graphify
 
 ### Community 110 - "Community 110"
 
@@ -1102,81 +1102,79 @@ Cohesion: 1.0
 Nodes (1): ref_path
 
 ## Knowledge Gaps
-- **677 isolated node(s):** `{ db }`, `{ db }`, `app`, `pool`, `db` (+672 more)
+- **693 isolated node(s):** `{ db }`, `{ db }`, `{ db }`, `app`, `pool` (+688 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **Thin community `Community 81`** (2 nodes): `app`, `app.ts`
+- **Thin community `Community 82`** (2 nodes): `app`, `app.ts`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 82`** (2 nodes): `server.ts`, `bootstrap()`
+- **Thin community `Community 83`** (2 nodes): `server.ts`, `bootstrap()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 83`** (2 nodes): `env.ts`, `env`
+- **Thin community `Community 84`** (2 nodes): `env.ts`, `env`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 84`** (2 nodes): `router`, `academics.routes.ts`
+- **Thin community `Community 85`** (2 nodes): `router`, `academics.routes.ts`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 85`** (2 nodes): `router`, `admissions.routes.ts`
+- **Thin community `Community 86`** (2 nodes): `router`, `admissions.routes.ts`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 86`** (2 nodes): `faculty.routes.ts`, `router`
+- **Thin community `Community 87`** (2 nodes): `faculty.routes.ts`, `router`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 87`** (2 nodes): `finance.routes.ts`, `router`
+- **Thin community `Community 88`** (2 nodes): `finance.routes.ts`, `router`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 88`** (2 nodes): `institution.routes.ts`, `router`
+- **Thin community `Community 89`** (2 nodes): `institution.routes.ts`, `router`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 89`** (2 nodes): `student.routes.ts`, `router`
+- **Thin community `Community 90`** (2 nodes): `student.routes.ts`, `router`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 90`** (2 nodes): `next.config.js`, `nextConfig`
+- **Thin community `Community 91`** (2 nodes): `next.config.js`, `nextConfig`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 91`** (2 nodes): `page.tsx`, `CAMERA_DECKS`
+- **Thin community `Community 92`** (2 nodes): `page.tsx`, `CAMERA_DECKS`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 92`** (2 nodes): `page.tsx`, `AIConfigPage()`
+- **Thin community `Community 93`** (2 nodes): `page.tsx`, `AIConfigPage()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 93`** (2 nodes): `page.tsx`, `BillingPage()`
+- **Thin community `Community 94`** (2 nodes): `page.tsx`, `BillingPage()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 94`** (2 nodes): `page.tsx`, `events`
+- **Thin community `Community 95`** (2 nodes): `page.tsx`, `events`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 95`** (2 nodes): `page.tsx`, `HostelPage()`
+- **Thin community `Community 96`** (2 nodes): `page.tsx`, `HostelPage()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 96`** (2 nodes): `page.tsx`, `InventoryPage()`
+- **Thin community `Community 97`** (2 nodes): `page.tsx`, `InventoryPage()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 97`** (2 nodes): `page.tsx`, `LibraryPage()`
+- **Thin community `Community 98`** (2 nodes): `page.tsx`, `LibraryPage()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 98`** (2 nodes): `page.tsx`, `MonitoringPage()`
+- **Thin community `Community 99`** (2 nodes): `page.tsx`, `MonitoringPage()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 99`** (2 nodes): `page.tsx`, `SecurityPage()`
+- **Thin community `Community 100`** (2 nodes): `page.tsx`, `SecurityPage()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 100`** (2 nodes): `page.tsx`, `SportsPage()`
+- **Thin community `Community 101`** (2 nodes): `page.tsx`, `SportsPage()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 101`** (2 nodes): `page.tsx`, `StudentMasterPage()`
+- **Thin community `Community 102`** (2 nodes): `page.tsx`, `StudentMasterPage()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 102`** (2 nodes): `page.tsx`, `routes`
+- **Thin community `Community 103`** (2 nodes): `page.tsx`, `routes`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 103`** (2 nodes): `Badge()`, `Badge.tsx`
+- **Thin community `Community 104`** (2 nodes): `Badge()`, `Badge.tsx`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 104`** (2 nodes): `SettingsShell.tsx`, `isActive`
+- **Thin community `Community 105`** (2 nodes): `SettingsShell.tsx`, `isActive`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 105`** (2 nodes): `QueryProvider.tsx`, `QueryProvider()`
+- **Thin community `Community 106`** (2 nodes): `QueryProvider.tsx`, `QueryProvider()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 106`** (2 nodes): `utils.ts`, `cn()`
+- **Thin community `Community 107`** (2 nodes): `utils.ts`, `cn()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 107`** (2 nodes): `Core Workflows`, `Skill: dev-skills`
+- **Thin community `Community 108`** (2 nodes): `Core Workflows`, `Skill: dev-skills`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 108`** (2 nodes): `Document: Graphify`, `Workflow: graphify`
+- **Thin community `Community 109`** (2 nodes): `Document: Graphify`, `Workflow: graphify`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 109`** (1 nodes): `server.ts`
+- **Thin community `Community 110`** (1 nodes): `server.ts`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 110`** (1 nodes): `next-env.d.ts`
+- **Thin community `Community 111`** (1 nodes): `next-env.d.ts`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 111`** (1 nodes): `postcss.config.js`
+- **Thin community `Community 112`** (1 nodes): `postcss.config.js`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 112`** (1 nodes): `tailwind.config.js`
-  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 113`** (1 nodes): `page.tsx`
+- **Thin community `Community 113`** (1 nodes): `tailwind.config.js`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 114`** (1 nodes): `page.tsx`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 115`** (1 nodes): `index.ts`
+- **Thin community `Community 115`** (1 nodes): `page.tsx`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 116`** (1 nodes): `States.tsx`
+- **Thin community `Community 116`** (1 nodes): `index.ts`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 117`** (1 nodes): `Topbar.tsx`
+- **Thin community `Community 117`** (1 nodes): `States.tsx`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 118`** (1 nodes): `index.ts`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.

@@ -112,21 +112,25 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
   },
 ]
 
+export function getWorkspaceForPath(path: string): PlatformWorkspace | undefined {
+  return PLATFORM_WORKSPACES.find((w) =>
+    w.routes.some((r) => path === r || path.startsWith(r + "/") || (r !== "/" && path.startsWith(r)))
+  )
+}
+
 export function isPathAllowedForWorkspaces(
   path: string,
   assignedWorkspaces?: string[]
 ): boolean {
-  // If no restrictions or empty, allow all (Super Admin or unrestricted)
-  if (!assignedWorkspaces || assignedWorkspaces.length === 0) {
+  // If undefined, allow all (Super Admin or unrestricted)
+  if (assignedWorkspaces === undefined) {
     return true
   }
 
   // Find which workspace this path belongs to
-  const matchingWorkspace = PLATFORM_WORKSPACES.find((w) =>
-    w.routes.some((r) => path.startsWith(r))
-  )
+  const matchingWorkspace = getWorkspaceForPath(path)
 
-  // If path doesn't match any restricted workspace (e.g. /profile), allow it
+  // If path doesn't match any restricted workspace (e.g. /profile, /login), allow it
   if (!matchingWorkspace) {
     return true
   }

@@ -2,7 +2,7 @@
 
 > God node · 25 connections · [docs/Design.md](file:///C:/Antigravityyyyy/VID_School/docs/Design.md)
 
-**Community:** [[[Document: Tasks & 1.1 Project Scaffolding & Infrastructure] Cluster]]
+**Community:** [[[columns & [searchQuery, setSearchQuery]] Cluster]]
 
 ## Connections by Relation
 

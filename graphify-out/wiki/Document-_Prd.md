@@ -2,7 +2,7 @@
 
 > God node · 21 connections · [docs/PRD.md](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md)
 
-**Community:** [[[useAuth() & RequirePermission()] Cluster]]
+**Community:** [[[Document: Appflow & 1. Overview & Navigation Architecture] Cluster]]
 
 ## Connections by Relation
 

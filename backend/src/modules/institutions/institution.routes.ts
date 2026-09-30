@@ -27,5 +27,8 @@ router.post('/:id/admins', institutionController.addAdmin.bind(institutionContro
 // PATCH /api/v1/institutions/:id/status
 router.patch('/:id/status', institutionController.updateStatus.bind(institutionController));
 
+// PATCH /api/v1/institutions/:id/admins/:adminId/workspaces
+router.patch('/:id/admins/:adminId/workspaces', institutionController.updateAdminWorkspaces.bind(institutionController));
+
 export default router;
 

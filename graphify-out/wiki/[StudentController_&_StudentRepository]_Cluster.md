@@ -28,7 +28,7 @@
 
 ## Relationships
 
-- [[[Document: Antigravity Master Prompt & 0. ROLE & OPERATING MODE] Cluster]] (40 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

@@ -12,6 +12,7 @@ export interface UserProfile {
   institutionId: string
   institutionName: string
   avatarUrl?: string
+  assignedWorkspaces?: string[]
 }
 
 export interface AuthContextType {
@@ -250,7 +251,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           email: backendUser.email || cleanId,
           role: resolvedRole,
           institutionId: backendUser.institutionId || `inst-${institutionSlug}`,
-          institutionName: backendUser.institutionName || (resolvedRole === "SUPER_ADMIN" ? "VID Global Platform" : "Springfield International Academy"),
+          institutionName: backendUser.institutionName || (resolvedRole === "SUPER_ADMIN" ? "VID Global Platform" : "Partner Institution"),
+          assignedWorkspaces: backendUser.assignedWorkspaces || [],
         }
 
         setUser(loggedInUser)
@@ -265,9 +267,53 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         return resolvedRole
       }
     } catch (err: any) {
-      if (err.message && (err.message.includes("Invalid") || err.message.includes("not found"))) {
+      if (err.message && (err.message.includes("Invalid password") || err.message.includes("Account not found"))) {
         throw err
       }
+
+      // Check custom provisioned Institute Admins in localStorage
+      if (typeof window !== "undefined") {
+        try {
+          const rawAdmins = localStorage.getItem("vid_institute_admins")
+          if (rawAdmins) {
+            const admins = JSON.parse(rawAdmins)
+            const customAdmin = admins.find(
+              (a: any) =>
+                (a.userId && a.userId.toLowerCase() === cleanId) ||
+                (a.email && a.email.toLowerCase() === cleanId)
+            )
+            if (customAdmin) {
+              if (customAdmin.password && password && password !== customAdmin.password) {
+                throw new Error("Invalid password for Institute Administrator. Please check your credentials.")
+              }
+
+              const loggedInUser: UserProfile = {
+                id: customAdmin.userId || `usr-${cleanId}`,
+                name: customAdmin.name || customAdmin.userId,
+                email: customAdmin.email || cleanId,
+                role: "INSTITUTION_ADMIN",
+                institutionId: customAdmin.institutionId || `inst-${institutionSlug}`,
+                institutionName: customAdmin.institutionName || "Partner Institution",
+                assignedWorkspaces: customAdmin.workspaces || [],
+              }
+
+              setUser(loggedInUser)
+              setRole("INSTITUTION_ADMIN")
+              setPermissions(ROLE_PERMISSIONS.INSTITUTION_ADMIN || ALL_PERMISSIONS)
+
+              localStorage.setItem("vid_session_user", JSON.stringify(loggedInUser))
+              localStorage.setItem("vid_session_role", "INSTITUTION_ADMIN")
+
+              return "INSTITUTION_ADMIN"
+            }
+          }
+        } catch (e: any) {
+          if (e.message && e.message.includes("Invalid password")) {
+            throw e
+          }
+        }
+      }
+
       // If network failed, check known registered accounts
       const known = KNOWN_ACCOUNTS[cleanId]
       if (known) {

@@ -1,6 +1,6 @@
 # sendSuccess()
 
-> God node · 21 connections · [C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts#L19)
+> God node · 23 connections · [C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts#L19)
 
 ## Call Trace Diagram
 
@@ -25,15 +25,17 @@ sequenceDiagram
     participant P16 as .getInstitutions()
     participant P17 as .getInstitutionById()
     participant P18 as .getStats()
-    participant P19 as .getStudents()
-    participant P20 as .getStudentById()
-    participant P21 as .promote()
-    participant P22 as .getHierarchy()
-    participant P23 as .getClasses()
-    participant P24 as .getSubjects()
-    participant P25 as .getApplicants()
-    participant P26 as .toggleModule()
-    participant P27 as .createInstitution()
+    participant P19 as .getAdmins()
+    participant P20 as .addAdmin()
+    participant P21 as .getStudents()
+    participant P22 as .getStudentById()
+    participant P23 as .promote()
+    participant P24 as .getHierarchy()
+    participant P25 as .getClasses()
+    participant P26 as .getSubjects()
+    participant P27 as .getApplicants()
+    participant P28 as .toggleModule()
+    participant P29 as .createInstitution()
     P0->>+ P1: calls
     P1-->>- P0: return
     P1->>+ P0: calls
@@ -98,6 +100,10 @@ sequenceDiagram
     P26-->>- P0: return
     P0->>+ P27: calls
     P27-->>- P0: return
+    P0->>+ P28: calls
+    P28-->>- P0: return
+    P0->>+ P29: calls
+    P29-->>- P0: return
 ```
 
 ## Connections by Relation
@@ -114,6 +120,8 @@ sequenceDiagram
 - [[.getInstitutions()]] `INFERRED`
 - [[.getInstitutionById()]] `INFERRED`
 - [[.getStats()]] `INFERRED`
+- [[.getAdmins()]] `INFERRED`
+- [[.addAdmin()]] `INFERRED`
 - [[.getStudents()]] `INFERRED`
 - [[.getStudentById()]] `INFERRED`
 - [[.promote()]] `INFERRED`
@@ -121,8 +129,6 @@ sequenceDiagram
 - [[.getClasses()]] `INFERRED`
 - [[.getSubjects()]] `INFERRED`
 - [[.getApplicants()]] `INFERRED`
-- [[.toggleModule()]] `INFERRED`
-- [[.createInstitution()]] `INFERRED`
 
 ### contains
 - [[api-response.ts]] `EXTRACTED`

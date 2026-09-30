@@ -38,12 +38,15 @@ export interface PlatformUser {
 }
 
 const DEFAULT_USERS: PlatformUser[] = [
-  { id: "u-1", name: "Dr. Alistair Vance", email: "admin@springfield.edu", role: "INSTITUTION_ADMIN", institution: "Springfield International Academy", status: "ACTIVE", createdAt: "2026-09-01" },
-  { id: "u-2", name: "Sister Maria Joseph", email: "principal@stjude.edu", role: "INSTITUTION_ADMIN", institution: "St. Jude Heritage World School", status: "ACTIVE", createdAt: "2026-09-05" },
-  { id: "u-3", name: "Revathi Raman", email: "revathi.raman@springfield.edu", role: "FACULTY", institution: "Springfield International Academy", status: "ACTIVE", createdAt: "2026-09-10" },
-  { id: "u-4", name: "Dr. Arvind Rao", email: "arvind.rao@springfield.edu", role: "FACULTY", institution: "Springfield International Academy", status: "ACTIVE", createdAt: "2026-09-12" },
-  { id: "u-5", name: "Sarah Jenkins", email: "admissions@springfield.edu", role: "ADMISSION_TEAM", institution: "Springfield International Academy", status: "ACTIVE", createdAt: "2026-09-14" },
-  { id: "u-6", name: "Marcus Brody", email: "finance@springfield.edu", role: "FINANCE_TEAM", institution: "Springfield International Academy", status: "ACTIVE", createdAt: "2026-09-16" },
+  {
+    id: "sa-001",
+    name: "VID Platform Super Admin",
+    email: "superadmin@vid.edu",
+    role: "SUPER_ADMIN",
+    institution: "VID Global Platform",
+    status: "ACTIVE",
+    createdAt: "2026-09-01",
+  },
 ]
 
 const ROLE_OPTIONS: SelectOption[] = [
@@ -63,13 +66,14 @@ export default function UsersPage() {
   const [users, setUsers] = useState<PlatformUser[]>(DEFAULT_USERS)
   const [searchQuery, setSearchQuery] = useState("")
   const [roleFilter, setRoleFilter] = useState("ALL")
+  const [institutionFilter, setInstitutionFilter] = useState("ALL")
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Add User Form State
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [role, setRole] = useState("FACULTY")
-  const [institution, setInstitution] = useState("Springfield International Academy")
+  const [institution, setInstitution] = useState("")
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
@@ -113,9 +117,13 @@ export default function UsersPage() {
     const matchesSearch =
       u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       u.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      u.institution.toLowerCase().includes(searchQuery.toLowerCase())
+      u.institution.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      u.role.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesRole = roleFilter === "ALL" || u.role === roleFilter
-    return matchesSearch && matchesRole
+    const matchesInstitution =
+      institutionFilter === "ALL" ||
+      u.institution.toLowerCase() === institutionFilter.toLowerCase()
+    return matchesSearch && matchesRole && matchesInstitution
   })
 
   // Validate form
@@ -291,14 +299,14 @@ export default function UsersPage() {
           />
           <StatCard
             label="Active Tenancies"
-            value={institutions.length || 4}
+            value={institutions.length}
             icon={<Building2 className="w-5 h-5" />}
           />
         </div>
 
         {/* Filter & Search Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-surface p-3 rounded-xl border border-border-default">
-          <div className="relative w-full sm:w-80">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-3 bg-surface p-3 rounded-xl border border-border-default">
+          <div className="relative w-full md:w-72">
             <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" />
             <input
               type="text"
@@ -309,23 +317,43 @@ export default function UsersPage() {
             />
           </div>
 
-          <div className="flex items-center gap-2 w-full sm:w-auto">
-            <span className="text-xs text-text-secondary whitespace-nowrap">Filter Role:</span>
-            <select
-              value={roleFilter}
-              onChange={(e) => setRoleFilter(e.target.value)}
-              className="bg-canvas border border-border-default rounded-lg px-2.5 py-1.5 text-xs text-text-primary focus:outline-none focus:ring-2 focus:ring-action-black"
-            >
-              <option value="ALL">All Roles</option>
-              <option value="SUPER_ADMIN">Super Admin</option>
-              <option value="INSTITUTION_ADMIN">Institution Admin</option>
-              <option value="FACULTY">Faculty</option>
-              <option value="ADMISSION_TEAM">Admissions Team</option>
-              <option value="FINANCE_TEAM">Finance Team</option>
-              <option value="EXAM_TEAM">Exam Team</option>
-              <option value="STUDENT">Student</option>
-              <option value="PARENT">Parent</option>
-            </select>
+          <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+            {/* Filter by Institution (Requirement 3) */}
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs text-text-secondary whitespace-nowrap">Institution:</span>
+              <select
+                value={institutionFilter}
+                onChange={(e) => setInstitutionFilter(e.target.value)}
+                className="bg-canvas border border-border-default rounded-lg px-2.5 py-1.5 text-xs text-text-primary focus:outline-none focus:ring-2 focus:ring-action-black max-w-[200px]"
+              >
+                <option value="ALL">All Institutions ({institutions.length})</option>
+                {institutions.map((inst) => (
+                  <option key={inst.id} value={inst.name}>
+                    {inst.name} ({inst.code})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Filter by Role */}
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs text-text-secondary whitespace-nowrap">Role:</span>
+              <select
+                value={roleFilter}
+                onChange={(e) => setRoleFilter(e.target.value)}
+                className="bg-canvas border border-border-default rounded-lg px-2.5 py-1.5 text-xs text-text-primary focus:outline-none focus:ring-2 focus:ring-action-black"
+              >
+                <option value="ALL">All Roles</option>
+                <option value="SUPER_ADMIN">Super Admin</option>
+                <option value="INSTITUTION_ADMIN">Institution Admin</option>
+                <option value="FACULTY">Faculty</option>
+                <option value="ADMISSION_TEAM">Admissions Team</option>
+                <option value="FINANCE_TEAM">Finance Team</option>
+                <option value="EXAM_TEAM">Exam Team</option>
+                <option value="STUDENT">Student</option>
+                <option value="PARENT">Parent</option>
+              </select>
+            </div>
           </div>
         </div>
 

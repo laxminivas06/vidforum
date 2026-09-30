@@ -1,23 +1,23 @@
 # Community 103
 
-> 2 nodes · cohesion 2.00
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [Skill: dev-skills](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/dev-skills/skills/dev-skills/SKILL.md) (3 connections)
-- [Core Workflows](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/dev-skills/skills/dev-skills/SKILL.md) (1 connections)
+- [QueryProvider.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx#L1) (1 connections)
+- [QueryProvider()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx#L6) (1 connections)
 
 ## Relationships
 
-- [[Community 102]] (3 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/dev-skills/skills/dev-skills/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/dev-skills/skills/dev-skills/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\frontend\contexts\QueryProvider.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 3 (100%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

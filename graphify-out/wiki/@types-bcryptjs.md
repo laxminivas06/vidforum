@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [@types/cors](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L26) (0 connections)
+- [tsx](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L32) (0 connections)
 
 ## Relationships
 

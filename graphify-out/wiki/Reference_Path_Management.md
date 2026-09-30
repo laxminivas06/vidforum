@@ -1,18 +1,14 @@
-# autoprefixer
+# Reference Path Management
 
 > 1 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [zod](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L19) (0 connections)
+- **ref_path** (0 connections)
 
 ## Relationships
 
 - No strong cross-community connections detected
-
-## Source Files
-
-- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
 
 ## Audit Trail
 

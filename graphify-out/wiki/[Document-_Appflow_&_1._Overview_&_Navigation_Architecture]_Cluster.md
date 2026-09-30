@@ -28,7 +28,7 @@
 
 ## Relationships
 
-- [[[useAuth() & RequirePermission()] Cluster]] (40 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

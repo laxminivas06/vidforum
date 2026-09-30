@@ -33,7 +33,7 @@
 
 ## Relationships
 
-- [[[sendSuccess() & InstitutionRepository] Cluster]] (94 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

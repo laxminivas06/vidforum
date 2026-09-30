@@ -53,6 +53,26 @@ export class InstitutionController {
       next(error);
     }
   }
+
+  async getAdmins(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const id = req.params.id as string;
+      const admins = institutionService.getInstitutionAdmins(id);
+      sendSuccess(res, admins);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async addAdmin(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const id = req.params.id as string;
+      const admin = await institutionService.addInstitutionAdmin(id, req.body);
+      sendSuccess(res, admin, 'Institute Administrator provisioned successfully', 201);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const institutionController = new InstitutionController();

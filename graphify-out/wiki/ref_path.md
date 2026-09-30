@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- **ref_path** (0 connections)
+- **frontend_components_ui_index_permissiondenied** (0 connections)
 
 ## Relationships
 

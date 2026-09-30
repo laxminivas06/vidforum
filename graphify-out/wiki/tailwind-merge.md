@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [tailwindcss](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L27) (0 connections)
+- [react-dom](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L17) (0 connections)
 
 ## Relationships
 

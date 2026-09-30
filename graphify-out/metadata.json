@@ -173,7 +173,8 @@
     "169": "frontend_components_ui_index_tablecolumn",
     "170": "frontend_app_globals",
     "171": "frontend_components_ui_index_permissiondenied",
-    "172": "ref_path"
+    "172": "ref_path",
+    "173": "Reference Path Management"
   },
   "communitySummaries": {
     "0": "",
@@ -348,7 +349,8 @@
     "169": "",
     "170": "",
     "171": "",
-    "172": ""
+    "172": "",
+    "173": "Manages storage, resolution, and validation of reference paths used throughout the system."
   },
   "communityLinks": {
     "1": {
@@ -358,11 +360,11 @@
       "1": 1,
       "2": 1
     },
-    "15": {
+    "16": {
       "1": 6
     },
     "2": {},
-    "10": {
+    "9": {
       "2": 1
     }
   }

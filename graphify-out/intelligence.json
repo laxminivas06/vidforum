@@ -6,24 +6,24 @@
       "type": "FUNCTION"
     },
     {
+      "label": "InstitutionService",
+      "risk": 0.392,
+      "type": "CLASS"
+    },
+    {
       "label": "SecurityPage()",
-      "risk": 0.385,
+      "risk": 0.282,
       "type": "FUNCTION"
     },
     {
       "label": "HostelPage()",
-      "risk": 0.369,
-      "type": "FUNCTION"
-    },
-    {
-      "label": "AttendanceSessionsPage()",
       "risk": 0.27,
       "type": "FUNCTION"
     },
     {
-      "label": "SportsPage()",
-      "risk": 0.254,
-      "type": "FUNCTION"
+      "label": "Document: Memory",
+      "risk": 0.238,
+      "type": "UNKNOWN"
     }
   ],
   "blast_radius": {

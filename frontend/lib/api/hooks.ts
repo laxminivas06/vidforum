@@ -3,57 +3,8 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { Institution, Applicant, AcademicGrade, FacultyMember, FeeRecord } from "@/types"
 
-// Mock Institutions
-const MOCK_INSTITUTIONS: Institution[] = [
-  {
-    id: "inst-001",
-    name: "Springfield International Academy",
-    code: "SIA-BLR",
-    domain: "springfield.vid.edu",
-    status: "ACTIVE",
-    plan: "ENTERPRISE",
-    studentsCount: 2450,
-    facultyCount: 142,
-    createdAt: "2024-01-15",
-    region: "Bangalore, India",
-  },
-  {
-    id: "inst-002",
-    name: "St. Jude Heritage World School",
-    code: "SJHW-DEL",
-    domain: "stjude.vid.edu",
-    status: "ACTIVE",
-    plan: "PRO",
-    studentsCount: 1820,
-    facultyCount: 98,
-    createdAt: "2024-03-22",
-    region: "New Delhi, India",
-  },
-  {
-    id: "inst-003",
-    name: "Oakridge Global STEM Campus",
-    code: "OGSC-HYD",
-    domain: "oakridge.vid.edu",
-    status: "ACTIVE",
-    plan: "ENTERPRISE",
-    studentsCount: 3100,
-    facultyCount: 180,
-    createdAt: "2023-11-05",
-    region: "Hyderabad, India",
-  },
-  {
-    id: "inst-004",
-    name: "Presidency Model Collegiate",
-    code: "PMC-MUM",
-    domain: "presidency.vid.edu",
-    status: "PENDING",
-    plan: "BASIC",
-    studentsCount: 850,
-    facultyCount: 45,
-    createdAt: "2024-08-10",
-    region: "Mumbai, India",
-  },
-]
+// Mock Institutions (Dummy institutions removed per Super Admin directive)
+const MOCK_INSTITUTIONS: Institution[] = []
 
 // Mock Applicants for Admissions Kanban
 const MOCK_APPLICANTS: Applicant[] = [
@@ -391,6 +342,140 @@ export function useCreateInstitution() {
         const withoutDup = old.filter((i) => i.id !== newInstitution.id && i.code !== newInstitution.code)
         return [newInstitution, ...withoutDup]
       })
+    },
+  })
+}
+
+export function useInstitutionAdmins(institutionId?: string) {
+  return useQuery({
+    queryKey: ["institution-admins", institutionId],
+    queryFn: async (): Promise<any[]> => {
+      if (!institutionId) return []
+      let customAdmins: any[] = []
+      if (typeof window !== "undefined") {
+        try {
+          const raw = localStorage.getItem("vid_institute_admins")
+          if (raw) {
+            const parsed = JSON.parse(raw)
+            customAdmins = parsed.filter(
+              (a: any) =>
+                a.institutionId === institutionId ||
+                a.institutionCode?.toLowerCase() === institutionId.toLowerCase()
+            )
+          }
+        } catch (e) {
+          console.warn("Failed to parse custom institute admins", e)
+        }
+      }
+
+      let backendAdmins: any[] = []
+      try {
+        const res = await fetch(`${API_BASE_URL}/institutions/${institutionId}/admins`)
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          backendAdmins = json.data
+        }
+      } catch (err) {
+        // Backend offline
+      }
+
+      const merged = [...customAdmins, ...backendAdmins]
+      const seen = new Set<string>()
+      return merged.filter((a) => {
+        const key = (a.userId || a.email || a.id).toLowerCase()
+        if (seen.has(key)) return false
+        seen.add(key)
+        return true
+      })
+    },
+    enabled: !!institutionId,
+  })
+}
+
+export function useCreateInstitutionAdmin() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (payload: {
+      institutionId: string
+      userId: string
+      email: string
+      password?: string
+      workspaces: string[]
+      name?: string
+      institutionName?: string
+      institutionCode?: string
+    }) => {
+      const newAdmin = {
+        id: `adm-${Date.now()}`,
+        userId: payload.userId.trim().toLowerCase(),
+        name: payload.name || payload.userId,
+        email: payload.email.trim().toLowerCase(),
+        password: payload.password || "admin123",
+        institutionId: payload.institutionId,
+        institutionName: payload.institutionName || "Partner Institution",
+        institutionCode: payload.institutionCode || "INST",
+        workspaces: payload.workspaces,
+        createdAt: new Date().toISOString(),
+      }
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/institutions/${payload.institutionId}/admins`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        })
+        const json = await res.json()
+        if (json.success && json.data) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable, persisting admin locally:", err)
+      }
+
+      return newAdmin
+    },
+    onSuccess: (newAdmin, variables) => {
+      if (typeof window !== "undefined") {
+        try {
+          const raw = localStorage.getItem("vid_institute_admins")
+          const current = raw ? JSON.parse(raw) : []
+          const updated = [
+            newAdmin,
+            ...current.filter(
+              (a: any) =>
+                a.userId?.toLowerCase() !== newAdmin.userId?.toLowerCase() &&
+                a.email?.toLowerCase() !== newAdmin.email?.toLowerCase()
+            ),
+          ]
+          localStorage.setItem("vid_institute_admins", JSON.stringify(updated))
+
+          // Also register in platform users list so it appears in Platform Users page
+          const rawUsers = localStorage.getItem("vid_platform_users")
+          const currentUsers = rawUsers ? JSON.parse(rawUsers) : []
+          const platformUser = {
+            id: newAdmin.id || `usr-${Date.now()}`,
+            name: newAdmin.name || newAdmin.userId,
+            email: newAdmin.email,
+            role: "INSTITUTION_ADMIN",
+            institution: variables.institutionName || newAdmin.institutionName || "Partner Institution",
+            status: "ACTIVE",
+            createdAt: new Date().toISOString().split("T")[0],
+          }
+          const updatedUsers = [
+            platformUser,
+            ...currentUsers.filter(
+              (u: any) => u.email?.toLowerCase() !== newAdmin.email?.toLowerCase()
+            ),
+          ]
+          localStorage.setItem("vid_platform_users", JSON.stringify(updatedUsers))
+        } catch (e) {
+          console.warn("Failed to persist institute admin to localStorage", e)
+        }
+      }
+
+      queryClient.invalidateQueries({ queryKey: ["institution-admins", variables.institutionId] })
+      queryClient.invalidateQueries({ queryKey: ["users"] })
     },
   })
 }

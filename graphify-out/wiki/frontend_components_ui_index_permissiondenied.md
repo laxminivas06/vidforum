@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- **ref_path** (0 connections)
+- **frontend_app_globals** (0 connections)
 
 ## Relationships
 

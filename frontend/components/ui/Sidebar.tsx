@@ -78,6 +78,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
 export interface SidebarProps {
   role?: RoleType
   enabledModules?: string[]
+  assignedWorkspaces?: string[]
   institutionName?: string
   institutionLogo?: string
   isMobileOpen?: boolean
@@ -89,7 +90,8 @@ export interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({
   role = "INSTITUTION_ADMIN",
   enabledModules = ["events", "transport", "hostel", "library", "sports", "inventory"],
-  institutionName = "Springfield International",
+  assignedWorkspaces,
+  institutionName = "Partner Institution",
   institutionLogo,
   isMobileOpen = false,
   onCloseMobile,
@@ -97,7 +99,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   collapsed = false,
 }) => {
   const pathname = usePathname()
-  const navigationGroups = getFilteredNavigation(role, enabledModules)
+  const navigationGroups = getFilteredNavigation(role, enabledModules, assignedWorkspaces)
 
   const renderIcon = (name: string, isActive: boolean) => {
     const IconComponent = ICON_MAP[name] || LayoutDashboard

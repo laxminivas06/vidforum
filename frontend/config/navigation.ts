@@ -184,20 +184,30 @@ export const NAVIGATION_CONFIG: Record<RoleType, NavGroup[]> = {
   ],
 }
 
+import { isPathAllowedForWorkspaces } from "./workspaces"
+
 /**
- * Filter navigation dynamically per Role and Enabled Optional Modules (PRD Rules 5 & 25)
+ * Filter navigation dynamically per Role, Enabled Optional Modules, and Assigned Workspaces (PRD Rules 5 & 25)
  */
 export function getFilteredNavigation(
   role: RoleType,
-  enabledModules: string[] = ["events", "transport", "hostel", "library", "sports", "inventory"]
+  enabledModules: string[] = ["events", "transport", "hostel", "library", "sports", "inventory"],
+  assignedWorkspaces?: string[]
 ): NavGroup[] {
   const groups = NAVIGATION_CONFIG[role] || NAVIGATION_CONFIG.INSTITUTION_ADMIN
 
   return groups
     .map((group) => {
       const filteredItems = group.items.filter((item) => {
-        if (!item.optionalModuleKey) return true
-        return enabledModules.includes(item.optionalModuleKey)
+        if (item.optionalModuleKey && !enabledModules.includes(item.optionalModuleKey)) {
+          return false
+        }
+        if (role === "INSTITUTION_ADMIN" && assignedWorkspaces && assignedWorkspaces.length > 0) {
+          if (!isPathAllowedForWorkspaces(item.href, assignedWorkspaces)) {
+            return false
+          }
+        }
+        return true
       })
       return {
         ...group,

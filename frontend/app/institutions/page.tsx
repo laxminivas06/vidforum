@@ -24,13 +24,17 @@ import {
   Search,
   ExternalLink,
   ShieldCheck,
+  Shield,
   Users,
   Layers,
   CheckCircle2,
+  UserPlus,
+  Mail,
 } from "lucide-react"
-import { useInstitutions } from "@/lib/api/hooks"
+import { useInstitutions, useInstitutionAdmins } from "@/lib/api/hooks"
 import { Institution } from "@/types"
 import { ProvisionTenantModal } from "@/components/institutions/ProvisionTenantModal"
+import { AddInstituteAdminModal } from "@/components/institutions/AddInstituteAdminModal"
 
 export default function InstitutionsPage() {
   const { data: institutions = [], isLoading } = useInstitutions()
@@ -38,6 +42,9 @@ export default function InstitutionsPage() {
   const [selectedInst, setSelectedInst] = useState<Institution | null>(null)
   const [suspendDialogOpen, setSuspendDialogOpen] = useState(false)
   const [isProvisionOpen, setIsProvisionOpen] = useState(false)
+  const [isAddAdminOpen, setIsAddAdminOpen] = useState(false)
+
+  const { data: instituteAdmins = [], refetch: refetchAdmins } = useInstitutionAdmins(selectedInst?.id)
 
   const filtered = institutions.filter(
     (i) =>
@@ -162,6 +169,7 @@ export default function InstitutionsPage() {
           columns={columns}
           keyExtractor={(item) => item.id}
           loading={isLoading}
+          onRowClick={(item) => setSelectedInst(item)}
           cardTitle={(item) => item.name}
           cardSubtitle={(item) => item.domain}
           cardBadge={(item) => (
@@ -234,6 +242,89 @@ export default function InstitutionsPage() {
                 <span className="font-mono text-text-secondary">{selectedInst.createdAt}</span>
               </div>
             </div>
+
+            {/* Tenant Administrators Section (Requirement 1) */}
+            <div className="p-3.5 rounded-xl bg-surface border border-border-default space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-brand-primary" />
+                  <span className="font-semibold text-text-primary text-xs">
+                    Tenant Administrators ({instituteAdmins.length})
+                  </span>
+                </div>
+                <Button
+                  size="dense"
+                  variant="primary"
+                  leadingIcon={<UserPlus className="w-3.5 h-3.5" />}
+                  onClick={() => setIsAddAdminOpen(true)}
+                >
+                  Add Institute Admin
+                </Button>
+              </div>
+
+              {instituteAdmins.length === 0 ? (
+                <div className="p-4 rounded-lg bg-subtle/60 border border-dashed border-border-default text-center">
+                  <p className="text-text-secondary text-[11px]">
+                    No administrators provisioned for this tenant yet.
+                  </p>
+                  <Button
+                    size="dense"
+                    variant="secondary"
+                    className="mt-2 text-xs"
+                    leadingIcon={<Plus className="w-3 h-3" />}
+                    onClick={() => setIsAddAdminOpen(true)}
+                  >
+                    Provision First Admin
+                  </Button>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  {instituteAdmins.map((adm: any) => (
+                    <div
+                      key={adm.id || adm.userId}
+                      className="p-2.5 rounded-lg bg-canvas border border-border-default space-y-1.5"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1.5">
+                          <span className="font-bold text-text-primary text-xs">
+                            {adm.name || adm.userId}
+                          </span>
+                          <Badge variant="neutral" className="text-[10px] font-mono">
+                            {adm.userId}
+                          </Badge>
+                        </div>
+                        <Badge variant="positive" className="text-[9px]">
+                          INSTITUTE ADMIN
+                        </Badge>
+                      </div>
+
+                      <div className="text-[11px] text-text-secondary font-mono flex items-center gap-1">
+                        <Mail className="w-3 h-3 text-text-muted" />
+                        <span>{adm.email}</span>
+                      </div>
+
+                      {/* Permitted Workspaces */}
+                      <div className="pt-1 border-t border-border-subtle">
+                        <div className="text-[10px] text-text-secondary uppercase font-mono mb-1">
+                          Permitted Workspaces ({adm.workspaces?.length || 0}):
+                        </div>
+                        <div className="flex flex-wrap gap-1">
+                          {(adm.workspaces || []).map((wsId: string) => (
+                            <Badge
+                              key={wsId}
+                              variant="neutral"
+                              className="text-[9px] px-1.5 py-0 capitalize"
+                            >
+                              {wsId.replace("_", " ")}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         )}
       </SlideOver>
@@ -245,6 +336,14 @@ export default function InstitutionsPage() {
         onSuccess={(newInst) => {
           setSelectedInst(newInst)
         }}
+      />
+
+      {/* Add Institute Admin Modal */}
+      <AddInstituteAdminModal
+        isOpen={isAddAdminOpen}
+        institution={selectedInst}
+        onClose={() => setIsAddAdminOpen(false)}
+        onSuccess={() => refetchAdmins()}
       />
 
       {/* Suspend Confirmation Dialog */}

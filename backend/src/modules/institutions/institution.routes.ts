@@ -18,4 +18,10 @@ router.get('/:id/stats', institutionController.getStats.bind(institutionControll
 // PATCH /api/v1/institutions/:id/modules/:moduleCode
 router.patch('/:id/modules/:moduleCode', institutionController.toggleModule.bind(institutionController));
 
+// GET /api/v1/institutions/:id/admins
+router.get('/:id/admins', institutionController.getAdmins.bind(institutionController));
+
+// POST /api/v1/institutions/:id/admins
+router.post('/:id/admins', institutionController.addAdmin.bind(institutionController));
+
 export default router;

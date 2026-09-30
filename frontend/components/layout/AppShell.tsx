@@ -51,6 +51,8 @@ const PLATFORM_SUPER_ADMIN_WORKSPACES = [
   "/billing",
 ]
 
+import { isPathAllowedForWorkspaces } from "@/config/workspaces"
+
 export const AppShell: React.FC<AppShellProps> = ({
   pageTitle,
   breadcrumbs = [],
@@ -93,12 +95,20 @@ export const AppShell: React.FC<AppShellProps> = ({
       (prefix) => pathname === prefix || pathname?.startsWith(prefix + "/")
     )
 
+  const isBlockedByWorkspaceRestriction =
+    !isSuperAdmin &&
+    role === "INSTITUTION_ADMIN" &&
+    user?.assignedWorkspaces &&
+    user.assignedWorkspaces.length > 0 &&
+    !isPathAllowedForWorkspaces(pathname, user.assignedWorkspaces)
+
   return (
     <div className="flex min-h-screen bg-canvas">
       {/* Dynamic Role-Scoped Sidebar */}
       <Sidebar
         role={role}
         enabledModules={enabledModules}
+        assignedWorkspaces={user?.assignedWorkspaces}
         institutionName={institutionName}
         isMobileOpen={isMobileMenuOpen}
         onCloseMobile={() => setIsMobileMenuOpen(false)}
@@ -145,6 +155,18 @@ export const AppShell: React.FC<AppShellProps> = ({
               <Link href="/dashboard" className="mt-4">
                 <Button size="default" variant="primary" leadingIcon={<ArrowLeft className="w-4 h-4" />}>
                   Return to Dashboard
+                </Button>
+              </Link>
+            </div>
+          ) : isBlockedByWorkspaceRestriction ? (
+            <div className="flex flex-col items-center justify-center py-12">
+              <PermissionDenied
+                requiredPermission="workspace.scoped_access"
+                message="Access Restricted: Your institutional administrator account has only been granted privileges for designated workspaces by the Platform Super Administrator. Contact your Super Admin to expand your workspace access."
+              />
+              <Link href="/dashboard" className="mt-4">
+                <Button size="default" variant="primary" leadingIcon={<ArrowLeft className="w-4 h-4" />}>
+                  Return to Permitted Workspaces
                 </Button>
               </Link>
             </div>

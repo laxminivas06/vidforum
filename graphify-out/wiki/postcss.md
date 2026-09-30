@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [react-dom](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L17) (0 connections)
+- [clsx](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L13) (0 connections)
 
 ## Relationships
 

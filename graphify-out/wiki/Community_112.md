@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [States.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/States.tsx#L1) (0 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/plans/page.tsx#L1) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\States.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/States.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\plans\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/plans/page.tsx)
 
 ## Audit Trail
 

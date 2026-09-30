@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx#L1) (2 connections)
-- [AttendanceSessionsPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx#L89) (1 connections)
-- [MOCK_SESSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx#L42) (1 connections)
+- [api.v1.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts#L1) (2 connections)
+- [dbOk](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts#L24) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts#L20) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\attendance\sessions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\routes\api.v1.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts)
 
 ## Audit Trail
 

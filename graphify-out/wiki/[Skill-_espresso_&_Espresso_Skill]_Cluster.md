@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: flaky-detector](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (2 connections)
-- [Flaky Detector Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (1 connections)
-- [Instructions](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (1 connections)
+- [Skill: falsegreen](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md) (2 connections)
+- [Falsegreen Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md) (1 connections)
+- [Patterns to Flag](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: falsegreen & Falsegreen Skill] Cluster]] (4 shared connections)
+- [[[Skill: docflow & Docflow Skill] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md)
+- [.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md)
 
 ## Audit Trail
 

@@ -496,7 +496,7 @@ export const ProvisionTenantModal: React.FC<ProvisionTenantModalProps> = ({
               variant="primary"
               size="dense"
               onClick={handleSubmit}
-              loading={createInstitutionMutation.isPending}
+              isLoading={createInstitutionMutation.isPending}
               disabled={submittedSuccess}
               leadingIcon={<Sparkles className="w-3.5 h-3.5 text-brand-primary" />}
             >

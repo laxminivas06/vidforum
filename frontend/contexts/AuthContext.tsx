@@ -271,6 +271,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       // If network failed, check known registered accounts
       const known = KNOWN_ACCOUNTS[cleanId]
       if (known) {
+        if (known.role === "SUPER_ADMIN" && password && password !== "admin123") {
+          throw new Error("Invalid password for Super Administrator. Password is admin123.")
+        }
+
         const loggedInUser: UserProfile = {
           id: `usr-${cleanId}`,
           name: known.name,

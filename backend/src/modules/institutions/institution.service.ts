@@ -12,7 +12,9 @@ export class InstitutionService {
       plan: row.plan,
       studentsCount: parseInt(row.studentsCount, 10),
       facultyCount: parseInt(row.facultyCount, 10),
-      createdAt: row.createdAt?.toISOString ? row.createdAt.toISOString().split('T')[0] : '2026-09-25',
+      createdAt: row.createdAt
+        ? new Date(row.createdAt).toISOString().split('T')[0]
+        : new Date().toISOString().split('T')[0],
       region: row.address || 'India',
     }));
   }
@@ -56,7 +58,9 @@ export class InstitutionService {
       plan: data.plan || 'ENTERPRISE',
       studentsCount: 0,
       facultyCount: 0,
-      createdAt: row.created_at?.toISOString ? row.created_at.toISOString().split('T')[0] : '2026-09-29',
+      createdAt: row.created_at
+        ? new Date(row.created_at).toISOString().split('T')[0]
+        : new Date().toISOString().split('T')[0],
       region: row.address || 'India',
       boardAffiliation: row.settings?.boardAffiliation,
       contactEmail: row.contact_email,

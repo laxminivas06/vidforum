@@ -4,12 +4,12 @@
 
 ## Key Concepts
 
-- [ConfirmDialog.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L1) (5 connections)
-- [activeCancelText](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L42) (1 connections)
-- [activeConfirmText](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L41) (1 connections)
-- [activeDestructive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L43) (1 connections)
-- [handleClose](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L40) (1 connections)
-- [isDialogOpen](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L39) (1 connections)
+- [Button.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L1) (5 connections)
+- [activeLeftIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L53) (1 connections)
+- [activeRightIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L54) (1 connections)
+- [baseStyles](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L32) (1 connections)
+- [sizes](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L46) (1 connections)
+- [variants](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L35) (1 connections)
 
 ## Relationships
 
@@ -17,7 +17,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\ConfirmDialog.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Button.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx)
 
 ## Audit Trail
 

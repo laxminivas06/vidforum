@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: token-optimizer](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md) (2 connections)
-- [Best Practices](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md) (1 connections)
-- [Token Optimizer Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md) (1 connections)
+- [Skill: test-gap](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (2 connections)
+- [Checks](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (1 connections)
+- [Test Gap Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: test-gap & Checks] Cluster]] (4 shared connections)
+- [[[Skill: spec-driven & Lifecycle Stages] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md)
+- [.agents/plugins/test-gap/skills/test-gap/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md)
 
 ## Audit Trail
 

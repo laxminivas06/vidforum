@@ -1,24 +1,48 @@
 # [[academicYear, setAcademicYear] & [activeSection, setActiveSection]] Cluster
 
-> 15 nodes · cohesion 0.13
+> 15 nodes · cohesion 0.17
 
 ## Key Concepts
 
-- [hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1) (14 connections)
-- [API_BASE_URL](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L279) (1 connections)
-- [DEFAULT_INST_ID](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L280) (1 connections)
-- [MOCK_APPLICANTS](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L59) (1 connections)
-- [MOCK_FACULTY](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L193) (1 connections)
-- [MOCK_FEES](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L233) (1 connections)
-- [MOCK_GRADES](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L155) (1 connections)
-- [MOCK_INSTITUTIONS](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L7) (1 connections)
-- [useAcademics()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L414) (1 connections)
-- [useAdmissions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L363) (1 connections)
-- [useCreateInstitution()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L300) (1 connections)
-- [useFaculty()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L434) (1 connections)
-- [useFinance()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L474) (1 connections)
-- [useInstitutions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L282) (1 connections)
-- [useMyClasses()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L454) (1 connections)
+- [StudentController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L5) (4 connections)
+- [StudentRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L3) (4 connections)
+- [StudentService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L3) (4 connections)
+- [.getStudentById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L24) (3 connections)
+- [.getStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L6) (3 connections)
+- [.promote()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L36) (3 connections)
+- [.findStudentMasterById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L57) (3 connections)
+- [.findStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L4) (3 connections)
+- [.promote()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L135) (3 connections)
+- [.getStudentMaster()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L8) (3 connections)
+- [.listStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L4) (3 connections)
+- [.promoteStudent()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L16) (3 connections)
+- [student.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L1) (1 connections)
+- [student.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L1) (1 connections)
+- [student.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L1) (1 connections)
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class StudentController {
+        +student.controller.ts()
+        +.getStudents()
+        +.getStudentById()
+        +.promote()
+    }
+    class StudentRepository {
+        +student.repository.ts()
+        +.findStudents()
+        +.findStudentMasterById()
+        +.promote()
+    }
+    class StudentService {
+        +student.service.ts()
+        +.listStudents()
+        +.getStudentMaster()
+        +.promoteStudent()
+    }
+```
 
 ## Relationships
 
@@ -26,12 +50,14 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\lib\api\hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 28 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 24 (57%)
+- INFERRED: 18 (43%)
 - AMBIGUOUS: 0 (0%)
 
 ---

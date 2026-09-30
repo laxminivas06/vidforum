@@ -95,6 +95,14 @@ router.post('/login', async (req: Request, res: Response) => {
 
     user.role_name = resolvedRole || 'INSTITUTION_ADMIN';
 
+    // 5. Password Verification: Enforce admin123 for Super Administrator
+    if (user.role_name === 'SUPER_ADMIN' || isSuperAdminAlias) {
+      if (password && password !== 'admin123') {
+        sendError(res, 'Invalid password for Super Administrator. Please check your credentials.', 401);
+        return;
+      }
+    }
+
     // Fetch permissions for the role
     const permRes = await db.query('SELECT code FROM permissions');
     const permissions = permRes.rows.map((r: any) => r.code);

@@ -7,22 +7,22 @@
     },
     {
       "label": "SecurityPage()",
-      "risk": 0.414,
+      "risk": 0.385,
       "type": "FUNCTION"
     },
     {
       "label": "HostelPage()",
-      "risk": 0.397,
+      "risk": 0.369,
       "type": "FUNCTION"
     },
     {
       "label": "AttendanceSessionsPage()",
-      "risk": 0.284,
+      "risk": 0.27,
       "type": "FUNCTION"
     },
     {
       "label": "SportsPage()",
-      "risk": 0.273,
+      "risk": 0.254,
       "type": "FUNCTION"
     }
   ],

@@ -1,34 +1,35 @@
 # [Document: Decisions & ADR-001 Strict Separation of Phase Deliverables] Cluster
 
-> 13 nodes · cohesion 0.15
+> 14 nodes · cohesion 0.14
 
 ## Key Concepts
 
-- [Document: Decisions](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (12 connections)
-- [ADR-001 Strict Separation of Phase Deliverables](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-002 Multi-Tenancy via Shared Database with Institution-ID & RLS](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-003 Central Student Master Record vs Workspace](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-004 Two-Tier RBAC with Resource-Level Context Verification](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-005 Full-Stack Monorepo Structure (backend/ + frontend/)](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-006 Pre-Commit Validation Pipeline for Excel Exam Imports](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-007 Strict 3-Workspace Boundary for AI Yantra](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-008 Node.js 22 + TypeScript + Express Layered MVC Architecture](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-009 Supabase Cloud PostgreSQL with Public Schema Helper Functions for RLS](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-010 Zero-Downtime TanStack Query Hooks with Resilient Mock Fallback](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [Architectural & Technical Decisions Log: VID Platform](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [Decision Records](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [VID Platform Educational Ecosystem Specification](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (13 connections)
+- [Academics & Curriculum](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Admissions & Enrollment](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Alumni Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Attendance Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Communication & Notifications](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Examination & Grading](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Fee & Financial Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Hostel Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Human Resources & Payroll](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Learning Management System (LMS)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Library Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Student Information System (SIS)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Transportation Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[VID Platform Educational Ecosystem Specification & Academics & Curriculum] Cluster]] (26 shared connections)
 
 ## Source Files
 
-- [docs/DECISIONS.md](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md)
+- [Reference_docs/VID Platform.pdf](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf)
 
 ## Audit Trail
 
-- EXTRACTED: 24 (100%)
+- EXTRACTED: 26 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

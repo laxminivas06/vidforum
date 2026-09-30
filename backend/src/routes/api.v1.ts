@@ -13,6 +13,7 @@ import hrmsRoutes from '../modules/hrms/hrms.routes';
 import timetableRoutes from '../modules/timetable/timetable.routes';
 import aiYantraRoutes from '../modules/ai-yantra/ai-yantra.routes';
 import optionalRoutes from '../modules/optional-modules/optional-modules.routes';
+import usersRoutes from '../modules/users/users.routes';
 import { db } from '../config/database';
 import { sendSuccess } from '../utils/api-response';
 
@@ -39,6 +40,7 @@ router.get('/health', async (_req: Request, res: Response) => {
 
 // Domain Routes
 router.use('/auth', authRoutes);
+router.use('/users', usersRoutes);
 router.use('/institutions', institutionRoutes);
 router.use('/academics', academicRoutes);
 router.use('/admissions', admissionsRoutes);

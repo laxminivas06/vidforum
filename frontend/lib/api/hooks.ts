@@ -283,16 +283,36 @@ export function useInstitutions() {
   return useQuery({
     queryKey: ["institutions"],
     queryFn: async (): Promise<Institution[]> => {
+      let savedCustom: Institution[] = []
+      if (typeof window !== "undefined") {
+        try {
+          const raw = localStorage.getItem("vid_custom_institutions")
+          if (raw) savedCustom = JSON.parse(raw)
+        } catch (e) {
+          console.warn("Failed to parse custom institutions", e)
+        }
+      }
+
+      let backendList: Institution[] = []
       try {
         const res = await fetch(`${API_BASE_URL}/institutions`)
         const json = await res.json()
         if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-          return json.data
+          backendList = json.data
         }
       } catch (err) {
         console.warn("Backend unavailable, using mock institutions:", err)
       }
-      return MOCK_INSTITUTIONS
+
+      const baseList = backendList.length > 0 ? backendList : MOCK_INSTITUTIONS
+      const merged = [...savedCustom, ...baseList]
+      const seen = new Set<string>()
+      return merged.filter((item) => {
+        const key = (item.code || item.id || "").toLowerCase()
+        if (seen.has(key)) return false
+        seen.add(key)
+        return true
+      })
     },
   })
 }
@@ -352,9 +372,24 @@ export function useCreateInstitution() {
       return fallbackInstitution
     },
     onSuccess: (newInstitution) => {
+      if (typeof window !== "undefined") {
+        try {
+          const raw = localStorage.getItem("vid_custom_institutions")
+          const current: Institution[] = raw ? JSON.parse(raw) : []
+          const updated = [
+            newInstitution,
+            ...current.filter((i) => i.code !== newInstitution.code && i.id !== newInstitution.id),
+          ]
+          localStorage.setItem("vid_custom_institutions", JSON.stringify(updated))
+        } catch (e) {
+          console.warn("Failed to persist custom institution", e)
+        }
+      }
+
       queryClient.setQueryData(["institutions"], (old: Institution[] | undefined) => {
         if (!old) return [newInstitution]
-        return [newInstitution, ...old]
+        const withoutDup = old.filter((i) => i.id !== newInstitution.id && i.code !== newInstitution.code)
+        return [newInstitution, ...withoutDup]
       })
     },
   })

@@ -4,31 +4,31 @@
 
 ## Key Concepts
 
-- [Document: Vid Database Architecture](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (47 connections)
-- [10. RBAC / Permissions](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [11. Academic Data Model](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [12. Workspace/Data Ownership Model](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [13. Normalization Analysis](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [14. Primary Key Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [15. Constraints](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [16. Delete/Update Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [17. Audit Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [18. Indexing Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [19. Supabase RLS Design](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [1. Executive Summary](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [20. Node.js/Express Backend Integration](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [21. Transaction Design](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [22. Database Functions and Triggers](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [23. Database Views](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [24. Complete ER Diagram](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [25. Final Database Architecture](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [26–30. Production SQL, RLS SQL, Functions/Triggers, Views, Seed Data](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [2. Requirements Extracted From PDF (condensed)](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [31. Migration Order](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [32. API/Backend Mapping](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [33. Performance Review](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [34. Security Review](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [35. Requirement Traceability (by module)](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L1) (26 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx#L1) (9 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L1) (7 connections)
+- [columns](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L202) (4 connections)
+- [[searchQuery, setSearchQuery]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L64) (4 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/vault/page.tsx#L1) (3 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L1) (3 connections)
+- [{ data: institutions = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L36) (2 connections)
+- [handleAddUser()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L140) (2 connections)
+- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L122) (2 connections)
+- [adminCount](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L253) (1 connections)
+- [[collectDialogOpen, setCollectDialogOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx#L41) (1 connections)
+- [combined](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L85) (1 connections)
+- [{ data: fees = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx#L36) (1 connections)
+- [{ data: institutions = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L62) (1 connections)
+- [{ data: staff = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L32) (1 connections)
+- [deduplicated](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L87) (1 connections)
+- [DEFAULT_USERS](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L40) (1 connections)
+- [[email, setEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L70) (1 connections)
+- [[errors, setErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L73) (1 connections)
+- [facultyCount](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L252) (1 connections)
+- [filtered](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L42) (1 connections)
+- [filteredFees](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx#L44) (1 connections)
+- [filteredUsers](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L112) (1 connections)
+- [[institution, setInstitution]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L72) (1 connections)
 - *... and 23 more nodes in this community*
 
 ## Relationships
@@ -37,11 +37,15 @@
 
 ## Source Files
 
-- [docs/VID_Database_Architecture.md](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md)
+- [C:\Antigravityyyyy\VID_School\frontend\app\documents\vault\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/vault/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\finance\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\hrms\staff\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\institutions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\users\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 94 (100%)
+- EXTRACTED: 100 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -1,13 +1,14 @@
 # [Document: Agents & 1. Operating Mode & Standards] Cluster
 
-> 4 nodes · cohesion 0.50
+> 5 nodes · cohesion 0.40
 
 ## Key Concepts
 
-- [hrms.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L1) (3 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L11) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L12) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L6) (1 connections)
+- [SlideOver.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L1) (4 connections)
+- [activeFooter](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L31) (1 connections)
+- [handleKeyDown()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L47) (1 connections)
+- [isPanelOpen](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L30) (1 connections)
+- [widths](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L58) (1 connections)
 
 ## Relationships
 
@@ -15,11 +16,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\SlideOver.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 6 (100%)
+- EXTRACTED: 8 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

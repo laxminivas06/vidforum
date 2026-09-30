@@ -4,11 +4,11 @@
 
 ## Key Concepts
 
-- [Document: Agents](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (4 connections)
-- [1. Operating Mode & Standards](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
-- [2. Active Plugin Ecosystem & Memory](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
-- [3. Working Agreement Checklist](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
-- [VID Platform: Agent Operating Guidelines](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
+- [users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L1) (4 connections)
+- [{ name, email, role = 'FACULTY', institutionName }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L33) (1 connections)
+- [newUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L40) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L10) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L5) (1 connections)
 
 ## Relationships
 
@@ -16,7 +16,7 @@
 
 ## Source Files
 
-- [AGENTS.md](file:///C:/Antigravityyyyy/VID_School/AGENTS.md)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts)
 
 ## Audit Trail
 

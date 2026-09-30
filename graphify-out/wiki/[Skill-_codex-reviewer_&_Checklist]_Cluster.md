@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: debt-ops](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md) (2 connections)
-- [Debt-Ops Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md) (1 connections)
-- [Rules](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md) (1 connections)
+- [Skill: commit-narrator](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (2 connections)
+- [Commit Narrator Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (1 connections)
+- [Format](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: commit-narrator & Commit Narrator Skill] Cluster]] (4 shared connections)
+- [[[Skill: axonflow & AxonFlow Skill] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/debt-ops/skills/debt-ops/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md)
+- [.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md)
 
 ## Audit Trail
 

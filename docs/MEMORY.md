@@ -21,6 +21,7 @@
 - **Spec-First:** Must maintain `/docs/PRD.md`, `/docs/TECH_SPEC.md`, `/docs/TASKS.md`, `/docs/DECISIONS.md`.
 - **Pre-Commit Verification:** Validate attendance and marks before database commit (zero silent failures).
 - **Auditing:** Financial and academic mutations generate immutable audit logs (`audit_logs`).
+- **Zero Duplicate Data & Dates Policy:** Strictly prohibit duplicate data, duplicate dates, duplicate record IDs, or duplicate entities across all frontend pages, tables, and mock/seed repositories. All entities must possess globally unique identifiers and distinct, realistic dates and attributes.
 
 ---
 

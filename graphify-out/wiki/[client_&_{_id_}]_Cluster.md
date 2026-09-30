@@ -1,33 +1,34 @@
 # [client & { id }] Cluster
 
-> 12 nodes · cohesion 0.17
+> 13 nodes · cohesion 0.15
 
 ## Key Concepts
 
-- [attendance.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L1) (11 connections)
-- [client](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L56) (1 connections)
-- [{ id }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L92) (1 connections)
-- [{ id: sessionId }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L58) (1 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L11) (1 connections)
-- [params](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L34) (1 connections)
-- [query](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L14) (1 connections)
-- [{ records }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L59) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L46) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L6) (1 connections)
-- [{ sectionId, date }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L12) (1 connections)
-- [verifiedBy](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L93) (1 connections)
+- [Document: Memory](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (12 connections)
+- [1.1 Architecture & Stack Contract](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [1.2 Core Development Directives](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [1. Project Context & Durable Conclusions (Honcho / Wingman / Knowl)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [2. Installed Plugin Suite (28 Plugins Matrix)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [3. Workflow Activation Guide](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [4. Frontend Implementation & Stitch Conversion State (2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.1 Cloud Database Infrastructure (Supabase PostgreSQL)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.2 Backend Layered MVC Engine (Node.js 22 + Express + TypeScript)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.3 Frontend-to-Backend Integration & Offline Resilience](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.4 Repository Sync & Git Checkpoints](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5. Backend & Supabase Database Architecture Implementation (2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [Persistent Agent Memory & Plugin Ecosystem: VID Platform](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Document: Memory & 1.1 Architecture & Stack Contract] Cluster]] (24 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\attendance\attendance.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts)
+- [docs/MEMORY.md](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md)
 
 ## Audit Trail
 
-- EXTRACTED: 22 (100%)
+- EXTRACTED: 24 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

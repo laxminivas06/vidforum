@@ -13,6 +13,7 @@
 - Follow all **30 Non-Negotiable Rules** from [docs/PRD.md](file:///c:/Antigravityyyyy/VID_School/docs/PRD.md).
 - Maintain the single student master record across all operations. Student is **never** a separate workspace.
 - Enforce multi-tenant isolation via `institution_id` on all tenant queries, models, and file storage.
+- **Zero Duplicate Data & Dates Policy:** Strictly prohibit duplicate data, duplicate dates, duplicate record IDs, duplicate tenant codes, or duplicate student records across all pages, views, tables, and seed/mock datasets. Every entity must have strictly unique identifiers and distinct, realistic dates and values.
 - Respect human approval gates between major phases.
 
 ---

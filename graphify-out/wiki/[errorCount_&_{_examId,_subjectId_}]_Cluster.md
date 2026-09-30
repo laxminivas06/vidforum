@@ -20,7 +20,7 @@
 
 ## Relationships
 
-- [[[client & { id }] Cluster]] (24 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

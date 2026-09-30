@@ -9,7 +9,7 @@
 
 ## Relationships
 
-- [[Skill: dev-skills & Core Workflows]] (2 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

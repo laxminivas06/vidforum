@@ -89,6 +89,9 @@
     },
     {
       "path": ".agents/plugins/openapi-gen/skills/openapi-gen"
+    },
+    {
+      "path": ".agents/plugins/prompt-architect/skills/prompt-architect"
     }
   ]
 }

@@ -11,7 +11,7 @@
 
 ## Relationships
 
-- [[[Skill: honcho-memory & Honcho Memory Skill] Cluster]] (6 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

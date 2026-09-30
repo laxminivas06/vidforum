@@ -12,7 +12,7 @@
 
 ## Relationships
 
-- [[[instId & result] Cluster]] (8 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

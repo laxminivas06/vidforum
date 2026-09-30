@@ -22,6 +22,7 @@
 Specialized plugins installed in `.agents/plugins/` and global customizations:
 
 Refer to [docs/MEMORY.md](file:///c:/Antigravityyyyy/VID_School/docs/MEMORY.md) for the complete plugin matrix and persistent context:
+- **Intake & Prompt Mastery (Phase 0):** `prompt-architect` (Transforms plain-language prompts into engineered, rule-enforced architectural blueprints before code execution).
 - **Minimalism & Speed:** `ponytail` (Intensity: **Ultra** — YAGNI, native platform first, shortest diff).
 - **Memory:** `honcho-memory`, `wingman`, `unforgit`, `local-memory`, `knowl`, `metabrain`, `memesh`.
 - **Quality & Review:** `brooks-lint`, `river-review`, `codex-reviewer`, `debt-ops`, `megalinter`, `a11y-audit`.
@@ -34,6 +35,7 @@ Refer to [docs/MEMORY.md](file:///c:/Antigravityyyyy/VID_School/docs/MEMORY.md) 
 ---
 
 ## 3. Working Agreement Checklist
+- **Phase 0 (Intake & Prompt Mastery):** Apply Prompt Architect on plain or informal user requests to clarify scope, inject PRD invariants (Rule 1 student master, Rule 2 tenant isolation, zero duplicate data), specify `@/components/ui/` primitives, and formulate measurable acceptance criteria.
 - **Pre-Edit:** Run Wingman data contract verification + check existing codebase components to avoid re-implementing existing code.
 - **During Code:** Apply **Ponytail Ultra** (reuse `@/components/ui/`, native features over libs, single root-cause fixes, shortest diffs, no speculative boilerplate).
 - **Post-Code:** Apply River Review (4 lenses) and Brooks Lint.

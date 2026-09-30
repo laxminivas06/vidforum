@@ -11,7 +11,7 @@
 
 ## Relationships
 
-- [[[Skill: local-memory & Key Actions] Cluster]] (6 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

@@ -15,7 +15,7 @@
 
 ## Relationships
 
-- [[[Document: Plugin Orchestrator & 1. Memory Phase (Start of Session & Pre-Edit)] Cluster]] (14 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

@@ -62,6 +62,7 @@ All 28 plugins are installed locally in `.agents/plugins/` with manifests (`plug
 | 29 | **Ponytail** | Code Minimalism | YAGNI extremist, native-platform-first, shortest working diffs | `ponytail` (Intensity: **Ultra**) |
 | 30 | **a11y-audit** | Quality & a11y | WCAG 2.1 AA accessibility & touch-target audits (PRD Rule 29) | `a11y-audit` |
 | 31 | **openapi-gen** | API Sync | Contract sync between Express /api/v1 and TanStack Query | `openapi-gen` |
+| 32 | **prompt-architect** | Intake & Prompt | Plain-English requests needing architectural optimization & PRD rule injection | `prompt-architect` |
 
 ### 2.1 Ponytail Ultra Operating Matrix
 **Active Mode:** `ULTRA` (Permanent across sessions per user instruction 2026-09-29)
@@ -95,7 +96,8 @@ When executing SDLC workflows in this repository, follow this execution mapping:
 
 ```mermaid
 graph TD
-    UserReq[User Request / New Feature] --> SpecDriven[Spec-Driven & AI-Native SDLC]
+    UserReq[User Request / Plain Prompt] --> Phase0[Phase 0: Prompt Architect & Intake]
+    Phase0 --> SpecDriven[Spec-Driven & AI-Native SDLC]
     SpecDriven --> PreEditCheck[Wingman & Local Memory Check]
     PreEditCheck --> DevLoop[Dev Skills TDD Loop & Token Optimizer]
     DevLoop --> CodeReview[Brooks Lint & River Review]
@@ -105,6 +107,8 @@ graph TD
     CommitPhase --> MemPersist[Honcho & Unforgit Memory Save]
 ```
 
+0. **Phase 0 (Intake & Prompt Mastery):**
+   - Execute `prompt-architect` to translate plain or informal user requests into structured, architecture-aware specifications enforcing PRD non-negotiables, `@/components/ui/` primitives, and acceptance criteria before touching code.
 1. **Before Editing Code:**
    - Consult `Wingman` and `Local Memory` to ensure data contracts (tenant isolation, student master relationships) are preserved.
 2. **During Coding:**

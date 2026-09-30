@@ -20,7 +20,7 @@
 
 ## Relationships
 
-- [[[Document: Memory & 1.1 Architecture & Stack Contract] Cluster]] (24 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

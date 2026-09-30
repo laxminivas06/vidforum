@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: docflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md) (2 connections)
-- [Docflow Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md) (1 connections)
-- [Policy](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md) (1 connections)
+- [Skill: espresso](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md) (2 connections)
+- [Espresso Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md) (1 connections)
+- [Guidelines](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: docflow & Docflow Skill] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/docflow/skills/docflow/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md)
+- [.agents/plugins/espresso/skills/espresso/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md)
 
 ## Audit Trail
 

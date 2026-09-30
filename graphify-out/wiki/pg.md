@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [tsx](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L32) (0 connections)
+- [@types/bcryptjs](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L25) (0 connections)
 
 ## Relationships
 

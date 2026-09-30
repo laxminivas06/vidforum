@@ -1,13 +1,12 @@
 # [Skill: honcho-memory & Honcho Memory Skill] Cluster
 
-> 4 nodes · cohesion 0.50
+> 3 nodes · cohesion 0.67
 
 ## Key Concepts
 
-- [Skill: local-memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (3 connections)
-- [Key Actions](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (1 connections)
-- [Local Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (1 connections)
-- [When to Use](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (1 connections)
+- [database.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts#L1) (2 connections)
+- [db](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts#L22) (1 connections)
+- [pool](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts#L4) (1 connections)
 
 ## Relationships
 
@@ -15,11 +14,11 @@
 
 ## Source Files
 
-- [.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\backend\src\config\database.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 6 (100%)
+- EXTRACTED: 4 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

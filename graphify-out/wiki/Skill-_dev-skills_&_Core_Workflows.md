@@ -1,11 +1,10 @@
 # Skill: dev-skills & Core Workflows
 
-> 2 nodes · cohesion 1.00
+> 1 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [Document: Graphify](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md) (1 connections)
-- [Workflow: graphify](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md) (1 connections)
+- [server.ts](file:///C:/Antigravityyyyy/VID_School/backend/server.ts#L1) (0 connections)
 
 ## Relationships
 
@@ -13,11 +12,11 @@
 
 ## Source Files
 
-- [.agents/workflows/graphify.md](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md)
+- [C:\Antigravityyyyy\VID_School\backend\server.ts](file:///C:/Antigravityyyyy/VID_School/backend/server.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 2 (100%)
+- EXTRACTED: 0 (0%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

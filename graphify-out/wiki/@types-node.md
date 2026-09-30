@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [typescript](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L28) (0 connections)
+- [zod](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L19) (0 connections)
 
 ## Relationships
 

@@ -4,18 +4,18 @@
 
 ## Key Concepts
 
-- [Skill: honcho-memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (3 connections)
-- [Honcho Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (1 connections)
-- [When to Pull Memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (1 connections)
-- [When to Save Memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (1 connections)
+- [Skill: local-memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (3 connections)
+- [Key Actions](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (1 connections)
+- [Local Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (1 connections)
+- [When to Use](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: honcho-memory & Honcho Memory Skill] Cluster]] (6 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md)
+- [.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md)
 
 ## Audit Trail
 

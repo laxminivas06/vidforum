@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [@types/node](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L30) (0 connections)
+- [typescript](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L33) (0 connections)
 
 ## Relationships
 

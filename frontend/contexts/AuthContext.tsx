@@ -22,6 +22,7 @@ export interface AuthContextType {
   permissions: string[]
   enabledModules: string[]
   isAuthenticated: boolean
+  isInitialized: boolean
   hasPermission: (permission: string) => boolean
   login: (
     identifier: string,
@@ -160,7 +161,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<UserProfile | null>(DEFAULT_USER)
+  const [user, setUser] = useState<UserProfile | null>(null)
+  const [isInitialized, setIsInitialized] = useState(false)
   const [role, setRole] = useState<RoleType>("INSTITUTION_ADMIN")
   const [enabledModules, setEnabledModules] = useState<string[]>([
     "events",
@@ -183,10 +185,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           setUser(parsedUser)
           setRole(savedRole)
           setPermissions(ROLE_PERMISSIONS[savedRole] || ALL_PERMISSIONS)
+        } else {
+          setUser(null)
         }
       } catch (err) {
         console.warn("Failed to hydrate auth session from storage", err)
+        setUser(null)
+      } finally {
+        setIsInitialized(true)
       }
+    } else {
+      setIsInitialized(true)
     }
   }, [])
 
@@ -333,6 +342,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         permissions,
         enabledModules,
         isAuthenticated: !!user,
+        isInitialized,
         hasPermission,
         login,
         logout,

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/AuthContext"
 import { Sidebar } from "@/components/ui/Sidebar"
 import { Topbar } from "@/components/ui/Topbar"
@@ -58,10 +58,26 @@ export const AppShell: React.FC<AppShellProps> = ({
   rightHeaderAction,
   fullWidth = false,
 }) => {
-  const { user, role, enabledModules, institutionName, logout } = useAuth()
+  const { user, role, enabledModules, institutionName, logout, isInitialized } = useAuth()
   const pathname = usePathname()
+  const router = useRouter()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isCollapsed, setIsCollapsed] = useState(false)
+
+  // Redirect to login if user is not authenticated
+  React.useEffect(() => {
+    if (isInitialized && !user) {
+      router.replace("/login")
+    }
+  }, [isInitialized, user, router])
+
+  if (!isInitialized || !user) {
+    return (
+      <div className="min-h-screen bg-canvas flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full border-2 border-brand-primary border-t-transparent animate-spin" />
+      </div>
+    )
+  }
 
   // Enforce Workspace Scoping
   const isSuperAdmin = role === "SUPER_ADMIN"

@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [autoprefixer](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L25) (0 connections)
+- [clsx](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L13) (0 connections)
 
 ## Relationships
 

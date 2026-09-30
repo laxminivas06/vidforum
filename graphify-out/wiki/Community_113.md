@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L1) (0 connections)
+- [index.ts](file:///C:/Antigravityyyyy/VID_School/frontend/types/index.ts#L1) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\types\index.ts](file:///C:/Antigravityyyyy/VID_School/frontend/types/index.ts)
 
 ## Audit Trail
 

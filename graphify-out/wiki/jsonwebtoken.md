@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [Document: Graphify](file:///C:/Antigravityyyyy/VID_School/.agents/rules/graphify.md) (0 connections)
+- [Document: Data](file:///C:/Antigravityyyyy/VID_School/.kilo/agents/data.md) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [.agents/rules/graphify.md](file:///C:/Antigravityyyyy/VID_School/.agents/rules/graphify.md)
+- [.kilo/agents/data.md](file:///C:/Antigravityyyyy/VID_School/.kilo/agents/data.md)
 
 ## Audit Trail
 

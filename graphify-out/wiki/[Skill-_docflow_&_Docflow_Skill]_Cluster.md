@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: espresso](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md) (2 connections)
-- [Espresso Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md) (1 connections)
-- [Guidelines](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md) (1 connections)
+- [Skill: falsegreen](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md) (2 connections)
+- [Falsegreen Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md) (1 connections)
+- [Patterns to Flag](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: espresso & Espresso Skill] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/espresso/skills/espresso/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md)
+- [.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md)
 
 ## Audit Trail
 

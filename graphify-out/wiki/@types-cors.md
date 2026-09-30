@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [@types/express](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L27) (0 connections)
+- [@types/jsonwebtoken](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L28) (0 connections)
 
 ## Relationships
 

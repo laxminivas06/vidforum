@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [lucide-react](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L14) (0 connections)
+- [next](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L15) (0 connections)
 
 ## Relationships
 

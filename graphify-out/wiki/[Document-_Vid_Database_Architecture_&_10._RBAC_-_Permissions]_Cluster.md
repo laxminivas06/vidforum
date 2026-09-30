@@ -1,6 +1,6 @@
 # [Document: Vid Database Architecture & 10. RBAC / Permissions] Cluster
 
-> 116 nodes · cohesion 0.04
+> 121 nodes · cohesion 0.04
 
 ## Key Concepts
 
@@ -17,6 +17,7 @@
 - [exam_subjects](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (7 connections)
 - [payments](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (7 connections)
 - [admissions](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (6 connections)
+- [event_registrations](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (6 connections)
 - [fee_structures](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (6 connections)
 - [attendance_records](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
 - [attendance_sessions](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
@@ -28,12 +29,11 @@
 - [sports_teams](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
 - [student_academic_history](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
 - [student_discounts](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
-- [student_fees](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
-- *... and 91 more nodes in this community*
+- *... and 96 more nodes in this community*
 
 ## Relationships
 
-- [[Community 999]] (497 shared connections)
+- [[Community 999]] (512 shared connections)
 
 ## Source Files
 
@@ -41,7 +41,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 498 (100%)
+- EXTRACTED: 513 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

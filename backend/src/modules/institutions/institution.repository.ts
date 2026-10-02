@@ -180,35 +180,68 @@ export class InstitutionRepository {
   }
 
   async findModules(institutionId: string) {
+    const inst = await this.findByIdOrCode(institutionId);
+    const instId = inst?.id || institutionId;
+
     const res = await db.query(
-      'SELECT module_code, is_enabled, config FROM module_configurations WHERE institution_id = $1',
-      [institutionId]
+      `SELECT module_key, enabled, config 
+       FROM institution_modules 
+       WHERE institution_id = $1
+       ORDER BY module_key ASC`,
+      [instId]
     );
+
+    // If no records in institution_modules yet, populate defaults
+    if (res.rows.length === 0) {
+      const defaultModules = [
+        'admissions', 'academics', 'faculty', 'attendance', 'examinations', 
+        'finance', 'documents', 'hrms', 'timetable', 'voice_agent', 
+        'ai_attendance', 'ai_tutor', 'events', 'transport', 'hostel', 
+        'library', 'sports', 'inventory'
+      ];
+      for (const m of defaultModules) {
+        await db.query(
+          `INSERT INTO institution_modules (institution_id, module_key, enabled)
+           VALUES ($1, $2, true)
+           ON CONFLICT (institution_id, module_key) DO NOTHING`,
+          [instId, m]
+        );
+      }
+      const refetch = await db.query(
+        `SELECT module_key, enabled, config FROM institution_modules WHERE institution_id = $1 ORDER BY module_key ASC`,
+        [instId]
+      );
+      return refetch.rows;
+    }
+
     return res.rows;
   }
 
   async getStats(institutionId: string) {
+    const inst = await this.findByIdOrCode(institutionId);
+    const instId = inst?.id || institutionId;
+
     const [studentsRes, staffRes, attendanceRes, feesRes] = await Promise.all([
-      db.query("SELECT count(*) FROM students WHERE institution_id = $1 AND status = 'active'", [institutionId]),
-      db.query("SELECT count(*) FROM staff WHERE institution_id = $1 AND employment_status = 'active'", [institutionId]),
+      db.query("SELECT count(*) FROM students WHERE institution_id = $1 AND status = 'active'", [instId]),
+      db.query("SELECT count(*) FROM staff WHERE institution_id = $1 AND employment_status = 'active'", [instId]),
       db.query(`
         SELECT 
           round(100.0 * count(*) filter (where status = 'present') / nullif(count(*), 0), 1) as rate
         FROM attendance_records
         WHERE institution_id = $1
-      `, [institutionId]),
+      `, [instId]),
       db.query(`
         SELECT 
           COALESCE(sum(total_amount), 0) as total,
           COALESCE(sum(balance_due), 0) as pending
         FROM student_fees
         WHERE institution_id = $1
-      `, [institutionId]),
+      `, [instId]),
     ]);
 
     return {
-      totalStudents: parseInt(studentsRes.rows[0].count, 10),
-      totalStaff: parseInt(staffRes.rows[0].count, 10),
+      totalStudents: parseInt(studentsRes.rows[0]?.count || '0', 10),
+      totalStaff: parseInt(staffRes.rows[0]?.count || '0', 10),
       attendanceRate: parseFloat(attendanceRes.rows[0]?.rate || '94.2'),
       feesTotal: parseFloat(feesRes.rows[0]?.total || '0'),
       feesPending: parseFloat(feesRes.rows[0]?.pending || '0'),
@@ -216,14 +249,29 @@ export class InstitutionRepository {
   }
 
   async upsertModule(institutionId: string, moduleCode: string, isEnabled: boolean) {
+    const inst = await this.findByIdOrCode(institutionId);
+    const instId = inst?.id || institutionId;
+    const cleanKey = moduleCode.trim().toLowerCase();
+
+    // 1. Update institution_modules per Section 5 & Section 12
     const res = await db.query(
-      `INSERT INTO module_configurations (institution_id, module_code, is_enabled)
-       VALUES ($1, $2, $3)
-       ON CONFLICT (institution_id, module_code) 
-       DO UPDATE SET is_enabled = EXCLUDED.is_enabled, updated_at = now()
+      `INSERT INTO institution_modules (institution_id, module_key, enabled, updated_at)
+       VALUES ($1, $2, $3, now())
+       ON CONFLICT (institution_id, module_key) 
+       DO UPDATE SET enabled = EXCLUDED.enabled, updated_at = now()
        RETURNING *`,
-      [institutionId, moduleCode, isEnabled]
+      [instId, cleanKey, isEnabled]
     );
+
+    // 2. Synchronize legacy module_configurations
+    await db.query(
+      `INSERT INTO module_configurations (institution_id, module_code, is_enabled, updated_at)
+       VALUES ($1, $2, $3, now())
+       ON CONFLICT (institution_id, module_code)
+       DO UPDATE SET is_enabled = EXCLUDED.is_enabled, updated_at = now()`,
+      [instId, cleanKey, isEnabled]
+    );
+
     return res.rows[0];
   }
 

@@ -4,18 +4,18 @@
 
 ## Key Concepts
 
-- [EditAdminWorkspacesModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L1) (11 connections)
-- [[error, setError]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L39) (1 connections)
-- [handleDeselectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L66) (1 connections)
-- [handleSave()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L70) (1 connections)
-- [handleSelectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L62) (1 connections)
-- [handleToggleWorkspace()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L56) (1 connections)
-- [initial](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L45) (1 connections)
-- [isChecked](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L212) (1 connections)
-- [[isSubmitting, setIsSubmitting]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L41) (1 connections)
-- [[selectedWorkspaces, setSelectedWorkspaces]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L38) (1 connections)
-- [[successBanner, setSuccessBanner]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L40) (1 connections)
-- [updateWorkspacesMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L37) (1 connections)
+- [attendance.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L1) (11 connections)
+- [client](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L56) (1 connections)
+- [{ id }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L92) (1 connections)
+- [{ id: sessionId }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L58) (1 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L11) (1 connections)
+- [params](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L34) (1 connections)
+- [query](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L14) (1 connections)
+- [{ records }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L59) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L46) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L6) (1 connections)
+- [{ sectionId, date }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L12) (1 connections)
+- [verifiedBy](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L93) (1 connections)
 
 ## Relationships
 
@@ -23,7 +23,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\institutions\EditAdminWorkspacesModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\attendance\attendance.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts)
 
 ## Audit Trail
 

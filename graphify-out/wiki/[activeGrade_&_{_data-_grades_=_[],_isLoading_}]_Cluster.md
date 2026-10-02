@@ -1,41 +1,21 @@
 # [activeGrade & { data: grades = [], isLoading }] Cluster
 
-> 10 nodes · cohesion 0.20
+> 12 nodes · cohesion 0.17
 
 ## Key Concepts
 
-- [error-format.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L1) (5 connections)
-- [AppError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L25) (2 connections)
-- [PermissionDeniedError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L47) (2 connections)
-- [ResourceNotFoundError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L54) (2 connections)
-- [TenantViolationError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L40) (2 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L30) (1 connections)
-- [formatErrorResponse()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L61) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L48) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L55) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L41) (1 connections)
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class AppError {
-        +error-format.ts()
-        +.constructor()
-    }
-    class PermissionDeniedError {
-        +error-format.ts()
-        +.constructor()
-    }
-    class ResourceNotFoundError {
-        +error-format.ts()
-        +.constructor()
-    }
-    class TenantViolationError {
-        +error-format.ts()
-        +.constructor()
-    }
-```
+- [AppShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L1) (11 connections)
+- [INSTITUTION_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L22) (1 connections)
+- [isBlockedByWorkspaceRestriction](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L98) (1 connections)
+- [isBlockedForInstitutionStaff](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L92) (1 connections)
+- [isBlockedForSuperAdmin](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L86) (1 connections)
+- [[isCollapsed, setIsCollapsed]](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L67) (1 connections)
+- [[isMobileMenuOpen, setIsMobileMenuOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L66) (1 connections)
+- [isSuperAdmin](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L85) (1 connections)
+- [pathname](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L64) (1 connections)
+- [PLATFORM_SUPER_ADMIN_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L46) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L65) (1 connections)
+- [{ user, role, enabledModules, institutionName, logout, isInitialized }](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L63) (1 connections)
 
 ## Relationships
 
@@ -43,11 +23,11 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\common\error-format.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\components\layout\AppShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 18 (100%)
+- EXTRACTED: 22 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

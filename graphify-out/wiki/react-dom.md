@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [@types/morgan](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L29) (0 connections)
+- [morgan](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L20) (0 connections)
 
 ## Relationships
 

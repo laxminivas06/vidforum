@@ -163,11 +163,43 @@ router.post('/login', async (req: Request, res: Response) => {
     }
 
     let permissions: string[] = [];
-    try {
-      const permRes = await db.query('SELECT code FROM permissions');
-      permissions = permRes.rows.map((r: any) => r.code);
-    } catch {
-      permissions = ['platform.all'];
+    if (user.role_name === 'SUPER_ADMIN') {
+      permissions = ['*', 'platform.all'];
+    } else {
+      try {
+        // Query permissions specifically granted to this user's role
+        const permRes = await db.query(
+          `SELECT DISTINCT p.code
+           FROM permissions p
+           JOIN role_permissions rp ON rp.permission_id = p.id
+           JOIN user_roles ur ON ur.role_id = rp.role_id
+           WHERE ur.profile_id = $1`,
+          [user.id]
+        );
+        permissions = permRes.rows.map((r: any) => r.code);
+
+        // Fallback to role-level permissions if user_roles had not yet joined rp
+        if (permissions.length === 0 && user.role_name) {
+          const rolePermRes = await db.query(
+            `SELECT DISTINCT p.code
+             FROM permissions p
+             JOIN role_permissions rp ON rp.permission_id = p.id
+             JOIN roles r ON r.id = rp.role_id
+             WHERE UPPER(r.name) = UPPER($1) OR UPPER(r.name) = UPPER($2)`,
+            [user.role_name, user.role_name.replace(/_/g, ' ')]
+          );
+          permissions = rolePermRes.rows.map((r: any) => r.code);
+        }
+
+        // Default for Institution Admin if empty: all non-platform permissions
+        if (permissions.length === 0 && (user.role_name === 'INSTITUTION_ADMIN' || user.role_name === 'Institution Admin')) {
+          const instPerms = await db.query(`SELECT code FROM permissions WHERE module != 'platform'`);
+          permissions = instPerms.rows.map((r: any) => r.code);
+        }
+      } catch (pErr) {
+        console.warn('Permissions resolution error:', (pErr as any)?.message);
+        permissions = [];
+      }
     }
 
     const assignedWorkspaces: string[] =
@@ -187,8 +219,24 @@ router.post('/login', async (req: Request, res: Response) => {
 
     const token = jwt.sign(tokenPayload, env.JWT_SECRET, { expiresIn: '7d' });
 
+    // Issue refresh token
+    const refreshToken = require('crypto').randomUUID();
+    const tokenHash = require('crypto').createHash('sha256').update(refreshToken).digest('hex');
+    const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
+
+    try {
+      await db.query(
+        `INSERT INTO refresh_tokens (user_id, token_hash, expires_at)
+         VALUES ($1, $2, $3)`,
+        [user.id, tokenHash, expiresAt.toISOString()]
+      );
+    } catch (refErr) {
+      console.warn('Refresh token persistence warning:', (refErr as any)?.message);
+    }
+
     sendSuccess(res, {
       token,
+      refreshToken,
       user: {
         id: user.id,
         name: user.full_name,
@@ -250,6 +298,93 @@ router.post('/switch-role', authMiddleware, (req: Request, res: Response) => {
     token,
     role: newRole,
   }, `Switched role to ${newRole}`);
+});
+
+// POST /api/v1/auth/refresh (Section 15: refresh token rotation)
+router.post('/refresh', async (req: Request, res: Response) => {
+  const { refreshToken } = req.body;
+  if (!refreshToken) {
+    sendError(res, 'Refresh token is required', 400);
+    return;
+  }
+
+  const tokenHash = require('crypto').createHash('sha256').update(refreshToken).digest('hex');
+
+  try {
+    const tokenRes = await db.query(
+      `SELECT rt.id, rt.user_id, rt.expires_at, rt.revoked,
+              p.email, p.full_name, p.default_institution_id,
+              COALESCE(r.name, 'INSTITUTION_ADMIN') as role_name
+       FROM refresh_tokens rt
+       JOIN profiles p ON p.id = rt.user_id
+       LEFT JOIN user_roles ur ON ur.profile_id = p.id
+       LEFT JOIN roles r ON r.id = ur.role_id
+       WHERE rt.token_hash = $1
+       LIMIT 1`,
+      [tokenHash]
+    );
+
+    if (tokenRes.rows.length === 0) {
+      sendError(res, 'Invalid refresh token', 401);
+      return;
+    }
+
+    const row = tokenRes.rows[0];
+    if (row.revoked) {
+      sendError(res, 'Refresh token has been revoked', 401);
+      return;
+    }
+
+    if (new Date(row.expires_at) < new Date()) {
+      sendError(res, 'Refresh token has expired', 401);
+      return;
+    }
+
+    // Revoke old refresh token (rotation)
+    await db.query(`UPDATE refresh_tokens SET revoked = true WHERE id = $1`, [row.id]);
+
+    // Issue new refresh token
+    const newRefreshToken = require('crypto').randomUUID();
+    const newTokenHash = require('crypto').createHash('sha256').update(newRefreshToken).digest('hex');
+    const newExpiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+
+    await db.query(
+      `INSERT INTO refresh_tokens (user_id, token_hash, expires_at) VALUES ($1, $2, $3)`,
+      [row.user_id, newTokenHash, newExpiresAt.toISOString()]
+    );
+
+    // Issue new access token
+    const tokenPayload = {
+      id: row.user_id,
+      email: row.email,
+      fullName: row.full_name,
+      role: row.role_name,
+      institutionId: row.default_institution_id,
+    };
+
+    const newAccessToken = jwt.sign(tokenPayload, env.JWT_SECRET, { expiresIn: '7d' });
+
+    sendSuccess(res, {
+      token: newAccessToken,
+      refreshToken: newRefreshToken,
+    }, 'Token refreshed successfully');
+  } catch (err: any) {
+    sendError(res, 'Token refresh failed: ' + err.message, 500);
+  }
+});
+
+// POST /api/v1/auth/logout
+router.post('/logout', async (req: Request, res: Response) => {
+  const { refreshToken } = req.body;
+  if (refreshToken) {
+    try {
+      const tokenHash = require('crypto').createHash('sha256').update(refreshToken).digest('hex');
+      await db.query(`UPDATE refresh_tokens SET revoked = true WHERE token_hash = $1`, [tokenHash]);
+    } catch (err) {
+      console.warn('Logout token revocation error:', err);
+    }
+  }
+  sendSuccess(res, null, 'Logged out successfully');
 });
 
 export default router;

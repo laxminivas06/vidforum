@@ -1,10 +1,11 @@
 # lucide-react
 
-> 1 nodes · cohesion 1.00
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [next-env.d.ts](file:///C:/Antigravityyyyy/VID_School/frontend/next-env.d.ts#L1) (0 connections)
+- [QueryProvider.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx#L1) (1 connections)
+- [QueryProvider()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx#L6) (1 connections)
 
 ## Relationships
 
@@ -12,11 +13,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\next-env.d.ts](file:///C:/Antigravityyyyy/VID_School/frontend/next-env.d.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\contexts\QueryProvider.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 0 (0%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

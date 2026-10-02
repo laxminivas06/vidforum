@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: falsegreen](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md) (2 connections)
-- [Falsegreen Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md) (1 connections)
-- [Patterns to Flag](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md) (1 connections)
+- [Skill: docflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md) (2 connections)
+- [Docflow Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md) (1 connections)
+- [Policy](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: megalinter & MegaLinter Skill] Cluster]] (4 shared connections)
+- [[[Skill: metabrain & Metabrain Skill] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md)
+- [.agents/plugins/docflow/skills/docflow/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md)
 
 ## Audit Trail
 

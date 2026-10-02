@@ -4,10 +4,10 @@
 
 ## Key Concepts
 
-- [ProgressBar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L1) (3 connections)
-- [heights](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L25) (1 connections)
-- [percentage](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L23) (1 connections)
-- [variants](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L31) (1 connections)
+- [rbac.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L1) (3 connections)
+- [requireAnyPermission()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L70) (1 connections)
+- [requirePermission()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L36) (1 connections)
+- [requireRole()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L7) (1 connections)
 
 ## Relationships
 
@@ -15,7 +15,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\ProgressBar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\rbac.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts)
 
 ## Audit Trail
 

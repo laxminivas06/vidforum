@@ -4,18 +4,18 @@
 
 ## Key Concepts
 
-- [AppShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L1) (11 connections)
-- [INSTITUTION_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L22) (1 connections)
-- [isBlockedByWorkspaceRestriction](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L98) (1 connections)
-- [isBlockedForInstitutionStaff](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L92) (1 connections)
-- [isBlockedForSuperAdmin](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L86) (1 connections)
-- [[isCollapsed, setIsCollapsed]](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L67) (1 connections)
-- [[isMobileMenuOpen, setIsMobileMenuOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L66) (1 connections)
-- [isSuperAdmin](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L85) (1 connections)
-- [pathname](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L64) (1 connections)
-- [PLATFORM_SUPER_ADMIN_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L46) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L65) (1 connections)
-- [{ user, role, enabledModules, institutionName, logout, isInitialized }](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L63) (1 connections)
+- [examinations.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L1) (11 connections)
+- [errorCount](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L96) (1 connections)
+- [{ examId, subjectId }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L42) (1 connections)
+- [{ examId, subjectId, rows }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L85) (1 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L11) (1 connections)
+- [params](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L65) (1 connections)
+- [query](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L13) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L31) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L6) (1 connections)
+- [studentRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L99) (1 connections)
+- [validationResults](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L94) (1 connections)
+- [validCount](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L95) (1 connections)
 
 ## Relationships
 
@@ -23,7 +23,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\layout\AppShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\examinations\examinations.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts)
 
 ## Audit Trail
 

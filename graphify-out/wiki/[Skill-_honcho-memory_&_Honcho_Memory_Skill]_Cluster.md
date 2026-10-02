@@ -4,12 +4,12 @@
 
 ## Key Concepts
 
-- [ConfirmDialog.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L1) (5 connections)
-- [activeCancelText](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L42) (1 connections)
-- [activeConfirmText](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L41) (1 connections)
-- [activeDestructive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L43) (1 connections)
-- [handleClose](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L40) (1 connections)
-- [isDialogOpen](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L39) (1 connections)
+- [StudentProfile.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L1) (5 connections)
+- [[activeTab, setActiveTab]](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L177) (1 connections)
+- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L279) (1 connections)
+- [MOCK_STUDENT](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L97) (1 connections)
+- [student](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L174) (1 connections)
+- [tabs](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L181) (1 connections)
 
 ## Relationships
 
@@ -17,7 +17,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\ConfirmDialog.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\student\StudentProfile.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx)
 
 ## Audit Trail
 

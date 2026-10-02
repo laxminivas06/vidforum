@@ -1,52 +1,48 @@
 # [columns & [searchQuery, setSearchQuery]] Cluster
 
-> 30 nodes · cohesion 0.07
+> 31 nodes · cohesion 0.06
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L1) (15 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L1) (10 connections)
-- [.updateStage()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts#L44) (5 connections)
-- [.updateApplicationStage()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.repository.ts#L55) (3 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/matrix/page.tsx#L1) (3 connections)
-- [handleAdvanceStage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L130) (2 connections)
-- [handleEnroll()](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L120) (2 connections)
-- [handleReject()](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L147) (2 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L45) (2 connections)
-- [[selectedGrade, setSelectedGrade]](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/matrix/page.tsx#L26) (2 connections)
-- [{ data: applicants = [], isLoading, updateStage }](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L46) (1 connections)
-- [DAYS](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/matrix/page.tsx#L15) (1 connections)
-- [[enrollingApplicant, setEnrollingApplicant]](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L53) (1 connections)
-- [[error, setError]](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L30) (1 connections)
-- [filteredApplicants](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L56) (1 connections)
-- [handleGoogleSignIn()](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L54) (1 connections)
-- [handleLoginSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L32) (1 connections)
-- [[identifier, setIdentifier]](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L26) (1 connections)
-- [[isLoading, setIsLoading]](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L29) (1 connections)
-- [{ login }](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L24) (1 connections)
-- [[password, setPassword]](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L27) (1 connections)
-- [PERIODS](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/matrix/page.tsx#L16) (1 connections)
-- [[rejectDialogOpen, setRejectDialogOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L52) (1 connections)
-- [ROLE_WORKSPACE_MAP](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L10) (1 connections)
-- [[selectedApplicant, setSelectedApplicant]](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L51) (1 connections)
-- *... and 5 more nodes in this community*
+- [auth.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L1) (30 connections)
+- [user](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L74) (2 connections)
+- [assignedWorkspaces](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L205) (1 connections)
+- [customAdmin](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L38) (1 connections)
+- [{ email, userId, identifier, password }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L28) (1 connections)
+- [expiresAt](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L225) (1 connections)
+- [institution](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L271) (1 connections)
+- [instPerms](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L196) (1 connections)
+- [instRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L266) (1 connections)
+- [isSuperAdminAlias](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L77) (1 connections)
+- [loginIdentifier](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L29) (1 connections)
+- [newAccessToken](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L365) (1 connections)
+- [newExpiresAt](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L349) (1 connections)
+- [newRefreshToken](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L347) (1 connections)
+- [{ newRole }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L284) (1 connections)
+- [newTokenHash](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L348) (1 connections)
+- [normalizeRole()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L12) (1 connections)
+- [permissions](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L165) (1 connections)
+- [permRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L171) (1 connections)
+- [profileRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L81) (1 connections)
+- [refreshToken](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L223) (1 connections)
+- [resolvedRole](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L73) (1 connections)
+- [rolePermRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L183) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L10) (1 connections)
+- [row](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L332) (1 connections)
+- *... and 6 more nodes in this community*
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[Community 999]] (1 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\admissions\admissions.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\admissions\admissions.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts)
-- [C:\Antigravityyyyy\VID_School\frontend\app\(auth)\login\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\admissions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\timetable\matrix\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/matrix/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\auth\auth.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 57 (86%)
-- INFERRED: 9 (14%)
+- EXTRACTED: 61 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

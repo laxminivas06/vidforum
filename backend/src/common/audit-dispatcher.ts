@@ -23,13 +23,25 @@ export class AuditDispatcher {
   public static async dispatch(event: AuditEventPayload): Promise<void> {
     const timestamp = new Date().toISOString();
 
+    const isUuid = (val?: string | null) =>
+      val ? /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(val) : false;
+
+    const safeActorId = isUuid(event.actorId) ? event.actorId : null;
+    const safeInstitutionId = isUuid(event.institutionId) ? event.institutionId : null;
+    const safeResourceId = isUuid(event.resourceId) ? event.resourceId : null;
+
+    const auditNewValue = {
+      ...(event.newValue || {}),
+      ...(safeActorId ? {} : { rawActorId: event.actorId }),
+    };
+
     try {
       await db.query(
         `INSERT INTO audit_logs (
           id,
           actor_id,
           action,
-          resource,
+          resource_table,
           resource_id,
           old_value,
           new_value,
@@ -42,13 +54,13 @@ export class AuditDispatcher {
           $1, $2, $3, $4, $5, $6, $7, $8, $9, $10
         )`,
         [
-          event.actorId,
+          safeActorId,
           event.action,
           event.resource,
-          event.resourceId || null,
+          safeResourceId,
           event.oldValue ? JSON.stringify(event.oldValue) : null,
-          event.newValue ? JSON.stringify(event.newValue) : null,
-          event.institutionId || null,
+          Object.keys(auditNewValue).length > 0 ? JSON.stringify(auditNewValue) : null,
+          safeInstitutionId,
           event.ipAddress || null,
           event.userAgent || null,
           timestamp,

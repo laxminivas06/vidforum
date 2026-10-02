@@ -244,4 +244,85 @@ router.patch('/:id', async (req: Request, res: Response) => {
   }
 });
 
+// GET /api/v1/users/roles
+router.get('/roles', async (_req: Request, res: Response) => {
+  try {
+    const rolesRes = await db.query(
+      `SELECT r.id, r.name, r.is_system_role as "isSystemRole", r.created_at as "createdAt",
+              count(rp.permission_id) as "permissionsCount"
+       FROM roles r
+       LEFT JOIN role_permissions rp ON rp.role_id = r.id
+       GROUP BY r.id, r.name, r.is_system_role, r.created_at
+       ORDER BY r.is_system_role DESC, r.name ASC`
+    );
+    sendSuccess(res, rolesRes.rows);
+  } catch (error: any) {
+    sendError(res, error.message, 500);
+  }
+});
+
+// GET /api/v1/users/permissions
+router.get('/permissions', async (_req: Request, res: Response) => {
+  try {
+    const permsRes = await db.query(
+      `SELECT id, code, description, module, created_at as "createdAt"
+       FROM permissions
+       ORDER BY module ASC, code ASC`
+    );
+    sendSuccess(res, permsRes.rows);
+  } catch (error: any) {
+    sendError(res, error.message, 500);
+  }
+});
+
+// GET /api/v1/users/roles/:roleId/permissions
+router.get('/roles/:roleId/permissions', async (req: Request, res: Response) => {
+  try {
+    const { roleId } = req.params;
+    const resRolePerms = await db.query(
+      `SELECT p.id, p.code, p.description, p.module
+       FROM permissions p
+       JOIN role_permissions rp ON rp.permission_id = p.id
+       WHERE rp.role_id = $1
+       ORDER BY p.module ASC, p.code ASC`,
+      [roleId]
+    );
+    sendSuccess(res, resRolePerms.rows);
+  } catch (error: any) {
+    sendError(res, error.message, 500);
+  }
+});
+
+// POST /api/v1/users/roles/:roleId/permissions
+router.post('/roles/:roleId/permissions', async (req: Request, res: Response) => {
+  const client = await db.getClient();
+  try {
+    const { roleId } = req.params;
+    const { permissionIds } = req.body;
+
+    if (!Array.isArray(permissionIds)) {
+      sendError(res, 'permissionIds array is required', 400);
+      return;
+    }
+
+    await client.query('BEGIN');
+    await client.query('DELETE FROM role_permissions WHERE role_id = $1', [roleId]);
+
+    for (const pid of permissionIds) {
+      await client.query(
+        'INSERT INTO role_permissions (role_id, permission_id) VALUES ($1, $2) ON CONFLICT DO NOTHING',
+        [roleId, pid]
+      );
+    }
+
+    await client.query('COMMIT');
+    sendSuccess(res, { roleId, count: permissionIds.length }, 'Role permissions updated successfully');
+  } catch (error: any) {
+    await client.query('ROLLBACK');
+    sendError(res, error.message, 500);
+  } finally {
+    client.release();
+  }
+});
+
 export default router;

@@ -32,6 +32,16 @@ export class InstitutionController {
     }
   }
 
+  async getModules(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const id = req.params.id as string;
+      const modules = await institutionService.getModules(id);
+      sendSuccess(res, modules);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async toggleModule(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const id = req.params.id as string;

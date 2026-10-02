@@ -4,14 +4,14 @@
 
 ## Key Concepts
 
-- [index.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L1) (7 connections)
-- [cn()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L72) (1 connections)
-- [containerRef](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L128) (1 connections)
-- [filteredOptions](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L132) (1 connections)
-- [handleClickOutside()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L139) (1 connections)
-- [[isOpen, setIsOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L126) (1 connections)
-- [[searchTerm, setSearchTerm]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L127) (1 connections)
-- [selectedOption](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L130) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L1) (7 connections)
+- [activeGrade](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L31) (1 connections)
+- [{ data: grades = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L28) (1 connections)
+- [isSelected](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L83) (1 connections)
+- [pct](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L176) (1 connections)
+- [[selectedGradeId, setSelectedGradeId]](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L29) (1 connections)
+- [totalCapacity](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L85) (1 connections)
+- [totalStudents](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L84) (1 connections)
 
 ## Relationships
 
@@ -19,7 +19,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Form\index.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\academics\hierarchy\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx)
 
 ## Audit Trail
 

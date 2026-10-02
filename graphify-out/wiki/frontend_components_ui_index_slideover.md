@@ -4,11 +4,15 @@
 
 ## Key Concepts
 
-- **frontend_components_ui_index_column** (0 connections)
+- [Document: Data](file:///C:/Antigravityyyyy/VID_School/.kilo/agents/data.md) (0 connections)
 
 ## Relationships
 
 - No strong cross-community connections detected
+
+## Source Files
+
+- [.kilo/agents/data.md](file:///C:/Antigravityyyyy/VID_School/.kilo/agents/data.md)
 
 ## Audit Trail
 

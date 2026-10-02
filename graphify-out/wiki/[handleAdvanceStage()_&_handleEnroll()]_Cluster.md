@@ -1,45 +1,47 @@
 # [handleAdvanceStage() & handleEnroll()] Cluster
 
-> 24 nodes · cohesion 0.08
+> 26 nodes · cohesion 0.08
 
 ## Key Concepts
 
-- [Document: Tech Spec](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (23 connections)
-- [1.1 Backend Architecture — Layered MVC](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [1. Technical Stack Selection & Justification](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [2. High-Level Architecture Diagram](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [3. Repository & Folder Structure](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [4.1 Schema Definition across 16 Core Domains](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [4. Database Schema & Multi-Tenant Data Model](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [5.1 Route Inventory (Section 26 Mapping)](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [5.2 Sample Request & Response Schemas](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [5. API Contracts & Endpoint Specification](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [6. Authentication, Security & Tenant Isolation](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [7. Responsive UI Specification & Breakpoints](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [8. Third-Party Integrations & Environment Variables](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Admission Approval $\to$ Student Creation Pipeline](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [AI Yantra Intelligence](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Cache & Message Broker / Job Queue](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Detailed Entity Specifications:](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [External Integrations](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Multi-Tenant PostgreSQL Database](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Object Storage](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Platform & Server](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Required Environment Variables (.env)](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Technical Specification: VID (Virtual Identification) Platform](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Timetable Conflict Detection](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Document: Design](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (25 connections)
+- [10. Accessibility Baseline](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [11. What This Design System Deliberately Avoids](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [1. Design Philosophy](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [2.1 Core Palette](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [2.2 Accent & Status Colors](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [2.3 Dark Elements (used, not a dark mode)](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [2. Color System](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [3. Typography](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [4. Spacing & Layout Grid](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.10 Slide-over / Detail Panel](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.1 Sidebar Navigation](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.2 Topbar / Breadcrumb](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.3 Two-Pane Settings Layout](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.4 Cards](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.5 Tables → Cards (responsive)](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.6 Forms](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.7 Buttons](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.8 Badges & Status Pills](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.9 Progress Indicators](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5. Core Components](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [6. Iconography](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [7. Required UI States (every screen)](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [8. Responsive Breakpoints](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [9. Motion & Interaction](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- *... and 1 more nodes in this community*
 
 ## Relationships
 
-- [[[Document: Readme & 1. Prerequisites] Cluster]] (46 shared connections)
+- [[[Document: Prd & 1.1 Problem Statement] Cluster]] (50 shared connections)
 
 ## Source Files
 
-- [docs/TECH_SPEC.md](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md)
+- [docs/Design.md](file:///C:/Antigravityyyyy/VID_School/docs/Design.md)
 
 ## Audit Trail
 
-- EXTRACTED: 46 (100%)
+- EXTRACTED: 50 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

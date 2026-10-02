@@ -1,10 +1,11 @@
 # next
 
-> 1 nodes · cohesion 1.00
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [postcss.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/postcss.config.js#L1) (0 connections)
+- [utils.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts#L1) (1 connections)
+- [cn()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts#L4) (1 connections)
 
 ## Relationships
 
@@ -12,11 +13,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\postcss.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/postcss.config.js)
+- [C:\Antigravityyyyy\VID_School\frontend\lib\utils.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 0 (0%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

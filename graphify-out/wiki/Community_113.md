@@ -4,16 +4,16 @@
 
 ## Key Concepts
 
-- [Document: Graphify](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md) (1 connections)
-- [Workflow: graphify](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/transport/page.tsx#L1) (1 connections)
+- [routes](file:///C:/Antigravityyyyy/VID_School/frontend/app/transport/page.tsx#L9) (1 connections)
 
 ## Relationships
 
-- [[Community 109]] (2 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/workflows/graphify.md](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md)
+- [C:\Antigravityyyyy\VID_School\frontend\app\transport\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/transport/page.tsx)
 
 ## Audit Trail
 

@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [QueryProvider.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx#L1) (1 connections)
-- [QueryProvider()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx#L6) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/security/page.tsx#L1) (1 connections)
+- [SecurityPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/security/page.tsx#L8) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\contexts\QueryProvider.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\security\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/security/page.tsx)
 
 ## Audit Trail
 

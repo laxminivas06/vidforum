@@ -1,18 +1,19 @@
 # [Document: Plugin Orchestrator & 1. Memory Phase (Start of Session & Pre-Edit)] Cluster
 
-> 9 nodes · cohesion 0.22
+> 10 nodes · cohesion 0.20
 
 ## Key Concepts
 
-- [documents.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L1) (8 connections)
-- [certificateId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L58) (1 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L11) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L12) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L6) (1 connections)
-- [sRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L42) (1 connections)
-- [student](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L57) (1 connections)
-- [{ studentId, purpose = 'General Purpose' }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L39) (1 connections)
-- [verificationUrl](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L59) (1 connections)
+- [timetable.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L1) (10 connections)
+- [conflicts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L56) (1 connections)
+- [facConflict](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L60) (1 connections)
+- [{ facultyId, roomId, dayOfWeek, startTime, endTime }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L53) (1 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L11) (1 connections)
+- [params](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L35) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L43) (1 connections)
+- [roomConflict](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L78) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L6) (1 connections)
+- [{ sectionId }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L12) (1 connections)
 
 ## Relationships
 
@@ -20,11 +21,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\documents\documents.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 16 (100%)
+- EXTRACTED: 19 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

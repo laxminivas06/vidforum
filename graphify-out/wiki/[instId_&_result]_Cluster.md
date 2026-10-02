@@ -1,28 +1,29 @@
 # [instId & result] Cluster
 
-> 7 nodes · cohesion 0.29
+> 8 nodes · cohesion 0.25
 
 ## Key Concepts
 
-- [Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L1) (6 connections)
-- [activeWorkspace](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L47) (1 connections)
-- [dropdownRef](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L39) (1 connections)
-- [handleClickOutside()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L51) (1 connections)
-- [isCurrent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L128) (1 connections)
-- [[isWorkspaceDropdownOpen, setIsWorkspaceDropdownOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L38) (1 connections)
-- [permittedWorkspaces](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L42) (1 connections)
+- [Document: Plugin Orchestrator](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (7 connections)
+- [1. Memory Phase (Start of Session & Pre-Edit)](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [2. Planning & SDLC Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [3. Implementation & Testing Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [4. Code Quality & Review Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [5. Security & Git Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [6. Token & Output Optimization](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [Plugin Orchestration Rules](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Document: Agents & 1. Operating Mode & Standards] Cluster]] (14 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx)
+- [.agents/rules/plugin-orchestrator.md](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md)
 
 ## Audit Trail
 
-- EXTRACTED: 12 (100%)
+- EXTRACTED: 14 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

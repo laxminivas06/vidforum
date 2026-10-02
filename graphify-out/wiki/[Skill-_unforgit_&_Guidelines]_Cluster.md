@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: metabrain](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md) (2 connections)
-- [Metabrain Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md) (1 connections)
-- [Workflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md) (1 connections)
+- [Skill: megalinter](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (2 connections)
+- [MegaLinter Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (1 connections)
+- [Target Toolchains](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: spec-driven & Lifecycle Stages] Cluster]] (4 shared connections)
+- [[[Skill: test-gap & Checks] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/metabrain/skills/metabrain/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md)
+- [.agents/plugins/megalinter/skills/megalinter/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md)
 
 ## Audit Trail
 

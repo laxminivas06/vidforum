@@ -1,6 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import { sendError } from '../utils/api-response';
 
+/**
+ * RBAC Role Check Middleware (Section 7, Rule 7, Rule 26)
+ */
 export function requireRole(...allowedRoles: string[]) {
   return (req: Request, res: Response, next: NextFunction): void => {
     if (!req.user) {
@@ -25,6 +28,11 @@ export function requireRole(...allowedRoles: string[]) {
   };
 }
 
+/**
+ * Permission Middleware (Section 7, Rule 7, Rule 26)
+ * Checks canonical permission code format: <module>.<resource>.<action>
+ * Super Admin or '*' automatically grants access.
+ */
 export function requirePermission(permission: string) {
   return (req: Request, res: Response, next: NextFunction): void => {
     if (!req.user) {
@@ -32,16 +40,62 @@ export function requirePermission(permission: string) {
       return;
     }
 
+    const permissions = req.user.permissions || [];
+
     if (
       req.user.role === 'SUPER_ADMIN' ||
       req.user.role === 'Super Admin' ||
-      req.user.permissions.includes('*') ||
-      req.user.permissions.includes(permission)
+      permissions.includes('*') ||
+      permissions.includes('platform.all') ||
+      permissions.includes(permission)
     ) {
       next();
       return;
     }
 
-    sendError(res, `Access denied: Missing permission '${permission}'`, 403, 'PERMISSION_DENIED');
+    // Check wildcard module matching e.g. 'academics.*'
+    const [mod] = permission.split('.');
+    if (permissions.includes(`${mod}.*`)) {
+      next();
+      return;
+    }
+
+    sendError(res, `Access denied: Missing required permission '${permission}'`, 403, 'PERMISSION_DENIED');
+  };
+}
+
+/**
+ * Check if user has ANY of the specified permissions
+ */
+export function requireAnyPermission(...permissions: string[]) {
+  return (req: Request, res: Response, next: NextFunction): void => {
+    if (!req.user) {
+      sendError(res, 'Authentication required', 401, 'UNAUTHORIZED');
+      return;
+    }
+
+    const userPerms = req.user.permissions || [];
+
+    if (
+      req.user.role === 'SUPER_ADMIN' ||
+      req.user.role === 'Super Admin' ||
+      userPerms.includes('*') ||
+      userPerms.includes('platform.all')
+    ) {
+      next();
+      return;
+    }
+
+    const hasAny = permissions.some((p) => {
+      const [mod] = p.split('.');
+      return userPerms.includes(p) || userPerms.includes(`${mod}.*`);
+    });
+
+    if (!hasAny) {
+      sendError(res, `Access denied: Requires at least one of permissions [${permissions.join(', ')}]`, 403, 'PERMISSION_DENIED');
+      return;
+    }
+
+    next();
   };
 }

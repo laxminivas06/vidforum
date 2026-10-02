@@ -33,7 +33,7 @@
 
 ## Relationships
 
-- [[[Document: Design & 10. Accessibility Baseline] Cluster]] (94 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

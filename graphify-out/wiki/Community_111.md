@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [utils.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts#L1) (1 connections)
-- [cn()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts#L4) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/sports/page.tsx#L1) (1 connections)
+- [SportsPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/sports/page.tsx#L8) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\lib\utils.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\sports\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/sports/page.tsx)
 
 ## Audit Trail
 

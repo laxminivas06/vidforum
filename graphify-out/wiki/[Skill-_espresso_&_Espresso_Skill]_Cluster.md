@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [App.tsx](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx#L1) (2 connections)
-- [[selectedChild, setSelectedChild]](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx#L6) (1 connections)
-- [[selectedRole, setSelectedRole]](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx#L5) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx#L1) (2 connections)
+- [MOCK_CAMPAIGNS](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx#L42) (1 connections)
+- [VoiceAgentCampaignsPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx#L75) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\mobile\App.tsx](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\voice-agent\campaigns\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx)
 
 ## Audit Trail
 

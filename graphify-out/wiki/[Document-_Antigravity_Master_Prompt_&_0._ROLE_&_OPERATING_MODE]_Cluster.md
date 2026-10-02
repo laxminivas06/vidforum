@@ -1,31 +1,31 @@
 # [Document: Antigravity Master Prompt & 0. ROLE & OPERATING MODE] Cluster
 
-> 22 nodes · cohesion 0.09
+> 22 nodes · cohesion 0.10
 
 ## Key Concepts
 
-- [hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1) (21 connections)
-- [API_BASE_URL](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L230) (1 connections)
-- [DEFAULT_INST_ID](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L231) (1 connections)
-- [MOCK_APPLICANTS](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L10) (1 connections)
-- [MOCK_FACULTY](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L144) (1 connections)
-- [MOCK_FEES](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L184) (1 connections)
-- [MOCK_GRADES](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L106) (1 connections)
-- [MOCK_INSTITUTIONS](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L7) (1 connections)
-- [useAcademics()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L722) (1 connections)
-- [useAdmissions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L671) (1 connections)
-- [useCreateInstitution()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L262) (1 connections)
-- [useCreateInstitutionAdmin()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L404) (1 connections)
-- [useCreatePlatformUser()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L614) (1 connections)
-- [useFaculty()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L742) (1 connections)
-- [useFinance()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L782) (1 connections)
-- [useInstitutionAdmins()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L358) (1 connections)
-- [useInstitutions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L233) (1 connections)
-- [useMyClasses()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L762) (1 connections)
-- [usePlatformUsers()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L568) (1 connections)
-- [useUpdateAdminWorkspaces()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L493) (1 connections)
-- [useUpdateInstitutionStatus()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L316) (1 connections)
-- [useUpdatePlatformUser()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L641) (1 connections)
+- [ProvisionTenantModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L1) (21 connections)
+- [autoGenerateCode()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L90) (2 connections)
+- [handleNameChange()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L68) (2 connections)
+- [handleSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L155) (2 connections)
+- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L132) (2 connections)
+- [[boardAffiliation, setBoardAffiliation]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L55) (1 connections)
+- [[code, setCode]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L54) (1 connections)
+- [[contactEmail, setContactEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L56) (1 connections)
+- [[contactPhone, setContactPhone]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L57) (1 connections)
+- [createInstitutionMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L65) (1 connections)
+- [[customDomain, setCustomDomain]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L60) (1 connections)
+- [effectiveDomain](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L101) (1 connections)
+- [[errors, setErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L62) (1 connections)
+- [[isCustomDomain, setIsCustomDomain]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L61) (1 connections)
+- [isSelected](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L445) (1 connections)
+- [[name, setName]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L53) (1 connections)
+- [PLAN_OPTIONS](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L33) (1 connections)
+- [[plan, setPlan]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L59) (1 connections)
+- [POPULAR_BOARDS](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L39) (1 connections)
+- [REGION_OPTIONS](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L26) (1 connections)
+- [[region, setRegion]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L58) (1 connections)
+- [[submittedSuccess, setSubmittedSuccess]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L63) (1 connections)
 
 ## Relationships
 
@@ -33,11 +33,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\lib\api\hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\components\institutions\ProvisionTenantModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 42 (100%)
+- EXTRACTED: 46 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

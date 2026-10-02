@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/monitoring/page.tsx#L1) (1 connections)
-- [MonitoringPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/monitoring/page.tsx#L8) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-config/page.tsx#L1) (1 connections)
+- [AIConfigPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-config/page.tsx#L8) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\monitoring\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/monitoring/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\ai-config\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-config/page.tsx)
 
 ## Audit Trail
 

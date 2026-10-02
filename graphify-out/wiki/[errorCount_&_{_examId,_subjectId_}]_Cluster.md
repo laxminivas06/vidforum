@@ -1,34 +1,35 @@
 # [errorCount & { examId, subjectId }] Cluster
 
-> 13 nodes · cohesion 0.15
+> 14 nodes · cohesion 0.15
 
 ## Key Concepts
 
-- [Document: Decisions](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (12 connections)
-- [ADR-001 Strict Separation of Phase Deliverables](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-002 Multi-Tenancy via Shared Database with Institution-ID & RLS](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-003 Central Student Master Record vs Workspace](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-004 Two-Tier RBAC with Resource-Level Context Verification](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-005 Full-Stack Monorepo Structure (backend/ + frontend/)](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-006 Pre-Commit Validation Pipeline for Excel Exam Imports](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-007 Strict 3-Workspace Boundary for AI Yantra](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-008 Node.js 22 + TypeScript + Express Layered MVC Architecture](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-009 Supabase Cloud PostgreSQL with Public Schema Helper Functions for RLS](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [ADR-010 Zero-Downtime TanStack Query Hooks with Resilient Mock Fallback](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [Architectural & Technical Decisions Log: VID Platform](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
-- [Decision Records](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [AddInstituteAdminModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L1) (13 connections)
+- [handleSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L89) (2 connections)
+- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L61) (2 connections)
+- [createAdminMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L34) (1 connections)
+- [[email, setEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L37) (1 connections)
+- [[errors, setErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L42) (1 connections)
+- [handleDeselectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L57) (1 connections)
+- [handleSelectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L53) (1 connections)
+- [handleToggleWorkspace()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L47) (1 connections)
+- [isChecked](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L271) (1 connections)
+- [[password, setPassword]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L38) (1 connections)
+- [[selectedWorkspaces, setSelectedWorkspaces]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L39) (1 connections)
+- [[successBanner, setSuccessBanner]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L43) (1 connections)
+- [[userId, setUserId]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L36) (1 connections)
 
 ## Relationships
 
-- [[[client & { id }] Cluster]] (24 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [docs/DECISIONS.md](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md)
+- [C:\Antigravityyyyy\VID_School\frontend\components\institutions\AddInstituteAdminModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 24 (100%)
+- EXTRACTED: 28 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

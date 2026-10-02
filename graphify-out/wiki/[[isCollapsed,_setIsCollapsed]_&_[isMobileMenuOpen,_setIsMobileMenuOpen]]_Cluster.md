@@ -4,13 +4,13 @@
 
 ## Key Concepts
 
-- [index.ts](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L1) (6 connections)
-- [ApiErrorDetailSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L51) (1 connections)
-- [ApiErrorSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L57) (1 connections)
-- [ApiSuccessSchema()](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L32) (1 connections)
-- [BaseEntitySchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L6) (1 connections)
-- [PaginationQuerySchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L19) (1 connections)
-- [TenantContextSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L75) (1 connections)
+- [Sidebar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L1) (6 connections)
+- [ICON_MAP](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L44) (1 connections)
+- [IconComponent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L105) (1 connections)
+- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L181) (1 connections)
+- [navigationGroups](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L102) (1 connections)
+- [pathname](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L101) (1 connections)
+- [renderIcon()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L200) (1 connections)
 
 ## Relationships
 
@@ -18,7 +18,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\packages\schemas\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Sidebar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx)
 
 ## Audit Trail
 

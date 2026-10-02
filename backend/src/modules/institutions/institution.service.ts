@@ -88,6 +88,14 @@ export class InstitutionService {
     };
   }
 
+  async getModules(idOrCode: string) {
+    const inst = await institutionRepository.findByIdOrCode(idOrCode);
+    if (!inst) {
+      throw new Error('Institution not found');
+    }
+    return await institutionRepository.findModules(inst.id);
+  }
+
   async toggleModule(idOrCode: string, moduleCode: string, isEnabled: boolean) {
     try {
       const inst = await institutionRepository.findByIdOrCode(idOrCode);

@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [Document: Data](file:///C:/Antigravityyyyy/VID_School/.kilo/agents/data.md) (0 connections)
+- [tailwindcss](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L27) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [.kilo/agents/data.md](file:///C:/Antigravityyyyy/VID_School/.kilo/agents/data.md)
+- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
 
 ## Audit Trail
 

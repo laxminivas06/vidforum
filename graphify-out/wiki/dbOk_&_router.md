@@ -1,25 +1,26 @@
 # dbOk & router
 
-> 4 nodes · cohesion 0.50
+> 5 nodes · cohesion 0.40
 
 ## Key Concepts
 
-- [optional-modules.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L1) (3 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L11) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L12) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L6) (1 connections)
+- [Document: Agents](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (4 connections)
+- [1. Operating Mode & Standards](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
+- [2. Active Plugin Ecosystem & Memory](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
+- [3. Working Agreement Checklist](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
+- [VID Platform: Agent Operating Guidelines](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[db & pool]] (8 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\optional-modules\optional-modules.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts)
+- [AGENTS.md](file:///C:/Antigravityyyyy/VID_School/AGENTS.md)
 
 ## Audit Trail
 
-- EXTRACTED: 6 (100%)
+- EXTRACTED: 8 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

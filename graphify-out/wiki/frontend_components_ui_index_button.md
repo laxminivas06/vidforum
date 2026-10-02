@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [@types/react](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L23) (0 connections)
+- [zod](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L19) (0 connections)
 
 ## Relationships
 

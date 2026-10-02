@@ -1,15 +1,16 @@
 # [Skill: brooks-lint & Brooks Lint Skill] Cluster
 
-> 6 nodes · cohesion 0.33
+> 7 nodes · cohesion 0.29
 
 ## Key Concepts
 
-- [Button.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L1) (5 connections)
-- [activeLeftIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L53) (1 connections)
-- [activeRightIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L54) (1 connections)
-- [baseStyles](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L32) (1 connections)
-- [sizes](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L46) (1 connections)
-- [variants](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L35) (1 connections)
+- [index.ts](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L1) (6 connections)
+- [ApiErrorDetailSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L51) (1 connections)
+- [ApiErrorSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L57) (1 connections)
+- [ApiSuccessSchema()](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L32) (1 connections)
+- [BaseEntitySchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L6) (1 connections)
+- [PaginationQuerySchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L19) (1 connections)
+- [TenantContextSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L75) (1 connections)
 
 ## Relationships
 
@@ -17,11 +18,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Button.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx)
+- [C:\Antigravityyyyy\VID_School\packages\schemas\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 10 (100%)
+- EXTRACTED: 12 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -1,26 +1,27 @@
 # db & pool
 
-> 5 nodes · cohesion 0.40
+> 6 nodes · cohesion 0.33
 
 ## Key Concepts
 
-- [Document: Agents](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (4 connections)
-- [1. Operating Mode & Standards](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
-- [2. Active Plugin Ecosystem & Memory](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
-- [3. Working Agreement Checklist](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
-- [VID Platform: Agent Operating Guidelines](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
+- [ConfirmDialog.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L1) (5 connections)
+- [activeCancelText](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L42) (1 connections)
+- [activeConfirmText](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L41) (1 connections)
+- [activeDestructive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L43) (1 connections)
+- [handleClose](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L40) (1 connections)
+- [isDialogOpen](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L39) (1 connections)
 
 ## Relationships
 
-- [[[Skill: brooks-lint & Brooks Lint Skill] Cluster]] (8 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [AGENTS.md](file:///C:/Antigravityyyyy/VID_School/AGENTS.md)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\ConfirmDialog.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 8 (100%)
+- EXTRACTED: 10 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

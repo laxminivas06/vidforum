@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: flaky-detector](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (2 connections)
-- [Flaky Detector Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (1 connections)
-- [Instructions](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (1 connections)
+- [Skill: espresso](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md) (2 connections)
+- [Espresso Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md) (1 connections)
+- [Guidelines](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: memesh & Execution Guide] Cluster]] (4 shared connections)
+- [[[Skill: pr-storyteller & PR Storyteller Skill] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md)
+- [.agents/plugins/espresso/skills/espresso/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md)
 
 ## Audit Trail
 

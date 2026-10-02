@@ -1,32 +1,17 @@
 # [activeFooter & isPanelOpen] Cluster
 
-> 8 nodes · cohesion 0.39
+> 8 nodes · cohesion 0.25
 
 ## Key Concepts
 
-- [VidApiClient](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L7) (7 connections)
-- [.request()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L18) (5 connections)
-- [.delete()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L71) (2 connections)
-- [.get()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L51) (2 connections)
-- [.patch()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L63) (2 connections)
-- [.post()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L55) (2 connections)
-- [index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L1) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L12) (1 connections)
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class VidApiClient {
-        +index.ts()
-        +.constructor()
-        +.request()
-        +.get()
-        +.post()
-        +.patch()
-        +.delete()
-    }
-```
+- [Table.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L1) (7 connections)
+- [handleSort()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L54) (1 connections)
+- [isTableLoading](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L52) (1 connections)
+- [mobileSubtitleCol](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L79) (1 connections)
+- [mobileTitleCol](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L78) (1 connections)
+- [[sortDir, setSortDir]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L50) (1 connections)
+- [sortedData](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L63) (1 connections)
+- [[sortKey, setSortKey]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L49) (1 connections)
 
 ## Relationships
 
@@ -34,11 +19,11 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\packages\api-client\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Table.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 22 (100%)
+- EXTRACTED: 14 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

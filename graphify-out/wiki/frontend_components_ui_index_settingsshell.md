@@ -4,11 +4,15 @@
 
 ## Key Concepts
 
-- **frontend_components_ui_index_cardtitle** (0 connections)
+- [Document: Graphify](file:///C:/Antigravityyyyy/VID_School/.agents/rules/graphify.md) (0 connections)
 
 ## Relationships
 
 - No strong cross-community connections detected
+
+## Source Files
+
+- [.agents/rules/graphify.md](file:///C:/Antigravityyyyy/VID_School/.agents/rules/graphify.md)
 
 ## Audit Trail
 

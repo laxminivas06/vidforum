@@ -2,7 +2,7 @@
 
 > God node · 23 connections · [docs/TECH_SPEC.md](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md)
 
-**Community:** [[[Document: Readme & 1. Prerequisites] Cluster]]
+**Community:** [[[handleAdvanceStage() & handleEnroll()] Cluster]]
 
 ## Connections by Relation
 

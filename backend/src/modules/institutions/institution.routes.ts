@@ -15,6 +15,9 @@ router.get('/:id', institutionController.getInstitutionById.bind(institutionCont
 // GET /api/v1/institutions/:id/stats
 router.get('/:id/stats', institutionController.getStats.bind(institutionController));
 
+// GET /api/v1/institutions/:id/modules
+router.get('/:id/modules', institutionController.getModules.bind(institutionController));
+
 // PATCH /api/v1/institutions/:id/modules/:moduleCode
 router.patch('/:id/modules/:moduleCode', institutionController.toggleModule.bind(institutionController));
 

@@ -374,12 +374,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setPermissions(ROLE_PERMISSIONS[newRole] || ALL_PERMISSIONS)
   }
 
-  const toggleOptionalModule = (moduleKey: string) => {
+  const toggleOptionalModule = async (moduleKey: string) => {
+    const isCurrentlyEnabled = enabledModules.includes(moduleKey);
+    const newEnabled = !isCurrentlyEnabled;
+
     setEnabledModules((prev) =>
-      prev.includes(moduleKey)
+      isCurrentlyEnabled
         ? prev.filter((k) => k !== moduleKey)
         : [...prev, moduleKey]
-    )
+    );
+
+    try {
+      const instId = user?.institutionId || "22222222-2222-2222-2222-222222222201";
+      await fetch(`http://localhost:5000/api/v1/institutions/${instId}/modules/${moduleKey}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isEnabled: newEnabled }),
+      });
+    } catch (err) {
+      console.warn("Failed to persist module toggle to backend:", err);
+    }
   }
 
   return (

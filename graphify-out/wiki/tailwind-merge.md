@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [@types/pg](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L31) (0 connections)
+- [pg](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L21) (0 connections)
 
 ## Relationships
 

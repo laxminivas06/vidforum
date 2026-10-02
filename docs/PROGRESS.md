@@ -11,9 +11,9 @@
 |---|---|---|---|
 | **Phase 1, Step A** | Foundation & Shared Infrastructure | **COMPLETED** | PASSED (Monorepo, CI, Design System, Common Base Classes, Docs) |
 | **Phase 1, Step B** | Platform, Identity, RBAC Engine & Administration | **COMPLETED** | PASSED (14/14 Automated Tests: Cross-Tenant 403, RBAC, Module Toggles, Audit, Notifications, Tokens) |
-| **Phase 1, Step C** | Academic Core, Faculty Scoping & Admissions Lifecycle | **COMPLETED** | PASSED (9/9 Automated Tests: Rule 8 Faculty Scoping, Atomic Admission Approval, 360° Student Master, D2 Department Types) |
-| **Phase 2, Module 1** | Timetable: Periods, Rooms, Conflict Engine, Publishing & Substitutions | **COMPLETED** | PASSED (10/10 Automated Tests: Conflict Detection Blocks Publish, Teacher/Room/Section Clashes, Substitutions, Scoped Schedules) |
-| **Phase 2, Remaining** | Finance, Attendance, Examinations, Documents, HRMS UI, Mobile Shell | **IN PROGRESS** | Next: Module 2 (Finance & Invoicing Engine) |
+| **Phase 1, Step C** | Academic Core, Faculty Scoping & Admissions Lifecycle | **COMPLETED** | PASSED (9/9 Automated Tests: Rule 8 Faculty Scoping, Atomic Admission Approval, 360° Student Master, D2 Department Types) || **Phase 2, Module 1** | Timetable: Periods, Rooms, Conflict Engine, Publishing & Substitutions | **COMPLETED** | PASSED (10/10 Automated Tests: Conflict Detection Blocks Publish, Teacher/Room/Section Clashes, Substitutions, Scoped Schedules) |
+| **Phase 2, Module 2** | Finance: Fees, Invoicing, Partial Payments, Receipts, Webhook Idempotency & Refunds | **COMPLETED** | PASSED (10/10 Automated Tests: Fee Structures, Invoices, Webhook Idempotency & Failure Paths, Refunds, Scoped Access) |
+| **Phase 2, Remaining** | Attendance, Examinations, Documents, HRMS UI, Mobile Shell | **IN PROGRESS** | Next: Module 3 (Attendance & Leave Management) |
 | **Phase 3** | AI Yantra (Voice Agent, AI Attendance, AI Tutor) | **QUEUED** | Pending Phase 2 |
 | **Phase 4** | Optional Modules (Events, Transport, Hostel, Library, Sports, Inventory) | **QUEUED** | Pending Phase 3 |
 
@@ -71,8 +71,6 @@
 
 ---
 
----
-
 ## Phase 2, Module 1 Checklist: Timetable (Completed)
 - [x] **Database Migration (`003_phase2_timetable.sql`):**
   - Confirmed schema & indexes for `rooms`, `periods`, `timetables`, `timetable_entries`, and `substitutions`.
@@ -100,9 +98,43 @@
 
 ---
 
-## Next Milestone: Phase 2, Module 2 (Finance & Fees)
-- Scope per Section 9.8 & Decisions D6, D10:
-  - Fee structures, fee components, discounts/concessions.
-  - Student fee ledger (`finance_transactions`, `invoices`, `payments`).
-  - Invoicing engine with partial payment tracking, receipts, and offline reconciliation.
+## Phase 2, Module 2 Checklist: Finance & Fee Management (Completed)
+- [x] **Database Migration (`004_phase2_finance.sql`):**
+  - Confirmed schema & performance indexes for `fee_structures`, `fee_categories`, `fee_groups`, `fee_structure_items`, `student_fees`, `invoices`, `invoice_items`, `payments`, `receipts`, `discounts`, `scholarships`, `student_discounts`, `refunds`.
+  - Added `payment_webhook_events` with unique constraint `(gateway_name, event_id)` for webhook idempotency.
+  - Added `institution_id` on `receipts` and `refunds` for multi-tenant isolation.
+  - Added `updated_at` column on `invoices` matching trigger `trg_set_updated_at`.
+- [x] **Atomic Transaction Helper:**
+  - Extended database configuration with atomic `db.transaction(callback)` executing `BEGIN`, `COMMIT`, `ROLLBACK`, and safe connection release.
+- [x] **Fee Structures & Discounts (Section 9.10 & Section 5):**
+  - Categories & Groups CRUD (`/api/v1/finance/categories`, `/api/v1/finance/groups`).
+  - Fee Structure builder with items and academic year/class mapping (`/api/v1/finance/structures`).
+  - Percentage discounts & flat scholarships with student assignment.
+- [x] **Invoicing & Ledger Engine:**
+  - Fee assignment generating `student_fees` row and initial itemized `invoices` with `invoice_items`.
+  - Overpayment prevention: strictly rejects payment attempts exceeding remaining balance due.
+  - Partial payments: atomic payment registration, receipt generation (`receipts`), and balance due update.
+  - Invoice status progression: `pending` → `partially_paid` → `paid`.
+  - Decision D6 Linkage: Transitions `admissions.admission_fee_status = 'paid'` upon student's full fee settlement.
+- [x] **Payment Gateway Webhooks (Section 9.10 & Section 18 Exit Gate):**
+  - Dedicated idempotent webhook endpoint (`POST /api/v1/finance/webhooks/:gateway` and `/api/v1/finance/webhook`).
+  - Duplicate delivery prevention: uses `(gateway_name, event_id)` table constraint and pre-check to return `{ duplicate: true }` without duplicate credit.
+  - Explicit failure path handling: captures `payment.failed` events, logs failed payments in `payments` ledger without modifying balance due, and returns status.
+- [x] **Refunds Engine:**
+  - Refund processing (`POST /api/v1/finance/refunds`) creating immutable refund ledger record, restoring student's balance due, reverting invoice status to `partially_paid`, and logging audit events.
+- [x] **Scoped Fee Access (Rules 8, 9, 10):**
+  - Student: Retrieves own fee ledger, invoices, payments, and receipts.
+  - Parent: Retrieves linked children's fee summaries and outstanding dues.
+  - Faculty: Blocked with `403 FORBIDDEN` (`RESOURCE_ACCESS_DENIED`) — faculty never accesses student financial ledgers.
+- [x] **Automated Test Suite:** `backend/tests/phase2_finance.test.ts` passing 10/10 tests. Total test suite passing: 43/43 tests.
+
+---
+
+## Next Milestone: Phase 2, Module 3 (Attendance & Leave Management)
+- Scope per Section 9.6 & Decisions D1, D3, D7:
+  - Roll call attendance engine (Present, Absent, Late, Excused) by date, section, period.
+  - Subject-wise / period-wise attendance option and daily attendance.
+  - Student & Faculty attendance models with multi-tenant isolation.
+  - Student leave requests with parent submission and admin/teacher approval flow.
+  - Threshold alerts & parent notifications for consecutive/excessive absences.
 

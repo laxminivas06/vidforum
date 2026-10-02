@@ -13,7 +13,8 @@
 | **Phase 1, Step B** | Platform, Identity, RBAC Engine & Administration | **COMPLETED** | PASSED (14/14 Automated Tests: Cross-Tenant 403, RBAC, Module Toggles, Audit, Notifications, Tokens) |
 | **Phase 1, Step C** | Academic Core, Faculty Scoping & Admissions Lifecycle | **COMPLETED** | PASSED (9/9 Automated Tests: Rule 8 Faculty Scoping, Atomic Admission Approval, 360° Student Master, D2 Department Types) || **Phase 2, Module 1** | Timetable: Periods, Rooms, Conflict Engine, Publishing & Substitutions | **COMPLETED** | PASSED (10/10 Automated Tests: Conflict Detection Blocks Publish, Teacher/Room/Section Clashes, Substitutions, Scoped Schedules) |
 | **Phase 2, Module 2** | Finance: Fees, Invoicing, Partial Payments, Receipts, Webhook Idempotency & Refunds | **COMPLETED** | PASSED (10/10 Automated Tests: Fee Structures, Invoices, Webhook Idempotency & Failure Paths, Refunds, Scoped Access) |
-| **Phase 2, Remaining** | Attendance, Examinations, Documents, HRMS UI, Mobile Shell | **IN PROGRESS** | Next: Module 3 (Attendance & Leave Management) |
+| **Phase 2, Module 3** | Attendance: Daily & Period Sessions, Batch Roll Call, Low Attendance Alerts, Leave Workflows | **COMPLETED** | PASSED (10/10 Automated Tests: Atomic Roll Call, Leave Request to Excused Status, Absence Notifications, Rule 8/9 Scoping) |
+| **Phase 2, Remaining** | Examinations, Documents, HRMS UI, Mobile Shell | **IN PROGRESS** | Next: Module 4 (Examinations & Gradebook) |
 | **Phase 3** | AI Yantra (Voice Agent, AI Attendance, AI Tutor) | **QUEUED** | Pending Phase 2 |
 | **Phase 4** | Optional Modules (Events, Transport, Hostel, Library, Sports, Inventory) | **QUEUED** | Pending Phase 3 |
 
@@ -130,11 +131,44 @@
 
 ---
 
-## Next Milestone: Phase 2, Module 3 (Attendance & Leave Management)
-- Scope per Section 9.6 & Decisions D1, D3, D7:
-  - Roll call attendance engine (Present, Absent, Late, Excused) by date, section, period.
-  - Subject-wise / period-wise attendance option and daily attendance.
-  - Student & Faculty attendance models with multi-tenant isolation.
-  - Student leave requests with parent submission and admin/teacher approval flow.
-  - Threshold alerts & parent notifications for consecutive/excessive absences.
+## Phase 2, Module 3 Checklist: Attendance & Leave Management (Completed)
+- [x] **Database Migration (`005_phase2_attendance.sql`):**
+  - Verified partial unique constraints `uq_daily_attendance_session` and `uq_period_attendance_session` on `attendance_sessions`.
+  - Verified `student_leave_requests` table with `chk_student_leave_dates` constraint.
+  - Verified indexes for student attendance, staff attendance, session dates, and student leave requests.
+- [x] **Daily & Period Attendance Sessions:**
+  - Session creation endpoint (`POST /api/v1/attendance/sessions`) enforcing unique sessions per section/date/period.
+  - Roster retrieval (`GET /api/v1/attendance/sessions/:id/roster`) integrating student master data with active leave status and prior markings.
+- [x] **Batch Roll Call Recording:**
+  - Atomic batch upsert (`POST /api/v1/attendance/sessions/:id/records`) supporting statuses (`present`, `absent`, `late`, `excused`) and remarks.
+  - Pre-validation checking that all students belong to the targeted section.
+  - Real-time parent notification dispatch for students marked `absent` (`attendance_alert`).
+- [x] **Student Attendance Metrics & Low Attendance Flagging:**
+  - Comprehensive attendance summary endpoint (`GET /api/v1/attendance/students/:studentId/summary`).
+  - Accurate attendance percentage calculation: `(present + late) / total * 100`.
+  - Automatic low attendance threshold indicator (`isLowAttendance: true` when percentage `< 75%`).
+- [x] **Leave Management Workflow:**
+  - Student/parent leave request submission (`POST /api/v1/attendance/leaves`).
+  - Role-based listing (`GET /api/v1/attendance/leaves`) with institution and student filtering.
+  - Leave approval/rejection (`PATCH /api/v1/attendance/leaves/:id/status`).
+  - Automatic reconciliation: approving a leave retroactively transitions any existing `absent` records in that date range to `excused`.
+- [x] **Staff Attendance:**
+  - Dedicated endpoints (`POST /api/v1/attendance/staff` and `GET /api/v1/attendance/staff`) for recording staff daily attendance.
+- [x] **Scoped Attendance Access (Rules 8, 9, 10):**
+  - Faculty: Restricted to creating sessions and recording roll call only for allocated classes/sections (or assigned class teacher sections).
+  - Student: Scoped strictly to viewing own attendance records and summaries.
+  - Parent: Scoped strictly to viewing linked children's attendance records.
+- [x] **Automated Test Suite:** `backend/tests/phase2_attendance.test.ts` passing 10/10 tests. Total test suite passing: 53/53 tests.
+
+---
+
+## Next Milestone: Phase 2, Module 4 (Examinations & Gradebook)
+- Scope per Section 9.8 & Decisions D1, D3, D7:
+  - Exam types (unit tests, term exams, finals) and exam definitions.
+  - Exam scheduling: subject, date, start/end time, room allocation, supervisor/invigilator assignment.
+  - Grade scales and tiers: percentage ranges, grade letters (`A+`, `A`, `B`, etc.), grade points, pass/fail status.
+  - Marks entry engine with status tracking (`draft`, `submitted`, `published`).
+  - Automated report card calculation: total marks, percentage, GPA/grade, class rank.
+  - Scoped access: Faculty enters marks only for allocated subjects/sections; students/parents view published results.
+
 

@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [postcss.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/postcss.config.js#L1) (0 connections)
+- [index.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/index.ts#L1) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\postcss.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/postcss.config.js)
+- [C:\Antigravityyyyy\VID_School\backend\src\common\index.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/index.ts)
 
 ## Audit Trail
 

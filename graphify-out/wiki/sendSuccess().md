@@ -1,367 +1,419 @@
 # sendSuccess()
 
-> God node · 130 connections · [C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts#L19)
+> God node · 149 connections · [C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts#L19)
 
 ## Call Trace Diagram
 
 ```mermaid
 sequenceDiagram
     participant P0 as sendSuccess()
-    participant P1 as .getHierarchy()
-    participant P2 as .getClasses()
-    participant P3 as .getSubjects()
-    participant P4 as .getStudentSummary()
-    participant P5 as sendError()
-    participant P6 as .getLogs()
-    participant P7 as .getLogById()
-    participant P8 as .recordPayment()
-    participant P9 as .getSummary()
-    participant P10 as .getNotifications()
-    participant P11 as .send()
-    participant P12 as .checkConflict()
-    participant P13 as authMiddleware()
-    participant P14 as tenantMiddleware()
-    participant P15 as .createApplication()
-    participant P16 as .updateStage()
-    participant P17 as .getOrCreateSession()
-    participant P18 as .getSessionById()
-    participant P19 as .listSessions()
-    participant P20 as .getSectionRoster()
-    participant P21 as .submitRollCall()
-    participant P22 as .getScopedAttendance()
-    participant P23 as .applyStudentLeave()
-    participant P24 as .listStudentLeaves()
-    participant P25 as .decideStudentLeave()
-    participant P26 as .recordStaffAttendance()
-    participant P27 as .listStaffAttendance()
-    participant P28 as .getInstitutionSummary()
-    participant P29 as .createExamType()
-    participant P30 as .listExamTypes()
-    participant P31 as .createExam()
-    participant P32 as .getExamById()
-    participant P33 as .listExams()
-    participant P34 as .updateExamStatus()
-    participant P35 as .addExamSubject()
-    participant P36 as .listExamSubjects()
-    participant P37 as .createExamSchedule()
-    participant P38 as .listExamSchedules()
-    participant P39 as .createExamRoom()
-    participant P40 as .allocateSeating()
-    participant P41 as .assignInvigilator()
-    participant P42 as .createGradeScale()
-    participant P43 as .listGradeScales()
-    participant P44 as .addGradeTier()
-    participant P45 as .submitMarksBatch()
-    participant P46 as .listMarks()
-    participant P47 as .verifyMarks()
-    participant P48 as .validateExcelImport()
-    participant P49 as .commitExcelImport()
-    participant P50 as .calculateResults()
-    participant P51 as .publishExamResults()
-    participant P52 as .getStudentReportCard()
-    participant P53 as .listStudentReportCards()
-    participant P54 as .listFeeCategories()
-    participant P55 as .createFeeCategory()
-    participant P56 as .listFeeGroups()
-    participant P57 as .createFeeGroup()
-    participant P58 as .listFeeStructures()
-    participant P59 as .getFeeStructure()
-    participant P60 as .createFeeStructure()
-    participant P61 as .listDiscounts()
-    participant P62 as .createDiscount()
-    participant P63 as .listScholarships()
-    participant P64 as .createScholarship()
-    participant P65 as .assignFeeToStudent()
-    participant P66 as .listStudentFees()
-    participant P67 as .getStudentFeeLedger()
-    participant P68 as .listInvoices()
-    participant P69 as .getInvoice()
-    participant P70 as .listPayments()
-    participant P71 as .getReceipt()
-    participant P72 as .processRefund()
-    participant P73 as .getScopedFees()
-    participant P74 as .getUnreadCount()
-    participant P75 as .markAsRead()
-    participant P76 as .markAllAsRead()
-    participant P77 as .listRooms()
-    participant P78 as .createRoom()
-    participant P79 as .updateRoom()
-    participant P80 as .deleteRoom()
-    participant P81 as .listPeriods()
-    participant P82 as .createPeriod()
-    participant P83 as .updatePeriod()
-    participant P84 as .deletePeriod()
-    participant P85 as .listTimetables()
-    participant P86 as .getTimetable()
-    participant P87 as .createTimetable()
-    participant P88 as .deleteTimetable()
-    participant P89 as .auditTimetableConflicts()
-    participant P90 as .listEntries()
-    participant P91 as .createEntry()
-    participant P92 as .deleteEntry()
-    participant P93 as .publishTimetable()
-    participant P94 as .unpublishTimetable()
-    participant P95 as .listSubstitutions()
-    participant P96 as .createSubstitution()
-    participant P97 as .getScopedSchedule()
-    participant P98 as errorMiddleware()
-    participant P99 as .handleGatewayWebhook()
-    participant P100 as .getStudentAttendanceSummary()
-    participant P101 as .getFaculty()
-    participant P102 as .getGrades()
-    participant P103 as .approve()
-    participant P104 as .getMyProfile()
-    participant P105 as .getMyClasses()
-    participant P106 as .getMySubjects()
-    participant P107 as .getSectionStudents()
-    participant P108 as .getFacultyById()
-    participant P109 as .getInstitutions()
-    participant P110 as .getInstitutionById()
-    participant P111 as .getStats()
-    participant P112 as .getAdmins()
-    participant P113 as .addAdmin()
-    participant P114 as .updateStatus()
-    participant P115 as .getStudents()
-    participant P116 as .getStudentById()
-    participant P117 as .promote()
-    participant P118 as .getAcademicYears()
-    participant P119 as .createAcademicYear()
-    participant P120 as .getDepartments()
-    participant P121 as .createDepartment()
-    participant P122 as .createClass()
-    participant P123 as .getClassSections()
-    participant P124 as .createSection()
-    participant P125 as .getClassSubjects()
-    participant P126 as .createSubject()
-    participant P127 as .linkSubjectToClass()
-    participant P128 as .getAllocations()
-    participant P129 as .createAllocation()
-    participant P130 as .getApplicants()
-    participant P131 as .getApplicationById()
-    participant P132 as .getModules()
-    participant P133 as .toggleModule()
-    participant P134 as .createInstitution()
-    participant P135 as .updateAdminWorkspaces()
+    participant P1 as .getStaffAttendance()
+    participant P2 as sendError()
+    participant P3 as .getStudentSummary()
+    participant P4 as .getLogs()
+    participant P5 as .getLogById()
+    participant P6 as .recordPayment()
+    participant P7 as .getSummary()
+    participant P8 as .deleteStaff()
+    participant P9 as .markStaffAttendance()
+    participant P10 as .getMonthlyAttendanceSummary()
+    participant P11 as .getFacultyWorkloads()
+    participant P12 as .getPayrollExport()
+    participant P13 as .getNotifications()
+    participant P14 as .send()
+    participant P15 as .checkConflict()
+    participant P16 as authMiddleware()
+    participant P17 as tenantMiddleware()
+    participant P18 as .createApplication()
+    participant P19 as .updateStage()
+    participant P20 as .getOrCreateSession()
+    participant P21 as .getSessionById()
+    participant P22 as .listSessions()
+    participant P23 as .getSectionRoster()
+    participant P24 as .submitRollCall()
+    participant P25 as .getScopedAttendance()
+    participant P26 as .applyStudentLeave()
+    participant P27 as .listStudentLeaves()
+    participant P28 as .decideStudentLeave()
+    participant P29 as .recordStaffAttendance()
+    participant P30 as .listStaffAttendance()
+    participant P31 as .getInstitutionSummary()
+    participant P32 as .createExamType()
+    participant P33 as .listExamTypes()
+    participant P34 as .createExam()
+    participant P35 as .getExamById()
+    participant P36 as .listExams()
+    participant P37 as .updateExamStatus()
+    participant P38 as .addExamSubject()
+    participant P39 as .listExamSubjects()
+    participant P40 as .createExamSchedule()
+    participant P41 as .listExamSchedules()
+    participant P42 as .createExamRoom()
+    participant P43 as .allocateSeating()
+    participant P44 as .assignInvigilator()
+    participant P45 as .createGradeScale()
+    participant P46 as .listGradeScales()
+    participant P47 as .addGradeTier()
+    participant P48 as .submitMarksBatch()
+    participant P49 as .listMarks()
+    participant P50 as .verifyMarks()
+    participant P51 as .validateExcelImport()
+    participant P52 as .commitExcelImport()
+    participant P53 as .calculateResults()
+    participant P54 as .publishExamResults()
+    participant P55 as .getStudentReportCard()
+    participant P56 as .listStudentReportCards()
+    participant P57 as .listFeeCategories()
+    participant P58 as .createFeeCategory()
+    participant P59 as .listFeeGroups()
+    participant P60 as .createFeeGroup()
+    participant P61 as .listFeeStructures()
+    participant P62 as .getFeeStructure()
+    participant P63 as .createFeeStructure()
+    participant P64 as .listDiscounts()
+    participant P65 as .createDiscount()
+    participant P66 as .listScholarships()
+    participant P67 as .createScholarship()
+    participant P68 as .assignFeeToStudent()
+    participant P69 as .listStudentFees()
+    participant P70 as .getStudentFeeLedger()
+    participant P71 as .listInvoices()
+    participant P72 as .getInvoice()
+    participant P73 as .listPayments()
+    participant P74 as .getReceipt()
+    participant P75 as .processRefund()
+    participant P76 as .getScopedFees()
+    participant P77 as .listDesignations()
+    participant P78 as .createDesignation()
+    participant P79 as .listStaff()
+    participant P80 as .getStaffDetails()
+    participant P81 as .onboardStaff()
+    participant P82 as .updateStaff()
+    participant P83 as .listLeaveTypes()
+    participant P84 as .createLeaveType()
+    participant P85 as .listLeaveRequests()
+    participant P86 as .applyLeave()
+    participant P87 as .actionLeaveRequest()
+    participant P88 as .getStaffLeaveBalance()
+    participant P89 as .computeStaffWorkload()
+    participant P90 as .getUnreadCount()
+    participant P91 as .markAsRead()
+    participant P92 as .markAllAsRead()
+    participant P93 as .listRooms()
+    participant P94 as .createRoom()
+    participant P95 as .updateRoom()
+    participant P96 as .deleteRoom()
+    participant P97 as .listPeriods()
+    participant P98 as .createPeriod()
+    participant P99 as .updatePeriod()
+    participant P100 as .deletePeriod()
+    participant P101 as .listTimetables()
+    participant P102 as .getTimetable()
+    participant P103 as .createTimetable()
+    participant P104 as .deleteTimetable()
+    participant P105 as .auditTimetableConflicts()
+    participant P106 as .listEntries()
+    participant P107 as .createEntry()
+    participant P108 as .deleteEntry()
+    participant P109 as .publishTimetable()
+    participant P110 as .unpublishTimetable()
+    participant P111 as .listSubstitutions()
+    participant P112 as .createSubstitution()
+    participant P113 as .getScopedSchedule()
+    participant P114 as errorMiddleware()
+    participant P115 as .handleGatewayWebhook()
+    participant P116 as .getStaffAttendanceByDate()
+    participant P117 as .getStaffAttendanceHistory()
+    participant P118 as .getHierarchy()
+    participant P119 as .getFaculty()
+    participant P120 as .getGrades()
+    participant P121 as .getClasses()
+    participant P122 as .getSubjects()
+    participant P123 as .approve()
+    participant P124 as .getMyProfile()
+    participant P125 as .getMyClasses()
+    participant P126 as .getMySubjects()
+    participant P127 as .getSectionStudents()
+    participant P128 as .getFacultyById()
+    participant P129 as .getInstitutions()
+    participant P130 as .getInstitutionById()
+    participant P131 as .getStats()
+    participant P132 as .getAdmins()
+    participant P133 as .addAdmin()
+    participant P134 as .updateStatus()
+    participant P135 as .getStudents()
+    participant P136 as .getStudentById()
+    participant P137 as .promote()
+    participant P138 as .getAcademicYears()
+    participant P139 as .createAcademicYear()
+    participant P140 as .getDepartments()
+    participant P141 as .createDepartment()
+    participant P142 as .createClass()
+    participant P143 as .getClassSections()
+    participant P144 as .createSection()
+    participant P145 as .getClassSubjects()
+    participant P146 as .createSubject()
+    participant P147 as .linkSubjectToClass()
+    participant P148 as .getAllocations()
+    participant P149 as .createAllocation()
+    participant P150 as .getApplicants()
+    participant P151 as .getApplicationById()
+    participant P152 as .getModules()
+    participant P153 as .toggleModule()
+    participant P154 as .createInstitution()
+    participant P155 as .updateAdminWorkspaces()
     P0->>+ P1: calls
     P1-->>- P0: return
     P1->>+ P0: calls
     P0-->>- P1: return
     P1->>+ P2: calls
     P2-->>- P1: return
-    P2->>+ P0: calls
-    P0-->>- P2: return
     P2->>+ P1: calls
     P1-->>- P2: return
-    P1->>+ P3: calls
-    P3-->>- P1: return
-    P3->>+ P0: calls
-    P0-->>- P3: return
-    P3->>+ P1: calls
-    P1-->>- P3: return
+    P2->>+ P3: calls
+    P3-->>- P2: return
+    P2->>+ P4: calls
+    P4-->>- P2: return
+    P2->>+ P5: calls
+    P5-->>- P2: return
+    P2->>+ P6: calls
+    P6-->>- P2: return
+    P2->>+ P7: calls
+    P7-->>- P2: return
+    P2->>+ P8: calls
+    P8-->>- P2: return
+    P2->>+ P9: calls
+    P9-->>- P2: return
+    P2->>+ P10: calls
+    P10-->>- P2: return
+    P2->>+ P11: calls
+    P11-->>- P2: return
+    P2->>+ P12: calls
+    P12-->>- P2: return
+    P2->>+ P13: calls
+    P13-->>- P2: return
+    P2->>+ P14: calls
+    P14-->>- P2: return
+    P2->>+ P15: calls
+    P15-->>- P2: return
+    P2->>+ P16: calls
+    P16-->>- P2: return
+    P2->>+ P17: calls
+    P17-->>- P2: return
+    P2->>+ P18: calls
+    P18-->>- P2: return
+    P2->>+ P19: calls
+    P19-->>- P2: return
+    P2->>+ P20: calls
+    P20-->>- P2: return
+    P2->>+ P21: calls
+    P21-->>- P2: return
+    P2->>+ P22: calls
+    P22-->>- P2: return
+    P2->>+ P23: calls
+    P23-->>- P2: return
+    P2->>+ P24: calls
+    P24-->>- P2: return
+    P2->>+ P25: calls
+    P25-->>- P2: return
+    P2->>+ P26: calls
+    P26-->>- P2: return
+    P2->>+ P27: calls
+    P27-->>- P2: return
+    P2->>+ P28: calls
+    P28-->>- P2: return
+    P2->>+ P29: calls
+    P29-->>- P2: return
+    P2->>+ P30: calls
+    P30-->>- P2: return
+    P2->>+ P31: calls
+    P31-->>- P2: return
+    P2->>+ P32: calls
+    P32-->>- P2: return
+    P2->>+ P33: calls
+    P33-->>- P2: return
+    P2->>+ P34: calls
+    P34-->>- P2: return
+    P2->>+ P35: calls
+    P35-->>- P2: return
+    P2->>+ P36: calls
+    P36-->>- P2: return
+    P2->>+ P37: calls
+    P37-->>- P2: return
+    P2->>+ P38: calls
+    P38-->>- P2: return
+    P2->>+ P39: calls
+    P39-->>- P2: return
+    P2->>+ P40: calls
+    P40-->>- P2: return
+    P2->>+ P41: calls
+    P41-->>- P2: return
+    P2->>+ P42: calls
+    P42-->>- P2: return
+    P2->>+ P43: calls
+    P43-->>- P2: return
+    P2->>+ P44: calls
+    P44-->>- P2: return
+    P2->>+ P45: calls
+    P45-->>- P2: return
+    P2->>+ P46: calls
+    P46-->>- P2: return
+    P2->>+ P47: calls
+    P47-->>- P2: return
+    P2->>+ P48: calls
+    P48-->>- P2: return
+    P2->>+ P49: calls
+    P49-->>- P2: return
+    P2->>+ P50: calls
+    P50-->>- P2: return
+    P2->>+ P51: calls
+    P51-->>- P2: return
+    P2->>+ P52: calls
+    P52-->>- P2: return
+    P2->>+ P53: calls
+    P53-->>- P2: return
+    P2->>+ P54: calls
+    P54-->>- P2: return
+    P2->>+ P55: calls
+    P55-->>- P2: return
+    P2->>+ P56: calls
+    P56-->>- P2: return
+    P2->>+ P57: calls
+    P57-->>- P2: return
+    P2->>+ P58: calls
+    P58-->>- P2: return
+    P2->>+ P59: calls
+    P59-->>- P2: return
+    P2->>+ P60: calls
+    P60-->>- P2: return
+    P2->>+ P61: calls
+    P61-->>- P2: return
+    P2->>+ P62: calls
+    P62-->>- P2: return
+    P2->>+ P63: calls
+    P63-->>- P2: return
+    P2->>+ P64: calls
+    P64-->>- P2: return
+    P2->>+ P65: calls
+    P65-->>- P2: return
+    P2->>+ P66: calls
+    P66-->>- P2: return
+    P2->>+ P67: calls
+    P67-->>- P2: return
+    P2->>+ P68: calls
+    P68-->>- P2: return
+    P2->>+ P69: calls
+    P69-->>- P2: return
+    P2->>+ P70: calls
+    P70-->>- P2: return
+    P2->>+ P71: calls
+    P71-->>- P2: return
+    P2->>+ P72: calls
+    P72-->>- P2: return
+    P2->>+ P73: calls
+    P73-->>- P2: return
+    P2->>+ P74: calls
+    P74-->>- P2: return
+    P2->>+ P75: calls
+    P75-->>- P2: return
+    P2->>+ P76: calls
+    P76-->>- P2: return
+    P2->>+ P77: calls
+    P77-->>- P2: return
+    P2->>+ P78: calls
+    P78-->>- P2: return
+    P2->>+ P79: calls
+    P79-->>- P2: return
+    P2->>+ P80: calls
+    P80-->>- P2: return
+    P2->>+ P81: calls
+    P81-->>- P2: return
+    P2->>+ P82: calls
+    P82-->>- P2: return
+    P2->>+ P83: calls
+    P83-->>- P2: return
+    P2->>+ P84: calls
+    P84-->>- P2: return
+    P2->>+ P85: calls
+    P85-->>- P2: return
+    P2->>+ P86: calls
+    P86-->>- P2: return
+    P2->>+ P87: calls
+    P87-->>- P2: return
+    P2->>+ P88: calls
+    P88-->>- P2: return
+    P2->>+ P89: calls
+    P89-->>- P2: return
+    P2->>+ P90: calls
+    P90-->>- P2: return
+    P2->>+ P91: calls
+    P91-->>- P2: return
+    P2->>+ P92: calls
+    P92-->>- P2: return
+    P2->>+ P93: calls
+    P93-->>- P2: return
+    P2->>+ P94: calls
+    P94-->>- P2: return
+    P2->>+ P95: calls
+    P95-->>- P2: return
+    P2->>+ P96: calls
+    P96-->>- P2: return
+    P2->>+ P97: calls
+    P97-->>- P2: return
+    P2->>+ P98: calls
+    P98-->>- P2: return
+    P2->>+ P99: calls
+    P99-->>- P2: return
+    P2->>+ P100: calls
+    P100-->>- P2: return
+    P2->>+ P101: calls
+    P101-->>- P2: return
+    P2->>+ P102: calls
+    P102-->>- P2: return
+    P2->>+ P103: calls
+    P103-->>- P2: return
+    P2->>+ P104: calls
+    P104-->>- P2: return
+    P2->>+ P105: calls
+    P105-->>- P2: return
+    P2->>+ P106: calls
+    P106-->>- P2: return
+    P2->>+ P107: calls
+    P107-->>- P2: return
+    P2->>+ P108: calls
+    P108-->>- P2: return
+    P2->>+ P109: calls
+    P109-->>- P2: return
+    P2->>+ P110: calls
+    P110-->>- P2: return
+    P2->>+ P111: calls
+    P111-->>- P2: return
+    P2->>+ P112: calls
+    P112-->>- P2: return
+    P2->>+ P113: calls
+    P113-->>- P2: return
+    P2->>+ P114: calls
+    P114-->>- P2: return
+    P2->>+ P115: calls
+    P115-->>- P2: return
+    P1->>+ P116: calls
+    P116-->>- P1: return
+    P1->>+ P117: calls
+    P117-->>- P1: return
+    P0->>+ P118: calls
+    P118-->>- P0: return
+    P0->>+ P3: calls
+    P3-->>- P0: return
     P0->>+ P4: calls
     P4-->>- P0: return
-    P4->>+ P0: calls
-    P0-->>- P4: return
-    P4->>+ P5: calls
-    P5-->>- P4: return
-    P5->>+ P4: calls
-    P4-->>- P5: return
-    P5->>+ P6: calls
-    P6-->>- P5: return
-    P5->>+ P7: calls
-    P7-->>- P5: return
-    P5->>+ P8: calls
-    P8-->>- P5: return
-    P5->>+ P9: calls
-    P9-->>- P5: return
-    P5->>+ P10: calls
-    P10-->>- P5: return
-    P5->>+ P11: calls
-    P11-->>- P5: return
-    P5->>+ P12: calls
-    P12-->>- P5: return
-    P5->>+ P13: calls
-    P13-->>- P5: return
-    P5->>+ P14: calls
-    P14-->>- P5: return
-    P5->>+ P15: calls
-    P15-->>- P5: return
-    P5->>+ P16: calls
-    P16-->>- P5: return
-    P5->>+ P17: calls
-    P17-->>- P5: return
-    P5->>+ P18: calls
-    P18-->>- P5: return
-    P5->>+ P19: calls
-    P19-->>- P5: return
-    P5->>+ P20: calls
-    P20-->>- P5: return
-    P5->>+ P21: calls
-    P21-->>- P5: return
-    P5->>+ P22: calls
-    P22-->>- P5: return
-    P5->>+ P23: calls
-    P23-->>- P5: return
-    P5->>+ P24: calls
-    P24-->>- P5: return
-    P5->>+ P25: calls
-    P25-->>- P5: return
-    P5->>+ P26: calls
-    P26-->>- P5: return
-    P5->>+ P27: calls
-    P27-->>- P5: return
-    P5->>+ P28: calls
-    P28-->>- P5: return
-    P5->>+ P29: calls
-    P29-->>- P5: return
-    P5->>+ P30: calls
-    P30-->>- P5: return
-    P5->>+ P31: calls
-    P31-->>- P5: return
-    P5->>+ P32: calls
-    P32-->>- P5: return
-    P5->>+ P33: calls
-    P33-->>- P5: return
-    P5->>+ P34: calls
-    P34-->>- P5: return
-    P5->>+ P35: calls
-    P35-->>- P5: return
-    P5->>+ P36: calls
-    P36-->>- P5: return
-    P5->>+ P37: calls
-    P37-->>- P5: return
-    P5->>+ P38: calls
-    P38-->>- P5: return
-    P5->>+ P39: calls
-    P39-->>- P5: return
-    P5->>+ P40: calls
-    P40-->>- P5: return
-    P5->>+ P41: calls
-    P41-->>- P5: return
-    P5->>+ P42: calls
-    P42-->>- P5: return
-    P5->>+ P43: calls
-    P43-->>- P5: return
-    P5->>+ P44: calls
-    P44-->>- P5: return
-    P5->>+ P45: calls
-    P45-->>- P5: return
-    P5->>+ P46: calls
-    P46-->>- P5: return
-    P5->>+ P47: calls
-    P47-->>- P5: return
-    P5->>+ P48: calls
-    P48-->>- P5: return
-    P5->>+ P49: calls
-    P49-->>- P5: return
-    P5->>+ P50: calls
-    P50-->>- P5: return
-    P5->>+ P51: calls
-    P51-->>- P5: return
-    P5->>+ P52: calls
-    P52-->>- P5: return
-    P5->>+ P53: calls
-    P53-->>- P5: return
-    P5->>+ P54: calls
-    P54-->>- P5: return
-    P5->>+ P55: calls
-    P55-->>- P5: return
-    P5->>+ P56: calls
-    P56-->>- P5: return
-    P5->>+ P57: calls
-    P57-->>- P5: return
-    P5->>+ P58: calls
-    P58-->>- P5: return
-    P5->>+ P59: calls
-    P59-->>- P5: return
-    P5->>+ P60: calls
-    P60-->>- P5: return
-    P5->>+ P61: calls
-    P61-->>- P5: return
-    P5->>+ P62: calls
-    P62-->>- P5: return
-    P5->>+ P63: calls
-    P63-->>- P5: return
-    P5->>+ P64: calls
-    P64-->>- P5: return
-    P5->>+ P65: calls
-    P65-->>- P5: return
-    P5->>+ P66: calls
-    P66-->>- P5: return
-    P5->>+ P67: calls
-    P67-->>- P5: return
-    P5->>+ P68: calls
-    P68-->>- P5: return
-    P5->>+ P69: calls
-    P69-->>- P5: return
-    P5->>+ P70: calls
-    P70-->>- P5: return
-    P5->>+ P71: calls
-    P71-->>- P5: return
-    P5->>+ P72: calls
-    P72-->>- P5: return
-    P5->>+ P73: calls
-    P73-->>- P5: return
-    P5->>+ P74: calls
-    P74-->>- P5: return
-    P5->>+ P75: calls
-    P75-->>- P5: return
-    P5->>+ P76: calls
-    P76-->>- P5: return
-    P5->>+ P77: calls
-    P77-->>- P5: return
-    P5->>+ P78: calls
-    P78-->>- P5: return
-    P5->>+ P79: calls
-    P79-->>- P5: return
-    P5->>+ P80: calls
-    P80-->>- P5: return
-    P5->>+ P81: calls
-    P81-->>- P5: return
-    P5->>+ P82: calls
-    P82-->>- P5: return
-    P5->>+ P83: calls
-    P83-->>- P5: return
-    P5->>+ P84: calls
-    P84-->>- P5: return
-    P5->>+ P85: calls
-    P85-->>- P5: return
-    P5->>+ P86: calls
-    P86-->>- P5: return
-    P5->>+ P87: calls
-    P87-->>- P5: return
-    P5->>+ P88: calls
-    P88-->>- P5: return
-    P5->>+ P89: calls
-    P89-->>- P5: return
-    P5->>+ P90: calls
-    P90-->>- P5: return
-    P5->>+ P91: calls
-    P91-->>- P5: return
-    P5->>+ P92: calls
-    P92-->>- P5: return
-    P5->>+ P93: calls
-    P93-->>- P5: return
-    P5->>+ P94: calls
-    P94-->>- P5: return
-    P5->>+ P95: calls
-    P95-->>- P5: return
-    P5->>+ P96: calls
-    P96-->>- P5: return
-    P5->>+ P97: calls
-    P97-->>- P5: return
-    P5->>+ P98: calls
-    P98-->>- P5: return
-    P5->>+ P99: calls
-    P99-->>- P5: return
-    P4->>+ P100: calls
-    P100-->>- P4: return
+    P0->>+ P5: calls
+    P5-->>- P0: return
+    P0->>+ P119: calls
+    P119-->>- P0: return
     P0->>+ P6: calls
     P6-->>- P0: return
     P0->>+ P7: calls
     P7-->>- P0: return
-    P0->>+ P101: calls
-    P101-->>- P0: return
     P0->>+ P8: calls
     P8-->>- P0: return
     P0->>+ P9: calls
@@ -372,24 +424,24 @@ sequenceDiagram
     P11-->>- P0: return
     P0->>+ P12: calls
     P12-->>- P0: return
-    P0->>+ P102: calls
-    P102-->>- P0: return
-    P0->>+ P2: calls
-    P2-->>- P0: return
-    P0->>+ P3: calls
-    P3-->>- P0: return
+    P0->>+ P13: calls
+    P13-->>- P0: return
+    P0->>+ P14: calls
+    P14-->>- P0: return
     P0->>+ P15: calls
     P15-->>- P0: return
-    P0->>+ P16: calls
-    P16-->>- P0: return
-    P0->>+ P103: calls
-    P103-->>- P0: return
-    P0->>+ P17: calls
-    P17-->>- P0: return
+    P0->>+ P120: calls
+    P120-->>- P0: return
+    P0->>+ P121: calls
+    P121-->>- P0: return
+    P0->>+ P122: calls
+    P122-->>- P0: return
     P0->>+ P18: calls
     P18-->>- P0: return
     P0->>+ P19: calls
     P19-->>- P0: return
+    P0->>+ P123: calls
+    P123-->>- P0: return
     P0->>+ P20: calls
     P20-->>- P0: return
     P0->>+ P21: calls
@@ -458,22 +510,22 @@ sequenceDiagram
     P52-->>- P0: return
     P0->>+ P53: calls
     P53-->>- P0: return
-    P0->>+ P104: calls
-    P104-->>- P0: return
-    P0->>+ P105: calls
-    P105-->>- P0: return
-    P0->>+ P106: calls
-    P106-->>- P0: return
-    P0->>+ P107: calls
-    P107-->>- P0: return
-    P0->>+ P108: calls
-    P108-->>- P0: return
     P0->>+ P54: calls
     P54-->>- P0: return
     P0->>+ P55: calls
     P55-->>- P0: return
     P0->>+ P56: calls
     P56-->>- P0: return
+    P0->>+ P124: calls
+    P124-->>- P0: return
+    P0->>+ P125: calls
+    P125-->>- P0: return
+    P0->>+ P126: calls
+    P126-->>- P0: return
+    P0->>+ P127: calls
+    P127-->>- P0: return
+    P0->>+ P128: calls
+    P128-->>- P0: return
     P0->>+ P57: calls
     P57-->>- P0: return
     P0->>+ P58: calls
@@ -508,30 +560,12 @@ sequenceDiagram
     P72-->>- P0: return
     P0->>+ P73: calls
     P73-->>- P0: return
-    P0->>+ P109: calls
-    P109-->>- P0: return
-    P0->>+ P110: calls
-    P110-->>- P0: return
-    P0->>+ P111: calls
-    P111-->>- P0: return
-    P0->>+ P112: calls
-    P112-->>- P0: return
-    P0->>+ P113: calls
-    P113-->>- P0: return
-    P0->>+ P114: calls
-    P114-->>- P0: return
     P0->>+ P74: calls
     P74-->>- P0: return
     P0->>+ P75: calls
     P75-->>- P0: return
     P0->>+ P76: calls
     P76-->>- P0: return
-    P0->>+ P115: calls
-    P115-->>- P0: return
-    P0->>+ P116: calls
-    P116-->>- P0: return
-    P0->>+ P117: calls
-    P117-->>- P0: return
     P0->>+ P77: calls
     P77-->>- P0: return
     P0->>+ P78: calls
@@ -558,44 +592,6 @@ sequenceDiagram
     P88-->>- P0: return
     P0->>+ P89: calls
     P89-->>- P0: return
-    P0->>+ P90: calls
-    P90-->>- P0: return
-    P0->>+ P91: calls
-    P91-->>- P0: return
-    P0->>+ P92: calls
-    P92-->>- P0: return
-    P0->>+ P93: calls
-    P93-->>- P0: return
-    P0->>+ P94: calls
-    P94-->>- P0: return
-    P0->>+ P95: calls
-    P95-->>- P0: return
-    P0->>+ P96: calls
-    P96-->>- P0: return
-    P0->>+ P97: calls
-    P97-->>- P0: return
-    P0->>+ P118: calls
-    P118-->>- P0: return
-    P0->>+ P119: calls
-    P119-->>- P0: return
-    P0->>+ P120: calls
-    P120-->>- P0: return
-    P0->>+ P121: calls
-    P121-->>- P0: return
-    P0->>+ P122: calls
-    P122-->>- P0: return
-    P0->>+ P123: calls
-    P123-->>- P0: return
-    P0->>+ P124: calls
-    P124-->>- P0: return
-    P0->>+ P125: calls
-    P125-->>- P0: return
-    P0->>+ P126: calls
-    P126-->>- P0: return
-    P0->>+ P127: calls
-    P127-->>- P0: return
-    P0->>+ P128: calls
-    P128-->>- P0: return
     P0->>+ P129: calls
     P129-->>- P0: return
     P0->>+ P130: calls
@@ -608,13 +604,102 @@ sequenceDiagram
     P133-->>- P0: return
     P0->>+ P134: calls
     P134-->>- P0: return
+    P0->>+ P90: calls
+    P90-->>- P0: return
+    P0->>+ P91: calls
+    P91-->>- P0: return
+    P0->>+ P92: calls
+    P92-->>- P0: return
     P0->>+ P135: calls
     P135-->>- P0: return
+    P0->>+ P136: calls
+    P136-->>- P0: return
+    P0->>+ P137: calls
+    P137-->>- P0: return
+    P0->>+ P93: calls
+    P93-->>- P0: return
+    P0->>+ P94: calls
+    P94-->>- P0: return
+    P0->>+ P95: calls
+    P95-->>- P0: return
+    P0->>+ P96: calls
+    P96-->>- P0: return
+    P0->>+ P97: calls
+    P97-->>- P0: return
+    P0->>+ P98: calls
+    P98-->>- P0: return
+    P0->>+ P99: calls
+    P99-->>- P0: return
+    P0->>+ P100: calls
+    P100-->>- P0: return
+    P0->>+ P101: calls
+    P101-->>- P0: return
+    P0->>+ P102: calls
+    P102-->>- P0: return
+    P0->>+ P103: calls
+    P103-->>- P0: return
+    P0->>+ P104: calls
+    P104-->>- P0: return
+    P0->>+ P105: calls
+    P105-->>- P0: return
+    P0->>+ P106: calls
+    P106-->>- P0: return
+    P0->>+ P107: calls
+    P107-->>- P0: return
+    P0->>+ P108: calls
+    P108-->>- P0: return
+    P0->>+ P109: calls
+    P109-->>- P0: return
+    P0->>+ P110: calls
+    P110-->>- P0: return
+    P0->>+ P111: calls
+    P111-->>- P0: return
+    P0->>+ P112: calls
+    P112-->>- P0: return
+    P0->>+ P113: calls
+    P113-->>- P0: return
+    P0->>+ P138: calls
+    P138-->>- P0: return
+    P0->>+ P139: calls
+    P139-->>- P0: return
+    P0->>+ P140: calls
+    P140-->>- P0: return
+    P0->>+ P141: calls
+    P141-->>- P0: return
+    P0->>+ P142: calls
+    P142-->>- P0: return
+    P0->>+ P143: calls
+    P143-->>- P0: return
+    P0->>+ P144: calls
+    P144-->>- P0: return
+    P0->>+ P145: calls
+    P145-->>- P0: return
+    P0->>+ P146: calls
+    P146-->>- P0: return
+    P0->>+ P147: calls
+    P147-->>- P0: return
+    P0->>+ P148: calls
+    P148-->>- P0: return
+    P0->>+ P149: calls
+    P149-->>- P0: return
+    P0->>+ P150: calls
+    P150-->>- P0: return
+    P0->>+ P151: calls
+    P151-->>- P0: return
+    P0->>+ P152: calls
+    P152-->>- P0: return
+    P0->>+ P153: calls
+    P153-->>- P0: return
+    P0->>+ P154: calls
+    P154-->>- P0: return
+    P0->>+ P155: calls
+    P155-->>- P0: return
 ```
 
 ## Connections by Relation
 
 ### calls
+- [[.getStaffAttendance()]] `INFERRED`
 - [[.getHierarchy()]] `INFERRED`
 - [[.getStudentSummary()]] `INFERRED`
 - [[.getLogs()]] `INFERRED`
@@ -622,6 +707,11 @@ sequenceDiagram
 - [[.getFaculty()]] `INFERRED`
 - [[.recordPayment()]] `INFERRED`
 - [[.getSummary()]] `INFERRED`
+- [[.deleteStaff()]] `INFERRED`
+- [[.markStaffAttendance()]] `INFERRED`
+- [[.getMonthlyAttendanceSummary()]] `INFERRED`
+- [[.getFacultyWorkloads()]] `INFERRED`
+- [[.getPayrollExport()]] `INFERRED`
 - [[.getNotifications()]] `INFERRED`
 - [[.send()]] `INFERRED`
 - [[.checkConflict()]] `INFERRED`
@@ -629,12 +719,6 @@ sequenceDiagram
 - [[.getClasses()]] `INFERRED`
 - [[.getSubjects()]] `INFERRED`
 - [[.createApplication()]] `INFERRED`
-- [[.updateStage()]] `INFERRED`
-- [[.approve()]] `INFERRED`
-- [[.getOrCreateSession()]] `INFERRED`
-- [[.getSessionById()]] `INFERRED`
-- [[.listSessions()]] `INFERRED`
-- [[.getSectionRoster()]] `INFERRED`
 
 ### contains
 - [[api-response.ts]] `EXTRACTED`

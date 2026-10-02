@@ -16,8 +16,9 @@
 | **Phase 2, Module 3** | Attendance: Daily & Period Sessions, Batch Roll Call, Low Attendance Alerts, Leave Workflows | **COMPLETED** | PASSED (10/10 Automated Tests: Atomic Roll Call, Leave Request to Excused Status, Absence Notifications, Rule 8/9 Scoping) |
 | **Phase 2, Module 4** | Examinations: Exam Lifecycle, Grade Scales, Pre-Commit Excel Import Validation, Report Cards | **COMPLETED** | PASSED (10/10 Automated Tests: Grade Resolution, Rule 8 Faculty Scoping, Excel Import Blocks Invalid Data, Automated Ranking, Scoped Access) |
 | **Phase 2, Module 5** | Documents: Vault Storage, Verification Workflow, Templates, Bonafide & TC QR Generation | **COMPLETED** | PASSED (10/10 Automated Tests: Storage Key Isolation, MIME Whitelist, Verification State Machine, QR Verification, Scoped Access) |
-| **Phase 2, Remaining** | HRMS Workspace & Operational Consoles | **IN PROGRESS** | Next: Module 6 (Staff & HRMS) |
-| **Phase 3** | AI Yantra (Voice Agent, AI Attendance, AI Tutor) | **QUEUED** | Pending Phase 2 |
+| **Phase 2, Module 6** | HRMS: Staff Onboarding, D3 Identity Chain, Leaves Workflow, Biometric Roll Call, Workload & Payroll Export | **COMPLETED** | PASSED (10/10 Automated Tests: Identity Chain, Historized Employment, Leave Quotas, Overlap Checks, Workload, Section 14 Payroll) |
+| **Phase 2 (Overall)** | Core Academic & Administrative Engine (Modules 1 - 6) | **COMPLETED** | PASSED (60/60 Phase 2 Tests; 83/83 Full Platform Tests Passing) |
+| **Phase 3** | AI Yantra (Voice Agent, AI Attendance, AI Tutor) | **QUEUED** | Ready for Phase 3 |
 | **Phase 4** | Optional Modules (Events, Transport, Hostel, Library, Sports, Inventory) | **QUEUED** | Pending Phase 3 |
 
 ---
@@ -255,10 +256,48 @@
 
 ---
 
-## Next Milestone: Phase 2, Module 6 (Staff & HRMS Workspace)
-- Scope per Section 9.12 & Decision D3:
-  - Staff onboarding, departments, designations, employment status lifecycle (`active`, `on_leave`, `suspended`, `resigned`, `terminated`).
-  - Staff leave application, approval, and balance tracking.
-  - Faculty workload tracking and period allocation summaries.
+## Phase 2, Module 6 Checklist: Staff & HRMS Workspace (Completed)
+- [x] **Database Schema & Enhancements (`008_phase2_hrms.sql`):**
+  - Extended `leave_requests` with `remarks text` and `total_days integer DEFAULT 1`.
+  - Extended `staff_attendance` with `remarks text`.
+  - Created performance indexes: `idx_staff_inst_status`, `idx_staff_dept`, `idx_staff_desig`, `idx_leave_requests_inst_status`, `idx_leave_requests_staff`, `idx_leave_requests_dates`, `idx_staff_employment_staff`.
+  - Seeded standard leave types (Casual Leave 12d, Sick Leave 10d, Earned Leave 15d, Maternity/Paternity 90d, Comp Off 5d, Unpaid Leave).
+- [x] **Designations Catalog (`/api/v1/hrms/designations`):**
+  - CRUD operations with tenant isolation and audit logging (`hrms.designation_created`).
+- [x] **Staff Directory & Onboarding (`/api/v1/hrms/staff`):**
+  - Identity Chain enforcement (Decision D3: `users/profiles -> staff -> faculty`).
+  - Auto-provisions `faculty` record when `isTeachingStaff = true`.
+  - Initial employment record generated in `staff_employment`.
+  - Directory filtering by department, designation, status, teaching flag, and search query.
+- [x] **Staff Lifecycle & Historized Role Changes (`PATCH /api/v1/hrms/staff/:id`):**
+  - Updates department, designation, employment status (`active`, `on_leave`, `suspended`, `resigned`, `terminated`), and payroll reference.
+  - Automatically closes previous `staff_employment` record (`effective_to = now()`) and records new effective tenure.
+- [x] **Staff Soft Deletion (`DELETE /api/v1/hrms/staff/:id`):**
+  - Sets `deleted_at = now()` and status `terminated`.
+  - Excludes soft-deleted employees from active directory listings and lookups.
+- [x] **Leave Management Engine (`/api/v1/hrms/leaves`):**
+  - Custom leave type creation with annual max quota.
+  - Leave application with start/end date validation, inclusive day calculation, overlap detection, and quota enforcement.
+  - Leave approval/rejection workflow with remarks, audit log (`hrms.leave_approved`/`hrms.leave_rejected`), and notification dispatch.
+  - Leave balance calculator (`/api/v1/hrms/leaves/balance/:staffId`) computing annual allowance, taken, and remaining days.
+- [x] **Staff Daily Attendance & Biometric Roll Call (`/api/v1/hrms/attendance`):**
+  - Batch roll-call marking with status (`present`, `absent`, `late`, `excused`) and remarks.
+  - Upsert idempotency on `(staff_id, attendance_date)` constraint.
+  - Monthly attendance aggregation with days present/absent/late/excused.
+- [x] **Faculty Workload Analysis (`/api/v1/hrms/workload`):**
+  - Computes periods per week from timetable allocations and assigned sections count from `faculty_assignments`.
+  - Materializes snapshot in `staff_workload` with overload detection (> 28 periods/week).
+- [x] **Section 14 Payroll Integration Hook (`/api/v1/hrms/payroll/export`):**
+  - Structured data export boundary for external payroll systems: employee code, name, designation, department, working days, present/absent/late days, payable days, and `payroll_reference`.
+- [x] **Automated Test Suite:** `backend/tests/phase2_hrms.test.ts` passing 10/10 tests.
+- [x] **Full Platform Regression Suite:** **83 / 83 tests passing (100% GREEN exit gate)**.
+
+---
+
+## Next Milestone: Phase 3 (AI Yantra Workspaces) & Operational Consoles
+- **Yantra Voice Agent:** Campaign management, student/parent voice dispatches, call analytics.
+- **Yantra AI Attendance:** Face embedding registration, frame recognition queue, validation review before final attendance.
+- **Yantra AI Tutor:** Context-scoped tutor chat, curriculum-aligned practice generation, learning velocity analytics.
+
 
 

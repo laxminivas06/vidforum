@@ -1,40 +1,42 @@
 # [campaign & campRes] Cluster
 
-> 19 nodes · cohesion 0.11
+> 21 nodes · cohesion 0.10
 
 ## Key Concepts
 
-- [Document: Appflow](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (18 connections)
-- [1. Overview & Navigation Architecture](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.1 Authentication](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.2 Super Admin Console (/(super-admin))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.3 Institution Admin Workspace (/(institution-admin))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.4 Core Workspaces (/(core))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.5 AI Yantra Services (/(ai-yantra))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.6 Optional Modular Workspaces (/(optional))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.7 Central Student Master Profile (/students/id)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.8 Mobile Parent & Student Portal (/(mobile)/app)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2. Complete Route Hierarchy & Screen Inventory](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.1 Login & Tenant Resolution](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.2 Institution Admin Settings Shell (Two-Pane)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.3 Admissions Workspace (Kanban & Slide-Over)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.4 Student Master Profile Shell](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3. Deep-Dive Screen Specifications](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [4. Navigation & Optional Module Matrix (/config/navigation.ts)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [5. Development Phases](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [VID (Virtual Identification) — Application Flow & Architecture Document](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [Document: Readme](file:///C:/Antigravityyyyy/VID_School/README.md) (20 connections)
+- [1. Prerequisites](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [2. Environment Variables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [3. Running the Development Servers](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [4. Running in Production](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📡 API Reference Snapshot (/api/v1/)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [🏛 Architecture & Tech Stack](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Build and Start Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Build and Start Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📚 Complete Specifications & Documentation](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [🛡️ Core Architectural Pillars & Non-Negotiables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📊 Current Implementation Progress (As of 2026-09-25)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [🚀 Getting Started](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [In vidforum/backend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [In vidforum/frontend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Or using nodemon:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📁 Repository Directory Structure](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Running Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Running Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Stack Highlights](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [VID (Virtual Identification) — Educational Management Ecosystem](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
 
 ## Relationships
 
-- [[[FacultyController & FacultyRepository] Cluster]] (36 shared connections)
+- [[[FacultyController & FacultyRepository] Cluster]] (40 shared connections)
 
 ## Source Files
 
-- [docs/AppFlow.md](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md)
+- [README.md](file:///C:/Antigravityyyyy/VID_School/README.md)
 
 ## Audit Trail
 
-- EXTRACTED: 36 (100%)
+- EXTRACTED: 40 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [index.ts](file:///C:/Antigravityyyyy/VID_School/frontend/types/index.ts#L1) (0 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/plans/page.tsx#L1) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\types\index.ts](file:///C:/Antigravityyyyy/VID_School/frontend/types/index.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\plans\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/plans/page.tsx)
 
 ## Audit Trail
 

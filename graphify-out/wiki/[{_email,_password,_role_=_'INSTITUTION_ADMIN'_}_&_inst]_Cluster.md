@@ -1,35 +1,65 @@
 # [{ email, password, role = 'INSTITUTION_ADMIN' } & inst] Cluster
 
-> 29 nodes · cohesion 0.07
+> 29 nodes · cohesion 0.10
 
 ## Key Concepts
 
-- [users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L1) (28 connections)
-- [cleanEmail](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L43) (1 connections)
-- [client](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L34) (1 connections)
-- [current](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L143) (1 connections)
-- [currentRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L132) (1 connections)
-- [displayName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L44) (1 connections)
-- [id](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L128) (1 connections)
-- [insertAuth](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L80) (1 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L47) (1 connections)
-- [instName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L48) (1 connections)
-- [instRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L50) (1 connections)
-- [{ name, email, role = 'FACULTY', institutionName }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L36) (1 connections)
-- [{ name, email, role, institutionName, status }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L129) (1 connections)
-- [newUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L105) (1 connections)
-- [normalizedRole](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L61) (1 connections)
-- [{ permissionIds }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L301) (1 connections)
-- [permsRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L267) (1 connections)
-- [profileId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L77) (1 connections)
-- [profileUpdate](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L191) (1 connections)
-- [resolvedRoleName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L71) (1 connections)
-- [resRolePerms](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L282) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L10) (1 connections)
-- [roleId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L70) (1 connections)
-- [roleRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L62) (1 connections)
-- [rolesRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L250) (1 connections)
+- [AttendanceRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L60) (14 connections)
+- [AttendanceService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L6) (14 connections)
+- [.submitRollCall()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L93) (6 connections)
+- [.getStudentSummary()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts#L94) (4 connections)
+- [.verifyFacultySectionAccess()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L642) (4 connections)
+- [.getInstitutionAttendanceStats()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L402) (3 connections)
+- [.applyStudentLeave()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L266) (3 connections)
+- [.getOrCreateSession()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L8) (3 connections)
+- [.getScopedAttendance()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L206) (3 connections)
+- [.getSectionRoster()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L72) (3 connections)
+- [.getStudentAttendanceSummary()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L168) (3 connections)
+- [.createStudentLeaveRequest()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L432) (2 connections)
+- [.getOrCreateSession()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L62) (2 connections)
+- [.getSectionRosterForSession()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L221) (2 connections)
+- [.getSessionById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L115) (2 connections)
+- [.listStudentLeaveRequests()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L454) (2 connections)
+- [.recordRollCall()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L262) (2 connections)
+- [.getInstitutionSummary()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L421) (2 connections)
+- [.getSessionById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L51) (2 connections)
+- [.listStudentLeaves()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L324) (2 connections)
+- [.getStudentAttendanceSummary()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L321) (1 connections)
+- [.listSessions()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L149) (1 connections)
+- [.listStaffAttendance()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L593) (1 connections)
+- [.recordStaffAttendance()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L569) (1 connections)
+- [.listSessions()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L57) (1 connections)
 - *... and 4 more nodes in this community*
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class AttendanceRepository {
+        +attendance.repository.ts()
+        +.getOrCreateSession()
+        +.getSessionById()
+        +.listSessions()
+        +.getSectionRosterForSession()
+        +.recordRollCall()
+        +.getStudentAttendanceSummary()
+        +.getInstitutionAttendanceStats()
+        +.createStudentLeaveRequest()
+        +.listStudentLeaveRequests()
+    }
+    class AttendanceService {
+        +attendance.service.ts()
+        +.getOrCreateSession()
+        +.getSessionById()
+        +.listSessions()
+        +.getSectionRoster()
+        +.submitRollCall()
+        +.getStudentAttendanceSummary()
+        +.getScopedAttendance()
+        +.applyStudentLeave()
+        +.listStudentLeaves()
+    }
+```
 
 ## Relationships
 
@@ -37,12 +67,14 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\attendance\attendance.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\attendance\attendance.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\attendance\attendance.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 56 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 61 (70%)
+- INFERRED: 26 (30%)
 - AMBIGUOUS: 0 (0%)
 
 ---

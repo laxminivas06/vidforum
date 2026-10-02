@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [SettingsShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx#L1) (1 connections)
-- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx#L58) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/%5Bid%5D/page.tsx#L1) (1 connections)
+- [StudentMasterPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/%5Bid%5D/page.tsx#L10) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\SettingsShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\students\[id]\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/%5Bid%5D/page.tsx)
 
 ## Audit Trail
 

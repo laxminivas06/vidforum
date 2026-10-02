@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-attendance/monitoring/page.tsx#L1) (1 connections)
-- [CAMERA_DECKS](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-attendance/monitoring/page.tsx#L25) (1 connections)
+- [phase2_finance.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_finance.test.ts#L1) (1 connections)
+- [runFinanceTests()](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_finance.test.ts#L6) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\ai-attendance\monitoring\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-attendance/monitoring/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\tests\phase2_finance.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_finance.test.ts)
 
 ## Audit Trail
 

@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-config/page.tsx#L1) (1 connections)
-- [AIConfigPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-config/page.tsx#L8) (1 connections)
+- [phase2_hrms.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_hrms.test.ts#L1) (1 connections)
+- [runHrmsTests()](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_hrms.test.ts#L5) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\ai-config\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-config/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\tests\phase2_hrms.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_hrms.test.ts)
 
 ## Audit Trail
 

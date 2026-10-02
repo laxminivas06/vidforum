@@ -1,20 +1,21 @@
 # [activeLeftIcon & activeRightIcon] Cluster
 
-> 11 nodes · cohesion 0.18
+> 12 nodes · cohesion 0.17
 
 ## Key Concepts
 
-- [ai-yantra.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L1) (10 connections)
-- [campaign](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L44) (1 connections)
-- [campRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L38) (1 connections)
-- [guardRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L47) (1 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L15) (1 connections)
-- [recRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L53) (1 connections)
-- [reply](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L107) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L16) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L6) (1 connections)
-- [{ studentId, message, subject = 'Mathematics' }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L104) (1 connections)
-- [{ title, scriptTemplate, targetFilter }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L35) (1 connections)
+- [EditAdminWorkspacesModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L1) (11 connections)
+- [[error, setError]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L39) (1 connections)
+- [handleDeselectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L66) (1 connections)
+- [handleSave()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L70) (1 connections)
+- [handleSelectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L62) (1 connections)
+- [handleToggleWorkspace()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L56) (1 connections)
+- [initial](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L45) (1 connections)
+- [isChecked](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L212) (1 connections)
+- [[isSubmitting, setIsSubmitting]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L41) (1 connections)
+- [[selectedWorkspaces, setSelectedWorkspaces]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L38) (1 connections)
+- [[successBanner, setSuccessBanner]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L40) (1 connections)
+- [updateWorkspacesMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L37) (1 connections)
 
 ## Relationships
 
@@ -22,11 +23,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\ai-yantra\ai-yantra.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\components\institutions\EditAdminWorkspacesModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 20 (100%)
+- EXTRACTED: 22 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

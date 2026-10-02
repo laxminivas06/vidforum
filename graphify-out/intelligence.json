@@ -2,35 +2,35 @@
   "hotspots": [
     {
       "label": "DocumentsService",
-      "risk": 0.59,
+      "risk": 0.586,
       "type": "CLASS"
     },
     {
       "label": "ExaminationsRepository",
-      "risk": 0.49,
+      "risk": 0.484,
       "type": "CLASS"
     },
     {
       "label": "ExaminationsService",
-      "risk": 0.449,
+      "risk": 0.443,
       "type": "CLASS"
     },
     {
       "label": "FinanceRepository",
-      "risk": 0.447,
+      "risk": 0.442,
       "type": "CLASS"
     },
     {
       "label": "TimetableRepository",
-      "risk": 0.412,
+      "risk": 0.407,
       "type": "CLASS"
     }
   ],
   "blast_radius": {
-    "sendSuccess()": 130,
-    "sendError()": 96,
+    "sendSuccess()": 149,
+    "sendError()": 115,
     "institutions": 73,
     "Document: Vid Database Architecture": 47,
-    "ExaminationsRepository": 30
+    "HrmsRepository": 31
   }
 }

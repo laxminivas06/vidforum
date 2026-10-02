@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [helmet](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L18) (0 connections)
+- [bcryptjs](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L14) (0 connections)
 
 ## Relationships
 

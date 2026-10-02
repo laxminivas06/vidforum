@@ -1,47 +1,47 @@
 # [[academicYear, setAcademicYear] & [activeSection, setActiveSection]] Cluster
 
-> 26 nodes · cohesion 0.08
+> 29 nodes · cohesion 0.07
 
 ## Key Concepts
 
-- [Document: Design](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (25 connections)
-- [10. Accessibility Baseline](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [11. What This Design System Deliberately Avoids](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [1. Design Philosophy](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [2.1 Core Palette](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [2.2 Accent & Status Colors](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [2.3 Dark Elements (used, not a dark mode)](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [2. Color System](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [3. Typography](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [4. Spacing & Layout Grid](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.10 Slide-over / Detail Panel](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.1 Sidebar Navigation](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.2 Topbar / Breadcrumb](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.3 Two-Pane Settings Layout](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.4 Cards](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.5 Tables → Cards (responsive)](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.6 Forms](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.7 Buttons](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.8 Badges & Status Pills](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.9 Progress Indicators](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5. Core Components](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [6. Iconography](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [7. Required UI States (every screen)](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [8. Responsive Breakpoints](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [9. Motion & Interaction](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- *... and 1 more nodes in this community*
+- [users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L1) (28 connections)
+- [cleanEmail](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L43) (1 connections)
+- [client](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L34) (1 connections)
+- [current](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L143) (1 connections)
+- [currentRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L132) (1 connections)
+- [displayName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L44) (1 connections)
+- [id](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L128) (1 connections)
+- [insertAuth](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L80) (1 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L47) (1 connections)
+- [instName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L48) (1 connections)
+- [instRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L50) (1 connections)
+- [{ name, email, role = 'FACULTY', institutionName }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L36) (1 connections)
+- [{ name, email, role, institutionName, status }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L129) (1 connections)
+- [newUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L105) (1 connections)
+- [normalizedRole](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L61) (1 connections)
+- [{ permissionIds }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L301) (1 connections)
+- [permsRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L267) (1 connections)
+- [profileId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L77) (1 connections)
+- [profileUpdate](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L191) (1 connections)
+- [resolvedRoleName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L71) (1 connections)
+- [resRolePerms](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L282) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L10) (1 connections)
+- [roleId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L70) (1 connections)
+- [roleRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L62) (1 connections)
+- [rolesRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L250) (1 connections)
+- *... and 4 more nodes in this community*
 
 ## Relationships
 
-- [[[{ email, password, role = 'INSTITUTION_ADMIN' } & inst] Cluster]] (50 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [docs/Design.md](file:///C:/Antigravityyyyy/VID_School/docs/Design.md)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 50 (100%)
+- EXTRACTED: 56 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

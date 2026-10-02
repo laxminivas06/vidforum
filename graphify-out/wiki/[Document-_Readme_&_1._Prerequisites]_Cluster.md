@@ -1,35 +1,59 @@
 # [Document: Readme & 1. Prerequisites] Cluster
 
-> 44 nodes · cohesion 0.05
+> 47 nodes · cohesion 0.05
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L1) (38 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/vault/page.tsx#L1) (3 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L1) (3 connections)
-- [columns](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L290) (3 connections)
-- [handleAddUser()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L158) (2 connections)
-- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L140) (2 connections)
-- [adminCount](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L357) (1 connections)
-- [createUserMutation](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L78) (1 connections)
-- [{ data: dbUsers = [], isLoading: isLoadingUsers }](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L77) (1 connections)
-- [{ data: institutions = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L76) (1 connections)
-- [{ data: staff = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L32) (1 connections)
-- [DEFAULT_USERS](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L46) (1 connections)
-- [[editEmail, setEditEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L100) (1 connections)
-- [[editErrors, setEditErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L104) (1 connections)
-- [[editingUser, setEditingUser]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L98) (1 connections)
-- [[editInstitution, setEditInstitution]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L102) (1 connections)
-- [[editName, setEditName]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L99) (1 connections)
-- [[editRole, setEditRole]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L101) (1 connections)
-- [[editStatus, setEditStatus]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L103) (1 connections)
-- [[editSuccessMessage, setEditSuccessMessage]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L106) (1 connections)
-- [[email, setEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L89) (1 connections)
-- [[errors, setErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L92) (1 connections)
-- [facultyCount](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L356) (1 connections)
-- [filteredUsers](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L126) (1 connections)
-- [handleOpenEdit()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L210) (1 connections)
-- *... and 19 more nodes in this community*
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L1) (15 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L1) (10 connections)
+- [AdmissionsRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.repository.ts#L16) (8 connections)
+- [AdmissionsService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts#L23) (6 connections)
+- [.approveApplication()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts#L75) (6 connections)
+- [.updateStage()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts#L44) (5 connections)
+- [.approve()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.controller.ts#L82) (3 connections)
+- [.executeApprovalTransaction()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.repository.ts#L98) (3 connections)
+- [.findApplicationById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.repository.ts#L48) (3 connections)
+- [admissions.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts#L1) (3 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/matrix/page.tsx#L1) (3 connections)
+- [.countStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.repository.ts#L229) (2 connections)
+- [.findApplicantsByInstitution()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.repository.ts#L17) (2 connections)
+- [.findDefaultSection()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.repository.ts#L234) (2 connections)
+- [.updateApplicationStage()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.repository.ts#L90) (2 connections)
+- [.getApplicants()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts#L24) (2 connections)
+- [.getApplicationById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts#L53) (2 connections)
+- [handleAdvanceStage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L130) (2 connections)
+- [handleEnroll()](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L120) (2 connections)
+- [handleReject()](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L147) (2 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L45) (2 connections)
+- [[selectedGrade, setSelectedGrade]](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/matrix/page.tsx#L26) (2 connections)
+- [.createApplication()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.repository.ts#L56) (1 connections)
+- [.createApplication()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts#L61) (1 connections)
+- [STAGE_MAP_TO_DB](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts#L13) (1 connections)
+- *... and 22 more nodes in this community*
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class AdmissionsRepository {
+        +admissions.repository.ts()
+        +.findApplicantsByInstitution()
+        +.findApplicationById()
+        +.createApplication()
+        +.updateApplicationStage()
+        +.executeApprovalTransaction()
+        +.countStudents()
+        +.findDefaultSection()
+    }
+    class AdmissionsService {
+        +admissions.service.ts()
+        +.getApplicants()
+        +.updateStage()
+        +.getApplicationById()
+        +.createApplication()
+        +.approveApplication()
+    }
+```
 
 ## Relationships
 
@@ -37,14 +61,17 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\documents\vault\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/vault/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\hrms\staff\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\users\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\admissions\admissions.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\admissions\admissions.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\admissions\admissions.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\(auth)\login\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\admissions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\timetable\matrix\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/matrix/page.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 89 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 88 (79%)
+- INFERRED: 24 (21%)
 - AMBIGUOUS: 0 (0%)
 
 ---

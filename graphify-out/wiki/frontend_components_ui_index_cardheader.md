@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [typescript](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L33) (0 connections)
+- [next](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L15) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [backend/package.json](file:///C:/Antigravityyyyy/VID_School/backend/package.json)
+- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
 
 ## Audit Trail
 

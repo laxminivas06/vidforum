@@ -1,75 +1,63 @@
 # [useAuth() & RequirePermission()] Cluster
 
-> 37 nodes · cohesion 0.09
+> 34 nodes · cohesion 0.07
 
 ## Key Concepts
 
-- [InstitutionService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.service.ts#L16) (12 connections)
-- [InstitutionController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.controller.ts#L5) (11 connections)
-- [InstitutionRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.repository.ts#L3) (11 connections)
-- [.findByIdOrCode()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.repository.ts#L39) (10 connections)
-- [.findModules()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.repository.ts#L182) (4 connections)
-- [.addInstitutionAdmin()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.service.ts#L140) (4 connections)
-- [.getInstitutionDetails()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.service.ts#L54) (4 connections)
-- [.getInstitutionStats()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.service.ts#L74) (4 connections)
-- [.addAdmin()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.controller.ts#L77) (3 connections)
-- [.getAdmins()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.controller.ts#L67) (3 connections)
-- [.getInstitutionById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.controller.ts#L15) (3 connections)
-- [.getInstitutions()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.controller.ts#L6) (3 connections)
-- [.getStats()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.controller.ts#L25) (3 connections)
-- [.updateStatus()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.controller.ts#L87) (3 connections)
-- [.getStats()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.repository.ts#L220) (3 connections)
-- [.upsertModule()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.repository.ts#L251) (3 connections)
-- [.getAllInstitutions()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.service.ts#L20) (3 connections)
-- [.getInstitutionAdmins()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.service.ts#L210) (3 connections)
-- [.getModules()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.service.ts#L91) (3 connections)
-- [.toggleModule()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.service.ts#L99) (3 connections)
-- [.updateInstitutionStatus()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.service.ts#L275) (3 connections)
-- [.createInstitution()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.controller.ts#L58) (2 connections)
-- [.getModules()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.controller.ts#L35) (2 connections)
-- [.toggleModule()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.controller.ts#L45) (2 connections)
-- [.updateAdminWorkspaces()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.controller.ts#L98) (2 connections)
-- *... and 12 more nodes in this community*
+- [AcademicsRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L3) (16 connections)
+- [AcademicsService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L3) (15 connections)
+- [.getGrades()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L6) (3 connections)
+- [.getAcademicGrades()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L4) (3 connections)
+- [.getClassesByInstitution()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L4) (2 connections)
+- [.getSectionsByClass()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L16) (2 connections)
+- [.getSubjectsByClass()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L31) (2 connections)
+- [.listAcademicYears()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L73) (2 connections)
+- [.listAllocations()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L165) (2 connections)
+- [.listDepartments()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L95) (2 connections)
+- [.getAcademicYears()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L43) (2 connections)
+- [.getAllocations()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L83) (2 connections)
+- [.getClassSections()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L63) (2 connections)
+- [.getClassSubjects()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L71) (2 connections)
+- [.getDepartments()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L51) (2 connections)
+- [.createAcademicYear()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L81) (1 connections)
+- [.createAllocation()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L183) (1 connections)
+- [.createClass()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L121) (1 connections)
+- [.createDepartment()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L110) (1 connections)
+- [.createSection()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L132) (1 connections)
+- [.createSubject()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L143) (1 connections)
+- [.getHierarchy()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L44) (1 connections)
+- [.linkSubjectToClass()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L154) (1 connections)
+- [.listClasses()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L60) (1 connections)
+- [.createAcademicYear()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L47) (1 connections)
+- *... and 9 more nodes in this community*
 
 ## Class Diagram
 
 ```mermaid
 classDiagram
-    class InstitutionController {
-        +institution.controller.ts()
-        +.getInstitutions()
-        +.getInstitutionById()
-        +.getStats()
-        +.getModules()
-        +.toggleModule()
-        +.createInstitution()
-        +.getAdmins()
-        +.addAdmin()
-        +.updateStatus()
+    class AcademicsRepository {
+        +academics.repository.ts()
+        +.getClassesByInstitution()
+        +.getSectionsByClass()
+        +.getSubjectsByClass()
+        +.getHierarchy()
+        +.listClasses()
+        +.listAcademicYears()
+        +.createAcademicYear()
+        +.listDepartments()
+        +.createDepartment()
     }
-    class InstitutionRepository {
-        +institution.repository.ts()
-        +.findAll()
-        +.findByIdOrCode()
-        +.create()
-        +.createAdmin()
-        +.findAdmins()
-        +.updateAdminWorkspaces()
-        +.findModules()
-        +.getStats()
-        +.upsertModule()
-    }
-    class InstitutionService {
-        +institution.service.ts()
-        +.getAllInstitutions()
-        +.getInstitutionDetails()
-        +.getInstitutionStats()
-        +.getModules()
-        +.toggleModule()
-        +.createInstitution()
-        +.addInstitutionAdmin()
-        +.getInstitutionAdmins()
-        +.updateAdminWorkspaces()
+    class AcademicsService {
+        +academics.service.ts()
+        +.getAcademicGrades()
+        +.getHierarchy()
+        +.getAcademicYears()
+        +.createAcademicYear()
+        +.getDepartments()
+        +.createDepartment()
+        +.createClass()
+        +.getClassSections()
+        +.createSection()
     }
 ```
 
@@ -79,14 +67,14 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\institutions\institution.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.controller.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\institutions\institution.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\institutions\institution.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.service.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 76 (60%)
-- INFERRED: 50 (40%)
+- EXTRACTED: 63 (81%)
+- INFERRED: 15 (19%)
 - AMBIGUOUS: 0 (0%)
 
 ---

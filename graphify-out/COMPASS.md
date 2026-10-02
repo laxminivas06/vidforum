@@ -9,11 +9,11 @@
 3. `institutions` (73 edges)
 4. `Document: Vid Database Architecture` (47 edges)
 5. `ExaminationsRepository` (30 edges)
-6. `ExaminationsController` (26 edges)
-7. `ExaminationsService` (26 edges)
-8. `FinanceRepository` (26 edges)
-9. `profiles` (26 edges)
-10. `TimetableRepository` (25 edges)
+6. `DocumentsRepository` (27 edges)
+7. `ExaminationsController` (26 edges)
+8. `ExaminationsService` (26 edges)
+9. `FinanceRepository` (26 edges)
+10. `profiles` (26 edges)
 
 ## System Layers
 - **L0: Global/Entry**: 

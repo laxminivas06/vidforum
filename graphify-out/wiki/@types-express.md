@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [Badge()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Badge.tsx#L10) (1 connections)
-- [Badge.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Badge.tsx#L1) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/sports/page.tsx#L1) (1 connections)
+- [SportsPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/sports/page.tsx#L8) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Badge.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Badge.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\sports\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/sports/page.tsx)
 
 ## Audit Trail
 

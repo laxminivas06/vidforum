@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: agent-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (2 connections)
-- [Agent Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (1 connections)
-- [Enforcement](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (1 connections)
+- [App.tsx](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx#L1) (2 connections)
+- [[selectedChild, setSelectedChild]](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx#L6) (1 connections)
+- [[selectedRole, setSelectedRole]](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx#L5) (1 connections)
 
 ## Relationships
 
-- [[[Skill: knowl & Knowl Project Memory Skill] Cluster]] (4 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/agent-guard/skills/agent-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\mobile\App.tsx](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx)
 
 ## Audit Trail
 

@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [@tanstack/react-query](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L12) (0 connections)
+- [@types/react](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L23) (0 connections)
 
 ## Relationships
 

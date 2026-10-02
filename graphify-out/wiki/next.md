@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [phase2_finance.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_finance.test.ts#L1) (1 connections)
-- [runFinanceTests()](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_finance.test.ts#L6) (1 connections)
+- [phase2_attendance.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_attendance.test.ts#L1) (1 connections)
+- [runAttendanceTests()](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_attendance.test.ts#L6) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\tests\phase2_finance.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_finance.test.ts)
+- [C:\Antigravityyyyy\VID_School\backend\tests\phase2_attendance.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_attendance.test.ts)
 
 ## Audit Trail
 

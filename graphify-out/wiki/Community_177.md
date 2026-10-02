@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [@types/react-dom](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L24) (0 connections)
+- [tailwind-merge](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L18) (0 connections)
 
 ## Relationships
 

@@ -1,32 +1,17 @@
 # [Skill: brooks-lint & Brooks Lint Skill] Cluster
 
-> 8 nodes · cohesion 0.39
+> 8 nodes · cohesion 0.25
 
 ## Key Concepts
 
-- [VidApiClient](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L7) (7 connections)
-- [.request()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L18) (5 connections)
-- [.delete()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L71) (2 connections)
-- [.get()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L51) (2 connections)
-- [.patch()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L63) (2 connections)
-- [.post()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L55) (2 connections)
-- [index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L1) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L12) (1 connections)
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class VidApiClient {
-        +index.ts()
-        +.constructor()
-        +.request()
-        +.get()
-        +.post()
-        +.patch()
-        +.delete()
-    }
-```
+- [index.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L1) (7 connections)
+- [cn()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L72) (1 connections)
+- [containerRef](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L128) (1 connections)
+- [filteredOptions](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L132) (1 connections)
+- [handleClickOutside()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L139) (1 connections)
+- [[isOpen, setIsOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L126) (1 connections)
+- [[searchTerm, setSearchTerm]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L127) (1 connections)
+- [selectedOption](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L130) (1 connections)
 
 ## Relationships
 
@@ -34,11 +19,11 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\packages\api-client\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Form\index.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 22 (100%)
+- EXTRACTED: 14 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

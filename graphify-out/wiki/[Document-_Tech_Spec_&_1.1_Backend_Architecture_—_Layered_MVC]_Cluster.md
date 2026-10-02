@@ -1,6 +1,6 @@
 # [Document: Tech Spec & 1.1 Backend Architecture — Layered MVC] Cluster
 
-> 51 nodes · cohesion 0.05
+> 52 nodes · cohesion 0.05
 
 ## Key Concepts
 
@@ -8,8 +8,6 @@
 - [FinanceService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L4) (24 connections)
 - [.getStudentFeeLedger()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L433) (5 connections)
 - [.handleGatewayWebhook()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L170) (5 connections)
-- [.getSummary()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts#L322) (4 connections)
-- [.recordPayment()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts#L212) (4 connections)
 - [.getScopedFees()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L781) (4 connections)
 - [.processPayment()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L130) (4 connections)
 - [.getInvoiceById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L489) (3 connections)
@@ -24,12 +22,14 @@
 - [.listInvoices()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L456) (2 connections)
 - [.recordFailedGatewayPayment()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L690) (2 connections)
 - [.recordWebhookEvent()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L673) (2 connections)
+- [.assignFeeToStudent()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L81) (2 connections)
+- [.createFeeStructure()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L33) (2 connections)
 - [.getFeeStructure()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L29) (2 connections)
 - [.getInvoice()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L125) (2 connections)
 - [.getReceipt()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L165) (2 connections)
+- [.processRefund()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L229) (2 connections)
 - [finance.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts#L1) (1 connections)
-- [finance.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L1) (1 connections)
-- *... and 26 more nodes in this community*
+- *... and 27 more nodes in this community*
 
 ## Class Diagram
 
@@ -67,14 +67,13 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts)
 - [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.repository.ts)
 - [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 113 (81%)
-- INFERRED: 27 (19%)
+- EXTRACTED: 114 (83%)
+- INFERRED: 24 (17%)
 - AMBIGUOUS: 0 (0%)
 
 ---

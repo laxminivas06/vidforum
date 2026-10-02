@@ -2,7 +2,7 @@
 
 > God node · 47 connections · [docs/VID_Database_Architecture.md](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md)
 
-**Community:** [[[Document: Tasks & 1.1 Project Scaffolding & Infrastructure] Cluster]]
+**Community:** [[[Document: Prd & 1.1 Problem Statement] Cluster]]
 
 ## Connections by Relation
 

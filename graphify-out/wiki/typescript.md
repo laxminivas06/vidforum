@@ -4,16 +4,16 @@
 
 ## Key Concepts
 
-- [Document: Graphify](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md) (1 connections)
-- [Workflow: graphify](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md) (1 connections)
+- [QueryProvider.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx#L1) (1 connections)
+- [QueryProvider()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx#L6) (1 connections)
 
 ## Relationships
 
-- [[bcryptjs]] (2 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/workflows/graphify.md](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md)
+- [C:\Antigravityyyyy\VID_School\frontend\contexts\QueryProvider.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx)
 
 ## Audit Trail
 

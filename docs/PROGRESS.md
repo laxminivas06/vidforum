@@ -15,7 +15,8 @@
 | **Phase 2, Module 2** | Finance: Fees, Invoicing, Partial Payments, Receipts, Webhook Idempotency & Refunds | **COMPLETED** | PASSED (10/10 Automated Tests: Fee Structures, Invoices, Webhook Idempotency & Failure Paths, Refunds, Scoped Access) |
 | **Phase 2, Module 3** | Attendance: Daily & Period Sessions, Batch Roll Call, Low Attendance Alerts, Leave Workflows | **COMPLETED** | PASSED (10/10 Automated Tests: Atomic Roll Call, Leave Request to Excused Status, Absence Notifications, Rule 8/9 Scoping) |
 | **Phase 2, Module 4** | Examinations: Exam Lifecycle, Grade Scales, Pre-Commit Excel Import Validation, Report Cards | **COMPLETED** | PASSED (10/10 Automated Tests: Grade Resolution, Rule 8 Faculty Scoping, Excel Import Blocks Invalid Data, Automated Ranking, Scoped Access) |
-| **Phase 2, Remaining** | Documents, HRMS UI, Mobile Shell | **IN PROGRESS** | Next: Module 5 (Documents Management) |
+| **Phase 2, Module 5** | Documents: Vault Storage, Verification Workflow, Templates, Bonafide & TC QR Generation | **COMPLETED** | PASSED (10/10 Automated Tests: Storage Key Isolation, MIME Whitelist, Verification State Machine, QR Verification, Scoped Access) |
+| **Phase 2, Remaining** | HRMS Workspace & Operational Consoles | **IN PROGRESS** | Next: Module 6 (Staff & HRMS) |
 | **Phase 3** | AI Yantra (Voice Agent, AI Attendance, AI Tutor) | **QUEUED** | Pending Phase 2 |
 | **Phase 4** | Optional Modules (Events, Transport, Hostel, Library, Sports, Inventory) | **QUEUED** | Pending Phase 3 |
 
@@ -211,11 +212,53 @@
 
 ---
 
-## Next Milestone: Phase 2, Module 5 (Documents Management)
-- Scope per Section 9.11 & Decisions D1, D7:
-  - Document types and templates (Certificates, Bonafide Certificates, ID Documents, Circulars).
-  - Student documents & Staff documents storage metadata.
-  - Verification workflow (pending, verified, rejected).
-  - Multi-tenant isolation (`institution_id`) and object storage paths (`{institution_id}/documents/...`).
+## Phase 2, Module 5 Checklist: Documents Management (Completed)
+- [x] **Database Migration (`007_phase2_documents.sql`):**
+  - Extended `documents` with `file_size` and `metadata` JSONB.
+  - Extended `document_templates` with `template_body` and `variables` JSONB.
+  - Extended `document_requests` with `remarks`, `processed_by`, `processed_at`, and `issued_document_id`.
+  - Added performance indexes for owner-scoped lookups, types, verification statuses, requests, and templates.
+- [x] **Document Types Catalog (Section 9.11 & Decision D7):**
+  - Full catalog listing (`GET /api/v1/documents/types`) including global types (`birth_certificate`, `bonafide`, `id_card`, `transfer_certificate`, `mark_sheet`).
+  - Dynamic creation of institution-specific document types (`POST /api/v1/documents/types`).
+- [x] **Document Vault & Upload Engine:**
+  - Standardized registration (`POST /api/v1/documents`) with structured canonical storage keys: `{institution_id}/documents/{owner_type}/{owner_id}/{timestamp}-{fileName}`.
+  - MIME whitelist validation: permits PDF, JPEG, PNG, DOC, DOCX; strictly blocks executable/malicious uploads with `400 INVALID_MIME_TYPE`.
+  - Initial pending verification state automatically registered in `document_verifications`.
+  - Soft deletion support (`DELETE /api/v1/documents/:id`) setting `deleted_at = now()`, excluding soft-deleted documents from active queries.
+- [x] **Verification Workflow & Audit Trail:**
+  - Multi-status verification transitions (`POST /api/v1/documents/:id/verify`) for `verified` and `rejected` statuses.
+  - Complete verification history inspection (`GET /api/v1/documents/:id/verification-history`).
+  - Real-time audit event dispatch (`documents.verified`, `documents.rejected`) and push notifications to student/parent inboxes.
+- [x] **Document Templates Engine:**
+  - Full CRUD for templates (`POST/GET/PUT/DELETE /api/v1/documents/templates`).
+  - Dynamic placeholder substitution support (`variables: ['{{student_name}}', '{{admission_number}}', ...]`).
+- [x] **Official Certificate Generation Engine (with QR & Verification URL):**
+  - **Bonafide Certificate** (`POST /api/v1/documents/generate/bonafide`):
+    - Authoritative ID format: `BONA-{instCode}-{timestamp}-{random}`.
+    - Tamper-evident SHA-256 signature in QR payload (`{ certId, studentId, admissionNo, institution, issuedAt, sig }`).
+    - Verification URL: `https://verify.vid.edu/cert/{certificateId}`.
+    - Automated vault registration with status `verified` and push notification dispatch.
+  - **Transfer Certificate (TC)** (`POST /api/v1/documents/generate/transfer-certificate`):
+    - Authoritative ID format: `TC-{instCode}-{timestamp}-{random}`.
+    - Records student academic conduct, reason for leaving, and class clearance.
+    - Automated vault registration with status `verified`.
+- [x] **Document Requests Pipeline:**
+  - Student / Parent submission (`POST /api/v1/documents/requests`).
+  - Admin review and processing (`PATCH /api/v1/documents/requests/:id/status`) linking issued document IDs.
+- [x] **Scoped Access Control (Rules 1, 2, 8, 9, 10):**
+  - Multi-tenant isolation: Cross-tenant access attempts are completely isolated and blocked with 404.
+  - Student (Rule 10): Scoped strictly to own document vault. Blocked from accessing other students' records.
+  - Parent (Rule 9): Scoped strictly to linked children. Blocked from unlinked students.
+  - Faculty (Rule 8): Scoped to students in assigned sections. Unallocated faculty access blocked with 403.
+- [x] **Automated Test Suite:** `backend/tests/phase2_documents.test.ts` passing 10/10 tests. Total test suite passing: 73/73 tests.
+
+---
+
+## Next Milestone: Phase 2, Module 6 (Staff & HRMS Workspace)
+- Scope per Section 9.12 & Decision D3:
+  - Staff onboarding, departments, designations, employment status lifecycle (`active`, `on_leave`, `suspended`, `resigned`, `terminated`).
+  - Staff leave application, approval, and balance tracking.
+  - Faculty workload tracking and period allocation summaries.
 
 

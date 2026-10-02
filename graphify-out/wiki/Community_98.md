@@ -1,23 +1,24 @@
 # Community 98
 
-> 2 nodes · cohesion 1.00
+> 3 nodes · cohesion 0.67
 
 ## Key Concepts
 
-- [run-migration.ts](file:///C:/Antigravityyyyy/VID_School/backend/scripts/run-migration.ts#L1) (1 connections)
-- [main()](file:///C:/Antigravityyyyy/VID_School/backend/scripts/run-migration.ts#L5) (1 connections)
+- [Skill: wingman](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md) (2 connections)
+- [Pre-Edit Verification Checklist](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md) (1 connections)
+- [Wingman Data-Contract Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[Community 97]] (4 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\scripts\run-migration.ts](file:///C:/Antigravityyyyy/VID_School/backend/scripts/run-migration.ts)
+- [.agents/plugins/wingman/skills/wingman/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md)
 
 ## Audit Trail
 
-- EXTRACTED: 2 (100%)
+- EXTRACTED: 4 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

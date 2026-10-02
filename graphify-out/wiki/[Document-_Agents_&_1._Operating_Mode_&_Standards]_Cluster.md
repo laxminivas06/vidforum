@@ -1,18 +1,35 @@
 # [Document: Agents & 1. Operating Mode & Standards] Cluster
 
-> 9 nodes · cohesion 0.22
+> 9 nodes · cohesion 0.25
 
 ## Key Concepts
 
-- [Card.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L1) (8 connections)
-- [activeDelta](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L122) (1 connections)
-- [activeDeltaType](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L123) (1 connections)
-- [Card](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L11) (1 connections)
-- [CardContent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L74) (1 connections)
-- [CardDescription](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L62) (1 connections)
-- [CardFooter](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L82) (1 connections)
-- [CardHeader](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L38) (1 connections)
-- [CardTitle](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L50) (1 connections)
+- [AuditRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.repository.ts#L18) (4 connections)
+- [AuditService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.service.ts#L3) (3 connections)
+- [.getAuditLogById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.service.ts#L15) (3 connections)
+- [.getAuditLogs()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.service.ts#L4) (3 connections)
+- [.findLogById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.repository.ts#L98) (2 connections)
+- [.findLogs()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.repository.ts#L23) (2 connections)
+- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.repository.ts#L19) (1 connections)
+- [audit.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.repository.ts#L1) (1 connections)
+- [audit.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.service.ts#L1) (1 connections)
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class AuditRepository {
+        +audit.repository.ts()
+        +.constructor()
+        +.findLogs()
+        +.findLogById()
+    }
+    class AuditService {
+        +audit.service.ts()
+        +.getAuditLogs()
+        +.getAuditLogById()
+    }
+```
 
 ## Relationships
 
@@ -20,12 +37,13 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Card.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\audit\audit.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\audit\audit.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 16 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 14 (70%)
+- INFERRED: 6 (30%)
 - AMBIGUOUS: 0 (0%)
 
 ---

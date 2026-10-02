@@ -1,25 +1,25 @@
 # [Skill: commit-narrator & Commit Narrator Skill] Cluster
 
-> 4 nodes · cohesion 0.50
+> 4 nodes · cohesion 0.67
 
 ## Key Concepts
 
-- [Skill: brooks-lint](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (3 connections)
-- [Brooks Lint Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (1 connections)
-- [Guiding Principles](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (1 connections)
-- [Severity Classifications](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (1 connections)
+- [workspaces.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L1) (3 connections)
+- [getWorkspaceForPath()](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L115) (2 connections)
+- [isPathAllowedForWorkspaces()](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L121) (2 connections)
+- [PLATFORM_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L9) (1 connections)
 
 ## Relationships
 
-- [[[Skill: agent-guard & Agent Guard Skill] Cluster]] (6 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\frontend\config\workspaces.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 6 (100%)
+- EXTRACTED: 8 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

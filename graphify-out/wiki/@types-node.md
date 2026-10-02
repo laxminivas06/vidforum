@@ -1,23 +1,23 @@
 # @types/node
 
-> 2 nodes · cohesion 2.00
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [Skill: dev-skills](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/dev-skills/skills/dev-skills/SKILL.md) (3 connections)
-- [Core Workflows](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/dev-skills/skills/dev-skills/SKILL.md) (1 connections)
+- [SettingsShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx#L1) (1 connections)
+- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx#L58) (1 connections)
 
 ## Relationships
 
-- [[zod]] (3 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/dev-skills/skills/dev-skills/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/dev-skills/skills/dev-skills/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\SettingsShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 3 (100%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

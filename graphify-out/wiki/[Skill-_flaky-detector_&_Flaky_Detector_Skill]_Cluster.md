@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [database.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts#L1) (2 connections)
-- [db](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts#L22) (1 connections)
-- [pool](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts#L4) (1 connections)
+- [verify-workspaces-e2e.js](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-workspaces-e2e.js#L1) (2 connections)
+- [{ db }](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-workspaces-e2e.js#L1) (1 connections)
+- [run()](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-workspaces-e2e.js#L3) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\config\database.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts)
+- [C:\Antigravityyyyy\VID_School\backend\scripts\verify-workspaces-e2e.js](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-workspaces-e2e.js)
 
 ## Audit Trail
 

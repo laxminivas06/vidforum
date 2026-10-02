@@ -4,14 +4,23 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L1) (7 connections)
-- [activeGrade](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L31) (1 connections)
-- [{ data: grades = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L28) (1 connections)
-- [isSelected](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L83) (1 connections)
-- [pct](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L176) (1 connections)
-- [[selectedGradeId, setSelectedGradeId]](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L29) (1 connections)
-- [totalCapacity](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L85) (1 connections)
-- [totalStudents](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L84) (1 connections)
+- [hrms.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L1) (7 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L11) (1 connections)
+- [{ name }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L100) (1 connections)
+- [{
+      profileId,
+      employeeCode,
+      departmentId,
+      designationId,
+      isTeachingStaff,
+      dateOfJoining,
+      qualification,
+      specialization,
+    }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L32) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L12) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L6) (1 connections)
+- [staff](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L67) (1 connections)
+- [staffRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L48) (1 connections)
 
 ## Relationships
 
@@ -19,7 +28,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\academics\hierarchy\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts)
 
 ## Audit Trail
 

@@ -1,29 +1,44 @@
 # [Skill: honcho-memory & Honcho Memory Skill] Cluster
 
-> 8 nodes · cohesion 0.25
+> 8 nodes · cohesion 0.39
 
 ## Key Concepts
 
-- [Document: Plugin Orchestrator](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (7 connections)
-- [1. Memory Phase (Start of Session & Pre-Edit)](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [2. Planning & SDLC Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [3. Implementation & Testing Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [4. Code Quality & Review Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [5. Security & Git Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [6. Token & Output Optimization](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [Plugin Orchestration Rules](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [VidApiClient](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L7) (7 connections)
+- [.request()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L18) (5 connections)
+- [.delete()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L71) (2 connections)
+- [.get()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L51) (2 connections)
+- [.patch()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L63) (2 connections)
+- [.post()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L55) (2 connections)
+- [index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L1) (1 connections)
+- [.constructor()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L12) (1 connections)
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class VidApiClient {
+        +index.ts()
+        +.constructor()
+        +.request()
+        +.get()
+        +.post()
+        +.patch()
+        +.delete()
+    }
+```
 
 ## Relationships
 
-- [[[heights & percentage] Cluster]] (14 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/rules/plugin-orchestrator.md](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md)
+- [C:\Antigravityyyyy\VID_School\packages\api-client\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 14 (100%)
+- EXTRACTED: 22 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

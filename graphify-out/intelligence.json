@@ -1,28 +1,28 @@
 {
   "hotspots": [
     {
+      "label": "DocumentsService",
+      "risk": 0.59,
+      "type": "CLASS"
+    },
+    {
       "label": "ExaminationsRepository",
-      "risk": 0.57,
+      "risk": 0.49,
       "type": "CLASS"
     },
     {
       "label": "ExaminationsService",
-      "risk": 0.547,
+      "risk": 0.449,
       "type": "CLASS"
     },
     {
       "label": "FinanceRepository",
-      "risk": 0.531,
+      "risk": 0.447,
       "type": "CLASS"
     },
     {
       "label": "TimetableRepository",
-      "risk": 0.492,
-      "type": "CLASS"
-    },
-    {
-      "label": "AttendanceService",
-      "risk": 0.395,
+      "risk": 0.412,
       "type": "CLASS"
     }
   ],

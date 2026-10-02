@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [postcss](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L26) (0 connections)
+- [zod](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L19) (0 connections)
 
 ## Relationships
 

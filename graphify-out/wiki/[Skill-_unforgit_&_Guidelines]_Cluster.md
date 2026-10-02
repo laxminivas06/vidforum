@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: axonflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (2 connections)
-- [AxonFlow Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (1 connections)
-- [Policies](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (1 connections)
+- [Skill: ai-native-sdlc](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (2 connections)
+- [AI-Native SDLC Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (1 connections)
+- [Gates](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: memesh & Execution Guide] Cluster]] (4 shared connections)
+- [[[Skill: token-optimizer & Best Practices] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/axonflow/skills/axonflow/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md)
+- [.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md)
 
 ## Audit Trail
 

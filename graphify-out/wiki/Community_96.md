@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: unforgit](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (2 connections)
-- [Guidelines](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (1 connections)
-- [Unforgit Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (1 connections)
+- [Skill: token-optimizer](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md) (2 connections)
+- [Best Practices](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md) (1 connections)
+- [Token Optimizer Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[nextConfig]] (4 shared connections)
+- [[Community 95]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/unforgit/skills/unforgit/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md)
+- [.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md)
 
 ## Audit Trail
 

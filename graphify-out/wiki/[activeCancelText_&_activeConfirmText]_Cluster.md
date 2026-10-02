@@ -4,16 +4,38 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L1) (9 connections)
-- [[activeRollCall, setActiveRollCall]](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L35) (1 connections)
-- [[attendanceRecords, setAttendanceRecords]](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L46) (1 connections)
-- [{ data: facultyInfo, isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L34) (1 connections)
-- [handleCompleteRollCall()](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L58) (1 connections)
-- [isCurrent](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L137) (1 connections)
-- [isPresent](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L341) (1 connections)
-- [[rollCallSuccess, setRollCallSuccess]](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L36) (1 connections)
-- [sampleStudents](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L39) (1 connections)
-- [toggleStudentAttendance()](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L48) (1 connections)
+- [error-format.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L1) (5 connections)
+- [AppError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L25) (2 connections)
+- [PermissionDeniedError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L47) (2 connections)
+- [ResourceNotFoundError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L54) (2 connections)
+- [TenantViolationError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L40) (2 connections)
+- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L30) (1 connections)
+- [formatErrorResponse()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L61) (1 connections)
+- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L48) (1 connections)
+- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L55) (1 connections)
+- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L41) (1 connections)
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class AppError {
+        +error-format.ts()
+        +.constructor()
+    }
+    class PermissionDeniedError {
+        +error-format.ts()
+        +.constructor()
+    }
+    class ResourceNotFoundError {
+        +error-format.ts()
+        +.constructor()
+    }
+    class TenantViolationError {
+        +error-format.ts()
+        +.constructor()
+    }
+```
 
 ## Relationships
 
@@ -21,7 +43,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\faculty\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\common\error-format.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts)
 
 ## Audit Trail
 

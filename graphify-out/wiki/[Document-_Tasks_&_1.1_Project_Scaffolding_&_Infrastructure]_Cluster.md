@@ -1,82 +1,35 @@
 # [Document: Tasks & 1.1 Project Scaffolding & Infrastructure] Cluster
 
-> 48 nodes · cohesion 0.05
+> 48 nodes · cohesion 0.04
 
 ## Key Concepts
 
-- [AttendanceRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L60) (14 connections)
-- [AttendanceService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L6) (14 connections)
-- [NotificationRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L17) (7 connections)
-- [.submitRollCall()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L93) (6 connections)
-- [NotificationService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L3) (6 connections)
-- [.sendNotification()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L21) (6 connections)
-- [.getStudentSummary()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts#L94) (4 connections)
-- [.verifyFacultySectionAccess()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L642) (4 connections)
-- [.decideStudentLeave()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L339) (4 connections)
-- [.getNotifications()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.controller.ts#L6) (4 connections)
-- [.send()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.controller.ts#L77) (4 connections)
-- [.getInstitutionAttendanceStats()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L402) (3 connections)
-- [.applyStudentLeave()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L266) (3 connections)
-- [.getOrCreateSession()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L8) (3 connections)
-- [.getScopedAttendance()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L206) (3 connections)
-- [.getSectionRoster()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L72) (3 connections)
-- [.getStudentAttendanceSummary()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts#L168) (3 connections)
-- [.getUserNotifications()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L4) (3 connections)
-- [.createStudentLeaveRequest()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L432) (2 connections)
-- [.decideStudentLeaveRequest()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L515) (2 connections)
-- [.getOrCreateSession()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L62) (2 connections)
-- [.getSectionRosterForSession()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L221) (2 connections)
-- [.getSessionById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L115) (2 connections)
-- [.listStudentLeaveRequests()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L454) (2 connections)
-- [.recordRollCall()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts#L262) (2 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L1) (17 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L1) (9 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx#L1) (9 connections)
+- [AuthContext.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L1) (9 connections)
+- [useAuth()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L422) (4 connections)
+- [[searchQuery, setSearchQuery]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L82) (4 connections)
+- [RequirePermission()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L436) (2 connections)
+- [DashboardPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L41) (2 connections)
+- [{ data: institutions = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L42) (2 connections)
+- [RootPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/page.tsx#L7) (2 connections)
+- [ALL_PERMISSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L48) (1 connections)
+- [AuthContext](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L160) (1 connections)
+- [AuthProvider()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L162) (1 connections)
+- [DEFAULT_USER](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L39) (1 connections)
+- [KNOWN_ACCOUNTS](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L149) (1 connections)
+- [ROLE_PERMISSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L90) (1 connections)
+- [SUPER_ADMIN_PERMISSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L77) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/page.tsx#L1) (1 connections)
+- [[actionType, setActionType]](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L47) (1 connections)
+- [applicantColumns](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L92) (1 connections)
+- [async()](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L420) (1 connections)
+- [[collectDialogOpen, setCollectDialogOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx#L41) (1 connections)
+- [[confirmDialogOpen, setConfirmDialogOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L89) (1 connections)
+- [{ data: applicants, isLoading: appsLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L87) (1 connections)
+- [{ data: fees }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L88) (1 connections)
 - *... and 23 more nodes in this community*
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class AttendanceRepository {
-        +attendance.repository.ts()
-        +.getOrCreateSession()
-        +.getSessionById()
-        +.listSessions()
-        +.getSectionRosterForSession()
-        +.recordRollCall()
-        +.getStudentAttendanceSummary()
-        +.getInstitutionAttendanceStats()
-        +.createStudentLeaveRequest()
-        +.listStudentLeaveRequests()
-    }
-    class AttendanceService {
-        +attendance.service.ts()
-        +.getOrCreateSession()
-        +.getSessionById()
-        +.listSessions()
-        +.getSectionRoster()
-        +.submitRollCall()
-        +.getStudentAttendanceSummary()
-        +.getScopedAttendance()
-        +.applyStudentLeave()
-        +.listStudentLeaves()
-    }
-    class NotificationRepository {
-        +notification.repository.ts()
-        +.constructor()
-        +.findForUser()
-        +.getUnreadCount()
-        +.markAsRead()
-        +.markAllAsRead()
-        +.createNotification()
-    }
-    class NotificationService {
-        +notification.service.ts()
-        +.getUserNotifications()
-        +.getUnreadCount()
-        +.markAsRead()
-        +.markAllAsRead()
-        +.sendNotification()
-    }
-```
 
 ## Relationships
 
@@ -84,17 +37,17 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\attendance\attendance.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\attendance\attendance.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\attendance\attendance.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.service.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.controller.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\finance\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\institutions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\users\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\contexts\AuthContext.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 91 (67%)
-- INFERRED: 45 (33%)
+- EXTRACTED: 94 (96%)
+- INFERRED: 4 (4%)
 - AMBIGUOUS: 0 (0%)
 
 ---

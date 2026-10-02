@@ -8,13 +8,13 @@
 - [[examinations.repository.ts]] `EXTRACTED`
 
 ### method
+- [[.verifyParentChildLink()]] `EXTRACTED`
 - [[.calculateExamResults()]] `EXTRACTED`
 - [[.verifyFacultySubjectAllocation()]] `EXTRACTED`
 - [[.getExamSubjectById()]] `EXTRACTED`
 - [[.upsertMarksBatch()]] `EXTRACTED`
 - [[.validateImportBatch()]] `EXTRACTED`
 - [[.commitImportBatch()]] `EXTRACTED`
-- [[.verifyParentChildLink()]] `EXTRACTED`
 - [[.getExamById()]] `EXTRACTED`
 - [[.publishExam()]] `EXTRACTED`
 - [[.addExamSubject()]] `EXTRACTED`

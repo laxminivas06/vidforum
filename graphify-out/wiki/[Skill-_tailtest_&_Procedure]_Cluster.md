@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [App.tsx](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx#L1) (2 connections)
-- [[selectedChild, setSelectedChild]](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx#L6) (1 connections)
-- [[selectedRole, setSelectedRole]](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx#L5) (1 connections)
+- [navigation.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L1) (2 connections)
+- [getFilteredNavigation()](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L192) (1 connections)
+- [NAVIGATION_CONFIG](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L27) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\mobile\App.tsx](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\config\navigation.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts)
 
 ## Audit Trail
 

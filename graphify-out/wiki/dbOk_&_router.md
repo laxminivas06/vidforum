@@ -4,13 +4,13 @@
 
 ## Key Concepts
 
-- [index.ts](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L1) (6 connections)
-- [ApiErrorDetailSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L51) (1 connections)
-- [ApiErrorSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L57) (1 connections)
-- [ApiSuccessSchema()](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L32) (1 connections)
-- [BaseEntitySchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L6) (1 connections)
-- [PaginationQuerySchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L19) (1 connections)
-- [TenantContextSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L75) (1 connections)
+- [Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L1) (6 connections)
+- [activeWorkspace](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L47) (1 connections)
+- [dropdownRef](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L39) (1 connections)
+- [handleClickOutside()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L51) (1 connections)
+- [isCurrent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L128) (1 connections)
+- [[isWorkspaceDropdownOpen, setIsWorkspaceDropdownOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L38) (1 connections)
+- [permittedWorkspaces](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L42) (1 connections)
 
 ## Relationships
 
@@ -18,7 +18,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\packages\schemas\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx)
 
 ## Audit Trail
 

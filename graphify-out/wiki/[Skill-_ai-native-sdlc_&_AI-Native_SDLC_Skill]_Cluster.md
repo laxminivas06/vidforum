@@ -4,10 +4,10 @@
 
 ## Key Concepts
 
-- [optional-modules.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L1) (3 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L11) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L12) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L6) (1 connections)
+- [rbac.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L1) (3 connections)
+- [requireAnyPermission()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L70) (1 connections)
+- [requirePermission()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L36) (1 connections)
+- [requireRole()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L7) (1 connections)
 
 ## Relationships
 
@@ -15,7 +15,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\optional-modules\optional-modules.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\rbac.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts)
 
 ## Audit Trail
 

@@ -1,33 +1,34 @@
 # [Document: Plugin Orchestrator & 1. Memory Phase (Start of Session & Pre-Edit)] Cluster
 
-> 12 nodes · cohesion 0.17
+> 13 nodes · cohesion 0.15
 
 ## Key Concepts
 
-- [EditAdminWorkspacesModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L1) (11 connections)
-- [[error, setError]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L39) (1 connections)
-- [handleDeselectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L66) (1 connections)
-- [handleSave()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L70) (1 connections)
-- [handleSelectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L62) (1 connections)
-- [handleToggleWorkspace()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L56) (1 connections)
-- [initial](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L45) (1 connections)
-- [isChecked](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L212) (1 connections)
-- [[isSubmitting, setIsSubmitting]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L41) (1 connections)
-- [[selectedWorkspaces, setSelectedWorkspaces]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L38) (1 connections)
-- [[successBanner, setSuccessBanner]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L40) (1 connections)
-- [updateWorkspacesMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L37) (1 connections)
+- [Document: Memory](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (12 connections)
+- [1.1 Architecture & Stack Contract](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [1.2 Core Development Directives](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [1. Project Context & Durable Conclusions (Honcho / Wingman / Knowl)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [2. Installed Plugin Suite (28 Plugins Matrix)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [3. Workflow Activation Guide](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [4. Frontend Implementation & Stitch Conversion State (2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.1 Cloud Database Infrastructure (Supabase PostgreSQL)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.2 Backend Layered MVC Engine (Node.js 22 + Express + TypeScript)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.3 Frontend-to-Backend Integration & Offline Resilience](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.4 Repository Sync & Git Checkpoints](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5. Backend & Supabase Database Architecture Implementation (2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [Persistent Agent Memory & Plugin Ecosystem: VID Platform](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[containerRef & filteredOptions] Cluster]] (24 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\institutions\EditAdminWorkspacesModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx)
+- [docs/MEMORY.md](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md)
 
 ## Audit Trail
 
-- EXTRACTED: 22 (100%)
+- EXTRACTED: 24 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

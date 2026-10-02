@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: codex-reviewer](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md) (2 connections)
-- [Checklist](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md) (1 connections)
-- [Codex Reviewer Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md) (1 connections)
+- [Skill: axonflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (2 connections)
+- [AxonFlow Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (1 connections)
+- [Policies](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: metabrain & Metabrain Skill] Cluster]] (4 shared connections)
+- [[[Skill: unforgit & Guidelines] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md)
+- [.agents/plugins/axonflow/skills/axonflow/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md)
 
 ## Audit Trail
 

@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [index.ts](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/index.ts#L1) (0 connections)
+- [tailwind.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/tailwind.config.js#L1) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\index.ts](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/index.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\tailwind.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/tailwind.config.js)
 
 ## Audit Trail
 

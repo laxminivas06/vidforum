@@ -1,35 +1,35 @@
 # [sendSuccess() & InstitutionRepository] Cluster
 
-> 66 nodes · cohesion 0.04
+> 116 nodes · cohesion 0.03
 
 ## Key Concepts
 
+- [.dispatch()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/audit-dispatcher.ts#L23) (35 connections)
 - [ExaminationsRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts#L121) (30 connections)
+- [DocumentsRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.repository.ts#L74) (27 connections)
 - [ExaminationsService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.service.ts#L6) (26 connections)
-- [.dispatch()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/audit-dispatcher.ts#L23) (24 connections)
+- [DocumentsService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.service.ts#L30) (22 connections)
+- [.generateBonafideCertificate()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.service.ts#L406) (8 connections)
+- [.verifyParentChildLink()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts#L1074) (8 connections)
+- [.sendNotification()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L21) (8 connections)
+- [.generateTransferCertificate()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.service.ts#L512) (7 connections)
+- [.requestDocument()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.service.ts#L610) (7 connections)
+- [.uploadDocument()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.service.ts#L77) (6 connections)
+- [.verifyDocument()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.service.ts#L236) (6 connections)
 - [.calculateExamResults()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts#L832) (6 connections)
+- [.findDocumentById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.repository.ts#L177) (5 connections)
+- [.getDocumentTypeById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.repository.ts#L93) (5 connections)
+- [.assertDocumentAccess()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.service.ts#L741) (5 connections)
 - [.verifyFacultySubjectAllocation()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts#L1053) (5 connections)
 - [.publishExamResults()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.service.ts#L372) (5 connections)
+- [.createDocument()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.repository.ts#L127) (4 connections)
+- [.createDocumentType()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.service.ts#L52) (4 connections)
+- [.deleteDocument()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.service.ts#L200) (4 connections)
+- [.processDocumentRequest()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.service.ts#L698) (4 connections)
 - [.commitImportBatch()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts#L807) (4 connections)
 - [.getExamSubjectById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts#L320) (4 connections)
 - [.upsertMarksBatch()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts#L560) (4 connections)
-- [.validateImportBatch()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts#L694) (4 connections)
-- [.verifyParentChildLink()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts#L1074) (4 connections)
-- [.commitExcelImport()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.service.ts#L315) (4 connections)
-- [.submitMarksBatch()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.service.ts#L193) (4 connections)
-- [.getExamById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts#L168) (3 connections)
-- [.calculateResults()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.service.ts#L355) (3 connections)
-- [.getStudentReportCard()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.service.ts#L448) (3 connections)
-- [.listMarks()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.service.ts#L236) (3 connections)
-- [.validateExcelImport()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.service.ts#L294) (3 connections)
-- [tenantMiddleware()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/tenant.middleware.ts#L12) (3 connections)
-- [AuditDispatcher](file:///C:/Antigravityyyyy/VID_School/backend/src/common/audit-dispatcher.ts#L19) (2 connections)
-- [.addExamSubject()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts#L277) (2 connections)
-- [.createExamSchedule()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts#L344) (2 connections)
-- [.listExamSubjects()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts#L297) (2 connections)
-- [.publishExam()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts#L256) (2 connections)
-- [.resolveGrade()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts#L521) (2 connections)
-- *... and 41 more nodes in this community*
+- *... and 91 more nodes in this community*
 
 ## Class Diagram
 
@@ -38,6 +38,30 @@ classDiagram
     class AuditDispatcher {
         +audit-dispatcher.ts()
         +.dispatch()
+    }
+    class DocumentsRepository {
+        +documents.repository.ts()
+        +.constructor()
+        +.listDocumentTypes()
+        +.getDocumentTypeById()
+        +.getDocumentTypeByCode()
+        +.createDocumentType()
+        +.createDocument()
+        +.findDocumentById()
+        +.findDocumentsByOwner()
+        +.listDocuments()
+    }
+    class DocumentsService {
+        +documents.service.ts()
+        +.constructor()
+        +.listDocumentTypes()
+        +.getDocumentType()
+        +.createDocumentType()
+        +.uploadDocument()
+        +.getDocument()
+        +.listDocuments()
+        +.deleteDocument()
+        +.verifyDocument()
     }
     class ExaminationsRepository {
         +examinations.repository.ts()
@@ -73,14 +97,16 @@ classDiagram
 
 - [C:\Antigravityyyyy\VID_School\backend\src\common\audit-dispatcher.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/audit-dispatcher.ts)
 - [C:\Antigravityyyyy\VID_School\backend\src\middleware\tenant.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/tenant.middleware.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\documents\documents.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\documents\documents.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.service.ts)
 - [C:\Antigravityyyyy\VID_School\backend\src\modules\examinations\examinations.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.repository.ts)
 - [C:\Antigravityyyyy\VID_School\backend\src\modules\examinations\examinations.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.service.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 141 (68%)
-- INFERRED: 65 (32%)
+- EXTRACTED: 253 (62%)
+- INFERRED: 153 (38%)
 - AMBIGUOUS: 0 (0%)
 
 ---

@@ -1,63 +1,41 @@
 # [conflicts & facConflict] Cluster
 
-> 15 nodes · cohesion 0.17
+> 19 nodes · cohesion 0.11
 
 ## Key Concepts
 
-- [StudentController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L5) (4 connections)
-- [StudentRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L3) (4 connections)
-- [StudentService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L3) (4 connections)
-- [.getStudentById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L24) (3 connections)
-- [.getStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L6) (3 connections)
-- [.promote()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L36) (3 connections)
-- [.getStudentMaster()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L8) (3 connections)
-- [.listStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L4) (3 connections)
-- [.promoteStudent()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L16) (3 connections)
-- [.findStudentMasterById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L57) (2 connections)
-- [.findStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L4) (2 connections)
-- [.promote()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L145) (2 connections)
-- [student.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L1) (1 connections)
-- [student.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L1) (1 connections)
-- [student.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L1) (1 connections)
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class StudentController {
-        +student.controller.ts()
-        +.getStudents()
-        +.getStudentById()
-        +.promote()
-    }
-    class StudentRepository {
-        +student.repository.ts()
-        +.findStudents()
-        +.findStudentMasterById()
-        +.promote()
-    }
-    class StudentService {
-        +student.service.ts()
-        +.listStudents()
-        +.getStudentMaster()
-        +.promoteStudent()
-    }
-```
+- [Document: Antigravity Master Prompt](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (18 connections)
+- [0. ROLE & OPERATING MODE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [1. PROJECT BRIEF](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [2. REQUIRED DELIVERABLES — CREATE THESE FILES FIRST](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [3. DEVELOPMENT RULES (apply throughout, no exceptions)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [4. TECH STACK CONSTRAINTS](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [5. WORKING AGREEMENT / CHECK-IN CADENCE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [6. AGENT MEMORY USAGE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [7. DEFINITION OF DONE (v1)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [AI Yantra Boundary](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [Backend Architecture Rules](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [/docs/DECISIONS.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [/docs/PRD.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [/docs/TASKS.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [/docs/TECHSPEC.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [Documentation / Architecture Reconciliation](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [Documentation Reconciliation](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [MASTER PROMPT — Antigravity Full-Stack Build](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [Multi-Tenant Security](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[campaign & campRes] Cluster]] (36 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts)
+- [Reference_docs/antigravity-master-prompt.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md)
 
 ## Audit Trail
 
-- EXTRACTED: 24 (62%)
-- INFERRED: 15 (38%)
+- EXTRACTED: 36 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

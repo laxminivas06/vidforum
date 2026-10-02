@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [verify-workspaces-e2e.js](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-workspaces-e2e.js#L1) (2 connections)
-- [{ db }](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-workspaces-e2e.js#L1) (1 connections)
-- [run()](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-workspaces-e2e.js#L3) (1 connections)
+- [purge-dummy-institutions.js](file:///C:/Antigravityyyyy/VID_School/backend/scripts/purge-dummy-institutions.js#L1) (2 connections)
+- [{ db }](file:///C:/Antigravityyyyy/VID_School/backend/scripts/purge-dummy-institutions.js#L1) (1 connections)
+- [purgeDummyData()](file:///C:/Antigravityyyyy/VID_School/backend/scripts/purge-dummy-institutions.js#L3) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\scripts\verify-workspaces-e2e.js](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-workspaces-e2e.js)
+- [C:\Antigravityyyyy\VID_School\backend\scripts\purge-dummy-institutions.js](file:///C:/Antigravityyyyy/VID_School/backend/scripts/purge-dummy-institutions.js)
 
 ## Audit Trail
 

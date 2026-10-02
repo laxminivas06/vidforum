@@ -4,11 +4,11 @@
 
 ## Key Concepts
 
-- [SlideOver.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L1) (4 connections)
-- [activeFooter](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L31) (1 connections)
-- [handleKeyDown()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L47) (1 connections)
-- [isPanelOpen](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L30) (1 connections)
-- [widths](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L58) (1 connections)
+- [authMiddleware()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/auth.middleware.ts#L26) (3 connections)
+- [verify-cloud-e2e.js](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-cloud-e2e.js#L1) (2 connections)
+- [verify()](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-cloud-e2e.js#L3) (2 connections)
+- [auth.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/auth.middleware.ts#L1) (1 connections)
+- [{ db }](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-cloud-e2e.js#L1) (1 connections)
 
 ## Relationships
 
@@ -16,12 +16,13 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\SlideOver.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\scripts\verify-cloud-e2e.js](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-cloud-e2e.js)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\auth.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/auth.middleware.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 8 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 6 (67%)
+- INFERRED: 3 (33%)
 - AMBIGUOUS: 0 (0%)
 
 ---

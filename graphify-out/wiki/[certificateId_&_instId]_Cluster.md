@@ -1,23 +1,46 @@
 # [certificateId & instId] Cluster
 
-> 14 nodes · cohesion 0.15
+> 14 nodes · cohesion 0.14
 
 ## Key Concepts
 
-- [AddInstituteAdminModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L1) (13 connections)
-- [handleSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L89) (2 connections)
-- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L61) (2 connections)
-- [createAdminMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L34) (1 connections)
-- [[email, setEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L37) (1 connections)
-- [[errors, setErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L42) (1 connections)
-- [handleDeselectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L57) (1 connections)
-- [handleSelectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L53) (1 connections)
-- [handleToggleWorkspace()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L47) (1 connections)
-- [isChecked](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L271) (1 connections)
-- [[password, setPassword]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L38) (1 connections)
-- [[selectedWorkspaces, setSelectedWorkspaces]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L39) (1 connections)
-- [[successBanner, setSuccessBanner]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L43) (1 connections)
-- [[userId, setUserId]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L36) (1 connections)
+- [NotificationRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L17) (7 connections)
+- [NotificationService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L3) (6 connections)
+- [.getUserNotifications()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L4) (3 connections)
+- [.createNotification()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L72) (2 connections)
+- [.findForUser()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L22) (2 connections)
+- [notification.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L1) (1 connections)
+- [notification.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L1) (1 connections)
+- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L18) (1 connections)
+- [.getUnreadCount()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L40) (1 connections)
+- [.markAllAsRead()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L61) (1 connections)
+- [.markAsRead()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L50) (1 connections)
+- [.getUnreadCount()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L8) (1 connections)
+- [.markAllAsRead()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L17) (1 connections)
+- [.markAsRead()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L13) (1 connections)
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class NotificationRepository {
+        +notification.repository.ts()
+        +.constructor()
+        +.findForUser()
+        +.getUnreadCount()
+        +.markAsRead()
+        +.markAllAsRead()
+        +.createNotification()
+    }
+    class NotificationService {
+        +notification.service.ts()
+        +.getUserNotifications()
+        +.getUnreadCount()
+        +.markAsRead()
+        +.markAllAsRead()
+        +.sendNotification()
+    }
+```
 
 ## Relationships
 
@@ -25,12 +48,13 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\institutions\AddInstituteAdminModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 28 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 25 (86%)
+- INFERRED: 4 (14%)
 - AMBIGUOUS: 0 (0%)
 
 ---

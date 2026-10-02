@@ -4,13 +4,13 @@
 
 ## Key Concepts
 
-- [Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L1) (6 connections)
-- [activeWorkspace](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L47) (1 connections)
-- [dropdownRef](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L39) (1 connections)
-- [handleClickOutside()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L51) (1 connections)
-- [isCurrent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L128) (1 connections)
-- [[isWorkspaceDropdownOpen, setIsWorkspaceDropdownOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L38) (1 connections)
-- [permittedWorkspaces](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L42) (1 connections)
+- [Sidebar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L1) (6 connections)
+- [ICON_MAP](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L44) (1 connections)
+- [IconComponent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L105) (1 connections)
+- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L181) (1 connections)
+- [navigationGroups](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L102) (1 connections)
+- [pathname](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L101) (1 connections)
+- [renderIcon()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L200) (1 connections)
 
 ## Relationships
 
@@ -18,7 +18,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Sidebar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx)
 
 ## Audit Trail
 

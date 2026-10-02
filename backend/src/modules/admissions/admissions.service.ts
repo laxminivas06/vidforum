@@ -50,7 +50,29 @@ export class AdmissionsService {
     return updated;
   }
 
-  async approveApplication(applicationId: string, institutionId: string) {
+  async getApplicationById(applicationId: string, institutionId: string) {
+    const app = await admissionsRepository.findApplicationById(applicationId, institutionId);
+    if (!app) {
+      throw new Error('Application not found');
+    }
+    return app;
+  }
+
+  async createApplication(institutionId: string, data: {
+    applicantName: string;
+    dateOfBirth?: string;
+    gender?: string;
+    classId: string;
+    academicYearId: string;
+    guardianName?: string;
+    guardianPhone?: string;
+    guardianEmail?: string;
+    stage?: string;
+  }) {
+    return await admissionsRepository.createApplication(institutionId, data);
+  }
+
+  async approveApplication(applicationId: string, institutionId: string, actorId?: string) {
     const app = await admissionsRepository.findApplicationById(applicationId, institutionId);
     if (!app) {
       throw new Error('Application not found');
@@ -75,6 +97,7 @@ export class AdmissionsService {
       firstName,
       lastName,
       rollNumber: `10A-${String(nextNum).padStart(2, '0')}`,
+      actorId,
     });
 
     return {

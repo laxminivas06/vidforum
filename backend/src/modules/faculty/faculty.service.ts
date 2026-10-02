@@ -47,6 +47,42 @@ export class FacultyService {
     }
     return member;
   }
+
+  async getFacultyProfile(profileId: string, institutionId: string) {
+    const member = await facultyRepository.findFacultyByProfileId(profileId, institutionId);
+    if (!member) {
+      throw new Error('Faculty profile not found');
+    }
+    const [classes, subjects] = await Promise.all([
+      facultyRepository.findAssignedClasses(member.id),
+      facultyRepository.findAssignedSubjects(member.id),
+    ]);
+    return {
+      ...member,
+      assignedClasses: classes,
+      assignedSubjects: subjects,
+    };
+  }
+
+  async getMyAssignedClasses(profileId: string, institutionId: string) {
+    const member = await facultyRepository.findFacultyByProfileId(profileId, institutionId);
+    if (!member) {
+      throw new Error('Faculty profile not found');
+    }
+    return await facultyRepository.findAssignedClasses(member.id);
+  }
+
+  async getMyAssignedSubjects(profileId: string, institutionId: string) {
+    const member = await facultyRepository.findFacultyByProfileId(profileId, institutionId);
+    if (!member) {
+      throw new Error('Faculty profile not found');
+    }
+    return await facultyRepository.findAssignedSubjects(member.id);
+  }
+
+  async getSectionStudentRoster(sectionId: string, institutionId: string) {
+    return await facultyRepository.findSectionStudents(sectionId, institutionId);
+  }
 }
 
 export const facultyService = new FacultyService();

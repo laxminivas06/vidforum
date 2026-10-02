@@ -4,11 +4,32 @@ import { tenantMiddleware } from '../../middleware/tenant.middleware';
 
 const router = Router();
 
+// POST /api/v1/admissions/applications
+router.post(
+  '/applications',
+  tenantMiddleware,
+  admissionsController.createApplication.bind(admissionsController)
+);
+
+// GET /api/v1/admissions/applications/:id
+router.get(
+  '/applications/:id',
+  tenantMiddleware,
+  admissionsController.getApplicationById.bind(admissionsController)
+);
+
 // GET /api/v1/admissions/applicants
 router.get(
   '/applicants',
   tenantMiddleware,
   admissionsController.getApplicants.bind(admissionsController)
+);
+
+// GET /api/v1/admissions/applicants/:id
+router.get(
+  '/applicants/:id',
+  tenantMiddleware,
+  admissionsController.getApplicationById.bind(admissionsController)
 );
 
 // PATCH /api/v1/admissions/applicants/:id/stage

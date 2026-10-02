@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { studentController } from './student.controller';
 import { tenantMiddleware } from '../../middleware/tenant.middleware';
+import { resourceGuard } from '../../middleware/resource-guard.middleware';
 
 const router = Router();
 
@@ -11,10 +12,11 @@ router.get(
   studentController.getStudents.bind(studentController)
 );
 
-// GET /api/v1/students/:id (360° Master Record)
+// GET /api/v1/students/:id (360° Master Record, Rules 9 & 10)
 router.get(
   '/:id',
   tenantMiddleware,
+  resourceGuard({ type: 'student_record' as any }),
   studentController.getStudentById.bind(studentController)
 );
 

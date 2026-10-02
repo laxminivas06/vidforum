@@ -36,51 +36,64 @@ export function resourceGuard(options: ResourceGuardOptions) {
       : (req.params.id || req.params.studentId || req.params.classId || req.params.sectionId);
 
     // Rule 10: Student may only access own permitted data
-    if (options.type === 'student') {
-      if (!resourceId) {
-        next();
-        return;
-      }
-      try {
-        const studentRes = await db.query(
-          `SELECT id FROM students WHERE (id::text = $1 OR user_id::text = $2 OR admission_number = $1) AND (user_id::text = $2 OR id::text = $2) LIMIT 1`,
-          [resourceId, user.id]
-        );
+    const isStudent = user.role === 'STUDENT' || user.role === 'Student';
+    const isParent = user.role === 'PARENT' || user.role === 'Parent';
 
-        if (studentRes.rows.length === 0) {
-          sendError(res, 'Access denied: Students can only access their own educational records (Rule 10)', 403, 'RESOURCE_ACCESS_DENIED');
+    if (options.type === 'student' || (options.type as any) === 'student_record') {
+      if (isStudent) {
+        if (!resourceId) {
+          next();
           return;
         }
-      } catch (err) {
-        console.error('Student resource guard check failed:', err);
-        sendError(res, 'Authorization verification failure', 500, 'INTERNAL_ERROR');
-        return;
+        try {
+          const studentRes = await db.query(
+            `SELECT id FROM students WHERE (id::text = $1 OR admission_number = $1) AND (user_id::text = $2 OR id::text = $2) LIMIT 1`,
+            [resourceId, user.id]
+          );
+
+          if (studentRes.rows.length === 0) {
+            sendError(res, 'Access denied: Students can only access their own educational records (Rule 10)', 403, 'RESOURCE_ACCESS_DENIED');
+            return;
+          }
+        } catch (err) {
+          console.error('Student resource guard check failed:', err);
+          sendError(res, 'Authorization verification failure', 500, 'INTERNAL_ERROR');
+          return;
+        }
       }
     }
 
     // Rule 9: Parent may only access linked children
-    if (options.type === 'parent') {
-      if (!resourceId) {
-        next();
-        return;
-      }
-      try {
-        const linkRes = await db.query(
-          `SELECT sp.student_id 
-           FROM student_guardians sp
-           JOIN guardians g ON g.id = sp.guardian_id
-           WHERE sp.student_id::text = $1 AND g.user_id::text = $2 LIMIT 1`,
-          [resourceId, user.id]
-        );
-
-        if (linkRes.rows.length === 0) {
-          sendError(res, 'Access denied: Parents can only access records for verified linked children (Rule 9)', 403, 'RESOURCE_ACCESS_DENIED');
+    if (options.type === 'parent' || (options.type as any) === 'student_record') {
+      if (isParent) {
+        if (!resourceId) {
+          next();
           return;
         }
-      } catch (err) {
-        console.error('Parent resource guard check failed:', err);
-        sendError(res, 'Authorization verification failure', 500, 'INTERNAL_ERROR');
-        return;
+        try {
+          const linkRes = await db.query(
+            `SELECT sp.student_id 
+             FROM student_parents sp
+             JOIN parents p ON p.id = sp.parent_id
+             WHERE sp.student_id::text = $1 AND p.profile_id::text = $2
+             UNION
+             SELECT sg.student_id
+             FROM student_guardians sg
+             JOIN guardians g ON g.id = sg.guardian_id
+             WHERE sg.student_id::text = $1 AND (g.profile_id::text = $2 OR g.id::text = $2)
+             LIMIT 1`,
+            [resourceId, user.id]
+          );
+
+          if (linkRes.rows.length === 0) {
+            sendError(res, 'Access denied: Parents can only access records for verified linked children (Rule 9)', 403, 'RESOURCE_ACCESS_DENIED');
+            return;
+          }
+        } catch (err) {
+          console.error('Parent resource guard check failed:', err);
+          sendError(res, 'Authorization verification failure', 500, 'INTERNAL_ERROR');
+          return;
+        }
       }
     }
 
@@ -94,9 +107,11 @@ export function resourceGuard(options: ResourceGuardOptions) {
         const assignmentRes = await db.query(
           `SELECT fa.id 
            FROM faculty_assignments fa
-           JOIN staff s ON s.id = fa.faculty_id
-           WHERE s.user_id::text = $1 
-             AND (fa.class_id::text = $2 OR fa.section_id::text = $2 OR fa.subject_id::text = $2)
+           JOIN staff s ON s.id = fa.staff_id
+           LEFT JOIN sections sec ON sec.id = fa.section_id
+           WHERE s.profile_id::text = $1 
+             AND (fa.section_id::text = $2 OR sec.class_id::text = $2 OR fa.subject_id::text = $2)
+             AND (fa.effective_to IS NULL OR fa.effective_to >= CURRENT_DATE)
            LIMIT 1`,
           [user.id, resourceId]
         );

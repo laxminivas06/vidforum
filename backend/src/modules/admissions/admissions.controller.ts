@@ -13,6 +13,55 @@ export class AdmissionsController {
     }
   }
 
+  async getApplicationById(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const id = req.params.id as string;
+      const instId = req.institutionId!;
+      const application = await admissionsService.getApplicationById(id, instId);
+      sendSuccess(res, application);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async createApplication(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const instId = req.institutionId!;
+      const {
+        applicantName,
+        dateOfBirth,
+        gender,
+        classId,
+        academicYearId,
+        guardianName,
+        guardianPhone,
+        guardianEmail,
+        stage,
+      } = req.body;
+
+      if (!applicantName || !classId || !academicYearId) {
+        sendError(res, 'applicantName, classId, and academicYearId are required', 400);
+        return;
+      }
+
+      const created = await admissionsService.createApplication(instId, {
+        applicantName,
+        dateOfBirth,
+        gender,
+        classId,
+        academicYearId,
+        guardianName,
+        guardianPhone,
+        guardianEmail,
+        stage,
+      });
+
+      sendSuccess(res, created, 'Application submitted successfully', 201);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async updateStage(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const id = req.params.id as string;
@@ -34,8 +83,9 @@ export class AdmissionsController {
     try {
       const id = req.params.id as string;
       const instId = req.institutionId!;
+      const actorId = req.user?.id;
 
-      const result = await admissionsService.approveApplication(id, instId);
+      const result = await admissionsService.approveApplication(id, instId, actorId);
       sendSuccess(res, result);
     } catch (error) {
       next(error);

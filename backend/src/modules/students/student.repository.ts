@@ -74,14 +74,23 @@ export class StudentRepository {
 
     const student = studentRes.rows[0];
 
-    // 2. Guardians
-    const guardiansRes = await db.query(
-      `SELECT g.*, sg.relationship, sg.is_primary_contact
-       FROM guardians g
-       JOIN student_guardians sg ON sg.guardian_id = g.id
-       WHERE sg.student_id = $1`,
-      [student.id]
-    );
+    // 2. Guardians & Parents
+    const [guardiansRes, parentsRes] = await Promise.all([
+      db.query(
+        `SELECT g.*, sg.relationship, sg.is_primary_contact
+         FROM guardians g
+         JOIN student_guardians sg ON sg.guardian_id = g.id
+         WHERE sg.student_id = $1`,
+        [student.id]
+      ),
+      db.query(
+        `SELECT p.*, sp.relationship, sp.is_primary_contact
+         FROM parents p
+         JOIN student_parents sp ON sp.parent_id = p.id
+         WHERE sp.student_id = $1`,
+        [student.id]
+      ),
+    ]);
 
     // 3. Academic History
     const historyRes = await db.query(
@@ -126,6 +135,7 @@ export class StudentRepository {
     return {
       profile: student,
       guardians: guardiansRes.rows,
+      parents: parentsRes.rows,
       academicHistory: historyRes.rows,
       attendance: attRes.rows[0] || { present_days: 0, total_days: 0, attendance_percentage: 100 },
       finance: feeRes.rows[0] || { total_amount: 0, balance_due: 0, invoices: [] },

@@ -11,8 +11,8 @@
 |---|---|---|---|
 | **Phase 1, Step A** | Foundation & Shared Infrastructure | **COMPLETED** | PASSED (Monorepo, CI, Design System, Common Base Classes, Docs) |
 | **Phase 1, Step B** | Platform, Identity, RBAC Engine & Administration | **COMPLETED** | PASSED (14/14 Automated Tests: Cross-Tenant 403, RBAC, Module Toggles, Audit, Notifications, Tokens) |
-| **Phase 1, Step C** | Academic Core, Faculty Scoping & Admissions Lifecycle | **READY** | Queued for Kickoff |
-| **Phase 2** | Timetable, Finance, Attendance, Examinations, Documents, HRMS UI, Mobile Shell | **QUEUED** | Pending Phase 1 |
+| **Phase 1, Step C** | Academic Core, Faculty Scoping & Admissions Lifecycle | **COMPLETED** | PASSED (9/9 Automated Tests: Rule 8 Faculty Scoping, Atomic Admission Approval, 360° Student Master, D2 Department Types) |
+| **Phase 2** | Timetable, Finance, Attendance, Examinations, Documents, HRMS UI, Mobile Shell | **READY** | Queued for Kickoff per Section 18 |
 | **Phase 3** | AI Yantra (Voice Agent, AI Attendance, AI Tutor) | **QUEUED** | Pending Phase 2 |
 | **Phase 4** | Optional Modules (Events, Transport, Hostel, Library, Sports, Inventory) | **QUEUED** | Pending Phase 3 |
 
@@ -42,6 +42,40 @@
 
 ---
 
-## Next Milestone: Phase 1, Step C Kickoff
-- Scope: `academics`, `students`, `hrms` (`staff` + `designations` tables only), `faculty`, `admissions` with full lifecycle in Section 8 (atomic approval transaction, D6 hand-off).
-- Exit Gate: Faculty scoped-access tests (Rule 8) and end-to-end admission approval test.
+## Phase 1, Step C Checklist (Completed)
+- [x] **Academic Core (Section 9.5 & Decision D2):**
+  - Hierarchy: `academic_years`, `departments` (with `department_type`: `'academic'` | `'administrative'`), `classes`, `sections`, `subjects`, `class_subjects`, and `faculty_assignments` (allocations).
+  - API Routes: Full CRUD under `/api/v1/academics/` (`/academic-years`, `/departments`, `/classes`, `/sections`, `/subjects`, `/allocations`, `/hierarchy`).
+- [x] **HRMS Foundation (Decision D3):**
+  - Tables: `staff` and `designations` created in Phase 1 with `is_teaching_staff` flag.
+  - Endpoints: `GET` and `POST` for `/api/v1/hrms/staff` and `/api/v1/hrms/designations`.
+- [x] **Faculty Module & Rule 8 Scoped Access:**
+  - Identity Chain: `users → staff → faculty` per Decision D3.
+  - Canonical Views & Tables: `faculty`, `faculty_subjects`, `faculty_classes`.
+  - Scoped Guarding: `GET /api/v1/faculty/sections/:sectionId/students` protected by `resourceGuard({ type: 'faculty' })`.
+  - Rule 8 Enforcement: Faculty attempting to access student rosters for unassigned sections are strictly blocked with `403 FORBIDDEN` (`RESOURCE_ACCESS_DENIED`).
+- [x] **Admissions Lifecycle & Atomic Approval (Section 8 & Decision D6):**
+  - Atomic Transaction: Single SQL transaction (`BEGIN...COMMIT`) executes:
+    1. `admissions` approval record created with `admission_fee_status = 'pending'` (D6).
+    2. `students` central master row created with generated `admission_number` and `roll_number` (Rule 1).
+    3. `parents` row created and linked via `student_parents` (Section 5).
+    4. `guardians` row created and linked via `student_guardians`.
+    5. `student_academic_history` row recorded.
+    6. `applications.stage` updated to `'approved'`.
+  - Post-Commit Integrations: Dispatches immutable audit event `admissions.application.approved` and notification to applicant/parent.
+- [x] **Student Master 360° Profile (Section 9.4 & Decision D1):**
+  - Master profile retrieval (`GET /api/v1/students/:id`) consolidates personal info, guardians, parents, academic history, attendance summary, and finance ledger.
+  - Scoped Guards: Student (Rule 10) and Parent (Rule 9) access control enforced server-side.
+- [x] **Automated Test Suite:** `backend/tests/phase1_step_c.test.ts` passing 9/9 tests.
+
+---
+
+## Next Milestone: Phase 2 Kickoff
+- Order of execution per Section 18:
+  1. `timetable`
+  2. `finance`
+  3. `attendance`
+  4. `examinations`
+  5. `documents`
+  6. `hrms` (UI)
+  7. Mobile shell (Student / Parent)

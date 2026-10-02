@@ -26,7 +26,18 @@ export class AuditDispatcher {
     const isUuid = (val?: string | null) =>
       val ? /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(val) : false;
 
-    const safeActorId = isUuid(event.actorId) ? event.actorId : null;
+    let safeActorId: string | null = null;
+    if (isUuid(event.actorId)) {
+      try {
+        const actorCheck = await db.query('SELECT 1 FROM profiles WHERE id = $1', [event.actorId]);
+        if (actorCheck.rows.length > 0) {
+          safeActorId = event.actorId;
+        }
+      } catch {
+        safeActorId = null;
+      }
+    }
+
     const safeInstitutionId = isUuid(event.institutionId) ? event.institutionId : null;
     const safeResourceId = isUuid(event.resourceId) ? event.resourceId : null;
 

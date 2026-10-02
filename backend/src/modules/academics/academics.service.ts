@@ -40,12 +40,52 @@ export class AcademicsService {
     return await academicsRepository.getHierarchy(institutionId);
   }
 
-  async getClasses(institutionId: string) {
-    return await academicsRepository.listClasses(institutionId);
+  async getAcademicYears(institutionId: string) {
+    return await academicsRepository.listAcademicYears(institutionId);
   }
 
-  async getSubjects(institutionId: string) {
-    return await academicsRepository.listSubjects(institutionId);
+  async createAcademicYear(institutionId: string, data: { name: string; startDate: string; endDate: string; isCurrent?: boolean }) {
+    return await academicsRepository.createAcademicYear(institutionId, data);
+  }
+
+  async getDepartments(institutionId: string, departmentType?: string) {
+    return await academicsRepository.listDepartments(institutionId, departmentType);
+  }
+
+  async createDepartment(institutionId: string, data: { name: string; code: string; departmentType?: string }) {
+    return await academicsRepository.createDepartment(institutionId, data);
+  }
+
+  async createClass(institutionId: string, data: { name: string; academicYearId: string; departmentId: string; sequenceOrder?: number }) {
+    return await academicsRepository.createClass(institutionId, data);
+  }
+
+  async getClassSections(classId: string) {
+    return await academicsRepository.getSectionsByClass(classId);
+  }
+
+  async createSection(institutionId: string, classId: string, data: { name: string; capacity?: number; classTeacherStaffId?: string }) {
+    return await academicsRepository.createSection(institutionId, classId, data);
+  }
+
+  async getClassSubjects(classId: string) {
+    return await academicsRepository.getSubjectsByClass(classId);
+  }
+
+  async createSubject(institutionId: string, data: { name: string; code: string; isElective?: boolean }) {
+    return await academicsRepository.createSubject(institutionId, data);
+  }
+
+  async linkSubjectToClass(classId: string, subjectId: string, isMandatory?: boolean) {
+    return await academicsRepository.linkSubjectToClass(classId, subjectId, isMandatory);
+  }
+
+  async getAllocations(institutionId: string) {
+    return await academicsRepository.listAllocations(institutionId);
+  }
+
+  async createAllocation(institutionId: string, data: { staffId: string; sectionId: string; subjectId: string; academicYearId: string }) {
+    return await academicsRepository.createAllocation(institutionId, data);
   }
 }
 

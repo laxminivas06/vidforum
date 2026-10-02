@@ -1,19 +1,21 @@
 # [ICON_MAP & IconComponent] Cluster
 
-> 10 nodes · cohesion 0.20
+> 12 nodes · cohesion 0.17
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L1) (9 connections)
-- [[activeRollCall, setActiveRollCall]](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L35) (1 connections)
-- [[attendanceRecords, setAttendanceRecords]](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L46) (1 connections)
-- [{ data: facultyInfo, isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L34) (1 connections)
-- [handleCompleteRollCall()](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L58) (1 connections)
-- [isCurrent](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L137) (1 connections)
-- [isPresent](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L341) (1 connections)
-- [[rollCallSuccess, setRollCallSuccess]](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L36) (1 connections)
-- [sampleStudents](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L39) (1 connections)
-- [toggleStudentAttendance()](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L48) (1 connections)
+- [AppShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L1) (11 connections)
+- [INSTITUTION_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L22) (1 connections)
+- [isBlockedByWorkspaceRestriction](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L98) (1 connections)
+- [isBlockedForInstitutionStaff](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L92) (1 connections)
+- [isBlockedForSuperAdmin](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L86) (1 connections)
+- [[isCollapsed, setIsCollapsed]](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L67) (1 connections)
+- [[isMobileMenuOpen, setIsMobileMenuOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L66) (1 connections)
+- [isSuperAdmin](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L85) (1 connections)
+- [pathname](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L64) (1 connections)
+- [PLATFORM_SUPER_ADMIN_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L46) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L65) (1 connections)
+- [{ user, role, enabledModules, institutionName, logout, isInitialized }](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L63) (1 connections)
 
 ## Relationships
 
@@ -21,11 +23,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\faculty\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\layout\AppShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 18 (100%)
+- EXTRACTED: 22 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

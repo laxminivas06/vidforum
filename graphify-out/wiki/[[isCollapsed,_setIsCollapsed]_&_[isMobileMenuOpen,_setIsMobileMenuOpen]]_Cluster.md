@@ -1,16 +1,17 @@
 # [[isCollapsed, setIsCollapsed] & [isMobileMenuOpen, setIsMobileMenuOpen]] Cluster
 
-> 7 nodes · cohesion 0.29
+> 8 nodes · cohesion 0.25
 
 ## Key Concepts
 
-- [Sidebar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L1) (6 connections)
-- [ICON_MAP](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L44) (1 connections)
-- [IconComponent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L105) (1 connections)
-- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L181) (1 connections)
-- [navigationGroups](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L102) (1 connections)
-- [pathname](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L101) (1 connections)
-- [renderIcon()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L200) (1 connections)
+- [Table.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L1) (7 connections)
+- [handleSort()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L54) (1 connections)
+- [isTableLoading](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L52) (1 connections)
+- [mobileSubtitleCol](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L79) (1 connections)
+- [mobileTitleCol](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L78) (1 connections)
+- [[sortDir, setSortDir]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L50) (1 connections)
+- [sortedData](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L63) (1 connections)
+- [[sortKey, setSortKey]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L49) (1 connections)
 
 ## Relationships
 
@@ -18,11 +19,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Sidebar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Table.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 12 (100%)
+- EXTRACTED: 14 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

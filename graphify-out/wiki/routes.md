@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [notification.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.routes.ts#L1) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.routes.ts#L7) (1 connections)
+- [app](file:///C:/Antigravityyyyy/VID_School/backend/src/app.ts#L10) (1 connections)
+- [app.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/app.ts#L1) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.routes.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\app.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/app.ts)
 
 ## Audit Trail
 

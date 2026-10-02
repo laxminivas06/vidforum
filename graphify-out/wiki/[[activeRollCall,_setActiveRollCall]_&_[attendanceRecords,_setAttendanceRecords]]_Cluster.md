@@ -1,21 +1,27 @@
 # [[activeRollCall, setActiveRollCall] & [attendanceRecords, setAttendanceRecords]] Cluster
 
-> 12 nodes · cohesion 0.17
+> 14 nodes · cohesion 0.14
 
 ## Key Concepts
 
-- [attendance.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L1) (11 connections)
-- [client](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L56) (1 connections)
-- [{ id }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L92) (1 connections)
-- [{ id: sessionId }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L58) (1 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L11) (1 connections)
-- [params](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L34) (1 connections)
-- [query](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L14) (1 connections)
-- [{ records }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L59) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L46) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L6) (1 connections)
-- [{ sectionId, date }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L12) (1 connections)
-- [verifiedBy](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L93) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L1) (13 connections)
+- [[academicYear, setAcademicYear]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L42) (1 connections)
+- [[activeSection, setActiveSection]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L37) (1 connections)
+- [[boardAffiliation, setBoardAffiliation]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L40) (1 connections)
+- [[confirmToggleModule, setConfirmToggleModule]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L44) (1 connections)
+- [[contactEmail, setContactEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L41) (1 connections)
+- [handleSave()](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L63) (1 connections)
+- [{
+    institutionName,
+    enabledModules,
+    toggleOptionalModule,
+  }](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L31) (1 connections)
+- [isEnabled](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L225) (1 connections)
+- [[isSaved, setIsSaved]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L43) (1 connections)
+- [optionalModulesList](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L46) (1 connections)
+- [[schoolCode, setSchoolCode]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L39) (1 connections)
+- [[schoolName, setSchoolName]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L38) (1 connections)
+- [sections](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L55) (1 connections)
 
 ## Relationships
 
@@ -23,11 +29,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\attendance\attendance.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\settings\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 22 (100%)
+- EXTRACTED: 26 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -1,17 +1,18 @@
 # [activeFooter & isPanelOpen] Cluster
 
-> 8 nodes · cohesion 0.25
+> 9 nodes · cohesion 0.22
 
 ## Key Concepts
 
-- [Table.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L1) (7 connections)
-- [handleSort()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L54) (1 connections)
-- [isTableLoading](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L52) (1 connections)
-- [mobileSubtitleCol](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L79) (1 connections)
-- [mobileTitleCol](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L78) (1 connections)
-- [[sortDir, setSortDir]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L50) (1 connections)
-- [sortedData](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L63) (1 connections)
-- [[sortKey, setSortKey]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L49) (1 connections)
+- [documents.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L1) (8 connections)
+- [certificateId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L58) (1 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L11) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L12) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L6) (1 connections)
+- [sRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L42) (1 connections)
+- [student](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L57) (1 connections)
+- [{ studentId, purpose = 'General Purpose' }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L39) (1 connections)
+- [verificationUrl](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L59) (1 connections)
 
 ## Relationships
 
@@ -19,11 +20,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Table.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\documents\documents.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 14 (100%)
+- EXTRACTED: 16 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

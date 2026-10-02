@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: falsegreen](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md) (2 connections)
-- [Falsegreen Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md) (1 connections)
-- [Patterns to Flag](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md) (1 connections)
+- [navigation.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L1) (2 connections)
+- [getFilteredNavigation()](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L192) (1 connections)
+- [NAVIGATION_CONFIG](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L27) (1 connections)
 
 ## Relationships
 
-- [[[Skill: river-review & Review Lenses] Cluster]] (4 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\frontend\config\navigation.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts)
 
 ## Audit Trail
 

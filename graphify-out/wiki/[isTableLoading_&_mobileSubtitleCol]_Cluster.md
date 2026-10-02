@@ -1,32 +1,34 @@
 # [isTableLoading & mobileSubtitleCol] Cluster
 
-> 11 nodes · cohesion 0.18
+> 13 nodes · cohesion 0.15
 
 ## Key Concepts
 
-- [ai-yantra.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L1) (10 connections)
-- [campaign](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L44) (1 connections)
-- [campRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L38) (1 connections)
-- [guardRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L47) (1 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L15) (1 connections)
-- [recRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L53) (1 connections)
-- [reply](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L107) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L16) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L6) (1 connections)
-- [{ studentId, message, subject = 'Mathematics' }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L104) (1 connections)
-- [{ title, scriptTemplate, targetFilter }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L35) (1 connections)
+- [Document: Decisions](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (12 connections)
+- [ADR-001 Strict Separation of Phase Deliverables](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-002 Multi-Tenancy via Shared Database with Institution-ID & RLS](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-003 Central Student Master Record vs Workspace](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-004 Two-Tier RBAC with Resource-Level Context Verification](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-005 Full-Stack Monorepo Structure (backend/ + frontend/)](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-006 Pre-Commit Validation Pipeline for Excel Exam Imports](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-007 Strict 3-Workspace Boundary for AI Yantra](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-008 Node.js 22 + TypeScript + Express Layered MVC Architecture](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-009 Supabase Cloud PostgreSQL with Public Schema Helper Functions for RLS](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-010 Zero-Downtime TanStack Query Hooks with Resilient Mock Fallback](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [Architectural & Technical Decisions Log: VID Platform](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [Decision Records](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[[activeRollCall, setActiveRollCall] & [attendanceRecords, setAttendanceRecords]] Cluster]] (24 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\ai-yantra\ai-yantra.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts)
+- [docs/DECISIONS.md](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md)
 
 ## Audit Trail
 
-- EXTRACTED: 20 (100%)
+- EXTRACTED: 24 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

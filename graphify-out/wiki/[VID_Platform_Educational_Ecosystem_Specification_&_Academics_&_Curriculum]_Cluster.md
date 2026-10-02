@@ -1,40 +1,44 @@
 # [VID Platform Educational Ecosystem Specification & Academics & Curriculum] Cluster
 
-> 19 nodes · cohesion 0.11
+> 23 nodes · cohesion 0.09
 
 ## Key Concepts
 
-- [Document: Antigravity Master Prompt](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (18 connections)
-- [0. ROLE & OPERATING MODE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [1. PROJECT BRIEF](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [2. REQUIRED DELIVERABLES — CREATE THESE FILES FIRST](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [3. DEVELOPMENT RULES (apply throughout, no exceptions)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [4. TECH STACK CONSTRAINTS](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [5. WORKING AGREEMENT / CHECK-IN CADENCE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [6. AGENT MEMORY USAGE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [7. DEFINITION OF DONE (v1)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [AI Yantra Boundary](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [Backend Architecture Rules](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [/docs/DECISIONS.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [/docs/PRD.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [/docs/TASKS.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [/docs/TECHSPEC.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [Documentation / Architecture Reconciliation](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [Documentation Reconciliation](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [MASTER PROMPT — Antigravity Full-Stack Build](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [Multi-Tenant Security](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [Document: Tasks](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (22 connections)
+- [1.1 Project Scaffolding & Infrastructure](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [1.2 Auth, Multi-Tenancy & RBAC Engine](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [1.3 Super Admin & Institution Admin Consoles](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [1.4 Academics Hierarchy & Faculty Mapping](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [1.5 Admissions Workspace & Central Student Master Entity](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [2.1 Attendance Workspace](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [2.2 Examinations Workspace & Excel Import Engine](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [2.3 Finance & Fee Management Workspace](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [2.4 Documents & Timetable & HRMS](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [3.1 Yantra Voice Agent](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [3.2 Yantra AI Attendance](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [3.3 Yantra AI Tutor](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [4.1 Modular Optional Workspaces](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [4.2 Dedicated Parent & Student Experience](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Development Tasks Breakdown: VID Platform](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Implementation Progress Ledger (As of 2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Phase 0: Project Initiation & Architecture Baseline](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Phase 1: Foundation Scaffold & MVP Core (Phase 1 Target)](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Phase 2: Core Operational Workspaces](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Phase 3: AI Yantra Intelligence Layer](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Phase 4: Optional Workspaces & Mobile Parent/Student Experience](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Phase 5: Testing, Auditing, Verification & Deployment](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[{ email, password, role = 'INSTITUTION_ADMIN' } & inst] Cluster]] (44 shared connections)
 
 ## Source Files
 
-- [Reference_docs/antigravity-master-prompt.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md)
+- [docs/TASKS.md](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md)
 
 ## Audit Trail
 
-- EXTRACTED: 36 (100%)
+- EXTRACTED: 44 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

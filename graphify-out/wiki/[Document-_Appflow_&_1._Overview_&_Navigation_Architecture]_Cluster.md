@@ -1,45 +1,80 @@
 # [Document: Appflow & 1. Overview & Navigation Architecture] Cluster
 
-> 23 nodes · cohesion 0.09
+> 34 nodes · cohesion 0.07
 
 ## Key Concepts
 
-- [Document: Tasks](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (22 connections)
-- [1.1 Project Scaffolding & Infrastructure](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [1.2 Auth, Multi-Tenancy & RBAC Engine](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [1.3 Super Admin & Institution Admin Consoles](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [1.4 Academics Hierarchy & Faculty Mapping](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [1.5 Admissions Workspace & Central Student Master Entity](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [2.1 Attendance Workspace](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [2.2 Examinations Workspace & Excel Import Engine](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [2.3 Finance & Fee Management Workspace](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [2.4 Documents & Timetable & HRMS](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [3.1 Yantra Voice Agent](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [3.2 Yantra AI Attendance](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [3.3 Yantra AI Tutor](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [4.1 Modular Optional Workspaces](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [4.2 Dedicated Parent & Student Experience](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Development Tasks Breakdown: VID Platform](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Implementation Progress Ledger (As of 2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Phase 0: Project Initiation & Architecture Baseline](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Phase 1: Foundation Scaffold & MVP Core (Phase 1 Target)](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Phase 2: Core Operational Workspaces](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Phase 3: AI Yantra Intelligence Layer](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Phase 4: Optional Workspaces & Mobile Parent/Student Experience](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Phase 5: Testing, Auditing, Verification & Deployment](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [AcademicsRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L3) (16 connections)
+- [AcademicsService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L3) (15 connections)
+- [.getGrades()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L6) (3 connections)
+- [.getAcademicGrades()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L4) (3 connections)
+- [.getClassesByInstitution()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L4) (2 connections)
+- [.getSectionsByClass()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L16) (2 connections)
+- [.getSubjectsByClass()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L31) (2 connections)
+- [.listAcademicYears()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L73) (2 connections)
+- [.listAllocations()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L165) (2 connections)
+- [.listDepartments()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L95) (2 connections)
+- [.getAcademicYears()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L43) (2 connections)
+- [.getAllocations()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L83) (2 connections)
+- [.getClassSections()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L63) (2 connections)
+- [.getClassSubjects()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L71) (2 connections)
+- [.getDepartments()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L51) (2 connections)
+- [.createAcademicYear()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L81) (1 connections)
+- [.createAllocation()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L183) (1 connections)
+- [.createClass()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L121) (1 connections)
+- [.createDepartment()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L110) (1 connections)
+- [.createSection()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L132) (1 connections)
+- [.createSubject()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L143) (1 connections)
+- [.getHierarchy()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L44) (1 connections)
+- [.linkSubjectToClass()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L154) (1 connections)
+- [.listClasses()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L60) (1 connections)
+- [.createAcademicYear()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L47) (1 connections)
+- *... and 9 more nodes in this community*
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class AcademicsRepository {
+        +academics.repository.ts()
+        +.getClassesByInstitution()
+        +.getSectionsByClass()
+        +.getSubjectsByClass()
+        +.getHierarchy()
+        +.listClasses()
+        +.listAcademicYears()
+        +.createAcademicYear()
+        +.listDepartments()
+        +.createDepartment()
+    }
+    class AcademicsService {
+        +academics.service.ts()
+        +.getAcademicGrades()
+        +.getHierarchy()
+        +.getAcademicYears()
+        +.createAcademicYear()
+        +.getDepartments()
+        +.createDepartment()
+        +.createClass()
+        +.getClassSections()
+        +.createSection()
+    }
+```
 
 ## Relationships
 
-- [[[useAuth() & RequirePermission()] Cluster]] (44 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [docs/TASKS.md](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 44 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 63 (81%)
+- INFERRED: 15 (19%)
 - AMBIGUOUS: 0 (0%)
 
 ---

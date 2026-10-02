@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/events/page.tsx#L1) (1 connections)
-- [events](file:///C:/Antigravityyyyy/VID_School/frontend/app/events/page.tsx#L9) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.routes.ts#L5) (1 connections)
+- [admissions.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.routes.ts#L1) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\events\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/events/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\admissions\admissions.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.routes.ts)
 
 ## Audit Trail
 

@@ -1,33 +1,35 @@
 # [activeDelta & activeDeltaType] Cluster
 
-> 12 nodes · cohesion 0.17
+> 14 nodes · cohesion 0.14
 
 ## Key Concepts
 
-- [EditAdminWorkspacesModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L1) (11 connections)
-- [[error, setError]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L39) (1 connections)
-- [handleDeselectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L66) (1 connections)
-- [handleSave()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L70) (1 connections)
-- [handleSelectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L62) (1 connections)
-- [handleToggleWorkspace()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L56) (1 connections)
-- [initial](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L45) (1 connections)
-- [isChecked](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L212) (1 connections)
-- [[isSubmitting, setIsSubmitting]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L41) (1 connections)
-- [[selectedWorkspaces, setSelectedWorkspaces]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L38) (1 connections)
-- [[successBanner, setSuccessBanner]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L40) (1 connections)
-- [updateWorkspacesMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L37) (1 connections)
+- [VID Platform Educational Ecosystem Specification](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (13 connections)
+- [Academics & Curriculum](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Admissions & Enrollment](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Alumni Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Attendance Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Communication & Notifications](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Examination & Grading](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Fee & Financial Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Hostel Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Human Resources & Payroll](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Learning Management System (LMS)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Library Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Student Information System (SIS)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Transportation Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[conflicts & facConflict] Cluster]] (26 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\institutions\EditAdminWorkspacesModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx)
+- [Reference_docs/VID Platform.pdf](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf)
 
 ## Audit Trail
 
-- EXTRACTED: 22 (100%)
+- EXTRACTED: 26 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

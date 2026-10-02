@@ -14,7 +14,8 @@
 | **Phase 1, Step C** | Academic Core, Faculty Scoping & Admissions Lifecycle | **COMPLETED** | PASSED (9/9 Automated Tests: Rule 8 Faculty Scoping, Atomic Admission Approval, 360° Student Master, D2 Department Types) || **Phase 2, Module 1** | Timetable: Periods, Rooms, Conflict Engine, Publishing & Substitutions | **COMPLETED** | PASSED (10/10 Automated Tests: Conflict Detection Blocks Publish, Teacher/Room/Section Clashes, Substitutions, Scoped Schedules) |
 | **Phase 2, Module 2** | Finance: Fees, Invoicing, Partial Payments, Receipts, Webhook Idempotency & Refunds | **COMPLETED** | PASSED (10/10 Automated Tests: Fee Structures, Invoices, Webhook Idempotency & Failure Paths, Refunds, Scoped Access) |
 | **Phase 2, Module 3** | Attendance: Daily & Period Sessions, Batch Roll Call, Low Attendance Alerts, Leave Workflows | **COMPLETED** | PASSED (10/10 Automated Tests: Atomic Roll Call, Leave Request to Excused Status, Absence Notifications, Rule 8/9 Scoping) |
-| **Phase 2, Remaining** | Examinations, Documents, HRMS UI, Mobile Shell | **IN PROGRESS** | Next: Module 4 (Examinations & Gradebook) |
+| **Phase 2, Module 4** | Examinations: Exam Lifecycle, Grade Scales, Pre-Commit Excel Import Validation, Report Cards | **COMPLETED** | PASSED (10/10 Automated Tests: Grade Resolution, Rule 8 Faculty Scoping, Excel Import Blocks Invalid Data, Automated Ranking, Scoped Access) |
+| **Phase 2, Remaining** | Documents, HRMS UI, Mobile Shell | **IN PROGRESS** | Next: Module 5 (Documents Management) |
 | **Phase 3** | AI Yantra (Voice Agent, AI Attendance, AI Tutor) | **QUEUED** | Pending Phase 2 |
 | **Phase 4** | Optional Modules (Events, Transport, Hostel, Library, Sports, Inventory) | **QUEUED** | Pending Phase 3 |
 
@@ -162,13 +163,59 @@
 
 ---
 
-## Next Milestone: Phase 2, Module 4 (Examinations & Gradebook)
-- Scope per Section 9.8 & Decisions D1, D3, D7:
-  - Exam types (unit tests, term exams, finals) and exam definitions.
-  - Exam scheduling: subject, date, start/end time, room allocation, supervisor/invigilator assignment.
-  - Grade scales and tiers: percentage ranges, grade letters (`A+`, `A`, `B`, etc.), grade points, pass/fail status.
-  - Marks entry engine with status tracking (`draft`, `submitted`, `published`).
-  - Automated report card calculation: total marks, percentage, GPA/grade, class rank.
-  - Scoped access: Faculty enters marks only for allocated subjects/sections; students/parents view published results.
+## Phase 2, Module 4 Checklist: Examinations & Gradebook (Completed)
+- [x] **Database Migration (`006_phase2_examinations.sql`):**
+  - Extended `marks` table with `grade_id`, `is_absent`, `remarks`, and `updated_at`.
+  - Extended `exams` table with `is_published` and `published_at`.
+  - Created `report_cards` table matching Section 5 authoritative entity ownership (`total_marks_obtained`, `total_max_marks`, `percentage`, `gpa`, `grade`, `rank`, `result_status`).
+  - Created `invigilators` table with `(exam_room_id, staff_id)` unique constraint.
+  - Created performance indexes for exams, exam subjects, schedules, marks, and report cards.
+- [x] **Exam Types, Exams & Subjects CRUD:**
+  - Endpoints for exam types (`POST/GET /api/v1/examinations/types`) with weightage.
+  - Exam definitions (`POST/GET /api/v1/examinations/exams`) with class and academic year mapping.
+  - Subject mapping with `max_marks` and `pass_marks` (`POST/GET /api/v1/examinations/exams/:id/subjects`).
+- [x] **Exam Schedules, Rooms & Invigilators:**
+  - Schedule creation (`POST /api/v1/examinations/schedules`) with time boundary validation (`endTime > startTime`).
+  - Exam rooms configuration with room capacity enforcement (`POST /api/v1/examinations/rooms`).
+  - Student seating allocations (`POST /api/v1/examinations/rooms/:id/seating`) with capacity overflow checks.
+  - Staff invigilator assignments (`POST /api/v1/examinations/rooms/:id/invigilators`).
+- [x] **Grade Scales & Tier Resolution:**
+  - Grade scale builder with arbitrary tiers (`POST/GET /api/v1/examinations/grade-scales`).
+  - Automated tier resolver matching percentage to letter grade and grade points.
+- [x] **Marks Entry & Batch Upsert:**
+  - Atomic batch marks recording (`POST /api/v1/examinations/marks/batch`) with automatic grade resolution.
+  - Marks verification workflow (`POST /api/v1/examinations/marks/verify`) setting `verified_by` and emitting audit events.
+- [x] **Excel Import Pipeline (Section 18 Exit Gate):**
+  - Dedicated pre-commit validation endpoint (`POST /api/v1/examinations/marks/import-validate` and `/import-excel`).
+  - Validates student existence in exam's class roster, bounds checking (`0 <= marks <= max_marks`), absence handling, and duplicate detection.
+  - **Strict Exit Gate Protection:** Pre-commit validation blocks any import with errors (`canCommit = false`). Commit attempt is rejected with `CANNOT_COMMIT_INVALID_DATA`. Invalid data is never committed.
+  - Atomic commit endpoint (`POST /api/v1/examinations/marks/import-commit`) for approved, valid batches.
+- [x] **Automated Report Card Calculation & Class Ranking Engine:**
+  - Calculation engine (`POST /api/v1/examinations/exams/:id/calculate-results`):
+    - Computes aggregate marks obtained, total max marks, and percentage.
+    - Resolves GPA and overall grade from institutional scale.
+    - Evaluates pass/fail status against individual subject pass marks.
+    - Orders class by percentage descending to compute official class rank (Rank 1, 2, 3...).
+    - Saves into `report_cards`.
+- [x] **Publishing Engine & Multi-Channel Notifications:**
+  - Publishing endpoint (`POST /api/v1/examinations/exams/:id/publish`):
+    - Sets `is_published = true`, `published_at = now()`, `status = 'completed'`.
+    - Marks all student report cards as published.
+    - Emits immutable audit log `examinations.results_published`.
+    - Automatically dispatches push notifications to student and linked parent inboxes.
+- [x] **Scoped Access Control (Rules 8, 9, 10):**
+  - Faculty: Can only enter/view marks for subjects and classes they are assigned to (`verifyFacultySubjectAllocation`). Unallocated access blocked with `403 FORBIDDEN` (`RESOURCE_ACCESS_DENIED`).
+  - Parent: Can only view report cards and marks for their linked children (`verifyParentChildLink`).
+  - Student: Can only view their own marks and published report cards.
+- [x] **Automated Test Suite:** `backend/tests/phase2_examinations.test.ts` passing 10/10 tests. Total test suite passing: 63/63 tests.
+
+---
+
+## Next Milestone: Phase 2, Module 5 (Documents Management)
+- Scope per Section 9.11 & Decisions D1, D7:
+  - Document types and templates (Certificates, Bonafide Certificates, ID Documents, Circulars).
+  - Student documents & Staff documents storage metadata.
+  - Verification workflow (pending, verified, rejected).
+  - Multi-tenant isolation (`institution_id`) and object storage paths (`{institution_id}/documents/...`).
 
 

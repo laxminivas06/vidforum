@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [tsx](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L32) (0 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-tutor/analytics/page.tsx#L1) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [backend/package.json](file:///C:/Antigravityyyyy/VID_School/backend/package.json)
+- [C:\Antigravityyyyy\VID_School\frontend\app\ai-tutor\analytics\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-tutor/analytics/page.tsx)
 
 ## Audit Trail
 

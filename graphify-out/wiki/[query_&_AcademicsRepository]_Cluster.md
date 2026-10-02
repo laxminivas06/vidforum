@@ -1,147 +1,48 @@
 # [query & AcademicsRepository] Cluster
 
-> 96 nodes · cohesion 0.03
+> 121 nodes · cohesion 0.04
 
 ## Key Concepts
 
-- [query](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L14) (48 connections)
-- [InstitutionService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.service.ts#L16) (12 connections)
-- [InstitutionRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.repository.ts#L3) (11 connections)
-- [.findByIdOrCode()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.repository.ts#L39) (11 connections)
-- [AcademicsRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L3) (7 connections)
-- [AdmissionsRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.repository.ts#L15) (7 connections)
-- [NotificationRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L17) (7 connections)
-- [.approveApplication()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts#L53) (6 connections)
-- [tenant-repository.base.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L1) (6 connections)
-- [NotificationService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L3) (6 connections)
-- [AcademicsService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts#L3) (5 connections)
-- [.findModules()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.repository.ts#L182) (5 connections)
-- [AdmissionsService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts#L23) (4 connections)
-- [authMiddleware()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/auth.middleware.ts#L26) (4 connections)
-- [.getStats()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.repository.ts#L220) (4 connections)
-- [.upsertModule()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.repository.ts#L251) (4 connections)
-- [.addInstitutionAdmin()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.service.ts#L140) (4 connections)
-- [.getInstitutionDetails()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.service.ts#L54) (4 connections)
-- [.getInstitutionStats()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.service.ts#L74) (4 connections)
-- [tenantMiddleware()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/tenant.middleware.ts#L12) (4 connections)
-- [findById()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L53) (4 connections)
-- [validateTenant()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L44) (4 connections)
-- [.getGrades()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L6) (3 connections)
-- [.getClassesByInstitution()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L4) (3 connections)
-- [.listClasses()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L60) (3 connections)
-- *... and 71 more nodes in this community*
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class AcademicsRepository {
-        +academics.repository.ts()
-        +.getClassesByInstitution()
-        +.getSectionsByClass()
-        +.getSubjectsByClass()
-        +.getHierarchy()
-        +.listClasses()
-        +.listSubjects()
-    }
-    class AcademicsService {
-        +academics.service.ts()
-        +.getAcademicGrades()
-        +.getHierarchy()
-        +.getClasses()
-        +.getSubjects()
-    }
-    class AdmissionsRepository {
-        +admissions.repository.ts()
-        +.findApplicantsByInstitution()
-        +.findApplicationById()
-        +.updateApplicationStage()
-        +.executeApprovalTransaction()
-        +.countStudents()
-        +.findDefaultSection()
-    }
-    class AdmissionsService {
-        +admissions.service.ts()
-        +.getApplicants()
-        +.updateStage()
-        +.approveApplication()
-    }
-    class AuditDispatcher {
-        +audit-dispatcher.ts()
-        +.dispatch()
-    }
-    class InstitutionRepository {
-        +institution.repository.ts()
-        +.findAll()
-        +.findByIdOrCode()
-        +.create()
-        +.createAdmin()
-        +.findAdmins()
-        +.updateAdminWorkspaces()
-        +.findModules()
-        +.getStats()
-        +.upsertModule()
-    }
-    class InstitutionService {
-        +institution.service.ts()
-        +.getAllInstitutions()
-        +.getInstitutionDetails()
-        +.getInstitutionStats()
-        +.getModules()
-        +.toggleModule()
-        +.createInstitution()
-        +.addInstitutionAdmin()
-        +.getInstitutionAdmins()
-        +.updateAdminWorkspaces()
-    }
-    class NotificationRepository {
-        +notification.repository.ts()
-        +.constructor()
-        +.findForUser()
-        +.getUnreadCount()
-        +.markAsRead()
-        +.markAllAsRead()
-        +.createNotification()
-    }
-    class NotificationService {
-        +notification.service.ts()
-        +.getUserNotifications()
-        +.getUnreadCount()
-        +.markAsRead()
-        +.markAllAsRead()
-        +.sendNotification()
-    }
-```
+- [institutions](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (73 connections)
+- [profiles](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (26 connections)
+- [students](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (24 connections)
+- [staff](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (16 connections)
+- [academic_years](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (15 connections)
+- [classes](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (15 connections)
+- [subjects](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (9 connections)
+- [sections](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (8 connections)
+- [timetable_entries](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (8 connections)
+- [applications](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (7 connections)
+- [exam_subjects](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (7 connections)
+- [payments](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (7 connections)
+- [admissions](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (6 connections)
+- [event_registrations](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (6 connections)
+- [fee_structures](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (6 connections)
+- [attendance_records](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [attendance_sessions](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [departments](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [exams](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [face_profiles](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [faculty_assignments](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [marks](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [sports_teams](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [student_academic_history](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [student_discounts](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- *... and 96 more nodes in this community*
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[Community 999]] (512 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\scripts\purge-dummy-institutions.js](file:///C:/Antigravityyyyy/VID_School/backend/scripts/purge-dummy-institutions.js)
-- [C:\Antigravityyyyy\VID_School\backend\scripts\verify-cloud-e2e.js](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-cloud-e2e.js)
-- [C:\Antigravityyyyy\VID_School\backend\scripts\verify-workspaces-e2e.js](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-workspaces-e2e.js)
-- [C:\Antigravityyyyy\VID_School\backend\src\common\audit-dispatcher.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/audit-dispatcher.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\common\tenant-repository.base.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\middleware\auth.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/auth.middleware.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\middleware\tenant.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/tenant.middleware.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\admissions\admissions.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\admissions\admissions.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\institutions\institution.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\institutions\institution.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.service.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts)
-- [C:\Antigravityyyyy\VID_School\backend\tests\phase1_step_b.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase1_step_b.test.ts)
+- [backend\db\schema.sql](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql)
 
 ## Audit Trail
 
-- EXTRACTED: 175 (54%)
-- INFERRED: 151 (46%)
+- EXTRACTED: 512 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

@@ -1,31 +1,35 @@
 # [StudentController & StudentRepository] Cluster
 
-> 22 nodes · cohesion 0.09
+> 29 nodes · cohesion 0.07
 
 ## Key Concepts
 
-- [hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1) (21 connections)
-- [API_BASE_URL](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L230) (1 connections)
-- [DEFAULT_INST_ID](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L231) (1 connections)
-- [MOCK_APPLICANTS](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L10) (1 connections)
-- [MOCK_FACULTY](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L144) (1 connections)
-- [MOCK_FEES](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L184) (1 connections)
-- [MOCK_GRADES](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L106) (1 connections)
-- [MOCK_INSTITUTIONS](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L7) (1 connections)
-- [useAcademics()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L722) (1 connections)
-- [useAdmissions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L671) (1 connections)
-- [useCreateInstitution()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L262) (1 connections)
-- [useCreateInstitutionAdmin()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L404) (1 connections)
-- [useCreatePlatformUser()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L614) (1 connections)
-- [useFaculty()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L742) (1 connections)
-- [useFinance()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L782) (1 connections)
-- [useInstitutionAdmins()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L358) (1 connections)
-- [useInstitutions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L233) (1 connections)
-- [useMyClasses()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L762) (1 connections)
-- [usePlatformUsers()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L568) (1 connections)
-- [useUpdateAdminWorkspaces()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L493) (1 connections)
-- [useUpdateInstitutionStatus()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L316) (1 connections)
-- [useUpdatePlatformUser()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L641) (1 connections)
+- [users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L1) (28 connections)
+- [cleanEmail](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L43) (1 connections)
+- [client](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L34) (1 connections)
+- [current](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L143) (1 connections)
+- [currentRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L132) (1 connections)
+- [displayName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L44) (1 connections)
+- [id](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L128) (1 connections)
+- [insertAuth](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L80) (1 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L47) (1 connections)
+- [instName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L48) (1 connections)
+- [instRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L50) (1 connections)
+- [{ name, email, role = 'FACULTY', institutionName }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L36) (1 connections)
+- [{ name, email, role, institutionName, status }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L129) (1 connections)
+- [newUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L105) (1 connections)
+- [normalizedRole](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L61) (1 connections)
+- [{ permissionIds }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L301) (1 connections)
+- [permsRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L267) (1 connections)
+- [profileId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L77) (1 connections)
+- [profileUpdate](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L191) (1 connections)
+- [resolvedRoleName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L71) (1 connections)
+- [resRolePerms](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L282) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L10) (1 connections)
+- [roleId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L70) (1 connections)
+- [roleRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L62) (1 connections)
+- [rolesRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L250) (1 connections)
+- *... and 4 more nodes in this community*
 
 ## Relationships
 
@@ -33,11 +37,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\lib\api\hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 42 (100%)
+- EXTRACTED: 56 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

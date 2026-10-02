@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [react-dom](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L17) (0 connections)
+- [dotenv](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L16) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
+- [backend/package.json](file:///C:/Antigravityyyyy/VID_School/backend/package.json)
 
 ## Audit Trail
 

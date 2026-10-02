@@ -1,14 +1,16 @@
 # Community 46
 
-> 5 nodes · cohesion 0.40
+> 7 nodes · cohesion 0.29
 
 ## Key Concepts
 
-- [SlideOver.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L1) (4 connections)
-- [activeFooter](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L31) (1 connections)
-- [handleKeyDown()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L47) (1 connections)
-- [isPanelOpen](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L30) (1 connections)
-- [widths](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L58) (1 connections)
+- [Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L1) (6 connections)
+- [activeWorkspace](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L47) (1 connections)
+- [dropdownRef](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L39) (1 connections)
+- [handleClickOutside()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L51) (1 connections)
+- [isCurrent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L128) (1 connections)
+- [[isWorkspaceDropdownOpen, setIsWorkspaceDropdownOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L38) (1 connections)
+- [permittedWorkspaces](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L42) (1 connections)
 
 ## Relationships
 
@@ -16,11 +18,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\SlideOver.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 8 (100%)
+- EXTRACTED: 12 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

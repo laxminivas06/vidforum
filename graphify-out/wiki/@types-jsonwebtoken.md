@@ -1,10 +1,11 @@
 # @types/jsonwebtoken
 
-> 1 nodes · cohesion 1.00
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [next](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L15) (0 connections)
+- [SettingsShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx#L1) (1 connections)
+- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx#L58) (1 connections)
 
 ## Relationships
 
@@ -12,11 +13,11 @@
 
 ## Source Files
 
-- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\SettingsShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 0 (0%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

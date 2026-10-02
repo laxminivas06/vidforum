@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [utils.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts#L1) (1 connections)
-- [cn()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts#L4) (1 connections)
+- [phase2_finance.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_finance.test.ts#L1) (1 connections)
+- [runFinanceTests()](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_finance.test.ts#L6) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\lib\utils.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts)
+- [C:\Antigravityyyyy\VID_School\backend\tests\phase2_finance.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_finance.test.ts)
 
 ## Audit Trail
 

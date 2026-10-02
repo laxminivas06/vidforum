@@ -4,11 +4,15 @@
 
 ## Key Concepts
 
-- **frontend_components_ui_index_settingssection** (0 connections)
+- [express](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L17) (0 connections)
 
 ## Relationships
 
 - No strong cross-community connections detected
+
+## Source Files
+
+- [backend/package.json](file:///C:/Antigravityyyyy/VID_School/backend/package.json)
 
 ## Audit Trail
 

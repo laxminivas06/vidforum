@@ -4,11 +4,15 @@
 
 ## Key Concepts
 
-- **frontend_components_ui_index_card** (0 connections)
+- [typescript](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L28) (0 connections)
 
 ## Relationships
 
 - No strong cross-community connections detected
+
+## Source Files
+
+- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
 
 ## Audit Trail
 

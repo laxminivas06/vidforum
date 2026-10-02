@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/inventory/page.tsx#L1) (1 connections)
-- [InventoryPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/inventory/page.tsx#L8) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.routes.ts#L7) (1 connections)
+- [audit.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.routes.ts#L1) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\inventory\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/inventory/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\audit\audit.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.routes.ts)
 
 ## Audit Trail
 

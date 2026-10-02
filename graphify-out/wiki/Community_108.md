@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/library/page.tsx#L1) (1 connections)
-- [LibraryPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/library/page.tsx#L8) (1 connections)
+- [examinations.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L1) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L6) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\library\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/library/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\examinations\examinations.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts)
 
 ## Audit Trail
 

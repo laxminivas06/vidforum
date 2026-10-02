@@ -1,23 +1,24 @@
 # Community 95
 
-> 2 nodes · cohesion 1.00
+> 3 nodes · cohesion 0.67
 
 ## Key Concepts
 
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.routes.ts#L7) (1 connections)
-- [audit.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.routes.ts#L1) (1 connections)
+- [Skill: token-optimizer](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md) (2 connections)
+- [Best Practices](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md) (1 connections)
+- [Token Optimizer Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[router]] (4 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\audit\audit.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.routes.ts)
+- [.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md)
 
 ## Audit Trail
 
-- EXTRACTED: 2 (100%)
+- EXTRACTED: 4 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

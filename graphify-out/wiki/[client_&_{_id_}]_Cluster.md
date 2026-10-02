@@ -1,39 +1,43 @@
 # [client & { id }] Cluster
 
-> 14 nodes · cohesion 0.14
+> 22 nodes · cohesion 0.09
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L1) (13 connections)
-- [[academicYear, setAcademicYear]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L42) (1 connections)
-- [[activeSection, setActiveSection]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L37) (1 connections)
-- [[boardAffiliation, setBoardAffiliation]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L40) (1 connections)
-- [[confirmToggleModule, setConfirmToggleModule]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L44) (1 connections)
-- [[contactEmail, setContactEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L41) (1 connections)
-- [handleSave()](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L63) (1 connections)
-- [{
-    institutionName,
-    enabledModules,
-    toggleOptionalModule,
-  }](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L31) (1 connections)
-- [isEnabled](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L225) (1 connections)
-- [[isSaved, setIsSaved]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L43) (1 connections)
-- [optionalModulesList](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L46) (1 connections)
-- [[schoolCode, setSchoolCode]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L39) (1 connections)
-- [[schoolName, setSchoolName]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L38) (1 connections)
-- [sections](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L55) (1 connections)
+- [Document: Prd](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (21 connections)
+- [1.1 Problem Statement](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [1.2 Core Principle & Philosophy](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [1. Executive Summary & Product Vision](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [2. Target Users & Personas](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [3.1 Workspace Classification Matrix](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [3.2 The Student Master Entity](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [3.3 The 30 Non-Negotiable Rules](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [3. Product Scope & Modular Architecture](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [4. Development Phases & Release Strategy](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [5.1 Super Admin](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [5.2 Institution Admin](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [5.3 Admissions Team](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [5.4 Academic Coordinator & Faculty](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [5. User Stories per Feature (Phase 1 MVP Highlights)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [6. Out-of-Scope Items (Strict Boundaries)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [7. Open Questions & Engineering Assumptions](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Phase 1: MVP Core Foundation (Immediate Focus)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Phase 2: Core Operational Workspaces](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Phase 3: AI Yantra Intelligence Layer](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Phase 4: Optional Modules & Mobile Experience](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Product Requirements Document (PRD): VID (Virtual Identification)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[VID Platform Educational Ecosystem Specification & Academics & Curriculum] Cluster]] (42 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\settings\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx)
+- [docs/PRD.md](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md)
 
 ## Audit Trail
 
-- EXTRACTED: 26 (100%)
+- EXTRACTED: 42 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

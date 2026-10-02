@@ -1,10 +1,11 @@
 # @types/morgan
 
-> 1 nodes · cohesion 1.00
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [react](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L16) (0 connections)
+- [QueryProvider.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx#L1) (1 connections)
+- [QueryProvider()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx#L6) (1 connections)
 
 ## Relationships
 
@@ -12,11 +13,11 @@
 
 ## Source Files
 
-- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
+- [C:\Antigravityyyyy\VID_School\frontend\contexts\QueryProvider.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/QueryProvider.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 0 (0%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

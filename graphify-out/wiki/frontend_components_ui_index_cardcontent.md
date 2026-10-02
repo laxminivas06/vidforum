@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [clsx](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L13) (0 connections)
+- [bcryptjs](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L14) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
+- [backend/package.json](file:///C:/Antigravityyyyy/VID_School/backend/package.json)
 
 ## Audit Trail
 

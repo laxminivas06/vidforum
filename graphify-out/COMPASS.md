@@ -4,16 +4,16 @@
 > This is a token-optimized summary. For deep logic, see GRAPH_REPORT.md.
 
 ## Core Abstractions (God Nodes)
-1. `institutions` (73 edges)
-2. `query` (48 edges)
-3. `Document: Vid Database Architecture` (47 edges)
-4. `sendSuccess()` (33 edges)
-5. `profiles` (26 edges)
-6. `Document: Design` (25 edges)
-7. `students` (24 edges)
-8. `Document: Tech Spec` (23 edges)
-9. `Document: Tasks` (22 edges)
-10. `Document: Prd` (21 edges)
+1. `sendSuccess()` (130 edges)
+2. `sendError()` (96 edges)
+3. `institutions` (73 edges)
+4. `Document: Vid Database Architecture` (47 edges)
+5. `ExaminationsRepository` (30 edges)
+6. `ExaminationsController` (26 edges)
+7. `ExaminationsService` (26 edges)
+8. `FinanceRepository` (26 edges)
+9. `profiles` (26 edges)
+10. `TimetableRepository` (25 edges)
 
 ## System Layers
 - **L0: Global/Entry**: 

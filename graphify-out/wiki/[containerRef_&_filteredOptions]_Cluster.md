@@ -1,53 +1,34 @@
 # [containerRef & filteredOptions] Cluster
 
-> 10 nodes · cohesion 0.20
+> 13 nodes · cohesion 0.15
 
 ## Key Concepts
 
-- [error-format.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L1) (5 connections)
-- [AppError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L25) (2 connections)
-- [PermissionDeniedError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L47) (2 connections)
-- [ResourceNotFoundError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L54) (2 connections)
-- [TenantViolationError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L40) (2 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L30) (1 connections)
-- [formatErrorResponse()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L61) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L48) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L55) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L41) (1 connections)
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class AppError {
-        +error-format.ts()
-        +.constructor()
-    }
-    class PermissionDeniedError {
-        +error-format.ts()
-        +.constructor()
-    }
-    class ResourceNotFoundError {
-        +error-format.ts()
-        +.constructor()
-    }
-    class TenantViolationError {
-        +error-format.ts()
-        +.constructor()
-    }
-```
+- [Document: Memory](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (12 connections)
+- [1.1 Architecture & Stack Contract](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [1.2 Core Development Directives](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [1. Project Context & Durable Conclusions (Honcho / Wingman / Knowl)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [2. Installed Plugin Suite (28 Plugins Matrix)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [3. Workflow Activation Guide](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [4. Frontend Implementation & Stitch Conversion State (2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.1 Cloud Database Infrastructure (Supabase PostgreSQL)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.2 Backend Layered MVC Engine (Node.js 22 + Express + TypeScript)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.3 Frontend-to-Backend Integration & Offline Resilience](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5.4 Repository Sync & Git Checkpoints](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [5. Backend & Supabase Database Architecture Implementation (2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [Persistent Agent Memory & Plugin Ecosystem: VID Platform](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[certificateId & instId] Cluster]] (24 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\common\error-format.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts)
+- [docs/MEMORY.md](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md)
 
 ## Audit Trail
 
-- EXTRACTED: 18 (100%)
+- EXTRACTED: 24 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

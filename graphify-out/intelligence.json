@@ -1,36 +1,36 @@
 {
   "hotspots": [
     {
-      "label": "InstitutionService",
-      "risk": 0.607,
+      "label": "ExaminationsRepository",
+      "risk": 0.57,
       "type": "CLASS"
     },
     {
-      "label": "AuthProvider()",
-      "risk": 0.577,
-      "type": "FUNCTION"
-    },
-    {
-      "label": "InstitutionRepository",
-      "risk": 0.35,
+      "label": "ExaminationsService",
+      "risk": 0.547,
       "type": "CLASS"
     },
     {
-      "label": "SecurityPage()",
-      "risk": 0.266,
-      "type": "FUNCTION"
+      "label": "FinanceRepository",
+      "risk": 0.531,
+      "type": "CLASS"
     },
     {
-      "label": "HostelPage()",
-      "risk": 0.255,
-      "type": "FUNCTION"
+      "label": "TimetableRepository",
+      "risk": 0.492,
+      "type": "CLASS"
+    },
+    {
+      "label": "AttendanceService",
+      "risk": 0.395,
+      "type": "CLASS"
     }
   ],
   "blast_radius": {
+    "sendSuccess()": 130,
+    "sendError()": 96,
     "institutions": 73,
-    "query": 48,
     "Document: Vid Database Architecture": 47,
-    "sendSuccess()": 33,
-    "profiles": 26
+    "ExaminationsRepository": 30
   }
 }

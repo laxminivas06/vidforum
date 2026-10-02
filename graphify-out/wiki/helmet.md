@@ -1,10 +1,11 @@
 # helmet
 
-> 1 nodes · cohesion 1.00
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [tailwind.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/tailwind.config.js#L1) (0 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/library/page.tsx#L1) (1 connections)
+- [LibraryPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/library/page.tsx#L8) (1 connections)
 
 ## Relationships
 
@@ -12,11 +13,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\tailwind.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/tailwind.config.js)
+- [C:\Antigravityyyyy\VID_School\frontend\app\library\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/library/page.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 0 (0%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

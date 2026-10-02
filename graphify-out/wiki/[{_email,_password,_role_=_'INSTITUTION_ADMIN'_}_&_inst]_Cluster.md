@@ -1,43 +1,47 @@
 # [{ email, password, role = 'INSTITUTION_ADMIN' } & inst] Cluster
 
-> 22 nodes · cohesion 0.09
+> 26 nodes · cohesion 0.08
 
 ## Key Concepts
 
-- [Document: Prd](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (21 connections)
-- [1.1 Problem Statement](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [1.2 Core Principle & Philosophy](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [1. Executive Summary & Product Vision](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [2. Target Users & Personas](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [3.1 Workspace Classification Matrix](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [3.2 The Student Master Entity](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [3.3 The 30 Non-Negotiable Rules](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [3. Product Scope & Modular Architecture](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [4. Development Phases & Release Strategy](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [5.1 Super Admin](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [5.2 Institution Admin](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [5.3 Admissions Team](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [5.4 Academic Coordinator & Faculty](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [5. User Stories per Feature (Phase 1 MVP Highlights)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [6. Out-of-Scope Items (Strict Boundaries)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [7. Open Questions & Engineering Assumptions](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [Phase 1: MVP Core Foundation (Immediate Focus)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [Phase 2: Core Operational Workspaces](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [Phase 3: AI Yantra Intelligence Layer](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [Phase 4: Optional Modules & Mobile Experience](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [Product Requirements Document (PRD): VID (Virtual Identification)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Document: Design](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (25 connections)
+- [10. Accessibility Baseline](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [11. What This Design System Deliberately Avoids](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [1. Design Philosophy](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [2.1 Core Palette](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [2.2 Accent & Status Colors](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [2.3 Dark Elements (used, not a dark mode)](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [2. Color System](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [3. Typography](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [4. Spacing & Layout Grid](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.10 Slide-over / Detail Panel](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.1 Sidebar Navigation](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.2 Topbar / Breadcrumb](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.3 Two-Pane Settings Layout](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.4 Cards](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.5 Tables → Cards (responsive)](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.6 Forms](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.7 Buttons](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.8 Badges & Status Pills](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5.9 Progress Indicators](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [5. Core Components](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [6. Iconography](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [7. Required UI States (every screen)](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [8. Responsive Breakpoints](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- [9. Motion & Interaction](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
+- *... and 1 more nodes in this community*
 
 ## Relationships
 
-- [[[StudentController & StudentRepository] Cluster]] (42 shared connections)
+- [[[Document: Appflow & 1. Overview & Navigation Architecture] Cluster]] (50 shared connections)
 
 ## Source Files
 
-- [docs/PRD.md](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md)
+- [docs/Design.md](file:///C:/Antigravityyyyy/VID_School/docs/Design.md)
 
 ## Audit Trail
 
-- EXTRACTED: 42 (100%)
+- EXTRACTED: 50 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

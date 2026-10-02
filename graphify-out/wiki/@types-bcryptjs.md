@@ -1,10 +1,11 @@
 # @types/bcryptjs
 
-> 1 nodes · cohesion 1.00
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [States.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/States.tsx#L1) (0 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/%5Bid%5D/page.tsx#L1) (1 connections)
+- [StudentMasterPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/%5Bid%5D/page.tsx#L10) (1 connections)
 
 ## Relationships
 
@@ -12,11 +13,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\States.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/States.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\students\[id]\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/%5Bid%5D/page.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 0 (0%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

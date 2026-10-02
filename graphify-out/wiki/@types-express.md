@@ -1,10 +1,11 @@
 # @types/express
 
-> 1 nodes · cohesion 1.00
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [lucide-react](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L14) (0 connections)
+- [Badge()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Badge.tsx#L10) (1 connections)
+- [Badge.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Badge.tsx#L1) (1 connections)
 
 ## Relationships
 
@@ -12,11 +13,11 @@
 
 ## Source Files
 
-- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Badge.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Badge.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 0 (0%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

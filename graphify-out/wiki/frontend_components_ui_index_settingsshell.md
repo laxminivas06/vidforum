@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [Document: Graphify](file:///C:/Antigravityyyyy/VID_School/.agents/rules/graphify.md) (0 connections)
+- [@types/jsonwebtoken](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L28) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [.agents/rules/graphify.md](file:///C:/Antigravityyyyy/VID_School/.agents/rules/graphify.md)
+- [backend/package.json](file:///C:/Antigravityyyyy/VID_School/backend/package.json)
 
 ## Audit Trail
 

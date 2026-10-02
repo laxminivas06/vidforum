@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: ai-native-sdlc](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (2 connections)
-- [AI-Native SDLC Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (1 connections)
-- [Gates](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (1 connections)
+- [phase1_step_b.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase1_step_b.test.ts#L1) (2 connections)
+- [createMockReqRes()](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase1_step_b.test.ts#L14) (1 connections)
+- [runStepBTests()](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase1_step_b.test.ts#L60) (1 connections)
 
 ## Relationships
 
-- [[[Skill: flaky-detector & Flaky Detector Skill] Cluster]] (4 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\backend\tests\phase1_step_b.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase1_step_b.test.ts)
 
 ## Audit Trail
 

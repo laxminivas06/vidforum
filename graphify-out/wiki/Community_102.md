@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-attendance/monitoring/page.tsx#L1) (1 connections)
-- [CAMERA_DECKS](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-attendance/monitoring/page.tsx#L25) (1 connections)
+- [module-guard.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/module-guard.middleware.ts#L1) (1 connections)
+- [requireModuleEnabled()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/module-guard.middleware.ts#L9) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\ai-attendance\monitoring\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-attendance/monitoring/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\module-guard.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/module-guard.middleware.ts)
 
 ## Audit Trail
 

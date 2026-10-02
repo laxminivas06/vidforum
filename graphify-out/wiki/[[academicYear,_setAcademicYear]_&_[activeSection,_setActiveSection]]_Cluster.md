@@ -1,43 +1,81 @@
 # [[academicYear, setAcademicYear] & [activeSection, setActiveSection]] Cluster
 
-> 21 nodes · cohesion 0.10
+> 24 nodes · cohesion 0.14
 
 ## Key Concepts
 
-- [Document: Readme](file:///C:/Antigravityyyyy/VID_School/README.md) (20 connections)
-- [1. Prerequisites](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [2. Environment Variables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [3. Running the Development Servers](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [4. Running in Production](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [📡 API Reference Snapshot (/api/v1/)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [🏛 Architecture & Tech Stack](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Build and Start Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Build and Start Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [📚 Complete Specifications & Documentation](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [🛡️ Core Architectural Pillars & Non-Negotiables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [📊 Current Implementation Progress (As of 2026-09-25)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [🚀 Getting Started](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [In vidforum/backend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [In vidforum/frontend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Or using nodemon:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [📁 Repository Directory Structure](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Running Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Running Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Stack Highlights](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [VID (Virtual Identification) — Educational Management Ecosystem](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [FacultyController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L5) (7 connections)
+- [FacultyRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L3) (7 connections)
+- [FacultyService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L3) (7 connections)
+- [.getFacultyProfile()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L51) (6 connections)
+- [.getFaculty()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L6) (4 connections)
+- [.findFacultyByProfileId()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L54) (4 connections)
+- [.getMyAssignedClasses()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L67) (4 connections)
+- [.getMyAssignedSubjects()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L75) (4 connections)
+- [.getFacultyById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L69) (3 connections)
+- [.getMyClasses()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L36) (3 connections)
+- [.getMyProfile()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L25) (3 connections)
+- [.getMySubjects()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L47) (3 connections)
+- [.getSectionStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L58) (3 connections)
+- [.findAssignedClasses()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L67) (3 connections)
+- [.findAssignedSubjects()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L86) (3 connections)
+- [.getFacultyList()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L4) (3 connections)
+- [.getFacultyMember()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L43) (3 connections)
+- [.getSectionStudentRoster()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L83) (3 connections)
+- [.findFacultyById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L41) (2 connections)
+- [.findFacultyByInstitution()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L4) (2 connections)
+- [.findSectionStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L105) (2 connections)
+- [faculty.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L1) (1 connections)
+- [faculty.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L1) (1 connections)
+- [faculty.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L1) (1 connections)
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class FacultyController {
+        +faculty.controller.ts()
+        +.getFaculty()
+        +.getMyProfile()
+        +.getMyClasses()
+        +.getMySubjects()
+        +.getSectionStudents()
+        +.getFacultyById()
+    }
+    class FacultyRepository {
+        +faculty.repository.ts()
+        +.findFacultyByInstitution()
+        +.findFacultyById()
+        +.findFacultyByProfileId()
+        +.findAssignedClasses()
+        +.findAssignedSubjects()
+        +.findSectionStudents()
+    }
+    class FacultyService {
+        +faculty.service.ts()
+        +.getFacultyList()
+        +.getFacultyMember()
+        +.getFacultyProfile()
+        +.getMyAssignedClasses()
+        +.getMyAssignedSubjects()
+        +.getSectionStudentRoster()
+    }
+```
 
 ## Relationships
 
-- [[[{ email, password, role = 'INSTITUTION_ADMIN' } & inst] Cluster]] (40 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [README.md](file:///C:/Antigravityyyyy/VID_School/README.md)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\faculty\faculty.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\faculty\faculty.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\faculty\faculty.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 40 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 42 (51%)
+- INFERRED: 40 (49%)
 - AMBIGUOUS: 0 (0%)
 
 ---

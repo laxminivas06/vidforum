@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [student.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.routes.ts#L1) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.routes.ts#L5) (1 connections)
+- [server.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/server.ts#L1) (1 connections)
+- [bootstrap()](file:///C:/Antigravityyyyy/VID_School/backend/src/server.ts#L5) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.routes.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\server.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/server.ts)
 
 ## Audit Trail
 

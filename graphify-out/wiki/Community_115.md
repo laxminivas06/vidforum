@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [SettingsShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx#L1) (1 connections)
-- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx#L58) (1 connections)
+- [phase2_attendance.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_attendance.test.ts#L1) (1 connections)
+- [runAttendanceTests()](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_attendance.test.ts#L6) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\SettingsShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\tests\phase2_attendance.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_attendance.test.ts)
 
 ## Audit Trail
 

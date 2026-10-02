@@ -1,48 +1,138 @@
 # [Document: Vid Database Architecture & 10. RBAC / Permissions] Cluster
 
-> 121 nodes · cohesion 0.04
+> 122 nodes · cohesion 0.04
 
 ## Key Concepts
 
-- [institutions](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (73 connections)
-- [profiles](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (26 connections)
-- [students](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (24 connections)
-- [staff](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (16 connections)
-- [academic_years](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (15 connections)
-- [classes](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (15 connections)
-- [subjects](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (9 connections)
-- [sections](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (8 connections)
-- [timetable_entries](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (8 connections)
-- [applications](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (7 connections)
-- [exam_subjects](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (7 connections)
-- [payments](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (7 connections)
-- [admissions](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (6 connections)
-- [event_registrations](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (6 connections)
-- [fee_structures](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (6 connections)
-- [attendance_records](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
-- [attendance_sessions](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
-- [departments](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
-- [exams](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
-- [face_profiles](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
-- [faculty_assignments](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
-- [marks](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
-- [sports_teams](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
-- [student_academic_history](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
-- [student_discounts](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
-- *... and 96 more nodes in this community*
+- [sendSuccess()](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts#L19) (130 connections)
+- [sendError()](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts#L48) (96 connections)
+- [ExaminationsController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.controller.ts#L5) (26 connections)
+- [FinanceController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts#L5) (24 connections)
+- [TimetableController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.controller.ts#L5) (23 connections)
+- [AcademicsController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L5) (17 connections)
+- [AttendanceController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts#L5) (14 connections)
+- [AdmissionsController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.controller.ts#L5) (6 connections)
+- [NotificationController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.controller.ts#L5) (6 connections)
+- [.getHierarchy()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L16) (4 connections)
+- [.checkConflict()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.controller.ts#L188) (4 connections)
+- [.getClasses()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L69) (3 connections)
+- [.getSubjects()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L122) (3 connections)
+- [.createApplication()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.controller.ts#L27) (3 connections)
+- [.updateStage()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.controller.ts#L65) (3 connections)
+- [.applyStudentLeave()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts#L137) (3 connections)
+- [.decideStudentLeave()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts#L178) (3 connections)
+- [.getInstitutionSummary()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts#L237) (3 connections)
+- [.getOrCreateSession()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts#L7) (3 connections)
+- [.getScopedAttendance()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts#L121) (3 connections)
+- [.getSectionRoster()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts#L51) (3 connections)
+- [.getSessionById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts#L22) (3 connections)
+- [.listSessions()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts#L32) (3 connections)
+- [.listStaffAttendance()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts#L220) (3 connections)
+- [.listStudentLeaves()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts#L153) (3 connections)
+- *... and 97 more nodes in this community*
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class AcademicsController {
+        +academics.controller.ts()
+        +.getGrades()
+        +.getHierarchy()
+        +.getAcademicYears()
+        +.createAcademicYear()
+        +.getDepartments()
+        +.createDepartment()
+        +.getClasses()
+        +.createClass()
+        +.getClassSections()
+    }
+    class AdmissionsController {
+        +admissions.controller.ts()
+        +.getApplicants()
+        +.getApplicationById()
+        +.createApplication()
+        +.updateStage()
+        +.approve()
+    }
+    class AttendanceController {
+        +attendance.controller.ts()
+        +.getOrCreateSession()
+        +.getSessionById()
+        +.listSessions()
+        +.getSectionRoster()
+        +.submitRollCall()
+        +.getStudentSummary()
+        +.getScopedAttendance()
+        +.applyStudentLeave()
+        +.listStudentLeaves()
+    }
+    class ExaminationsController {
+        +examinations.controller.ts()
+        +.createExamType()
+        +.listExamTypes()
+        +.createExam()
+        +.getExamById()
+        +.listExams()
+        +.updateExamStatus()
+        +.addExamSubject()
+        +.listExamSubjects()
+        +.createExamSchedule()
+    }
+    class FinanceController {
+        +finance.controller.ts()
+        +.listFeeCategories()
+        +.createFeeCategory()
+        +.listFeeGroups()
+        +.createFeeGroup()
+        +.listFeeStructures()
+        +.getFeeStructure()
+        +.createFeeStructure()
+        +.listDiscounts()
+        +.createDiscount()
+    }
+    class NotificationController {
+        +notification.controller.ts()
+        +.getNotifications()
+        +.getUnreadCount()
+        +.markAsRead()
+        +.markAllAsRead()
+        +.send()
+    }
+    class TimetableController {
+        +timetable.controller.ts()
+        +.listRooms()
+        +.createRoom()
+        +.updateRoom()
+        +.deleteRoom()
+        +.listPeriods()
+        +.createPeriod()
+        +.updatePeriod()
+        +.deletePeriod()
+        +.listTimetables()
+    }
+```
 
 ## Relationships
 
-- [[Community 999]] (512 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [backend\db\schema.sql](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\error.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/error.middleware.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\admissions\admissions.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\attendance\attendance.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\examinations\examinations.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 513 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 237 (37%)
+- INFERRED: 412 (63%)
 - AMBIGUOUS: 0 (0%)
 
 ---

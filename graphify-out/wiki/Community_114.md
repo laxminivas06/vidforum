@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [Badge()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Badge.tsx#L10) (1 connections)
-- [Badge.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Badge.tsx#L1) (1 connections)
+- [timetable.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L1) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L6) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Badge.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Badge.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts)
 
 ## Audit Trail
 

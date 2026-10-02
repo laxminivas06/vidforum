@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [helmet](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L18) (0 connections)
+- [next-env.d.ts](file:///C:/Antigravityyyyy/VID_School/frontend/next-env.d.ts#L1) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [backend/package.json](file:///C:/Antigravityyyyy/VID_School/backend/package.json)
+- [C:\Antigravityyyyy\VID_School\frontend\next-env.d.ts](file:///C:/Antigravityyyyy/VID_School/frontend/next-env.d.ts)
 
 ## Audit Trail
 

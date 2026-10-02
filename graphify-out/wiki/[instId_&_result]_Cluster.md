@@ -4,22 +4,22 @@
 
 ## Key Concepts
 
-- [Document: Plugin Orchestrator](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (7 connections)
-- [1. Memory Phase (Start of Session & Pre-Edit)](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [2. Planning & SDLC Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [3. Implementation & Testing Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [4. Code Quality & Review Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [5. Security & Git Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [6. Token & Output Optimization](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [Plugin Orchestration Rules](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L1) (7 connections)
+- [activeGrade](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L31) (1 connections)
+- [{ data: grades = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L28) (1 connections)
+- [isSelected](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L83) (1 connections)
+- [pct](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L176) (1 connections)
+- [[selectedGradeId, setSelectedGradeId]](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L29) (1 connections)
+- [totalCapacity](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L85) (1 connections)
+- [totalStudents](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L84) (1 connections)
 
 ## Relationships
 
-- [[[Document: Agents & 1. Operating Mode & Standards] Cluster]] (14 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/rules/plugin-orchestrator.md](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md)
+- [C:\Antigravityyyyy\VID_School\frontend\app\academics\hierarchy\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx)
 
 ## Audit Trail
 

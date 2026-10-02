@@ -1,35 +1,63 @@
 # [conflicts & facConflict] Cluster
 
-> 13 nodes · cohesion 0.15
+> 15 nodes · cohesion 0.17
 
 ## Key Concepts
 
-- [Document: Memory](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (12 connections)
-- [1.1 Architecture & Stack Contract](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [1.2 Core Development Directives](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [1. Project Context & Durable Conclusions (Honcho / Wingman / Knowl)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [2. Installed Plugin Suite (28 Plugins Matrix)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [3. Workflow Activation Guide](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [4. Frontend Implementation & Stitch Conversion State (2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [5.1 Cloud Database Infrastructure (Supabase PostgreSQL)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [5.2 Backend Layered MVC Engine (Node.js 22 + Express + TypeScript)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [5.3 Frontend-to-Backend Integration & Offline Resilience](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [5.4 Repository Sync & Git Checkpoints](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [5. Backend & Supabase Database Architecture Implementation (2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [Persistent Agent Memory & Plugin Ecosystem: VID Platform](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [StudentController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L5) (4 connections)
+- [StudentRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L3) (4 connections)
+- [StudentService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L3) (4 connections)
+- [.getStudentById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L24) (3 connections)
+- [.getStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L6) (3 connections)
+- [.promote()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L36) (3 connections)
+- [.getStudentMaster()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L8) (3 connections)
+- [.listStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L4) (3 connections)
+- [.promoteStudent()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L16) (3 connections)
+- [.findStudentMasterById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L57) (2 connections)
+- [.findStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L4) (2 connections)
+- [.promote()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L145) (2 connections)
+- [student.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L1) (1 connections)
+- [student.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L1) (1 connections)
+- [student.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L1) (1 connections)
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class StudentController {
+        +student.controller.ts()
+        +.getStudents()
+        +.getStudentById()
+        +.promote()
+    }
+    class StudentRepository {
+        +student.repository.ts()
+        +.findStudents()
+        +.findStudentMasterById()
+        +.promote()
+    }
+    class StudentService {
+        +student.service.ts()
+        +.listStudents()
+        +.getStudentMaster()
+        +.promoteStudent()
+    }
+```
 
 ## Relationships
 
-- [[[FacultyController & FacultyRepository] Cluster]] (24 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [docs/MEMORY.md](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 24 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 24 (62%)
+- INFERRED: 15 (38%)
 - AMBIGUOUS: 0 (0%)
 
 ---

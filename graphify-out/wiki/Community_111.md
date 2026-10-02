@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/sports/page.tsx#L1) (1 connections)
-- [SportsPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/sports/page.tsx#L8) (1 connections)
+- [institution.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.routes.ts#L1) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.routes.ts#L4) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\sports\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/sports/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\institutions\institution.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.routes.ts)
 
 ## Audit Trail
 

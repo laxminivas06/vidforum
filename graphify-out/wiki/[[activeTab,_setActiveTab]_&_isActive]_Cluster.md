@@ -1,18 +1,20 @@
 # [[activeTab, setActiveTab] & isActive] Cluster
 
-> 9 nodes · cohesion 0.22
+> 11 nodes · cohesion 0.18
 
 ## Key Concepts
 
-- [documents.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L1) (8 connections)
-- [certificateId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L58) (1 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L11) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L12) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L6) (1 connections)
-- [sRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L42) (1 connections)
-- [student](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L57) (1 connections)
-- [{ studentId, purpose = 'General Purpose' }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L39) (1 connections)
-- [verificationUrl](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L59) (1 connections)
+- [ai-yantra.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L1) (10 connections)
+- [campaign](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L44) (1 connections)
+- [campRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L38) (1 connections)
+- [guardRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L47) (1 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L15) (1 connections)
+- [recRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L53) (1 connections)
+- [reply](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L107) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L16) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L6) (1 connections)
+- [{ studentId, message, subject = 'Mathematics' }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L104) (1 connections)
+- [{ title, scriptTemplate, targetFilter }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L35) (1 connections)
 
 ## Relationships
 
@@ -20,11 +22,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\documents\documents.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\ai-yantra\ai-yantra.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 16 (100%)
+- EXTRACTED: 20 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

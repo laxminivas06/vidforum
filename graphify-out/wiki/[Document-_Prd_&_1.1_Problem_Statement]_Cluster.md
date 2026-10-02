@@ -1,47 +1,47 @@
 # [Document: Prd & 1.1 Problem Statement] Cluster
 
-> 29 nodes · cohesion 0.07
+> 48 nodes · cohesion 0.04
 
 ## Key Concepts
 
-- [users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L1) (28 connections)
-- [cleanEmail](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L43) (1 connections)
-- [client](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L34) (1 connections)
-- [current](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L143) (1 connections)
-- [currentRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L132) (1 connections)
-- [displayName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L44) (1 connections)
-- [id](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L128) (1 connections)
-- [insertAuth](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L80) (1 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L47) (1 connections)
-- [instName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L48) (1 connections)
-- [instRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L50) (1 connections)
-- [{ name, email, role = 'FACULTY', institutionName }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L36) (1 connections)
-- [{ name, email, role, institutionName, status }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L129) (1 connections)
-- [newUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L105) (1 connections)
-- [normalizedRole](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L61) (1 connections)
-- [{ permissionIds }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L301) (1 connections)
-- [permsRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L267) (1 connections)
-- [profileId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L77) (1 connections)
-- [profileUpdate](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L191) (1 connections)
-- [resolvedRoleName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L71) (1 connections)
-- [resRolePerms](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L282) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L10) (1 connections)
-- [roleId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L70) (1 connections)
-- [roleRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L62) (1 connections)
-- [rolesRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L250) (1 connections)
-- *... and 4 more nodes in this community*
+- [Document: Vid Database Architecture](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (47 connections)
+- [10. RBAC / Permissions](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [11. Academic Data Model](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [12. Workspace/Data Ownership Model](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [13. Normalization Analysis](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [14. Primary Key Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [15. Constraints](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [16. Delete/Update Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [17. Audit Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [18. Indexing Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [19. Supabase RLS Design](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [1. Executive Summary](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [20. Node.js/Express Backend Integration](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [21. Transaction Design](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [22. Database Functions and Triggers](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [23. Database Views](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [24. Complete ER Diagram](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [25. Final Database Architecture](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [26–30. Production SQL, RLS SQL, Functions/Triggers, Views, Seed Data](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [2. Requirements Extracted From PDF (condensed)](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [31. Migration Order](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [32. API/Backend Mapping](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [33. Performance Review](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [34. Security Review](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [35. Requirement Traceability (by module)](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- *... and 23 more nodes in this community*
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Document: Tasks & 1.1 Project Scaffolding & Infrastructure] Cluster]] (94 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts)
+- [docs/VID_Database_Architecture.md](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md)
 
 ## Audit Trail
 
-- EXTRACTED: 56 (100%)
+- EXTRACTED: 94 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

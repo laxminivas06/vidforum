@@ -1,35 +1,42 @@
 # [errorCount & { examId, subjectId }] Cluster
 
-> 14 nodes · cohesion 0.15
+> 21 nodes · cohesion 0.10
 
 ## Key Concepts
 
-- [AddInstituteAdminModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L1) (13 connections)
-- [handleSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L89) (2 connections)
-- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L61) (2 connections)
-- [createAdminMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L34) (1 connections)
-- [[email, setEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L37) (1 connections)
-- [[errors, setErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L42) (1 connections)
-- [handleDeselectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L57) (1 connections)
-- [handleSelectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L53) (1 connections)
-- [handleToggleWorkspace()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L47) (1 connections)
-- [isChecked](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L271) (1 connections)
-- [[password, setPassword]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L38) (1 connections)
-- [[selectedWorkspaces, setSelectedWorkspaces]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L39) (1 connections)
-- [[successBanner, setSuccessBanner]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L43) (1 connections)
-- [[userId, setUserId]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L36) (1 connections)
+- [Document: Readme](file:///C:/Antigravityyyyy/VID_School/README.md) (20 connections)
+- [1. Prerequisites](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [2. Environment Variables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [3. Running the Development Servers](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [4. Running in Production](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📡 API Reference Snapshot (/api/v1/)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [🏛 Architecture & Tech Stack](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Build and Start Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Build and Start Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📚 Complete Specifications & Documentation](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [🛡️ Core Architectural Pillars & Non-Negotiables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📊 Current Implementation Progress (As of 2026-09-25)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [🚀 Getting Started](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [In vidforum/backend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [In vidforum/frontend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Or using nodemon:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📁 Repository Directory Structure](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Running Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Running Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Stack Highlights](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [VID (Virtual Identification) — Educational Management Ecosystem](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Document: Decisions & ADR-001 Strict Separation of Phase Deliverables] Cluster]] (40 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\institutions\AddInstituteAdminModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx)
+- [README.md](file:///C:/Antigravityyyyy/VID_School/README.md)
 
 ## Audit Trail
 
-- EXTRACTED: 28 (100%)
+- EXTRACTED: 40 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

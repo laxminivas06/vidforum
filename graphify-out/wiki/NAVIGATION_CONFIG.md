@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [layout.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx#L1) (2 connections)
-- [metadata](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx#L6) (1 connections)
-- [RootLayout()](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx#L11) (1 connections)
+- [database.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts#L1) (2 connections)
+- [db](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts#L22) (1 connections)
+- [pool](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts#L4) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\layout.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\config\database.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts)
 
 ## Audit Trail
 

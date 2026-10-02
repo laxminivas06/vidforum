@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: metabrain](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md) (2 connections)
-- [Metabrain Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md) (1 connections)
-- [Workflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md) (1 connections)
+- [Skill: hol-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md) (2 connections)
+- [Audit Checks](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md) (1 connections)
+- [HOL Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: secret-guard & Scan Targets] Cluster]] (4 shared connections)
+- [[[Skill: metabrain & Metabrain Skill] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/metabrain/skills/metabrain/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md)
+- [.agents/plugins/hol-guard/skills/hol-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md)
 
 ## Audit Trail
 

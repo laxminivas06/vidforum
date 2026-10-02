@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [dotenv](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L16) (0 connections)
+- [@types/node](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L30) (0 connections)
 
 ## Relationships
 

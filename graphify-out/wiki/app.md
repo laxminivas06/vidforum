@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: test-gap](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (2 connections)
-- [Checks](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (1 connections)
-- [Test Gap Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (1 connections)
+- [Skill: river-review](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md) (2 connections)
+- [Review Lenses](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md) (1 connections)
+- [River Review Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: wingman & Pre-Edit Verification Checklist] Cluster]] (4 shared connections)
+- [[[Skill: test-gap & Checks] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/test-gap/skills/test-gap/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md)
+- [.agents/plugins/river-review/skills/river-review/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md)
 
 ## Audit Trail
 

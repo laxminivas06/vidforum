@@ -1,42 +1,21 @@
 # [conflicts & facConflict] Cluster
 
-> 12 nodes · cohesion 0.20
+> 12 nodes · cohesion 0.17
 
 ## Key Concepts
 
-- [FacultyController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L5) (3 connections)
-- [.getFaculty()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L6) (3 connections)
-- [.getFacultyById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L16) (3 connections)
-- [FacultyRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L3) (3 connections)
-- [.findFacultyById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L41) (3 connections)
-- [.findFacultyByInstitution()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L4) (3 connections)
-- [FacultyService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L3) (3 connections)
-- [.getFacultyList()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L4) (3 connections)
-- [.getFacultyMember()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L43) (3 connections)
-- [faculty.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L1) (1 connections)
-- [faculty.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L1) (1 connections)
-- [faculty.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L1) (1 connections)
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class FacultyController {
-        +faculty.controller.ts()
-        +.getFaculty()
-        +.getFacultyById()
-    }
-    class FacultyRepository {
-        +faculty.repository.ts()
-        +.findFacultyByInstitution()
-        +.findFacultyById()
-    }
-    class FacultyService {
-        +faculty.service.ts()
-        +.getFacultyList()
-        +.getFacultyMember()
-    }
-```
+- [examinations.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L1) (11 connections)
+- [errorCount](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L96) (1 connections)
+- [{ examId, subjectId }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L42) (1 connections)
+- [{ examId, subjectId, rows }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L85) (1 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L11) (1 connections)
+- [params](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L65) (1 connections)
+- [query](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L13) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L31) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L6) (1 connections)
+- [studentRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L99) (1 connections)
+- [validationResults](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L94) (1 connections)
+- [validCount](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L95) (1 connections)
 
 ## Relationships
 
@@ -44,14 +23,12 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\faculty\faculty.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\faculty\faculty.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\faculty\faculty.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\examinations\examinations.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 18 (60%)
-- INFERRED: 12 (40%)
+- EXTRACTED: 22 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

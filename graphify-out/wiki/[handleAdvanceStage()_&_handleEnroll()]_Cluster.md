@@ -1,44 +1,45 @@
 # [handleAdvanceStage() & handleEnroll()] Cluster
 
-> 23 nodes · cohesion 0.09
+> 24 nodes · cohesion 0.08
 
 ## Key Concepts
 
-- [Document: Tasks](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (22 connections)
-- [1.1 Project Scaffolding & Infrastructure](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [1.2 Auth, Multi-Tenancy & RBAC Engine](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [1.3 Super Admin & Institution Admin Consoles](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [1.4 Academics Hierarchy & Faculty Mapping](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [1.5 Admissions Workspace & Central Student Master Entity](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [2.1 Attendance Workspace](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [2.2 Examinations Workspace & Excel Import Engine](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [2.3 Finance & Fee Management Workspace](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [2.4 Documents & Timetable & HRMS](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [3.1 Yantra Voice Agent](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [3.2 Yantra AI Attendance](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [3.3 Yantra AI Tutor](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [4.1 Modular Optional Workspaces](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [4.2 Dedicated Parent & Student Experience](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Development Tasks Breakdown: VID Platform](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Implementation Progress Ledger (As of 2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Phase 0: Project Initiation & Architecture Baseline](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Phase 1: Foundation Scaffold & MVP Core (Phase 1 Target)](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Phase 2: Core Operational Workspaces](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Phase 3: AI Yantra Intelligence Layer](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Phase 4: Optional Workspaces & Mobile Parent/Student Experience](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
-- [Phase 5: Testing, Auditing, Verification & Deployment](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md) (1 connections)
+- [Document: Tech Spec](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (23 connections)
+- [1.1 Backend Architecture — Layered MVC](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [1. Technical Stack Selection & Justification](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [2. High-Level Architecture Diagram](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [3. Repository & Folder Structure](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [4.1 Schema Definition across 16 Core Domains](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [4. Database Schema & Multi-Tenant Data Model](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [5.1 Route Inventory (Section 26 Mapping)](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [5.2 Sample Request & Response Schemas](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [5. API Contracts & Endpoint Specification](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [6. Authentication, Security & Tenant Isolation](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [7. Responsive UI Specification & Breakpoints](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [8. Third-Party Integrations & Environment Variables](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Admission Approval $\to$ Student Creation Pipeline](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [AI Yantra Intelligence](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Cache & Message Broker / Job Queue](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Detailed Entity Specifications:](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [External Integrations](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Multi-Tenant PostgreSQL Database](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Object Storage](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Platform & Server](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Required Environment Variables (.env)](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Technical Specification: VID (Virtual Identification) Platform](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Timetable Conflict Detection](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Document: Readme & 1. Prerequisites] Cluster]] (46 shared connections)
 
 ## Source Files
 
-- [docs/TASKS.md](file:///C:/Antigravityyyyy/VID_School/docs/TASKS.md)
+- [docs/TECH_SPEC.md](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md)
 
 ## Audit Trail
 
-- EXTRACTED: 44 (100%)
+- EXTRACTED: 46 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

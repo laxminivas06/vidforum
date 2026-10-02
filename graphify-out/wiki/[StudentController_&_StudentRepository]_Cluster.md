@@ -1,42 +1,43 @@
 # [StudentController & StudentRepository] Cluster
 
-> 21 nodes · cohesion 0.10
+> 22 nodes · cohesion 0.09
 
 ## Key Concepts
 
-- [Document: Readme](file:///C:/Antigravityyyyy/VID_School/README.md) (20 connections)
-- [1. Prerequisites](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [2. Environment Variables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [3. Running the Development Servers](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [4. Running in Production](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [📡 API Reference Snapshot (/api/v1/)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [🏛 Architecture & Tech Stack](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Build and Start Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Build and Start Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [📚 Complete Specifications & Documentation](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [🛡️ Core Architectural Pillars & Non-Negotiables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [📊 Current Implementation Progress (As of 2026-09-25)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [🚀 Getting Started](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [In vidforum/backend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [In vidforum/frontend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Or using nodemon:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [📁 Repository Directory Structure](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Running Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Running Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [Stack Highlights](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
-- [VID (Virtual Identification) — Educational Management Ecosystem](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Document: Prd](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (21 connections)
+- [1.1 Problem Statement](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [1.2 Core Principle & Philosophy](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [1. Executive Summary & Product Vision](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [2. Target Users & Personas](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [3.1 Workspace Classification Matrix](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [3.2 The Student Master Entity](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [3.3 The 30 Non-Negotiable Rules](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [3. Product Scope & Modular Architecture](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [4. Development Phases & Release Strategy](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [5.1 Super Admin](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [5.2 Institution Admin](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [5.3 Admissions Team](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [5.4 Academic Coordinator & Faculty](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [5. User Stories per Feature (Phase 1 MVP Highlights)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [6. Out-of-Scope Items (Strict Boundaries)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [7. Open Questions & Engineering Assumptions](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Phase 1: MVP Core Foundation (Immediate Focus)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Phase 2: Core Operational Workspaces](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Phase 3: AI Yantra Intelligence Layer](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Phase 4: Optional Modules & Mobile Experience](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Product Requirements Document (PRD): VID (Virtual Identification)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Document: Antigravity Master Prompt & 0. ROLE & OPERATING MODE] Cluster]] (42 shared connections)
 
 ## Source Files
 
-- [README.md](file:///C:/Antigravityyyyy/VID_School/README.md)
+- [docs/PRD.md](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md)
 
 ## Audit Trail
 
-- EXTRACTED: 40 (100%)
+- EXTRACTED: 42 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: tailtest](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (2 connections)
-- [Procedure](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (1 connections)
-- [Tailtest Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (1 connections)
+- [Skill: pr-storyteller](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md) (2 connections)
+- [PR Storyteller Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md) (1 connections)
+- [Structure](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: unforgit & Guidelines] Cluster]] (4 shared connections)
+- [[[Skill: tailtest & Procedure] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/tailtest/skills/tailtest/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md)
+- [.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md)
 
 ## Audit Trail
 

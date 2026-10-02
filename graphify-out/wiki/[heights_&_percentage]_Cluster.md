@@ -1,14 +1,15 @@
 # [heights & percentage] Cluster
 
-> 5 nodes · cohesion 0.40
+> 6 nodes · cohesion 0.33
 
 ## Key Concepts
 
-- [SlideOver.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L1) (4 connections)
-- [activeFooter](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L31) (1 connections)
-- [handleKeyDown()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L47) (1 connections)
-- [isPanelOpen](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L30) (1 connections)
-- [widths](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L58) (1 connections)
+- [StudentProfile.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L1) (5 connections)
+- [[activeTab, setActiveTab]](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L177) (1 connections)
+- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L279) (1 connections)
+- [MOCK_STUDENT](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L97) (1 connections)
+- [student](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L174) (1 connections)
+- [tabs](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L181) (1 connections)
 
 ## Relationships
 
@@ -16,11 +17,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\SlideOver.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\student\StudentProfile.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 8 (100%)
+- EXTRACTED: 10 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

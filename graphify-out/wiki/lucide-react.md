@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [index.ts](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/index.ts#L1) (0 connections)
+- [next-env.d.ts](file:///C:/Antigravityyyyy/VID_School/frontend/next-env.d.ts#L1) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\index.ts](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/index.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\next-env.d.ts](file:///C:/Antigravityyyyy/VID_School/frontend/next-env.d.ts)
 
 ## Audit Trail
 

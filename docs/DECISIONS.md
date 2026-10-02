@@ -75,5 +75,33 @@
 - **Boundaries:** Ponytail Ultra is strictly forbidden from compromising multi-tenant `institution_id` isolation, role/permission security checks, student master single-entity constraints, or pre-commit data validation queues.
 - **Rationale:** Keeps token consumption minimal, diffs reviewable, and prevents architectural bloat across both frontend and backend.
 
+### [ADR-012] Adoption of Master Build Prompt Fixed Decisions (D1–D11)
+- **Date & Timestamp:** 2026-10-02T10:56:00+05:30
+- **Context:** Enforcing single-source-of-truth governance across all platform modules and eliminating domain collisions.
+- **Decision:** Formally bind all 11 Master Prompt fixed decisions:
+  - **D1 (Student Master):** `students` table is owned by module `students` with zero module-specific duplicate student tables. No student workspace.
+  - **D2 (Departments):** Single `departments` table in `academics` with `department_type` enum (`academic`, `administrative`), referenced by HRMS.
+  - **D3 (Identity Chain):** `users → staff → faculty`. `staff` and `designations` created in Phase 1; HRMS workspace UI ships in Phase 2.
+  - **D4 (Attendance Triad):** `attendance*` = student attendance; `staff_attendance` = HRMS; `ai_attendance_events` = raw AI output requiring validation before becoming final.
+  - **D5 (Attendance Staging):** Source-agnostic attendance ingestion pipeline in Phase 2; AI Face/CCTV attached in Phase 3.
+  - **D6 (Admission Fee Hand-off):** Admissions approval emits `admission.approved` event and marks `admission_fee_status = pending`; Finance module consumes in Phase 2.
+  - **D7 (Shared Platform Services):** Notifications and Audit logging are implemented as shared foundational services in Phase 1, never UI workspaces.
+  - **D8 (Room Ownership):** `rooms` table is owned by `timetable`; `examinations` references it via `exam_room_allocations`.
+  - **D9 & D10 (Unified Mobile Client):** Single role-based React Native (Expo) + TypeScript app for Students and Parents, consuming the same OpenAPI-generated client and schemas.
+  - **D11 (Phase 4 Modular Isolation):** Capability-minimal design with strict module-prefixed tables (`hostel_*`, `library_*`, `transport_*`, etc.).
+- **Rationale:** Establishes immutable boundaries across entities and guarantees seamless cross-phase integration.
+
+### [ADR-013] Strict Anti-Collision & Dependency Hierarchy Protocol
+- **Date & Timestamp:** 2026-10-02T10:57:00+05:30
+- **Context:** Preventing circular dependencies, cross-module mutations, and architectural drift.
+- **Decision:** Enforce strict single ownership where only the owning module writes to its tables. Enforce strict dependency hierarchy: `common` ← `auth/tenants` ← `students/academics/hrms` ← downstream/optional modules. Core modules are strictly prohibited from importing optional or AI modules.
+- **Rationale:** Guarantees that optional or AI modules can be toggled or detached without destabilizing the core educational engine.
+
+### [ADR-014] Five-Point Multi-Tenancy Enforcement Protocol
+- **Date & Timestamp:** 2026-10-02T10:58:00+05:30
+- **Context:** Section 6 and Rule 6 mandate tenant isolation across five distinct architectural layers.
+- **Decision:** Enforce `institution_id` validation at: (1) Verified JWT claims (never user input), (2) RBAC permission checks, (3) Repository base queries with mandatory tenant filter / PostgreSQL RLS, (4) Object storage file keys (`{institution_id}/...`), and (5) AI prompt context bounding. Cross-tenant access strictly emits a 403 status code and an immutable security audit event.
+- **Rationale:** Guarantees ironclad tenant isolation across all services, API endpoints, storage buckets, and AI models.
+
 ---
 *End of DECISIONS.md*

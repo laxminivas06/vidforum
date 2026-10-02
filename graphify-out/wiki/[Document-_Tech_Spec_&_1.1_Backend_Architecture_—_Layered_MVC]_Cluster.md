@@ -1,49 +1,47 @@
 # [Document: Tech Spec & 1.1 Backend Architecture — Layered MVC] Cluster
 
-> 44 nodes · cohesion 0.05
+> 48 nodes · cohesion 0.04
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L1) (38 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/vault/page.tsx#L1) (3 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L1) (3 connections)
-- [columns](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L290) (3 connections)
-- [handleAddUser()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L158) (2 connections)
-- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L140) (2 connections)
-- [adminCount](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L357) (1 connections)
-- [createUserMutation](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L78) (1 connections)
-- [{ data: dbUsers = [], isLoading: isLoadingUsers }](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L77) (1 connections)
-- [{ data: institutions = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L76) (1 connections)
-- [{ data: staff = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L32) (1 connections)
-- [DEFAULT_USERS](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L46) (1 connections)
-- [[editEmail, setEditEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L100) (1 connections)
-- [[editErrors, setEditErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L104) (1 connections)
-- [[editingUser, setEditingUser]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L98) (1 connections)
-- [[editInstitution, setEditInstitution]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L102) (1 connections)
-- [[editName, setEditName]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L99) (1 connections)
-- [[editRole, setEditRole]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L101) (1 connections)
-- [[editStatus, setEditStatus]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L103) (1 connections)
-- [[editSuccessMessage, setEditSuccessMessage]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L106) (1 connections)
-- [[email, setEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L89) (1 connections)
-- [[errors, setErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L92) (1 connections)
-- [facultyCount](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L356) (1 connections)
-- [filteredUsers](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L126) (1 connections)
-- [handleOpenEdit()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L210) (1 connections)
-- *... and 19 more nodes in this community*
+- [Document: Vid Database Architecture](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (47 connections)
+- [10. RBAC / Permissions](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [11. Academic Data Model](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [12. Workspace/Data Ownership Model](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [13. Normalization Analysis](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [14. Primary Key Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [15. Constraints](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [16. Delete/Update Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [17. Audit Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [18. Indexing Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [19. Supabase RLS Design](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [1. Executive Summary](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [20. Node.js/Express Backend Integration](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [21. Transaction Design](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [22. Database Functions and Triggers](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [23. Database Views](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [24. Complete ER Diagram](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [25. Final Database Architecture](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [26–30. Production SQL, RLS SQL, Functions/Triggers, Views, Seed Data](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [2. Requirements Extracted From PDF (condensed)](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [31. Migration Order](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [32. API/Backend Mapping](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [33. Performance Review](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [34. Security Review](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- [35. Requirement Traceability (by module)](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
+- *... and 23 more nodes in this community*
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Document: Design & 10. Accessibility Baseline] Cluster]] (94 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\documents\vault\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/vault/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\hrms\staff\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\users\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx)
+- [docs/VID_Database_Architecture.md](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md)
 
 ## Audit Trail
 
-- EXTRACTED: 89 (100%)
+- EXTRACTED: 94 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

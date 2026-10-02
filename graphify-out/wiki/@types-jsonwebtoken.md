@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [@types/bcryptjs](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L25) (0 connections)
+- [dotenv](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L16) (0 connections)
 
 ## Relationships
 

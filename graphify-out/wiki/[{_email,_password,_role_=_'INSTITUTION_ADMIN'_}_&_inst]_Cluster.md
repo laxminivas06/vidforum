@@ -1,41 +1,42 @@
 # [{ email, password, role = 'INSTITUTION_ADMIN' } & inst] Cluster
 
-> 20 nodes · cohesion 0.10
+> 21 nodes · cohesion 0.10
 
 ## Key Concepts
 
-- [auth.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L1) (19 connections)
-- [user](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L74) (2 connections)
-- [assignedWorkspaces](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L173) (1 connections)
-- [customAdmin](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L38) (1 connections)
-- [{ email, userId, identifier, password }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L28) (1 connections)
-- [institution](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L223) (1 connections)
-- [instRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L218) (1 connections)
-- [isSuperAdminAlias](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L77) (1 connections)
-- [loginIdentifier](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L29) (1 connections)
-- [{ newRole }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L236) (1 connections)
-- [normalizeRole()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L12) (1 connections)
-- [permissions](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L165) (1 connections)
-- [permRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L167) (1 connections)
-- [profileRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L81) (1 connections)
-- [resolvedRole](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L73) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L10) (1 connections)
-- [studentRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L109) (1 connections)
-- [token](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L55) (1 connections)
-- [tokenPayload](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L45) (1 connections)
-- [updatedPayload](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L242) (1 connections)
+- [Document: Readme](file:///C:/Antigravityyyyy/VID_School/README.md) (20 connections)
+- [1. Prerequisites](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [2. Environment Variables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [3. Running the Development Servers](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [4. Running in Production](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📡 API Reference Snapshot (/api/v1/)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [🏛 Architecture & Tech Stack](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Build and Start Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Build and Start Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📚 Complete Specifications & Documentation](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [🛡️ Core Architectural Pillars & Non-Negotiables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📊 Current Implementation Progress (As of 2026-09-25)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [🚀 Getting Started](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [In vidforum/backend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [In vidforum/frontend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Or using nodemon:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📁 Repository Directory Structure](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Running Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Running Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Stack Highlights](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [VID (Virtual Identification) — Educational Management Ecosystem](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
 
 ## Relationships
 
-- [[Community 999]] (1 shared connections)
+- [[[StudentController & StudentRepository] Cluster]] (40 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\auth\auth.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts)
+- [README.md](file:///C:/Antigravityyyyy/VID_School/README.md)
 
 ## Audit Trail
 
-- EXTRACTED: 39 (100%)
+- EXTRACTED: 40 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

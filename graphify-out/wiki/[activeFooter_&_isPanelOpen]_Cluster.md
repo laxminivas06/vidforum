@@ -1,16 +1,32 @@
 # [activeFooter & isPanelOpen] Cluster
 
-> 7 nodes · cohesion 0.29
+> 8 nodes · cohesion 0.39
 
 ## Key Concepts
 
-- [Sidebar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L1) (6 connections)
-- [ICON_MAP](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L44) (1 connections)
-- [IconComponent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L105) (1 connections)
-- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L181) (1 connections)
-- [navigationGroups](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L102) (1 connections)
-- [pathname](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L101) (1 connections)
-- [renderIcon()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L200) (1 connections)
+- [VidApiClient](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L7) (7 connections)
+- [.request()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L18) (5 connections)
+- [.delete()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L71) (2 connections)
+- [.get()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L51) (2 connections)
+- [.patch()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L63) (2 connections)
+- [.post()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L55) (2 connections)
+- [index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L1) (1 connections)
+- [.constructor()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L12) (1 connections)
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class VidApiClient {
+        +index.ts()
+        +.constructor()
+        +.request()
+        +.get()
+        +.post()
+        +.patch()
+        +.delete()
+    }
+```
 
 ## Relationships
 
@@ -18,11 +34,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Sidebar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx)
+- [C:\Antigravityyyyy\VID_School\packages\api-client\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 12 (100%)
+- EXTRACTED: 22 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

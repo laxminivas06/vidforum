@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: pr-storyteller](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md) (2 connections)
-- [PR Storyteller Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md) (1 connections)
-- [Structure](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md) (1 connections)
+- [Skill: knowl](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (2 connections)
+- [Knowl Project Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (1 connections)
+- [Procedures](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: spec-driven & Lifecycle Stages] Cluster]] (4 shared connections)
+- [[[Skill: pr-storyteller & PR Storyteller Skill] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md)
+- [.agents/plugins/knowl/skills/knowl/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md)
 
 ## Audit Trail
 

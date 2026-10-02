@@ -1,6 +1,6 @@
 # query
 
-> God node · 36 connections · [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L14)
+> God node · 40 connections · [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.routes.ts#L14)
 
 ## Call Trace Diagram
 
@@ -19,36 +19,40 @@ sequenceDiagram
     participant P10 as .createAdmin()
     participant P11 as .updateAdminWorkspaces()
     participant P12 as .toggleModule()
-    participant P13 as authMiddleware()
-    participant P14 as verify()
-    participant P15 as tenantMiddleware()
-    participant P16 as .getClassesByInstitution()
-    participant P17 as .listClasses()
-    participant P18 as .listSubjects()
-    participant P19 as .findApplicantsByInstitution()
-    participant P20 as .findApplicationById()
-    participant P21 as .updateApplicationStage()
-    participant P22 as .executeApprovalTransaction()
-    participant P23 as .countStudents()
-    participant P24 as .findDefaultSection()
-    participant P25 as .findFacultyByInstitution()
-    participant P26 as .findFacultyById()
-    participant P27 as .findFeeRecordsByInstitution()
-    participant P28 as .recordPayment()
-    participant P29 as .getSummary()
-    participant P30 as .findAll()
-    participant P31 as .create()
-    participant P32 as .findAdmins()
-    participant P33 as .upsertModule()
-    participant P34 as .updateStatus()
-    participant P35 as .findStudents()
-    participant P36 as .findStudentMasterById()
-    participant P37 as .promote()
-    participant P38 as purgeDummyData()
-    participant P39 as run()
-    participant P40 as .getSectionsByClass()
-    participant P41 as .getSubjectsByClass()
-    participant P42 as .getHierarchy()
+    participant P13 as findById()
+    participant P14 as authMiddleware()
+    participant P15 as verify()
+    participant P16 as findMany()
+    participant P17 as softDelete()
+    participant P18 as tenantMiddleware()
+    participant P19 as .getClassesByInstitution()
+    participant P20 as .listClasses()
+    participant P21 as .listSubjects()
+    participant P22 as .findApplicantsByInstitution()
+    participant P23 as .findApplicationById()
+    participant P24 as .updateApplicationStage()
+    participant P25 as .executeApprovalTransaction()
+    participant P26 as .countStudents()
+    participant P27 as .findDefaultSection()
+    participant P28 as .findFacultyByInstitution()
+    participant P29 as .findFacultyById()
+    participant P30 as .findFeeRecordsByInstitution()
+    participant P31 as .recordPayment()
+    participant P32 as .getSummary()
+    participant P33 as .findAll()
+    participant P34 as .create()
+    participant P35 as .findAdmins()
+    participant P36 as .upsertModule()
+    participant P37 as .updateStatus()
+    participant P38 as .findStudents()
+    participant P39 as .findStudentMasterById()
+    participant P40 as .promote()
+    participant P41 as purgeDummyData()
+    participant P42 as run()
+    participant P43 as .dispatch()
+    participant P44 as .getSectionsByClass()
+    participant P45 as .getSubjectsByClass()
+    participant P46 as .getHierarchy()
     P0->>+ P1: calls
     P1-->>- P0: return
     P1->>+ P0: calls
@@ -119,22 +123,22 @@ sequenceDiagram
     P30-->>- P0: return
     P0->>+ P31: calls
     P31-->>- P0: return
-    P0->>+ P10: calls
-    P10-->>- P0: return
     P0->>+ P32: calls
     P32-->>- P0: return
+    P0->>+ P33: calls
+    P33-->>- P0: return
+    P0->>+ P34: calls
+    P34-->>- P0: return
+    P0->>+ P10: calls
+    P10-->>- P0: return
+    P0->>+ P35: calls
+    P35-->>- P0: return
     P0->>+ P11: calls
     P11-->>- P0: return
     P0->>+ P4: calls
     P4-->>- P0: return
     P0->>+ P7: calls
     P7-->>- P0: return
-    P0->>+ P33: calls
-    P33-->>- P0: return
-    P0->>+ P34: calls
-    P34-->>- P0: return
-    P0->>+ P35: calls
-    P35-->>- P0: return
     P0->>+ P36: calls
     P36-->>- P0: return
     P0->>+ P37: calls
@@ -149,14 +153,25 @@ sequenceDiagram
     P41-->>- P0: return
     P0->>+ P42: calls
     P42-->>- P0: return
+    P0->>+ P43: calls
+    P43-->>- P0: return
+    P0->>+ P44: calls
+    P44-->>- P0: return
+    P0->>+ P45: calls
+    P45-->>- P0: return
+    P0->>+ P46: calls
+    P46-->>- P0: return
 ```
 
 ## Connections by Relation
 
 ### calls
 - [[.findByIdOrCode()]] `INFERRED`
+- [[findById()]] `INFERRED`
 - [[authMiddleware()]] `INFERRED`
 - [[verify()]] `INFERRED`
+- [[findMany()]] `INFERRED`
+- [[softDelete()]] `INFERRED`
 - [[tenantMiddleware()]] `INFERRED`
 - [[.getClassesByInstitution()]] `INFERRED`
 - [[.listClasses()]] `INFERRED`
@@ -171,9 +186,6 @@ sequenceDiagram
 - [[.findFacultyById()]] `INFERRED`
 - [[.findFeeRecordsByInstitution()]] `INFERRED`
 - [[.recordPayment()]] `INFERRED`
-- [[.getSummary()]] `INFERRED`
-- [[.findAll()]] `INFERRED`
-- [[.create()]] `INFERRED`
 
 ### contains
 - [[timetable.routes.ts]] `EXTRACTED`

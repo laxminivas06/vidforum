@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-tutor/analytics/page.tsx#L1) (0 connections)
+- [server.ts](file:///C:/Antigravityyyyy/VID_School/backend/server.ts#L1) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\ai-tutor\analytics\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-tutor/analytics/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\server.ts](file:///C:/Antigravityyyyy/VID_School/backend/server.ts)
 
 ## Audit Trail
 

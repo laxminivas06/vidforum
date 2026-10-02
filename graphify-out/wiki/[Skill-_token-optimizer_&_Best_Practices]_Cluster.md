@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: secret-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (2 connections)
-- [Scan Targets](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
-- [Secret Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
+- [Skill: memesh](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md) (2 connections)
+- [Execution Guide](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md) (1 connections)
+- [MeMesh Shared Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: test-gap & Checks] Cluster]] (4 shared connections)
+- [[[Skill: secret-guard & Scan Targets] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/secret-guard/skills/secret-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md)
+- [.agents/plugins/memesh/skills/memesh/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md)
 
 ## Audit Trail
 

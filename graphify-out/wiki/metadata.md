@@ -4,18 +4,18 @@
 
 ## Key Concepts
 
-- [Skill: honcho-memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (3 connections)
-- [Honcho Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (1 connections)
-- [When to Pull Memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (1 connections)
-- [When to Save Memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (1 connections)
+- [ProgressBar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L1) (3 connections)
+- [heights](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L25) (1 connections)
+- [percentage](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L23) (1 connections)
+- [variants](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L31) (1 connections)
 
 ## Relationships
 
-- [[Community 46]] (6 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\ProgressBar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx)
 
 ## Audit Trail
 

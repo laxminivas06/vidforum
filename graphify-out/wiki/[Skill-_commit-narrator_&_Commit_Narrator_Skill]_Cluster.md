@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: agent-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (2 connections)
-- [Agent Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (1 connections)
-- [Enforcement](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx#L1) (2 connections)
+- [ExaminationsPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx#L76) (1 connections)
+- [MOCK_EXAMS](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx#L40) (1 connections)
 
 ## Relationships
 
-- [[[Skill: codex-reviewer & Checklist] Cluster]] (4 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/agent-guard/skills/agent-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\frontend\app\examinations\schedules\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx)
 
 ## Audit Trail
 

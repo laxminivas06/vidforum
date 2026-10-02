@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: flaky-detector](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (2 connections)
-- [Flaky Detector Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (1 connections)
-- [Instructions](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (1 connections)
+- [Skill: debt-ops](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md) (2 connections)
+- [Debt-Ops Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md) (1 connections)
+- [Rules](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: megalinter & MegaLinter Skill] Cluster]] (4 shared connections)
+- [[[Skill: flaky-detector & Flaky Detector Skill] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md)
+- [.agents/plugins/debt-ops/skills/debt-ops/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md)
 
 ## Audit Trail
 

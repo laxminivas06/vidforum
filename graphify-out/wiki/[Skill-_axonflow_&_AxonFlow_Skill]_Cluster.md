@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx#L1) (2 connections)
-- [MOCK_CAMPAIGNS](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx#L42) (1 connections)
-- [VoiceAgentCampaignsPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx#L75) (1 connections)
+- [layout.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx#L1) (2 connections)
+- [metadata](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx#L6) (1 connections)
+- [RootLayout()](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx#L11) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\voice-agent\campaigns\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\layout.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx)
 
 ## Audit Trail
 

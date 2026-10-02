@@ -1,15 +1,16 @@
 # [instId & result] Cluster
 
-> 6 nodes · cohesion 0.33
+> 7 nodes · cohesion 0.29
 
 ## Key Concepts
 
-- [Button.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L1) (5 connections)
-- [activeLeftIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L53) (1 connections)
-- [activeRightIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L54) (1 connections)
-- [baseStyles](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L32) (1 connections)
-- [sizes](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L46) (1 connections)
-- [variants](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L35) (1 connections)
+- [Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L1) (6 connections)
+- [activeWorkspace](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L47) (1 connections)
+- [dropdownRef](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L39) (1 connections)
+- [handleClickOutside()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L51) (1 connections)
+- [isCurrent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L128) (1 connections)
+- [[isWorkspaceDropdownOpen, setIsWorkspaceDropdownOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L38) (1 connections)
+- [permittedWorkspaces](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L42) (1 connections)
 
 ## Relationships
 
@@ -17,11 +18,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Button.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 10 (100%)
+- EXTRACTED: 12 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

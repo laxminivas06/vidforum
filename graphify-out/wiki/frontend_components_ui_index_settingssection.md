@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- **frontend_components_ui_index_input** (0 connections)
+- **frontend_components_ui_index_cardheader** (0 connections)
 
 ## Relationships
 

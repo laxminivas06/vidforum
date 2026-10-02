@@ -4,33 +4,33 @@
 
 ## Key Concepts
 
-- [Document: Antigravity Master Prompt](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (18 connections)
-- [0. ROLE & OPERATING MODE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [1. PROJECT BRIEF](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [2. REQUIRED DELIVERABLES — CREATE THESE FILES FIRST](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [3. DEVELOPMENT RULES (apply throughout, no exceptions)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [4. TECH STACK CONSTRAINTS](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [5. WORKING AGREEMENT / CHECK-IN CADENCE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [6. AGENT MEMORY USAGE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [7. DEFINITION OF DONE (v1)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [AI Yantra Boundary](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [Backend Architecture Rules](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [/docs/DECISIONS.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [/docs/PRD.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [/docs/TASKS.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [/docs/TECHSPEC.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [Documentation / Architecture Reconciliation](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [Documentation Reconciliation](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [MASTER PROMPT — Antigravity Full-Stack Build](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [Multi-Tenant Security](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [Document: Appflow](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (18 connections)
+- [1. Overview & Navigation Architecture](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.1 Authentication](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.2 Super Admin Console (/(super-admin))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.3 Institution Admin Workspace (/(institution-admin))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.4 Core Workspaces (/(core))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.5 AI Yantra Services (/(ai-yantra))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.6 Optional Modular Workspaces (/(optional))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.7 Central Student Master Profile (/students/id)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.8 Mobile Parent & Student Portal (/(mobile)/app)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2. Complete Route Hierarchy & Screen Inventory](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [3.1 Login & Tenant Resolution](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [3.2 Institution Admin Settings Shell (Two-Pane)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [3.3 Admissions Workspace (Kanban & Slide-Over)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [3.4 Student Master Profile Shell](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [3. Deep-Dive Screen Specifications](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [4. Navigation & Optional Module Matrix (/config/navigation.ts)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [5. Development Phases](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [VID (Virtual Identification) — Application Flow & Architecture Document](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[[academicYear, setAcademicYear] & [activeSection, setActiveSection]] Cluster]] (36 shared connections)
 
 ## Source Files
 
-- [Reference_docs/antigravity-master-prompt.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md)
+- [docs/AppFlow.md](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md)
 
 ## Audit Trail
 

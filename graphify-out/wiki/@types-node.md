@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [@types/jsonwebtoken](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L28) (0 connections)
+- [pg](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L21) (0 connections)
 
 ## Relationships
 

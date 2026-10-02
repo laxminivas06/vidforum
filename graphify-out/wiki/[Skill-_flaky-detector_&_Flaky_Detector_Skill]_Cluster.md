@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: debt-ops](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md) (2 connections)
-- [Debt-Ops Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md) (1 connections)
-- [Rules](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md) (1 connections)
+- [Skill: ai-native-sdlc](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (2 connections)
+- [AI-Native SDLC Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (1 connections)
+- [Gates](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: falsegreen & Falsegreen Skill] Cluster]] (4 shared connections)
+- [[[Skill: debt-ops & Debt-Ops Skill] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/debt-ops/skills/debt-ops/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md)
+- [.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md)
 
 ## Audit Trail
 

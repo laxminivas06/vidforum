@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/events/page.tsx#L1) (1 connections)
-- [events](file:///C:/Antigravityyyyy/VID_School/frontend/app/events/page.tsx#L9) (1 connections)
+- [next.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/next.config.js#L1) (1 connections)
+- [nextConfig](file:///C:/Antigravityyyyy/VID_School/frontend/next.config.js#L2) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\events\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/events/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\next.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/next.config.js)
 
 ## Audit Trail
 

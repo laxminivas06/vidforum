@@ -1,24 +1,25 @@
 # MOCK_USERS
 
-> 3 nodes · cohesion 0.67
+> 4 nodes · cohesion 0.50
 
 ## Key Concepts
 
-- [rbac.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L1) (2 connections)
-- [requirePermission()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L28) (1 connections)
-- [requireRole()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L4) (1 connections)
+- [Skill: honcho-memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (3 connections)
+- [Honcho Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (1 connections)
+- [When to Pull Memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (1 connections)
+- [When to Save Memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[metadata]] (6 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\middleware\rbac.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts)
+- [.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md)
 
 ## Audit Trail
 
-- EXTRACTED: 4 (100%)
+- EXTRACTED: 6 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

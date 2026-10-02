@@ -4,16 +4,16 @@
 
 ## Key Concepts
 
-- [Document: Graphify](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md) (1 connections)
-- [Workflow: graphify](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md) (1 connections)
+- [SettingsShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx#L1) (1 connections)
+- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx#L58) (1 connections)
 
 ## Relationships
 
-- [[Community 108]] (2 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/workflows/graphify.md](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\SettingsShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx)
 
 ## Audit Trail
 

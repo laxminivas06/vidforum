@@ -1,35 +1,35 @@
 # [columns & [searchQuery, setSearchQuery]] Cluster
 
-> 26 nodes · cohesion 0.08
+> 30 nodes · cohesion 0.07
 
 ## Key Concepts
 
-- [Document: Design](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (25 connections)
-- [10. Accessibility Baseline](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [11. What This Design System Deliberately Avoids](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [1. Design Philosophy](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [2.1 Core Palette](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [2.2 Accent & Status Colors](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [2.3 Dark Elements (used, not a dark mode)](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [2. Color System](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [3. Typography](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [4. Spacing & Layout Grid](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.10 Slide-over / Detail Panel](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.1 Sidebar Navigation](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.2 Topbar / Breadcrumb](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.3 Two-Pane Settings Layout](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.4 Cards](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.5 Tables → Cards (responsive)](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.6 Forms](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.7 Buttons](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.8 Badges & Status Pills](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.9 Progress Indicators](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5. Core Components](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [6. Iconography](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [7. Required UI States (every screen)](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [8. Responsive Breakpoints](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [9. Motion & Interaction](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- *... and 1 more nodes in this community*
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L1) (15 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L1) (10 connections)
+- [.updateStage()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts#L44) (5 connections)
+- [.updateApplicationStage()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.repository.ts#L55) (3 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/matrix/page.tsx#L1) (3 connections)
+- [handleAdvanceStage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L130) (2 connections)
+- [handleEnroll()](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L120) (2 connections)
+- [handleReject()](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L147) (2 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L45) (2 connections)
+- [[selectedGrade, setSelectedGrade]](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/matrix/page.tsx#L26) (2 connections)
+- [{ data: applicants = [], isLoading, updateStage }](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L46) (1 connections)
+- [DAYS](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/matrix/page.tsx#L15) (1 connections)
+- [[enrollingApplicant, setEnrollingApplicant]](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L53) (1 connections)
+- [[error, setError]](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L30) (1 connections)
+- [filteredApplicants](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L56) (1 connections)
+- [handleGoogleSignIn()](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L54) (1 connections)
+- [handleLoginSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L32) (1 connections)
+- [[identifier, setIdentifier]](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L26) (1 connections)
+- [[isLoading, setIsLoading]](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L29) (1 connections)
+- [{ login }](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L24) (1 connections)
+- [[password, setPassword]](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L27) (1 connections)
+- [PERIODS](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/matrix/page.tsx#L16) (1 connections)
+- [[rejectDialogOpen, setRejectDialogOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L52) (1 connections)
+- [ROLE_WORKSPACE_MAP](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L10) (1 connections)
+- [[selectedApplicant, setSelectedApplicant]](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L51) (1 connections)
+- *... and 5 more nodes in this community*
 
 ## Relationships
 
@@ -37,12 +37,16 @@
 
 ## Source Files
 
-- [docs/Design.md](file:///C:/Antigravityyyyy/VID_School/docs/Design.md)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\admissions\admissions.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\admissions\admissions.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\(auth)\login\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\admissions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\timetable\matrix\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/matrix/page.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 50 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 57 (86%)
+- INFERRED: 9 (14%)
 - AMBIGUOUS: 0 (0%)
 
 ---

@@ -1,0 +1,17 @@
+{
+  "name": "@vid/api-client",
+  "version": "1.0.0",
+  "description": "Typed API Client for VID Platform",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@vid/schemas": "file:../schemas"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

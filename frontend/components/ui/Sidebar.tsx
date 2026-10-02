@@ -1,8 +1,11 @@
-import React from "react"
+"use client"
+
+import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { getFilteredNavigation, RoleType, NavItem } from "@/config/navigation"
+import { PLATFORM_WORKSPACES, getWorkspaceForPath } from "@/config/workspaces"
 import { Badge } from "./Badge"
 import {
   LayoutDashboard,
@@ -37,10 +40,15 @@ import {
   AlertTriangle,
   User,
   LogOut,
-  X
+  X,
+  ArrowLeft,
+  CheckCircle2,
+  UserCheck,
+  FileCheck,
+  ChevronRight,
 } from "lucide-react"
 
-// Icon registry matching navigation.ts
+// Icon registry matching navigation.ts and workspaces.ts
 const ICON_MAP: Record<string, React.ElementType> = {
   LayoutDashboard,
   Building2,
@@ -73,6 +81,9 @@ const ICON_MAP: Record<string, React.ElementType> = {
   Award,
   AlertTriangle,
   User,
+  CheckCircle2,
+  UserCheck,
+  FileCheck,
 }
 
 export interface SidebarProps {
@@ -85,6 +96,7 @@ export interface SidebarProps {
   onCloseMobile?: () => void
   onSignOut?: () => void
   collapsed?: boolean
+  currentPath?: string
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -97,22 +109,68 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onCloseMobile,
   onSignOut,
   collapsed = false,
+  currentPath,
 }) => {
-  const pathname = usePathname()
-  const navigationGroups = getFilteredNavigation(role, enabledModules, assignedWorkspaces)
+  const routerPathname = usePathname()
+  const pathname = currentPath || routerPathname
+  const [currentSearch, setCurrentSearch] = useState("")
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentSearch(window.location.search)
+    }
+  }, [pathname])
 
   const renderIcon = (name: string, isActive: boolean) => {
     const IconComponent = ICON_MAP[name] || LayoutDashboard
     return (
       <IconComponent
         className={cn(
-          "w-5 h-5 shrink-0 transition-colors",
+          "w-4.5 h-4.5 shrink-0 transition-colors",
           isActive ? "text-canvas" : "text-text-secondary group-hover:text-text-primary"
         )}
         strokeWidth={1.75}
       />
     )
   }
+
+  // 1. Detect if currently inside a specific workspace
+  const activeWorkspace = getWorkspaceForPath(pathname)
+  const isInsideIsolatedWorkspace =
+    role !== "SUPER_ADMIN" &&
+    activeWorkspace !== undefined &&
+    activeWorkspace.id !== "dashboard"
+
+  // 2. Compute Navigation Items:
+  // If in an isolated workspace, show ONLY that workspace's tools
+  // If in hub/dashboard mode, show the global workspaces directory
+  const navigationGroups = React.useMemo(() => {
+    if (isInsideIsolatedWorkspace && activeWorkspace) {
+      // Filter workspace items if any optional module is disabled
+      const scopedItems = activeWorkspace.navItems.filter((item) => {
+        if (item.optionalModuleKey && !enabledModules.includes(item.optionalModuleKey)) {
+          return false
+        }
+        return true
+      })
+
+      return [
+        {
+          label: `${activeWorkspace.shortName.toUpperCase()} TOOLS`,
+          items: scopedItems.map((item) => ({
+            title: item.title,
+            href: item.href,
+            iconName: item.iconName,
+            badge: item.badge,
+            badgeVariant: item.badgeVariant,
+          })),
+        },
+      ]
+    }
+
+    // Otherwise, render role-filtered navigation (Hub / Platform Console)
+    return getFilteredNavigation(role, enabledModules, assignedWorkspaces)
+  }, [role, enabledModules, assignedWorkspaces, isInsideIsolatedWorkspace, activeWorkspace])
 
   const sidebarContent = (
     <div className="flex flex-col h-full bg-sidebar border-r border-border-default select-none">
@@ -144,10 +202,51 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Nav Groups Scrollable Area */}
-      <div className="flex-1 overflow-y-auto px-3 py-3 space-y-5">
-        {/* Workspace Scoping Indicator for Institute Admin */}
-        {role === "INSTITUTION_ADMIN" && !collapsed && (
-          <div className="px-1 mb-3 shrink-0">
+      <div className="flex-1 overflow-y-auto px-3 py-3 space-y-4">
+        {/* ISOLATED WORKSPACE HEADER CARD */}
+        {isInsideIsolatedWorkspace && activeWorkspace && !collapsed && (
+          <div className="p-2.5 rounded-xl bg-surface border border-border-default shadow-xs shrink-0">
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-lg bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-primary shrink-0">
+                {React.createElement(ICON_MAP[activeWorkspace.iconName] || Briefcase, {
+                  className: "w-4 h-4",
+                })}
+              </div>
+              <div className="min-w-0 flex-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-brand-primary block leading-none">
+                  Isolated Workspace
+                </span>
+                <span className="text-xs font-semibold text-text-primary block truncate mt-0.5">
+                  {activeWorkspace.name}
+                </span>
+              </div>
+            </div>
+            <Link
+              href="/dashboard"
+              className="w-full mt-2 flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-canvas border border-border-default hover:bg-subtle hover:border-border-strong text-xs font-medium text-text-secondary hover:text-text-primary transition-colors"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>All Workspaces Hub</span>
+            </Link>
+          </div>
+        )}
+
+        {/* Collapsed Back-to-Hub Icon when in isolated workspace */}
+        {isInsideIsolatedWorkspace && activeWorkspace && collapsed && (
+          <div className="flex justify-center pb-2 border-b border-border-default/60">
+            <Link
+              href="/dashboard"
+              title="Return to All Workspaces Hub"
+              className="p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-subtle"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
+          </div>
+        )}
+
+        {/* Global Permitted Workspaces Pill (When on Dashboard / Hub) */}
+        {!isInsideIsolatedWorkspace && role === "INSTITUTION_ADMIN" && !collapsed && (
+          <div className="px-1 mb-2 shrink-0">
             <div className="p-2 rounded-xl bg-surface border border-border-default/80 flex items-center justify-between shadow-xs">
               <div className="flex items-center gap-2 min-w-0">
                 <div className="w-5 h-5 rounded-md bg-action-black/5 dark:bg-white/10 flex items-center justify-center shrink-0">
@@ -155,32 +254,51 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 </div>
                 <div className="min-w-0">
                   <span className="text-[11px] font-bold text-text-primary block truncate leading-tight">
-                    Permitted Workspaces
+                    Workspace Directory
                   </span>
                   <span className="text-[10px] text-text-secondary block leading-tight">
-                    {assignedWorkspaces ? `${assignedWorkspaces.length} active` : "All platform"}
+                    Select a workspace to enter
                   </span>
                 </div>
               </div>
               <Badge variant="neutral" className="text-[9px] font-mono shrink-0 px-1 py-0">
-                {assignedWorkspaces ? `${assignedWorkspaces.length}` : "13"}
+                {assignedWorkspaces ? `${assignedWorkspaces.length}` : "10 Core"}
               </Badge>
             </div>
           </div>
         )}
 
+        {/* Navigation Items (Exclusively Isolated) */}
         {navigationGroups.map((group, groupIdx) => (
           <div key={groupIdx} className="space-y-1">
             {!collapsed && (
-              <div className="px-3 text-[11px] font-medium uppercase tracking-[0.05em] text-text-muted mb-2">
-                {group.label}
+              <div className="px-3 text-[11px] font-semibold uppercase tracking-[0.05em] text-text-muted mb-1.5 flex items-center justify-between">
+                <span>{group.label}</span>
+                {isInsideIsolatedWorkspace && (
+                  <span className="text-[9px] font-mono text-brand-primary font-normal">
+                    Isolated
+                  </span>
+                )}
               </div>
             )}
             <ul className="space-y-0.5">
               {group.items.map((item) => {
-                const isActive =
-                  pathname === item.href ||
-                  (item.href !== "/dashboard" && pathname.startsWith(item.href))
+                const [itemPath, itemQuery] = item.href.split("?")
+                const currentPathOnly = pathname.split("?")[0]
+
+                let isActive = false
+                if (itemQuery) {
+                  isActive = currentPathOnly === itemPath && currentSearch.includes(itemQuery)
+                } else if (isInsideIsolatedWorkspace) {
+                  const anySiblingMatches = group.items.some(
+                    (other) => other.href.includes("?") && currentSearch.includes(other.href.split("?")[1])
+                  )
+                  isActive = currentPathOnly === itemPath && !anySiblingMatches
+                } else {
+                  isActive =
+                    pathname === item.href ||
+                    (item.href !== "/dashboard" && pathname.startsWith(item.href))
+                }
 
                 return (
                   <li key={item.href}>
@@ -192,7 +310,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         "group flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all",
                         collapsed ? "justify-center px-0 py-2.5" : "justify-between",
                         isActive
-                          ? "bg-action-black text-canvas shadow-sm"
+                          ? "bg-action-black text-canvas shadow-xs font-semibold"
                           : "text-text-secondary hover:text-text-primary hover:bg-subtle"
                       )}
                     >
@@ -229,7 +347,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <button
           onClick={onSignOut}
           className={cn(
-            "w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium text-text-secondary hover:text-status-error hover:bg-red-50/50 transition-colors",
+            "w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium text-text-secondary hover:text-status-error hover:bg-red-50/50 dark:hover:bg-red-950/20 transition-colors",
             collapsed && "justify-center px-0"
           )}
         >

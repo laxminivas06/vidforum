@@ -114,6 +114,7 @@ export const AppShell: React.FC<AppShellProps> = ({
         onCloseMobile={() => setIsMobileMenuOpen(false)}
         onSignOut={logout}
         collapsed={isCollapsed}
+        currentPath={pathname}
       />
 
       {/* Main Content Area */}

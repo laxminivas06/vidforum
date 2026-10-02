@@ -34,9 +34,35 @@ import {
   Clock,
   Radio,
   ExternalLink,
+  UserPlus,
+  BookOpen,
+  FileSpreadsheet,
+  FileText,
+  Briefcase,
+  Settings,
+  Layers,
+  Package,
 } from "lucide-react"
 import { useInstitutions, useAdmissions, useFinance } from "@/lib/api/hooks"
 import { Institution, Applicant } from "@/types"
+import { PLATFORM_WORKSPACES } from "@/config/workspaces"
+
+const WORKSPACE_ICONS: Record<string, React.ElementType> = {
+  LayoutDashboard: GraduationCap,
+  UserPlus,
+  GraduationCap,
+  BookOpen,
+  CalendarCheck,
+  FileSpreadsheet,
+  CreditCard,
+  FileText,
+  Briefcase,
+  Clock,
+  Settings,
+  Building2,
+  Package,
+  Layers,
+}
 
 export default function DashboardPage() {
   const { role } = useAuth()
@@ -238,65 +264,89 @@ function InstitutionAdminDashboard() {
           />
         </div>
 
-        {/* Spot Hero Dark Panel — AI Yantra Telemetry */}
-        <SpotHeroPanel
-          badgeText="AI YANTRA GLOBAL ENGINE // LIVE TELEMETRY"
-          headline="Autonomous Campus Intelligence Operational"
-          description="Facial attendance streams active across 12 campus terminals. Voice Agent AI dispatched 48 fee follow-up calls today with an 88% resolution rate."
-          className="border border-neutral-800"
-          actions={
-            <div className="flex flex-wrap items-center gap-3">
-              <Link href="/ai-attendance/monitoring">
-                <Button size="dense" variant="primary" className="bg-brand-primary text-black hover:bg-emerald-400">
-                  Inspect Camera Decks
-                </Button>
-              </Link>
-              <Link href="/voice-agent/campaigns">
-                <Button size="dense" variant="secondary" className="border-neutral-700 text-white bg-neutral-900 hover:bg-neutral-800">
-                  Voice Agent Log
-                </Button>
-              </Link>
-            </div>
-          }
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-            <div className="p-3 rounded-lg bg-neutral-900/80 border border-neutral-800 flex items-center justify-between">
-              <div>
-                <div className="text-[10px] uppercase font-semibold text-neutral-400 font-mono">
-                  Vision Attendance
-                </div>
-                <div className="text-lg font-bold text-white font-mono mt-0.5">
-                  1,842 Scans
-                </div>
+        {/* Core Isolated Workspaces Launchpad */}
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-4 rounded-xl bg-surface border border-border-default shadow-card">
+            <div>
+              <div className="flex items-center gap-2">
+                <Layers className="w-5 h-5 text-brand-primary" />
+                <h2 className="text-base font-bold text-text-primary">
+                  Select Dedicated Workspace
+                </h2>
+                <Badge variant="neutral" className="text-[10px] font-mono">
+                  Strictly Isolated Workstations
+                </Badge>
               </div>
-              <div className="w-2.5 h-2.5 rounded-full bg-brand-primary animate-pulse" />
+              <p className="text-xs text-text-secondary mt-1">
+                Each workspace loads exclusively with its dedicated sub-tools, rosters, and data workflows. Other workspaces remain hidden to prevent clutter and distraction.
+              </p>
             </div>
-
-            <div className="p-3 rounded-lg bg-neutral-900/80 border border-neutral-800 flex items-center justify-between">
-              <div>
-                <div className="text-[10px] uppercase font-semibold text-neutral-400 font-mono">
-                  Voice Agent Outbound
-                </div>
-                <div className="text-lg font-bold text-white font-mono mt-0.5">
-                  48 Calls / 92% Ack
-                </div>
-              </div>
-              <Radio className="w-4 h-4 text-brand-primary" />
-            </div>
-
-            <div className="p-3 rounded-lg bg-neutral-900/80 border border-neutral-800 flex items-center justify-between">
-              <div>
-                <div className="text-[10px] uppercase font-semibold text-neutral-400 font-mono">
-                  AI Tutor Inquiries
-                </div>
-                <div className="text-lg font-bold text-white font-mono mt-0.5">
-                  312 Concepts Solved
-                </div>
-              </div>
-              <Cpu className="w-4 h-4 text-brand-primary" />
+            <div className="text-xs font-mono text-text-muted shrink-0">
+              10 Isolated Workspaces Configured
             </div>
           </div>
-        </SpotHeroPanel>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {PLATFORM_WORKSPACES.filter((ws) => ws.id !== "dashboard").map((ws) => {
+              const IconComp = WORKSPACE_ICONS[ws.iconName] || Briefcase
+              return (
+                <div
+                  key={ws.id}
+                  className="group relative flex flex-col justify-between p-4 rounded-xl bg-surface border border-border-default hover:border-brand-primary/60 hover:shadow-md transition-all"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <div className="w-9 h-9 rounded-lg bg-subtle border border-border-default/80 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary/10 group-hover:text-brand-primary transition-colors">
+                        <IconComp className="w-4.5 h-4.5" />
+                      </div>
+                      <Badge variant="neutral" className="text-[9px] uppercase tracking-wider font-mono">
+                        {ws.category}
+                      </Badge>
+                    </div>
+
+                    <h3 className="text-sm font-bold text-text-primary group-hover:text-brand-primary transition-colors">
+                      {ws.name}
+                    </h3>
+                    <p className="text-xs text-text-secondary mt-1 line-clamp-2 leading-relaxed">
+                      {ws.description}
+                    </p>
+
+                    <div className="mt-3 pt-3 border-t border-border-subtle/80 space-y-1.5">
+                      <div className="text-[10px] font-semibold uppercase tracking-wider text-text-muted">
+                        Sub-Tools ({ws.navItems.length})
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {ws.navItems.slice(0, 3).map((item, idx) => (
+                          <span
+                            key={idx}
+                            className="inline-block text-[11px] px-1.5 py-0.5 rounded bg-subtle text-text-secondary truncate max-w-[130px]"
+                          >
+                            {item.title}
+                          </span>
+                        ))}
+                        {ws.navItems.length > 3 && (
+                          <span className="inline-block text-[10px] px-1 py-0.5 text-text-muted">
+                            +{ws.navItems.length - 3} more
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 pt-2">
+                    <Link
+                      href={ws.primaryRoute}
+                      className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-action-black text-canvas hover:bg-neutral-800 text-xs font-semibold shadow-xs transition-colors"
+                    >
+                      <span>Enter {ws.shortName}</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
 
         {/* 2-Column Operational Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

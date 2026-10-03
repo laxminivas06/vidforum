@@ -13,8 +13,8 @@
 |---|---|---|---|
 | **Step R** | **Audit + Security & Cleanup Remediation** | **COMPLETED** | Gate R PASSED (26/26 Tests Green) |
 | **Step 1B** | **Staff & HRMS (Finish: Add Teachers & Directory)** | **COMPLETED** | Gate 1B PASSED (10/10 Tests Green) |
-| **Step 2** | **Academics & Curriculum (Schedules & Textbooks)** | **READY TO START** | Gate 1B Cleared |
-| **Step 3** | **Admissions & Enrollment (Add Students & Pipeline)** | **QUEUED** | Awaiting Step 2 |
+| **Step 2** | **Academics & Curriculum (Schedules & Textbooks)** | **COMPLETED** | Gate 2 PASSED (10/10 Tests Green) |
+| **Step 3** | **Admissions & Enrollment (Add Students & Pipeline)** | **READY TO START** | Gate 2 Cleared |
 | **Step 4** | **Faculty Management (Allocations & Workloads)** | **QUEUED** | Awaiting Step 3 |
 | **Step 5** | **Timetable (Constraint Solver & Matrix Editor)** | **QUEUED** | Awaiting Step 4 |
 | **Step 6** | **Attendance (Daily Roll Call & Leave Reconciliation)** | **QUEUED** | Awaiting Step 5 |
@@ -88,15 +88,15 @@
 ---
 
 ### STEP 2: Academics & Curriculum
-- [ ] Database migration: `grades`, `sections`, `classes`, `subjects`, `grade_subjects`, `exam_estimates`, `calendar_days`, `preferred_textbooks`.
-- [ ] **Academic Years:** Create, edit, Set as current (exactly one), Close year, Clone from previous year.
-- [ ] **Grades & Sections:** CRUD, reordering, generate classes (Grade x Section matrix with capacity).
-- [ ] **Subjects Master:** Name, unique code, core/elective type, active flag.
-- [ ] **Grade -> Subject Mapping:** Periods per week, max marks, pass marks, copy matrix.
-- [ ] **Exam Estimated Schedule (A2):** Term windows per grade, date validation, calendar overlay.
-- [ ] **Year Schedule:** Working week configuration, holiday/vacation calendar, live working day count, `isWorkingDay(date)` service.
-- [ ] **Preferred Textbooks (A1):** Title, author, publisher, edition, ISBN, printable booklist.
-- [ ] **Gate 2:** Year created -> classes generated -> subjects mapped -> holidays added -> working day counts exact -> clone verified. Generate `docs/GATE_REPORT_2.md`.
+- [x] Database migration: `grades`, `sections`, `classes`, `subjects`, `grade_subjects`, `exam_estimates`, `calendar_days`, `preferred_textbooks`. (Migration 013 applied)
+- [x] **Academic Years:** Create, edit, Set as current (exactly one), Close year, Clone from previous year.
+- [x] **Grades & Sections:** CRUD, reordering, generate classes (Grade x Section matrix with capacity).
+- [x] **Subjects Master:** Name, unique code, core/elective type, active flag.
+- [x] **Grade -> Subject Mapping:** Periods per week, max marks, pass marks, copy matrix.
+- [x] **Exam Estimated Schedule (A2):** Term windows per grade, date validation, calendar overlay.
+- [x] **Year Schedule:** Working week configuration, holiday/vacation calendar, live working day count, `isWorkingDay(date)` service.
+- [x] **Preferred Textbooks (A1):** Title, author, publisher, edition, ISBN, printable booklist.
+- [x] **Gate 2:** Year created -> classes generated -> subjects mapped -> holidays added -> working day counts exact -> clone verified. Generated `docs/GATE_REPORT_2.md`.
 
 ---
 

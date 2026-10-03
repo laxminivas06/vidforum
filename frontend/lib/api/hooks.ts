@@ -1192,4 +1192,580 @@ export async function checkDuplicateStaff(data: {
   return json.data || { isDuplicate: false, reasons: [], duplicateFields: [] }
 }
 
+// =========================================================================
+// STEP 2: ACADEMICS & CURRICULUM HOOKS
+// =========================================================================
+
+export function useAcademicYears() {
+  return useQuery({
+    queryKey: ["academics-years"],
+    queryFn: async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/academics/academic-years`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for academic years:", err)
+      }
+      return []
+    },
+  })
+}
+
+export function useCreateAcademicYear() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: { name: string; startDate: string; endDate: string; isCurrent?: boolean; status?: string }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/academic-years`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to create academic year")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-years"] })
+    },
+  })
+}
+
+export function useSetCurrentAcademicYear() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const res = await fetch(`${API_BASE_URL}/academics/academic-years/${id}/set-current`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to set current year")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-years"] })
+    },
+  })
+}
+
+export function useCloseAcademicYear() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const res = await fetch(`${API_BASE_URL}/academics/academic-years/${id}/close`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to close academic year")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-years"] })
+    },
+  })
+}
+
+export function useCloneAcademicYear() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({ sourceYearId, data }: { sourceYearId: string; data: { name: string; startDate: string; endDate: string; cloneClasses?: boolean; cloneSubjects?: boolean; cloneTextbooks?: boolean } }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/academic-years/${sourceYearId}/clone`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to clone academic year")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-years"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-classes"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+    },
+  })
+}
+
+export function useClasses(academicYearId?: string) {
+  return useQuery({
+    queryKey: ["academics-classes", academicYearId],
+    queryFn: async () => {
+      try {
+        const url = academicYearId 
+          ? `${API_BASE_URL}/academics/classes?academicYearId=${academicYearId}`
+          : `${API_BASE_URL}/academics/classes`
+        const res = await fetch(url, { headers: getAuthHeaders() })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for classes:", err)
+      }
+      return []
+    },
+  })
+}
+
+export function useGenerateClassMatrix() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: {
+      academicYearId: string
+      departmentId: string
+      gradeNames: string[]
+      sectionNames: string[]
+      defaultCapacity?: number
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/classes/matrix-generate`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to generate class matrix")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-classes"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+    },
+  })
+}
+
+export function useCreateSection() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({ classId, data }: { classId: string; data: { name: string; capacity?: number; classTeacherStaffId?: string } }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/classes/${classId}/sections`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to create section")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-classes"] })
+    },
+  })
+}
+
+export function useSubjects() {
+  return useQuery({
+    queryKey: ["academics-subjects"],
+    queryFn: async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/academics/subjects`, { headers: getAuthHeaders() })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for subjects:", err)
+      }
+      return []
+    },
+  })
+}
+
+export function useCreateSubject() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: {
+      name: string
+      code: string
+      isElective?: boolean
+      credits?: number
+      departmentId?: string
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/subjects`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to create subject")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-subjects"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+    },
+  })
+}
+
+export function useGradeSubjects(classId?: string) {
+  return useQuery({
+    queryKey: ["grade-subjects", classId],
+    queryFn: async () => {
+      if (!classId) return []
+      try {
+        const res = await fetch(`${API_BASE_URL}/academics/classes/${classId}/grade-subjects`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for grade subjects:", err)
+      }
+      return []
+    },
+    enabled: !!classId,
+  })
+}
+
+export function useMapSubjectToGrade() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: {
+      classId: string
+      subjectId: string
+      periodsPerWeek?: number
+      maxMarks?: number
+      passMarks?: number
+      isMandatory?: boolean
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/classes/${data.classId}/grade-subjects`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to map subject")
+      return json.data
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["grade-subjects", variables.classId] })
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+    },
+  })
+}
+
+export function useRemoveSubjectFromGrade() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({ classId, subjectId }: { classId: string; subjectId: string }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/classes/${classId}/grade-subjects/${subjectId}`, {
+        method: "DELETE",
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to remove subject")
+      return json.data
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["grade-subjects", variables.classId] })
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+    },
+  })
+}
+
+export function useCopySubjectMatrix() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({ sourceClassId, targetClassIds }: { sourceClassId: string; targetClassIds: string[] }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/classes/${sourceClassId}/grade-subjects/copy-to`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ targetClassIds }),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to copy subject matrix")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["grade-subjects"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+    },
+  })
+}
+
+export function useExamEstimates(academicYearId?: string, classId?: string) {
+  return useQuery({
+    queryKey: ["exam-estimates", academicYearId, classId],
+    queryFn: async () => {
+      if (!academicYearId) return []
+      try {
+        let url = `${API_BASE_URL}/academics/exam-estimates?academicYearId=${academicYearId}`
+        if (classId) url += `&classId=${classId}`
+        const res = await fetch(url, { headers: getAuthHeaders() })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for exam estimates:", err)
+      }
+      return []
+    },
+    enabled: !!academicYearId,
+  })
+}
+
+export function useCreateExamEstimate() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: {
+      academicYearId: string
+      classId?: string
+      termName: string
+      startDate: string
+      endDate: string
+      description?: string
+      status?: string
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/exam-estimates`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to create exam estimate")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["exam-estimates"] })
+    },
+  })
+}
+
+export function useCalendarConfig(academicYearId?: string) {
+  return useQuery({
+    queryKey: ["calendar-config", academicYearId],
+    queryFn: async () => {
+      if (!academicYearId) return { working_days_of_week: [1, 2, 3, 4, 5] }
+      try {
+        const res = await fetch(`${API_BASE_URL}/academics/calendar-config?academicYearId=${academicYearId}`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && json.data) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for calendar config:", err)
+      }
+      return { working_days_of_week: [1, 2, 3, 4, 5] }
+    },
+    enabled: !!academicYearId,
+  })
+}
+
+export function useSaveCalendarConfig() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: { academicYearId: string; workingDaysOfWeek: number[] }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/calendar-config`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to save calendar config")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["calendar-config"] })
+      queryClient.invalidateQueries({ queryKey: ["working-days-count"] })
+    },
+  })
+}
+
+export function useCalendarDays(academicYearId?: string) {
+  return useQuery({
+    queryKey: ["calendar-days", academicYearId],
+    queryFn: async () => {
+      if (!academicYearId) return []
+      try {
+        const res = await fetch(`${API_BASE_URL}/academics/calendar-days?academicYearId=${academicYearId}`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for calendar days:", err)
+      }
+      return []
+    },
+    enabled: !!academicYearId,
+  })
+}
+
+export function useCreateCalendarDay() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: {
+      academicYearId: string
+      date: string
+      dayType: string
+      description?: string
+      isWorkingDay?: boolean
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/calendar-days`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to add calendar day")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["calendar-days"] })
+      queryClient.invalidateQueries({ queryKey: ["working-days-count"] })
+    },
+  })
+}
+
+export function useDeleteCalendarDay() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const res = await fetch(`${API_BASE_URL}/academics/calendar-days/${id}`, {
+        method: "DELETE",
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to delete calendar day")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["calendar-days"] })
+      queryClient.invalidateQueries({ queryKey: ["working-days-count"] })
+    },
+  })
+}
+
+export function useWorkingDaysCount(academicYearId?: string, startDate?: string, endDate?: string) {
+  return useQuery({
+    queryKey: ["working-days-count", academicYearId, startDate, endDate],
+    queryFn: async () => {
+      if (!academicYearId) return null
+      try {
+        let url = `${API_BASE_URL}/academics/working-days/count?academicYearId=${academicYearId}`
+        if (startDate) url += `&startDate=${startDate}`
+        if (endDate) url += `&endDate=${endDate}`
+        const res = await fetch(url, { headers: getAuthHeaders() })
+        const json = await res.json()
+        if (json.success && json.data) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for working days count:", err)
+      }
+      return null
+    },
+    enabled: !!academicYearId,
+  })
+}
+
+export function useTextbooks(academicYearId?: string, classId?: string) {
+  return useQuery({
+    queryKey: ["preferred-textbooks", academicYearId, classId],
+    queryFn: async () => {
+      if (!academicYearId) return []
+      try {
+        let url = `${API_BASE_URL}/academics/textbooks?academicYearId=${academicYearId}`
+        if (classId) url += `&classId=${classId}`
+        const res = await fetch(url, { headers: getAuthHeaders() })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for preferred textbooks:", err)
+      }
+      return []
+    },
+    enabled: !!academicYearId,
+  })
+}
+
+export function useCreateTextbook() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: {
+      academicYearId: string
+      classId: string
+      subjectId: string
+      title: string
+      author: string
+      publisher: string
+      edition?: string
+      isbn?: string
+      price?: number
+      isMandatory?: boolean
+      notes?: string
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/textbooks`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to create textbook")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["preferred-textbooks"] })
+      queryClient.invalidateQueries({ queryKey: ["preferred-booklist"] })
+    },
+  })
+}
+
+export function useDeleteTextbook() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const res = await fetch(`${API_BASE_URL}/academics/textbooks/${id}`, {
+        method: "DELETE",
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to delete textbook")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["preferred-textbooks"] })
+      queryClient.invalidateQueries({ queryKey: ["preferred-booklist"] })
+    },
+  })
+}
+
+export function useBooklist(academicYearId?: string, classId?: string) {
+  return useQuery({
+    queryKey: ["preferred-booklist", academicYearId, classId],
+    queryFn: async () => {
+      if (!academicYearId || !classId) return null
+      try {
+        const res = await fetch(`${API_BASE_URL}/academics/textbooks/booklist?academicYearId=${academicYearId}&classId=${classId}`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && json.data) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for booklist:", err)
+      }
+      return null
+    },
+    enabled: !!academicYearId && !!classId,
+  })
+}
+
+
 

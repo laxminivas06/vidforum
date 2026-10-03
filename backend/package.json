@@ -12,6 +12,8 @@
     "test:r2": "tsx src/scripts/verify-r2-auth.ts",
     "test:r3": "tsx src/scripts/verify-r3-workspaces.ts",
     "test:r4": "tsx src/scripts/verify-r4-provisioning.ts",
+    "test:1b": "tsx src/scripts/verify-1b-hrms.ts",
+    "test:2": "tsx src/scripts/verify-2-academics.ts",
     "test": "tsx ../scripts/verify_actions.ts",
     "scan:forbidden": "tsx ../scripts/scan_forbidden.ts",
     "gate:r": "tsx ../scripts/gate_report.ts"

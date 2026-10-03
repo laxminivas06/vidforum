@@ -35,6 +35,11 @@ const SUITES = [
     name: 'Staff & HRMS Core Lifecycle',
     script: 'src/scripts/verify-1b-hrms.ts',
   },
+  {
+    suite: '2',
+    name: 'Academics & Curriculum (Schedules & Textbooks)',
+    script: 'src/scripts/verify-2-academics.ts',
+  },
 ];
 
 export function runAllSuites(): { results: SuiteResult[]; totalPassed: number; totalFailed: number } {

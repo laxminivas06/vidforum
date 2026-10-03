@@ -35,7 +35,7 @@ export const AddInstituteAdminModal: React.FC<AddInstituteAdminModalProps> = ({
 
   const [userId, setUserId] = useState("")
   const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("admin123")
+  const [password, setPassword] = useState("")
   const [selectedWorkspaces, setSelectedWorkspaces] = useState<string[]>(
     PLATFORM_WORKSPACES.map((w) => w.id)
   )
@@ -110,7 +110,7 @@ export const AddInstituteAdminModal: React.FC<AddInstituteAdminModalProps> = ({
         setSuccessBanner(null)
         setUserId("")
         setEmail("")
-        setPassword("admin123")
+        setPassword("")
         setSelectedWorkspaces(PLATFORM_WORKSPACES.map((w) => w.id))
         onSuccess?.()
         onClose()
@@ -211,7 +211,7 @@ export const AddInstituteAdminModal: React.FC<AddInstituteAdminModalProps> = ({
             label="Initial Account Password"
             required
             error={errors.password}
-            helperText="Secure initial credential. Default is admin123."
+            helperText="Initial credential. First login will enforce a password update."
           >
             <div className="relative">
               <KeyRound className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" />

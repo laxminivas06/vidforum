@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { db } from '../../config/database';
+import { env } from '../../config/env';
 
 export interface StaffMemberInput {
   name: string;
@@ -77,9 +78,9 @@ export class FacultyRepository {
     try {
       await client.query('BEGIN');
 
-      // 1. Ensure user in auth.users with default password admin123
-      const defaultPassHash = bcrypt.hashSync('admin123', 10);
-      const userMeta = { full_name: cleanName, user_id: cleanEmail, plain_password_hint: 'admin123' };
+      // 1. Ensure user in auth.users with configured initial password
+      const defaultPassHash = bcrypt.hashSync(env.DEFAULT_INITIAL_PASSWORD, 10);
+      const userMeta = { full_name: cleanName, user_id: cleanEmail, must_change_password: true };
 
       let userRes = await client.query('SELECT id FROM auth.users WHERE LOWER(email) = LOWER($1)', [cleanEmail]);
       let profileId = userRes.rows[0]?.id;
@@ -96,7 +97,7 @@ export class FacultyRepository {
         await client.query(
           `UPDATE auth.users 
            SET encrypted_password = COALESCE(encrypted_password, $1),
-               raw_user_meta_data = (COALESCE(raw_user_meta_data, '{}'::jsonb) || $2::jsonb),
+               raw_user_meta_data = (COALESCE(raw_user_meta_data, '{}'::jsonb) - 'plain_password_hint' || $2::jsonb),
                updated_at = now()
            WHERE id = $3`,
           [defaultPassHash, JSON.stringify(userMeta), profileId]
@@ -105,8 +106,8 @@ export class FacultyRepository {
 
       // 2. Ensure profile
       await client.query(
-        `INSERT INTO profiles (id, full_name, email, phone, default_institution_id, status)
-         VALUES ($1, $2, $3, $4, $5, 'active')
+        `INSERT INTO profiles (id, full_name, email, phone, default_institution_id, status, must_change_password)
+         VALUES ($1, $2, $3, $4, $5, 'active', true)
          ON CONFLICT (id) DO UPDATE
            SET full_name = EXCLUDED.full_name,
                phone = COALESCE(NULLIF(EXCLUDED.phone, ''), profiles.phone),

@@ -1,4 +1,5 @@
 import { institutionRepository } from './institution.repository';
+import { env } from '../../config/env';
 
 export interface StoredInstituteAdmin {
   id: string;
@@ -170,7 +171,7 @@ export class InstitutionService {
         email: data.email.trim().toLowerCase(),
         institutionId: targetInstId,
         workspaces: Array.isArray(data.workspaces) ? data.workspaces : [],
-        password: data.password || 'admin123',
+        password: data.password || env.DEFAULT_INITIAL_PASSWORD,
       });
     } catch (dbErr) {
       console.warn('Database admin persistence error:', (dbErr as any)?.message);
@@ -181,7 +182,7 @@ export class InstitutionService {
       userId: data.userId.trim().toLowerCase(),
       name: data.name?.trim() || data.userId.trim(),
       email: data.email.trim().toLowerCase(),
-      password: data.password || 'admin123',
+      password: '••••••••',
       institutionId: targetInstId,
       institutionName: targetInstName,
       institutionCode: targetInstCode,

@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { db } from '../../config/database';
+import { env } from '../../config/env';
 
 export class InstitutionRepository {
   async findAll() {
@@ -104,13 +105,13 @@ export class InstitutionRepository {
       const cleanEmail = data.email.trim().toLowerCase();
       const cleanUserId = data.userId.trim().toLowerCase();
       const displayName = data.name?.trim() || data.userId.trim();
-      const rawPassword = (data.password && data.password.trim()) || 'admin123';
+      const rawPassword = (data.password && data.password.trim()) || env.DEFAULT_INITIAL_PASSWORD;
       const defaultPassHash = bcrypt.hashSync(rawPassword, 10);
       const meta = {
         full_name: displayName,
         user_id: cleanUserId,
         userId: cleanUserId,
-        plain_password_hint: rawPassword,
+        must_change_password: true,
       };
 
       let userRes = await client.query('SELECT id FROM auth.users WHERE LOWER(email) = LOWER($1)', [cleanEmail]);
@@ -126,7 +127,7 @@ export class InstitutionRepository {
       } else {
         await client.query(`
           UPDATE auth.users
-          SET raw_user_meta_data = (COALESCE(raw_user_meta_data, '{}'::jsonb) || $1::jsonb),
+          SET raw_user_meta_data = (COALESCE(raw_user_meta_data, '{}'::jsonb) - 'plain_password_hint' || $1::jsonb),
               encrypted_password = COALESCE(encrypted_password, $2),
               updated_at = now()
           WHERE id = $3
@@ -134,8 +135,8 @@ export class InstitutionRepository {
       }
 
       await client.query(`
-        INSERT INTO profiles (id, full_name, email, default_institution_id, status)
-        VALUES ($1, $2, $3, $4, 'active')
+        INSERT INTO profiles (id, full_name, email, default_institution_id, status, must_change_password)
+        VALUES ($1, $2, $3, $4, 'active', true)
         ON CONFLICT (id) DO UPDATE
           SET full_name = EXCLUDED.full_name, default_institution_id = EXCLUDED.default_institution_id, updated_at = now()
       `, [profileId, displayName, cleanEmail, data.institutionId]);

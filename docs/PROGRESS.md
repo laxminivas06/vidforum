@@ -33,17 +33,17 @@
   - [x] Update `docs/ENTITY_OWNERSHIP.md` with master entity table and foreign key relationships.
   - [x] Create `docs/DEFECTS.md` with line-level forensic citations for Section 4 defects.
   - [x] Structure `docs/PROGRESS.md` to track Master Build Prompt v3.
-- [ ] **R2: Unified Authentication Rebuild**
-  - [ ] Implement `findLoginSubject(identifier)` matching email, `login_id`, or `U_id` case-insensitively with typed columns.
-  - [ ] Enforce password verification strictly against account's bcrypt hash in `auth.users.encrypted_password`.
-  - [ ] Eliminate universal `admin123` defaults and blank-password acceptance backend and frontend.
-  - [ ] Implement rate limiting (5 attempts / 15 min per IP and identifier) and account lockout.
-  - [ ] Implement `must_change_password` first-login screen (min 8 chars, denylist verification).
-  - [ ] Remove all client-side auth fallbacks, "known accounts", and `localStorage` mock stores.
-  - [ ] Enforce short access token TTL (15 min) with refresh rotation and revocation on password/role change.
-  - [ ] Implement forgot-password token flow and admin-initiated credential reset.
-  - [ ] Log immutable security audit events for all login attempts, failures, lockouts, and resets.
-  - [ ] Author automated negative and positive test suites on test database.
+- [x] **R2: Unified Authentication Rebuild**
+  - [x] Implement `findLoginSubject(identifier)` matching email, `login_id`, or `U_id` case-insensitively with typed columns.
+  - [x] Enforce password verification strictly against account's bcrypt hash in `auth.users.encrypted_password`.
+  - [x] Eliminate universal `admin123` defaults and blank-password acceptance backend and frontend.
+  - [x] Implement rate limiting (5 attempts / 15 min per IP and identifier) and account lockout.
+  - [x] Implement `must_change_password` first-login screen (min 8 chars, denylist verification).
+  - [x] Remove all client-side auth fallbacks, "known accounts", and `localStorage` mock stores.
+  - [x] Enforce short access token TTL (15 min) with refresh rotation and revocation on password/role change.
+  - [x] Implement forgot-password token flow and admin-initiated credential reset.
+  - [x] Log immutable security audit events for all login attempts, failures, lockouts, and resets.
+  - [x] Author automated negative and positive test suites on test database.
 - [ ] **R3: Server-Side Workspace Enforcement**
   - [ ] Expose single canonical workspace registry via `GET /api/v1/workspaces`.
   - [ ] Implement `requireWorkspace(key)` middleware across all route groups.

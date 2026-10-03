@@ -14,6 +14,7 @@ export const env = {
   DB_NAME: process.env.DB_NAME || 'postgres',
   DB_SSL: process.env.DB_SSL === 'true' || process.env.NODE_ENV === 'production',
   JWT_SECRET: process.env.JWT_SECRET || 'vid-platform-dev-jwt-secret-replace-in-production',
-  JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '7d',
+  JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '15m',
   CORS_ORIGIN: process.env.CORS_ORIGIN || '*',
+  DEFAULT_INITIAL_PASSWORD: process.env.DEFAULT_INITIAL_PASSWORD || 'admin123',
 };

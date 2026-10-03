@@ -230,75 +230,24 @@ export function useCreateInstitutionAdmin() {
       institutionName?: string
       institutionCode?: string
     }) => {
-      const newAdmin = {
-        id: `adm-${Date.now()}`,
-        userId: payload.userId.trim().toLowerCase(),
-        name: payload.name || payload.userId,
-        email: payload.email.trim().toLowerCase(),
-        password: payload.password || "admin123",
-        institutionId: payload.institutionId,
-        institutionName: payload.institutionName || "Partner Institution",
-        institutionCode: payload.institutionCode || "INST",
-        workspaces: payload.workspaces,
-        createdAt: new Date().toISOString(),
+      const token = typeof window !== "undefined" ? localStorage.getItem("vid_auth_token") : null
+      const res = await fetch(`${API_BASE_URL}/institutions/${payload.institutionId}/admins`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify(payload),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to create institution administrator")
       }
-
-      try {
-        const res = await fetch(`${API_BASE_URL}/institutions/${payload.institutionId}/admins`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        })
-        const json = await res.json()
-        if (json.success && json.data) {
-          return json.data
-        }
-      } catch (err) {
-        console.warn("Backend unavailable, persisting admin locally:", err)
-      }
-
-      return newAdmin
+      return json.data
     },
-    onSuccess: (newAdmin, variables) => {
-      if (typeof window !== "undefined") {
-        try {
-          const raw = localStorage.getItem("vid_institute_admins")
-          const current = raw ? JSON.parse(raw) : []
-          const updated = [
-            newAdmin,
-            ...current.filter(
-              (a: any) =>
-                a.userId?.toLowerCase() !== newAdmin.userId?.toLowerCase() &&
-                a.email?.toLowerCase() !== newAdmin.email?.toLowerCase()
-            ),
-          ]
-          localStorage.setItem("vid_institute_admins", JSON.stringify(updated))
-
-          // Also register in platform users list so it appears in Platform Users page
-          const rawUsers = localStorage.getItem("vid_platform_users")
-          const currentUsers = rawUsers ? JSON.parse(rawUsers) : []
-          const platformUser = {
-            id: newAdmin.id || `usr-${Date.now()}`,
-            name: newAdmin.name || newAdmin.userId,
-            email: newAdmin.email,
-            role: "INSTITUTION_ADMIN",
-            institution: variables.institutionName || newAdmin.institutionName || "Partner Institution",
-            status: "ACTIVE",
-            createdAt: new Date().toISOString().split("T")[0],
-          }
-          const updatedUsers = [
-            platformUser,
-            ...currentUsers.filter(
-              (u: any) => u.email?.toLowerCase() !== newAdmin.email?.toLowerCase()
-            ),
-          ]
-          localStorage.setItem("vid_platform_users", JSON.stringify(updatedUsers))
-        } catch (e) {
-          console.warn("Failed to persist institute admin to localStorage", e)
-        }
-      }
-
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["institution-admins", variables.institutionId] })
+      queryClient.invalidateQueries({ queryKey: ["institutions"] })
       queryClient.invalidateQueries({ queryKey: ["users"] })
       queryClient.invalidateQueries({ queryKey: ["platform-users"] })
     },

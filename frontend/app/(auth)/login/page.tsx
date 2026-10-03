@@ -4,15 +4,15 @@ import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/AuthContext"
 import { RoleType } from "@/config/navigation"
-import { Lock, User, Eye, EyeOff, ArrowRight } from "lucide-react"
+import { Lock, User, Eye, EyeOff, ArrowRight, ShieldCheck } from "lucide-react"
 
 // Background RBAC Workspace Redirection Map
 const ROLE_WORKSPACE_MAP: Record<RoleType, string> = {
   SUPER_ADMIN: "/dashboard",
   INSTITUTION_ADMIN: "/dashboard",
   FACULTY: "/faculty/dashboard",
-  STUDENT: "/students/cccccccc-cccc-cccc-cccc-cccccccccc01",
-  PARENT: "/students/cccccccc-cccc-cccc-cccc-cccccccccc01",
+  STUDENT: "/dashboard",
+  PARENT: "/dashboard",
   ADMISSION_TEAM: "/admissions",
   FINANCE_TEAM: "/finance/dashboard",
   EXAM_TEAM: "/examinations/schedules",
@@ -24,7 +24,7 @@ export default function LoginPage() {
   const { login } = useAuth()
 
   const [identifier, setIdentifier] = useState("")
-  const [password, setPassword] = useState("admin123")
+  const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -36,12 +36,25 @@ export default function LoginPage() {
       return
     }
 
+    if (!password.trim()) {
+      setError("Please enter your password.")
+      return
+    }
+
     setIsLoading(true)
     setError(null)
 
     try {
-      // Background RBAC role resolution: backend resolves role from user identity
-      const assignedRole = await login(identifier.trim(), password.trim() || "admin123")
+      const assignedRole = await login(identifier.trim(), password.trim())
+
+      // Check if user must change password on first login
+      const sessionUser = typeof window !== "undefined" ? localStorage.getItem("vid_session_user") : null
+      const parsed = sessionUser ? JSON.parse(sessionUser) : null
+      if (parsed?.mustChangePassword) {
+        router.push("/change-password")
+        return
+      }
+
       const workspaceRoute = ROLE_WORKSPACE_MAP[assignedRole] || "/dashboard"
       router.push(workspaceRoute)
     } catch (err: any) {
@@ -51,24 +64,8 @@ export default function LoginPage() {
     }
   }
 
-  const handleGoogleSignIn = async () => {
-    setIsLoading(true)
-    setError(null)
-
-    try {
-      // Simulate Google OAuth SSO: resolve user in background via Google account
-      const googleAccount = identifier.trim()
-        ? (identifier.includes("@") ? identifier.trim() : `${identifier.trim().toLowerCase()}@gmail.com`)
-        : "admin@springfield.edu"
-
-      const assignedRole = await login(googleAccount, "google_oauth_verified")
-      const workspaceRoute = ROLE_WORKSPACE_MAP[assignedRole] || "/dashboard"
-      router.push(workspaceRoute)
-    } catch (err: any) {
-      setError("Google Sign-In failed. Please try again.")
-    } finally {
-      setIsLoading(false)
-    }
+  const handleGoogleSignIn = () => {
+    setError("Google Workspace SSO requires institutional single sign-on configuration. Please sign in with your User ID and password.")
   }
 
   return (
@@ -88,7 +85,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* 3) Signin with Google */}
+        {/* Sign in with Google */}
         <button
           type="button"
           onClick={handleGoogleSignIn}
@@ -122,21 +119,13 @@ export default function LoginPage() {
             <div className="w-full border-t border-slate-200" />
           </div>
           <div className="relative flex justify-center text-xs uppercase tracking-wider text-slate-400">
-            <span className="bg-white px-3 font-medium">Or continue with</span>
-          </div>
-        </div>
-
-        {/* Default Credential Quick Helper */}
-        <div className="mb-5 p-3 rounded-xl bg-slate-100/90 border border-slate-200 flex items-start gap-2.5 text-xs text-slate-600">
-          <div className="w-2 h-2 rounded-full bg-emerald-500 mt-1 shrink-0" />
-          <div>
-            <span className="font-semibold text-slate-800">Workspace Login:</span> Enter your <span className="font-medium text-slate-900">User ID</span> or <span className="font-medium text-slate-900">Email</span>. Default password is <code className="bg-slate-200 px-1.5 py-0.5 rounded text-slate-900 font-mono text-xs">admin123</code>
+            <span className="bg-white px-3 font-medium">Or continue with credentials</span>
           </div>
         </div>
 
         {/* Credentials Form */}
         <form onSubmit={handleLoginSubmit} className="space-y-4">
-          {/* 1) User ID and Email */}
+          {/* User ID and Email */}
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
               User ID or Email
@@ -146,7 +135,7 @@ export default function LoginPage() {
                 type="text"
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
-                placeholder="User ID (e.g. FAC101) or Email address"
+                placeholder="User ID or institutional email"
                 required
                 className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-slate-900 transition-all pl-10"
               />
@@ -156,7 +145,7 @@ export default function LoginPage() {
             </div>
           </div>
 
-          {/* 2) Password */}
+          {/* Password */}
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <label className="text-xs font-semibold uppercase tracking-wider text-slate-700">
@@ -166,7 +155,7 @@ export default function LoginPage() {
                 href="#forgot"
                 onClick={(e) => {
                   e.preventDefault()
-                  alert("Please contact your institutional administrator or IT desk to reset your credentials. Default is admin123.")
+                  alert("Please contact your institutional administrator or IT desk to reset your credentials.")
                 }}
                 className="text-xs text-slate-500 hover:text-slate-900 transition-colors"
               >
@@ -178,7 +167,8 @@ export default function LoginPage() {
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Default: admin123"
+                placeholder="••••••••"
+                required
                 className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-slate-900 transition-all pl-10 pr-10"
               />
               <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -212,9 +202,10 @@ export default function LoginPage() {
         </form>
 
         {/* Security Note */}
-        <p className="text-center text-xs text-slate-400 mt-6">
-          Protected by Role-Based Access Control (RBAC)
-        </p>
+        <div className="flex items-center justify-center gap-1.5 text-center text-xs text-slate-400 mt-6">
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+          <span>Protected by Multi-Tenant Access Control & Security Auditing</span>
+        </div>
       </div>
     </div>
   )

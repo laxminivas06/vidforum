@@ -11,8 +11,15 @@ export interface UserProfile {
   role: RoleType
   institutionId: string
   institutionName: string
+  institutionCode?: string
   avatarUrl?: string
   assignedWorkspaces?: string[]
+  mustChangePassword?: boolean
+}
+
+export interface LoginResult {
+  role: RoleType
+  mustChangePassword: boolean
 }
 
 export interface AuthContextType {
@@ -31,18 +38,10 @@ export interface AuthContextType {
     explicitRole?: RoleType,
     institutionSlug?: string
   ) => Promise<RoleType>
-  logout: () => void
+  logout: () => Promise<void>
   switchRole: (newRole: RoleType) => void
   toggleOptionalModule: (moduleKey: string) => void
-}
-
-const DEFAULT_USER: UserProfile = {
-  id: "usr-admin-01",
-  name: "Dr. Alistair Vance",
-  email: "admin@springfield.edu",
-  role: "INSTITUTION_ADMIN",
-  institutionId: "inst-springfield-001",
-  institutionName: "Springfield International Academy",
+  changePassword: (currentPassword: string, newPassword: string) => Promise<void>
 }
 
 const ALL_PERMISSIONS = [
@@ -145,18 +144,6 @@ const ROLE_PERMISSIONS: Record<RoleType, string[]> = {
   ],
 }
 
-// Known registered accounts lookup for offline resilience
-const KNOWN_ACCOUNTS: Record<string, { role: RoleType; name: string; instName: string }> = {
-  "superadmin": { role: "SUPER_ADMIN", name: "VID Platform Super Admin", instName: "VID Global Platform" },
-  "superadmin@vid.edu": { role: "SUPER_ADMIN", name: "VID Platform Super Admin", instName: "VID Global Platform" },
-  "sa-001": { role: "SUPER_ADMIN", name: "VID Platform Super Admin", instName: "VID Global Platform" },
-  "admin@springfield.edu": { role: "INSTITUTION_ADMIN", name: "Dr. Alistair Vance", instName: "Springfield International Academy" },
-  "revathi.raman@springfield.edu": { role: "FACULTY", name: "Mrs. Revathi Raman", instName: "Springfield International Academy" },
-  "arvind.rao@springfield.edu": { role: "FACULTY", name: "Dr. Arvind Rao", instName: "Springfield International Academy" },
-  "sia-2026-042": { role: "STUDENT", name: "Aarav Sharma", instName: "Springfield International Academy" },
-  "sia-2026-043": { role: "STUDENT", name: "Rhea Nair", instName: "Springfield International Academy" },
-}
-
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -181,7 +168,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       try {
         const savedUserStr = localStorage.getItem("vid_session_user")
         const savedRole = localStorage.getItem("vid_session_role") as RoleType | null
-        if (savedUserStr && savedRole) {
+        const token = localStorage.getItem("vid_auth_token")
+
+        if (savedUserStr && savedRole && token) {
           const parsedUser = JSON.parse(savedUserStr)
           setUser(parsedUser)
           setRole(savedRole)
@@ -202,7 +191,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const hasPermission = (permission: string): boolean => {
     if (role === "SUPER_ADMIN") {
-      // Super Admin ONLY has platform-level permissions, NOT institution operations
       return (
         permission.startsWith("platform.") ||
         permission.startsWith("institutions.") ||
@@ -222,186 +210,124 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     identifier: string,
     password?: string,
     explicitRole?: RoleType,
-    institutionSlug = "springfield"
+    institutionSlug = "narayana"
   ): Promise<RoleType> => {
-    const cleanId = (identifier || "").trim().toLowerCase()
+    const cleanId = (identifier || "").trim()
     if (!cleanId) {
       throw new Error("User ID or Email is required.")
     }
-    const cleanPassword = (password || "").trim() || "admin123"
 
-    try {
-      const res = await fetch("http://localhost:5000/api/v1/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          identifier: cleanId,
-          email: cleanId,
-          userId: cleanId,
-          password: cleanPassword,
-          role: explicitRole,
-        }),
-      })
-      const data = await res.json()
-
-      if (res.ok && data.success && data.data?.user) {
-        const backendUser = data.data.user
-        const resolvedRole = (backendUser.role || explicitRole || "INSTITUTION_ADMIN") as RoleType
-
-        const loggedInUser: UserProfile = {
-          id: backendUser.id,
-          name: backendUser.name || cleanId.toUpperCase(),
-          email: backendUser.email || cleanId,
-          role: resolvedRole,
-          institutionId: backendUser.institutionId || `inst-${institutionSlug}`,
-          institutionName: backendUser.institutionName || (resolvedRole === "SUPER_ADMIN" ? "VID Global Platform" : "Partner Institution"),
-          assignedWorkspaces: backendUser.assignedWorkspaces || [],
-        }
-
-        setUser(loggedInUser)
-        setRole(resolvedRole)
-        setPermissions(backendUser.permissions || ROLE_PERMISSIONS[resolvedRole] || ALL_PERMISSIONS)
-
-        if (typeof window !== "undefined") {
-          localStorage.setItem("vid_session_user", JSON.stringify(loggedInUser))
-          localStorage.setItem("vid_session_role", resolvedRole)
-          if (data.data?.token) {
-            localStorage.setItem("vid_auth_token", data.data.token)
-          }
-        }
-
-        return resolvedRole
-      } else if (!res.ok && data.message && data.message.includes("Invalid password")) {
-        throw new Error(data.message)
-      }
-    } catch (err: any) {
-      if (err.message && err.message.includes("Invalid password")) {
-        throw err
-      }
-      // If network offline or account not found in DB, check local storage stores
+    const cleanPassword = (password || "").trim()
+    if (!cleanPassword) {
+      throw new Error("Password is required.")
     }
 
-    // Check custom provisioned Institute Admins in localStorage
+    const res = await fetch("http://localhost:5000/api/v1/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        identifier: cleanId,
+        password: cleanPassword,
+      }),
+    })
+    const data = await res.json()
+
+    if (!res.ok || !data.success || !data.data?.user) {
+      throw new Error(data.message || "Authentication failed. Please verify your credentials.")
+    }
+
+    const backendUser = data.data.user
+    const resolvedRole = (backendUser.role || explicitRole || "INSTITUTION_ADMIN") as RoleType
+
+    const loggedInUser: UserProfile = {
+      id: backendUser.id,
+      name: backendUser.name || cleanId.toUpperCase(),
+      email: backendUser.email || cleanId,
+      role: resolvedRole,
+      institutionId: backendUser.institutionId || `inst-${institutionSlug}`,
+      institutionName: backendUser.institutionName || (resolvedRole === "SUPER_ADMIN" ? "VID Global Platform" : "Partner Institution"),
+      institutionCode: backendUser.institutionCode,
+      assignedWorkspaces: backendUser.assignedWorkspaces || [],
+      mustChangePassword: Boolean(backendUser.mustChangePassword),
+    }
+
+    setUser(loggedInUser)
+    setRole(resolvedRole)
+    setPermissions(backendUser.permissions || ROLE_PERMISSIONS[resolvedRole] || ALL_PERMISSIONS)
+
     if (typeof window !== "undefined") {
-      try {
-        const rawAdmins = localStorage.getItem("vid_institute_admins")
-        if (rawAdmins) {
-          const admins = JSON.parse(rawAdmins)
-          const customAdmin = admins.find(
-            (a: any) =>
-              (a.userId && a.userId.toLowerCase() === cleanId) ||
-              (a.email && a.email.toLowerCase() === cleanId)
-          )
-          if (customAdmin) {
-            const expectedPass = customAdmin.password || "admin123"
-            if (cleanPassword !== expectedPass && cleanPassword !== "admin123") {
-              throw new Error("Invalid password for Institute Administrator. Please check your credentials.")
-            }
-
-            const loggedInUser: UserProfile = {
-              id: customAdmin.userId || `usr-${cleanId}`,
-              name: customAdmin.name || customAdmin.userId,
-              email: customAdmin.email || cleanId,
-              role: "INSTITUTION_ADMIN",
-              institutionId: customAdmin.institutionId || `inst-${institutionSlug}`,
-              institutionName: customAdmin.institutionName || "Partner Institution",
-              assignedWorkspaces: customAdmin.workspaces || [],
-            }
-
-            setUser(loggedInUser)
-            setRole("INSTITUTION_ADMIN")
-            setPermissions(ROLE_PERMISSIONS.INSTITUTION_ADMIN || ALL_PERMISSIONS)
-
-            localStorage.setItem("vid_session_user", JSON.stringify(loggedInUser))
-            localStorage.setItem("vid_session_role", "INSTITUTION_ADMIN")
-
-            return "INSTITUTION_ADMIN"
-          }
-        }
-      } catch (e: any) {
-        if (e.message && e.message.includes("Invalid password")) {
-          throw e
-        }
+      localStorage.setItem("vid_session_user", JSON.stringify(loggedInUser))
+      localStorage.setItem("vid_session_role", resolvedRole)
+      if (data.data?.token) {
+        localStorage.setItem("vid_auth_token", data.data.token)
       }
-
-      // Check custom provisioned platform users in localStorage
-      try {
-        const rawUsers = localStorage.getItem("vid_platform_users")
-        if (rawUsers) {
-          const pUsers = JSON.parse(rawUsers)
-          const customUser = pUsers.find(
-            (u: any) =>
-              (u.userId && u.userId.toLowerCase() === cleanId) ||
-              (u.email && u.email.toLowerCase() === cleanId)
-          )
-          if (customUser) {
-            const userRole = (customUser.role || "INSTITUTION_ADMIN") as RoleType
-            const loggedInUser: UserProfile = {
-              id: customUser.id || `usr-${cleanId}`,
-              name: customUser.name || cleanId,
-              email: customUser.email || cleanId,
-              role: userRole,
-              institutionId: customUser.institutionId || `inst-${institutionSlug}`,
-              institutionName: customUser.institution || "Partner Institution",
-            }
-            setUser(loggedInUser)
-            setRole(userRole)
-            setPermissions(ROLE_PERMISSIONS[userRole] || ALL_PERMISSIONS)
-            localStorage.setItem("vid_session_user", JSON.stringify(loggedInUser))
-            localStorage.setItem("vid_session_role", userRole)
-            return userRole
-          }
-        }
-      } catch (e: any) {
-        if (e.message && e.message.includes("Invalid password")) {
-          throw e
-        }
+      if (data.data?.refreshToken) {
+        localStorage.setItem("vid_refresh_token", data.data.refreshToken)
       }
     }
 
-    // Check known registered accounts
-    const known = KNOWN_ACCOUNTS[cleanId]
-    if (known) {
-      if (known.role === "SUPER_ADMIN" && cleanPassword !== "admin123") {
-        throw new Error("Invalid password for Super Administrator. Password is admin123.")
-      }
-
-      const loggedInUser: UserProfile = {
-        id: `usr-${cleanId}`,
-        name: known.name,
-        email: cleanId.includes("@") ? cleanId : `${cleanId}@springfield.edu`,
-        role: known.role,
-        institutionId: `inst-${institutionSlug}`,
-        institutionName: known.instName,
-      }
-      setUser(loggedInUser)
-      setRole(known.role)
-      setPermissions(ROLE_PERMISSIONS[known.role] || ALL_PERMISSIONS)
-
-      if (typeof window !== "undefined") {
-        localStorage.setItem("vid_session_user", JSON.stringify(loggedInUser))
-        localStorage.setItem("vid_session_role", known.role)
-      }
-
-      return known.role
-    }
-
-    throw new Error("Invalid User ID or Email. Account not found.")
+    return resolvedRole
   }
 
-  const logout = () => {
+  const changePassword = async (currentPassword: string, newPassword: string): Promise<void> => {
+    const token = typeof window !== "undefined" ? localStorage.getItem("vid_auth_token") : null
+    if (!token) {
+      throw new Error("You must be logged in to change your password.")
+    }
+
+    const res = await fetch("http://localhost:5000/api/v1/auth/change-password", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ currentPassword, newPassword }),
+    })
+
+    const data = await res.json()
+    if (!res.ok || !data.success) {
+      throw new Error(data.message || "Failed to update password.")
+    }
+
+    if (data.data?.token && typeof window !== "undefined") {
+      localStorage.setItem("vid_auth_token", data.data.token)
+    }
+
+    if (user) {
+      const updatedUser = { ...user, mustChangePassword: false }
+      setUser(updatedUser)
+      if (typeof window !== "undefined") {
+        localStorage.setItem("vid_session_user", JSON.stringify(updatedUser))
+      }
+    }
+  }
+
+  const logout = async () => {
+    const refreshToken = typeof window !== "undefined" ? localStorage.getItem("vid_refresh_token") : null
+    if (refreshToken) {
+      try {
+        await fetch("http://localhost:5000/api/v1/auth/logout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ refreshToken }),
+        })
+      } catch (err) {
+        console.warn("Backend logout notification warning:", err)
+      }
+    }
+
     setUser(null)
     setRole("INSTITUTION_ADMIN")
     if (typeof window !== "undefined") {
       localStorage.removeItem("vid_session_user")
       localStorage.removeItem("vid_session_role")
       localStorage.removeItem("vid_auth_token")
+      localStorage.removeItem("vid_refresh_token")
       window.location.href = "/login"
     }
   }
 
   const switchRole = (newRole: RoleType) => {
-    // Strictly isolate Super Admin: Cannot switch perspective into institution roles
     if (role === "SUPER_ADMIN" && newRole !== "SUPER_ADMIN") {
       console.warn("Super Admin workspace isolation: cannot switch to institution roles.")
       return
@@ -419,24 +345,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }
 
   const toggleOptionalModule = async (moduleKey: string) => {
-    const isCurrentlyEnabled = enabledModules.includes(moduleKey);
-    const newEnabled = !isCurrentlyEnabled;
+    const isCurrentlyEnabled = enabledModules.includes(moduleKey)
+    const newEnabled = !isCurrentlyEnabled
 
     setEnabledModules((prev) =>
       isCurrentlyEnabled
         ? prev.filter((k) => k !== moduleKey)
         : [...prev, moduleKey]
-    );
+    )
 
     try {
-      const instId = user?.institutionId || "22222222-2222-2222-2222-222222222201";
+      const instId = user?.institutionId || "22222222-2222-2222-2222-222222222201"
       await fetch(`http://localhost:5000/api/v1/institutions/${instId}/modules/${moduleKey}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ isEnabled: newEnabled }),
-      });
+      })
     } catch (err) {
-      console.warn("Failed to persist module toggle to backend:", err);
+      console.warn("Failed to persist module toggle to backend:", err)
     }
   }
 
@@ -456,6 +382,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         logout,
         switchRole,
         toggleOptionalModule,
+        changePassword,
       }}
     >
       {children}

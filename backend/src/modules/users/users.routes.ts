@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { db } from '../../config/database';
+import { env } from '../../config/env';
 import { sendSuccess, sendError } from '../../utils/api-response';
 
 const router = Router();
@@ -349,7 +350,7 @@ router.get('/faculty-accounts', async (req: Request, res: Response) => {
         st.date_of_birth as "dateOfBirth",
         st.gender,
         COALESCE(u.raw_user_meta_data->>'user_id', p.email) as "userId",
-        u.raw_user_meta_data->>'plain_password_hint' as "tempPassword",
+        COALESCE(p.must_change_password, false) as "mustChangePassword",
         CASE WHEN u.encrypted_password IS NOT NULL THEN true ELSE false END as "hasCredentials",
         COALESCE(
           ur.scope->'workspaces',
@@ -389,7 +390,7 @@ router.post('/provision-faculty', async (req: Request, res: Response) => {
     const cleanEmail = email.trim().toLowerCase();
     const cleanUserId = (userId || cleanEmail).trim();
     const cleanName = (name || cleanUserId).trim();
-    const rawPassword = (password && password.trim()) || 'admin123';
+    const rawPassword = (password && password.trim()) || env.DEFAULT_INITIAL_PASSWORD;
     const hashedPassword = bcrypt.hashSync(rawPassword, 10);
     const cleanWorkspaces: string[] = Array.isArray(workspaces) && workspaces.length > 0
       ? workspaces
@@ -423,7 +424,7 @@ router.post('/provision-faculty', async (req: Request, res: Response) => {
       full_name: cleanName,
       user_id: cleanUserId,
       userId: cleanUserId,
-      plain_password_hint: rawPassword,
+      must_change_password: true,
       workspaces: cleanWorkspaces,
     };
 
@@ -431,7 +432,7 @@ router.post('/provision-faculty', async (req: Request, res: Response) => {
       await client.query(
         `UPDATE auth.users 
          SET encrypted_password = $1,
-             raw_user_meta_data = (COALESCE(raw_user_meta_data, '{}'::jsonb) || $2::jsonb),
+             raw_user_meta_data = (COALESCE(raw_user_meta_data, '{}'::jsonb) - 'plain_password_hint' || $2::jsonb),
              updated_at = now()
          WHERE id = $3`,
         [hashedPassword, JSON.stringify(userMetadata), profileId]
@@ -448,10 +449,10 @@ router.post('/provision-faculty', async (req: Request, res: Response) => {
 
     // 4. Ensure profiles table has record
     await client.query(
-      `INSERT INTO profiles (id, full_name, email, default_institution_id, status)
-       VALUES ($1, $2, $3, $4, 'active')
+      `INSERT INTO profiles (id, full_name, email, default_institution_id, status, must_change_password)
+       VALUES ($1, $2, $3, $4, 'active', true)
        ON CONFLICT (id) DO UPDATE
-         SET full_name = EXCLUDED.full_name, default_institution_id = COALESCE(EXCLUDED.default_institution_id, profiles.default_institution_id), updated_at = now()`,
+         SET full_name = EXCLUDED.full_name, default_institution_id = COALESCE(EXCLUDED.default_institution_id, profiles.default_institution_id), must_change_password = true, updated_at = now()`,
       [profileId, cleanName, cleanEmail, targetInstId]
     );
 
@@ -566,8 +567,8 @@ router.post('/clean-test-data', async (_req: Request, res: Response) => {
       WHERE email NOT IN ${protectedEmails}
     `);
 
-    // 5. Ensure default admin accounts exist and have default password 'admin123'
-    const defaultPassHash = bcrypt.hashSync('admin123', 10);
+    // 5. Ensure default admin accounts exist and have configured initial password
+    const defaultPassHash = bcrypt.hashSync(env.DEFAULT_INITIAL_PASSWORD, 10);
 
     const ngsRes = await db.query(`SELECT id FROM institutions WHERE code = 'NGS' LIMIT 1`);
     const ngsId = ngsRes.rows[0]?.id || '18b3b9a6-0791-47f4-bbd0-bf7c0221e18f';
@@ -590,7 +591,7 @@ router.post('/clean-test-data', async (_req: Request, res: Response) => {
         authId = ins.rows[0].id;
       } else {
         await db.query(
-          `UPDATE auth.users SET encrypted_password = $1, raw_user_meta_data = $2, updated_at = now() WHERE id = $3`,
+          `UPDATE auth.users SET encrypted_password = $1, raw_user_meta_data = (COALESCE(raw_user_meta_data, '{}'::jsonb) - 'plain_password_hint' || $2::jsonb), updated_at = now() WHERE id = $3`,
           [defaultPassHash, JSON.stringify({ full_name: adm.name, user_id: adm.userId }), authId]
         );
       }
@@ -621,7 +622,7 @@ router.post('/clean-test-data', async (_req: Request, res: Response) => {
       );
     }
 
-    sendSuccess(res, { message: 'All test data purged successfully. HRMS and Institute Admin workspaces cleaned. Default password set to admin123.' });
+    sendSuccess(res, { message: 'All test data purged successfully. HRMS and Institute Admin workspaces cleaned. Default initial password applied.' });
   } catch (error: any) {
     sendError(res, error.message, 500);
   }

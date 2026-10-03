@@ -170,7 +170,7 @@ function InstitutionAdminDashboard() {
   const [provisionName, setProvisionName] = useState("")
   const [provisionEmail, setProvisionEmail] = useState("")
   const [provisionUserId, setProvisionUserId] = useState("")
-  const [provisionPassword, setProvisionPassword] = useState("admin123")
+  const [provisionPassword, setProvisionPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [provisionError, setProvisionError] = useState<string | null>(null)
   const [provisionSuccessData, setProvisionSuccessData] = useState<any | null>(null)
@@ -226,7 +226,7 @@ function InstitutionAdminDashboard() {
         : (found.email.split("@")[0] || `faculty_${Date.now()}`)
       setProvisionUserId(suggestedUserId)
       if (!provisionPassword) {
-        setProvisionPassword("admin123")
+        generateRandomPassword()
       }
       if (found.assignedWorkspaces && Array.isArray(found.assignedWorkspaces) && found.assignedWorkspaces.length > 0) {
         setSelectedWorkspaces(found.assignedWorkspaces)
@@ -243,6 +243,7 @@ function InstitutionAdminDashboard() {
     const randomNum = Math.floor(1000 + Math.random() * 9000)
     const generated = `Faculty${special}${randomNum}`
     setProvisionPassword(generated)
+    return generated
   }
 
   // Submit Provisioning Form
@@ -252,7 +253,7 @@ function InstitutionAdminDashboard() {
       setProvisionError("Email address is required")
       return
     }
-    const finalPassword = provisionPassword.trim() || "admin123"
+    const finalPassword = provisionPassword.trim() || generateRandomPassword()
 
     try {
       setProvisionError(null)
@@ -280,7 +281,7 @@ function InstitutionAdminDashboard() {
       setProvisionName("")
       setProvisionEmail("")
       setProvisionUserId("")
-      setProvisionPassword("admin123")
+      setProvisionPassword("")
       setSelectedWorkspaces(DEFAULT_FACULTY_WORKSPACES)
     } catch (err: any) {
       setProvisionError(err.message || "Failed to provision faculty credentials")
@@ -293,7 +294,7 @@ function InstitutionAdminDashboard() {
     const wsNames = workspaces && workspaces.length > 0
       ? workspaces.map((wId) => PLATFORM_WORKSPACES.find((w) => w.id === wId)?.shortName || wId).join(", ")
       : "Faculty, Academics, Attendance, Exams, Timetable"
-    const text = `VID Platform Faculty Credentials:\nUser ID / Login ID: ${userId || email}\nEmail: ${email}\nPassword: ${pwd || "[Default: admin123]"}\nPermitted Workspaces: ${wsNames}\nLogin Portal: ${loginUrl}`
+    const text = `VID Platform Faculty Credentials:\nUser ID / Login ID: ${userId || email}\nEmail: ${email}\nPassword: ${pwd || "[Generated at setup]"}\nPermitted Workspaces: ${wsNames}\nLogin Portal: ${loginUrl}`
     navigator.clipboard.writeText(text)
     setCopySuccessToast(`Credentials copied! You can now send this User ID & Password to the faculty member.`)
     setTimeout(() => setCopySuccessToast(null), 3000)
@@ -1142,7 +1143,7 @@ function InstitutionAdminDashboard() {
                   {/* Password with Generator */}
                   <FormField
                     label="Password"
-                    helperText="Default password is admin123. Keep it as default or click 'Generate' to create a custom password."
+                    helperText="Initial credential. Click 'Generate' to create a strong password or enter custom. User will update on first login."
                   >
                     <div className="flex gap-2">
                       <div className="relative flex-1">
@@ -1150,7 +1151,7 @@ function InstitutionAdminDashboard() {
                           type={showPassword ? "text" : "password"}
                           value={provisionPassword}
                           onChange={(e) => setProvisionPassword(e.target.value)}
-                          placeholder="Default: admin123"
+                          placeholder="Initial password or click Generate..."
                           leftIcon={<Lock className="w-3.5 h-3.5 text-text-muted" />}
                         />
                         <button

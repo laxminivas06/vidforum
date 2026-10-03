@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import React, { useState } from "react"
 import { useRouter } from "next/navigation"
@@ -24,7 +24,7 @@ export default function LoginPage() {
   const { login } = useAuth()
 
   const [identifier, setIdentifier] = useState("")
-  const [password, setPassword] = useState("")
+  const [password, setPassword] = useState("admin123")
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -41,7 +41,7 @@ export default function LoginPage() {
 
     try {
       // Background RBAC role resolution: backend resolves role from user identity
-      const assignedRole = await login(identifier.trim(), password)
+      const assignedRole = await login(identifier.trim(), password.trim() || "admin123")
       const workspaceRoute = ROLE_WORKSPACE_MAP[assignedRole] || "/dashboard"
       router.push(workspaceRoute)
     } catch (err: any) {
@@ -126,6 +126,14 @@ export default function LoginPage() {
           </div>
         </div>
 
+        {/* Default Credential Quick Helper */}
+        <div className="mb-5 p-3 rounded-xl bg-slate-100/90 border border-slate-200 flex items-start gap-2.5 text-xs text-slate-600">
+          <div className="w-2 h-2 rounded-full bg-emerald-500 mt-1 shrink-0" />
+          <div>
+            <span className="font-semibold text-slate-800">Workspace Login:</span> Enter your <span className="font-medium text-slate-900">User ID</span> or <span className="font-medium text-slate-900">Email</span>. Default password is <code className="bg-slate-200 px-1.5 py-0.5 rounded text-slate-900 font-mono text-xs">admin123</code>
+          </div>
+        </div>
+
         {/* Credentials Form */}
         <form onSubmit={handleLoginSubmit} className="space-y-4">
           {/* 1) User ID and Email */}
@@ -138,7 +146,7 @@ export default function LoginPage() {
                 type="text"
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
-                placeholder="e.g. name@institution.edu or student ID"
+                placeholder="User ID (e.g. FAC101) or Email address"
                 required
                 className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-slate-900 transition-all pl-10"
               />
@@ -158,7 +166,7 @@ export default function LoginPage() {
                 href="#forgot"
                 onClick={(e) => {
                   e.preventDefault()
-                  alert("Please contact your institutional administrator or IT desk to reset your credentials.")
+                  alert("Please contact your institutional administrator or IT desk to reset your credentials. Default is admin123.")
                 }}
                 className="text-xs text-slate-500 hover:text-slate-900 transition-colors"
               >
@@ -170,8 +178,7 @@ export default function LoginPage() {
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••••••"
-                required
+                placeholder="Default: admin123"
                 className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-slate-900 transition-all pl-10 pr-10"
               />
               <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">

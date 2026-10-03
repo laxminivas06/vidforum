@@ -77,18 +77,30 @@ router.post('/login', async (req: Request, res: Response) => {
     const isSuperAdminAlias = ['superadmin', 'superadmin@vid.edu', 'sa-001', 'superadmin@vid.platform'].includes(loginIdentifier.toLowerCase());
 
     try {
-      // 2. Search profiles by email, phone, or Super Admin alias
+      // 2. Search auth.users & profiles by email, user_id, employee_code, or phone
       const profileRes = await db.query(
-        `SELECT p.id, p.full_name, p.email, p.default_institution_id,
+        `SELECT COALESCE(p.id, u.id)::text as id,
+                COALESCE(p.full_name, u.raw_user_meta_data->>'full_name', u.raw_user_meta_data->>'fullName') as full_name,
+                COALESCE(p.email, u.email) as email,
+                COALESCE(p.default_institution_id::text, u.raw_user_meta_data->>'institutionId') as default_institution_id,
+                u.encrypted_password, u.raw_user_meta_data,
                 i.name as institution_name, i.code as institution_code,
-                r.name as role_name, ur.scope
-         FROM profiles p
+                r.name as role_name, ur.scope,
+                st.employee_code
+         FROM auth.users u
+         LEFT JOIN profiles p ON p.id = u.id OR LOWER(TRIM(p.email)) = LOWER(TRIM(u.email))
          LEFT JOIN institutions i ON i.id = p.default_institution_id
-         LEFT JOIN user_roles ur ON ur.profile_id = p.id
+         LEFT JOIN user_roles ur ON ur.profile_id = p.id OR ur.profile_id = u.id
          LEFT JOIN roles r ON r.id = ur.role_id
-         WHERE LOWER(p.email) = LOWER($1) 
-            OR LOWER(p.phone) = LOWER($1)
-            OR ($2 = true AND LOWER(p.email) = 'superadmin@vid.edu')
+         LEFT JOIN staff st ON st.profile_id = p.id OR st.profile_id = u.id
+         WHERE LOWER(TRIM(u.email)) = LOWER(TRIM($1)) 
+            OR LOWER(TRIM(COALESCE(p.email, ''))) = LOWER(TRIM($1))
+            OR LOWER(TRIM(COALESCE(u.raw_user_meta_data->>'user_id', ''))) = LOWER(TRIM($1))
+            OR LOWER(TRIM(COALESCE(u.raw_user_meta_data->>'userId', ''))) = LOWER(TRIM($1))
+            OR LOWER(TRIM(COALESCE(st.employee_code, ''))) = LOWER(TRIM($1))
+            OR LOWER(TRIM(COALESCE(p.phone, ''))) = LOWER(TRIM($1))
+            OR ($2 = true AND LOWER(TRIM(COALESCE(u.email, p.email, ''))) = 'superadmin@vid.edu')
+         ORDER BY (CASE WHEN r.name IS NOT NULL THEN 1 ELSE 2 END), u.created_at DESC
          LIMIT 1`,
         [loginIdentifier, isSuperAdminAlias]
       );
@@ -100,11 +112,73 @@ router.post('/login', async (req: Request, res: Response) => {
         } else if (user.role_name) {
           resolvedRole = normalizeRole(user.role_name);
         } else {
-          resolvedRole = 'INSTITUTION_ADMIN';
+          resolvedRole = 'FACULTY';
         }
       }
 
-      // 3. Search students table by admission_number (e.g. SIA-2026-042)
+      // 3. Fallback: Search profiles directly if auth.users row was not joined
+      if (!user) {
+        const directProfileRes = await db.query(
+          `SELECT COALESCE(p.id, u.id)::text as id,
+                  COALESCE(p.full_name, u.raw_user_meta_data->>'full_name') as full_name,
+                  COALESCE(p.email, u.email) as email,
+                  p.default_institution_id::text as default_institution_id,
+                  u.encrypted_password, u.raw_user_meta_data,
+                  i.name as institution_name, i.code as institution_code,
+                  r.name as role_name, ur.scope,
+                  st.employee_code
+           FROM profiles p
+           LEFT JOIN auth.users u ON u.id = p.id OR LOWER(TRIM(u.email)) = LOWER(TRIM(p.email))
+           LEFT JOIN institutions i ON i.id = p.default_institution_id
+           LEFT JOIN user_roles ur ON ur.profile_id = p.id
+           LEFT JOIN roles r ON r.id = ur.role_id
+           LEFT JOIN staff st ON st.profile_id = p.id
+           WHERE LOWER(TRIM(p.email)) = LOWER(TRIM($1)) 
+              OR LOWER(TRIM(COALESCE(u.email, ''))) = LOWER(TRIM($1))
+              OR LOWER(TRIM(COALESCE(u.raw_user_meta_data->>'user_id', ''))) = LOWER(TRIM($1))
+              OR LOWER(TRIM(COALESCE(u.raw_user_meta_data->>'userId', ''))) = LOWER(TRIM($1))
+              OR LOWER(TRIM(COALESCE(st.employee_code, ''))) = LOWER(TRIM($1))
+              OR LOWER(TRIM(COALESCE(p.phone, ''))) = LOWER(TRIM($1))
+           ORDER BY (CASE WHEN r.name IS NOT NULL THEN 1 ELSE 2 END)
+           LIMIT 1`,
+          [loginIdentifier]
+        );
+        if (directProfileRes.rows[0]) {
+          user = directProfileRes.rows[0];
+          resolvedRole = user.role_name ? normalizeRole(user.role_name) : 'FACULTY';
+        }
+      }
+
+      // 3.5 Fallback: Search staff directly by employee_code or email
+      if (!user) {
+        const staffRes = await db.query(
+          `SELECT st.id as staff_id, COALESCE(p.id, u.id)::text as id,
+                  COALESCE(p.full_name, u.raw_user_meta_data->>'full_name', 'Faculty Member') as full_name,
+                  COALESCE(p.email, u.email) as email,
+                  st.institution_id::text as default_institution_id,
+                  u.encrypted_password, u.raw_user_meta_data,
+                  i.name as institution_name, i.code as institution_code,
+                  'FACULTY' as role_name,
+                  st.employee_code
+           FROM staff st
+           LEFT JOIN profiles p ON p.id = st.profile_id
+           LEFT JOIN auth.users u ON u.id = p.id OR LOWER(TRIM(u.email)) = LOWER(TRIM(p.email))
+           LEFT JOIN institutions i ON i.id = st.institution_id
+           WHERE LOWER(TRIM(st.employee_code)) = LOWER(TRIM($1))
+              OR LOWER(TRIM(COALESCE(p.email, ''))) = LOWER(TRIM($1))
+              OR LOWER(TRIM(COALESCE(u.email, ''))) = LOWER(TRIM($1))
+              OR LOWER(TRIM(COALESCE(u.raw_user_meta_data->>'user_id', ''))) = LOWER(TRIM($1))
+              OR LOWER(TRIM(COALESCE(u.raw_user_meta_data->>'userId', ''))) = LOWER(TRIM($1))
+           LIMIT 1`,
+          [loginIdentifier]
+        );
+        if (staffRes.rows[0]) {
+          user = staffRes.rows[0];
+          resolvedRole = 'FACULTY';
+        }
+      }
+
+      // 4. Search students table by admission_number (e.g. SIA-2026-042)
       if (!user) {
         const studentRes = await db.query(
           `SELECT s.id, s.first_name || ' ' || s.last_name as full_name, s.admission_number,
@@ -112,7 +186,7 @@ router.post('/login', async (req: Request, res: Response) => {
                   i.name as institution_name, i.code as institution_code
            FROM students s
            LEFT JOIN institutions i ON i.id = s.institution_id
-           WHERE LOWER(s.admission_number) = LOWER($1) OR LOWER(s.id::text) = LOWER($1) LIMIT 1`,
+           WHERE LOWER(TRIM(s.admission_number)) = LOWER(TRIM($1)) OR LOWER(TRIM(s.id::text)) = LOWER(TRIM($1)) LIMIT 1`,
           [loginIdentifier]
         );
         if (studentRes.rows[0]) {
@@ -129,7 +203,8 @@ router.post('/login', async (req: Request, res: Response) => {
 
     // Fallback for Super Admin if database record is missing
     if (isSuperAdminAlias && !user) {
-      if (password && password !== 'admin123') {
+      const suppliedPass = (password || '').trim() || 'admin123';
+      if (suppliedPass !== 'admin123') {
         sendError(res, 'Invalid password for Super Administrator. Please check your credentials.', 401);
         return;
       }
@@ -145,8 +220,7 @@ router.post('/login', async (req: Request, res: Response) => {
       resolvedRole = 'SUPER_ADMIN';
     }
 
-    // 4. Strict RBAC Enforcement: If no valid registered account exists, reject with 401
-    // (Random test IDs and unregistered accounts are strictly rejected)
+    // 5. Strict RBAC Enforcement: If no valid registered account exists, reject with 401
     if (!user) {
       sendError(res, 'Invalid User ID or Email. Account not found.', 401);
       return;
@@ -154,12 +228,26 @@ router.post('/login', async (req: Request, res: Response) => {
 
     user.role_name = resolvedRole || 'INSTITUTION_ADMIN';
 
-    // 5. Password Verification: Enforce admin123 for Super Administrator
-    if (user.role_name === 'SUPER_ADMIN' || isSuperAdminAlias) {
-      if (password && password !== 'admin123') {
-        sendError(res, 'Invalid password for Super Administrator. Please check your credentials.', 401);
-        return;
+    // 6. Password Verification:
+    // Support default password 'admin123' across all accounts (Admin, Faculty, Staff).
+    // Also support custom provisioned passwords via bcrypt comparison.
+    // If password is blank or omitted, automatically defaults to 'admin123'.
+    const suppliedPassword = (password || '').trim() || 'admin123';
+
+    const isDefaultAdminPass = suppliedPassword === 'admin123';
+    let isPasswordValid = isDefaultAdminPass;
+
+    if (!isPasswordValid && user.encrypted_password) {
+      try {
+        isPasswordValid = bcrypt.compareSync(suppliedPassword, user.encrypted_password);
+      } catch {
+        isPasswordValid = false;
       }
+    }
+
+    if (!isPasswordValid) {
+      sendError(res, 'Invalid password. Default password is admin123.', 401);
+      return;
     }
 
     let permissions: string[] = [];
@@ -205,7 +293,9 @@ router.post('/login', async (req: Request, res: Response) => {
     const assignedWorkspaces: string[] =
       (user?.scope && Array.isArray((user.scope as any).workspaces))
         ? (user.scope as any).workspaces
-        : [];
+        : (user?.raw_user_meta_data?.workspaces && Array.isArray(user.raw_user_meta_data.workspaces))
+        ? user.raw_user_meta_data.workspaces
+        : (user.role_name === 'FACULTY' ? ['faculty', 'academics', 'attendance', 'examinations', 'timetable'] : []);
 
     const tokenPayload = {
       id: user.id,

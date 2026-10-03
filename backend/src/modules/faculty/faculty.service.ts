@@ -11,7 +11,16 @@ export class FacultyService {
       designation: row.designation || 'Lecturer',
       department: row.department || 'Academic Department',
       email: row.email,
-      phone: row.phone || '+91 98000 00000',
+      phone: row.phone || '',
+      qualification: row.qualification || '',
+      university: row.university || '',
+      subjects: row.subjects || '',
+      experience: row.experience || '',
+      address: row.address || '',
+      dateOfBirth: row.dateOfBirth ? new Date(row.dateOfBirth).toISOString().split('T')[0] : '',
+      gender: row.gender || '',
+      userId: row.userId || row.email,
+      hasAccount: !!row.hasAccount,
       assignedClasses: row.assignedClasses || [],
       todayClasses: [
         {
@@ -36,8 +45,16 @@ export class FacultyService {
           status: 'UPCOMING',
         },
       ],
-      status: row.status.toUpperCase(),
+      status: (row.status || 'ACTIVE').toUpperCase(),
     }));
+  }
+
+  async addStaffMember(institutionId: string, data: any) {
+    return await facultyRepository.createStaffMember(institutionId, data);
+  }
+
+  async addStaffBulk(institutionId: string, items: any[]) {
+    return await facultyRepository.createStaffBulk(institutionId, items);
   }
 
   async getFacultyMember(id: string, institutionId: string) {

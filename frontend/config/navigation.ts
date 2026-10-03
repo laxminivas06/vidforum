@@ -51,7 +51,8 @@ export const NAVIGATION_CONFIG: Record<RoleType, NavGroup[]> = {
     {
       label: "OVERVIEW",
       items: [
-        { title: "Dashboard", href: "/dashboard", iconName: "LayoutDashboard" },
+        { title: "Institute Admin Workspace", href: "/dashboard", iconName: "ShieldCheck" },
+        { title: "Faculty & User Accounts", href: "/dashboard?tab=users", iconName: "Users" },
       ],
     },
     {

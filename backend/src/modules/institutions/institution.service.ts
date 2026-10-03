@@ -170,6 +170,7 @@ export class InstitutionService {
         email: data.email.trim().toLowerCase(),
         institutionId: targetInstId,
         workspaces: Array.isArray(data.workspaces) ? data.workspaces : [],
+        password: data.password || 'admin123',
       });
     } catch (dbErr) {
       console.warn('Database admin persistence error:', (dbErr as any)?.message);

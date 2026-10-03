@@ -86,8 +86,17 @@ export interface FacultyMember {
   department: string
   email: string
   phone: string
+  qualification?: string
+  university?: string
+  subjects?: string
+  experience?: string
+  address?: string
+  dateOfBirth?: string
+  gender?: string
+  userId?: string
+  hasAccount?: boolean
   assignedClasses: FacultyAssignment[]
-  todayClasses: {
+  todayClasses?: {
     time: string
     grade: string
     section: string

@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs';
 import { db } from '../../config/database';
 
 export class InstitutionRepository {
@@ -94,24 +95,42 @@ export class InstitutionRepository {
     email: string;
     institutionId: string;
     workspaces: string[];
+    password?: string;
   }) {
     const adminRoleId = '33333333-3333-3333-3333-333333333301';
     const client = await db.getClient();
     try {
       await client.query('BEGIN');
       const cleanEmail = data.email.trim().toLowerCase();
+      const cleanUserId = data.userId.trim().toLowerCase();
       const displayName = data.name?.trim() || data.userId.trim();
+      const rawPassword = (data.password && data.password.trim()) || 'admin123';
+      const defaultPassHash = bcrypt.hashSync(rawPassword, 10);
+      const meta = {
+        full_name: displayName,
+        user_id: cleanUserId,
+        userId: cleanUserId,
+        plain_password_hint: rawPassword,
+      };
 
       let userRes = await client.query('SELECT id FROM auth.users WHERE LOWER(email) = LOWER($1)', [cleanEmail]);
       let profileId = userRes.rows[0]?.id;
 
       if (!profileId) {
         const insertAuth = await client.query(`
-          INSERT INTO auth.users (id, email, raw_user_meta_data, created_at, updated_at)
-          VALUES (gen_random_uuid(), $1, $2, now(), now())
+          INSERT INTO auth.users (id, email, encrypted_password, raw_user_meta_data, created_at, updated_at)
+          VALUES (gen_random_uuid(), $1, $2, $3, now(), now())
           RETURNING id
-        `, [cleanEmail, JSON.stringify({ full_name: displayName })]);
+        `, [cleanEmail, defaultPassHash, JSON.stringify(meta)]);
         profileId = insertAuth.rows[0].id;
+      } else {
+        await client.query(`
+          UPDATE auth.users
+          SET raw_user_meta_data = (COALESCE(raw_user_meta_data, '{}'::jsonb) || $1::jsonb),
+              encrypted_password = COALESCE(encrypted_password, $2),
+              updated_at = now()
+          WHERE id = $3
+        `, [JSON.stringify(meta), defaultPassHash, profileId]);
       }
 
       await client.query(`

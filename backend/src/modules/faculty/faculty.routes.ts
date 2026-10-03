@@ -12,6 +12,20 @@ router.get(
   facultyController.getFaculty.bind(facultyController)
 );
 
+// POST /api/v1/faculty (Add Staff Member)
+router.post(
+  '/',
+  tenantMiddleware,
+  facultyController.createFaculty.bind(facultyController)
+);
+
+// POST /api/v1/faculty/bulk (Bulk Add Staff Members from CSV/Excel)
+router.post(
+  '/bulk',
+  tenantMiddleware,
+  facultyController.createFacultyBulk.bind(facultyController)
+);
+
 // GET /api/v1/faculty/me
 router.get(
   '/me',

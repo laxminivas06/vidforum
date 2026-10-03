@@ -76,6 +76,27 @@ export class FacultyController {
       next(error);
     }
   }
+
+  async createFaculty(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const instId = req.institutionId!;
+      const staffMember = await facultyService.addStaffMember(instId, req.body);
+      sendSuccess(res, staffMember, 'Staff member added successfully', 201);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async createFacultyBulk(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const instId = req.institutionId!;
+      const list = Array.isArray(req.body) ? req.body : (req.body.staff || req.body.members || []);
+      const result = await facultyService.addStaffBulk(instId, list);
+      sendSuccess(res, result, 'Bulk staff processing completed', 201);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const facultyController = new FacultyController();

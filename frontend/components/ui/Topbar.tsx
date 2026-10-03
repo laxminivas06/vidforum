@@ -150,7 +150,7 @@ export const Topbar: React.FC<TopbarProps> = ({
               </div>
 
               <div className="max-h-80 overflow-y-auto py-1 space-y-1">
-                {/* 1. Executive Hub Option */}
+                {/* 1. Institute Admin Workspace Option */}
                 <Link
                   href="/dashboard"
                   onClick={() => setIsWorkspaceDropdownOpen(false)}
@@ -165,9 +165,9 @@ export const Topbar: React.FC<TopbarProps> = ({
                     <LayoutDashboard className="w-3.5 h-3.5 text-brand-primary" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="font-semibold text-xs truncate">All Workspaces Hub</div>
+                    <div className="font-semibold text-xs truncate">Institute Admin Workspace</div>
                     <div className="text-[10px] text-text-secondary truncate">
-                      Multi-workspace overview & KPIs
+                      Tenant admin, faculty accounts & overview
                     </div>
                   </div>
                   {currentPath === "/dashboard" && (

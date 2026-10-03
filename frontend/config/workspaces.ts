@@ -22,15 +22,16 @@ export interface PlatformWorkspace {
 export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
   {
     id: "dashboard",
-    name: "Executive Workspace Hub",
-    shortName: "Hub",
+    name: "Institute Admin Workspace",
+    shortName: "Institute Admin",
     category: "OVERVIEW",
-    description: "Multi-tenant institutional overview, enrollment stats and workspace launcher",
-    iconName: "LayoutDashboard",
+    description: "Multi-tenant institutional administration, user management, and faculty account provisioning",
+    iconName: "ShieldCheck",
     primaryRoute: "/dashboard",
     routes: ["/dashboard"],
     navItems: [
-      { title: "Executive Overview", href: "/dashboard", iconName: "LayoutDashboard" },
+      { title: "Admin Overview", href: "/dashboard", iconName: "LayoutDashboard" },
+      { title: "Faculty & User Accounts", href: "/dashboard?tab=users", iconName: "Users" },
       { title: "Student Master 360°", href: "/students/cccccccc-cccc-cccc-cccc-cccccccccc01", iconName: "User" },
     ],
   },

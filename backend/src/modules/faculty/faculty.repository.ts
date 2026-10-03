@@ -226,14 +226,15 @@ export class FacultyRepository {
   }
 
   async findFacultyByProfileId(profileId: string, institutionId: string) {
+    const cleanId = (profileId || '').trim();
     const res = await db.query(
       `SELECT st.*, p.full_name, p.email, p.phone, d.name as department_name, des.name as designation_name
        FROM staff st
        JOIN profiles p ON p.id = st.profile_id
        LEFT JOIN departments d ON d.id = st.department_id
        LEFT JOIN designations des ON des.id = st.designation_id
-       WHERE (st.profile_id = $1 OR p.id = $1 OR LOWER(TRIM(COALESCE(p.email, ''))) = LOWER(TRIM($1))) AND (st.institution_id = $2 OR $2 IS NULL)`,
-      [profileId, institutionId]
+       WHERE (st.profile_id::text = $1 OR p.id::text = $1 OR LOWER(p.email) = LOWER($1)) AND (st.institution_id::text = $2 OR $2 IS NULL)`,
+      [cleanId, institutionId || null]
     );
     return res.rows[0] || null;
   }

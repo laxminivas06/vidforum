@@ -97,7 +97,6 @@ export const AppShell: React.FC<AppShellProps> = ({
 
   const isBlockedByWorkspaceRestriction =
     !isSuperAdmin &&
-    role === "INSTITUTION_ADMIN" &&
     user?.assignedWorkspaces &&
     user.assignedWorkspaces.length > 0 &&
     !isPathAllowedForWorkspaces(pathname, user.assignedWorkspaces)
@@ -165,7 +164,7 @@ export const AppShell: React.FC<AppShellProps> = ({
             <div className="flex flex-col items-center justify-center py-12">
               <PermissionDenied
                 requiredPermission="workspace.scoped_access"
-                message="Access Restricted: Your institutional administrator account has only been granted privileges for designated workspaces by the Platform Super Administrator. Contact your Super Admin to expand your workspace access."
+                message="Access Restricted: Your account has only been granted privileges for designated workspaces. Contact your administrator to expand your workspace access."
               />
               <Link href="/dashboard" className="mt-4">
                 <Button size="default" variant="primary" leadingIcon={<ArrowLeft className="w-4 h-4" />}>

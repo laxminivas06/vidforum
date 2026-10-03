@@ -16,6 +16,9 @@ import optionalRoutes from '../modules/optional-modules/optional-modules.routes'
 import usersRoutes from '../modules/users/users.routes';
 import notificationRoutes from '../modules/notifications/notification.routes';
 import auditRoutes from '../modules/audit/audit.routes';
+import workspaceRoutes from '../modules/workspaces/workspace.routes';
+import { authMiddleware } from '../middleware/auth.middleware';
+import { requireWorkspace } from '../middleware/workspace.middleware';
 import { db } from '../config/database';
 import { sendSuccess } from '../utils/api-response';
 
@@ -44,20 +47,23 @@ router.get('/health', async (_req: Request, res: Response) => {
 
 // Domain Routes
 router.use('/auth', authRoutes);
+router.use('/workspaces', workspaceRoutes);
 router.use('/users', usersRoutes);
 router.use('/institutions', institutionRoutes);
 router.use('/notifications', notificationRoutes);
 router.use('/audit-logs', auditRoutes);
-router.use('/academics', academicRoutes);
-router.use('/admissions', admissionsRoutes);
-router.use('/students', studentRoutes);
-router.use('/faculty', facultyRoutes);
-router.use('/attendance', attendanceRoutes);
-router.use('/examinations', examRoutes);
-router.use('/finance', financeRoutes);
-router.use('/documents', documentRoutes);
-router.use('/hrms', hrmsRoutes);
-router.use('/timetable', timetableRoutes);
+router.use('/students', authMiddleware, studentRoutes);
+
+// Strict Workspace Enforcement
+router.use('/academics', authMiddleware, requireWorkspace('academics'), academicRoutes);
+router.use('/admissions', authMiddleware, requireWorkspace('admissions'), admissionsRoutes);
+router.use('/faculty', authMiddleware, requireWorkspace('faculty'), facultyRoutes);
+router.use('/attendance', authMiddleware, requireWorkspace('attendance'), attendanceRoutes);
+router.use('/examinations', authMiddleware, requireWorkspace('examinations'), examRoutes);
+router.use('/finance', authMiddleware, requireWorkspace('finance'), financeRoutes);
+router.use('/documents', authMiddleware, requireWorkspace('documents'), documentRoutes);
+router.use('/hrms', authMiddleware, requireWorkspace('hrms'), hrmsRoutes);
+router.use('/timetable', authMiddleware, requireWorkspace('timetable'), timetableRoutes);
 router.use('/ai-yantra', aiYantraRoutes);
 router.use('/optional-modules', optionalRoutes);
 

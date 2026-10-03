@@ -44,12 +44,12 @@
   - [x] Implement forgot-password token flow and admin-initiated credential reset.
   - [x] Log immutable security audit events for all login attempts, failures, lockouts, and resets.
   - [x] Author automated negative and positive test suites on test database.
-- [ ] **R3: Server-Side Workspace Enforcement**
-  - [ ] Expose single canonical workspace registry via `GET /api/v1/workspaces`.
-  - [ ] Implement `requireWorkspace(key)` middleware across all route groups.
-  - [ ] Verify database-backed workspace grant validation on every request (cached via `perm_version`).
-  - [ ] Synchronize frontend navigation and page route guards with server-side 403 enforcement.
-  - [ ] Author cross-tenant and ungranted workspace denial test suites.
+- [x] **R3: Server-Side Workspace Enforcement**
+  - [x] Expose single canonical workspace registry via `GET /api/v1/workspaces`.
+  - [x] Implement `requireWorkspace(key)` middleware across all route groups.
+  - [x] Verify database-backed workspace grant validation on every request (cached via `perm_version`).
+  - [x] Synchronize frontend navigation and page route guards with server-side 403 enforcement.
+  - [x] Author cross-tenant and ungranted workspace denial test suites.
 - [ ] **R4: Account Provisioning Engine**
   - [ ] Extend existing Faculty & User Accounts modal with Section 10 Role Templates (`Teacher`, `HR Officer`, `Admission Officer`, etc.).
   - [ ] Implement discrete actions: Provision, Edit Access, Reset Credentials, Deactivate/Reactivate, Audit.

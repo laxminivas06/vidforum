@@ -50,12 +50,12 @@
   - [x] Verify database-backed workspace grant validation on every request (cached via `perm_version`).
   - [x] Synchronize frontend navigation and page route guards with server-side 403 enforcement.
   - [x] Author cross-tenant and ungranted workspace denial test suites.
-- [ ] **R4: Account Provisioning Engine**
-  - [ ] Extend existing Faculty & User Accounts modal with Section 10 Role Templates (`Teacher`, `HR Officer`, `Admission Officer`, etc.).
-  - [ ] Implement discrete actions: Provision, Edit Access, Reset Credentials, Deactivate/Reactivate, Audit.
-  - [ ] Implement Bulk Provisioning with atomic per-row error handling and one-time downloadable credentials CSV.
-  - [ ] Add clipboard credentials card enforcing first-login password change.
-  - [ ] Author automated tests for single and bulk provisioning failure paths.
+- [x] **R4: Account Provisioning Engine**
+  - [x] Extend existing Faculty & User Accounts modal with Section 10 Role Templates (`Teacher`, `HR Officer`, `Admission Officer`, etc.).
+  - [x] Implement discrete actions: Provision, Edit Access, Reset Credentials, Deactivate/Reactivate, Audit.
+  - [x] Implement Bulk Provisioning with atomic per-row error handling and one-time downloadable credentials CSV.
+  - [x] Add clipboard credentials card enforcing first-login password change.
+  - [x] Author automated tests for single and bulk provisioning failure paths.
 - [ ] **R5: Typo, Schema & Mock Data Sanitation**
   - [ ] Correct all label typos across UI, templates, and validation messages (`Experience`, `Date of Birth`, `University`, `Phone Number`).
   - [ ] Standardize schema attributes to snake_case (`experience_years`, `date_of_birth`).

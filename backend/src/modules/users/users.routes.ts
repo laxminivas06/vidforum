@@ -3,6 +3,8 @@ import bcrypt from 'bcryptjs';
 import { db } from '../../config/database';
 import { env } from '../../config/env';
 import { sendSuccess, sendError } from '../../utils/api-response';
+import { ROLE_TEMPLATES } from './role-templates';
+import { provisioningService } from './provisioning.service';
 
 const router = Router();
 
@@ -327,6 +329,116 @@ router.post('/roles/:roleId/permissions', async (req: Request, res: Response) =>
   }
 });
 
+// GET /api/v1/users/role-templates
+router.get('/role-templates', (_req: Request, res: Response) => {
+  sendSuccess(res, Object.values(ROLE_TEMPLATES));
+});
+
+const getUserAgent = (req: Request): string | undefined => {
+  const ua = req.headers['user-agent'];
+  return Array.isArray(ua) ? ua[0] : ua;
+};
+
+// POST /api/v1/users/provision - Single account provisioning engine with Role Templates
+router.post('/provision', async (req: Request, res: Response) => {
+  try {
+    const user = (req as any).user;
+    const result = await provisioningService.provisionUser(
+      req.body,
+      user?.id,
+      req.ip,
+      getUserAgent(req)
+    );
+    sendSuccess(res, result, 'User account provisioned successfully', 201);
+  } catch (error: any) {
+    sendError(res, error.message, 400);
+  }
+});
+
+// POST /api/v1/users/bulk-provision - Bulk account provisioning engine with atomic per-row error reporting
+router.post('/bulk-provision', async (req: Request, res: Response) => {
+  try {
+    const user = (req as any).user;
+    const { users, institutionId } = req.body;
+    const result = await provisioningService.bulkProvisionUsers(
+      users,
+      institutionId,
+      user?.id,
+      req.ip,
+      getUserAgent(req)
+    );
+    sendSuccess(res, result, 'Bulk provisioning completed', 200);
+  } catch (error: any) {
+    sendError(res, error.message, 400);
+  }
+});
+
+// PATCH /api/v1/users/:id/access - Edit role, role template, and workspace grants
+router.patch('/:id/access', async (req: Request, res: Response) => {
+  try {
+    const user = (req as any).user;
+    const result = await provisioningService.updateUserAccess(
+      req.params.id as string,
+      req.body,
+      user?.id,
+      req.ip,
+      getUserAgent(req)
+    );
+    sendSuccess(res, result, 'User access updated successfully');
+  } catch (error: any) {
+    sendError(res, error.message, 400);
+  }
+});
+
+// POST /api/v1/users/:id/reset-credentials - Reset credentials with first-login requirement
+router.post('/:id/reset-credentials', async (req: Request, res: Response) => {
+  try {
+    const user = (req as any).user;
+    const result = await provisioningService.resetCredentials(
+      req.params.id as string,
+      req.body?.password,
+      user?.id,
+      req.ip,
+      getUserAgent(req)
+    );
+    sendSuccess(res, result, 'User credentials reset successfully');
+  } catch (error: any) {
+    sendError(res, error.message, 400);
+  }
+});
+
+// PATCH /api/v1/users/:id/status - Deactivate or reactivate user account
+router.patch('/:id/status', async (req: Request, res: Response) => {
+  try {
+    const user = (req as any).user;
+    const { status } = req.body;
+    if (!['active', 'inactive', 'suspended'].includes(status?.toLowerCase())) {
+      sendError(res, 'Valid status required: active, inactive, suspended', 400);
+      return;
+    }
+    const result = await provisioningService.updateUserStatus(
+      req.params.id as string,
+      status.toLowerCase(),
+      user?.id,
+      req.ip,
+      getUserAgent(req)
+    );
+    sendSuccess(res, result, `User account ${status} successfully`);
+  } catch (error: any) {
+    sendError(res, error.message, 400);
+  }
+});
+
+// GET /api/v1/users/:id/audit - Security and provisioning audit trail
+router.get('/:id/audit', async (req: Request, res: Response) => {
+  try {
+    const result = await provisioningService.getUserAudit(req.params.id as string);
+    sendSuccess(res, result);
+  } catch (error: any) {
+    sendError(res, error.message, 500);
+  }
+});
+
 // GET /api/v1/users/faculty-accounts - Fetch faculty roster with credentials status
 router.get('/faculty-accounts', async (req: Request, res: Response) => {
   try {
@@ -340,6 +452,7 @@ router.get('/faculty-accounts', async (req: Request, res: Response) => {
         p.email,
         p.phone,
         st.employment_status as status,
+        p.status as "profileStatus",
         COALESCE(d.name, 'Academic Department') as department,
         COALESCE(des.name, 'Lecturer') as designation,
         st.qualification,
@@ -357,6 +470,7 @@ router.get('/faculty-accounts', async (req: Request, res: Response) => {
           u.raw_user_meta_data->'workspaces',
           '["faculty", "academics", "attendance", "examinations", "timetable"]'::jsonb
         ) as "assignedWorkspaces",
+        COALESCE(ur.scope->>'roleTemplate', 'TEACHER') as "roleTemplate",
         COALESCE(r.name, 'FACULTY') as role,
         st.created_at as "createdAt"
       FROM staff st
@@ -378,125 +492,40 @@ router.get('/faculty-accounts', async (req: Request, res: Response) => {
 
 // POST /api/v1/users/provision-faculty - Generate User ID & Password for faculty / staff
 router.post('/provision-faculty', async (req: Request, res: Response) => {
-  const client = await db.getClient();
   try {
-    const { staffId, name, email, userId, password, role = 'FACULTY', institutionId, workspaces } = req.body;
+    const user = (req as any).user;
+    const { staffId, name, email, userId, password, role = 'FACULTY', roleTemplate, institutionId, workspaces } = req.body;
 
-    if (!email) {
-      sendError(res, 'Email is required to provision faculty credentials', 400);
-      return;
-    }
-
-    const cleanEmail = email.trim().toLowerCase();
-    const cleanUserId = (userId || cleanEmail).trim();
-    const cleanName = (name || cleanUserId).trim();
-    const rawPassword = (password && password.trim()) || env.DEFAULT_INITIAL_PASSWORD;
-    const hashedPassword = bcrypt.hashSync(rawPassword, 10);
-    const cleanWorkspaces: string[] = Array.isArray(workspaces) && workspaces.length > 0
-      ? workspaces
-      : ['faculty', 'academics', 'attendance', 'examinations', 'timetable'];
-
-    // 1. Resolve institution
-    let targetInstId = institutionId;
-    if (!targetInstId) {
-      const instRes = await client.query("SELECT id FROM institutions WHERE status = 'active' ORDER BY created_at ASC LIMIT 1");
-      targetInstId = instRes.rows[0]?.id;
-    }
-
-    // 2. Resolve Role
-    const roleRes = await client.query(
-      `SELECT id, name FROM roles 
-       WHERE LOWER(name) = LOWER($1) 
-          OR LOWER(REPLACE(name, ' ', '_')) = LOWER($1)
-       LIMIT 1`,
-      [role.trim()]
+    const result = await provisioningService.provisionUser(
+      {
+        staffId,
+        name,
+        email,
+        userId,
+        password,
+        roleTemplate: roleTemplate || role || 'TEACHER',
+        institutionId,
+        workspaces,
+      },
+      user?.id,
+      req.ip,
+      req.headers['user-agent'] as string
     );
-    const roleId = roleRes.rows[0]?.id || '33333333-3333-3333-3333-333333333302';
-    const resolvedRoleName = roleRes.rows[0]?.name || 'FACULTY';
-
-    await client.query('BEGIN');
-
-    // 3. Upsert into auth.users with encrypted_password, user_id metadata, and permitted workspaces
-    let userRes = await client.query('SELECT id, raw_user_meta_data FROM auth.users WHERE LOWER(email) = LOWER($1)', [cleanEmail]);
-    let profileId = userRes.rows[0]?.id;
-
-    const userMetadata = {
-      full_name: cleanName,
-      user_id: cleanUserId,
-      userId: cleanUserId,
-      must_change_password: true,
-      workspaces: cleanWorkspaces,
-    };
-
-    if (profileId) {
-      await client.query(
-        `UPDATE auth.users 
-         SET encrypted_password = $1,
-             raw_user_meta_data = (COALESCE(raw_user_meta_data, '{}'::jsonb) - 'plain_password_hint' || $2::jsonb),
-             updated_at = now()
-         WHERE id = $3`,
-        [hashedPassword, JSON.stringify(userMetadata), profileId]
-      );
-    } else {
-      const insertAuth = await client.query(
-        `INSERT INTO auth.users (id, email, encrypted_password, raw_user_meta_data, created_at, updated_at)
-         VALUES (gen_random_uuid(), $1, $2, $3, now(), now())
-         RETURNING id`,
-        [cleanEmail, hashedPassword, JSON.stringify(userMetadata)]
-      );
-      profileId = insertAuth.rows[0].id;
-    }
-
-    // 4. Ensure profiles table has record
-    await client.query(
-      `INSERT INTO profiles (id, full_name, email, default_institution_id, status, must_change_password)
-       VALUES ($1, $2, $3, $4, 'active', true)
-       ON CONFLICT (id) DO UPDATE
-         SET full_name = EXCLUDED.full_name, default_institution_id = COALESCE(EXCLUDED.default_institution_id, profiles.default_institution_id), must_change_password = true, updated_at = now()`,
-      [profileId, cleanName, cleanEmail, targetInstId]
-    );
-
-    // 5. If staffId provided, link to profile_id; else ensure staff row exists
-    if (staffId) {
-      await client.query(`UPDATE staff SET profile_id = $1 WHERE id = $2`, [profileId, staffId]);
-    } else {
-      const existingStaff = await client.query('SELECT id FROM staff WHERE profile_id = $1', [profileId]);
-      if (existingStaff.rowCount === 0) {
-        const empCode = `FAC-EMP-${Math.floor(1000 + Math.random() * 9000)}`;
-        await client.query(
-          `INSERT INTO staff (id, institution_id, profile_id, employee_code, is_teaching_staff, employment_status, date_of_joining)
-           VALUES (gen_random_uuid(), $1, $2, $3, true, 'active', CURRENT_DATE)`,
-          [targetInstId, profileId, empCode]
-        );
-      }
-    }
-
-    // 6. Assign role in user_roles with permitted workspaces in scope
-    await client.query('DELETE FROM user_roles WHERE profile_id = $1', [profileId]);
-    await client.query(
-      `INSERT INTO user_roles (id, profile_id, role_id, institution_id, scope, granted_at)
-       VALUES (gen_random_uuid(), $1, $2, $3, $4, now())`,
-      [profileId, roleId, targetInstId, JSON.stringify({ workspaces: cleanWorkspaces })]
-    );
-
-    await client.query('COMMIT');
 
     sendSuccess(res, {
-      profileId,
-      staffId: staffId || null,
-      name: cleanName,
-      email: cleanEmail,
-      userId: cleanUserId,
-      role: resolvedRoleName,
-      workspaces: cleanWorkspaces,
+      profileId: result.id,
+      staffId: result.staffId || null,
+      name: result.name,
+      email: result.email,
+      userId: result.userId,
+      role: result.role,
+      roleTemplate: result.roleTemplate,
+      workspaces: result.workspaces,
       hasCredentials: true,
-      plainPassword: rawPassword,
+      plainPassword: result.initialPassword,
     }, 'Faculty credentials provisioned successfully. User can now log in.');
   } catch (error: any) {
-    await client.query('ROLLBACK');
-    sendError(res, error.message, 500);
-  } finally {
-    client.release();
+    sendError(res, error.message, 400);
   }
 });
 

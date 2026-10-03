@@ -671,3 +671,192 @@ export function useFinance() {
   })
 }
 
+export function useRoleTemplates() {
+  return useQuery({
+    queryKey: ["role-templates"],
+    queryFn: async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/users/role-templates`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for role-templates:", err)
+      }
+      return []
+    },
+  })
+}
+
+export function useProvisionUser() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (payload: {
+      name?: string
+      email: string
+      userId?: string
+      roleTemplate?: string
+      workspaces?: string[]
+      password?: string
+      institutionId?: string
+      staffId?: string
+      phone?: string
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/users/provision`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(payload),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to provision user")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["faculty-accounts"] })
+      queryClient.invalidateQueries({ queryKey: ["faculty-roster"] })
+      queryClient.invalidateQueries({ queryKey: ["platform-users"] })
+    },
+  })
+}
+
+export function useBulkProvisionUsers() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (payload: {
+      users: Array<{
+        name: string
+        email: string
+        userId?: string
+        roleTemplate?: string
+        workspaces?: string[]
+        phone?: string
+      }>
+      institutionId?: string
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/users/bulk-provision`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(payload),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Bulk provisioning failed")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["faculty-accounts"] })
+      queryClient.invalidateQueries({ queryKey: ["faculty-roster"] })
+      queryClient.invalidateQueries({ queryKey: ["platform-users"] })
+    },
+  })
+}
+
+export function useUpdateUserAccess() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({
+      id,
+      ...payload
+    }: {
+      id: string
+      roleTemplate?: string
+      role?: string
+      workspaces?: string[]
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/users/${id}/access`, {
+        method: "PATCH",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(payload),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to update user access")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["faculty-accounts"] })
+      queryClient.invalidateQueries({ queryKey: ["platform-users"] })
+    },
+  })
+}
+
+export function useResetUserCredentials() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({ id, password }: { id: string; password?: string }) => {
+      const res = await fetch(`${API_BASE_URL}/users/${id}/reset-credentials`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ password }),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to reset credentials")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["faculty-accounts"] })
+      queryClient.invalidateQueries({ queryKey: ["platform-users"] })
+    },
+  })
+}
+
+export function useUpdateUserStatus() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({
+      id,
+      status,
+    }: {
+      id: string
+      status: "active" | "inactive" | "suspended"
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/users/${id}/status`, {
+        method: "PATCH",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ status }),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to update user status")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["faculty-accounts"] })
+      queryClient.invalidateQueries({ queryKey: ["platform-users"] })
+    },
+  })
+}
+
+export function useUserAudit(userId?: string) {
+  return useQuery({
+    queryKey: ["user-audit", userId],
+    queryFn: async () => {
+      if (!userId) return []
+      try {
+        const res = await fetch(`${API_BASE_URL}/users/${userId}/audit`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for user audit:", err)
+      }
+      return []
+    },
+    enabled: Boolean(userId),
+  })
+}
+
+

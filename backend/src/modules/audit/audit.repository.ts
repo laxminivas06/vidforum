@@ -113,6 +113,38 @@ export class AuditRepository extends TenantScopedRepository<AuditRecord> {
     const res = await db.query(query, params);
     return res.rows[0] || null;
   }
+
+  async createLog(data: {
+    institutionId?: string | null;
+    actorId?: string | null;
+    action: string;
+    resourceTable: string;
+    resourceId?: string | null;
+    oldValue?: Record<string, any> | null;
+    newValue?: Record<string, any> | null;
+    ipAddress?: string | null;
+    userAgent?: string | null;
+  }) {
+    const rawIp = data.ipAddress;
+    const ip = rawIp && rawIp !== '::1' && !rawIp.includes('localhost') ? rawIp : null;
+    const res = await db.query(
+      `INSERT INTO audit_logs (id, institution_id, actor_id, action, resource_table, resource_id, old_value, new_value, ip_address, user_agent, created_at)
+       VALUES (gen_random_uuid(), $1, $2, $3, $4, $5, $6, $7, $8::inet, $9, now())
+       RETURNING *`,
+      [
+        data.institutionId || null,
+        data.actorId || null,
+        data.action,
+        data.resourceTable,
+        data.resourceId || null,
+        data.oldValue ? JSON.stringify(data.oldValue) : null,
+        data.newValue ? JSON.stringify(data.newValue) : null,
+        ip,
+        data.userAgent || null,
+      ]
+    );
+    return res.rows[0];
+  }
 }
 
 export const auditRepository = new AuditRepository();

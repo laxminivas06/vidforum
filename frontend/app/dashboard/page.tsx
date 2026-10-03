@@ -58,6 +58,11 @@ import {
   AlertCircle,
   CheckSquare,
   Square,
+  History,
+  Shield,
+  UserX,
+  UserCheck,
+  FileSpreadsheet as FileSpreadsheetIcon,
 } from "lucide-react"
 import {
   useInstitutions,
@@ -66,7 +71,12 @@ import {
   useFaculty,
   useFacultyAccounts,
   useProvisionFaculty,
+  useRoleTemplates,
+  useProvisionUser,
+  useResetUserCredentials,
+  useUpdateUserStatus,
 } from "@/lib/api/hooks"
+import { EditUserAccessModal, BulkProvisionModal, UserAuditModal } from "@/components/users"
 import { Institution, Applicant } from "@/types"
 import { PLATFORM_WORKSPACES } from "@/config/workspaces"
 
@@ -146,7 +156,11 @@ function InstitutionAdminDashboard() {
   const { data: fees } = useFinance()
   const { data: facultyAccounts = [], isLoading: accountsLoading } = useFacultyAccounts()
   const { data: staffList = [] } = useFaculty()
+  const { data: roleTemplates = [] } = useRoleTemplates()
   const provisionMutation = useProvisionFaculty()
+  const provisionUserMutation = useProvisionUser()
+  const resetCredentialsMutation = useResetUserCredentials()
+  const updateStatusMutation = useUpdateUserStatus()
 
   const [activeTab, setActiveTab] = useState<"overview" | "users">("overview")
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false)
@@ -162,7 +176,7 @@ function InstitutionAdminDashboard() {
     }
   }, [])
 
-  // Faculty Accounts State
+  // Faculty & User Accounts State
   const [userSearchQuery, setUserSearchQuery] = useState("")
   const [accountFilter, setAccountFilter] = useState<"ALL" | "CREDENTIALS_SET" | "PENDING">("ALL")
   const [isProvisionModalOpen, setIsProvisionModalOpen] = useState(false)
@@ -172,10 +186,26 @@ function InstitutionAdminDashboard() {
   const [provisionUserId, setProvisionUserId] = useState("")
   const [provisionPassword, setProvisionPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+  const [selectedRoleTemplate, setSelectedRoleTemplate] = useState<string>("TEACHER")
   const [provisionError, setProvisionError] = useState<string | null>(null)
   const [provisionSuccessData, setProvisionSuccessData] = useState<any | null>(null)
   const [copySuccessToast, setCopySuccessToast] = useState<string | null>(null)
   const [selectedWorkspaces, setSelectedWorkspaces] = useState<string[]>(DEFAULT_FACULTY_WORKSPACES)
+
+  // Additional Action Modals State
+  const [isBulkProvisionModalOpen, setIsBulkProvisionModalOpen] = useState(false)
+  const [isEditAccessModalOpen, setIsEditAccessModalOpen] = useState(false)
+  const [selectedUserForEdit, setSelectedUserForEdit] = useState<any | null>(null)
+  const [isAuditModalOpen, setIsAuditModalOpen] = useState(false)
+  const [selectedUserForAudit, setSelectedUserForAudit] = useState<any | null>(null)
+
+  const handleRoleTemplateChange = (tplKey: string) => {
+    setSelectedRoleTemplate(tplKey)
+    const tpl = roleTemplates.find((t: any) => t.key === tplKey)
+    if (tpl && Array.isArray(tpl.defaultWorkspaces) && tpl.defaultWorkspaces.length > 0) {
+      setSelectedWorkspaces(tpl.defaultWorkspaces)
+    }
+  }
 
   const handleToggleWorkspace = (wsId: string) => {
     setSelectedWorkspaces((prev) =>
@@ -209,7 +239,8 @@ function InstitutionAdminDashboard() {
       acc.email?.toLowerCase().includes(q) ||
       acc.employeeCode?.toLowerCase().includes(q) ||
       acc.userId?.toLowerCase().includes(q) ||
-      acc.subjects?.toLowerCase().includes(q)
+      acc.subjects?.toLowerCase().includes(q) ||
+      acc.roleTemplate?.toLowerCase().includes(q)
     )
   })
 
@@ -220,13 +251,15 @@ function InstitutionAdminDashboard() {
     if (found) {
       setProvisionName(found.name || "")
       setProvisionEmail(found.email || "")
-      // Suggest clean user ID from email or employee code
       const suggestedUserId = found.employeeCode
         ? found.employeeCode.toLowerCase().replace(/[^a-z0-9]/g, "")
-        : (found.email.split("@")[0] || `faculty_${Date.now()}`)
+        : (found.email.split("@")[0] || `user_${Date.now()}`)
       setProvisionUserId(suggestedUserId)
       if (!provisionPassword) {
         generateRandomPassword()
+      }
+      if (found.roleTemplate) {
+        setSelectedRoleTemplate(found.roleTemplate)
       }
       if (found.assignedWorkspaces && Array.isArray(found.assignedWorkspaces) && found.assignedWorkspaces.length > 0) {
         setSelectedWorkspaces(found.assignedWorkspaces)
@@ -241,7 +274,7 @@ function InstitutionAdminDashboard() {
     const specials = ["@", "!", "#", "$"]
     const special = specials[Math.floor(Math.random() * specials.length)]
     const randomNum = Math.floor(1000 + Math.random() * 9000)
-    const generated = `Faculty${special}${randomNum}`
+    const generated = `VidSecure${special}${randomNum}`
     setProvisionPassword(generated)
     return generated
   }
@@ -257,14 +290,14 @@ function InstitutionAdminDashboard() {
 
     try {
       setProvisionError(null)
-      const result = await provisionMutation.mutateAsync({
+      const result = await provisionUserMutation.mutateAsync({
         staffId: selectedStaffId || undefined,
         name: provisionName.trim() || undefined,
         email: provisionEmail.trim().toLowerCase(),
         userId: provisionUserId.trim() || provisionEmail.trim().toLowerCase(),
         password: finalPassword,
+        roleTemplate: selectedRoleTemplate,
         workspaces: selectedWorkspaces,
-        role: "FACULTY",
       })
 
       setProvisionSuccessData({
@@ -272,6 +305,7 @@ function InstitutionAdminDashboard() {
         email: provisionEmail,
         userId: provisionUserId || result.userId,
         password: finalPassword,
+        roleTemplate: result.roleTemplate || selectedRoleTemplate,
         workspaces: selectedWorkspaces,
         loginUrl: typeof window !== "undefined" ? `${window.location.origin}/login` : "/login",
       })
@@ -282,9 +316,51 @@ function InstitutionAdminDashboard() {
       setProvisionEmail("")
       setProvisionUserId("")
       setProvisionPassword("")
+      setSelectedRoleTemplate("TEACHER")
       setSelectedWorkspaces(DEFAULT_FACULTY_WORKSPACES)
     } catch (err: any) {
-      setProvisionError(err.message || "Failed to provision faculty credentials")
+      setProvisionError(err.message || "Failed to provision user credentials")
+    }
+  }
+
+  // Direct Credential Reset Handler
+  const handleDirectResetCredentials = async (account: any) => {
+    try {
+      const res = await resetCredentialsMutation.mutateAsync({
+        id: account.profileId || account.id,
+      })
+      setProvisionSuccessData({
+        name: account.name,
+        email: account.email,
+        userId: account.userId || account.email,
+        password: res.initialPassword,
+        roleTemplate: account.roleTemplate || "TEACHER",
+        workspaces: account.assignedWorkspaces || DEFAULT_FACULTY_WORKSPACES,
+        loginUrl: typeof window !== "undefined" ? `${window.location.origin}/login` : "/login",
+      })
+      setIsProvisionModalOpen(true)
+      setCopySuccessToast(`Credentials reset! Temporary password generated for ${account.name}.`)
+      setTimeout(() => setCopySuccessToast(null), 4000)
+    } catch (err: any) {
+      setCopySuccessToast(`Error: ${err.message || "Failed to reset credentials"}`)
+      setTimeout(() => setCopySuccessToast(null), 4000)
+    }
+  }
+
+  // Account Status Toggle Handler
+  const handleToggleStatus = async (account: any) => {
+    const isCurrentlyActive = (account.profileStatus || "active").toLowerCase() === "active"
+    const nextStatus = isCurrentlyActive ? "inactive" : "active"
+    try {
+      await updateStatusMutation.mutateAsync({
+        id: account.profileId || account.id,
+        status: nextStatus,
+      })
+      setCopySuccessToast(`Account status updated to ${nextStatus.toUpperCase()} for ${account.name}.`)
+      setTimeout(() => setCopySuccessToast(null), 3000)
+    } catch (err: any) {
+      setCopySuccessToast(`Error: ${err.message || "Failed to update status"}`)
+      setTimeout(() => setCopySuccessToast(null), 3000)
     }
   }
 
@@ -294,10 +370,10 @@ function InstitutionAdminDashboard() {
     const wsNames = workspaces && workspaces.length > 0
       ? workspaces.map((wId) => PLATFORM_WORKSPACES.find((w) => w.id === wId)?.shortName || wId).join(", ")
       : "Faculty, Academics, Attendance, Exams, Timetable"
-    const text = `VID Platform Faculty Credentials:\nUser ID / Login ID: ${userId || email}\nEmail: ${email}\nPassword: ${pwd || "[Generated at setup]"}\nPermitted Workspaces: ${wsNames}\nLogin Portal: ${loginUrl}`
+    const text = `VID Platform User Credentials:\nUser ID / Login ID: ${userId || email}\nEmail: ${email}\nInitial Password: ${pwd || "[Generated at setup]"}\nPermitted Workspaces: ${wsNames}\nNotice: Password change mandatory on first login.\nLogin Portal: ${loginUrl}`
     navigator.clipboard.writeText(text)
-    setCopySuccessToast(`Credentials copied! You can now send this User ID & Password to the faculty member.`)
-    setTimeout(() => setCopySuccessToast(null), 3000)
+    setCopySuccessToast(`Credentials copied! You can now send this User ID & Password to the user.`)
+    setTimeout(() => setCopySuccessToast(null), 3500)
   }
 
   // Build staff options for dropdown
@@ -366,10 +442,10 @@ function InstitutionAdminDashboard() {
     },
   ]
 
-  // Columns for Faculty Accounts Table
+  // Columns for Faculty & User Accounts Table
   const accountColumns: TableColumn<any>[] = [
     {
-      header: "Faculty / Staff Member",
+      header: "Member Name & Code",
       key: "name",
       render: (item) => (
         <div>
@@ -381,7 +457,7 @@ function InstitutionAdminDashboard() {
               </span>
             )}
           </div>
-          <div className="text-xs text-text-secondary font-mono">{item.employeeCode}</div>
+          <div className="text-xs text-text-secondary font-mono">{item.employeeCode || "No Employee Code"}</div>
         </div>
       ),
     },
@@ -390,13 +466,29 @@ function InstitutionAdminDashboard() {
       key: "designation",
       render: (item) => (
         <div>
-          <div className="text-xs font-medium text-text-primary">{item.designation || "Faculty"}</div>
+          <div className="text-xs font-medium text-text-primary">{item.designation || "Staff"}</div>
           <div className="text-[11px] text-text-secondary">{item.department || "Academic Department"}</div>
         </div>
       ),
     },
     {
-      header: "Login User ID / Email",
+      header: "Role Template",
+      key: "roleTemplate",
+      render: (item) => {
+        const tplKey = item.roleTemplate || "TEACHER"
+        const tpl = roleTemplates.find((t: any) => t.key === tplKey)
+        return (
+          <div className="flex flex-col gap-0.5">
+            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-brand-primary/10 text-brand-primary border border-brand-primary/30 w-fit">
+              {tpl?.name || tplKey}
+            </span>
+            <span className="text-[10px] text-text-muted">Role: {item.role}</span>
+          </div>
+        )
+      },
+    },
+    {
+      header: "User ID & Email",
       key: "userId",
       render: (item) => (
         <div>
@@ -409,17 +501,27 @@ function InstitutionAdminDashboard() {
       ),
     },
     {
-      header: "Account Status",
+      header: "Status",
       key: "hasCredentials",
-      render: (item) => (
-        <div>
-          {item.hasCredentials ? (
-            <Badge variant="positive">CREDENTIALS ACTIVE</Badge>
-          ) : (
-            <Badge variant="warning">PENDING SETUP</Badge>
-          )}
-        </div>
-      ),
+      render: (item) => {
+        const isInactive = (item.profileStatus || "active").toLowerCase() === "inactive"
+        return (
+          <div className="flex flex-col gap-1">
+            {isInactive ? (
+              <Badge variant="error">DEACTIVATED</Badge>
+            ) : item.hasCredentials ? (
+              <Badge variant="positive">CREDENTIALS ACTIVE</Badge>
+            ) : (
+              <Badge variant="warning">PENDING SETUP</Badge>
+            )}
+            {item.mustChangePassword && (
+              <span className="text-[9px] text-amber-600 dark:text-amber-400 font-mono">
+                First-login change req.
+              </span>
+            )}
+          </div>
+        )
+      },
     },
     {
       header: "Permitted Workspaces",
@@ -429,7 +531,7 @@ function InstitutionAdminDashboard() {
         if (list.length === 0) {
           return (
             <div className="flex items-center gap-1 text-[11px] text-text-muted">
-              <span className="italic">Default Faculty Set (5)</span>
+              <span className="italic">Default Set</span>
             </div>
           )
         }
@@ -451,42 +553,86 @@ function InstitutionAdminDashboard() {
       },
     },
     {
-      header: "Credentials Action",
+      header: "Actions",
       key: "staffId",
-      render: (item) => (
-        <div className="flex items-center gap-2">
-          <Button
-            size="dense"
-            variant={item.hasCredentials ? "secondary" : "primary"}
-            leadingIcon={<Key className="w-3 h-3" />}
-            onClick={() => {
-              handleStaffSelection(item.staffId)
-              if (item.assignedWorkspaces && Array.isArray(item.assignedWorkspaces) && item.assignedWorkspaces.length > 0) {
-                setSelectedWorkspaces(item.assignedWorkspaces)
-              } else {
-                setSelectedWorkspaces(DEFAULT_FACULTY_WORKSPACES)
-              }
-              setProvisionError(null)
-              setProvisionSuccessData(null)
-              setIsProvisionModalOpen(true)
-            }}
-          >
-            {item.hasCredentials ? "Reset Credentials" : "Set Credentials"}
-          </Button>
+      render: (item) => {
+        const isInactive = (item.profileStatus || "active").toLowerCase() === "inactive"
+        return (
+          <div className="flex items-center gap-1.5 flex-wrap">
+            {item.hasCredentials ? (
+              <Button
+                size="dense"
+                variant="secondary"
+                leadingIcon={<Key className="w-3 h-3" />}
+                title="Reset temporary password"
+                onClick={() => handleDirectResetCredentials(item)}
+              >
+                Reset
+              </Button>
+            ) : (
+              <Button
+                size="dense"
+                variant="primary"
+                leadingIcon={<Key className="w-3 h-3" />}
+                onClick={() => {
+                  handleStaffSelection(item.staffId || item.id)
+                  setIsProvisionModalOpen(true)
+                }}
+              >
+                Set
+              </Button>
+            )}
 
-          {item.hasCredentials && (
             <Button
               size="dense"
               variant="ghost"
-              title="Copy Login Info to give to faculty"
-              leadingIcon={<Copy className="w-3 h-3" />}
-              onClick={() => handleCopyCredentials(item.userId, item.email, item.tempPassword, item.assignedWorkspaces)}
+              title="Edit Role Template & Workspaces"
+              leadingIcon={<Shield className="w-3 h-3" />}
+              onClick={() => {
+                setSelectedUserForEdit(item)
+                setIsEditAccessModalOpen(true)
+              }}
             >
-              Copy
+              Access
             </Button>
-          )}
-        </div>
-      ),
+
+            <Button
+              size="dense"
+              variant="ghost"
+              title={isInactive ? "Reactivate account" : "Deactivate account"}
+              leadingIcon={isInactive ? <UserCheck className="w-3 h-3 text-emerald-500" /> : <UserX className="w-3 h-3 text-red-500" />}
+              onClick={() => handleToggleStatus(item)}
+            >
+              {isInactive ? "Enable" : "Disable"}
+            </Button>
+
+            <Button
+              size="dense"
+              variant="ghost"
+              title="Security & Lifecycle Audit"
+              leadingIcon={<History className="w-3 h-3" />}
+              onClick={() => {
+                setSelectedUserForAudit(item)
+                setIsAuditModalOpen(true)
+              }}
+            >
+              Audit
+            </Button>
+
+            {item.hasCredentials && (
+              <Button
+                size="dense"
+                variant="ghost"
+                title="Copy Login Info"
+                leadingIcon={<Copy className="w-3 h-3" />}
+                onClick={() => handleCopyCredentials(item.userId, item.email, item.tempPassword, item.assignedWorkspaces)}
+              >
+                Copy
+              </Button>
+            )}
+          </div>
+        )
+      },
     },
   ]
 
@@ -497,24 +643,35 @@ function InstitutionAdminDashboard() {
       rightHeaderAction={
         <div className="flex items-center gap-2">
           {activeTab === "users" ? (
-            <Button
-              size="dense"
-              variant="primary"
-              leadingIcon={<Plus className="w-3.5 h-3.5" />}
-              onClick={() => {
-                setSelectedStaffId("")
-                setProvisionName("")
-                setProvisionEmail("")
-                setProvisionUserId("")
-                generateRandomPassword()
-                setSelectedWorkspaces(DEFAULT_FACULTY_WORKSPACES)
-                setProvisionError(null)
-                setProvisionSuccessData(null)
-                setIsProvisionModalOpen(true)
-              }}
-            >
-              Generate Faculty Account
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                size="dense"
+                variant="secondary"
+                leadingIcon={<FileSpreadsheetIcon className="w-3.5 h-3.5" />}
+                onClick={() => setIsBulkProvisionModalOpen(true)}
+              >
+                Bulk Provision (CSV)
+              </Button>
+              <Button
+                size="dense"
+                variant="primary"
+                leadingIcon={<Plus className="w-3.5 h-3.5" />}
+                onClick={() => {
+                  setSelectedStaffId("")
+                  setProvisionName("")
+                  setProvisionEmail("")
+                  setProvisionUserId("")
+                  setSelectedRoleTemplate("TEACHER")
+                  generateRandomPassword()
+                  setSelectedWorkspaces(DEFAULT_FACULTY_WORKSPACES)
+                  setProvisionError(null)
+                  setProvisionSuccessData(null)
+                  setIsProvisionModalOpen(true)
+                }}
+              >
+                Provision Account
+              </Button>
+            </div>
           ) : (
             <>
               <Link href="/hrms/staff">
@@ -976,9 +1133,9 @@ function InstitutionAdminDashboard() {
                   <Key className="w-4.5 h-4.5" />
                 </div>
                 <div>
-                  <h2 className="text-base font-bold text-text-primary">Generate Faculty Credentials</h2>
+                  <h2 className="text-base font-bold text-text-primary">Provision User Account Credentials</h2>
                   <p className="text-xs text-text-secondary mt-0.5">
-                    Assign User ID & Password for faculty to log into the application
+                    Generate User ID & Password with Section 10 Role Templates and workspace isolation
                   </p>
                 </div>
               </div>
@@ -1006,16 +1163,29 @@ function InstitutionAdminDashboard() {
                         Account Successfully Provisioned!
                       </h4>
                       <p className="text-xs text-emerald-700 dark:text-emerald-400 mt-0.5">
-                        The faculty member can now log in using either their User ID or Email with the generated password.
+                        The user can now log in using either their User ID or Email with the generated temporary password.
                       </p>
                     </div>
+                  </div>
+
+                  {/* Mandatory First-Login Password Change Notice */}
+                  <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-300 text-xs flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 shrink-0" />
+                    <span>
+                      <strong>Mandatory First-Login Password Change:</strong> This user will be required to change their temporary password immediately upon their first login.
+                    </span>
                   </div>
 
                   {/* Credentials Box */}
                   <div className="p-4 rounded-xl bg-subtle border border-border-default space-y-3 font-mono text-xs">
                     <div className="flex items-center justify-between border-b border-border-subtle pb-2">
-                      <span className="text-text-secondary">Faculty Name:</span>
+                      <span className="text-text-secondary">Full Name:</span>
                       <span className="font-bold text-text-primary">{provisionSuccessData.name}</span>
+                    </div>
+
+                    <div className="flex items-center justify-between border-b border-border-subtle pb-2">
+                      <span className="text-text-secondary">Role Template:</span>
+                      <span className="font-bold text-brand-primary">{provisionSuccessData.roleTemplate}</span>
                     </div>
 
                     <div className="flex items-center justify-between border-b border-border-subtle pb-2">
@@ -1029,7 +1199,7 @@ function InstitutionAdminDashboard() {
                     </div>
 
                     <div className="flex items-center justify-between border-b border-border-subtle pb-2">
-                      <span className="text-text-secondary">Password:</span>
+                      <span className="text-text-secondary">Temporary Password:</span>
                       <span className="font-bold text-emerald-600 dark:text-emerald-400">{provisionSuccessData.password}</span>
                     </div>
 
@@ -1076,7 +1246,7 @@ function InstitutionAdminDashboard() {
                         )
                       }
                     >
-                      Copy Credentials to Give to Faculty
+                      Copy Credentials to Give to User
                     </Button>
 
                     <Link href="/login" target="_blank" className="flex-1">
@@ -1095,23 +1265,36 @@ function InstitutionAdminDashboard() {
                     </div>
                   )}
 
+                  {/* Section 10 Role Template */}
+                  <FormField label="Assign Role Template (Section 10 Standard)" required>
+                    <Select
+                      value={selectedRoleTemplate}
+                      onChange={(val) => handleRoleTemplateChange(val)}
+                      className="w-full text-xs font-semibold"
+                      options={roleTemplates.map((t: any) => ({
+                        label: `${t.name} (Role: ${t.roleName} • ${t.defaultWorkspaces?.length || 0} Default Workspaces)`,
+                        value: t.key,
+                      }))}
+                    />
+                  </FormField>
+
                   {/* Select Staff Member from HRMS Roster */}
-                  <FormField label="Link to Staff Member from HRMS Workspace" required>
+                  <FormField label="Optional: Link to Staff Member from HRMS Workspace">
                     <Select
                       options={staffOptions}
                       value={selectedStaffId}
                       onChange={(val) => handleStaffSelection(val)}
-                      placeholder="Select faculty member..."
+                      placeholder="Select staff member (optional)..."
                     />
                   </FormField>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Full Name */}
-                    <FormField label="Full Name">
+                    <FormField label="Full Name" required>
                       <Input
                         value={provisionName}
                         onChange={(e) => setProvisionName(e.target.value)}
-                        placeholder="Faculty full name"
+                        placeholder="User full name"
                       />
                     </FormField>
 
@@ -1121,7 +1304,7 @@ function InstitutionAdminDashboard() {
                         type="email"
                         value={provisionEmail}
                         onChange={(e) => setProvisionEmail(e.target.value)}
-                        placeholder="faculty@school.edu"
+                        placeholder="user@school.edu"
                       />
                     </FormField>
                   </div>
@@ -1135,14 +1318,14 @@ function InstitutionAdminDashboard() {
                     <Input
                       value={provisionUserId}
                       onChange={(e) => setProvisionUserId(e.target.value)}
-                      placeholder="e.g. fac.raman or FAC1042"
+                      placeholder="e.g. fac.raman or USR1042"
                       leftIcon={<Key className="w-3.5 h-3.5 text-text-muted" />}
                     />
                   </FormField>
 
                   {/* Password with Generator */}
                   <FormField
-                    label="Password"
+                    label="Initial Temporary Password"
                     helperText="Initial credential. Click 'Generate' to create a strong password or enter custom. User will update on first login."
                   >
                     <div className="flex gap-2">
@@ -1278,7 +1461,7 @@ function InstitutionAdminDashboard() {
                       type="submit"
                       variant="primary"
                       size="default"
-                      isLoading={provisionMutation.isPending}
+                      isLoading={provisionUserMutation.isPending}
                     >
                       Save & Provision Account
                     </Button>
@@ -1289,6 +1472,40 @@ function InstitutionAdminDashboard() {
           </div>
         </div>
       )}
+
+      {/* Edit User Access Modal */}
+      <EditUserAccessModal
+        isOpen={isEditAccessModalOpen}
+        user={selectedUserForEdit}
+        onClose={() => {
+          setIsEditAccessModalOpen(false)
+          setSelectedUserForEdit(null)
+        }}
+        onSuccess={() => {
+          setCopySuccessToast("User access updated successfully.")
+          setTimeout(() => setCopySuccessToast(null), 3000)
+        }}
+      />
+
+      {/* Bulk Provisioning Modal */}
+      <BulkProvisionModal
+        isOpen={isBulkProvisionModalOpen}
+        onClose={() => setIsBulkProvisionModalOpen(false)}
+        onSuccess={() => {
+          setCopySuccessToast("Bulk account provisioning completed.")
+          setTimeout(() => setCopySuccessToast(null), 3000)
+        }}
+      />
+
+      {/* User Audit Trail Modal */}
+      <UserAuditModal
+        isOpen={isAuditModalOpen}
+        user={selectedUserForAudit}
+        onClose={() => {
+          setIsAuditModalOpen(false)
+          setSelectedUserForAudit(null)
+        }}
+      />
 
       {/* Emergency Broadcast Confirm Dialog */}
       <ConfirmDialog

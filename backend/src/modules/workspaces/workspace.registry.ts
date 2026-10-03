@@ -11,7 +11,7 @@ export interface WorkspaceDefinition {
 export const CANONICAL_WORKSPACES: WorkspaceDefinition[] = [
   {
     key: 'dashboard',
-    title: 'Executive Workspace Hub',
+    title: 'Institute Admin Workspace',
     category: 'OVERVIEW',
     primaryRoute: '/dashboard',
     description: 'Central operational dashboard, student 360 overview, and administrative summary.',

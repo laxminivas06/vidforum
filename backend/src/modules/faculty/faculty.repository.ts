@@ -6,13 +6,16 @@ export interface StaffMemberInput {
   name: string;
   phone?: string;
   phoneNumber?: string;
+  phone_number?: string;
   qualification?: string;
   university?: string;
   subjects?: string;
   experience?: string;
+  experience_years?: number | string;
   address?: string;
   email: string;
   dateOfBirth?: string;
+  date_of_birth?: string;
   gender?: string;
   designation?: string;
   department?: string;
@@ -69,7 +72,7 @@ export class FacultyRepository {
   async createStaffMember(institutionId: string, data: StaffMemberInput) {
     const cleanEmail = (data.email || '').trim().toLowerCase();
     const cleanName = (data.name || '').trim();
-    const cleanPhone = (data.phoneNumber || data.phone || '').trim();
+    const cleanPhone = (data.phone || data.phoneNumber || data.phone_number || '').trim();
     if (!cleanEmail || !cleanName) {
       throw new Error('Name and Email are required to add a staff member');
     }
@@ -147,9 +150,9 @@ export class FacultyRepository {
           data.qualification || null,
           data.university || null,
           data.subjects || null,
-          data.experience || null,
+          data.experience || (data.experience_years !== undefined ? String(data.experience_years) : null),
           data.address || null,
-          data.dateOfBirth ? data.dateOfBirth : null,
+          (data.dateOfBirth || data.date_of_birth) ? (data.dateOfBirth || data.date_of_birth) : null,
           data.gender || null,
         ]
       );

@@ -3,21 +3,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { Institution, Applicant, AcademicGrade, FacultyMember, FeeRecord } from "@/types"
 
-// Mock Institutions (Dummy institutions removed per Super Admin directive)
-const MOCK_INSTITUTIONS: Institution[] = []
-
-// Mock Applicants for Admissions Kanban (Mock data removed)
-const MOCK_APPLICANTS: Applicant[] = []
-
-// Mock Academic Grades & Hierarchy (Mock data removed)
-const MOCK_GRADES: AcademicGrade[] = []
-
-// Mock Faculty Roster (Mock data removed)
-const MOCK_FACULTY: FacultyMember[] = []
-
-// Mock Fee Records (Mock data removed)
-const MOCK_FEES: FeeRecord[] = []
-
 // --- TanStack Query Hooks (Live Backend with Database Persistence) ---
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1"
 const DEFAULT_INST_ID = "18b3b9a6-0791-47f4-bbd0-bf7c0221e18f"
@@ -447,9 +432,9 @@ export function useAdmissions() {
           return json.data
         }
       } catch (err) {
-        console.warn("Backend unavailable, using mock applicants:", err)
+        console.warn("Backend query failed for applicants:", err)
       }
-      return MOCK_APPLICANTS
+      return []
     },
   })
 
@@ -496,9 +481,9 @@ export function useAcademics() {
           return json.data
         }
       } catch (err) {
-        console.warn("Backend unavailable, using mock academic grades:", err)
+        console.warn("Backend query failed for academic grades:", err)
       }
-      return MOCK_GRADES
+      return []
     },
   })
 }

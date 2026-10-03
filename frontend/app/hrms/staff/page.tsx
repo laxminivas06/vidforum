@@ -67,7 +67,7 @@ export default function HRMSStaffPage() {
   const [experience, setExperience] = useState("")
   const [address, setAddress] = useState("")
   const [email, setEmail] = useState("")
-  const [bod, setBod] = useState("")
+  const [dateOfBirth, setDateOfBirth] = useState("")
   const [gender, setGender] = useState("")
   const [designation, setDesignation] = useState("Lecturer")
   const [department, setDepartment] = useState("Academic Department")
@@ -120,7 +120,7 @@ export default function HRMSStaffPage() {
         experience: experience.trim(),
         address: address.trim(),
         email: email.trim().toLowerCase(),
-        dateOfBirth: bod || undefined,
+        dateOfBirth: dateOfBirth || undefined,
         gender: gender || undefined,
         designation: designation.trim() || "Lecturer",
         department: department.trim() || "Academic Department",
@@ -136,7 +136,7 @@ export default function HRMSStaffPage() {
       setExperience("")
       setAddress("")
       setEmail("")
-      setBod("")
+      setDateOfBirth("")
       setGender("")
       setTimeout(() => {
         setIsAddModalOpen(false)
@@ -224,10 +224,10 @@ export default function HRMSStaffPage() {
           const rowQual = findVal(["qualification", "degree", "highestqualification"])
           const rowUniv = findVal(["university", "college", "institution"])
           const rowSub = findVal(["subjects", "subject", "teachingsubjects"])
-          const rowExp = findVal(["experince", "experience", "yearsofexperience"])
+          const rowExp = findVal(["experience", "experienceyears", "yearsofexperience", "experince"])
           const rowAddr = findVal(["address", "location", "residentialaddress"])
           const rowEmail = findVal(["email", "emailaddress", "mail"])
-          const rowBod = findVal(["bod", "dob", "dateofbirth", "birthdate"])
+          const rowBod = findVal(["dateofbirth", "dob", "birthdate", "bod"])
           const rowGen = findVal(["gender", "sex"])
 
           const isValid = !!(rowName && rowEmail && rowPhone)
@@ -587,12 +587,12 @@ export default function HRMSStaffPage() {
                   />
                 </FormField>
 
-                {/* 8. BOD (Date of Birth) */}
-                <FormField label="Birth of Date (DOB)">
+                {/* 8. Date of Birth (DOB) */}
+                <FormField label="Date of Birth (DOB)">
                   <Input
                     type="date"
-                    value={bod}
-                    onChange={(e) => setBod(e.target.value)}
+                    value={dateOfBirth}
+                    onChange={(e) => setDateOfBirth(e.target.value)}
                   />
                 </FormField>
 

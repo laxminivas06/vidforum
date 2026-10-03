@@ -56,10 +56,10 @@
   - [x] Implement Bulk Provisioning with atomic per-row error handling and one-time downloadable credentials CSV.
   - [x] Add clipboard credentials card enforcing first-login password change.
   - [x] Author automated tests for single and bulk provisioning failure paths.
-- [ ] **R5: Typo, Schema & Mock Data Sanitation**
-  - [ ] Correct all label typos across UI, templates, and validation messages (`Experience`, `Date of Birth`, `University`, `Phone Number`).
-  - [ ] Standardize schema attributes to snake_case (`experience_years`, `date_of_birth`).
-  - [ ] Purge remaining `MOCK_*` arrays, dummy seeds, and leftover "Executive Workspace Hub" strings.
+- [x] **R5: Typo, Schema & Mock Data Sanitation**
+  - [x] Correct all label typos across UI, templates, and validation messages (`Experience`, `Date of Birth`, `University`, `Phone Number`).
+  - [x] Standardize schema attributes to snake_case (`experience_years`, `date_of_birth`).
+  - [x] Purge remaining `MOCK_*` arrays, dummy seeds, and leftover "Executive Workspace Hub" strings.
 - [ ] **R6: Test Infrastructure & Verification Tooling**
   - [ ] Configure isolated test database environment (`TEST_DATABASE_URL`).
   - [ ] Add `scripts/verify_actions`, `scripts/scan_forbidden`, and `scripts/gate_report`.

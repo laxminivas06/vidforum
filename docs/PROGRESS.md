@@ -11,8 +11,8 @@
 
 | Step | Module / Milestone | Status | Gate Status |
 |---|---|---|---|
-| **Step R** | **Audit + Security & Cleanup Remediation** | **IN PROGRESS** | R1 Audit Complete · R2-R6 In Progress |
-| **Step 1B** | **Staff & HRMS (Finish: Add Teachers & Directory)** | **QUEUED** | Awaiting Gate R |
+| **Step R** | **Audit + Security & Cleanup Remediation** | **COMPLETED** | Gate R PASSED (26/26 Tests Green) |
+| **Step 1B** | **Staff & HRMS (Finish: Add Teachers & Directory)** | **READY TO START** | Gate R Cleared |
 | **Step 2** | **Academics & Curriculum (Schedules & Textbooks)** | **QUEUED** | Awaiting Step 1B |
 | **Step 3** | **Admissions & Enrollment (Add Students & Pipeline)** | **QUEUED** | Awaiting Step 2 |
 | **Step 4** | **Faculty Management (Allocations & Workloads)** | **QUEUED** | Awaiting Step 3 |
@@ -60,16 +60,16 @@
   - [x] Correct all label typos across UI, templates, and validation messages (`Experience`, `Date of Birth`, `University`, `Phone Number`).
   - [x] Standardize schema attributes to snake_case (`experience_years`, `date_of_birth`).
   - [x] Purge remaining `MOCK_*` arrays, dummy seeds, and leftover "Executive Workspace Hub" strings.
-- [ ] **R6: Test Infrastructure & Verification Tooling**
-  - [ ] Configure isolated test database environment (`TEST_DATABASE_URL`).
-  - [ ] Add `scripts/verify_actions`, `scripts/scan_forbidden`, and `scripts/gate_report`.
-  - [ ] Integrate test commands into unified CI verification pipeline.
-- [ ] **Gate R: Remediation Exit Criteria**
-  - [ ] All R2–R4 automated tests passing green on test database.
-  - [ ] `scan_forbidden` exits 0 (zero unapproved `admin123` literals, zero mock data).
-  - [ ] `npx tsc --noEmit` exits 0 across backend and frontend.
-  - [ ] Direct API requests without workspace grants or permissions return strict `403 Forbidden`.
-  - [ ] Generate and commit `docs/GATE_REPORT_R.md`.
+- [x] **R6: Test Infrastructure & Verification Tooling**
+  - [x] Configure isolated test database environment (`TEST_DATABASE_URL`).
+  - [x] Add `scripts/verify_actions`, `scripts/scan_forbidden`, and `scripts/gate_report`.
+  - [x] Integrate test commands into unified CI verification pipeline.
+- [x] **Gate R: Remediation Exit Criteria**
+  - [x] All R2–R4 automated tests passing green on test database (26/26 tests passed).
+  - [x] `scan_forbidden` exits 0 (zero unapproved `admin123` literals, zero mock data).
+  - [x] `npx tsc --noEmit` exits 0 across backend and frontend.
+  - [x] Direct API requests without workspace grants or permissions return strict `403 Forbidden`.
+  - [x] Generate and commit `docs/GATE_REPORT_R.md`.
 
 ---
 

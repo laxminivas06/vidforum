@@ -8,7 +8,13 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "db:migrate": "tsx src/db/migrate.ts",
-    "db:seed": "tsx src/db/seed.ts"
+    "db:seed": "tsx src/db/seed.ts",
+    "test:r2": "tsx src/scripts/verify-r2-auth.ts",
+    "test:r3": "tsx src/scripts/verify-r3-workspaces.ts",
+    "test:r4": "tsx src/scripts/verify-r4-provisioning.ts",
+    "test": "tsx ../scripts/verify_actions.ts",
+    "scan:forbidden": "tsx ../scripts/scan_forbidden.ts",
+    "gate:r": "tsx ../scripts/gate_report.ts"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

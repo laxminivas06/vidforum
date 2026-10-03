@@ -30,6 +30,20 @@ const createDesignationSchema = z.object({
   name: z.string().min(1, 'Designation name is required'),
 });
 
+const createDepartmentSchema = z.object({
+  name: z.string().min(1, 'Department name is required'),
+  code: z.string().min(1, 'Department code is required'),
+  departmentType: z.string().optional().default('academic'),
+});
+
+const checkDuplicateSchema = z.object({
+  email: z.string().email(),
+  name: z.string().optional(),
+  dateOfBirth: z.string().optional(),
+  phone: z.string().optional(),
+  excludeStaffId: z.string().optional(),
+});
+
 const createLeaveTypeSchema = z.object({
   name: z.string().min(1, 'Leave type name is required'),
   maxDaysPerYear: z.number().int().positive().optional().nullable(),
@@ -87,6 +101,77 @@ export class HrmsController {
       const designation = await hrmsService.createDesignation(institutionId, parsed.data.name, actorId);
       sendSuccess(res, designation, 'Designation created successfully', 201);
     } catch (error: any) {
+      sendError(res, error.message, 400);
+    }
+  }
+
+  async deleteDesignation(req: Request, res: Response) {
+    try {
+      const institutionId = req.institutionId!;
+      const actorId = req.user?.id || 'system';
+      const id = req.params.id as string;
+
+      await hrmsService.deleteDesignation(institutionId, id, actorId);
+      sendSuccess(res, { deleted: true }, 'Designation deleted successfully');
+    } catch (error: any) {
+      if (error.message.includes('Cannot delete')) {
+        sendError(res, error.message, 409);
+        return;
+      }
+      sendError(res, error.message, 400);
+    }
+  }
+
+  // ==========================================
+  // DEPARTMENTS
+  // ==========================================
+
+  async listDepartments(req: Request, res: Response) {
+    try {
+      const institutionId = req.institutionId!;
+      const departments = await hrmsService.listDepartments(institutionId);
+      sendSuccess(res, departments, 'Departments retrieved successfully');
+    } catch (error: any) {
+      sendError(res, error.message, 500);
+    }
+  }
+
+  async createDepartment(req: Request, res: Response) {
+    try {
+      const institutionId = req.institutionId!;
+      const actorId = req.user?.id || 'system';
+      const parsed = createDepartmentSchema.safeParse(req.body);
+      if (!parsed.success) {
+        sendError(res, parsed.error.errors[0].message, 400);
+        return;
+      }
+
+      const dept = await hrmsService.createDepartment(
+        institutionId,
+        parsed.data.name,
+        parsed.data.code,
+        parsed.data.departmentType,
+        actorId
+      );
+      sendSuccess(res, dept, 'Department created successfully', 201);
+    } catch (error: any) {
+      sendError(res, error.message, 400);
+    }
+  }
+
+  async deleteDepartment(req: Request, res: Response) {
+    try {
+      const institutionId = req.institutionId!;
+      const actorId = req.user?.id || 'system';
+      const id = req.params.id as string;
+
+      await hrmsService.deleteDepartment(institutionId, id, actorId);
+      sendSuccess(res, { deleted: true }, 'Department deleted successfully');
+    } catch (error: any) {
+      if (error.message.includes('Cannot delete')) {
+        sendError(res, error.message, 409);
+        return;
+      }
       sendError(res, error.message, 400);
     }
   }
@@ -424,6 +509,54 @@ export class HrmsController {
       sendSuccess(res, exportData, 'Payroll export generated successfully');
     } catch (error: any) {
       sendError(res, error.message, 400);
+    }
+  }
+
+  // ==========================================
+  // 7. DUPLICATES, BATCH ATTENDANCE & REPORTS
+  // ==========================================
+
+  async checkDuplicateStaff(req: Request, res: Response) {
+    try {
+      const institutionId = req.institutionId!;
+      const parsed = checkDuplicateSchema.safeParse(req.body);
+      if (!parsed.success) {
+        sendError(res, parsed.error.errors[0].message, 400);
+        return;
+      }
+
+      const result = await hrmsService.checkDuplicateStaff(institutionId, parsed.data);
+      sendSuccess(res, result, 'Duplicate check completed');
+    } catch (error: any) {
+      sendError(res, error.message, 400);
+    }
+  }
+
+  async markAllStaffPresent(req: Request, res: Response) {
+    try {
+      const institutionId = req.institutionId!;
+      const actorId = req.user?.id || 'system';
+      const { attendanceDate } = req.body;
+
+      if (!attendanceDate) {
+        sendError(res, 'attendanceDate is required', 400);
+        return;
+      }
+
+      const result = await hrmsService.markAllStaffPresent(institutionId, actorId, String(attendanceDate));
+      sendSuccess(res, result, `Marked ${result.markedCount} staff members present`);
+    } catch (error: any) {
+      sendError(res, error.message, 400);
+    }
+  }
+
+  async getHRReportSummary(req: Request, res: Response) {
+    try {
+      const institutionId = req.institutionId!;
+      const summary = await hrmsService.getHRReportSummary(institutionId);
+      sendSuccess(res, summary, 'HR reports summary retrieved successfully');
+    } catch (error: any) {
+      sendError(res, error.message, 500);
     }
   }
 }

@@ -30,6 +30,11 @@ const SUITES = [
     name: 'Account Provisioning Engine & Role Templates',
     script: 'src/scripts/verify-r4-provisioning.ts',
   },
+  {
+    suite: '1B',
+    name: 'Staff & HRMS Core Lifecycle',
+    script: 'src/scripts/verify-1b-hrms.ts',
+  },
 ];
 
 export function runAllSuites(): { results: SuiteResult[]; totalPassed: number; totalFailed: number } {

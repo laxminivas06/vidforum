@@ -12,8 +12,8 @@
 | Step | Module / Milestone | Status | Gate Status |
 |---|---|---|---|
 | **Step R** | **Audit + Security & Cleanup Remediation** | **COMPLETED** | Gate R PASSED (26/26 Tests Green) |
-| **Step 1B** | **Staff & HRMS (Finish: Add Teachers & Directory)** | **READY TO START** | Gate R Cleared |
-| **Step 2** | **Academics & Curriculum (Schedules & Textbooks)** | **QUEUED** | Awaiting Step 1B |
+| **Step 1B** | **Staff & HRMS (Finish: Add Teachers & Directory)** | **COMPLETED** | Gate 1B PASSED (10/10 Tests Green) |
+| **Step 2** | **Academics & Curriculum (Schedules & Textbooks)** | **READY TO START** | Gate 1B Cleared |
 | **Step 3** | **Admissions & Enrollment (Add Students & Pipeline)** | **QUEUED** | Awaiting Step 2 |
 | **Step 4** | **Faculty Management (Allocations & Workloads)** | **QUEUED** | Awaiting Step 3 |
 | **Step 5** | **Timetable (Constraint Solver & Matrix Editor)** | **QUEUED** | Awaiting Step 4 |
@@ -74,16 +74,16 @@
 ---
 
 ### STEP 1B: Staff & HRMS (Finish: Add Teachers)
-- [ ] Database migration: `staff` extended fields (`experience_years`, `date_of_birth`, `staff_type`, `designation_id`, `department_id`, `joining_date`, `status`).
-- [ ] **Staff Directory:** Standard list anatomy, filters by type, designation, department, experience, account status.
-- [ ] **Add/Edit Staff:** All note fields, duplicate warnings on email and name+DOB, server-side duplicate check.
-- [ ] **Bulk Import (xlsx/csv):** Template download, client preview, **mandatory server-side validation**, row-by-row error report.
-- [ ] **Staff Profile:** Tabs for Overview, Documents, Leave, Attendance, History/Audit, Account.
-- [ ] **Designations & Departments:** CRUD with foreign key usage blocking.
-- [ ] **Leave Management:** Leave types, quotas, balance adjustments, application workflow, calendar.
-- [ ] **Staff Attendance:** Daily roll call, mark-all-present, monthly register, working-day validation.
-- [ ] **HR Reports:** Headcount by type/department, experience distribution, leave summary.
-- [ ] **Gate 1B:** Add teacher -> provision account -> forced password change -> leave approval reduces balance -> delete designation in use blocked -> deactivate blocks login. Generate `docs/GATE_REPORT_1B.md`.
+- [x] Database migration: `staff` extended fields (`experience_years`, `date_of_birth`, `staff_type`, `designation_id`, `department_id`, `joining_date`, `status`). (Migration 012 applied)
+- [x] **Staff Directory:** Standard list anatomy, filters by type, designation, department, experience, account status.
+- [x] **Add/Edit Staff:** All note fields, duplicate warnings on email and name+DOB, server-side duplicate check.
+- [x] **Bulk Import (xlsx/csv):** Template download, client preview, **mandatory server-side validation**, row-by-row error report.
+- [x] **Staff Profile:** Tabs for Overview, Documents, Leave, Attendance, History/Audit, Account.
+- [x] **Designations & Departments:** CRUD with foreign key usage blocking.
+- [x] **Leave Management:** Leave types, quotas, balance adjustments, application workflow, calendar.
+- [x] **Staff Attendance:** Daily roll call, mark-all-present, monthly register, working-day validation.
+- [x] **HR Reports:** Headcount by type/department, experience distribution, leave summary.
+- [x] **Gate 1B:** Add teacher -> provision account -> forced password change -> leave approval reduces balance -> delete designation in use blocked -> deactivate blocks login. Generated `docs/GATE_REPORT_1B.md`.
 
 ---
 

@@ -29,6 +29,17 @@ export interface DesignationRecord {
   institution_id: string;
   name: string;
   created_at: string;
+  staff_count?: number;
+}
+
+export interface DepartmentRecord {
+  id: string;
+  institution_id: string;
+  code: string;
+  name: string;
+  department_type: string;
+  created_at: string;
+  staff_count?: number;
 }
 
 export interface LeaveTypeRecord {
@@ -94,9 +105,12 @@ export class HrmsRepository {
 
   async listDesignations(institutionId: string): Promise<DesignationRecord[]> {
     const res = await db.query(
-      `SELECT * FROM designations 
-       WHERE institution_id = $1 
-       ORDER BY name ASC`,
+      `SELECT des.*, COUNT(st.id)::int as staff_count 
+       FROM designations des
+       LEFT JOIN staff st ON st.designation_id = des.id AND st.deleted_at IS NULL
+       WHERE des.institution_id = $1 
+       GROUP BY des.id
+       ORDER BY des.name ASC`,
       [institutionId]
     );
     return res.rows;
@@ -121,6 +135,84 @@ export class HrmsRepository {
       [institutionId, name.trim()]
     );
     return res.rows[0];
+  }
+
+  async isDesignationInUse(institutionId: string, designationId: string): Promise<boolean> {
+    const res = await db.query(
+      `SELECT 1 FROM staff 
+       WHERE institution_id = $1 AND designation_id = $2 AND deleted_at IS NULL 
+       LIMIT 1`,
+      [institutionId, designationId]
+    );
+    return res.rows.length > 0;
+  }
+
+  async deleteDesignation(institutionId: string, designationId: string): Promise<boolean> {
+    const inUse = await this.isDesignationInUse(institutionId, designationId);
+    if (inUse) {
+      throw new Error('Cannot delete designation: assigned to active staff members');
+    }
+    const res = await db.query(
+      `DELETE FROM designations WHERE institution_id = $1 AND id = $2 RETURNING id`,
+      [institutionId, designationId]
+    );
+    return (res.rowCount || 0) > 0;
+  }
+
+  // ==========================================
+  // DEPARTMENTS
+  // ==========================================
+
+  async listDepartments(institutionId: string): Promise<DepartmentRecord[]> {
+    const res = await db.query(
+      `SELECT d.*, COUNT(st.id)::int as staff_count 
+       FROM departments d
+       LEFT JOIN staff st ON st.department_id = d.id AND st.deleted_at IS NULL
+       WHERE d.institution_id = $1 
+       GROUP BY d.id
+       ORDER BY d.name ASC`,
+      [institutionId]
+    );
+    return res.rows;
+  }
+
+  async createDepartment(
+    institutionId: string,
+    name: string,
+    code: string,
+    departmentType = 'academic'
+  ): Promise<DepartmentRecord> {
+    const res = await db.query(
+      `INSERT INTO departments (institution_id, code, name, department_type)
+       VALUES ($1, $2, $3, $4)
+       ON CONFLICT (institution_id, code) DO UPDATE 
+         SET name = EXCLUDED.name, department_type = EXCLUDED.department_type
+       RETURNING *`,
+      [institutionId, code.trim().toUpperCase(), name.trim(), departmentType]
+    );
+    return res.rows[0];
+  }
+
+  async isDepartmentInUse(institutionId: string, departmentId: string): Promise<boolean> {
+    const res = await db.query(
+      `SELECT 1 FROM staff 
+       WHERE institution_id = $1 AND department_id = $2 AND deleted_at IS NULL 
+       LIMIT 1`,
+      [institutionId, departmentId]
+    );
+    return res.rows.length > 0;
+  }
+
+  async deleteDepartment(institutionId: string, departmentId: string): Promise<boolean> {
+    const inUse = await this.isDepartmentInUse(institutionId, departmentId);
+    if (inUse) {
+      throw new Error('Cannot delete department: assigned to active staff members');
+    }
+    const res = await db.query(
+      `DELETE FROM departments WHERE institution_id = $1 AND id = $2 RETURNING id`,
+      [institutionId, departmentId]
+    );
+    return (res.rowCount || 0) > 0;
   }
 
   // ==========================================
@@ -808,5 +900,213 @@ export class HrmsRepository {
       ...r,
       is_overloaded: r.periods_per_week > 28, // Standard threshold: > 28 periods/week is overloaded
     }));
+  }
+
+  // ==========================================
+  // 6. DUPLICATE CHECK & HR REPORTS
+  // ==========================================
+
+  async checkDuplicateStaff(
+    institutionId: string,
+    data: { email: string; name?: string; dateOfBirth?: string; phone?: string; excludeStaffId?: string }
+  ): Promise<{ isDuplicate: boolean; duplicateFields: string[]; reasons: string[] }> {
+    const reasons: string[] = [];
+    const duplicateFields: string[] = [];
+
+    // 1. Check duplicate email in staff profiles
+    if (data.email) {
+      const cleanEmail = data.email.trim().toLowerCase();
+      let query = `
+        SELECT st.id, p.full_name, p.email 
+        FROM staff st
+        JOIN profiles p ON p.id = st.profile_id
+        WHERE st.institution_id = $1 AND LOWER(p.email) = $2 AND st.deleted_at IS NULL
+      `;
+      const params: any[] = [institutionId, cleanEmail];
+      if (data.excludeStaffId) {
+        query += ` AND st.id != $3`;
+        params.push(data.excludeStaffId);
+      }
+      const res = await db.query(query, params);
+      if (res.rows.length > 0) {
+        duplicateFields.push('email');
+        reasons.push(`A staff member with email '${cleanEmail}' already exists (${res.rows[0].full_name}).`);
+      }
+    }
+
+    // 2. Check duplicate name + date_of_birth
+    if (data.name && data.dateOfBirth) {
+      const cleanName = data.name.trim().toLowerCase();
+      let query = `
+        SELECT st.id, p.full_name, st.date_of_birth 
+        FROM staff st
+        JOIN profiles p ON p.id = st.profile_id
+        WHERE st.institution_id = $1 AND LOWER(p.full_name) = $2 AND st.date_of_birth = $3 AND st.deleted_at IS NULL
+      `;
+      const params: any[] = [institutionId, cleanName, data.dateOfBirth];
+      if (data.excludeStaffId) {
+        query += ` AND st.id != $4`;
+        params.push(data.excludeStaffId);
+      }
+      const res = await db.query(query, params);
+      if (res.rows.length > 0) {
+        duplicateFields.push('name_dob');
+        reasons.push(`A staff member with name '${data.name}' and DOB '${data.dateOfBirth}' already exists.`);
+      }
+    }
+
+    // 3. Check duplicate phone if provided
+    if (data.phone && data.phone.trim()) {
+      const cleanPhone = data.phone.trim();
+      let query = `
+        SELECT st.id, p.full_name, p.phone 
+        FROM staff st
+        JOIN profiles p ON p.id = st.profile_id
+        WHERE st.institution_id = $1 AND p.phone = $2 AND st.deleted_at IS NULL
+      `;
+      const params: any[] = [institutionId, cleanPhone];
+      if (data.excludeStaffId) {
+        query += ` AND st.id != $3`;
+        params.push(data.excludeStaffId);
+      }
+      const res = await db.query(query, params);
+      if (res.rows.length > 0) {
+        duplicateFields.push('phone');
+        reasons.push(`A staff member with phone number '${cleanPhone}' already exists (${res.rows[0].full_name}).`);
+      }
+    }
+
+    return {
+      isDuplicate: duplicateFields.length > 0,
+      duplicateFields,
+      reasons,
+    };
+  }
+
+  async markAllStaffPresent(
+    institutionId: string,
+    actorId: string,
+    attendanceDate: string
+  ): Promise<{ markedCount: number }> {
+    const activeStaff = await db.query(
+      `SELECT id FROM staff 
+       WHERE institution_id = $1 AND employment_status = 'active' AND deleted_at IS NULL`,
+      [institutionId]
+    );
+
+    let count = 0;
+    for (const row of activeStaff.rows) {
+      await this.upsertStaffAttendance({
+        institutionId,
+        staffId: row.id,
+        attendanceDate,
+        status: 'present',
+        remarks: 'Batch marked present',
+        markedBy: actorId,
+      });
+      count++;
+    }
+    return { markedCount: count };
+  }
+
+  async getHRReportSummary(institutionId: string): Promise<{
+    headcount: {
+      total: number;
+      active: number;
+      onLeave: number;
+      teaching: number;
+      nonTeaching: number;
+    };
+    byDepartment: Array<{ name: string; count: number }>;
+    byDesignation: Array<{ name: string; count: number }>;
+    experienceDistribution: {
+      under2Years: number;
+      twoToFiveYears: number;
+      fiveToTenYears: number;
+      over10Years: number;
+    };
+    leaveSummary: {
+      totalRequests: number;
+      pendingRequests: number;
+      approvedRequests: number;
+      rejectedRequests: number;
+    };
+  }> {
+    // 1. Staff metrics
+    const staffRes = await db.query(
+      `SELECT 
+         count(*)::int as total,
+         count(*) FILTER (WHERE employment_status = 'active')::int as active,
+         count(*) FILTER (WHERE employment_status = 'on_leave')::int as on_leave,
+         count(*) FILTER (WHERE is_teaching_staff = true OR staff_type = 'teaching')::int as teaching,
+         count(*) FILTER (WHERE is_teaching_staff = false OR staff_type = 'non_teaching')::int as non_teaching,
+         count(*) FILTER (WHERE COALESCE(experience_years, 0) < 2)::int as under_2,
+         count(*) FILTER (WHERE COALESCE(experience_years, 0) >= 2 AND COALESCE(experience_years, 0) < 5)::int as two_to_five,
+         count(*) FILTER (WHERE COALESCE(experience_years, 0) >= 5 AND COALESCE(experience_years, 0) <= 10)::int as five_to_ten,
+         count(*) FILTER (WHERE COALESCE(experience_years, 0) > 10)::int as over_10
+       FROM staff
+       WHERE institution_id = $1 AND deleted_at IS NULL`,
+      [institutionId]
+    );
+    const s = staffRes.rows[0] || {};
+
+    // 2. By Department
+    const deptRes = await db.query(
+      `SELECT COALESCE(d.name, 'Unassigned') as name, count(st.id)::int as count
+       FROM staff st
+       LEFT JOIN departments d ON d.id = st.department_id
+       WHERE st.institution_id = $1 AND st.deleted_at IS NULL
+       GROUP BY d.name
+       ORDER BY count DESC`,
+      [institutionId]
+    );
+
+    // 3. By Designation
+    const desigRes = await db.query(
+      `SELECT COALESCE(des.name, 'Unassigned') as name, count(st.id)::int as count
+       FROM staff st
+       LEFT JOIN designations des ON des.id = st.designation_id
+       WHERE st.institution_id = $1 AND st.deleted_at IS NULL
+       GROUP BY des.name
+       ORDER BY count DESC`,
+      [institutionId]
+    );
+
+    // 4. Leave summary
+    const leaveRes = await db.query(
+      `SELECT 
+         count(*)::int as total,
+         count(*) FILTER (WHERE status = 'pending')::int as pending,
+         count(*) FILTER (WHERE status = 'approved')::int as approved,
+         count(*) FILTER (WHERE status = 'rejected')::int as rejected
+       FROM leave_requests
+       WHERE institution_id = $1`,
+      [institutionId]
+    );
+    const l = leaveRes.rows[0] || {};
+
+    return {
+      headcount: {
+        total: s.total || 0,
+        active: s.active || 0,
+        onLeave: s.on_leave || 0,
+        teaching: s.teaching || 0,
+        nonTeaching: s.non_teaching || 0,
+      },
+      byDepartment: deptRes.rows,
+      byDesignation: desigRes.rows,
+      experienceDistribution: {
+        under2Years: s.under_2 || 0,
+        twoToFiveYears: s.two_to_five || 0,
+        fiveToTenYears: s.five_to_ten || 0,
+        over10Years: s.over_10 || 0,
+      },
+      leaveSummary: {
+        totalRequests: l.total || 0,
+        pendingRequests: l.pending || 0,
+        approvedRequests: l.approved || 0,
+        rejectedRequests: l.rejected || 0,
+      },
+    };
   }
 }

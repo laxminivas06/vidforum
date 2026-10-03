@@ -78,11 +78,26 @@ export class ProvisioningService {
    * Single account provisioning engine.
    */
   public async provisionUser(
-    input: ProvisionUserInput,
-    actorId?: string | null,
-    ipAddress?: string | null,
+    inputOrInstId: ProvisionUserInput | string,
+    actorIdOrInput?: string | null | ProvisionUserInput,
+    dataOrIp?: ProvisionUserInput | string | null,
     userAgent?: string | null
   ): Promise<ProvisionResult> {
+    let input: ProvisionUserInput;
+    let actorId: string | null | undefined;
+    let ipAddress: string | null | undefined;
+
+    if (typeof inputOrInstId === 'string') {
+      // Called as provisionUser(institutionId, actorId, input)
+      actorId = typeof actorIdOrInput === 'string' ? actorIdOrInput : null;
+      input = { ...(dataOrIp as ProvisionUserInput), institutionId: (dataOrIp as ProvisionUserInput)?.institutionId || inputOrInstId };
+      ipAddress = null;
+    } else {
+      input = inputOrInstId;
+      actorId = typeof actorIdOrInput === 'string' ? actorIdOrInput : null;
+      ipAddress = typeof dataOrIp === 'string' ? dataOrIp : null;
+    }
+
     if (!input.name || !input.name.trim()) {
       throw new Error('Name is required');
     }
@@ -543,12 +558,33 @@ export class ProvisioningService {
    * Deactivate / Reactivate User Account.
    */
   public async updateUserStatus(
-    userId: string,
-    status: 'active' | 'inactive' | 'suspended',
-    actorId?: string | null,
-    ipAddress?: string | null,
-    userAgent?: string | null
+    arg1: string,
+    arg2: 'active' | 'inactive' | 'suspended' | string | null,
+    arg3?: string | null,
+    arg4?: string | null,
+    arg5?: string | null
   ) {
+    let userId: string;
+    let status: 'active' | 'inactive' | 'suspended';
+    let actorId: string | null | undefined;
+    let ipAddress: string | null | undefined;
+    let userAgent: string | null | undefined;
+
+    // Check if called as (institutionId, actorId, userId, status)
+    if (arg4 && ['active', 'inactive', 'suspended'].includes(arg4.toLowerCase())) {
+      actorId = typeof arg2 === 'string' ? arg2 : null;
+      userId = arg3!;
+      status = arg4.toLowerCase() as ('active' | 'inactive' | 'suspended');
+      ipAddress = arg5;
+    } else {
+      // Called as (userId, status, actorId, ipAddress, userAgent)
+      userId = arg1;
+      status = ((arg2 as string) || 'active').toLowerCase() as ('active' | 'inactive' | 'suspended');
+      actorId = arg3;
+      ipAddress = arg4;
+      userAgent = arg5;
+    }
+
     const profileRes = await db.query('SELECT * FROM profiles WHERE id = $1', [userId]);
     if (profileRes.rowCount === 0) {
       throw new Error('User not found');

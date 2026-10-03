@@ -1,4 +1,6 @@
+import bcrypt from 'bcryptjs';
 import { db } from '../../config/database';
+import { env } from '../../config/env';
 import {
   HrmsRepository,
   StaffRecord,
@@ -39,6 +41,67 @@ export class HrmsService {
     });
 
     return designation;
+  }
+
+  async deleteDesignation(institutionId: string, designationId: string, actorId: string): Promise<boolean> {
+    const success = await this.repo.deleteDesignation(institutionId, designationId);
+
+    await AuditDispatcher.dispatch({
+      actorId,
+      institutionId,
+      action: 'hrms.designation_deleted',
+      resource: 'designations',
+      resourceId: designationId,
+    });
+
+    return success;
+  }
+
+  // ==========================================
+  // DEPARTMENTS
+  // ==========================================
+
+  async listDepartments(institutionId: string) {
+    return this.repo.listDepartments(institutionId);
+  }
+
+  async createDepartment(
+    institutionId: string,
+    name: string,
+    code: string,
+    departmentType: string,
+    actorId: string
+  ) {
+    if (!name || !name.trim() || !code || !code.trim()) {
+      throw new Error('Department name and code are required');
+    }
+
+    const dept = await this.repo.createDepartment(institutionId, name, code, departmentType);
+
+    await AuditDispatcher.dispatch({
+      actorId,
+      institutionId,
+      action: 'hrms.department_created',
+      resource: 'departments',
+      resourceId: dept.id,
+      newValue: { name: dept.name, code: dept.code, departmentType: dept.department_type },
+    });
+
+    return dept;
+  }
+
+  async deleteDepartment(institutionId: string, departmentId: string, actorId: string): Promise<boolean> {
+    const success = await this.repo.deleteDepartment(institutionId, departmentId);
+
+    await AuditDispatcher.dispatch({
+      actorId,
+      institutionId,
+      action: 'hrms.department_deleted',
+      resource: 'departments',
+      resourceId: departmentId,
+    });
+
+    return success;
   }
 
   // ==========================================
@@ -161,6 +224,153 @@ export class HrmsService {
     });
 
     return staff;
+  }
+
+  async createStaffDirect(
+    institutionId: string,
+    actorId: string,
+    data: {
+      name: string;
+      email: string;
+      phone?: string;
+      qualification?: string;
+      university?: string;
+      subjects?: string;
+      experience?: string;
+      experienceYears?: number;
+      dateOfBirth?: string;
+      gender?: string;
+      departmentId?: string | null;
+      designationId?: string | null;
+      isTeachingStaff?: boolean;
+      address?: string;
+      employeeCode?: string;
+      dateOfJoining?: string;
+    }
+  ): Promise<any> {
+    const cleanName = (data.name || '').trim();
+    const cleanEmail = (data.email || '').trim().toLowerCase();
+    if (!cleanName || !cleanEmail) {
+      throw new Error('Name and email are required for staff onboarding');
+    }
+
+    // 1. Check duplicate
+    const dupCheck = await this.repo.checkDuplicateStaff(institutionId, {
+      email: cleanEmail,
+      phone: data.phone,
+      name: cleanName,
+      dateOfBirth: data.dateOfBirth,
+    });
+    if (dupCheck.isDuplicate) {
+      throw new Error(`Duplicate staff detected: ${dupCheck.reasons.join(', ')}`);
+    }
+
+    // 2. Ensure auth.users and profile exist
+    const userRes = await db.query('SELECT id FROM auth.users WHERE LOWER(email) = LOWER($1)', [cleanEmail]);
+    let profileId = userRes.rows[0]?.id;
+
+    if (!profileId) {
+      const defaultPassHash = bcrypt.hashSync(env.DEFAULT_INITIAL_PASSWORD || 'Welcome@123', 10);
+      const userMeta = { full_name: cleanName, user_id: cleanEmail, must_change_password: true };
+      const insertAuth = await db.query(
+        `INSERT INTO auth.users (id, email, encrypted_password, raw_user_meta_data, created_at, updated_at)
+         VALUES (gen_random_uuid(), $1, $2, $3, now(), now())
+         RETURNING id`,
+        [cleanEmail, defaultPassHash, JSON.stringify(userMeta)]
+      );
+      profileId = insertAuth.rows[0].id;
+    }
+
+    await db.query(
+      `INSERT INTO profiles (id, full_name, email, phone, default_institution_id, status, must_change_password)
+       VALUES ($1, $2, $3, $4, $5, 'active', true)
+       ON CONFLICT (id) DO UPDATE
+         SET full_name = EXCLUDED.full_name,
+             phone = COALESCE(NULLIF(EXCLUDED.phone, ''), profiles.phone),
+             default_institution_id = COALESCE(EXCLUDED.default_institution_id, profiles.default_institution_id),
+             updated_at = now()`,
+      [profileId, cleanName, cleanEmail, data.phone?.trim() || null, institutionId]
+    );
+
+    // 3. Generate employee code if not provided
+    const employeeCode = data.employeeCode || `EMP-${Math.floor(1000 + Math.random() * 9000)}`;
+    const joiningDate = data.dateOfJoining || new Date().toISOString().split('T')[0];
+
+    // 4. Insert staff record
+    const staffRes = await db.query(
+      `INSERT INTO staff (
+        institution_id, profile_id, employee_code, department_id, designation_id,
+        is_teaching_staff, employment_status, date_of_joining,
+        qualification, university, subjects, experience, experience_years,
+        date_of_birth, gender, address
+      ) VALUES (
+        $1, $2, $3, $4, $5,
+        $6, 'active', $7,
+        $8, $9, $10, $11, $12,
+        $13, $14, $15
+      )
+      RETURNING *`,
+      [
+        institutionId,
+        profileId,
+        employeeCode,
+        data.departmentId || null,
+        data.designationId || null,
+        data.isTeachingStaff ?? true,
+        joiningDate,
+        data.qualification || null,
+        data.university || null,
+        data.subjects || null,
+        data.experience || (data.experienceYears !== undefined ? `${data.experienceYears} Years` : null),
+        data.experienceYears !== undefined ? data.experienceYears : null,
+        data.dateOfBirth || null,
+        data.gender || null,
+        data.address || null,
+      ]
+    );
+
+    const staff = staffRes.rows[0];
+
+    // 5. Employment history
+    await this.repo.recordEmploymentHistory({
+      staffId: staff.id,
+      departmentId: staff.department_id,
+      designationId: staff.designation_id,
+      effectiveFrom: joiningDate,
+    });
+
+    // 6. Link faculty if teaching
+    if (staff.is_teaching_staff) {
+      await this.repo.linkFacultyRecord(
+        institutionId,
+        staff.id,
+        data.qualification || 'Master of Education / Sciences',
+        data.subjects || 'Core Academics'
+      );
+    }
+
+    // 7. Audit Log
+    await AuditDispatcher.dispatch({
+      actorId,
+      institutionId,
+      action: 'hrms.staff_created',
+      resource: 'staff',
+      resourceId: staff.id,
+      newValue: {
+        employeeCode: staff.employee_code,
+        profileId,
+        name: cleanName,
+        email: cleanEmail,
+        isTeachingStaff: staff.is_teaching_staff,
+      },
+    });
+
+    return {
+      ...staff,
+      name: cleanName,
+      email: cleanEmail,
+      employeeCode: staff.employee_code,
+    };
   }
 
   async updateStaff(
@@ -622,5 +832,33 @@ export class HrmsService {
       total_employees: exportRows.length,
       employees: exportRows,
     };
+  }
+
+  // ==========================================
+  // 7. DUPLICATES, BATCH ATTENDANCE & REPORTS
+  // ==========================================
+
+  async checkDuplicateStaff(
+    institutionId: string,
+    data: { email: string; name?: string; dateOfBirth?: string; phone?: string; excludeStaffId?: string }
+  ) {
+    return this.repo.checkDuplicateStaff(institutionId, data);
+  }
+
+  async markAllStaffPresent(institutionId: string, actorId: string, attendanceDate: string) {
+    const res = await this.repo.markAllStaffPresent(institutionId, actorId, attendanceDate);
+    await AuditDispatcher.dispatch({
+      actorId,
+      institutionId,
+      action: 'hrms.attendance_bulk_marked',
+      resource: 'staff_attendance',
+      resourceId: attendanceDate,
+      newValue: { markedCount: res.markedCount, date: attendanceDate },
+    });
+    return res;
+  }
+
+  async getHRReportSummary(institutionId: string) {
+    return this.repo.getHRReportSummary(institutionId);
   }
 }

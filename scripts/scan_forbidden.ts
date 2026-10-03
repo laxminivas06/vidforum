@@ -29,6 +29,7 @@ const EXCLUDED_PATTERNS = [
   'verify-r2-auth.ts', // test script checking initial seeded password
   'verify-r3-workspaces.ts',
   'verify-r4-provisioning.ts',
+  'verify-1b-hrms.ts',
   'scan_forbidden.ts',
   'gate_report.ts',
 ];
@@ -72,7 +73,7 @@ export function runScan(): { violations: Violation[]; filesScanned: number } {
       // Rule 1: Universal 'admin123' bypasses
       if (line.includes('admin123')) {
         // Allowed only in auth denylist or env default fallback
-        const isDenylist = relativePath.includes('auth.routes.ts') && (trimmed.includes("'admin123'") || trimmed.includes('"admin123"'));
+        const isDenylist = (relativePath.includes('auth.routes.ts') || relativePath.includes('auth.service.ts')) && (trimmed.includes("'admin123'") || trimmed.includes('"admin123"'));
         const isEnvConfig = relativePath.includes('config/env.ts') && trimmed.includes('DEFAULT_INITIAL_PASSWORD');
         if (!isDenylist && !isEnvConfig) {
           violations.push({

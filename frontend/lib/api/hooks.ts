@@ -844,4 +844,352 @@ export function useUserAudit(userId?: string) {
   })
 }
 
+// ========================================================
+// HRMS HOOKS (Step 1B)
+// ========================================================
+
+export function useDesignations() {
+  return useQuery({
+    queryKey: ["hrms-designations"],
+    queryFn: async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/hrms/designations`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for designations:", err)
+      }
+      return []
+    },
+  })
+}
+
+export function useCreateDesignation() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (name: string) => {
+      const res = await fetch(`${API_BASE_URL}/hrms/designations`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ name }),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to create designation")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["hrms-designations"] })
+    },
+  })
+}
+
+export function useDeleteDesignation() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const res = await fetch(`${API_BASE_URL}/hrms/designations/${id}`, {
+        method: "DELETE",
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to delete designation")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["hrms-designations"] })
+    },
+  })
+}
+
+export function useDepartments() {
+  return useQuery({
+    queryKey: ["hrms-departments"],
+    queryFn: async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/hrms/departments`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for departments:", err)
+      }
+      return []
+    },
+  })
+}
+
+export function useCreateDepartment() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: { name: string; code: string; departmentType?: string }) => {
+      const res = await fetch(`${API_BASE_URL}/hrms/departments`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to create department")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["hrms-departments"] })
+    },
+  })
+}
+
+export function useDeleteDepartment() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const res = await fetch(`${API_BASE_URL}/hrms/departments/${id}`, {
+        method: "DELETE",
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to delete department")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["hrms-departments"] })
+    },
+  })
+}
+
+export function useLeaveTypes() {
+  return useQuery({
+    queryKey: ["hrms-leave-types"],
+    queryFn: async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/hrms/leaves/types`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for leave types:", err)
+      }
+      return []
+    },
+  })
+}
+
+export function useCreateLeaveType() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: { name: string; maxDaysPerYear: number }) => {
+      const res = await fetch(`${API_BASE_URL}/hrms/leaves/types`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to create leave type")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["hrms-leave-types"] })
+    },
+  })
+}
+
+export function useLeaveRequests() {
+  return useQuery({
+    queryKey: ["hrms-leave-requests"],
+    queryFn: async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/hrms/leaves/requests`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for leave requests:", err)
+      }
+      return []
+    },
+  })
+}
+
+export function useApplyLeave() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: {
+      staffId: string
+      leaveTypeId: string
+      startDate: string
+      endDate: string
+      reason: string
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/hrms/leaves/requests`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to submit leave request")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["hrms-leave-requests"] })
+      queryClient.invalidateQueries({ queryKey: ["hrms-reports-summary"] })
+    },
+  })
+}
+
+export function useActionLeaveRequest() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({
+      id,
+      action,
+      reviewNotes,
+    }: {
+      id: string
+      action: "approved" | "rejected"
+      reviewNotes?: string
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/hrms/leaves/requests/${id}/action`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ action, reviewNotes }),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to action leave request")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["hrms-leave-requests"] })
+      queryClient.invalidateQueries({ queryKey: ["hrms-reports-summary"] })
+    },
+  })
+}
+
+export function useStaffAttendance(date?: string) {
+  return useQuery({
+    queryKey: ["hrms-attendance", date],
+    queryFn: async () => {
+      try {
+        const query = date ? `?date=${encodeURIComponent(date)}` : ""
+        const res = await fetch(`${API_BASE_URL}/hrms/attendance${query}`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for staff attendance:", err)
+      }
+      return []
+    },
+  })
+}
+
+export function useMarkAllStaffPresent() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (date?: string) => {
+      const res = await fetch(`${API_BASE_URL}/hrms/attendance/mark-all-present`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ date }),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to mark all staff present")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["hrms-attendance"] })
+    },
+  })
+}
+
+export function useRecordStaffAttendance() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: {
+      staffId: string
+      date: string
+      status: "present" | "absent" | "half_day" | "on_leave"
+      remarks?: string
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/hrms/attendance`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to record attendance")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["hrms-attendance"] })
+    },
+  })
+}
+
+export function useHRReportSummary() {
+  return useQuery({
+    queryKey: ["hrms-reports-summary"],
+    queryFn: async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/hrms/reports/summary`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && json.data) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for HR reports summary:", err)
+      }
+      return null
+    },
+  })
+}
+
+export async function checkDuplicateStaff(data: {
+  email?: string
+  phone?: string
+  name?: string
+  dateOfBirth?: string
+}) {
+  const res = await fetch(`${API_BASE_URL}/hrms/staff/check-duplicate`, {
+    method: "POST",
+    headers: getAuthHeaders(),
+    body: JSON.stringify(data),
+  })
+  const json = await res.json()
+  return json.data || { isDuplicate: false, reasons: [], duplicateFields: [] }
+}
+
 

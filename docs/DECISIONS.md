@@ -103,5 +103,29 @@
 - **Decision:** Enforce `institution_id` validation at: (1) Verified JWT claims (never user input), (2) RBAC permission checks, (3) Repository base queries with mandatory tenant filter / PostgreSQL RLS, (4) Object storage file keys (`{institution_id}/...`), and (5) AI prompt context bounding. Cross-tenant access strictly emits a 403 status code and an immutable security audit event.
 - **Rationale:** Guarantees ironclad tenant isolation across all services, API endpoints, storage buckets, and AI models.
 
+### [ADR-015] Initial Default Password Policy (Assumption A8)
+- **Date & Timestamp:** 2026-10-03T22:15:00+05:30
+- **Context:** Previous sessions implemented universal default passwords and blank password bypasses that allowed any account to be compromised.
+- **Decision:** `DEFAULT_INITIAL_PASSWORD` is configurable exclusively via server environment variables (defaulting to `admin123` in non-production development environments). It is never hardcoded as a universal fallback or bypass. Initial provisioning always generates an individual bcrypt hash in `auth.users.encrypted_password` with `must_change_password = true`. Universal password acceptance and blank password fallbacks are permanently eradicated.
+- **Rationale:** Prevents unauthorized credential escalation while allowing administrative account provisioning workflows.
+
+### [ADR-016] Identifier Disambiguation & Human IDs (Assumptions A4 & A9)
+- **Date & Timestamp:** 2026-10-03T22:15:00+05:30
+- **Context:** Database queries used fragile type casting (`::text` on UUID columns) and phone number lookups that were non-unique across institutions.
+- **Decision:** `U_id` (`STF-000001`, `STU-000001`) serves as the immutable institutional record ID, while `login_id` (e.g. `FAC_ASHARMA_01`) serves as the unique human-readable authentication handle. Both are distinct from database UUID primary keys. Login lookup strictly accepts exact, case-insensitive matches against `email`, `login_id`, or `U_id`. Phone login is disabled until a unique index and institution-scoped E.164 constraint are added.
+- **Rationale:** Eliminates query-level type mismatch bugs and prevents account collision or misidentification.
+
+### [ADR-017] Token Storage and Session Management
+- **Date & Timestamp:** 2026-10-03T22:15:00+05:30
+- **Context:** Previous sessions allowed client-side account stores in `localStorage` and trusted JWT workspace claims without server verification.
+- **Decision:** Client-side account stores and identity fallbacks in browser `localStorage` are strictly forbidden. Access tokens are short-lived (15 minutes). Refresh tokens are rotated. Workspace grants are verified against the database on every request, cached by a tenant-level `perm_version` counter. A change in permissions, password, or account status immediately invalidates existing sessions.
+- **Rationale:** Guarantees that permission and workspace revocations take effect immediately.
+
+### [ADR-018] Test Database Isolation
+- **Date & Timestamp:** 2026-10-03T22:15:00+05:30
+- **Context:** Previous sessions executed ad-hoc test scripts against the working database and subsequently purged data, leaving the system untested.
+- **Decision:** Automated integration tests and E2E tests must execute exclusively against an isolated test database (`TEST_DATABASE_URL`), never against the working development or production database. `npm run seed:demo` loads demo data only upon explicit command with `NODE_ENV` guards.
+- **Rationale:** Protects live data integrity and guarantees reproducible, non-destructive test execution.
+
 ---
 *End of DECISIONS.md*

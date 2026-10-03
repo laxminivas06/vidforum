@@ -1,15 +1,16 @@
 # MOCK_USERS
 
-> 6 nodes · cohesion 0.33
+> 7 nodes · cohesion 0.29
 
 ## Key Concepts
 
-- [Button.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L1) (5 connections)
-- [activeLeftIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L53) (1 connections)
-- [activeRightIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L54) (1 connections)
-- [baseStyles](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L32) (1 connections)
-- [sizes](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L46) (1 connections)
-- [variants](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L35) (1 connections)
+- [AuthContext.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L1) (6 connections)
+- [ALL_PERMISSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L47) (1 connections)
+- [AuthContext](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L147) (1 connections)
+- [AuthProvider()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L149) (1 connections)
+- [RequirePermission()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L407) (1 connections)
+- [ROLE_PERMISSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L89) (1 connections)
+- [SUPER_ADMIN_PERMISSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L76) (1 connections)
 
 ## Relationships
 
@@ -17,11 +18,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Button.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\contexts\AuthContext.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 10 (100%)
+- EXTRACTED: 12 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

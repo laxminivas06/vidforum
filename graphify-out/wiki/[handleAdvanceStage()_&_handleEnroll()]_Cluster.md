@@ -1,35 +1,35 @@
 # [handleAdvanceStage() & handleEnroll()] Cluster
 
-> 44 nodes · cohesion 0.05
+> 38 nodes · cohesion 0.05
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L1) (38 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/vault/page.tsx#L1) (3 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L1) (3 connections)
-- [columns](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L290) (3 connections)
-- [handleAddUser()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L158) (2 connections)
-- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L140) (2 connections)
-- [adminCount](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L357) (1 connections)
-- [createUserMutation](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L78) (1 connections)
-- [{ data: dbUsers = [], isLoading: isLoadingUsers }](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L77) (1 connections)
-- [{ data: institutions = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L76) (1 connections)
-- [{ data: staff = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L32) (1 connections)
-- [DEFAULT_USERS](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L46) (1 connections)
-- [[editEmail, setEditEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L100) (1 connections)
-- [[editErrors, setEditErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L104) (1 connections)
-- [[editingUser, setEditingUser]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L98) (1 connections)
-- [[editInstitution, setEditInstitution]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L102) (1 connections)
-- [[editName, setEditName]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L99) (1 connections)
-- [[editRole, setEditRole]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L101) (1 connections)
-- [[editStatus, setEditStatus]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L103) (1 connections)
-- [[editSuccessMessage, setEditSuccessMessage]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L106) (1 connections)
-- [[email, setEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L89) (1 connections)
-- [[errors, setErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L92) (1 connections)
-- [facultyCount](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L356) (1 connections)
-- [filteredUsers](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L126) (1 connections)
-- [handleOpenEdit()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L210) (1 connections)
-- *... and 19 more nodes in this community*
+- [auth.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L1) (37 connections)
+- [assignedWorkspaces](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L171) (1 connections)
+- [cleanCurrent](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L270) (1 connections)
+- [cleanNew](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L269) (1 connections)
+- [clientIp](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L44) (1 connections)
+- [{ currentPassword, newPassword }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L251) (1 connections)
+- [currentValid](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L295) (1 connections)
+- [dbLockout](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L106) (1 connections)
+- [{ email, userId, identifier, password }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L30) (1 connections)
+- [expiresAt](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L199) (1 connections)
+- [failRecord](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L65) (1 connections)
+- [institution](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L339) (1 connections)
+- [instRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L341) (1 connections)
+- [isPasswordValid](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L118) (1 connections)
+- [lockoutStatus](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L49) (1 connections)
+- [loginIdentifier](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L31) (1 connections)
+- [newAccessToken](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L441) (1 connections)
+- [newExpiresAt](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L424) (1 connections)
+- [newRefreshToken](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L422) (1 connections)
+- [{ newRole }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L359) (1 connections)
+- [newTokenHash](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L423) (1 connections)
+- [newTokenPayload](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L318) (1 connections)
+- [PASSWORD_DENYLIST](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L15) (1 connections)
+- [permissions](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L168) (1 connections)
+- [refreshToken](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts#L197) (1 connections)
+- *... and 13 more nodes in this community*
 
 ## Relationships
 
@@ -37,13 +37,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\documents\vault\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/vault/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\hrms\staff\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\users\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\auth\auth.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.routes.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 89 (100%)
+- EXTRACTED: 74 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

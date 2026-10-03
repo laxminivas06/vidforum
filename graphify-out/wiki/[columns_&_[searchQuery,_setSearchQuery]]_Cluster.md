@@ -4,31 +4,31 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L1) (17 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L1) (9 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx#L1) (9 connections)
-- [AuthContext.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L1) (9 connections)
-- [useAuth()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L422) (4 connections)
-- [[searchQuery, setSearchQuery]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L82) (4 connections)
-- [RequirePermission()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L436) (2 connections)
-- [DashboardPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L41) (2 connections)
-- [{ data: institutions = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L42) (2 connections)
-- [RootPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/page.tsx#L7) (2 connections)
-- [ALL_PERMISSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L48) (1 connections)
-- [AuthContext](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L160) (1 connections)
-- [AuthProvider()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L162) (1 connections)
-- [DEFAULT_USER](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L39) (1 connections)
-- [KNOWN_ACCOUNTS](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L149) (1 connections)
-- [ROLE_PERMISSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L90) (1 connections)
-- [SUPER_ADMIN_PERMISSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L77) (1 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/page.tsx#L1) (1 connections)
-- [[actionType, setActionType]](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L47) (1 connections)
-- [applicantColumns](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L92) (1 connections)
-- [async()](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L420) (1 connections)
-- [[collectDialogOpen, setCollectDialogOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx#L41) (1 connections)
-- [[confirmDialogOpen, setConfirmDialogOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L89) (1 connections)
-- [{ data: applicants, isLoading: appsLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L87) (1 connections)
-- [{ data: fees }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L88) (1 connections)
+- [users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L1) (48 connections)
+- [adminEmails](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L605) (1 connections)
+- [adminRoleId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L636) (1 connections)
+- [adminRoleRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L635) (1 connections)
+- [authId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L612) (1 connections)
+- [authUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L611) (1 connections)
+- [cleanEmail](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L47) (1 connections)
+- [client](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L38) (1 connections)
+- [current](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L147) (1 connections)
+- [currentRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L136) (1 connections)
+- [defaultPassHash](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L600) (1 connections)
+- [displayName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L48) (1 connections)
+- [getUserAgent()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L337) (1 connections)
+- [id](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L132) (1 connections)
+- [ins](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L614) (1 connections)
+- [insertAuth](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L84) (1 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L51) (1 connections)
+- [institutionId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L445) (1 connections)
+- [instName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L52) (1 connections)
+- [instRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L54) (1 connections)
+- [{ name, email, role = 'FACULTY', institutionName }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L40) (1 connections)
+- [{ name, email, role, institutionName, status }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L133) (1 connections)
+- [newUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L109) (1 connections)
+- [ngsId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L603) (1 connections)
+- [ngsRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L602) (1 connections)
 - *... and 23 more nodes in this community*
 
 ## Relationships
@@ -37,17 +37,12 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\finance\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\institutions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\users\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\contexts\AuthContext.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 94 (96%)
-- INFERRED: 4 (4%)
+- EXTRACTED: 95 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

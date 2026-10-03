@@ -1,17 +1,19 @@
 # [heights & percentage] Cluster
 
-> 8 nodes · cohesion 0.25
+> 10 nodes · cohesion 0.20
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L1) (7 connections)
-- [activeGrade](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L31) (1 connections)
-- [{ data: grades = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L28) (1 connections)
-- [isSelected](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L83) (1 connections)
-- [pct](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L176) (1 connections)
-- [[selectedGradeId, setSelectedGradeId]](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L29) (1 connections)
-- [totalCapacity](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L85) (1 connections)
-- [totalStudents](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L84) (1 connections)
+- [Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L1) (9 connections)
+- [ActiveIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L91) (1 connections)
+- [activeWorkspace](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L90) (1 connections)
+- [dropdownRef](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L80) (1 connections)
+- [handleClickOutside()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L97) (1 connections)
+- [isCurrent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L184) (1 connections)
+- [[isWorkspaceDropdownOpen, setIsWorkspaceDropdownOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L79) (1 connections)
+- [permittedWorkspaces](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L83) (1 connections)
+- [TOPBAR_ICON_MAP](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L31) (1 connections)
+- [WsIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L185) (1 connections)
 
 ## Relationships
 
@@ -19,11 +21,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\academics\hierarchy\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 14 (100%)
+- EXTRACTED: 18 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

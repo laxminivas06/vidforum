@@ -1,21 +1,22 @@
 # [Skill: debt-ops & Debt-Ops Skill] Cluster
 
-> 4 nodes · cohesion 0.67
+> 5 nodes · cohesion 0.40
 
 ## Key Concepts
 
-- [workspaces.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L1) (3 connections)
-- [getWorkspaceForPath()](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L115) (2 connections)
-- [isPathAllowedForWorkspaces()](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L121) (2 connections)
-- [PLATFORM_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L9) (1 connections)
+- [Document: Agents](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (4 connections)
+- [1. Operating Mode & Standards](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
+- [2. Active Plugin Ecosystem & Memory](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
+- [3. Working Agreement Checklist](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
+- [VID Platform: Agent Operating Guidelines](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: ai-native-sdlc & AI-Native SDLC Skill] Cluster]] (8 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\config\workspaces.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts)
+- [AGENTS.md](file:///C:/Antigravityyyyy/VID_School/AGENTS.md)
 
 ## Audit Trail
 

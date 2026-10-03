@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [app](file:///C:/Antigravityyyyy/VID_School/backend/src/app.ts#L10) (1 connections)
-- [app.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/app.ts#L1) (1 connections)
+- [module-guard.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/module-guard.middleware.ts#L1) (1 connections)
+- [requireModuleEnabled()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/module-guard.middleware.ts#L9) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\app.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/app.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\module-guard.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/module-guard.middleware.ts)
 
 ## Audit Trail
 

@@ -1,32 +1,18 @@
 # [Skill: local-memory & Key Actions] Cluster
 
-> 8 nodes · cohesion 0.39
+> 9 nodes · cohesion 0.22
 
 ## Key Concepts
 
-- [VidApiClient](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L7) (7 connections)
-- [.request()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L18) (5 connections)
-- [.delete()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L71) (2 connections)
-- [.get()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L51) (2 connections)
-- [.patch()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L63) (2 connections)
-- [.post()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L55) (2 connections)
-- [index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L1) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L12) (1 connections)
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class VidApiClient {
-        +index.ts()
-        +.constructor()
-        +.request()
-        +.get()
-        +.post()
-        +.patch()
-        +.delete()
-    }
-```
+- [Card.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L1) (8 connections)
+- [activeDelta](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L122) (1 connections)
+- [activeDeltaType](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L123) (1 connections)
+- [Card](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L11) (1 connections)
+- [CardContent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L74) (1 connections)
+- [CardDescription](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L62) (1 connections)
+- [CardFooter](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L82) (1 connections)
+- [CardHeader](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L38) (1 connections)
+- [CardTitle](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L50) (1 connections)
 
 ## Relationships
 
@@ -34,11 +20,11 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\packages\api-client\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Card.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 22 (100%)
+- EXTRACTED: 16 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

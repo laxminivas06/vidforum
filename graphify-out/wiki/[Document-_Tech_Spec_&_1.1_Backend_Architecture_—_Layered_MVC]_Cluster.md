@@ -1,69 +1,35 @@
 # [Document: Tech Spec & 1.1 Backend Architecture — Layered MVC] Cluster
 
-> 55 nodes · cohesion 0.05
+> 70 nodes · cohesion 0.03
 
 ## Key Concepts
 
-- [TimetableRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L80) (25 connections)
-- [TimetableService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L15) (25 connections)
-- [normalizeDayOfWeek()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L68) (5 connections)
-- [.checkTimetableConflicts()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L493) (5 connections)
-- [.publishTimetable()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L142) (5 connections)
-- [.checkCandidateConflicts()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L386) (4 connections)
-- [.listEntries()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L289) (4 connections)
-- [.checkCandidateConflict()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L94) (4 connections)
-- [.createEntry()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L358) (3 connections)
-- [.getEntryById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L353) (3 connections)
-- [.getPeriodById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L159) (3 connections)
-- [.getRoomById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L93) (3 connections)
-- [.getScopedSchedule()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L598) (3 connections)
-- [.getTimetableById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L257) (3 connections)
-- [.setPublishStatus()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L525) (3 connections)
-- [.getTimetable()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L72) (3 connections)
-- [.unpublishTimetable()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L171) (3 connections)
-- [timetable.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L1) (2 connections)
-- [timetable.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L1) (2 connections)
-- [.listSubstitutions()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L542) (2 connections)
-- [.updatePeriod()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L181) (2 connections)
-- [.updateRoom()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L113) (2 connections)
-- [ConflictError](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L4) (2 connections)
-- [.auditTimetableConflicts()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L106) (2 connections)
-- [.createEntry()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L115) (2 connections)
-- *... and 30 more nodes in this community*
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class TimetableRepository {
-        +timetable.repository.ts()
-        +.listRooms()
-        +.getRoomById()
-        +.createRoom()
-        +.updateRoom()
-        +.deleteRoom()
-        +.listPeriods()
-        +.getPeriodById()
-        +.createPeriod()
-        +.updatePeriod()
-    }
-    class ConflictError {
-        +timetable.service.ts()
-        +.constructor()
-    }
-    class TimetableService {
-        +timetable.service.ts()
-        +.listRooms()
-        +.getRoom()
-        +.createRoom()
-        +.updateRoom()
-        +.deleteRoom()
-        +.listPeriods()
-        +.getPeriod()
-        +.createPeriod()
-        +.updatePeriod()
-    }
-```
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L1) (55 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L1) (17 connections)
+- [generateRandomPassword()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L273) (3 connections)
+- [{ data: institutions = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L42) (2 connections)
+- [handleProvisionSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L283) (2 connections)
+- [handleStaffSelection()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L248) (2 connections)
+- [updateStatusMutation](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L43) (2 connections)
+- [[accountFilter, setAccountFilter]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L181) (1 connections)
+- [[actionType, setActionType]](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L47) (1 connections)
+- [[activeTab, setActiveTab]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L165) (1 connections)
+- [applicantColumns](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L390) (1 connections)
+- [async()](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L420) (1 connections)
+- [[confirmDialogOpen, setConfirmDialogOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L166) (1 connections)
+- [[copySuccessToast, setCopySuccessToast]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L192) (1 connections)
+- [DashboardPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L109) (1 connections)
+- [{ data: applicants, isLoading: appsLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L155) (1 connections)
+- [{ data: facultyAccounts = [], isLoading: accountsLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L157) (1 connections)
+- [{ data: fees }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L156) (1 connections)
+- [{ data: instituteAdmins = [], refetch: refetchAdmins }](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L54) (1 connections)
+- [{ data: roleTemplates = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L159) (1 connections)
+- [{ data: staffList = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L158) (1 connections)
+- [DEFAULT_FACULTY_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L83) (1 connections)
+- [filtered](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L56) (1 connections)
+- [filteredAccounts](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L229) (1 connections)
+- [handleCopyCredentials()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L368) (1 connections)
+- *... and 45 more nodes in this community*
 
 ## Relationships
 
@@ -71,13 +37,13 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\institutions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 132 (86%)
-- INFERRED: 22 (14%)
+- EXTRACTED: 146 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

@@ -1,41 +1,40 @@
 # [[activeRollCall, setActiveRollCall] & [attendanceRecords, setAttendanceRecords]] Cluster
 
-> 19 nodes · cohesion 0.11
+> 17 nodes · cohesion 0.15
 
 ## Key Concepts
 
-- [Document: Antigravity Master Prompt](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (18 connections)
-- [0. ROLE & OPERATING MODE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [1. PROJECT BRIEF](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [2. REQUIRED DELIVERABLES — CREATE THESE FILES FIRST](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [3. DEVELOPMENT RULES (apply throughout, no exceptions)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [4. TECH STACK CONSTRAINTS](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [5. WORKING AGREEMENT / CHECK-IN CADENCE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [6. AGENT MEMORY USAGE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [7. DEFINITION OF DONE (v1)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [AI Yantra Boundary](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [Backend Architecture Rules](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [/docs/DECISIONS.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [/docs/PRD.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [/docs/TASKS.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [/docs/TECHSPEC.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [Documentation / Architecture Reconciliation](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [Documentation Reconciliation](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [MASTER PROMPT — Antigravity Full-Stack Build](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
-- [Multi-Tenant Security](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [gate_report.ts](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L1) (8 connections)
+- [scan_forbidden.ts](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L1) (7 connections)
+- [generateGateReport()](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L35) (4 connections)
+- [getAllFiles()](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L40) (3 connections)
+- [runScan()](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L55) (3 connections)
+- [getGitCommit()](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L11) (2 connections)
+- [runCommand()](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L20) (2 connections)
+- [shouldExclude()](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L36) (2 connections)
+- [BACKEND_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L7) (1 connections)
+- [DOCS_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L9) (1 connections)
+- [FRONTEND_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L8) (1 connections)
+- [ROOT_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L6) (1 connections)
+- [{ success }](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L145) (1 connections)
+- [EXCLUDED_PATTERNS](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L23) (1 connections)
+- [ROOT_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L11) (1 connections)
+- [SCAN_DIRS](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L13) (1 connections)
+- [{ violations, filesScanned }](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L141) (1 connections)
 
 ## Relationships
 
-- [[[conflicts & facConflict] Cluster]] (36 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [Reference_docs/antigravity-master-prompt.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md)
+- [C:\Antigravityyyyy\VID_School\scripts\gate_report.ts](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts)
+- [C:\Antigravityyyyy\VID_School\scripts\scan_forbidden.ts](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 36 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 38 (95%)
+- INFERRED: 2 (5%)
 - AMBIGUOUS: 0 (0%)
 
 ---

@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [phase2_finance.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_finance.test.ts#L1) (1 connections)
-- [runFinanceTests()](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_finance.test.ts#L6) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-config/page.tsx#L1) (1 connections)
+- [AIConfigPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-config/page.tsx#L8) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\tests\phase2_finance.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_finance.test.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\ai-config\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-config/page.tsx)
 
 ## Audit Trail
 

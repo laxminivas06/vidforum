@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [jsonwebtoken](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L19) (0 connections)
+- [@types/react](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L23) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [backend/package.json](file:///C:/Antigravityyyyy/VID_School/backend/package.json)
+- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
 
 ## Audit Trail
 

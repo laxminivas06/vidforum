@@ -1,35 +1,35 @@
 # [containerRef & filteredOptions] Cluster
 
-> 14 nodes · cohesion 0.14
+> 14 nodes · cohesion 0.15
 
 ## Key Concepts
 
-- [VID Platform Educational Ecosystem Specification](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (13 connections)
-- [Academics & Curriculum](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Admissions & Enrollment](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Alumni Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Attendance Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Communication & Notifications](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Examination & Grading](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Fee & Financial Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Hostel Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Human Resources & Payroll](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Learning Management System (LMS)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Library Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Student Information System (SIS)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
-- [Transportation Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [AddInstituteAdminModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L1) (13 connections)
+- [handleSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L89) (2 connections)
+- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L61) (2 connections)
+- [createAdminMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L34) (1 connections)
+- [[email, setEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L37) (1 connections)
+- [[errors, setErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L42) (1 connections)
+- [handleDeselectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L57) (1 connections)
+- [handleSelectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L53) (1 connections)
+- [handleToggleWorkspace()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L47) (1 connections)
+- [isChecked](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L271) (1 connections)
+- [[password, setPassword]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L38) (1 connections)
+- [[selectedWorkspaces, setSelectedWorkspaces]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L39) (1 connections)
+- [[successBanner, setSuccessBanner]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L43) (1 connections)
+- [[userId, setUserId]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx#L36) (1 connections)
 
 ## Relationships
 
-- [[[isTableLoading & mobileSubtitleCol] Cluster]] (26 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [Reference_docs/VID Platform.pdf](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf)
+- [C:\Antigravityyyyy\VID_School\frontend\components\institutions\AddInstituteAdminModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/AddInstituteAdminModal.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 26 (100%)
+- EXTRACTED: 28 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

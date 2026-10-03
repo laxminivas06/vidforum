@@ -1,14 +1,15 @@
 # NAVIGATION_CONFIG
 
-> 5 nodes · cohesion 0.40
+> 6 nodes · cohesion 0.33
 
 ## Key Concepts
 
-- [authMiddleware()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/auth.middleware.ts#L26) (3 connections)
-- [verify-cloud-e2e.js](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-cloud-e2e.js#L1) (2 connections)
-- [verify()](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-cloud-e2e.js#L3) (2 connections)
-- [auth.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/auth.middleware.ts#L1) (1 connections)
-- [{ db }](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-cloud-e2e.js#L1) (1 connections)
+- [StudentProfile.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L1) (5 connections)
+- [[activeTab, setActiveTab]](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L177) (1 connections)
+- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L279) (1 connections)
+- [MOCK_STUDENT](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L97) (1 connections)
+- [student](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L174) (1 connections)
+- [tabs](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L181) (1 connections)
 
 ## Relationships
 
@@ -16,13 +17,12 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\scripts\verify-cloud-e2e.js](file:///C:/Antigravityyyyy/VID_School/backend/scripts/verify-cloud-e2e.js)
-- [C:\Antigravityyyyy\VID_School\backend\src\middleware\auth.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/auth.middleware.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\components\student\StudentProfile.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 6 (67%)
-- INFERRED: 3 (33%)
+- EXTRACTED: 10 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [phase1_step_c.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase1_step_c.test.ts#L1) (2 connections)
-- [createMockReqRes()](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase1_step_c.test.ts#L9) (1 connections)
-- [runStepCTests()](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase1_step_c.test.ts#L53) (1 connections)
+- [layout.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx#L1) (2 connections)
+- [metadata](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx#L6) (1 connections)
+- [RootLayout()](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx#L11) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\tests\phase1_step_c.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase1_step_c.test.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\layout.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/layout.tsx)
 
 ## Audit Trail
 

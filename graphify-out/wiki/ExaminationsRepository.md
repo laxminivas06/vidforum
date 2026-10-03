@@ -12,10 +12,10 @@
 - [[.calculateExamResults()]] `EXTRACTED`
 - [[.verifyFacultySubjectAllocation()]] `EXTRACTED`
 - [[.getExamSubjectById()]] `EXTRACTED`
-- [[.upsertMarksBatch()]] `EXTRACTED`
 - [[.validateImportBatch()]] `EXTRACTED`
-- [[.commitImportBatch()]] `EXTRACTED`
 - [[.getExamById()]] `EXTRACTED`
+- [[.upsertMarksBatch()]] `EXTRACTED`
+- [[.commitImportBatch()]] `EXTRACTED`
 - [[.publishExam()]] `EXTRACTED`
 - [[.addExamSubject()]] `EXTRACTED`
 - [[.listExamSubjects()]] `EXTRACTED`

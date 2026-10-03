@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [App.tsx](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx#L1) (2 connections)
-- [[selectedChild, setSelectedChild]](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx#L6) (1 connections)
-- [[selectedRole, setSelectedRole]](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx#L5) (1 connections)
+- [Skill: ai-native-sdlc](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (2 connections)
+- [AI-Native SDLC Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (1 connections)
+- [Gates](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: wingman & Pre-Edit Verification Checklist] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\mobile\App.tsx](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx)
+- [.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md)
 
 ## Audit Trail
 

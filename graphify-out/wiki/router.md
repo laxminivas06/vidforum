@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: hol-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md) (2 connections)
-- [Audit Checks](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md) (1 connections)
-- [HOL Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md) (1 connections)
+- [Skill: megalinter](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (2 connections)
+- [MegaLinter Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (1 connections)
+- [Target Toolchains](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[router]] (4 shared connections)
+- [[CAMERA_DECKS]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/hol-guard/skills/hol-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md)
+- [.agents/plugins/megalinter/skills/megalinter/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md)
 
 ## Audit Trail
 

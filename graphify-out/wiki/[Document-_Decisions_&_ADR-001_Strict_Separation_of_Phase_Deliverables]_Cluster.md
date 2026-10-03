@@ -31,7 +31,7 @@
 
 ## Relationships
 
-- [[[VID Platform Educational Ecosystem Specification & Academics & Curriculum] Cluster]] (46 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

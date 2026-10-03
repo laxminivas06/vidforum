@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [env.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/env.ts#L1) (1 connections)
-- [env](file:///C:/Antigravityyyyy/VID_School/backend/src/config/env.ts#L6) (1 connections)
+- [workspace.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/workspace.middleware.ts#L1) (1 connections)
+- [requireWorkspace()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/workspace.middleware.ts#L7) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\config\env.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/env.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\workspace.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/workspace.middleware.ts)
 
 ## Audit Trail
 

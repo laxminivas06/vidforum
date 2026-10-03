@@ -1,18 +1,14 @@
-# frontend_components_ui_index_slideover
+# Community 211
 
 > 1 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [cors](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L15) (0 connections)
+- **frontend_components_ui_index_tablecolumn** (0 connections)
 
 ## Relationships
 
 - No strong cross-community connections detected
-
-## Source Files
-
-- [backend/package.json](file:///C:/Antigravityyyyy/VID_School/backend/package.json)
 
 ## Audit Trail
 

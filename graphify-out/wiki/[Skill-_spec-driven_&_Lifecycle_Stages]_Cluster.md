@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx#L1) (2 connections)
-- [ExaminationsPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx#L76) (1 connections)
-- [MOCK_EXAMS](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx#L40) (1 connections)
+- [navigation.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L1) (2 connections)
+- [getFilteredNavigation()](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L193) (1 connections)
+- [NAVIGATION_CONFIG](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L27) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\examinations\schedules\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\config\navigation.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts)
 
 ## Audit Trail
 

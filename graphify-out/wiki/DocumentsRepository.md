@@ -23,11 +23,11 @@
 - [[.listRequests()]] `EXTRACTED`
 - [[.updateRequestStatus()]] `EXTRACTED`
 - [[.verifyFacultyStudentLink()]] `EXTRACTED`
-- [[.constructor()]] `EXTRACTED`
 - [[.listDocumentTypes()]] `EXTRACTED`
 - [[.createDocumentType()]] `EXTRACTED`
 - [[.findDocumentsByOwner()]] `EXTRACTED`
 - [[.listDocuments()]] `EXTRACTED`
+- [[.verifyDocument()]] `EXTRACTED`
 
 ---
 

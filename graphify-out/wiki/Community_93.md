@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: secret-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (2 connections)
-- [Scan Targets](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
-- [Secret Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
+- [Skill: tailtest](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (2 connections)
+- [Procedure](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (1 connections)
+- [Tailtest Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[Community 92]] (4 shared connections)
+- [[Community 95]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/secret-guard/skills/secret-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md)
+- [.agents/plugins/tailtest/skills/tailtest/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md)
 
 ## Audit Trail
 

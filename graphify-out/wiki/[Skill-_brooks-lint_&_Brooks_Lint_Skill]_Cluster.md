@@ -1,17 +1,18 @@
 # [Skill: brooks-lint & Brooks Lint Skill] Cluster
 
-> 8 nodes · cohesion 0.25
+> 9 nodes · cohesion 0.22
 
 ## Key Concepts
 
-- [Table.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L1) (7 connections)
-- [handleSort()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L54) (1 connections)
-- [isTableLoading](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L52) (1 connections)
-- [mobileSubtitleCol](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L79) (1 connections)
-- [mobileTitleCol](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L78) (1 connections)
-- [[sortDir, setSortDir]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L50) (1 connections)
-- [sortedData](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L63) (1 connections)
-- [[sortKey, setSortKey]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L49) (1 connections)
+- [hrms.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L1) (9 connections)
+- [actionLeaveSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L46) (1 connections)
+- [applyLeaveSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L38) (1 connections)
+- [createDesignationSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L29) (1 connections)
+- [createLeaveTypeSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L33) (1 connections)
+- [hrmsService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L6) (1 connections)
+- [markAttendanceSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L51) (1 connections)
+- [onboardStaffSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L9) (1 connections)
+- [updateStaffSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L21) (1 connections)
 
 ## Relationships
 
@@ -19,11 +20,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Table.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 14 (100%)
+- EXTRACTED: 17 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

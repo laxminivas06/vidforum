@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: spec-driven](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md) (2 connections)
-- [Lifecycle Stages](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md) (1 connections)
-- [Spec-Driven Development Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md) (1 connections)
+- [Skill: test-gap](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (2 connections)
+- [Checks](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (1 connections)
+- [Test Gap Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[Community 93]] (4 shared connections)
+- [[Community 96]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/spec-driven/skills/spec-driven/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md)
+- [.agents/plugins/test-gap/skills/test-gap/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md)
 
 ## Audit Trail
 

@@ -1,13 +1,15 @@
 # [Skill: axonflow & AxonFlow Skill] Cluster
 
-> 4 nodes · cohesion 0.50
+> 6 nodes · cohesion 0.33
 
 ## Key Concepts
 
-- [rbac.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L1) (3 connections)
-- [requireAnyPermission()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L70) (1 connections)
-- [requirePermission()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L36) (1 connections)
-- [requireRole()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L7) (1 connections)
+- [verify_actions.ts](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L1) (5 connections)
+- [BACKEND_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L15) (1 connections)
+- [ROOT_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L14) (1 connections)
+- [runAllSuites()](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L35) (1 connections)
+- [SUITES](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L17) (1 connections)
+- [{ totalFailed }](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L89) (1 connections)
 
 ## Relationships
 
@@ -15,11 +17,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\middleware\rbac.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts)
+- [C:\Antigravityyyyy\VID_School\scripts\verify_actions.ts](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 6 (100%)
+- EXTRACTED: 10 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

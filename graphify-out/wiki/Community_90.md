@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: metabrain](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md) (2 connections)
-- [Metabrain Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md) (1 connections)
-- [Workflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md) (1 connections)
+- [Skill: river-review](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md) (2 connections)
+- [Review Lenses](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md) (1 connections)
+- [River Review Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[Community 89]] (4 shared connections)
+- [[Community 92]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/metabrain/skills/metabrain/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md)
+- [.agents/plugins/river-review/skills/river-review/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md)
 
 ## Audit Trail
 

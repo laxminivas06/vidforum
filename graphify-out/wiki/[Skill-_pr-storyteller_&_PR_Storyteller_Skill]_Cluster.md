@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [phase2_timetable.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_timetable.test.ts#L1) (2 connections)
-- [createMockReqRes()](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_timetable.test.ts#L7) (1 connections)
-- [runTimetableTests()](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_timetable.test.ts#L50) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx#L1) (2 connections)
+- [AttendanceSessionsPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx#L89) (1 connections)
+- [MOCK_SESSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx#L42) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\tests\phase2_timetable.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_timetable.test.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\attendance\sessions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx)
 
 ## Audit Trail
 

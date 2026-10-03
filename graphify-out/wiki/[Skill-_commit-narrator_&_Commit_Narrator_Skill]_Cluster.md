@@ -1,13 +1,14 @@
 # [Skill: commit-narrator & Commit Narrator Skill] Cluster
 
-> 4 nodes · cohesion 0.50
+> 5 nodes · cohesion 0.50
 
 ## Key Concepts
 
-- [ProgressBar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L1) (3 connections)
-- [heights](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L25) (1 connections)
-- [percentage](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L23) (1 connections)
-- [variants](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L31) (1 connections)
+- [workspaces.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L1) (4 connections)
+- [getWorkspaceForPath()](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L237) (2 connections)
+- [isPathAllowedForWorkspaces()](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L252) (2 connections)
+- [PLATFORM_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L22) (1 connections)
+- [SUPER_ADMIN_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L214) (1 connections)
 
 ## Relationships
 
@@ -15,11 +16,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\ProgressBar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\config\workspaces.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 6 (100%)
+- EXTRACTED: 10 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

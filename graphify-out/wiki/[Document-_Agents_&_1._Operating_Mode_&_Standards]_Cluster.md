@@ -1,41 +1,21 @@
 # [Document: Agents & 1. Operating Mode & Standards] Cluster
 
-> 10 nodes · cohesion 0.20
+> 12 nodes · cohesion 0.18
 
 ## Key Concepts
 
-- [error-format.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L1) (5 connections)
-- [AppError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L25) (2 connections)
-- [PermissionDeniedError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L47) (2 connections)
-- [ResourceNotFoundError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L54) (2 connections)
-- [TenantViolationError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L40) (2 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L30) (1 connections)
-- [formatErrorResponse()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L61) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L48) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L55) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L41) (1 connections)
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class AppError {
-        +error-format.ts()
-        +.constructor()
-    }
-    class PermissionDeniedError {
-        +error-format.ts()
-        +.constructor()
-    }
-    class ResourceNotFoundError {
-        +error-format.ts()
-        +.constructor()
-    }
-    class TenantViolationError {
-        +error-format.ts()
-        +.constructor()
-    }
-```
+- [BulkProvisionModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L1) (11 connections)
+- [handleSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L110) (2 connections)
+- [parseCsv()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L62) (2 connections)
+- [bulkMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L31) (1 connections)
+- [[downloadSuccessToast, setDownloadSuccessToast]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L36) (1 connections)
+- [[error, setError]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L34) (1 connections)
+- [handleDownloadCredentialsCsv()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L133) (1 connections)
+- [handleDownloadTemplate()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L41) (1 connections)
+- [handleFileUpload()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L97) (1 connections)
+- [parsedPreview](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L159) (1 connections)
+- [[rawText, setRawText]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L33) (1 connections)
+- [[resultData, setResultData]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L35) (1 connections)
 
 ## Relationships
 
@@ -43,11 +23,11 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\common\error-format.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\components\users\BulkProvisionModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 18 (100%)
+- EXTRACTED: 24 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

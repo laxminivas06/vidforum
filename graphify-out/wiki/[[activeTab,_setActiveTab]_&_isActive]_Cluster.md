@@ -4,27 +4,27 @@
 
 ## Key Concepts
 
-- [Document: Memory](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (12 connections)
-- [1.1 Architecture & Stack Contract](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [1.2 Core Development Directives](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [1. Project Context & Durable Conclusions (Honcho / Wingman / Knowl)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [2. Installed Plugin Suite (28 Plugins Matrix)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [3. Workflow Activation Guide](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [4. Frontend Implementation & Stitch Conversion State (2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [5.1 Cloud Database Infrastructure (Supabase PostgreSQL)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [5.2 Backend Layered MVC Engine (Node.js 22 + Express + TypeScript)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [5.3 Frontend-to-Backend Integration & Offline Resilience](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [5.4 Repository Sync & Git Checkpoints](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [5. Backend & Supabase Database Architecture Implementation (2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [Persistent Agent Memory & Plugin Ecosystem: VID Platform](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [Document: Decisions](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (12 connections)
+- [ADR-001 Strict Separation of Phase Deliverables](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-002 Multi-Tenancy via Shared Database with Institution-ID & RLS](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-003 Central Student Master Record vs Workspace](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-004 Two-Tier RBAC with Resource-Level Context Verification](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-005 Full-Stack Monorepo Structure (backend/ + frontend/)](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-006 Pre-Commit Validation Pipeline for Excel Exam Imports](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-007 Strict 3-Workspace Boundary for AI Yantra](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-008 Node.js 22 + TypeScript + Express Layered MVC Architecture](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-009 Supabase Cloud PostgreSQL with Public Schema Helper Functions for RLS](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [ADR-010 Zero-Downtime TanStack Query Hooks with Resilient Mock Fallback](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [Architectural & Technical Decisions Log: VID Platform](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
+- [Decision Records](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md) (1 connections)
 
 ## Relationships
 
-- [[[Document: Plugin Orchestrator & 1. Memory Phase (Start of Session & Pre-Edit)] Cluster]] (24 shared connections)
+- [[[ICON_MAP & IconComponent] Cluster]] (24 shared connections)
 
 ## Source Files
 
-- [docs/MEMORY.md](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md)
+- [docs/DECISIONS.md](file:///C:/Antigravityyyyy/VID_School/docs/DECISIONS.md)
 
 ## Audit Trail
 

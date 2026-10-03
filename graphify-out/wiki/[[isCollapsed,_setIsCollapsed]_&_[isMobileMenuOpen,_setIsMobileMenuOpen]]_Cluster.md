@@ -1,18 +1,19 @@
 # [[isCollapsed, setIsCollapsed] & [isMobileMenuOpen, setIsMobileMenuOpen]] Cluster
 
-> 9 nodes · cohesion 0.22
+> 10 nodes · cohesion 0.20
 
 ## Key Concepts
 
-- [Card.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L1) (8 connections)
-- [activeDelta](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L122) (1 connections)
-- [activeDeltaType](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L123) (1 connections)
-- [Card](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L11) (1 connections)
-- [CardContent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L74) (1 connections)
-- [CardDescription](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L62) (1 connections)
-- [CardFooter](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L82) (1 connections)
-- [CardHeader](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L38) (1 connections)
-- [CardTitle](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L50) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L1) (9 connections)
+- [[activeRollCall, setActiveRollCall]](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L35) (1 connections)
+- [[attendanceRecords, setAttendanceRecords]](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L46) (1 connections)
+- [{ data: facultyInfo, isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L34) (1 connections)
+- [handleCompleteRollCall()](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L58) (1 connections)
+- [isCurrent](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L137) (1 connections)
+- [isPresent](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L341) (1 connections)
+- [[rollCallSuccess, setRollCallSuccess]](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L36) (1 connections)
+- [sampleStudents](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L39) (1 connections)
+- [toggleStudentAttendance()](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L48) (1 connections)
 
 ## Relationships
 
@@ -20,11 +21,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Card.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\faculty\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 16 (100%)
+- EXTRACTED: 18 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

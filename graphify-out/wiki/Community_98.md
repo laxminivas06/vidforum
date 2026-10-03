@@ -1,24 +1,23 @@
 # Community 98
 
-> 3 nodes · cohesion 0.67
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [Skill: unforgit](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (2 connections)
-- [Guidelines](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (1 connections)
-- [Unforgit Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (1 connections)
+- [app](file:///C:/Antigravityyyyy/VID_School/backend/src/app.ts#L10) (1 connections)
+- [app.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/app.ts#L1) (1 connections)
 
 ## Relationships
 
-- [[Community 97]] (4 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/unforgit/skills/unforgit/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\backend\src\app.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/app.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 4 (100%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

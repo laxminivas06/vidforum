@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: axonflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (2 connections)
-- [AxonFlow Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (1 connections)
-- [Policies](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (1 connections)
+- [Skill: commit-narrator](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (2 connections)
+- [Commit Narrator Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (1 connections)
+- [Format](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: wingman & Pre-Edit Verification Checklist] Cluster]] (4 shared connections)
+- [[env]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/axonflow/skills/axonflow/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md)
+- [.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md)
 
 ## Audit Trail
 

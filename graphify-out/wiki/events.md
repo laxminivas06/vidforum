@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: pr-storyteller](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md) (2 connections)
-- [PR Storyteller Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md) (1 connections)
-- [Structure](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md) (1 connections)
+- [Skill: secret-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (2 connections)
+- [Scan Targets](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
+- [Secret Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[Community 90]] (4 shared connections)
+- [[Community 93]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md)
+- [.agents/plugins/secret-guard/skills/secret-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md)
 
 ## Audit Trail
 

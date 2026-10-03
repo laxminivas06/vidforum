@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: memesh](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md) (2 connections)
-- [Execution Guide](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md) (1 connections)
-- [MeMesh Shared Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md) (1 connections)
+- [Skill: pr-storyteller](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md) (2 connections)
+- [PR Storyteller Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md) (1 connections)
+- [Structure](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[CAMERA_DECKS]] (4 shared connections)
+- [[events]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/memesh/skills/memesh/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md)
+- [.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md)
 
 ## Audit Trail
 

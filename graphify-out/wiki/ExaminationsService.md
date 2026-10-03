@@ -10,11 +10,12 @@
 ### method
 - [[.publishExamResults()]] `EXTRACTED`
 - [[.submitMarksBatch()]] `EXTRACTED`
-- [[.commitExcelImport()]] `EXTRACTED`
 - [[.listMarks()]] `EXTRACTED`
+- [[.commitExcelImport()]] `EXTRACTED`
+- [[.getStudentReportCard()]] `EXTRACTED`
 - [[.validateExcelImport()]] `EXTRACTED`
 - [[.calculateResults()]] `EXTRACTED`
-- [[.getStudentReportCard()]] `EXTRACTED`
+- [[.listStudentReportCards()]] `EXTRACTED`
 - [[.createExamType()]] `EXTRACTED`
 - [[.createExam()]] `EXTRACTED`
 - [[.getExamById()]] `EXTRACTED`
@@ -22,7 +23,6 @@
 - [[.addExamSubject()]] `EXTRACTED`
 - [[.createExamSchedule()]] `EXTRACTED`
 - [[.verifyMarks()]] `EXTRACTED`
-- [[.listStudentReportCards()]] `EXTRACTED`
 - [[.listExamTypes()]] `EXTRACTED`
 - [[.listExams()]] `EXTRACTED`
 - [[.listExamSubjects()]] `EXTRACTED`

@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: commit-narrator](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (2 connections)
-- [Commit Narrator Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (1 connections)
-- [Format](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (1 connections)
+- [Skill: docflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md) (2 connections)
+- [Docflow Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md) (1 connections)
+- [Policy](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[Community 79]] (4 shared connections)
+- [[router]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md)
+- [.agents/plugins/docflow/skills/docflow/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md)
 
 ## Audit Trail
 

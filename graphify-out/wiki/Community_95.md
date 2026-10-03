@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: tailtest](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (2 connections)
-- [Procedure](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (1 connections)
-- [Tailtest Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (1 connections)
+- [Skill: token-optimizer](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md) (2 connections)
+- [Best Practices](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md) (1 connections)
+- [Token Optimizer Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[Community 94]] (4 shared connections)
+- [[Community 97]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/tailtest/skills/tailtest/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md)
+- [.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md)
 
 ## Audit Trail
 

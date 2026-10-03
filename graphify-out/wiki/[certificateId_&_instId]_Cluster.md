@@ -1,45 +1,45 @@
 # [certificateId & instId] Cluster
 
-> 15 nodes · cohesion 0.13
+> 16 nodes · cohesion 0.20
 
 ## Key Concepts
 
-- [NotificationRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L17) (7 connections)
-- [NotificationService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L3) (6 connections)
-- [.getNotifications()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.controller.ts#L6) (4 connections)
-- [.getUserNotifications()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L4) (3 connections)
-- [.createNotification()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L72) (2 connections)
-- [.findForUser()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L22) (2 connections)
-- [notification.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L1) (1 connections)
-- [notification.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L1) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L18) (1 connections)
-- [.getUnreadCount()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L40) (1 connections)
-- [.markAllAsRead()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L61) (1 connections)
-- [.markAsRead()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts#L50) (1 connections)
-- [.getUnreadCount()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L8) (1 connections)
-- [.markAllAsRead()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L17) (1 connections)
-- [.markAsRead()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L13) (1 connections)
+- [VidApiClient](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L7) (7 connections)
+- [AuthRateLimiter](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L9) (5 connections)
+- [.reset()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L103) (5 connections)
+- [.request()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L18) (5 connections)
+- [.getKey()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L15) (4 connections)
+- [.isLocked()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L19) (4 connections)
+- [.recordFailure()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L52) (4 connections)
+- [.get()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L51) (4 connections)
+- [.delete()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L71) (3 connections)
+- [runTests()](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-r2-auth.ts#L8) (3 connections)
+- [.patch()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L63) (2 connections)
+- [.post()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L55) (2 connections)
+- [auth-rate-limiter.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L1) (1 connections)
+- [verify-r2-auth.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-r2-auth.ts#L1) (1 connections)
+- [index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L1) (1 connections)
+- [.constructor()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L12) (1 connections)
 
 ## Class Diagram
 
 ```mermaid
 classDiagram
-    class NotificationRepository {
-        +notification.repository.ts()
-        +.constructor()
-        +.findForUser()
-        +.getUnreadCount()
-        +.markAsRead()
-        +.markAllAsRead()
-        +.createNotification()
+    class AuthRateLimiter {
+        +auth-rate-limiter.ts()
+        +.getKey()
+        +.isLocked()
+        +.recordFailure()
+        +.reset()
     }
-    class NotificationService {
-        +notification.service.ts()
-        +.getUserNotifications()
-        +.getUnreadCount()
-        +.markAsRead()
-        +.markAllAsRead()
-        +.sendNotification()
+    class VidApiClient {
+        +index.ts()
+        +.constructor()
+        +.request()
+        +.get()
+        +.post()
+        +.patch()
+        +.delete()
     }
 ```
 
@@ -49,14 +49,14 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.controller.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\auth\auth-rate-limiter.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\scripts\verify-r2-auth.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-r2-auth.ts)
+- [C:\Antigravityyyyy\VID_School\packages\api-client\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 26 (79%)
-- INFERRED: 7 (21%)
+- EXTRACTED: 40 (77%)
+- INFERRED: 12 (23%)
 - AMBIGUOUS: 0 (0%)
 
 ---

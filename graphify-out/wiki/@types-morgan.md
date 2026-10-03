@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/security/page.tsx#L1) (1 connections)
-- [SecurityPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/security/page.tsx#L8) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/library/page.tsx#L1) (1 connections)
+- [LibraryPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/library/page.tsx#L8) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\security\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/security/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\library\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/library/page.tsx)
 
 ## Audit Trail
 

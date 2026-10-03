@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: agent-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (2 connections)
-- [Agent Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (1 connections)
-- [Enforcement](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (1 connections)
+- [Skill: axonflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (2 connections)
+- [AxonFlow Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (1 connections)
+- [Policies](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: token-optimizer & Best Practices] Cluster]] (4 shared connections)
+- [[app]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/agent-guard/skills/agent-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md)
+- [.agents/plugins/axonflow/skills/axonflow/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md)
 
 ## Audit Trail
 

@@ -1,27 +1,24 @@
 # [activeGrade & { data: grades = [], isLoading }] Cluster
 
-> 14 nodes · cohesion 0.14
+> 15 nodes · cohesion 0.13
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L1) (13 connections)
-- [[academicYear, setAcademicYear]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L42) (1 connections)
-- [[activeSection, setActiveSection]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L37) (1 connections)
-- [[boardAffiliation, setBoardAffiliation]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L40) (1 connections)
-- [[confirmToggleModule, setConfirmToggleModule]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L44) (1 connections)
-- [[contactEmail, setContactEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L41) (1 connections)
-- [handleSave()](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L63) (1 connections)
-- [{
-    institutionName,
-    enabledModules,
-    toggleOptionalModule,
-  }](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L31) (1 connections)
-- [isEnabled](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L225) (1 connections)
-- [[isSaved, setIsSaved]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L43) (1 connections)
-- [optionalModulesList](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L46) (1 connections)
-- [[schoolCode, setSchoolCode]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L39) (1 connections)
-- [[schoolName, setSchoolName]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L38) (1 connections)
-- [sections](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L55) (1 connections)
+- [EditUserAccessModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L1) (14 connections)
+- [{ data: roleTemplates = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L33) (1 connections)
+- [[error, setError]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L38) (1 connections)
+- [handleDeselectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L76) (1 connections)
+- [handleSave()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L80) (1 connections)
+- [handleSelectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L72) (1 connections)
+- [handleTemplateChange()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L58) (1 connections)
+- [handleToggleWorkspace()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L66) (1 connections)
+- [initialWorkspaces](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L46) (1 connections)
+- [isSelected](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L185) (1 connections)
+- [[selectedTemplate, setSelectedTemplate]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L36) (1 connections)
+- [[selectedWorkspaces, setSelectedWorkspaces]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L37) (1 connections)
+- [[successBanner, setSuccessBanner]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L39) (1 connections)
+- [tplKey](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L43) (1 connections)
+- [updateAccessMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L34) (1 connections)
 
 ## Relationships
 
@@ -29,11 +26,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\settings\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\users\EditUserAccessModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 26 (100%)
+- EXTRACTED: 28 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

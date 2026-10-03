@@ -1,47 +1,47 @@
 # [API_BASE_URL & DEFAULT_INST_ID] Cluster
 
-> 26 nodes · cohesion 0.08
+> 29 nodes · cohesion 0.07
 
 ## Key Concepts
 
-- [Document: Design](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (25 connections)
-- [10. Accessibility Baseline](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [11. What This Design System Deliberately Avoids](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [1. Design Philosophy](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [2.1 Core Palette](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [2.2 Accent & Status Colors](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [2.3 Dark Elements (used, not a dark mode)](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [2. Color System](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [3. Typography](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [4. Spacing & Layout Grid](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.10 Slide-over / Detail Panel](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.1 Sidebar Navigation](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.2 Topbar / Breadcrumb](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.3 Two-Pane Settings Layout](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.4 Cards](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.5 Tables → Cards (responsive)](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.6 Forms](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.7 Buttons](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.8 Badges & Status Pills](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5.9 Progress Indicators](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [5. Core Components](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [6. Iconography](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [7. Required UI States (every screen)](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [8. Responsive Breakpoints](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- [9. Motion & Interaction](file:///C:/Antigravityyyyy/VID_School/docs/Design.md) (1 connections)
-- *... and 1 more nodes in this community*
+- [hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1) (28 connections)
+- [API_BASE_URL](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L7) (1 connections)
+- [DEFAULT_INST_ID](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L8) (1 connections)
+- [getAuthHeaders()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L10) (1 connections)
+- [useAcademics()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L471) (1 connections)
+- [useAdmissions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L420) (1 connections)
+- [useBulkCreateStaff()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L546) (1 connections)
+- [useBulkProvisionUsers()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L712) (1 connections)
+- [useCreateInstitution()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L62) (1 connections)
+- [useCreateInstitutionAdmin()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L204) (1 connections)
+- [useCreatePlatformUser()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L363) (1 connections)
+- [useCreateStaff()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L511) (1 connections)
+- [useFaculty()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L491) (1 connections)
+- [useFacultyAccounts()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L568) (1 connections)
+- [useFinance()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L639) (1 connections)
+- [useInstitutionAdmins()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L158) (1 connections)
+- [useInstitutions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L33) (1 connections)
+- [useMyClasses()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L619) (1 connections)
+- [usePlatformUsers()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L317) (1 connections)
+- [useProvisionFaculty()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L588) (1 connections)
+- [useProvisionUser()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L679) (1 connections)
+- [useResetUserCredentials()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L775) (1 connections)
+- [useRoleTemplates()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L659) (1 connections)
+- [useUpdateAdminWorkspaces()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L242) (1 connections)
+- [useUpdateInstitutionStatus()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L116) (1 connections)
+- *... and 4 more nodes in this community*
 
 ## Relationships
 
-- [[[[academicYear, setAcademicYear] & [activeSection, setActiveSection]] Cluster]] (50 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [docs/Design.md](file:///C:/Antigravityyyyy/VID_School/docs/Design.md)
+- [C:\Antigravityyyyy\VID_School\frontend\lib\api\hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 50 (100%)
+- EXTRACTED: 56 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

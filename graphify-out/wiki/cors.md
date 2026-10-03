@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [phase2_hrms.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_hrms.test.ts#L1) (1 connections)
-- [runHrmsTests()](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_hrms.test.ts#L5) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/page.tsx#L1) (1 connections)
+- [AttendanceRootPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/page.tsx#L3) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\tests\phase2_hrms.test.ts](file:///C:/Antigravityyyyy/VID_School/backend/tests/phase2_hrms.test.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\attendance\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/page.tsx)
 
 ## Audit Trail
 

@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- **frontend_components_ui_index_plancard** (0 connections)
+- **frontend_components_ui_index_column** (0 connections)
 
 ## Relationships
 

@@ -1,15 +1,16 @@
 # MOCK_EXAMS
 
-> 6 nodes · cohesion 0.33
+> 7 nodes · cohesion 0.29
 
 ## Key Concepts
 
-- [StudentProfile.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L1) (5 connections)
-- [[activeTab, setActiveTab]](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L177) (1 connections)
-- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L279) (1 connections)
-- [MOCK_STUDENT](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L97) (1 connections)
-- [student](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L174) (1 connections)
-- [tabs](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L181) (1 connections)
+- [UserAuditModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L1) (6 connections)
+- [{ data: logs = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L20) (1 connections)
+- [isAccess](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L64) (1 connections)
+- [isProvision](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L62) (1 connections)
+- [isReset](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L63) (1 connections)
+- [isStatus](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L65) (1 connections)
+- [targetId](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L19) (1 connections)
 
 ## Relationships
 
@@ -17,11 +18,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\student\StudentProfile.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\users\UserAuditModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 10 (100%)
+- EXTRACTED: 12 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

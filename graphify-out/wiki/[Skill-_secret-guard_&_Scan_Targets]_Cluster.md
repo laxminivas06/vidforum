@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx#L1) (2 connections)
-- [AttendanceSessionsPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx#L89) (1 connections)
-- [MOCK_SESSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx#L42) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx#L1) (2 connections)
+- [MOCK_CAMPAIGNS](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx#L42) (1 connections)
+- [VoiceAgentCampaignsPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx#L75) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\attendance\sessions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\voice-agent\campaigns\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx)
 
 ## Audit Trail
 

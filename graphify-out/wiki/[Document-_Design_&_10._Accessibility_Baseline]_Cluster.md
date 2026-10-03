@@ -1,65 +1,35 @@
 # [Document: Design & 10. Accessibility Baseline] Cluster
 
-> 59 nodes · cohesion 0.05
+> 80 nodes · cohesion 0.03
 
 ## Key Concepts
 
-- [HrmsRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.repository.ts#L90) (31 connections)
-- [HrmsService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.service.ts#L14) (22 connections)
-- [.actionLeaveRequest()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.service.ts#L375) (7 connections)
-- [.applyLeave()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.service.ts#L277) (7 connections)
-- [.onboardStaff()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.service.ts#L77) (7 connections)
-- [.updateStaff()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.service.ts#L166) (7 connections)
-- [.getStaffById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.repository.ts#L190) (6 connections)
-- [.getStaffAttendance()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L321) (5 connections)
-- [.deleteStaff()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L166) (4 connections)
-- [.getMonthlyAttendanceSummary()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L349) (4 connections)
-- [.getPayrollExport()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L413) (4 connections)
-- [.markStaffAttendance()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L298) (4 connections)
-- [.markStaffAttendanceBatch()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.service.ts#L474) (4 connections)
-- [.softDeleteStaff()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.service.ts#L225) (4 connections)
-- [.getStaffLeaveUsageByYear()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.repository.ts#L550) (3 connections)
-- [.linkFacultyRecord()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.repository.ts#L364) (3 connections)
-- [.recordEmploymentHistory()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.repository.ts#L316) (3 connections)
-- [.generatePayrollExport()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.service.ts#L581) (3 connections)
-- [.getMonthlyAttendanceAggregates()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.service.ts#L535) (3 connections)
-- [.getStaffDetails()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.service.ts#L61) (3 connections)
-- [.checkOverlappingLeave()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.repository.ts#L512) (2 connections)
-- [.closeActiveEmploymentHistory()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.repository.ts#L339) (2 connections)
-- [.createLeaveRequest()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.repository.ts#L416) (2 connections)
-- [.createStaff()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.repository.ts#L229) (2 connections)
-- [.findStaffByEmployeeCode()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.repository.ts#L211) (2 connections)
-- *... and 34 more nodes in this community*
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class HrmsRepository {
-        +hrms.repository.ts()
-        +.listDesignations()
-        +.findDesignationByName()
-        +.createDesignation()
-        +.listStaff()
-        +.getStaffById()
-        +.findStaffByEmployeeCode()
-        +.findStaffByProfileId()
-        +.createStaff()
-        +.updateStaff()
-    }
-    class HrmsService {
-        +hrms.service.ts()
-        +.constructor()
-        +.listDesignations()
-        +.createDesignation()
-        +.listStaff()
-        +.getStaffDetails()
-        +.onboardStaff()
-        +.updateStaff()
-        +.softDeleteStaff()
-        +.listLeaveTypes()
-    }
-```
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L1) (38 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L1) (31 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx#L1) (9 connections)
+- [[searchQuery, setSearchQuery]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L82) (5 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/vault/page.tsx#L1) (3 connections)
+- [columns](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L290) (2 connections)
+- [[email, setEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L89) (2 connections)
+- [handleAddUser()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L158) (2 connections)
+- [[name, setName]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L88) (2 connections)
+- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L140) (2 connections)
+- [[actionSuccess, setActionSuccess]](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L75) (1 connections)
+- [[address, setAddress]](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L68) (1 connections)
+- [adminCount](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L357) (1 connections)
+- [bulkCreateMutation](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L55) (1 connections)
+- [[bulkError, setBulkError]](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L80) (1 connections)
+- [[bulkSuccess, setBulkSuccess]](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L81) (1 connections)
+- [[collectDialogOpen, setCollectDialogOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx#L41) (1 connections)
+- [createStaffMutation](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L54) (1 connections)
+- [createUserMutation](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L78) (1 connections)
+- [{ data: dbUsers = [], isLoading: isLoadingUsers }](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L77) (1 connections)
+- [{ data: fees = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx#L36) (1 connections)
+- [{ data: institutions = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L76) (1 connections)
+- [{ data: staff = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L53) (1 connections)
+- [[dateOfBirth, setDateOfBirth]](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L70) (1 connections)
+- [DEFAULT_USERS](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L46) (1 connections)
+- *... and 55 more nodes in this community*
 
 ## Relationships
 
@@ -67,14 +37,15 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.service.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\documents\vault\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/vault/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\finance\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\hrms\staff\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\users\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 114 (60%)
-- INFERRED: 77 (40%)
+- EXTRACTED: 166 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

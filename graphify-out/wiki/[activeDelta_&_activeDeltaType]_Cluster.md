@@ -10,12 +10,12 @@
 - [.getStudentById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L24) (3 connections)
 - [.getStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L6) (3 connections)
 - [.promote()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L36) (3 connections)
+- [.findStudentMasterById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L57) (3 connections)
+- [.findStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L4) (3 connections)
+- [.promote()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L145) (3 connections)
 - [.getStudentMaster()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L8) (3 connections)
 - [.listStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L4) (3 connections)
 - [.promoteStudent()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L16) (3 connections)
-- [.findStudentMasterById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L57) (2 connections)
-- [.findStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L4) (2 connections)
-- [.promote()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L145) (2 connections)
 - [student.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L1) (1 connections)
 - [student.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts#L1) (1 connections)
 - [student.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts#L1) (1 connections)
@@ -56,8 +56,8 @@ classDiagram
 
 ## Audit Trail
 
-- EXTRACTED: 24 (62%)
-- INFERRED: 15 (38%)
+- EXTRACTED: 24 (57%)
+- INFERRED: 18 (43%)
 - AMBIGUOUS: 0 (0%)
 
 ---

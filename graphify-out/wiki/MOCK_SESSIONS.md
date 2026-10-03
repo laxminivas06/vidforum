@@ -1,16 +1,16 @@
 # MOCK_SESSIONS
 
-> 7 nodes · cohesion 0.29
+> 7 nodes · cohesion 0.48
 
 ## Key Concepts
 
-- [index.ts](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L1) (6 connections)
-- [ApiErrorDetailSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L51) (1 connections)
-- [ApiErrorSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L57) (1 connections)
-- [ApiSuccessSchema()](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L32) (1 connections)
-- [BaseEntitySchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L6) (1 connections)
-- [PaginationQuerySchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L19) (1 connections)
-- [TenantContextSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L75) (1 connections)
+- [tenant-repository.base.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L1) (6 connections)
+- [findById()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L53) (4 connections)
+- [validateTenant()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L44) (4 connections)
+- [findMany()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L81) (3 connections)
+- [softDelete()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L138) (3 connections)
+- [findByIdOrFail()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L70) (2 connections)
+- [constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L37) (1 connections)
 
 ## Relationships
 
@@ -18,12 +18,12 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\packages\schemas\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\common\tenant-repository.base.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 12 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 20 (87%)
+- INFERRED: 3 (13%)
 - AMBIGUOUS: 0 (0%)
 
 ---

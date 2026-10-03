@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [react](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L16) (0 connections)
+- [index.ts](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/index.ts#L1) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
+- [C:\Antigravityyyyy\VID_School\frontend\components\users\index.ts](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/index.ts)
 
 ## Audit Trail
 

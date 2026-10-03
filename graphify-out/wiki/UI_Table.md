@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- **frontend_components_ui_index_progressbar** (0 connections)
+- **frontend_components_ui_index_confirmdialog** (0 connections)
 
 ## Relationships
 

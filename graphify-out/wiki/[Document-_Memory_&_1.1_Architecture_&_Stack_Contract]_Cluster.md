@@ -30,7 +30,7 @@
 
 ## Relationships
 
-- [[[Document: Decisions & ADR-001 Strict Separation of Phase Deliverables] Cluster]] (44 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

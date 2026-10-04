@@ -2,8 +2,8 @@
 
 **Gate:** Gate R (Audit + Security & Cleanup Remediation)  
 **Standard:** VID Master Build Prompt v3 (Section 6 & 18)  
-**Commit Hash:** `cb67604`  
-**Generated At:** 2026-10-03T17:26:46.016Z  
+**Commit Hash:** `2844955`  
+**Generated At:** 2026-10-04T08:49:12.443Z  
 **Status:** **PASSED**  
 
 ---
@@ -19,13 +19,13 @@ Step R remediation has systematically eliminated all 10 architectural and securi
 | Check / Verification Category | Target Standard | Result | Status |
 |---|---|---|---|
 | **R1: Codebase Audit & Mapping** | Complete `CODEBASE_MAP`, `WORKSPACE_MAP`, `DEFECTS`, `DECISIONS` | 4 comprehensive documents published | **PASSED** |
-| **R2: Unified Authentication** | 10 Automated Tests (Bcrypt, Lockout, Rate Limiting, Subject Resolver) | 10 / 10 Tests Passed (7.00s) | **PASSED** |
-| **R3: Server-Side Workspaces** | 7 Automated Tests (Canonical Registry, 403 Forbidden on ungranted routes) | 7 / 7 Tests Passed (4.34s) | **PASSED** |
-| **R4: Provisioning Engine** | 9 Automated Tests (Role Templates, Reset, Revocation, Deactivation, Bulk CSV) | 9 / 9 Tests Passed (16.69s) | **PASSED** |
+| **R2: Unified Authentication** | 10 Automated Tests (Bcrypt, Lockout, Rate Limiting, Subject Resolver) | 10 / 10 Tests Passed (9.03s) | **PASSED** |
+| **R3: Server-Side Workspaces** | 7 Automated Tests (Canonical Registry, 403 Forbidden on ungranted routes) | 7 / 7 Tests Passed (6.13s) | **PASSED** |
+| **R4: Provisioning Engine** | 9 Automated Tests (Role Templates, Reset, Revocation, Deactivation, Bulk CSV) | 9 / 9 Tests Passed (19.48s) | **PASSED** |
 | **R5: Typo & Schema Sanitation** | Zero `bod`, `experince`, `Birth of Date`; snake_case attributes normalized | Cleaned in `staff/page.tsx` & `faculty.repository.ts` | **PASSED** |
-| **R6: Forbidden Code Scan** | Zero unapproved `admin123` literals, zero active mock arrays | 0 Violations across 149 source files | **PASSED** |
-| **Backend TypeScript Compilation** | `npx tsc --noEmit` exit code 0 | 0 Errors (2.50s) | **PASSED** |
-| **Frontend TypeScript Compilation** | `npx tsc --noEmit` exit code 0 | 0 Errors (1.74s) | **PASSED** |
+| **R6: Forbidden Code Scan** | Zero unapproved `admin123` literals, zero active mock arrays | 0 Violations across 155 source files | **PASSED** |
+| **Backend TypeScript Compilation** | `npx tsc --noEmit` exit code 0 | 0 Errors (2.84s) | **PASSED** |
+| **Frontend TypeScript Compilation** | `npx tsc --noEmit` exit code 0 | 0 Errors (2.03s) | **PASSED** |
 
 **Total Automated Verification:** 26 / 26 individual test assertions passed green.
 

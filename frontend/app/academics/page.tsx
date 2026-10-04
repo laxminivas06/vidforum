@@ -33,6 +33,7 @@ import {
   Sliders,
   ShieldCheck,
   AlertCircle,
+  Pencil,
 } from "lucide-react"
 import {
   useAcademics,
@@ -42,10 +43,15 @@ import {
   useCloseAcademicYear,
   useCloneAcademicYear,
   useClasses,
+  useCreateClass,
+  useUpdateClass,
+  useDeleteClass,
   useGenerateClassMatrix,
   useCreateSection,
   useSubjects,
   useCreateSubject,
+  useUpdateSubject,
+  useDeleteSubject,
   useGradeSubjects,
   useMapSubjectToGrade,
   useRemoveSubjectFromGrade,
@@ -218,14 +224,247 @@ export default function AcademicsWorkspacePage() {
     setTimeout(() => setActionError(null), 5000)
   }
 
+  // Add Class / Grade Modal state
+  const [isAddClassModalOpen, setIsAddClassModalOpen] = useState(false)
+  const [newClassName, setNewClassName] = useState("")
+  const [newClassSection, setNewClassSection] = useState("Section A")
+  const [newClassCapacity, setNewClassCapacity] = useState(40)
+  const [newClassDeptId, setNewClassDeptId] = useState("")
+
+  // Subject Master (Grade-Scoped) state
+  const [selectedSubjectGradeId, setSelectedSubjectGradeId] = useState<string>("")
+  const activeSubjectGradeId = selectedSubjectGradeId || selectedGradeId || grades[0]?.id || classes[0]?.id || ""
+  const currentSubjectGrade = grades.find((g) => g.id === activeSubjectGradeId) || grades[0]
+  const { data: gradeMappedSubjects = [] } = useGradeSubjects(activeSubjectGradeId)
+
+  // Edit Subject Modal state
+  const [isEditSubjectModalOpen, setIsEditSubjectModalOpen] = useState(false)
+  const [editingSubject, setEditingSubject] = useState<any | null>(null)
+  const [editSubName, setEditSubName] = useState("")
+  const [editSubCode, setEditSubCode] = useState("")
+  const [editSubCredits, setEditSubCredits] = useState(4)
+  const [editSubIsElective, setEditSubIsElective] = useState(false)
+  const [editSubPeriods, setEditSubPeriods] = useState(5)
+  const [editSubMaxMarks, setEditSubMaxMarks] = useState(100)
+  const [editSubPassMarks, setEditSubPassMarks] = useState(35)
+  const [editSubMandatory, setEditSubMandatory] = useState(true)
+
+  // Add Subject to Grade Modal state
+  const [isAddSubjectToGradeModalOpen, setIsAddSubjectToGradeModalOpen] = useState(false)
+  const [addSubjectMode, setAddSubjectMode] = useState<"NEW" | "CATALOG">("NEW")
+  const [catalogSubjectId, setCatalogSubjectId] = useState("")
+  const [newGradeSubPeriods, setNewGradeSubPeriods] = useState(5)
+  const [newGradeSubMaxMarks, setNewGradeSubMaxMarks] = useState(100)
+  const [newGradeSubPassMarks, setNewGradeSubPassMarks] = useState(35)
+  const [newGradeSubMandatory, setNewGradeSubMandatory] = useState(true)
+
+  // Class & Subject Mutations
+  const createClassMutation = useCreateClass()
+  const updateClassMutation = useUpdateClass()
+  const deleteClassMutation = useDeleteClass()
+  const updateSubjectMutation = useUpdateSubject()
+  const deleteSubjectMutation = useDeleteSubject()
+
+  // Display subjects for selected grade in Subject Master
+  const displayGradeSubjects = useMemo(() => {
+    let list: any[] = []
+    if (gradeMappedSubjects && gradeMappedSubjects.length > 0) {
+      list = gradeMappedSubjects.map((s: any) => ({
+        id: s.subject_id || s.id,
+        name: s.subject_name || s.name,
+        code: s.subject_code || s.code,
+        credits: s.credits || 4,
+        periodsPerWeek: s.periods_per_week || 5,
+        maxMarks: s.max_marks || 100,
+        passMarks: s.pass_marks || 35,
+        isMandatory: s.is_mandatory ?? true,
+        type: s.is_elective ? "ELECTIVE" : "CORE",
+        isElective: !!s.is_elective,
+      }))
+    } else if (currentSubjectGrade?.subjects) {
+      list = currentSubjectGrade.subjects.map((s: any) => ({
+        ...s,
+        isElective: s.type === "ELECTIVE",
+      }))
+    }
+
+    if (!subjectSearch.trim()) return list
+    const q = subjectSearch.toLowerCase()
+    return list.filter((s: any) => s.name?.toLowerCase().includes(q) || s.code?.toLowerCase().includes(q))
+  }, [gradeMappedSubjects, currentSubjectGrade, subjectSearch])
+
+  const handleOpenEditSubject = (sub: any) => {
+    setEditingSubject(sub)
+    setEditSubName(sub.name)
+    setEditSubCode(sub.code)
+    setEditSubCredits(sub.credits || 4)
+    setEditSubIsElective(sub.isElective || sub.type === "ELECTIVE")
+    setEditSubPeriods(sub.periodsPerWeek || 5)
+    setEditSubMaxMarks(sub.maxMarks || 100)
+    setEditSubPassMarks(sub.passMarks || 35)
+    setEditSubMandatory(sub.isMandatory ?? true)
+    setIsEditSubjectModalOpen(true)
+  }
+
+  const handleSaveSubjectEdit = async () => {
+    if (!editSubName.trim() || !editSubCode.trim()) {
+      triggerError("Subject name and code are required.")
+      return
+    }
+    try {
+      await updateSubjectMutation.mutateAsync({
+        id: editingSubject.id,
+        data: {
+          name: editSubName.trim(),
+          code: editSubCode.trim().toUpperCase(),
+          credits: editSubCredits,
+          isElective: editSubIsElective,
+        },
+      })
+      if (activeSubjectGradeId) {
+        await mapSubjectMutation.mutateAsync({
+          classId: activeSubjectGradeId,
+          subjectId: editingSubject.id,
+          periodsPerWeek: editSubPeriods,
+          maxMarks: editSubMaxMarks,
+          passMarks: editSubPassMarks,
+          isMandatory: editSubMandatory,
+        })
+      }
+      triggerSuccess(`Subject "${editSubName}" updated successfully for ${currentSubjectGrade?.name}!`)
+      setIsEditSubjectModalOpen(false)
+      setEditingSubject(null)
+    } catch (err: any) {
+      triggerError(err.message || "Failed to update subject")
+    }
+  }
+
+  const handleAddSubjectToGrade = async () => {
+    if (!activeSubjectGradeId) {
+      triggerError("Please select a class / grade first")
+      return
+    }
+
+    try {
+      let subjectIdToMap = ""
+      if (addSubjectMode === "NEW") {
+        if (!newSubName.trim() || !newSubCode.trim()) {
+          triggerError("Subject name and code are required")
+          return
+        }
+        const created = await createSubjectMutation.mutateAsync({
+          name: newSubName.trim(),
+          code: newSubCode.trim().toUpperCase(),
+          credits: newSubCredits,
+          isElective: newSubElective,
+          departmentId: newSubDeptId || departments[0]?.id || undefined,
+        })
+        subjectIdToMap = created.id
+      } else {
+        if (!catalogSubjectId) {
+          triggerError("Please select a subject from the catalog")
+          return
+        }
+        subjectIdToMap = catalogSubjectId
+      }
+
+      await mapSubjectMutation.mutateAsync({
+        classId: activeSubjectGradeId,
+        subjectId: subjectIdToMap,
+        periodsPerWeek: newGradeSubPeriods,
+        maxMarks: newGradeSubMaxMarks,
+        passMarks: newGradeSubPassMarks,
+        isMandatory: newGradeSubMandatory,
+      })
+
+      triggerSuccess(`Subject added to ${currentSubjectGrade?.name} successfully!`)
+      setIsAddSubjectToGradeModalOpen(false)
+      setNewSubName("")
+      setNewSubCode("")
+      setCatalogSubjectId("")
+    } catch (err: any) {
+      triggerError(err.message || "Failed to add subject")
+    }
+  }
+
+  const handleRemoveSubjectFromGrade = async (sub: any) => {
+    if (confirm(`Remove subject "${sub.name}" from ${currentSubjectGrade?.name}?`)) {
+      try {
+        await removeSubjectMutation.mutateAsync({
+          classId: activeSubjectGradeId,
+          subjectId: sub.id,
+        })
+        triggerSuccess(`Removed "${sub.name}" from ${currentSubjectGrade?.name}.`)
+      } catch (err: any) {
+        triggerError(err.message || "Failed to remove subject")
+      }
+    }
+  }
+
+  const handleAddClassSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!newClassName.trim()) {
+      triggerError("Class / Grade name is required.")
+      return
+    }
+
+    try {
+      const created = await createClassMutation.mutateAsync({
+        name: newClassName.trim(),
+        academicYearId: activeYearId,
+        departmentId: newClassDeptId || departments[0]?.id || undefined,
+        sequenceOrder: grades.length + 1,
+        initialSection: newClassSection.trim() || "Section A",
+        initialCapacity: newClassCapacity || 40,
+      })
+
+      triggerSuccess(`Class / Grade "${newClassName}" added successfully with ${newClassSection || "Section A"}!`)
+      setIsAddClassModalOpen(false)
+      if (created?.id) {
+        setSelectedGradeId(created.id)
+        setSelectedSubjectGradeId(created.id)
+      }
+      setNewClassName("")
+      setNewClassSection("Section A")
+      setNewClassCapacity(40)
+    } catch (err: any) {
+      triggerError(err.message || "Failed to create class / grade")
+    }
+  }
+
   return (
     <AppShell
       pageTitle="Academics & Curriculum Management"
-      breadcrumbs={[{ label: "Core" }, { label: "Academics" }, { label: activeTab }]}
+      breadcrumbs={[
+        { label: "Core" },
+        { label: "Academics" },
+        {
+          label:
+            activeTab === "hierarchy"
+              ? "Classes or Grades"
+              : activeTab === "subjects"
+              ? "Subject Master"
+              : activeTab,
+        },
+      ]}
       rightHeaderAction={
         <div className="flex items-center gap-2">
           {activeTab === "hierarchy" && (
             <>
+              <Button
+                size="dense"
+                variant="primary"
+                leadingIcon={<Plus className="w-3.5 h-3.5" />}
+                onClick={() => {
+                  setNewClassName("")
+                  setNewClassSection("Section A")
+                  setNewClassCapacity(40)
+                  setNewClassDeptId(departments[0]?.id || "")
+                  setIsAddClassModalOpen(true)
+                }}
+              >
+                Add Class / Grade
+              </Button>
               <Button
                 size="dense"
                 variant="secondary"
@@ -236,7 +475,7 @@ export default function AcademicsWorkspacePage() {
               </Button>
               <Button
                 size="dense"
-                variant="primary"
+                variant="ghost"
                 leadingIcon={<Plus className="w-3.5 h-3.5" />}
                 onClick={() => setIsAddSectionModalOpen(true)}
               >
@@ -250,9 +489,17 @@ export default function AcademicsWorkspacePage() {
               size="dense"
               variant="primary"
               leadingIcon={<Plus className="w-3.5 h-3.5" />}
-              onClick={() => setIsAddSubjectModalOpen(true)}
+              onClick={() => {
+                setAddSubjectMode("NEW")
+                setNewSubName("")
+                setNewSubCode("")
+                setNewSubCredits(4)
+                setNewSubElective(false)
+                setCatalogSubjectId("")
+                setIsAddSubjectToGradeModalOpen(true)
+              }}
             >
-              Add Subject
+              Add Subject to {currentSubjectGrade?.name || "Grade"}
             </Button>
           )}
 
@@ -398,8 +645,8 @@ export default function AcademicsWorkspacePage() {
         {/* Workspace Navigation Tabs */}
         <div className="flex items-center gap-1 border-b border-border-default overflow-x-auto pb-px">
           {[
-            { id: "hierarchy", label: "Class Hierarchy & Sections", icon: DoorOpen },
-            { id: "subjects", label: "Subjects Master", icon: BookOpen },
+            { id: "hierarchy", label: "Classes or Grades", icon: DoorOpen },
+            { id: "subjects", label: "Subject Master", icon: BookOpen },
             { id: "mapping", label: "Curriculum Mapping", icon: Layers },
             { id: "calendar", label: "Year Schedule & Working Days", icon: CalendarDays },
             { id: "exams", label: "Exam Estimates (A2)", icon: Clock },
@@ -426,15 +673,37 @@ export default function AcademicsWorkspacePage() {
         </div>
 
         {/* ========================================================================= */}
-        {/* TAB 1: CLASS HIERARCHY & SECTIONS */}
+        {/* TAB 1: CLASSES OR GRADES */}
         {/* ========================================================================= */}
         {activeTab === "hierarchy" && (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {/* Left: Grade Level Selector */}
-            <div className="flex flex-col gap-2">
-              <span className="text-xs font-semibold text-text-secondary uppercase tracking-wider font-mono px-1">
-                Select Grade Level ({grades.length})
-              </span>
+            {/* Left: Grade Level Selector with Top-Left Add Button */}
+            <div className="flex flex-col gap-3">
+              {/* Prominent Top-Left Button as explicitly requested */}
+              <Button
+                variant="primary"
+                size="default"
+                className="w-full shadow-sm justify-center font-semibold"
+                leadingIcon={<Plus className="w-4 h-4" />}
+                onClick={() => {
+                  setNewClassName("")
+                  setNewClassSection("Section A")
+                  setNewClassCapacity(40)
+                  setNewClassDeptId(departments[0]?.id || "")
+                  setIsAddClassModalOpen(true)
+                }}
+              >
+                + Add Class / Grade
+              </Button>
+
+              <div className="flex items-center justify-between px-1">
+                <span className="text-xs font-semibold text-text-secondary uppercase tracking-wider font-mono">
+                  Classes or Grades ({grades.length})
+                </span>
+                <span className="text-[11px] font-mono text-text-muted">
+                  Year: {currentYear?.name || "Active"}
+                </span>
+              </div>
               <div className="flex flex-col gap-2">
                 {grades.map((grade) => {
                   const isSelected = grade.id === activeGrade?.id
@@ -619,59 +888,238 @@ export default function AcademicsWorkspacePage() {
         )}
 
         {/* ========================================================================= */}
-        {/* TAB 2: SUBJECTS MASTER */}
+        {/* TAB 2: SUBJECT MASTER (GRADE-SCOPED)                                      */}
         {/* ========================================================================= */}
         {activeTab === "subjects" && (
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between gap-4 p-3 rounded-xl bg-surface border border-border-default">
-              <div className="relative flex-1 max-w-md">
-                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" />
-                <input
-                  type="text"
-                  placeholder="Search subjects by name or code..."
-                  value={subjectSearch}
-                  onChange={(e) => setSubjectSearch(e.target.value)}
-                  className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-border-default bg-subtle text-xs text-text-primary"
-                />
+          <div className="flex flex-col gap-5">
+            {/* Step 1: Select Grade / Class Control Header */}
+            <div className="p-4 rounded-xl bg-surface border border-border-default flex flex-col gap-3 shadow-xs">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-primary shrink-0">
+                    <GraduationCap className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold text-text-primary uppercase tracking-wider font-mono">
+                        Select Grade / Class:
+                      </span>
+                      <Badge variant="neutral" className="text-[10px] uppercase font-mono">
+                        {grades.length} Grades
+                      </Badge>
+                    </div>
+                    <p className="text-xs text-text-secondary mt-0.5">
+                      Select a grade or class to view, add, or edit its prescribed subjects and marks allocation.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2.5">
+                  <select
+                    value={activeSubjectGradeId}
+                    onChange={(e) => setSelectedSubjectGradeId(e.target.value)}
+                    className="px-3.5 py-2 rounded-lg border border-border-default bg-subtle text-xs font-bold text-text-primary min-w-[200px]"
+                  >
+                    {grades.map((g: any) => (
+                      <option key={g.id} value={g.id}>
+                        {g.name} ({g.subjects?.length || 0} subjects)
+                      </option>
+                    ))}
+                  </select>
+
+                  <Button
+                    size="default"
+                    variant="primary"
+                    leadingIcon={<Plus className="w-4 h-4" />}
+                    onClick={() => {
+                      setAddSubjectMode("NEW")
+                      setNewSubName("")
+                      setNewSubCode("")
+                      setNewSubCredits(4)
+                      setNewSubElective(false)
+                      setCatalogSubjectId("")
+                      setIsAddSubjectToGradeModalOpen(true)
+                    }}
+                  >
+                    + Add Subject to {currentSubjectGrade?.name || "Grade"}
+                  </Button>
+                </div>
               </div>
 
-              <div className="text-xs font-mono text-text-secondary">
-                Total Master Subjects: <span className="font-bold text-text-primary">{subjects.length}</span>
+              {/* Horizontal Grade Chips for instant 1-click switching */}
+              <div className="flex items-center gap-1.5 overflow-x-auto pt-2 border-t border-border-subtle pb-1">
+                {grades.map((g: any) => {
+                  const isSelected = g.id === activeSubjectGradeId
+                  const subCount = g.subjects?.length || 0
+                  return (
+                    <button
+                      key={g.id}
+                      type="button"
+                      onClick={() => setSelectedSubjectGradeId(g.id)}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
+                        isSelected
+                          ? "bg-action-black text-canvas shadow-xs font-bold"
+                          : "bg-subtle text-text-secondary hover:text-text-primary hover:bg-border-subtle border border-border-subtle"
+                      }`}
+                    >
+                      <span>{g.name}</span>
+                      <span
+                        className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                          isSelected ? "bg-white/20 text-white" : "bg-border-default text-text-muted"
+                        }`}
+                      >
+                        {subCount}
+                      </span>
+                    </button>
+                  )
+                })}
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredSubjects.map((sub: any) => (
-                <Card key={sub.id}>
-                  <CardHeader className="pb-2">
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-xs font-bold text-text-secondary px-2 py-0.5 rounded bg-subtle">
-                        {sub.code}
-                      </span>
-                      <Badge variant={sub.is_elective ? "neutral" : "positive"}>
-                        {sub.is_elective ? "ELECTIVE" : "CORE"}
-                      </Badge>
-                    </div>
-                    <CardTitle className="text-sm font-semibold mt-2">{sub.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="flex flex-col gap-2 text-xs text-text-secondary">
-                    <div className="flex justify-between">
-                      <span>Credits:</span>
-                      <span className="font-semibold text-text-primary">{sub.credits || 4.0} Credits</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Mapped Classes:</span>
-                      <span className="font-mono text-text-primary">{sub.classes_count || 0} Classes</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Status:</span>
-                      <Badge variant={sub.is_active ? "positive" : "warning"} size="sm">
-                        {sub.is_active ? "Active" : "Archived"}
-                      </Badge>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+            {/* Step 2: Subject Offerings for Selected Grade / Class */}
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-xl bg-surface border border-border-default">
+                <div className="flex items-center gap-2">
+                  <BookOpen className="w-4 h-4 text-brand-primary" />
+                  <span className="text-xs font-bold text-text-primary">
+                    Subjects for {currentSubjectGrade?.name || "Selected Grade"}
+                  </span>
+                  <span className="text-xs font-mono text-text-muted">
+                    ({displayGradeSubjects.length} Assigned)
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="relative">
+                    <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" />
+                    <input
+                      type="text"
+                      placeholder={`Search ${currentSubjectGrade?.name || "grade"} subjects...`}
+                      value={subjectSearch}
+                      onChange={(e) => setSubjectSearch(e.target.value)}
+                      className="pl-8 pr-3 py-1.5 rounded-lg border border-border-default bg-subtle text-xs text-text-primary w-48 sm:w-64"
+                    />
+                  </div>
+
+                  <Button
+                    size="dense"
+                    variant="secondary"
+                    leadingIcon={<Plus className="w-3.5 h-3.5" />}
+                    onClick={() => {
+                      setAddSubjectMode("NEW")
+                      setNewSubName("")
+                      setNewSubCode("")
+                      setNewSubCredits(4)
+                      setNewSubElective(false)
+                      setCatalogSubjectId("")
+                      setIsAddSubjectToGradeModalOpen(true)
+                    }}
+                  >
+                    Add Subject
+                  </Button>
+                </div>
+              </div>
+
+              {/* Grid of Subject Cards */}
+              {displayGradeSubjects.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {displayGradeSubjects.map((sub: any) => (
+                    <Card key={sub.id || sub.code} className="hover:border-border-strong transition-all flex flex-col justify-between">
+                      <CardHeader className="pb-2">
+                        <div className="flex items-center justify-between">
+                          <span className="font-mono text-xs font-bold text-brand-primary px-2 py-0.5 rounded bg-brand-primary/10 border border-brand-primary/20">
+                            {sub.code}
+                          </span>
+                          <div className="flex items-center gap-1.5">
+                            <Badge variant={sub.type === "CORE" || !sub.isElective ? "positive" : "neutral"} size="sm">
+                              {sub.type === "CORE" || !sub.isElective ? "CORE" : "ELECTIVE"}
+                            </Badge>
+                            {sub.isMandatory && (
+                              <Badge variant="neutral" size="sm" className="text-[10px]">
+                                Mandatory
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                        <CardTitle className="text-sm font-bold text-text-primary mt-2">
+                          {sub.name}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="flex flex-col gap-2.5 text-xs text-text-secondary pt-0">
+                        <div className="grid grid-cols-2 gap-2 p-2.5 rounded-lg bg-subtle border border-border-subtle font-mono text-[11px]">
+                          <div>
+                            <span className="text-text-muted block text-[10px]">Periods / Week:</span>
+                            <span className="font-bold text-text-primary">{sub.periodsPerWeek || 5} Periods</span>
+                          </div>
+                          <div>
+                            <span className="text-text-muted block text-[10px]">Credits:</span>
+                            <span className="font-bold text-text-primary">{sub.credits || 4} Credits</span>
+                          </div>
+                          <div>
+                            <span className="text-text-muted block text-[10px]">Max Marks:</span>
+                            <span className="font-bold text-text-primary">{sub.maxMarks || 100}</span>
+                          </div>
+                          <div>
+                            <span className="text-text-muted block text-[10px]">Pass Marks:</span>
+                            <span className="font-bold text-text-primary">{sub.passMarks || 35}</span>
+                          </div>
+                        </div>
+
+                        {/* Card Actions: Edit Subject or Remove from Grade */}
+                        <div className="flex items-center justify-end gap-2 pt-2 border-t border-border-subtle">
+                          <Button
+                            size="dense"
+                            variant="secondary"
+                            leadingIcon={<Pencil className="w-3 h-3 text-brand-primary" />}
+                            onClick={() => handleOpenEditSubject(sub)}
+                          >
+                            Edit Subject
+                          </Button>
+                          <Button
+                            size="dense"
+                            variant="ghost"
+                            className="text-status-error hover:bg-status-error/10 hover:text-status-error"
+                            leadingIcon={<Trash2 className="w-3 h-3" />}
+                            onClick={() => handleRemoveSubjectFromGrade(sub)}
+                          >
+                            Remove
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <div className="p-12 text-center bg-surface rounded-2xl border border-dashed border-border-default flex flex-col items-center justify-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-subtle border border-border-default flex items-center justify-center text-text-muted">
+                    <BookOpen className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-text-primary">
+                      No subjects configured for {currentSubjectGrade?.name || "this grade"} yet
+                    </h4>
+                    <p className="text-xs text-text-secondary mt-1 max-w-md mx-auto">
+                      Add the core curriculum and elective subjects taught to students in {currentSubjectGrade?.name || "this grade"}.
+                    </p>
+                  </div>
+                  <Button
+                    size="default"
+                    variant="primary"
+                    leadingIcon={<Plus className="w-4 h-4" />}
+                    onClick={() => {
+                      setAddSubjectMode("NEW")
+                      setNewSubName("")
+                      setNewSubCode("")
+                      setNewSubCredits(4)
+                      setNewSubElective(false)
+                      setCatalogSubjectId("")
+                      setIsAddSubjectToGradeModalOpen(true)
+                    }}
+                  >
+                    + Add Subject to {currentSubjectGrade?.name || "Grade"}
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -1330,6 +1778,481 @@ export default function AcademicsWorkspacePage() {
           </div>
         )}
       </div>
+
+      {/* ========================================================================= */}
+      {/* MODAL: ADD CLASS / GRADE                                                  */}
+      {/* ========================================================================= */}
+      {isAddClassModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in">
+          <div className="bg-surface rounded-2xl border border-border-default max-w-md w-full p-6 shadow-2xl flex flex-col gap-4">
+            <div className="flex items-center justify-between pb-2 border-b border-border-default">
+              <div>
+                <h3 className="text-base font-bold text-text-primary">Add Class or Grade</h3>
+                <p className="text-xs text-text-secondary mt-0.5">
+                  Define a new class level with its initial classroom section
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsAddClassModalOpen(false)}
+                className="p-1 rounded-lg text-text-muted hover:text-text-primary hover:bg-subtle"
+              >
+                <XCircle className="w-5 h-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleAddClassSubmit} className="flex flex-col gap-3 text-xs">
+              <div>
+                <label className="font-semibold text-text-primary block mb-1">
+                  Class / Grade Name <span className="text-status-error">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={newClassName}
+                  onChange={(e) => setNewClassName(e.target.value)}
+                  placeholder="e.g. Grade 1, Grade 11 - Science, Class 6"
+                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-semibold"
+                />
+              </div>
+
+              <div>
+                <label className="font-semibold text-text-primary block mb-1">Academic Year</label>
+                <select
+                  value={activeYearId}
+                  disabled
+                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle/50 text-text-secondary cursor-not-allowed"
+                >
+                  <option value={activeYearId}>{currentYear?.name || "Active Year"}</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="font-semibold text-text-primary block mb-1">Department</label>
+                <select
+                  value={newClassDeptId}
+                  onChange={(e) => setNewClassDeptId(e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                >
+                  <option value="">Default Department</option>
+                  {departments.map((d: any) => (
+                    <option key={d.id} value={d.id}>
+                      {d.name} ({d.code})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 pt-1">
+                <div>
+                  <label className="font-semibold text-text-primary block mb-1">Initial Section</label>
+                  <input
+                    type="text"
+                    value={newClassSection}
+                    onChange={(e) => setNewClassSection(e.target.value)}
+                    placeholder="Section A"
+                    className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-mono"
+                  />
+                </div>
+                <div>
+                  <label className="font-semibold text-text-primary block mb-1">Seating Capacity</label>
+                  <input
+                    type="number"
+                    min={1}
+                    max={200}
+                    value={newClassCapacity}
+                    onChange={(e) => setNewClassCapacity(parseInt(e.target.value, 10) || 40)}
+                    className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-mono"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-2 pt-3 border-t border-border-default mt-2">
+                <Button
+                  type="button"
+                  size="dense"
+                  variant="ghost"
+                  onClick={() => setIsAddClassModalOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  size="dense"
+                  variant="primary"
+                  isLoading={createClassMutation.isPending}
+                >
+                  + Create Class / Grade
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* MODAL: ADD SUBJECT TO GRADE                                               */}
+      {/* ========================================================================= */}
+      {isAddSubjectToGradeModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in">
+          <div className="bg-surface rounded-2xl border border-border-default max-w-lg w-full p-6 shadow-2xl flex flex-col gap-4 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-2 border-b border-border-default">
+              <div>
+                <h3 className="text-base font-bold text-text-primary">
+                  Add Subject to {currentSubjectGrade?.name || "Grade"}
+                </h3>
+                <p className="text-xs text-text-secondary mt-0.5">
+                  Assign a new or existing subject to the curriculum of {currentSubjectGrade?.name || "this grade"}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsAddSubjectToGradeModalOpen(false)}
+                className="p-1 rounded-lg text-text-muted hover:text-text-primary hover:bg-subtle"
+              >
+                <XCircle className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Mode Switcher */}
+            <div className="flex rounded-lg bg-subtle p-1 border border-border-subtle text-xs">
+              <button
+                type="button"
+                onClick={() => setAddSubjectMode("NEW")}
+                className={`flex-1 py-1.5 rounded-md font-semibold transition-all ${
+                  addSubjectMode === "NEW"
+                    ? "bg-surface text-text-primary shadow-xs"
+                    : "text-text-muted hover:text-text-primary"
+                }`}
+              >
+                Create New Subject
+              </button>
+              <button
+                type="button"
+                onClick={() => setAddSubjectMode("CATALOG")}
+                className={`flex-1 py-1.5 rounded-md font-semibold transition-all ${
+                  addSubjectMode === "CATALOG"
+                    ? "bg-surface text-text-primary shadow-xs"
+                    : "text-text-muted hover:text-text-primary"
+                }`}
+              >
+                Choose from Catalog ({subjects.length})
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-3 text-xs">
+              {addSubjectMode === "NEW" ? (
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-semibold text-text-primary block mb-1">
+                        Subject Name <span className="text-status-error">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={newSubName}
+                        onChange={(e) => setNewSubName(e.target.value)}
+                        placeholder="e.g. Mathematics, Science"
+                        className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                      />
+                    </div>
+                    <div>
+                      <label className="font-semibold text-text-primary block mb-1">
+                        Subject Code <span className="text-status-error">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={newSubCode}
+                        onChange={(e) => setNewSubCode(e.target.value.toUpperCase())}
+                        placeholder="e.g. MATH-10, SCI-01"
+                        className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-mono uppercase"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-semibold text-text-primary block mb-1">Type</label>
+                      <select
+                        value={newSubElective ? "ELECTIVE" : "CORE"}
+                        onChange={(e) => setNewSubElective(e.target.value === "ELECTIVE")}
+                        className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                      >
+                        <option value="CORE">CORE Subject</option>
+                        <option value="ELECTIVE">ELECTIVE Subject</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="font-semibold text-text-primary block mb-1">Credits</label>
+                      <input
+                        type="number"
+                        min={1}
+                        max={10}
+                        value={newSubCredits}
+                        onChange={(e) => setNewSubCredits(parseInt(e.target.value, 10) || 4)}
+                        className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-mono"
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div>
+                  <label className="font-semibold text-text-primary block mb-1">
+                    Select Subject from School Master Catalog <span className="text-status-error">*</span>
+                  </label>
+                  <select
+                    value={catalogSubjectId}
+                    onChange={(e) => setCatalogSubjectId(e.target.value)}
+                    className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                  >
+                    <option value="">-- Choose a Subject --</option>
+                    {subjects.map((sub: any) => (
+                      <option key={sub.id} value={sub.id}>
+                        {sub.name} ({sub.code}) • {sub.is_elective ? "Elective" : "Core"}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              {/* Assessment & Schedule parameters for this grade */}
+              <div className="pt-2 border-t border-border-subtle mt-1">
+                <span className="text-[11px] font-bold text-text-secondary uppercase tracking-wider block mb-2 font-mono">
+                  Grade Schedule & Marks Criteria
+                </span>
+                <div className="grid grid-cols-3 gap-2 font-mono">
+                  <div>
+                    <label className="text-[10px] text-text-muted block mb-1 font-sans">Periods / Week</label>
+                    <input
+                      type="number"
+                      min={1}
+                      max={20}
+                      value={newGradeSubPeriods}
+                      onChange={(e) => setNewGradeSubPeriods(parseInt(e.target.value, 10) || 5)}
+                      className="w-full px-2.5 py-1.5 rounded-lg border border-border-default bg-subtle text-text-primary text-center"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-text-muted block mb-1 font-sans">Max Marks</label>
+                    <input
+                      type="number"
+                      min={10}
+                      max={200}
+                      value={newGradeSubMaxMarks}
+                      onChange={(e) => setNewGradeSubMaxMarks(parseInt(e.target.value, 10) || 100)}
+                      className="w-full px-2.5 py-1.5 rounded-lg border border-border-default bg-subtle text-text-primary text-center"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-text-muted block mb-1 font-sans">Pass Marks</label>
+                    <input
+                      type="number"
+                      min={1}
+                      max={100}
+                      value={newGradeSubPassMarks}
+                      onChange={(e) => setNewGradeSubPassMarks(parseInt(e.target.value, 10) || 35)}
+                      className="w-full px-2.5 py-1.5 rounded-lg border border-border-default bg-subtle text-text-primary text-center"
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-3 flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    id="newSubMandatoryCheck"
+                    checked={newGradeSubMandatory}
+                    onChange={(e) => setNewGradeSubMandatory(e.target.checked)}
+                    className="w-4 h-4 rounded border-border-default text-brand-primary"
+                  />
+                  <label htmlFor="newSubMandatoryCheck" className="text-xs text-text-primary font-medium cursor-pointer">
+                    Mandatory for all students enrolled in {currentSubjectGrade?.name || "this grade"}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-2 pt-3 border-t border-border-default">
+              <Button
+                type="button"
+                size="dense"
+                variant="ghost"
+                onClick={() => setIsAddSubjectToGradeModalOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="button"
+                size="dense"
+                variant="primary"
+                isLoading={createSubjectMutation.isPending || mapSubjectMutation.isPending}
+                onClick={handleAddSubjectToGrade}
+              >
+                + Add to {currentSubjectGrade?.name || "Grade"}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* MODAL: EDIT SUBJECT (GRADE-SCOPED & MASTER)                               */}
+      {/* ========================================================================= */}
+      {isEditSubjectModalOpen && editingSubject && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in">
+          <div className="bg-surface rounded-2xl border border-border-default max-w-lg w-full p-6 shadow-2xl flex flex-col gap-4 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-2 border-b border-border-default">
+              <div>
+                <h3 className="text-base font-bold text-text-primary">
+                  Edit Subject: {editingSubject.name}
+                </h3>
+                <p className="text-xs text-text-secondary mt-0.5">
+                  Modify subject details and curriculum criteria for {currentSubjectGrade?.name || "this grade"}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsEditSubjectModalOpen(false)
+                  setEditingSubject(null)
+                }}
+                className="p-1 rounded-lg text-text-muted hover:text-text-primary hover:bg-subtle"
+              >
+                <XCircle className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-3 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="font-semibold text-text-primary block mb-1">
+                    Subject Name <span className="text-status-error">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={editSubName}
+                    onChange={(e) => setEditSubName(e.target.value)}
+                    className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-semibold"
+                  />
+                </div>
+                <div>
+                  <label className="font-semibold text-text-primary block mb-1">
+                    Subject Code <span className="text-status-error">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={editSubCode}
+                    onChange={(e) => setEditSubCode(e.target.value.toUpperCase())}
+                    className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-mono uppercase"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="font-semibold text-text-primary block mb-1">Subject Type</label>
+                  <select
+                    value={editSubIsElective ? "ELECTIVE" : "CORE"}
+                    onChange={(e) => setEditSubIsElective(e.target.value === "ELECTIVE")}
+                    className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                  >
+                    <option value="CORE">CORE</option>
+                    <option value="ELECTIVE">ELECTIVE</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="font-semibold text-text-primary block mb-1">Academic Credits</label>
+                  <input
+                    type="number"
+                    min={1}
+                    max={10}
+                    value={editSubCredits}
+                    onChange={(e) => setEditSubCredits(parseInt(e.target.value, 10) || 4)}
+                    className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-mono"
+                  />
+                </div>
+              </div>
+
+              {/* Assessment parameters for this grade */}
+              <div className="pt-2 border-t border-border-subtle mt-1">
+                <span className="text-[11px] font-bold text-text-secondary uppercase tracking-wider block mb-2 font-mono">
+                  Weekly Schedule & Grading Criteria ({currentSubjectGrade?.name || "Grade"})
+                </span>
+                <div className="grid grid-cols-3 gap-2 font-mono">
+                  <div>
+                    <label className="text-[10px] text-text-muted block mb-1 font-sans">Periods / Week</label>
+                    <input
+                      type="number"
+                      min={1}
+                      max={20}
+                      value={editSubPeriods}
+                      onChange={(e) => setEditSubPeriods(parseInt(e.target.value, 10) || 5)}
+                      className="w-full px-2.5 py-1.5 rounded-lg border border-border-default bg-subtle text-text-primary text-center"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-text-muted block mb-1 font-sans">Max Marks</label>
+                    <input
+                      type="number"
+                      min={10}
+                      max={200}
+                      value={editSubMaxMarks}
+                      onChange={(e) => setEditSubMaxMarks(parseInt(e.target.value, 10) || 100)}
+                      className="w-full px-2.5 py-1.5 rounded-lg border border-border-default bg-subtle text-text-primary text-center"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-text-muted block mb-1 font-sans">Pass Marks</label>
+                    <input
+                      type="number"
+                      min={1}
+                      max={100}
+                      value={editSubPassMarks}
+                      onChange={(e) => setEditSubPassMarks(parseInt(e.target.value, 10) || 35)}
+                      className="w-full px-2.5 py-1.5 rounded-lg border border-border-default bg-subtle text-text-primary text-center"
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-3 flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    id="editSubMandatoryCheck"
+                    checked={editSubMandatory}
+                    onChange={(e) => setEditSubMandatory(e.target.checked)}
+                    className="w-4 h-4 rounded border-border-default text-brand-primary"
+                  />
+                  <label htmlFor="editSubMandatoryCheck" className="text-xs text-text-primary font-medium cursor-pointer">
+                    Mandatory for students in {currentSubjectGrade?.name || "this grade"}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-2 pt-3 border-t border-border-default">
+              <Button
+                type="button"
+                size="dense"
+                variant="ghost"
+                onClick={() => {
+                  setIsEditSubjectModalOpen(false)
+                  setEditingSubject(null)
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="button"
+                size="dense"
+                variant="primary"
+                isLoading={updateSubjectMutation.isPending || mapSubjectMutation.isPending}
+                onClick={handleSaveSubjectEdit}
+              >
+                Save Changes
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ========================================================================= */}
       {/* MODAL: GENERATE GRADE X SECTION MATRIX */}

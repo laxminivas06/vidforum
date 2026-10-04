@@ -161,16 +161,16 @@ export class AcademicsController {
     try {
       const instId = req.institutionId!;
       const actorId = (req as any).user?.id || 'system';
-      const { name, academicYearId, departmentId, sequenceOrder } = req.body;
+      const { name, academicYearId, departmentId, sequenceOrder, initialSection, initialCapacity } = req.body;
 
-      if (!name || !academicYearId || !departmentId) {
-        sendError(res, 'Name, academicYearId, and departmentId are required', 400, 'VALIDATION_ERROR');
+      if (!name || !name.trim()) {
+        sendError(res, 'Class / Grade name is required', 400, 'VALIDATION_ERROR');
         return;
       }
 
       const created = await academicsService.createClass(
         instId,
-        { name, academicYearId, departmentId, sequenceOrder },
+        { name, academicYearId, departmentId, sequenceOrder, initialSection, initialCapacity },
         actorId
       );
       sendSuccess(res, created, 'Class created successfully', 201);

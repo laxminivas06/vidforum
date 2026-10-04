@@ -149,8 +149,8 @@ export const NAVIGATION_CONFIG: Record<RoleType, NavGroup[]> = {
     {
       label: "ACADEMICS",
       items: [
-        { title: "Academic Hierarchy", href: "/academics/hierarchy", iconName: "Layers" },
-        { title: "Subject Catalog", href: "/academics/subjects", iconName: "BookOpen" },
+        { title: "Classes or Grades", href: "/academics/hierarchy", iconName: "Layers" },
+        { title: "Subject Master", href: "/academics?tab=subjects", iconName: "BookOpen" },
         { title: "Timetable Matrix", href: "/timetable/matrix", iconName: "Clock" },
         { title: "Timetable Conflicts", href: "/timetable/conflicts", iconName: "AlertTriangle" },
       ],

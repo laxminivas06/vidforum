@@ -61,9 +61,9 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     primaryRoute: "/academics/hierarchy",
     routes: ["/academics"],
     navItems: [
-      { title: "Academic Hierarchy", href: "/academics/hierarchy", iconName: "Layers" },
-      { title: "Grade Sections", href: "/academics/hierarchy?view=sections", iconName: "GraduationCap" },
-      { title: "Subject Catalog", href: "/academics/hierarchy?view=subjects", iconName: "BookOpen" },
+      { title: "Classes or Grades", href: "/academics/hierarchy", iconName: "Layers" },
+      { title: "Subject Master", href: "/academics?tab=subjects", iconName: "BookOpen" },
+      { title: "Curriculum Mapping", href: "/academics?tab=mapping", iconName: "GraduationCap" },
     ],
   },
   {

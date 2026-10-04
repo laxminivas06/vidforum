@@ -1,5 +1,6 @@
 import { academicsRepository } from './academics.repository';
 import { AuditDispatcher } from '../../common/audit-dispatcher';
+import { db } from '../../config/database';
 
 export class AcademicsService {
   // =========================================================================
@@ -161,11 +162,68 @@ export class AcademicsService {
 
   async createClass(institutionId: string, data: {
     name: string;
-    academicYearId: string;
-    departmentId: string;
+    academicYearId?: string;
+    departmentId?: string;
     sequenceOrder?: number;
+    initialSection?: string;
+    initialCapacity?: number;
   }, actorId = 'system') {
-    const created = await academicsRepository.createClass(institutionId, data);
+    let targetYearId = data.academicYearId;
+    if (!targetYearId) {
+      const curYear = await db.query('SELECT id FROM academic_years WHERE institution_id = $1 AND is_current = true LIMIT 1', [institutionId]);
+      targetYearId = curYear.rows[0]?.id;
+      if (!targetYearId) {
+        const anyYear = await db.query('SELECT id FROM academic_years WHERE institution_id = $1 ORDER BY created_at DESC LIMIT 1', [institutionId]);
+        targetYearId = anyYear.rows[0]?.id;
+      }
+    }
+    if (!targetYearId) {
+      throw new Error('No academic year found for institution');
+    }
+
+    let targetDeptId = data.departmentId;
+    if (!targetDeptId) {
+      const deptRes = await db.query('SELECT id FROM departments WHERE institution_id = $1 ORDER BY created_at ASC LIMIT 1', [institutionId]);
+      targetDeptId = deptRes.rows[0]?.id;
+      if (!targetDeptId) {
+        const newDept = await db.query(
+          `INSERT INTO departments (institution_id, name, code) VALUES ($1, 'Academics', 'ACAD') RETURNING id`,
+          [institutionId]
+        );
+        targetDeptId = newDept.rows[0]?.id;
+      }
+    }
+    if (!targetDeptId) {
+      throw new Error('Failed to resolve department for class');
+    }
+
+    let seq = data.sequenceOrder;
+    if (seq === undefined || seq === null) {
+      const seqRes = await db.query(
+        'SELECT COALESCE(MAX(sequence_order), 0) + 1 as next_seq FROM classes WHERE institution_id = $1 AND academic_year_id = $2',
+        [institutionId, targetYearId]
+      );
+      seq = parseInt(seqRes.rows[0]?.next_seq || '1', 10);
+    }
+
+    const created = await academicsRepository.createClass(institutionId, {
+      name: data.name.trim(),
+      academicYearId: targetYearId,
+      departmentId: targetDeptId,
+      sequenceOrder: seq,
+    });
+
+    // Create initial section so class is immediately visible and usable
+    const secName = (data.initialSection && data.initialSection.trim()) || 'Section A';
+    try {
+      await academicsRepository.createSection(institutionId, created.id, {
+        name: secName,
+        capacity: data.initialCapacity || 40,
+      });
+    } catch (secErr) {
+      console.warn('Initial section note:', (secErr as any)?.message);
+    }
+
     await AuditDispatcher.dispatch({
       actorId,
       action: 'academics.class.create',

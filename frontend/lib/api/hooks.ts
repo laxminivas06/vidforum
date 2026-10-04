@@ -1634,6 +1634,72 @@ export function useGenerateClassMatrix() {
   })
 }
 
+export function useCreateClass() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: {
+      name: string
+      academicYearId?: string
+      departmentId?: string
+      sequenceOrder?: number
+      initialSection?: string
+      initialCapacity?: number
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/classes`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to create class / grade")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-classes"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+    },
+  })
+}
+
+export function useUpdateClass() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({ id, data }: { id: string; data: { name?: string; departmentId?: string; sequenceOrder?: number } }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/classes/${id}`, {
+        method: "PUT",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to update class / grade")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-classes"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+    },
+  })
+}
+
+export function useDeleteClass() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const res = await fetch(`${API_BASE_URL}/academics/classes/${id}`, {
+        method: "DELETE",
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to delete class / grade")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-classes"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+    },
+  })
+}
+
 export function useCreateSection() {
   const queryClient = useQueryClient()
   return useMutation({
@@ -1693,6 +1759,47 @@ export function useCreateSubject() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["academics-subjects"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+    },
+  })
+}
+
+export function useUpdateSubject() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({ id, data }: { id: string; data: { name?: string; code?: string; isElective?: boolean; credits?: number; departmentId?: string; isActive?: boolean } }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/subjects/${id}`, {
+        method: "PUT",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to update subject")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-subjects"] })
+      queryClient.invalidateQueries({ queryKey: ["grade-subjects"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+    },
+  })
+}
+
+export function useDeleteSubject() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const res = await fetch(`${API_BASE_URL}/academics/subjects/${id}`, {
+        method: "DELETE",
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to delete subject")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-subjects"] })
+      queryClient.invalidateQueries({ queryKey: ["grade-subjects"] })
       queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
     },
   })

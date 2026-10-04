@@ -1,12 +1,12 @@
-# Graph Report - C:\Antigravityyyyy\VID_School  (2026-10-03)
+# Graph Report - C:\Antigravityyyyy\VID_School  (2026-10-04)
 
 ## Corpus Check
-- 236 files · ~403,041 words
+- 246 files · ~538,699 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1935 nodes · 2622 edges · 215 communities detected
-- Extraction: 72% EXTRACTED · 28% INFERRED · 0% AMBIGUOUS · INFERRED: 726 edges (avg confidence: 0.8)
+- 2372 nodes · 3361 edges · 215 communities detected
+- Extraction: 70% EXTRACTED · 30% INFERRED · 0% AMBIGUOUS · INFERRED: 997 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
@@ -227,28 +227,28 @@
 - [[_COMMUNITY_Community 214|Community 214]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `query` - 217 edges
-2. `sendSuccess()` - 151 edges
-3. `sendError()` - 115 edges
+1. `query` - 280 edges
+2. `sendSuccess()` - 200 edges
+3. `sendError()` - 153 edges
 4. `institutions` - 73 edges
-5. `Document: Vid Database Architecture` - 47 edges
-6. `HrmsRepository` - 31 edges
-7. `ExaminationsRepository` - 30 edges
-8. `DocumentsRepository` - 27 edges
-9. `ExaminationsController` - 26 edges
-10. `ExaminationsService` - 26 edges
+5. `AcademicsRepository` - 51 edges
+6. `AcademicsController` - 49 edges
+7. `AcademicsService` - 49 edges
+8. `Document: Vid Database Architecture` - 47 edges
+9. `HrmsRepository` - 40 edges
+10. `ExaminationsRepository` - 30 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `main()` --calls--> `query`  [INFERRED]
   C:\Antigravityyyyy\VID_School\backend\scripts\run-migration.ts → C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts
-- `findById()` --calls--> `query`  [INFERRED]
-  C:\Antigravityyyyy\VID_School\backend\src\common\tenant-repository.base.ts → C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts
-- `findMany()` --calls--> `query`  [INFERRED]
-  C:\Antigravityyyyy\VID_School\backend\src\common\tenant-repository.base.ts → C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts
-- `softDelete()` --calls--> `query`  [INFERRED]
-  C:\Antigravityyyyy\VID_School\backend\src\common\tenant-repository.base.ts → C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts
 - `authMiddleware()` --calls--> `sendError()`  [INFERRED]
   C:\Antigravityyyyy\VID_School\backend\src\middleware\auth.middleware.ts → C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts
+- `errorMiddleware()` --calls--> `sendError()`  [INFERRED]
+  C:\Antigravityyyyy\VID_School\backend\src\middleware\error.middleware.ts → C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts
+- `tenantMiddleware()` --calls--> `query`  [INFERRED]
+  C:\Antigravityyyyy\VID_School\backend\src\middleware\tenant.middleware.ts → C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts
+- `tenantMiddleware()` --calls--> `sendError()`  [INFERRED]
+  C:\Antigravityyyyy\VID_School\backend\src\middleware\tenant.middleware.ts → C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts
 
 ## Hyperedges (group relationships)
 - **Single Student Master Record Architecture** — docs_appflow_2_7_central_student_master_profile_stu, docs_appflow_2_8_mobile_parent_student_portal_mo, docs_appflow_3_4_student_master_profile_shell, docs_decisions_adr_003_central_student_master_record_vs, docs_memory_persistent_agent_memory_plugin_ecosyst [INFERRED 0.95]
@@ -258,150 +258,160 @@
 
 ### Community 0 - "Community 0"
 
-Cohesion: 0.02
-Nodes (19): AcademicsRepository, AcademicsService, main(), AuditDispatcher, DocumentsRepository, ALLOWED_MIME_TYPES, DocumentsService, ExaminationsRepository (+11 more)
+Cohesion: 0.01
+Nodes (25): AcademicsRepository, main(), main(), main(), main(), DocumentsRepository, ALLOWED_MIME_TYPES, DocumentsService (+17 more)
 
 ### Community 1 - "Community 1"
 
-Cohesion: 0.03
-Nodes (13): AcademicsController, AdmissionsController, sendError(), sendSuccess(), AttendanceController, AuditController, authMiddleware(), errorMiddleware() (+5 more)
+Cohesion: 0.02
+Nodes (15): AcademicsController, AdmissionsController, sendError(), sendPaginated(), sendSuccess(), AttendanceController, authMiddleware(), errorMiddleware() (+7 more)
 
 ### Community 2 - "Community 2"
 
-Cohesion: 0.04
-Nodes (121): academic_years, admission_documents, admissions, ai_attendance_events, ai_voice_calls, ai_voice_campaigns, ai_voice_recipients, ai_voice_templates (+113 more)
+Cohesion: 0.01
+Nodes (152): [academicYearId, setAcademicYearId], actionLeaveMutation, [actionSuccess, setActionSuccess], activeStudents, [address, setAddress], [addressLine1, setAddressLine1], [ageMax, setAgeMax], [ageMin, setAgeMin] (+144 more)
 
 ### Community 3 - "Community 3"
 
 Cohesion: 0.03
-Nodes (70): [actionSuccess, setActionSuccess], [address, setAddress], adminCount, bulkCreateMutation, [bulkError, setBulkError], [bulkSuccess, setBulkSuccess], [collectDialogOpen, setCollectDialogOpen], columns (+62 more)
+Nodes (13): AcademicsService, AuditDispatcher, ExaminationsService, HrmsService, StudentRepository, StudentService, tenantMiddleware(), authService (+5 more)
 
 ### Community 4 - "Community 4"
+
+Cohesion: 0.04
+Nodes (121): academic_years, admission_documents, admissions, ai_attendance_events, ai_voice_calls, ai_voice_campaigns, ai_voice_recipients, ai_voice_templates (+113 more)
+
+### Community 5 - "Community 5"
+
+Cohesion: 0.02
+Nodes (102): [actionError, setActionError], activeGrade, activeMappingClassId, activeTextbookClassId, activeYearId, async(), [cloneEnd, setCloneEnd], [cloneName, setCloneName] (+94 more)
+
+### Community 6 - "Community 6"
+
+Cohesion: 0.03
+Nodes (5): API_BASE_URL, checkDuplicateStaff(), DEFAULT_INST_ID, getAuthHeaders(), handleDuplicateCheck()
+
+### Community 7 - "Community 7"
 
 Cohesion: 0.03
 Nodes (58): [accountFilter, setAccountFilter], [actionType, setActionType], [activeTab, setActiveTab], applicantColumns, [confirmDialogOpen, setConfirmDialogOpen], [copySuccessToast, setCopySuccessToast], { data: applicants, isLoading: appsLoading }, { data: facultyAccounts = [], isLoading: accountsLoading } (+50 more)
 
-### Community 5 - "Community 5"
-
-Cohesion: 0.05
-Nodes (2): FinanceRepository, FinanceService
-
-### Community 6 - "Community 6"
+### Community 8 - "Community 8"
 
 Cohesion: 0.04
 Nodes (46): adminEmails, adminRoleId, adminRoleRes, authId, authUser, cleanEmail, client, current (+38 more)
 
-### Community 7 - "Community 7"
+### Community 9 - "Community 9"
 
 Cohesion: 0.04
 Nodes (48): 10. RBAC / Permissions, 11. Academic Data Model, 12. Workspace/Data Ownership Model, 13. Normalization Analysis, 14. Primary Key Strategy, 15. Constraints, 16. Delete/Update Strategy, 17. Audit Strategy (+40 more)
 
-### Community 8 - "Community 8"
+### Community 10 - "Community 10"
 
 Cohesion: 0.05
-Nodes (27): AdmissionsRepository, AdmissionsService, STAGE_MAP_TO_DB, STAGE_MAP_TO_UI, { data: applicants = [], isLoading, updateStage }, DAYS, [enrollingApplicant, setEnrollingApplicant], [error, setError] (+19 more)
+Nodes (37): adminCount, columns, createUserMutation, { data: dbUsers = [], isLoading: isLoadingUsers }, { data: institutions = [] }, DEFAULT_USERS, [editEmail, setEditEmail], [editErrors, setEditErrors] (+29 more)
 
-### Community 9 - "Community 9"
+### Community 11 - "Community 11"
+
+Cohesion: 0.07
+Nodes (15): AuthRateLimiter, AuthRepository, AuthService, PASSWORD_DENYLIST, VidApiClient, [error, setError], handleLoginSubmit(), [identifier, setIdentifier] (+7 more)
+
+### Community 12 - "Community 12"
 
 Cohesion: 0.05
 Nodes (37): assignedWorkspaces, cleanCurrent, cleanNew, clientIp, { currentPassword, newPassword }, currentValid, dbLockout, { email, userId, identifier, password } (+29 more)
 
-### Community 10 - "Community 10"
+### Community 13 - "Community 13"
 
 Cohesion: 0.09
 Nodes (3): InstitutionController, InstitutionRepository, InstitutionService
 
-### Community 11 - "Community 11"
+### Community 14 - "Community 14"
 
 Cohesion: 0.06
 Nodes (28): actor, bonafideSchema, certificate, created, createTemplateSchema, createTypeSchema, doc, docTypeId (+20 more)
 
-### Community 12 - "Community 12"
-
-Cohesion: 0.1
-Nodes (7): AuditRepository, AuditService, AuthRepository, ProvisioningService, resolveRoleTemplate(), ROLE_TEMPLATES, runR4Verification()
-
-### Community 13 - "Community 13"
-
-Cohesion: 0.09
-Nodes (2): AttendanceRepository, AttendanceService
-
-### Community 14 - "Community 14"
+### Community 15 - "Community 15"
 
 Cohesion: 0.11
 Nodes (3): FacultyController, FacultyRepository, FacultyService
 
-### Community 15 - "Community 15"
+### Community 16 - "Community 16"
 
 Cohesion: 0.08
 Nodes (2): ConflictError, TimetableService
 
-### Community 16 - "Community 16"
-
-Cohesion: 0.07
-Nodes (2): API_BASE_URL, DEFAULT_INST_ID
-
 ### Community 17 - "Community 17"
+
+Cohesion: 0.09
+Nodes (4): AdmissionsRepository, AdmissionsService, STAGE_MAP_TO_DB, STAGE_MAP_TO_UI
+
+### Community 18 - "Community 18"
+
+Cohesion: 0.1
+Nodes (2): AttendanceRepository, AttendanceService
+
+### Community 19 - "Community 19"
+
+Cohesion: 0.11
+Nodes (7): AuditController, AuditRepository, AuditService, ProvisioningService, resolveRoleTemplate(), ROLE_TEMPLATES, runR4Verification()
+
+### Community 20 - "Community 20"
 
 Cohesion: 0.08
 Nodes (26): 10. Accessibility Baseline, 11. What This Design System Deliberately Avoids, 1. Design Philosophy, 2.1 Core Palette, 2.2 Accent & Status Colors, 2.3 Dark Elements (used, not a dark mode), 2. Color System, 3. Typography (+18 more)
 
-### Community 18 - "Community 18"
+### Community 21 - "Community 21"
 
 Cohesion: 0.08
 Nodes (24): 1.1 Backend Architecture — Layered MVC, 1. Technical Stack Selection & Justification, 2. High-Level Architecture Diagram, 3. Repository & Folder Structure, 4.1 Schema Definition across 16 Core Domains, 4. Database Schema & Multi-Tenant Data Model, 5.1 Route Inventory (Section 26 Mapping), 5.2 Sample Request & Response Schemas (+16 more)
 
-### Community 19 - "Community 19"
+### Community 22 - "Community 22"
 
 Cohesion: 0.09
 Nodes (23): 1.1 Project Scaffolding & Infrastructure, 1.2 Auth, Multi-Tenancy & RBAC Engine, 1.3 Super Admin & Institution Admin Consoles, 1.4 Academics Hierarchy & Faculty Mapping, 1.5 Admissions Workspace & Central Student Master Entity, 2.1 Attendance Workspace, 2.2 Examinations Workspace & Excel Import Engine, 2.3 Finance & Fee Management Workspace (+15 more)
 
-### Community 20 - "Community 20"
+### Community 23 - "Community 23"
 
 Cohesion: 0.1
 Nodes (21): autoGenerateCode(), [boardAffiliation, setBoardAffiliation], [code, setCode], [contactEmail, setContactEmail], [contactPhone, setContactPhone], createInstitutionMutation, [customDomain, setCustomDomain], effectiveDomain (+13 more)
 
-### Community 21 - "Community 21"
+### Community 24 - "Community 24"
 
 Cohesion: 0.09
 Nodes (22): 1.1 Problem Statement, 1.2 Core Principle & Philosophy, 1. Executive Summary & Product Vision, 2. Target Users & Personas, 3.1 Workspace Classification Matrix, 3.2 The Student Master Entity, 3.3 The 30 Non-Negotiable Rules, 3. Product Scope & Modular Architecture (+14 more)
 
-### Community 22 - "Community 22"
+### Community 25 - "Community 25"
 
 Cohesion: 0.1
 Nodes (21): 1. Prerequisites, 2. Environment Variables, 3. Running the Development Servers, 4. Running in Production, 📡 API Reference Snapshot (/api/v1/), 🏛 Architecture & Tech Stack, Build and Start Backend, Build and Start Frontend (+13 more)
 
-### Community 23 - "Community 23"
+### Community 26 - "Community 26"
+
+Cohesion: 0.11
+Nodes (1): FinanceService
+
+### Community 27 - "Community 27"
 
 Cohesion: 0.11
 Nodes (19): 1. Overview & Navigation Architecture, 2.1 Authentication, 2.2 Super Admin Console (/(super-admin)), 2.3 Institution Admin Workspace (/(institution-admin)), 2.4 Core Workspaces (/(core)), 2.5 AI Yantra Services (/(ai-yantra)), 2.6 Optional Modular Workspaces (/(optional)), 2.7 Central Student Master Profile (/students/id) (+11 more)
 
-### Community 24 - "Community 24"
+### Community 28 - "Community 28"
 
 Cohesion: 0.11
 Nodes (19): 0. ROLE & OPERATING MODE, 1. PROJECT BRIEF, 2. REQUIRED DELIVERABLES — CREATE THESE FILES FIRST, 3. DEVELOPMENT RULES (apply throughout, no exceptions), 4. TECH STACK CONSTRAINTS, 5. WORKING AGREEMENT / CHECK-IN CADENCE, 6. AGENT MEMORY USAGE, 7. DEFINITION OF DONE (v1) (+11 more)
 
-### Community 25 - "Community 25"
+### Community 29 - "Community 29"
 
 Cohesion: 0.15
 Nodes (15): BACKEND_DIR, DOCS_DIR, FRONTEND_DIR, generateGateReport(), getGitCommit(), ROOT_DIR, runCommand(), { success } (+7 more)
 
-### Community 26 - "Community 26"
-
-Cohesion: 0.2
-Nodes (3): AuthRateLimiter, VidApiClient, runTests()
-
-### Community 27 - "Community 27"
-
-Cohesion: 0.17
-Nodes (3): StudentController, StudentRepository, StudentService
-
-### Community 28 - "Community 28"
+### Community 30 - "Community 30"
 
 Cohesion: 0.13
 Nodes (9): { data: roleTemplates = [] }, [error, setError], initialWorkspaces, isSelected, [selectedTemplate, setSelectedTemplate], [selectedWorkspaces, setSelectedWorkspaces], [successBanner, setSuccessBanner], tplKey (+1 more)
 
-### Community 29 - "Community 29"
+### Community 31 - "Community 31"
 
 Cohesion: 0.14
 Nodes (12): [academicYear, setAcademicYear], [activeSection, setActiveSection], [boardAffiliation, setBoardAffiliation], [confirmToggleModule, setConfirmToggleModule], [contactEmail, setContactEmail], {
@@ -410,125 +420,115 @@ Nodes (12): [academicYear, setAcademicYear], [activeSection, setActiveSection], 
     toggleOptionalModule,
   }, isEnabled, [isSaved, setIsSaved] (+4 more)
 
-### Community 30 - "Community 30"
+### Community 32 - "Community 32"
 
 Cohesion: 0.15
 Nodes (10): createAdminMutation, [email, setEmail], [errors, setErrors], handleSubmit(), isChecked, [password, setPassword], [selectedWorkspaces, setSelectedWorkspaces], [successBanner, setSuccessBanner] (+2 more)
 
-### Community 31 - "Community 31"
+### Community 33 - "Community 33"
 
 Cohesion: 0.14
 Nodes (14): Academics & Curriculum, Admissions & Enrollment, Alumni Management, Attendance Management, Communication & Notifications, Examination & Grading, Fee & Financial Management, Hostel Management (+6 more)
 
-### Community 32 - "Community 32"
+### Community 34 - "Community 34"
 
 Cohesion: 0.15
 Nodes (11): activeWorkspace, anySiblingMatches, currentPathOnly, [currentSearch, setCurrentSearch], ICON_MAP, isActive, isInsideIsolatedWorkspace, [itemPath, itemQuery] (+3 more)
 
-### Community 33 - "Community 33"
+### Community 35 - "Community 35"
 
 Cohesion: 0.15
 Nodes (13): ADR-001 Strict Separation of Phase Deliverables, ADR-002 Multi-Tenancy via Shared Database with Institution-ID & RLS, ADR-003 Central Student Master Record vs Workspace, ADR-004 Two-Tier RBAC with Resource-Level Context Verification, ADR-005 Full-Stack Monorepo Structure (backend/ + frontend/), ADR-006 Pre-Commit Validation Pipeline for Excel Exam Imports, ADR-007 Strict 3-Workspace Boundary for AI Yantra, ADR-008 Node.js 22 + TypeScript + Express Layered MVC Architecture (+5 more)
 
-### Community 34 - "Community 34"
+### Community 36 - "Community 36"
 
 Cohesion: 0.15
 Nodes (13): 1.1 Architecture & Stack Contract, 1.2 Core Development Directives, 1. Project Context & Durable Conclusions (Honcho / Wingman / Knowl), 2. Installed Plugin Suite (28 Plugins Matrix), 3. Workflow Activation Guide, 4. Frontend Implementation & Stitch Conversion State (2026-09-25), 5.1 Cloud Database Infrastructure (Supabase PostgreSQL), 5.2 Backend Layered MVC Engine (Node.js 22 + Express + TypeScript) (+5 more)
 
-### Community 35 - "Community 35"
+### Community 37 - "Community 37"
 
 Cohesion: 0.17
 Nodes (7): [error, setError], initial, isChecked, [isSubmitting, setIsSubmitting], [selectedWorkspaces, setSelectedWorkspaces], [successBanner, setSuccessBanner], updateWorkspacesMutation
 
-### Community 36 - "Community 36"
+### Community 38 - "Community 38"
 
 Cohesion: 0.17
 Nodes (11): INSTITUTION_WORKSPACES, isBlockedByWorkspaceRestriction, isBlockedForInstitutionStaff, isBlockedForSuperAdmin, [isCollapsed, setIsCollapsed], [isMobileMenuOpen, setIsMobileMenuOpen], isSuperAdmin, pathname (+3 more)
 
-### Community 37 - "Community 37"
+### Community 39 - "Community 39"
 
 Cohesion: 0.18
 Nodes (8): bulkMutation, [downloadSuccessToast, setDownloadSuccessToast], [error, setError], handleSubmit(), parseCsv(), parsedPreview, [rawText, setRawText], [resultData, setResultData]
 
-### Community 38 - "Community 38"
+### Community 40 - "Community 40"
 
 Cohesion: 0.18
 Nodes (10): campaign, campRes, guardRes, instId, recRes, reply, result, router (+2 more)
 
-### Community 39 - "Community 39"
+### Community 41 - "Community 41"
+
+Cohesion: 0.18
+Nodes (10): actionLeaveSchema, applyLeaveSchema, checkDuplicateSchema, createDepartmentSchema, createDesignationSchema, createLeaveTypeSchema, hrmsService, markAttendanceSchema (+2 more)
+
+### Community 42 - "Community 42"
 
 Cohesion: 0.2
 Nodes (4): AppError, PermissionDeniedError, ResourceNotFoundError, TenantViolationError
 
-### Community 40 - "Community 40"
+### Community 43 - "Community 43"
 
 Cohesion: 0.2
 Nodes (7): [activeRollCall, setActiveRollCall], [attendanceRecords, setAttendanceRecords], { data: facultyInfo, isLoading }, isCurrent, isPresent, [rollCallSuccess, setRollCallSuccess], sampleStudents
 
-### Community 41 - "Community 41"
+### Community 44 - "Community 44"
 
 Cohesion: 0.2
 Nodes (8): ActiveIcon, activeWorkspace, dropdownRef, isCurrent, [isWorkspaceDropdownOpen, setIsWorkspaceDropdownOpen], permittedWorkspaces, TOPBAR_ICON_MAP, WsIcon
 
-### Community 42 - "Community 42"
-
-Cohesion: 0.22
-Nodes (8): actionLeaveSchema, applyLeaveSchema, createDesignationSchema, createLeaveTypeSchema, hrmsService, markAttendanceSchema, onboardStaffSchema, updateStaffSchema
-
-### Community 43 - "Community 43"
+### Community 45 - "Community 45"
 
 Cohesion: 0.22
 Nodes (8): authHeader, grantedKeys, grantRes, router, row, token, user, workspaces
 
-### Community 44 - "Community 44"
+### Community 46 - "Community 46"
 
 Cohesion: 0.22
 Nodes (8): activeDelta, activeDeltaType, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle
 
-### Community 45 - "Community 45"
-
-Cohesion: 0.25
-Nodes (7): activeGrade, { data: grades = [], isLoading }, isSelected, pct, [selectedGradeId, setSelectedGradeId], totalCapacity, totalStudents
-
-### Community 46 - "Community 46"
+### Community 47 - "Community 47"
 
 Cohesion: 0.25
 Nodes (6): isTableLoading, mobileSubtitleCol, mobileTitleCol, [sortDir, setSortDir], sortedData, [sortKey, setSortKey]
 
-### Community 47 - "Community 47"
+### Community 48 - "Community 48"
 
 Cohesion: 0.25
 Nodes (5): containerRef, filteredOptions, [isOpen, setIsOpen], [searchTerm, setSearchTerm], selectedOption
 
-### Community 48 - "Community 48"
+### Community 49 - "Community 49"
 
 Cohesion: 0.25
 Nodes (8): 1. Memory Phase (Start of Session & Pre-Edit), 2. Planning & SDLC Phase, 3. Implementation & Testing Phase, 4. Code Quality & Review Phase, 5. Security & Git Phase, 6. Token & Output Optimization, Plugin Orchestration Rules, Document: Plugin Orchestrator
 
-### Community 49 - "Community 49"
-
-Cohesion: 0.48
-Nodes (5): findById(), findByIdOrFail(), findMany(), softDelete(), validateTenant()
-
 ### Community 50 - "Community 50"
 
 Cohesion: 0.29
-Nodes (6): { data: logs = [], isLoading }, isAccess, isProvision, isReset, isStatus, targetId
+Nodes (6): [activeTab, setActiveTab], { data: liveMaster, isLoading }, isActive, MOCK_STUDENT, student, tabs
 
 ### Community 51 - "Community 51"
 
 Cohesion: 0.29
-Nodes (4): ALL_PERMISSIONS, AuthContext, ROLE_PERMISSIONS, SUPER_ADMIN_PERMISSIONS
+Nodes (6): { data: logs = [], isLoading }, isAccess, isProvision, isReset, isStatus, targetId
 
 ### Community 52 - "Community 52"
 
 Cohesion: 0.29
-Nodes (5): ApiErrorDetailSchema, ApiErrorSchema, BaseEntitySchema, PaginationQuerySchema, TenantContextSchema
+Nodes (4): ALL_PERMISSIONS, AuthContext, ROLE_PERMISSIONS, SUPER_ADMIN_PERMISSIONS
 
 ### Community 53 - "Community 53"
 
-Cohesion: 0.33
-Nodes (5): [activeTab, setActiveTab], isActive, MOCK_STUDENT, student, tabs
+Cohesion: 0.29
+Nodes (5): ApiErrorDetailSchema, ApiErrorSchema, BaseEntitySchema, PaginationQuerySchema, TenantContextSchema
 
 ### Community 54 - "Community 54"
 
@@ -1336,7 +1336,7 @@ Cohesion: 1.0
 Nodes (1): ref_path
 
 ## Knowledge Gaps
-- **839 isolated node(s):** `app`, `pool`, `db`, `env`, `router` (+834 more)
+- **1023 isolated node(s):** `app`, `pool`, `db`, `env`, `router` (+1018 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **Thin community `Community 98`** (2 nodes): `app`, `app.ts`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
@@ -1382,7 +1382,7 @@ Nodes (1): ref_path
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 119`** (2 nodes): `page.tsx`, `RootPage()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 120`** (2 nodes): `page.tsx`, `AcademicsRootPage()`
+- **Thin community `Community 120`** (2 nodes): `page.tsx`, `AcademicsHierarchyRedirect()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 121`** (2 nodes): `page.tsx`, `CAMERA_DECKS`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.

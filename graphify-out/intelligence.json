@@ -1,36 +1,36 @@
 {
   "hotspots": [
     {
+      "label": "AcademicsRepository",
+      "risk": 0.618,
+      "type": "CLASS"
+    },
+    {
+      "label": "AcademicsController",
+      "risk": 0.559,
+      "type": "CLASS"
+    },
+    {
       "label": "DocumentsService",
-      "risk": 0.577,
+      "risk": 0.443,
+      "type": "CLASS"
+    },
+    {
+      "label": "HrmsService",
+      "risk": 0.385,
       "type": "CLASS"
     },
     {
       "label": "ExaminationsRepository",
-      "risk": 0.472,
-      "type": "CLASS"
-    },
-    {
-      "label": "ExaminationsService",
-      "risk": 0.433,
-      "type": "CLASS"
-    },
-    {
-      "label": "FinanceRepository",
-      "risk": 0.431,
-      "type": "CLASS"
-    },
-    {
-      "label": "TimetableRepository",
-      "risk": 0.397,
+      "risk": 0.357,
       "type": "CLASS"
     }
   ],
   "blast_radius": {
-    "query": 217,
-    "sendSuccess()": 151,
-    "sendError()": 115,
+    "query": 280,
+    "sendSuccess()": 200,
+    "sendError()": 153,
     "institutions": 73,
-    "Document: Vid Database Architecture": 47
+    "AcademicsRepository": 51
   }
 }

@@ -1,17 +1,18 @@
 # db & pool
 
-> 8 nodes · cohesion 0.25
+> 9 nodes · cohesion 0.22
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L1) (7 connections)
-- [activeGrade](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L31) (1 connections)
-- [{ data: grades = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L28) (1 connections)
-- [isSelected](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L83) (1 connections)
-- [pct](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L176) (1 connections)
-- [[selectedGradeId, setSelectedGradeId]](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L29) (1 connections)
-- [totalCapacity](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L85) (1 connections)
-- [totalStudents](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L84) (1 connections)
+- [workspace.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L1) (8 connections)
+- [authHeader](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L13) (1 connections)
+- [grantedKeys](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L24) (1 connections)
+- [grantRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L35) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L8) (1 connections)
+- [row](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L45) (1 connections)
+- [token](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L17) (1 connections)
+- [user](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L12) (1 connections)
+- [workspaces](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L65) (1 connections)
 
 ## Relationships
 
@@ -19,11 +20,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\academics\hierarchy\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\workspaces\workspace.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 14 (100%)
+- EXTRACTED: 16 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

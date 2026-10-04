@@ -1,35 +1,57 @@
 # [API_BASE_URL & DEFAULT_INST_ID] Cluster
 
-> 29 nodes · cohesion 0.07
+> 30 nodes · cohesion 0.08
 
 ## Key Concepts
 
-- [hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1) (28 connections)
-- [API_BASE_URL](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L7) (1 connections)
-- [DEFAULT_INST_ID](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L8) (1 connections)
-- [getAuthHeaders()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L10) (1 connections)
-- [useAcademics()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L471) (1 connections)
-- [useAdmissions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L420) (1 connections)
-- [useBulkCreateStaff()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L546) (1 connections)
-- [useBulkProvisionUsers()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L712) (1 connections)
-- [useCreateInstitution()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L62) (1 connections)
-- [useCreateInstitutionAdmin()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L204) (1 connections)
-- [useCreatePlatformUser()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L363) (1 connections)
-- [useCreateStaff()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L511) (1 connections)
-- [useFaculty()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L491) (1 connections)
-- [useFacultyAccounts()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L568) (1 connections)
-- [useFinance()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L639) (1 connections)
-- [useInstitutionAdmins()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L158) (1 connections)
-- [useInstitutions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L33) (1 connections)
-- [useMyClasses()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L619) (1 connections)
-- [usePlatformUsers()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L317) (1 connections)
-- [useProvisionFaculty()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L588) (1 connections)
-- [useProvisionUser()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L679) (1 connections)
-- [useResetUserCredentials()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L775) (1 connections)
-- [useRoleTemplates()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L659) (1 connections)
-- [useUpdateAdminWorkspaces()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L242) (1 connections)
-- [useUpdateInstitutionStatus()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L116) (1 connections)
-- *... and 4 more nodes in this community*
+- [TimetableService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L15) (25 connections)
+- [.checkTimetableConflicts()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L493) (5 connections)
+- [.publishTimetable()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L142) (5 connections)
+- [.checkConflict()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.controller.ts#L188) (4 connections)
+- [.getTimetableById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L257) (4 connections)
+- [.setPublishStatus()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts#L525) (4 connections)
+- [.checkCandidateConflict()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L94) (4 connections)
+- [.getTimetable()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L72) (3 connections)
+- [.unpublishTimetable()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L171) (3 connections)
+- [timetable.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L1) (2 connections)
+- [ConflictError](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L4) (2 connections)
+- [.auditTimetableConflicts()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L106) (2 connections)
+- [.createEntry()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L115) (2 connections)
+- [.createSubstitution()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L191) (2 connections)
+- [.listEntries()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L111) (2 connections)
+- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L7) (1 connections)
+- [.createPeriod()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L49) (1 connections)
+- [.createRoom()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L25) (1 connections)
+- [.createTimetable()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L82) (1 connections)
+- [.deleteEntry()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L137) (1 connections)
+- [.deletePeriod()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L63) (1 connections)
+- [.deleteRoom()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L36) (1 connections)
+- [.deleteTimetable()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L89) (1 connections)
+- [.getScopedSchedule()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L217) (1 connections)
+- [.listPeriods()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts#L41) (1 connections)
+- *... and 5 more nodes in this community*
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class ConflictError {
+        +timetable.service.ts()
+        +.constructor()
+    }
+    class TimetableService {
+        +timetable.service.ts()
+        +.listRooms()
+        +.getRoom()
+        +.createRoom()
+        +.updateRoom()
+        +.deleteRoom()
+        +.listPeriods()
+        +.getPeriod()
+        +.createPeriod()
+        +.updatePeriod()
+    }
+```
 
 ## Relationships
 
@@ -37,12 +59,14 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\lib\api\hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 56 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 62 (74%)
+- INFERRED: 22 (26%)
 - AMBIGUOUS: 0 (0%)
 
 ---

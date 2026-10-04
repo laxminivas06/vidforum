@@ -1,7 +1,16 @@
 "use client"
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
-import { Institution, Applicant, AcademicGrade, FacultyMember, FeeRecord } from "@/types"
+import {
+  Institution,
+  Applicant,
+  AcademicGrade,
+  FacultyMember,
+  FeeRecord,
+  StudentListItem,
+  ClassEnrollmentCount,
+  EnquiryItem,
+} from "@/types"
 
 // --- TanStack Query Hooks (Live Backend with Database Persistence) ---
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1"
@@ -425,10 +434,10 @@ export function useAdmissions() {
     queryFn: async (): Promise<Applicant[]> => {
       try {
         const res = await fetch(`${API_BASE_URL}/admissions/applicants`, {
-          headers: { "X-Institution-Id": DEFAULT_INST_ID },
+          headers: getAuthHeaders(),
         })
         const json = await res.json()
-        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+        if (json.success && Array.isArray(json.data)) {
           return json.data
         }
       } catch (err) {
@@ -440,17 +449,14 @@ export function useAdmissions() {
 
   const updateStageMutation = useMutation({
     mutationFn: async ({ applicantId, newStage }: { applicantId: string; newStage: any }) => {
-      try {
-        await fetch(`${API_BASE_URL}/admissions/applicants/${applicantId}/stage`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Institution-Id": DEFAULT_INST_ID,
-          },
-          body: JSON.stringify({ stage: newStage }),
-        })
-      } catch (err) {
-        console.warn("Stage update fetch fallback:", err)
+      const res = await fetch(`${API_BASE_URL}/admissions/applicants/${applicantId}/stage`, {
+        method: "PATCH",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ stage: newStage }),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to update applicant stage")
       }
       return { applicantId, newStage }
     },
@@ -459,13 +465,302 @@ export function useAdmissions() {
         if (!old) return []
         return old.map((app) => (app.id === applicantId ? { ...app, stage: newStage } : app))
       })
+      queryClient.invalidateQueries({ queryKey: ["admissions"] })
+    },
+  })
+
+  const approveApplicantMutation = useMutation({
+    mutationFn: async (applicantId: string) => {
+      const res = await fetch(`${API_BASE_URL}/admissions/applicants/${applicantId}/approve`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to approve applicant")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admissions"] })
+      queryClient.invalidateQueries({ queryKey: ["students"] })
+      queryClient.invalidateQueries({ queryKey: ["enrollment-counts"] })
+    },
+  })
+
+  const createApplicantMutation = useMutation({
+    mutationFn: async (data: any) => {
+      const res = await fetch(`${API_BASE_URL}/admissions/applications`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to create application")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admissions"] })
+    },
+  })
+
+  const bulkImportApplicantsMutation = useMutation({
+    mutationFn: async (payload: { applicants: any[]; academicYearId?: string }) => {
+      const res = await fetch(`${API_BASE_URL}/admissions/applicants/bulk`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(payload),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to bulk import applicants")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admissions"] })
+      queryClient.invalidateQueries({ queryKey: ["enrollment-counts"] })
     },
   })
 
   return {
     ...query,
     updateStage: updateStageMutation.mutateAsync,
+    approveApplicant: approveApplicantMutation.mutateAsync,
+    createApplicant: createApplicantMutation.mutateAsync,
+    bulkImportApplicants: bulkImportApplicantsMutation.mutateAsync,
   }
+}
+
+export function useEnquiries(filters?: { search?: string; status?: string }) {
+  const queryClient = useQueryClient()
+  const qParams = new URLSearchParams()
+  if (filters?.search) qParams.set("search", filters.search)
+  if (filters?.status) qParams.set("status", filters.status)
+
+  const query = useQuery({
+    queryKey: ["enquiries", filters],
+    queryFn: async (): Promise<EnquiryItem[]> => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/admissions/enquiries?${qParams.toString()}`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Failed to fetch enquiries:", err)
+      }
+      return []
+    },
+  })
+
+  const createEnquiryMutation = useMutation({
+    mutationFn: async (data: any) => {
+      const res = await fetch(`${API_BASE_URL}/admissions/enquiries`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) throw new Error(json.message || "Failed to create enquiry")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["enquiries"] })
+    },
+  })
+
+  const convertEnquiryMutation = useMutation({
+    mutationFn: async ({ id, classId, academicYearId }: { id: string; classId: string; academicYearId: string }) => {
+      const res = await fetch(`${API_BASE_URL}/admissions/enquiries/${id}/convert`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ classId, academicYearId }),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) throw new Error(json.message || "Failed to convert enquiry")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["enquiries"] })
+      queryClient.invalidateQueries({ queryKey: ["admissions"] })
+    },
+  })
+
+  return {
+    ...query,
+    createEnquiry: createEnquiryMutation.mutateAsync,
+    convertEnquiry: convertEnquiryMutation.mutateAsync,
+  }
+}
+
+export function useStudents(filters: {
+  search?: string
+  classId?: string
+  sectionId?: string
+  status?: string
+  ageMin?: number
+  ageMax?: number
+} = {}) {
+  const queryParams = new URLSearchParams()
+  if (filters.search) queryParams.set("search", filters.search)
+  if (filters.classId) queryParams.set("classId", filters.classId)
+  if (filters.sectionId) queryParams.set("sectionId", filters.sectionId)
+  if (filters.status) queryParams.set("status", filters.status)
+  if (filters.ageMin !== undefined) queryParams.set("ageMin", String(filters.ageMin))
+  if (filters.ageMax !== undefined) queryParams.set("ageMax", String(filters.ageMax))
+
+  return useQuery({
+    queryKey: ["students", filters],
+    queryFn: async (): Promise<StudentListItem[]> => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/students?${queryParams.toString()}`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Failed to fetch students list:", err)
+      }
+      return []
+    },
+  })
+}
+
+export function useStudentMaster(id?: string) {
+  return useQuery({
+    queryKey: ["student-master", id],
+    enabled: !!id,
+    queryFn: async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/students/${id}`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && json.data) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn(`Failed to fetch student master for ${id}:`, err)
+      }
+      return null
+    },
+  })
+}
+
+export function useEnrollmentCounts() {
+  return useQuery({
+    queryKey: ["enrollment-counts"],
+    queryFn: async (): Promise<ClassEnrollmentCount[]> => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/students/enrollment-counts`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Failed to fetch enrollment counts:", err)
+      }
+      return []
+    },
+  })
+}
+
+export function useCreateStudent() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const res = await fetch(`${API_BASE_URL}/students`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to enroll student")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["students"] })
+      queryClient.invalidateQueries({ queryKey: ["enrollment-counts"] })
+    },
+  })
+}
+
+export function useUpdateStudent() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({ id, data }: { id: string; data: any }) => {
+      const res = await fetch(`${API_BASE_URL}/students/${id}`, {
+        method: "PATCH",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to update student")
+      }
+      return json.data
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["students"] })
+      queryClient.invalidateQueries({ queryKey: ["student-master", variables.id] })
+    },
+  })
+}
+
+export function usePromoteStudent() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({ id, ...body }: { id: string; toClassId: string; toSectionId: string; academicYearId: string; decision?: string }) => {
+      const res = await fetch(`${API_BASE_URL}/students/${id}/promote`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(body),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to promote student")
+      }
+      return json.data
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["students"] })
+      queryClient.invalidateQueries({ queryKey: ["student-master", variables.id] })
+      queryClient.invalidateQueries({ queryKey: ["enrollment-counts"] })
+    },
+  })
+}
+
+export function useBulkImportStudents() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({ rows, academicYearId }: { rows: any[]; academicYearId: string }) => {
+      const res = await fetch(`${API_BASE_URL}/students/bulk-import`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ rows, academicYearId }),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to bulk import students")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["students"] })
+      queryClient.invalidateQueries({ queryKey: ["enrollment-counts"] })
+    },
+  })
 }
 
 export function useAcademics() {

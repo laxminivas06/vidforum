@@ -30,6 +30,10 @@ export interface Applicant {
   applicationNumber: string
   studentName: string
   gradeApplying: string
+  classId?: string
+  academicYearId?: string
+  dateOfBirth?: string
+  gender?: string
   parentName: string
   parentPhone: string
   parentEmail: string
@@ -121,3 +125,56 @@ export interface FeeRecord {
   dueDate: string
   status: "PAID" | "PARTIAL" | "OVERDUE" | "PENDING"
 }
+
+export interface StudentListItem {
+  id: string
+  admissionNumber: string
+  firstName: string
+  lastName: string
+  name: string
+  dateOfBirth: string
+  age: number
+  gender: string
+  status: string
+  bloodGroup?: string
+  nationality?: string
+  photoUrl?: string
+  notes?: string
+  createdAt?: string
+  updatedAt?: string
+  classId?: string
+  className?: string
+  sectionId?: string
+  sectionName?: string
+  rollNumber?: string
+  guardianName?: string
+  guardianPhone?: string
+}
+
+export interface ClassEnrollmentCount {
+  class_id: string
+  institution_id: string
+  class_name: string
+  capacity: number
+  enrolled_count: number
+  available_seats: number
+}
+
+export interface EnquiryItem {
+  id: string
+  institution_id: string
+  applicant_name: string
+  date_of_birth?: string
+  gender?: string
+  grade_applying?: string
+  class_id?: string
+  academic_year_id?: string
+  contact_name: string
+  contact_phone: string
+  contact_email?: string
+  source?: string
+  notes?: string
+  status: "open" | "converted" | "dropped"
+  created_at: string
+}
+

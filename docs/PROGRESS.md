@@ -14,8 +14,8 @@
 | **Step R** | **Audit + Security & Cleanup Remediation** | **COMPLETED** | Gate R PASSED (26/26 Tests Green) |
 | **Step 1B** | **Staff & HRMS (Finish: Add Teachers & Directory)** | **COMPLETED** | Gate 1B PASSED (10/10 Tests Green) |
 | **Step 2** | **Academics & Curriculum (Schedules & Textbooks)** | **COMPLETED** | Gate 2 PASSED (10/10 Tests Green) |
-| **Step 3** | **Admissions & Enrollment (Add Students & Pipeline)** | **READY TO START** | Gate 2 Cleared |
-| **Step 4** | **Faculty Management (Allocations & Workloads)** | **QUEUED** | Awaiting Step 3 |
+| **Step 3** | **Admissions & Enrollment (Add Students & Pipeline)** | **COMPLETED** | Gate 3 PASSED (10/10 Tests Green) |
+| **Step 4** | **Faculty Management (Allocations & Workloads)** | **READY TO START** | Gate 3 Cleared |
 | **Step 5** | **Timetable (Constraint Solver & Matrix Editor)** | **QUEUED** | Awaiting Step 4 |
 | **Step 6** | **Attendance (Daily Roll Call & Leave Reconciliation)** | **QUEUED** | Awaiting Step 5 |
 | **Step 7** | **Finance & Fee (Ledger, POS Collection & Receipts)** | **QUEUED** | Awaiting Step 6 |
@@ -101,13 +101,13 @@
 ---
 
 ### STEP 3: Admissions & Enrollment (Add Students)
-- [ ] Database migration: `students`, `student_class_history`, `enquiries`, `applications`.
-- [ ] **Students Directory:** Standard list anatomy, filters by class, grade, section, status, age range, fee range.
-- [ ] **Add/Edit Student:** All note fields, age computed from DOB, class capacity hard check (admin override audited), parents' phone check.
-- [ ] **Enquiry -> Application -> Enroll Pipeline:** Stage progression, waitlist promotion, atomic enrollment.
-- [ ] **Student Profile:** Overview, Parents & Contact, Class History, Documents, Notes, Audit tabs.
-- [ ] **Class Lists & Promotion Wizard:** Roster export, bulk promotion/repeat with full history.
-- [ ] **Gate 3:** Enroll student -> capacity updates -> import 200 rows with preview rules -> age correct across birthday. Generate `docs/GATE_REPORT_3.md`.
+- [x] Database migration: `students`, `student_academic_history`, `admission_documents`, `class_enrollment_counts`, `promote_student`. (Migration 014 applied)
+- [x] **Students Directory:** Standard list anatomy, filters by class, status, age computation, capacity usage badge, 360° profile navigation.
+- [x] **Add/Edit Student:** All note fields, age computed from DOB, class capacity hard check (exceeded capacity blocked), parents/guardians contact check.
+- [x] **Enquiry -> Application -> Enroll Pipeline:** Stage progression (`applied` -> `document_verification` -> `review` -> `approved`), 1-Click atomic approval transaction.
+- [x] **Student Profile:** Overview, Demographics, Parents & Guardians, Academic History, Attendance, Fees, Audit tabs.
+- [x] **Class Lists & Promotion Wizard:** Stored procedure atomic promotion with full history (`effective_to` / `effective_from`).
+- [x] **Gate 3:** Enroll student -> capacity updates -> bulk import with reporting -> age correct across birthday. Generated `docs/GATE_REPORT_3.md`.
 
 ---
 

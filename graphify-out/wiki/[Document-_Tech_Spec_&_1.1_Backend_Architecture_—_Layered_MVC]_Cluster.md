@@ -1,48 +1,47 @@
 # [Document: Tech Spec & 1.1 Backend Architecture — Layered MVC] Cluster
 
-> 70 nodes · cohesion 0.03
+> 121 nodes · cohesion 0.04
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L1) (55 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L1) (17 connections)
-- [generateRandomPassword()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L273) (3 connections)
-- [{ data: institutions = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L42) (2 connections)
-- [handleProvisionSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L283) (2 connections)
-- [handleStaffSelection()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L248) (2 connections)
-- [updateStatusMutation](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L43) (2 connections)
-- [[accountFilter, setAccountFilter]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L181) (1 connections)
-- [[actionType, setActionType]](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L47) (1 connections)
-- [[activeTab, setActiveTab]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L165) (1 connections)
-- [applicantColumns](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L390) (1 connections)
-- [async()](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L420) (1 connections)
-- [[confirmDialogOpen, setConfirmDialogOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L166) (1 connections)
-- [[copySuccessToast, setCopySuccessToast]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L192) (1 connections)
-- [DashboardPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L109) (1 connections)
-- [{ data: applicants, isLoading: appsLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L155) (1 connections)
-- [{ data: facultyAccounts = [], isLoading: accountsLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L157) (1 connections)
-- [{ data: fees }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L156) (1 connections)
-- [{ data: instituteAdmins = [], refetch: refetchAdmins }](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L54) (1 connections)
-- [{ data: roleTemplates = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L159) (1 connections)
-- [{ data: staffList = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L158) (1 connections)
-- [DEFAULT_FACULTY_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L83) (1 connections)
-- [filtered](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L56) (1 connections)
-- [filteredAccounts](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L229) (1 connections)
-- [handleCopyCredentials()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L368) (1 connections)
-- *... and 45 more nodes in this community*
+- [institutions](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (73 connections)
+- [profiles](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (26 connections)
+- [students](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (24 connections)
+- [staff](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (16 connections)
+- [academic_years](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (15 connections)
+- [classes](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (15 connections)
+- [subjects](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (9 connections)
+- [sections](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (8 connections)
+- [timetable_entries](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (8 connections)
+- [applications](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (7 connections)
+- [exam_subjects](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (7 connections)
+- [payments](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (7 connections)
+- [admissions](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (6 connections)
+- [event_registrations](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (6 connections)
+- [fee_structures](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (6 connections)
+- [attendance_records](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [attendance_sessions](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [departments](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [exams](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [face_profiles](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [faculty_assignments](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [marks](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [sports_teams](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [student_academic_history](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- [student_discounts](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql) (5 connections)
+- *... and 96 more nodes in this community*
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[Community 999]] (512 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\institutions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx)
+- [backend\db\schema.sql](file:///C:/Antigravityyyyy/VID_School/backend/db/schema.sql)
 
 ## Audit Trail
 
-- EXTRACTED: 146 (100%)
+- EXTRACTED: 512 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

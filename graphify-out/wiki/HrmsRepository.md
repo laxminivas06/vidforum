@@ -1,6 +1,6 @@
 # HrmsRepository
 
-> God node · 31 connections · [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.repository.ts#L90)
+> God node · 40 connections · [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.repository.ts#L101)
 
 ## Connections by Relation
 
@@ -12,6 +12,11 @@
 - [[.recordEmploymentHistory()]] `EXTRACTED`
 - [[.linkFacultyRecord()]] `EXTRACTED`
 - [[.getStaffLeaveUsageByYear()]] `EXTRACTED`
+- [[.upsertStaffAttendance()]] `EXTRACTED`
+- [[.isDesignationInUse()]] `EXTRACTED`
+- [[.deleteDesignation()]] `EXTRACTED`
+- [[.isDepartmentInUse()]] `EXTRACTED`
+- [[.deleteDepartment()]] `EXTRACTED`
 - [[.findStaffByEmployeeCode()]] `EXTRACTED`
 - [[.findStaffByProfileId()]] `EXTRACTED`
 - [[.createStaff()]] `EXTRACTED`
@@ -22,12 +27,7 @@
 - [[.getLeaveRequestById()]] `EXTRACTED`
 - [[.checkOverlappingLeave()]] `EXTRACTED`
 - [[.updateLeaveRequestAction()]] `EXTRACTED`
-- [[.upsertStaffAttendance()]] `EXTRACTED`
 - [[.upsertStaffWorkload()]] `EXTRACTED`
-- [[.listDesignations()]] `EXTRACTED`
-- [[.findDesignationByName()]] `EXTRACTED`
-- [[.createDesignation()]] `EXTRACTED`
-- [[.listStaff()]] `EXTRACTED`
 
 ---
 

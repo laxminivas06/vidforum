@@ -1,35 +1,35 @@
 # [Document: Prd & 1.1 Problem Statement] Cluster
 
-> 48 nodes · cohesion 0.04
+> 69 nodes · cohesion 0.03
 
 ## Key Concepts
 
-- [Document: Vid Database Architecture](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (47 connections)
-- [10. RBAC / Permissions](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [11. Academic Data Model](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [12. Workspace/Data Ownership Model](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [13. Normalization Analysis](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [14. Primary Key Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [15. Constraints](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [16. Delete/Update Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [17. Audit Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [18. Indexing Strategy](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [19. Supabase RLS Design](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [1. Executive Summary](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [20. Node.js/Express Backend Integration](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [21. Transaction Design](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [22. Database Functions and Triggers](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [23. Database Views](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [24. Complete ER Diagram](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [25. Final Database Architecture](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [26–30. Production SQL, RLS SQL, Functions/Triggers, Views, Seed Data](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [2. Requirements Extracted From PDF (condensed)](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [31. Migration Order](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [32. API/Backend Mapping](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [33. Performance Review](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [34. Security Review](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- [35. Requirement Traceability (by module)](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md) (1 connections)
-- *... and 23 more nodes in this community*
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L1) (55 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L1) (17 connections)
+- [[activeTab, setActiveTab]](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L85) (3 connections)
+- [generateRandomPassword()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L273) (3 connections)
+- [{ data: institutions = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L42) (2 connections)
+- [handleProvisionSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L283) (2 connections)
+- [handleStaffSelection()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L248) (2 connections)
+- [updateStatusMutation](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L43) (2 connections)
+- [[accountFilter, setAccountFilter]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L181) (1 connections)
+- [[actionType, setActionType]](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L47) (1 connections)
+- [applicantColumns](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L390) (1 connections)
+- [[confirmDialogOpen, setConfirmDialogOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L166) (1 connections)
+- [[copySuccessToast, setCopySuccessToast]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L192) (1 connections)
+- [DashboardPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L109) (1 connections)
+- [{ data: applicants, isLoading: appsLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L155) (1 connections)
+- [{ data: facultyAccounts = [], isLoading: accountsLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L157) (1 connections)
+- [{ data: fees }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L156) (1 connections)
+- [{ data: instituteAdmins = [], refetch: refetchAdmins }](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L54) (1 connections)
+- [{ data: roleTemplates = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L159) (1 connections)
+- [{ data: staffList = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L158) (1 connections)
+- [DEFAULT_FACULTY_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L83) (1 connections)
+- [filtered](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L56) (1 connections)
+- [filteredAccounts](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L229) (1 connections)
+- [handleCopyCredentials()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L368) (1 connections)
+- [handleDeselectAllWorkspaces()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L220) (1 connections)
+- *... and 44 more nodes in this community*
 
 ## Relationships
 
@@ -37,11 +37,13 @@
 
 ## Source Files
 
-- [docs/VID_Database_Architecture.md](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md)
+- [C:\Antigravityyyyy\VID_School\frontend\app\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\hrms\staff\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\institutions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 94 (100%)
+- EXTRACTED: 147 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

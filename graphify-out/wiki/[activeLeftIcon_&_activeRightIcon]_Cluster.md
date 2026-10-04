@@ -4,27 +4,27 @@
 
 ## Key Concepts
 
-- [Document: Memory](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (12 connections)
-- [1.1 Architecture & Stack Contract](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [1.2 Core Development Directives](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [1. Project Context & Durable Conclusions (Honcho / Wingman / Knowl)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [2. Installed Plugin Suite (28 Plugins Matrix)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [3. Workflow Activation Guide](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [4. Frontend Implementation & Stitch Conversion State (2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [5.1 Cloud Database Infrastructure (Supabase PostgreSQL)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [5.2 Backend Layered MVC Engine (Node.js 22 + Express + TypeScript)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [5.3 Frontend-to-Backend Integration & Offline Resilience](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [5.4 Repository Sync & Git Checkpoints](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [5. Backend & Supabase Database Architecture Implementation (2026-09-25)](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
-- [Persistent Agent Memory & Plugin Ecosystem: VID Platform](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md) (1 connections)
+- [Sidebar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L1) (12 connections)
+- [activeWorkspace](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L138) (1 connections)
+- [anySiblingMatches](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L293) (1 connections)
+- [currentPathOnly](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L287) (1 connections)
+- [[currentSearch, setCurrentSearch]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L116) (1 connections)
+- [ICON_MAP](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L52) (1 connections)
+- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L289) (1 connections)
+- [isInsideIsolatedWorkspace](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L139) (1 connections)
+- [[itemPath, itemQuery]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L286) (1 connections)
+- [navigationGroups](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L147) (1 connections)
+- [pathname](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L115) (1 connections)
+- [renderIcon()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L124) (1 connections)
+- [routerPathname](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx#L114) (1 connections)
 
 ## Relationships
 
-- [[[[activeTab, setActiveTab] & isActive] Cluster]] (24 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [docs/MEMORY.md](file:///C:/Antigravityyyyy/VID_School/docs/MEMORY.md)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Sidebar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Sidebar.tsx)
 
 ## Audit Trail
 

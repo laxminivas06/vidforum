@@ -40,6 +40,11 @@ const SUITES = [
     name: 'Academics & Curriculum (Schedules & Textbooks)',
     script: 'src/scripts/verify-2-academics.ts',
   },
+  {
+    suite: '3',
+    name: 'Admissions & Enrollment (Add Students & Pipeline)',
+    script: 'src/scripts/verify-3-admissions.ts',
+  },
 ];
 
 export function runAllSuites(): { results: SuiteResult[]; totalPassed: number; totalFailed: number } {

@@ -457,55 +457,15 @@ async function runVerification() {
     // ----------------------------------------------------
     // Clean up test records in reverse dependency order
     // ----------------------------------------------------
-    console.log('Performing clean up of test records...');
+    // Tested data is preserved for UI inspection & further use (User Directive: Retain Tested Data)
     try {
-      const allYearIds = [yearA?.id, yearB?.id, clonedYearResult?.newAcademicYear?.id].filter(Boolean);
-      
-      if (allYearIds.length > 0) {
-        // 1. Delete textbooks
-        await db.query(`DELETE FROM preferred_textbooks WHERE academic_year_id = ANY($1)`, [allYearIds]);
-        // 2. Delete exam estimates
-        await db.query(`DELETE FROM exam_estimates WHERE academic_year_id = ANY($1)`, [allYearIds]);
-        // 3. Delete calendar days & configs
-        await db.query(`DELETE FROM calendar_days WHERE academic_year_id = ANY($1)`, [allYearIds]);
-        await db.query(`DELETE FROM academic_calendar_configs WHERE academic_year_id = ANY($1)`, [allYearIds]);
-        // 4. Delete grade subjects & class subjects
-        await db.query(`
-          DELETE FROM grade_subjects WHERE class_id IN (
-            SELECT id FROM classes WHERE academic_year_id = ANY($1)
-          )
-        `, [allYearIds]);
-        await db.query(`
-          DELETE FROM class_subjects WHERE class_id IN (
-            SELECT id FROM classes WHERE academic_year_id = ANY($1)
-          )
-        `, [allYearIds]);
-        // 5. Delete sections
-        await db.query(`
-          DELETE FROM sections WHERE class_id IN (
-            SELECT id FROM classes WHERE academic_year_id = ANY($1)
-          )
-        `, [allYearIds]);
-        // 6. Delete classes
-        await db.query(`DELETE FROM classes WHERE academic_year_id = ANY($1)`, [allYearIds]);
-        // 7. Delete academic years
-        await db.query(`DELETE FROM academic_years WHERE id = ANY($1)`, [allYearIds]);
-      }
-
-      // 8. Delete test subjects
-      const subIds = [subjectMath?.id, subjectRobotics?.id].filter(Boolean);
-      if (subIds.length > 0) {
-        await db.query(`DELETE FROM subjects WHERE id = ANY($1)`, [subIds]);
-      }
-
-      // 9. Delete test department
-      if (testDept?.id) {
-        await db.query(`DELETE FROM departments WHERE id = $1`, [testDept.id]);
-      }
-
-      console.log('✔ Cleanup completed successfully.');
+      await db.query(
+        `UPDATE academic_years SET is_current = (name = 'AY 2026-27 (CBSE)') WHERE institution_id = $1`,
+        [institutionId]
+      );
+      console.log('💾 Tested Academics data preserved in database for further use & UI inspection.');
     } catch (cleanupErr) {
-      console.warn('Cleanup warning:', cleanupErr);
+      console.warn('Post-test warning:', cleanupErr);
     }
   }
 }

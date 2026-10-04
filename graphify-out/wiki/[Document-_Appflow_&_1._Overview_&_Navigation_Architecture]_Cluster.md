@@ -1,44 +1,68 @@
 # [Document: Appflow & 1. Overview & Navigation Architecture] Cluster
 
-> 32 nodes · cohesion 0.06
+> 39 nodes · cohesion 0.07
 
 ## Key Concepts
 
-- [documents.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L1) (29 connections)
-- [DocumentsController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L73) (3 connections)
-- [actor](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L109) (1 connections)
-- [bonafideSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L42) (1 connections)
-- [certificate](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L267) (1 connections)
-- [created](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L110) (1 connections)
-- [createTemplateSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L27) (1 connections)
-- [createTypeSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L6) (1 connections)
-- [doc](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L125) (1 connections)
-- [docTypeId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L218) (1 connections)
-- [.getActor()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L82) (1 connections)
-- [.getService()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L74) (1 connections)
-- [filters](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L147) (1 connections)
-- [history](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L193) (1 connections)
-- [paramToStr()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L68) (1 connections)
-- [parsed](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L107) (1 connections)
-- [processed](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L322) (1 connections)
-- [processRequestSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L62) (1 connections)
-- [request](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L294) (1 connections)
-- [requestDocumentSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L55) (1 connections)
-- [requests](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L310) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L156) (1 connections)
-- [service](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L97) (1 connections)
-- [template](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L208) (1 connections)
-- [templates](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L219) (1 connections)
-- *... and 7 more nodes in this community*
+- [.login()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.service.ts#L24) (10 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L1) (10 connections)
+- [VidApiClient](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L7) (7 connections)
+- [.reset()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L103) (6 connections)
+- [AuthRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts#L22) (6 connections)
+- [AuthRateLimiter](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L9) (5 connections)
+- [.isLocked()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L19) (5 connections)
+- [.recordFailure()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L52) (5 connections)
+- [.findLoginSubject()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts#L42) (5 connections)
+- [.changePassword()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.service.ts#L143) (5 connections)
+- [.get()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L51) (5 connections)
+- [.request()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L18) (5 connections)
+- [.getKey()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L15) (4 connections)
+- [.getUserPermissions()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts#L112) (3 connections)
+- [.updatePassword()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts#L156) (3 connections)
+- [AuthService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.service.ts#L23) (3 connections)
+- [.delete()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L71) (3 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L45) (3 connections)
+- [runTests()](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-r2-auth.ts#L8) (3 connections)
+- [.normalizeRole()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts#L23) (2 connections)
+- [.revokeAllRefreshTokens()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts#L203) (2 connections)
+- [auth.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.service.ts#L1) (2 connections)
+- [.patch()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L63) (2 connections)
+- [.post()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L55) (2 connections)
+- [handleLoginSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L32) (2 connections)
+- *... and 14 more nodes in this community*
 
 ## Class Diagram
 
 ```mermaid
 classDiagram
-    class DocumentsController {
-        +documents.controller.ts()
-        +.getService()
-        +.getActor()
+    class AuthRateLimiter {
+        +auth-rate-limiter.ts()
+        +.getKey()
+        +.isLocked()
+        +.recordFailure()
+        +.reset()
+    }
+    class AuthRepository {
+        +auth.repository.ts()
+        +.normalizeRole()
+        +.findLoginSubject()
+        +.getUserPermissions()
+        +.updatePassword()
+        +.revokeAllRefreshTokens()
+    }
+    class AuthService {
+        +auth.service.ts()
+        +.login()
+        +.changePassword()
+    }
+    class VidApiClient {
+        +index.ts()
+        +.constructor()
+        +.request()
+        +.get()
+        +.post()
+        +.patch()
+        +.delete()
     }
 ```
 
@@ -48,12 +72,19 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\documents\documents.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\auth\auth-rate-limiter.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\auth\auth.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\auth\auth.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.service.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\scripts\verify-r2-auth.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-r2-auth.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\(auth)\login\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\students\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx)
+- [C:\Antigravityyyyy\VID_School\packages\api-client\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 62 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 85 (69%)
+- INFERRED: 38 (31%)
 - AMBIGUOUS: 0 (0%)
 
 ---

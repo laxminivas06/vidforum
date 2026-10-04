@@ -5,7 +5,7 @@
 ## Key Concepts
 
 - [student.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.routes.ts#L1) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.routes.ts#L6) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.routes.ts#L5) (1 connections)
 
 ## Relationships
 

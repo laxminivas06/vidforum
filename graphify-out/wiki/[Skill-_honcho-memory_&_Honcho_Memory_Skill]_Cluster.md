@@ -1,18 +1,19 @@
 # [Skill: honcho-memory & Honcho Memory Skill] Cluster
 
-> 9 nodes · cohesion 0.22
+> 10 nodes · cohesion 0.20
 
 ## Key Concepts
 
-- [workspace.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L1) (8 connections)
-- [authHeader](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L13) (1 connections)
-- [grantedKeys](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L24) (1 connections)
-- [grantRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L35) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L8) (1 connections)
-- [row](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L45) (1 connections)
-- [token](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L17) (1 connections)
-- [user](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L12) (1 connections)
-- [workspaces](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L65) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L1) (9 connections)
+- [[activeRollCall, setActiveRollCall]](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L35) (1 connections)
+- [[attendanceRecords, setAttendanceRecords]](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L46) (1 connections)
+- [{ data: facultyInfo, isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L34) (1 connections)
+- [handleCompleteRollCall()](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L58) (1 connections)
+- [isCurrent](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L137) (1 connections)
+- [isPresent](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L341) (1 connections)
+- [[rollCallSuccess, setRollCallSuccess]](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L36) (1 connections)
+- [sampleStudents](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L39) (1 connections)
+- [toggleStudentAttendance()](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L48) (1 connections)
 
 ## Relationships
 
@@ -20,11 +21,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\workspaces\workspace.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\faculty\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 16 (100%)
+- EXTRACTED: 18 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

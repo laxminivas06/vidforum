@@ -1,45 +1,44 @@
 # [certificateId & instId] Cluster
 
-> 16 nodes · cohesion 0.20
+> 19 nodes · cohesion 0.11
 
 ## Key Concepts
 
-- [VidApiClient](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L7) (7 connections)
-- [AuthRateLimiter](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L9) (5 connections)
-- [.reset()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L103) (5 connections)
-- [.request()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L18) (5 connections)
-- [.getKey()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L15) (4 connections)
-- [.isLocked()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L19) (4 connections)
-- [.recordFailure()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L52) (4 connections)
-- [.get()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L51) (4 connections)
-- [.delete()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L71) (3 connections)
-- [runTests()](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-r2-auth.ts#L8) (3 connections)
-- [.patch()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L63) (2 connections)
-- [.post()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L55) (2 connections)
-- [auth-rate-limiter.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L1) (1 connections)
-- [verify-r2-auth.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-r2-auth.ts#L1) (1 connections)
-- [index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L1) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L12) (1 connections)
+- [FinanceService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L4) (24 connections)
+- [.assignFeeToStudent()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L81) (2 connections)
+- [.createFeeStructure()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L33) (2 connections)
+- [.processRefund()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L229) (2 connections)
+- [finance.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L1) (1 connections)
+- [.createDiscount()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L66) (1 connections)
+- [.createFeeCategory()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L10) (1 connections)
+- [.createFeeGroup()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L19) (1 connections)
+- [.createScholarship()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L75) (1 connections)
+- [.getScopedFees()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L259) (1 connections)
+- [.getStudentFeeLedger()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L116) (1 connections)
+- [.listDiscounts()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L62) (1 connections)
+- [.listFeeCategories()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L6) (1 connections)
+- [.listFeeGroups()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L15) (1 connections)
+- [.listFeeStructures()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L25) (1 connections)
+- [.listInvoices()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L121) (1 connections)
+- [.listPayments()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L161) (1 connections)
+- [.listScholarships()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L71) (1 connections)
+- [.listStudentFees()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L112) (1 connections)
 
 ## Class Diagram
 
 ```mermaid
 classDiagram
-    class AuthRateLimiter {
-        +auth-rate-limiter.ts()
-        +.getKey()
-        +.isLocked()
-        +.recordFailure()
-        +.reset()
-    }
-    class VidApiClient {
-        +index.ts()
-        +.constructor()
-        +.request()
-        +.get()
-        +.post()
-        +.patch()
-        +.delete()
+    class FinanceService {
+        +finance.service.ts()
+        +.listFeeCategories()
+        +.createFeeCategory()
+        +.listFeeGroups()
+        +.createFeeGroup()
+        +.listFeeStructures()
+        +.getFeeStructure()
+        +.createFeeStructure()
+        +.listDiscounts()
+        +.createDiscount()
     }
 ```
 
@@ -49,14 +48,12 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\auth\auth-rate-limiter.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\scripts\verify-r2-auth.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-r2-auth.ts)
-- [C:\Antigravityyyyy\VID_School\packages\api-client\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 40 (77%)
-- INFERRED: 12 (23%)
+- EXTRACTED: 42 (93%)
+- INFERRED: 3 (7%)
 - AMBIGUOUS: 0 (0%)
 
 ---

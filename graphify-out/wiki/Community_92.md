@@ -10,7 +10,7 @@
 
 ## Relationships
 
-- [[Community 94]] (4 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

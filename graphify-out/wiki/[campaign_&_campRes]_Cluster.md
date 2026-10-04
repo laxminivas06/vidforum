@@ -1,40 +1,43 @@
 # [campaign & campRes] Cluster
 
-> 19 nodes · cohesion 0.11
+> 22 nodes · cohesion 0.10
 
 ## Key Concepts
 
-- [Document: Appflow](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (18 connections)
-- [1. Overview & Navigation Architecture](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.1 Authentication](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.2 Super Admin Console (/(super-admin))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.3 Institution Admin Workspace (/(institution-admin))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.4 Core Workspaces (/(core))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.5 AI Yantra Services (/(ai-yantra))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.6 Optional Modular Workspaces (/(optional))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.7 Central Student Master Profile (/students/id)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.8 Mobile Parent & Student Portal (/(mobile)/app)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2. Complete Route Hierarchy & Screen Inventory](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.1 Login & Tenant Resolution](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.2 Institution Admin Settings Shell (Two-Pane)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.3 Admissions Workspace (Kanban & Slide-Over)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.4 Student Master Profile Shell](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3. Deep-Dive Screen Specifications](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [4. Navigation & Optional Module Matrix (/config/navigation.ts)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [5. Development Phases](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [VID (Virtual Identification) — Application Flow & Architecture Document](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [ProvisionTenantModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L1) (21 connections)
+- [autoGenerateCode()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L90) (2 connections)
+- [handleNameChange()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L68) (2 connections)
+- [handleSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L155) (2 connections)
+- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L132) (2 connections)
+- [[boardAffiliation, setBoardAffiliation]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L55) (1 connections)
+- [[code, setCode]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L54) (1 connections)
+- [[contactEmail, setContactEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L56) (1 connections)
+- [[contactPhone, setContactPhone]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L57) (1 connections)
+- [createInstitutionMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L65) (1 connections)
+- [[customDomain, setCustomDomain]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L60) (1 connections)
+- [effectiveDomain](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L101) (1 connections)
+- [[errors, setErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L62) (1 connections)
+- [[isCustomDomain, setIsCustomDomain]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L61) (1 connections)
+- [isSelected](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L445) (1 connections)
+- [[name, setName]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L53) (1 connections)
+- [PLAN_OPTIONS](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L33) (1 connections)
+- [[plan, setPlan]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L59) (1 connections)
+- [POPULAR_BOARDS](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L39) (1 connections)
+- [REGION_OPTIONS](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L26) (1 connections)
+- [[region, setRegion]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L58) (1 connections)
+- [[submittedSuccess, setSubmittedSuccess]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L63) (1 connections)
 
 ## Relationships
 
-- [[[conflicts & facConflict] Cluster]] (36 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [docs/AppFlow.md](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md)
+- [C:\Antigravityyyyy\VID_School\frontend\components\institutions\ProvisionTenantModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 36 (100%)
+- EXTRACTED: 46 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

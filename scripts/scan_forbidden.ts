@@ -30,6 +30,8 @@ const EXCLUDED_PATTERNS = [
   'verify-r3-workspaces.ts',
   'verify-r4-provisioning.ts',
   'verify-1b-hrms.ts',
+  'verify-2-academics.ts',
+  'verify-3-admissions.ts',
   'scan_forbidden.ts',
   'gate_report.ts',
 ];

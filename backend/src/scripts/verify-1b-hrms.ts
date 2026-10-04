@@ -343,25 +343,8 @@ async function runVerification() {
     console.error('\n❌ STEP 1B VERIFICATION FAILED:', error);
     process.exit(1);
   } finally {
-    // Cascade cleanup test artifacts
-    if (createdStaff?.id) {
-      await db.query(`DELETE FROM staff_attendance WHERE staff_id = $1`, [createdStaff.id]).catch(() => {});
-      await db.query(`DELETE FROM leave_requests WHERE staff_id = $1`, [createdStaff.id]).catch(() => {});
-      await db.query(`DELETE FROM staff_employment WHERE staff_id = $1`, [createdStaff.id]).catch(() => {});
-      await db.query(`DELETE FROM faculty WHERE staff_id = $1`, [createdStaff.id]).catch(() => {});
-      await db.query(`DELETE FROM staff WHERE id = $1`, [createdStaff.id]).catch(() => {});
-    }
-    if (provisionedUser?.id) {
-      await db.query(`DELETE FROM user_roles WHERE profile_id = $1`, [provisionedUser.id]).catch(() => {});
-      await db.query(`DELETE FROM profiles WHERE id = $1`, [provisionedUser.id]).catch(() => {});
-      await db.query(`DELETE FROM auth.users WHERE id = $1`, [provisionedUser.id]).catch(() => {});
-    }
-    if (testDesignation?.id) {
-      await db.query(`DELETE FROM designations WHERE id = $1`, [testDesignation.id]).catch(() => {});
-    }
-    if (testDepartment?.id) {
-      await db.query(`DELETE FROM departments WHERE id = $1`, [testDepartment.id]).catch(() => {});
-    }
+    // Tested data is preserved for UI inspection & further use (User Directive: Retain Tested Data)
+    console.log('💾 Tested HRMS data preserved in database for further use & UI inspection.');
     process.exit(0);
   }
 }

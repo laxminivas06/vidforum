@@ -1,35 +1,35 @@
 # [columns & [searchQuery, setSearchQuery]] Cluster
 
-> 48 nodes · cohesion 0.04
+> 80 nodes · cohesion 0.03
 
 ## Key Concepts
 
-- [users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L1) (48 connections)
-- [adminEmails](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L605) (1 connections)
-- [adminRoleId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L636) (1 connections)
-- [adminRoleRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L635) (1 connections)
-- [authId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L612) (1 connections)
-- [authUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L611) (1 connections)
-- [cleanEmail](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L47) (1 connections)
-- [client](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L38) (1 connections)
-- [current](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L147) (1 connections)
-- [currentRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L136) (1 connections)
-- [defaultPassHash](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L600) (1 connections)
-- [displayName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L48) (1 connections)
-- [getUserAgent()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L337) (1 connections)
-- [id](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L132) (1 connections)
-- [ins](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L614) (1 connections)
-- [insertAuth](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L84) (1 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L51) (1 connections)
-- [institutionId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L445) (1 connections)
-- [instName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L52) (1 connections)
-- [instRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L54) (1 connections)
-- [{ name, email, role = 'FACULTY', institutionName }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L40) (1 connections)
-- [{ name, email, role, institutionName, status }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L133) (1 connections)
-- [newUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L109) (1 connections)
-- [ngsId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L603) (1 connections)
-- [ngsRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L602) (1 connections)
-- *... and 23 more nodes in this community*
+- [hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1) (78 connections)
+- [checkDuplicateStaff()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1475) (4 connections)
+- [getAuthHeaders()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L19) (2 connections)
+- [handleDuplicateCheck()](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L165) (2 connections)
+- [API_BASE_URL](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L16) (1 connections)
+- [DEFAULT_INST_ID](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L17) (1 connections)
+- [useAcademics()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L766) (1 connections)
+- [useAcademicYears()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1494) (1 connections)
+- [useActionLeaveRequest()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1357) (1 connections)
+- [useAdmissions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L429) (1 connections)
+- [useApplyLeave()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1329) (1 connections)
+- [useBooklist()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L2043) (1 connections)
+- [useBulkCreateStaff()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L841) (1 connections)
+- [useBulkImportStudents()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L744) (1 connections)
+- [useBulkProvisionUsers()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1007) (1 connections)
+- [useCalendarConfig()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1838) (1 connections)
+- [useCalendarDays()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1880) (1 connections)
+- [useClasses()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1590) (1 connections)
+- [useCloneAcademicYear()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1569) (1 connections)
+- [useCloseAcademicYear()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1551) (1 connections)
+- [useCopySubjectMatrix()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1769) (1 connections)
+- [useCreateAcademicYear()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1514) (1 connections)
+- [useCreateCalendarDay()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1902) (1 connections)
+- [useCreateDepartment()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1227) (1 connections)
+- [useCreateDesignation()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1166) (1 connections)
+- *... and 55 more nodes in this community*
 
 ## Relationships
 
@@ -37,12 +37,13 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\hrms\staff\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\lib\api\hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 95 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 159 (98%)
+- INFERRED: 3 (2%)
 - AMBIGUOUS: 0 (0%)
 
 ---

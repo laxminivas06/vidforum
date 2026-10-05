@@ -1,31 +1,23 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/AuthContext"
 
 export default function RootPage() {
   const router = useRouter()
-  const { isAuthenticated, isInitialized } = useAuth()
-  const [initVisualDone, setInitVisualDone] = useState(false)
-
-  // Give a crisp, polished 800ms initialization visual before transitioning
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setInitVisualDone(true)
-    }, 800)
-    return () => clearTimeout(timer)
-  }, [])
+  const { isInitialized } = useAuth()
 
   useEffect(() => {
-    if (!isInitialized || !initVisualDone) return
+    // Prefetch login route immediately for instant transition
+    router.prefetch("/login")
+  }, [router])
 
-    if (isAuthenticated) {
-      router.replace("/dashboard")
-    } else {
+  useEffect(() => {
+    if (isInitialized) {
       router.replace("/login")
     }
-  }, [isAuthenticated, isInitialized, initVisualDone, router])
+  }, [isInitialized, router])
 
   return (
     <div className="min-h-screen bg-canvas flex items-center justify-center select-none">

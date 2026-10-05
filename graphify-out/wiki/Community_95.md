@@ -1,23 +1,24 @@
 # Community 95
 
-> 2 nodes · cohesion 1.00
+> 3 nodes · cohesion 0.67
 
 ## Key Concepts
 
-- [env.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/env.ts#L1) (1 connections)
-- [env](file:///C:/Antigravityyyyy/VID_School/backend/src/config/env.ts#L6) (1 connections)
+- [Skill: test-gap](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (2 connections)
+- [Checks](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (1 connections)
+- [Test Gap Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[Community 89]] (4 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\config\env.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/env.ts)
+- [.agents/plugins/test-gap/skills/test-gap/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md)
 
 ## Audit Trail
 
-- EXTRACTED: 2 (100%)
+- EXTRACTED: 4 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

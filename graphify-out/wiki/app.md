@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: flaky-detector](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (2 connections)
-- [Flaky Detector Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (1 connections)
-- [Instructions](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (1 connections)
+- [Skill: codex-reviewer](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md) (2 connections)
+- [Checklist](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md) (1 connections)
+- [Codex Reviewer Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[Community 79]] (4 shared connections)
+- [[[Skill: spec-driven & Lifecycle Stages] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md)
+- [.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md)
 
 ## Audit Trail
 

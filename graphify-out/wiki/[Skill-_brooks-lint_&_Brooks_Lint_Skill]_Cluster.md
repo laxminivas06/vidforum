@@ -1,18 +1,19 @@
 # [Skill: brooks-lint & Brooks Lint Skill] Cluster
 
-> 9 nodes · cohesion 0.22
+> 10 nodes · cohesion 0.20
 
 ## Key Concepts
 
-- [workspace.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L1) (8 connections)
-- [authHeader](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L13) (1 connections)
-- [grantedKeys](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L24) (1 connections)
-- [grantRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L35) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L8) (1 connections)
-- [row](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L45) (1 connections)
-- [token](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L17) (1 connections)
-- [user](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L12) (1 connections)
-- [workspaces](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L65) (1 connections)
+- [Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L1) (9 connections)
+- [ActiveIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L91) (1 connections)
+- [activeWorkspace](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L90) (1 connections)
+- [dropdownRef](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L80) (1 connections)
+- [handleClickOutside()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L97) (1 connections)
+- [isCurrent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L184) (1 connections)
+- [[isWorkspaceDropdownOpen, setIsWorkspaceDropdownOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L79) (1 connections)
+- [permittedWorkspaces](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L83) (1 connections)
+- [TOPBAR_ICON_MAP](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L31) (1 connections)
+- [WsIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L185) (1 connections)
 
 ## Relationships
 
@@ -20,11 +21,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\workspaces\workspace.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 16 (100%)
+- EXTRACTED: 18 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

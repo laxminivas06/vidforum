@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [bcryptjs](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L14) (0 connections)
+- [tailwind.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/tailwind.config.js#L1) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [backend/package.json](file:///C:/Antigravityyyyy/VID_School/backend/package.json)
+- [C:\Antigravityyyyy\VID_School\frontend\tailwind.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/tailwind.config.js)
 
 ## Audit Trail
 

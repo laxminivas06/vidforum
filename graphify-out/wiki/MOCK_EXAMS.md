@@ -4,13 +4,13 @@
 
 ## Key Concepts
 
-- [AuthContext.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L1) (6 connections)
-- [ALL_PERMISSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L47) (1 connections)
-- [AuthContext](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L147) (1 connections)
-- [AuthProvider()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L149) (1 connections)
-- [RequirePermission()](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L407) (1 connections)
-- [ROLE_PERMISSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L89) (1 connections)
-- [SUPER_ADMIN_PERMISSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx#L76) (1 connections)
+- [StudentProfile.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L1) (6 connections)
+- [[activeTab, setActiveTab]](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L237) (1 connections)
+- [{ data: liveMaster, isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L175) (1 connections)
+- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L355) (1 connections)
+- [MOCK_STUDENT](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L98) (1 connections)
+- [student](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L177) (1 connections)
+- [tabs](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L241) (1 connections)
 
 ## Relationships
 
@@ -18,7 +18,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\contexts\AuthContext.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/contexts/AuthContext.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\student\StudentProfile.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx)
 
 ## Audit Trail
 

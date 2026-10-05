@@ -1,10 +1,11 @@
 # frontend_components_ui_index_column
 
-> 1 nodes · cohesion 1.00
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [index.ts](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/index.ts#L1) (0 connections)
+- [css.d.ts](file:///C:/Antigravityyyyy/VID_School/frontend/types/css.d.ts#L1) (1 connections)
+- [content](file:///C:/Antigravityyyyy/VID_School/frontend/types/css.d.ts#L2) (1 connections)
 
 ## Relationships
 
@@ -12,11 +13,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\users\index.ts](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/index.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\types\css.d.ts](file:///C:/Antigravityyyyy/VID_School/frontend/types/css.d.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 0 (0%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

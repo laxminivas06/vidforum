@@ -1,13 +1,14 @@
 # [Skill: debt-ops & Debt-Ops Skill] Cluster
 
-> 4 nodes · cohesion 0.50
+> 5 nodes · cohesion 0.50
 
 ## Key Concepts
 
-- [optional-modules.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L1) (3 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L11) (1 connections)
-- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L12) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L6) (1 connections)
+- [workspaces.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L1) (4 connections)
+- [getWorkspaceForPath()](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L240) (2 connections)
+- [isPathAllowedForWorkspaces()](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L255) (2 connections)
+- [PLATFORM_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L22) (1 connections)
+- [SUPER_ADMIN_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L217) (1 connections)
 
 ## Relationships
 
@@ -15,11 +16,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\optional-modules\optional-modules.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\config\workspaces.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 6 (100%)
+- EXTRACTED: 10 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

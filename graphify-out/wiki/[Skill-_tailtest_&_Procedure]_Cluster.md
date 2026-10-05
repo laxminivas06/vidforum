@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: commit-narrator](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (2 connections)
-- [Commit Narrator Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (1 connections)
-- [Format](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (1 connections)
+- [navigation.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L1) (2 connections)
+- [getFilteredNavigation()](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L193) (1 connections)
+- [NAVIGATION_CONFIG](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L27) (1 connections)
 
 ## Relationships
 
-- [[[Skill: test-gap & Checks] Cluster]] (4 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\frontend\config\navigation.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts)
 
 ## Audit Trail
 

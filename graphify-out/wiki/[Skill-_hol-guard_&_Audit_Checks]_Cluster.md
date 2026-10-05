@@ -1,24 +1,25 @@
 # [Skill: hol-guard & Audit Checks] Cluster
 
-> 3 nodes · cohesion 0.67
+> 4 nodes · cohesion 0.50
 
 ## Key Concepts
 
-- [database.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts#L1) (2 connections)
-- [db](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts#L22) (1 connections)
-- [pool](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts#L4) (1 connections)
+- [Skill: brooks-lint](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (3 connections)
+- [Brooks Lint Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (1 connections)
+- [Guiding Principles](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (1 connections)
+- [Severity Classifications](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: espresso & Espresso Skill] Cluster]] (6 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\config\database.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/config/database.ts)
+- [.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md)
 
 ## Audit Trail
 
-- EXTRACTED: 4 (100%)
+- EXTRACTED: 6 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: secret-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (2 connections)
-- [Scan Targets](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
-- [Secret Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
+- [Skill: knowl](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (2 connections)
+- [Knowl Project Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (1 connections)
+- [Procedures](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[nextConfig]] (4 shared connections)
+- [[env]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/secret-guard/skills/secret-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md)
+- [.agents/plugins/knowl/skills/knowl/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md)
 
 ## Audit Trail
 

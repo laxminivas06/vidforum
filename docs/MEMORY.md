@@ -23,6 +23,8 @@
 - **Auditing:** Financial and academic mutations generate immutable audit logs (`audit_logs`).
 - **Zero Duplicate Data & Dates Policy:** Strictly prohibit duplicate data, duplicate dates, duplicate record IDs, or duplicate entities across all frontend pages, tables, and mock/seed repositories. All entities must possess globally unique identifiers and distinct, realistic dates and attributes.
 - **Supabase MCP Database Protocol:** All database operations (schema inspection, table alterations, stored procedures, RPC functions, triggers, and DDL migrations) must be executed using the Supabase MCP Server (`supabase-mcp-server`, project `cyvckmjocomqzipbvbpv`), allowing direct modification, testing, and management of all PostgreSQL database functions with zero teardown of existing tested records.
+- **Git Push Governance (All Workflows):** Strictly PROHIBIT pushing to Git/GitHub (`git push`) unless the user explicitly commands a git push in the prompt. Never push automatically as part of any SDLC or testing workflow.
+- **Workspace Navigation Isolation (All Workflows):** Strictly isolate navigation in every workspace (Academics, Staff/HRMS, Admissions, etc.). When inside an isolated workspace, the sidebar must display ONLY that workspace's dedicated tools and functional routes. Never leak global or other workspace navigation items into an isolated workspace.
 
 ---
 
@@ -121,9 +123,11 @@ graph TD
    - Run `Tailtest` to execute unit tests.
    - Inspect assertions with `falsegreen-skill` to eliminate false positives.
    - Run `Test Gap` on the diff.
-4. **Before Git Commit:**
+4. **Before Git Commit & Git Governance:**
    - Execute `Secret Guard` to scan for high-entropy tokens and leaked credentials.
    - Invoke `Commit Narrator` to generate a semantic conventional commit with the context and *why*.
+   - **Git Push Prohibition:** Strictly DO NOT run `git push` unless the user explicitly requested a push in the prompt.
+   - **Workspace Navigation Isolation:** Ensure any workspace view strictly isolates sidebar items to that workspace's dedicated functional tools.
    - Update `docs/TASKS.md` and documentation with `Docflow`.
 5. **Session Wrap-Up:**
    - Persist durable architectural insights and user preferences to `Honcho` and `Unforgit` memory.

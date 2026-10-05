@@ -1,10 +1,11 @@
 # frontend_components_ui_index_cardcontent
 
-> 1 nodes · cohesion 1.00
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/plans/page.tsx#L1) (0 connections)
+- [SettingsShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx#L1) (1 connections)
+- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx#L58) (1 connections)
 
 ## Relationships
 
@@ -12,11 +13,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\plans\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/plans/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\SettingsShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SettingsShell.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 0 (0%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

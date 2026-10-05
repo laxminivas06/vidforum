@@ -4,12 +4,12 @@
 
 ## Key Concepts
 
-- [verify_actions.ts](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L1) (5 connections)
-- [BACKEND_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L15) (1 connections)
-- [ROOT_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L14) (1 connections)
-- [runAllSuites()](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L50) (1 connections)
-- [SUITES](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L17) (1 connections)
-- [{ totalFailed }](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L104) (1 connections)
+- [Button.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L1) (5 connections)
+- [activeLeftIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L53) (1 connections)
+- [activeRightIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L54) (1 connections)
+- [baseStyles](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L32) (1 connections)
+- [sizes](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L46) (1 connections)
+- [variants](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx#L35) (1 connections)
 
 ## Relationships
 
@@ -17,7 +17,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\scripts\verify_actions.ts](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Button.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Button.tsx)
 
 ## Audit Trail
 

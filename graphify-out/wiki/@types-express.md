@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hostel/page.tsx#L1) (1 connections)
-- [HostelPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/hostel/page.tsx#L8) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/academics/page.tsx#L1) (1 connections)
+- [MY_SUBJECTS](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/academics/page.tsx#L36) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\hostel\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hostel/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\app\academics\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/academics/page.tsx)
 
 ## Audit Trail
 

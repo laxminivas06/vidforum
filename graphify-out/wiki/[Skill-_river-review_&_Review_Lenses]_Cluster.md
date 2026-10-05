@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: ai-native-sdlc](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (2 connections)
-- [AI-Native SDLC Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (1 connections)
-- [Gates](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/attendance/page.tsx#L1) (2 connections)
+- [colorMap](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/attendance/page.tsx#L151) (1 connections)
+- [StudentAttendancePage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/attendance/page.tsx#L23) (1 connections)
 
 ## Relationships
 
-- [[[Skill: secret-guard & Scan Targets] Cluster]] (4 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\frontend\app\app\attendance\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/attendance/page.tsx)
 
 ## Audit Trail
 

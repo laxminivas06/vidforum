@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-config/page.tsx#L1) (1 connections)
-- [AIConfigPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-config/page.tsx#L8) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L1) (1 connections)
+- [AcademicsHierarchyRedirect()](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx#L3) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\ai-config\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-config/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\academics\hierarchy\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/hierarchy/page.tsx)
 
 ## Audit Trail
 

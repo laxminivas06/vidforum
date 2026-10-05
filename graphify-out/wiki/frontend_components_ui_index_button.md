@@ -1,10 +1,11 @@
 # frontend_components_ui_index_button
 
-> 1 nodes · cohesion 1.00
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [tailwind.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/tailwind.config.js#L1) (0 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/transport/page.tsx#L1) (1 connections)
+- [routes](file:///C:/Antigravityyyyy/VID_School/frontend/app/transport/page.tsx#L9) (1 connections)
 
 ## Relationships
 
@@ -12,11 +13,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\tailwind.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/tailwind.config.js)
+- [C:\Antigravityyyyy\VID_School\frontend\app\transport\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/transport/page.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 0 (0%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

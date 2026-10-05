@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { z } from 'zod';
 import { HrmsService } from './hrms.service';
+import { academicsRepository } from '../academics/academics.repository';
 import { sendSuccess, sendError } from '../../utils/api-response';
 
 const hrmsService = new HrmsService();
@@ -185,10 +186,14 @@ export class HrmsController {
       const institutionId = req.institutionId!;
       const { departmentId, designationId, employmentStatus, isTeachingStaff, search } = req.query;
 
+      const normalizedStatus = employmentStatus
+        ? String(employmentStatus).toLowerCase().replace(/-/g, '_')
+        : undefined;
+
       const staff = await hrmsService.listStaff(institutionId, {
         departmentId: departmentId ? String(departmentId) : undefined,
         designationId: designationId ? String(designationId) : undefined,
-        employmentStatus: employmentStatus ? String(employmentStatus) : undefined,
+        employmentStatus: normalizedStatus,
         isTeachingStaff: isTeachingStaff !== undefined ? isTeachingStaff === 'true' : undefined,
         search: search ? String(search) : undefined,
       });
@@ -455,10 +460,16 @@ export class HrmsController {
   async getFacultyWorkloads(req: Request, res: Response) {
     try {
       const institutionId = req.institutionId!;
-      const { academicYearId } = req.query;
+      let { academicYearId } = req.query;
 
       if (!academicYearId) {
-        sendError(res, 'academicYearId query parameter is required', 400);
+        const allYears = await academicsRepository.listAcademicYears(institutionId);
+        const currentYear = allYears.find((y: any) => y.is_current) || allYears[0];
+        academicYearId = currentYear?.id;
+      }
+
+      if (!academicYearId) {
+        sendSuccess(res, [], 'No academic year configured');
         return;
       }
 
@@ -473,10 +484,16 @@ export class HrmsController {
     try {
       const institutionId = req.institutionId!;
       const staffId = req.params.staffId as string;
-      const { academicYearId } = req.body;
+      let { academicYearId } = req.body || {};
 
       if (!academicYearId) {
-        sendError(res, 'academicYearId is required in request body', 400);
+        const allYears = await academicsRepository.listAcademicYears(institutionId);
+        const currentYear = allYears.find((y: any) => y.is_current) || allYears[0];
+        academicYearId = currentYear?.id;
+      }
+
+      if (!academicYearId) {
+        sendError(res, 'No active academic year found to compute workload', 400);
         return;
       }
 

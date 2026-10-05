@@ -4,13 +4,13 @@
 
 ## Key Concepts
 
-- [UserAuditModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L1) (6 connections)
-- [{ data: logs = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L20) (1 connections)
-- [isAccess](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L64) (1 connections)
-- [isProvision](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L62) (1 connections)
-- [isReset](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L63) (1 connections)
-- [isStatus](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L65) (1 connections)
-- [targetId](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L19) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/conflicts/page.tsx#L1) (6 connections)
+- [[conflicts, setConflicts]](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/conflicts/page.tsx#L77) (1 connections)
+- [handleResolve()](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/conflicts/page.tsx#L90) (1 connections)
+- [handleScan()](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/conflicts/page.tsx#L81) (1 connections)
+- [INITIAL_CONFLICTS](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/conflicts/page.tsx#L40) (1 connections)
+- [[isScanning, setIsScanning]](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/conflicts/page.tsx#L78) (1 connections)
+- [[scanMessage, setScanMessage]](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/conflicts/page.tsx#L79) (1 connections)
 
 ## Relationships
 
@@ -18,7 +18,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\users\UserAuditModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\timetable\conflicts\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/timetable/conflicts/page.tsx)
 
 ## Audit Trail
 

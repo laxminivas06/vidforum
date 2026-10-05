@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: wingman](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md) (2 connections)
-- [Pre-Edit Verification Checklist](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md) (1 connections)
-- [Wingman Data-Contract Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md) (1 connections)
+- [Skill: secret-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (2 connections)
+- [Scan Targets](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
+- [Secret Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[Community 93]] (4 shared connections)
+- [[router]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/wingman/skills/wingman/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md)
+- [.agents/plugins/secret-guard/skills/secret-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md)
 
 ## Audit Trail
 

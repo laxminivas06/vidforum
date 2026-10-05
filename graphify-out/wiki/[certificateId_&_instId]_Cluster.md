@@ -1,40 +1,43 @@
 # [certificateId & instId] Cluster
 
-> 17 nodes · cohesion 0.15
+> 21 nodes · cohesion 0.10
 
 ## Key Concepts
 
-- [gate_report.ts](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L1) (8 connections)
-- [scan_forbidden.ts](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L1) (7 connections)
-- [generateGateReport()](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L35) (4 connections)
-- [getAllFiles()](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L43) (3 connections)
-- [runScan()](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L58) (3 connections)
-- [getGitCommit()](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L11) (2 connections)
-- [runCommand()](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L20) (2 connections)
-- [shouldExclude()](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L39) (2 connections)
-- [BACKEND_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L7) (1 connections)
-- [DOCS_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L9) (1 connections)
-- [FRONTEND_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L8) (1 connections)
-- [ROOT_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L6) (1 connections)
-- [{ success }](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L145) (1 connections)
-- [EXCLUDED_PATTERNS](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L23) (1 connections)
-- [ROOT_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L11) (1 connections)
-- [SCAN_DIRS](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L13) (1 connections)
-- [{ violations, filesScanned }](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L144) (1 connections)
+- [Document: Readme](file:///C:/Antigravityyyyy/VID_School/README.md) (20 connections)
+- [1. Prerequisites](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [2. Environment Variables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [3. Running the Development Servers](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [4. Running in Production](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📡 API Reference Snapshot (/api/v1/)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [🏛 Architecture & Tech Stack](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Build and Start Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Build and Start Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📚 Complete Specifications & Documentation](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [🛡️ Core Architectural Pillars & Non-Negotiables](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📊 Current Implementation Progress (As of 2026-09-25)](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [🚀 Getting Started](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [In vidforum/backend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [In vidforum/frontend:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Or using nodemon:](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [📁 Repository Directory Structure](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Running Backend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Running Frontend](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [Stack Highlights](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
+- [VID (Virtual Identification) — Educational Management Ecosystem](file:///C:/Antigravityyyyy/VID_School/README.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[campaign & campRes] Cluster]] (40 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\scripts\gate_report.ts](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts)
-- [C:\Antigravityyyyy\VID_School\scripts\scan_forbidden.ts](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts)
+- [README.md](file:///C:/Antigravityyyyy/VID_School/README.md)
 
 ## Audit Trail
 
-- EXTRACTED: 38 (95%)
-- INFERRED: 2 (5%)
+- EXTRACTED: 40 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

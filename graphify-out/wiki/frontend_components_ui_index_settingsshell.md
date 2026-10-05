@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [zod](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L22) (0 connections)
+- [postcss.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/postcss.config.js#L1) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [backend/package.json](file:///C:/Antigravityyyyy/VID_School/backend/package.json)
+- [C:\Antigravityyyyy\VID_School\frontend\postcss.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/postcss.config.js)
 
 ## Audit Trail
 

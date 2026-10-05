@@ -1,13 +1,14 @@
 # [Skill: commit-narrator & Commit Narrator Skill] Cluster
 
-> 4 nodes · cohesion 0.50
+> 5 nodes · cohesion 0.40
 
 ## Key Concepts
 
-- [rbac.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L1) (3 connections)
-- [requireAnyPermission()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L70) (1 connections)
-- [requirePermission()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L36) (1 connections)
-- [requireRole()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L7) (1 connections)
+- [SlideOver.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L1) (4 connections)
+- [activeFooter](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L31) (1 connections)
+- [handleKeyDown()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L47) (1 connections)
+- [isPanelOpen](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L30) (1 connections)
+- [widths](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx#L58) (1 connections)
 
 ## Relationships
 
@@ -15,11 +16,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\middleware\rbac.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\SlideOver.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/SlideOver.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 6 (100%)
+- EXTRACTED: 8 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

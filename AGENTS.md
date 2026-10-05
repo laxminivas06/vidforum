@@ -42,5 +42,6 @@ Refer to [docs/MEMORY.md](file:///c:/Antigravityyyyy/VID_School/docs/MEMORY.md) 
 - **During Code:** Apply **Ponytail Ultra** (reuse `@/components/ui/`, native features over libs, single root-cause fixes, shortest diffs, no speculative boilerplate).
 - **Post-Code:** Apply River Review (4 lenses) and Brooks Lint.
 - **Pre-Commit:** Run Secret Guard and Falsegreen test verification.
-- **Commit:** Use Commit Narrator for semantic commit messages with architectural context.
+- **Commit & Git Governance:** Use Commit Narrator for semantic commit messages with architectural context. Strictly DO NOT push to Git / GitHub unless the user explicitly requests a git push in the prompt.
+- **Workspace Navigation Isolation Policy:** Strictly enforce isolated workspace navigation across all workspaces (Academics, Staff/HRMS, Admissions, etc.): when inside a workspace, display ONLY that workspace's dedicated tools in the sidebar. Never leak other workspace navigation items into an isolated workspace.
 - **Post-Commit:** Update docs with Docflow and persist durable conclusions to Honcho & Unforgit.

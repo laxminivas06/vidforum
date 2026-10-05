@@ -4,16 +4,16 @@
 
 ## Key Concepts
 
-- [Document: Graphify](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md) (1 connections)
-- [Workflow: graphify](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/library/page.tsx#L1) (1 connections)
+- [LibraryPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/library/page.tsx#L8) (1 connections)
 
 ## Relationships
 
-- [[react-dom]] (2 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/workflows/graphify.md](file:///C:/Antigravityyyyy/VID_School/.agents/workflows/graphify.md)
+- [C:\Antigravityyyyy\VID_School\frontend\app\library\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/library/page.tsx)
 
 ## Audit Trail
 

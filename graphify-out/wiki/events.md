@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: unforgit](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (2 connections)
-- [Guidelines](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (1 connections)
-- [Unforgit Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (1 connections)
+- [Skill: river-review](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md) (2 connections)
+- [Review Lenses](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md) (1 connections)
+- [River Review Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[Community 92]] (4 shared connections)
+- [[router]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/unforgit/skills/unforgit/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md)
+- [.agents/plugins/river-review/skills/river-review/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md)
 
 ## Audit Trail
 

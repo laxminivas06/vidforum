@@ -1,29 +1,30 @@
 # dbOk & router
 
-> 7 nodes · cohesion 0.48
+> 8 nodes · cohesion 0.25
 
 ## Key Concepts
 
-- [tenant-repository.base.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L1) (6 connections)
-- [findById()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L53) (4 connections)
-- [validateTenant()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L44) (4 connections)
-- [findMany()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L81) (3 connections)
-- [softDelete()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L138) (3 connections)
-- [findByIdOrFail()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L70) (2 connections)
-- [constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L37) (1 connections)
+- [Document: Plugin Orchestrator](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (7 connections)
+- [1. Memory Phase (Start of Session & Pre-Edit)](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [2. Planning & SDLC Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [3. Implementation & Testing Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [4. Code Quality & Review Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [5. Security & Git Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [6. Token & Output Optimization](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [Plugin Orchestration Rules](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[Community 46]] (14 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\common\tenant-repository.base.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts)
+- [.agents/rules/plugin-orchestrator.md](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md)
 
 ## Audit Trail
 
-- EXTRACTED: 20 (87%)
-- INFERRED: 3 (13%)
+- EXTRACTED: 14 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

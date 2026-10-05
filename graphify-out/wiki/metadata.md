@@ -1,16 +1,16 @@
 # metadata
 
-> 7 nodes · cohesion 0.29
+> 7 nodes · cohesion 0.48
 
 ## Key Concepts
 
-- [StudentProfile.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L1) (6 connections)
-- [[activeTab, setActiveTab]](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L237) (1 connections)
-- [{ data: liveMaster, isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L175) (1 connections)
-- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L355) (1 connections)
-- [MOCK_STUDENT](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L98) (1 connections)
-- [student](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L177) (1 connections)
-- [tabs](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L241) (1 connections)
+- [tenant-repository.base.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L1) (6 connections)
+- [findById()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L53) (4 connections)
+- [validateTenant()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L44) (4 connections)
+- [findMany()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L81) (3 connections)
+- [softDelete()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L138) (3 connections)
+- [findByIdOrFail()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L70) (2 connections)
+- [constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L37) (1 connections)
 
 ## Relationships
 
@@ -18,12 +18,12 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\student\StudentProfile.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\common\tenant-repository.base.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 12 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 20 (87%)
+- INFERRED: 3 (13%)
 - AMBIGUOUS: 0 (0%)
 
 ---

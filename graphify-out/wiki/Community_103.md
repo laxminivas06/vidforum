@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [documents.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L1) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts#L6) (1 connections)
+- [resource-guard.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/resource-guard.middleware.ts#L1) (1 connections)
+- [resourceGuard()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/resource-guard.middleware.ts#L14) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\documents\documents.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.routes.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\resource-guard.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/resource-guard.middleware.ts)
 
 ## Audit Trail
 

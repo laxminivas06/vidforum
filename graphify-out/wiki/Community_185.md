@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [tailwind-merge](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L18) (0 connections)
+- [@types/bcryptjs](file:///C:/Antigravityyyyy/VID_School/backend/package.json#L25) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
+- [backend/package.json](file:///C:/Antigravityyyyy/VID_School/backend/package.json)
 
 ## Audit Trail
 

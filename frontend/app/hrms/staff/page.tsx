@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect, Suspense } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { AppShell } from "@/components/layout/AppShell"
 import {
   Card,
@@ -17,6 +18,7 @@ import {
   Input,
   Select,
   SelectOption,
+  ProgressBar,
 } from "@/components/ui"
 import {
   Users,
@@ -39,6 +41,7 @@ import {
   Trash2,
   Check,
   BarChart2,
+  Activity,
 } from "lucide-react"
 import {
   useFaculty,
@@ -60,6 +63,9 @@ import {
   useRecordStaffAttendance,
   useHRReportSummary,
   checkDuplicateStaff,
+  useFacultyWorkloads,
+  useComputeStaffWorkload,
+  FacultyWorkloadItem,
 } from "@/lib/api/hooks"
 import { FacultyMember } from "@/types"
 import * as XLSX from "xlsx"
@@ -73,6 +79,7 @@ const GENDER_OPTIONS: SelectOption[] = [
 
 const TABS = [
   { id: "directory", label: "Staff Directory", icon: Users },
+  { id: "workload", label: "Teaching Workload", icon: Activity },
   { id: "org", label: "Departments & Designations", icon: Building },
   { id: "leaves", label: "Leave Management", icon: Calendar },
   { id: "attendance", label: "Staff Attendance", icon: CheckCircle2 },
@@ -81,11 +88,43 @@ const TABS = [
 
 type TabType = (typeof TABS)[number]["id"]
 
-export default function HRMSStaffPage() {
-  const [activeTab, setActiveTab] = useState<TabType>("directory")
+function HRMSStaffContent() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const tabQuery = (searchParams?.get("tab") as TabType) || null
+  const statusQuery = searchParams?.get("status") || null
+
+  const validTabs: TabType[] = ["directory", "workload", "org", "leaves", "attendance", "reports"]
+  const initialTab: TabType = (tabQuery && validTabs.includes(tabQuery)) ? tabQuery : "directory"
+
+  const [activeTab, setActiveTab] = useState<TabType>(initialTab)
+
+  // Status Filter from query (e.g. ?status=ACTIVE or ?status=ON_LEAVE)
+  const statusFilter = statusQuery ? statusQuery.toUpperCase() : null
+
+  // Synchronize activeTab with URL tab query
+  useEffect(() => {
+    if (tabQuery && validTabs.includes(tabQuery)) {
+      setActiveTab(tabQuery)
+    } else if (!tabQuery && !statusQuery) {
+      setActiveTab("directory")
+    }
+  }, [tabQuery, statusQuery])
+
+  const handleTabChange = (newTab: TabType) => {
+    setConflictError(null)
+    setActiveTab(newTab)
+    if (newTab === "directory") {
+      router.push("/hrms/staff", { scroll: false })
+    } else {
+      router.push(`/hrms/staff?tab=${newTab}`, { scroll: false })
+    }
+  }
 
   // --- Data Hooks ---
   const { data: staff = [], isLoading } = useFaculty()
+  const { data: workloads = [], isLoading: isWorkloadsLoading } = useFacultyWorkloads()
+  const computeWorkloadMutation = useComputeStaffWorkload()
   const createStaffMutation = useCreateStaff()
   const bulkCreateMutation = useBulkCreateStaff()
 
@@ -188,6 +227,12 @@ export default function HRMSStaffPage() {
 
   // --- Filtered staff list ---
   const filteredStaff = staff.filter((m) => {
+    // 1. Status Filter from URL or selection
+    if (statusFilter && m.status !== statusFilter) {
+      return false
+    }
+
+    // 2. Text Search Query
     if (!searchQuery.trim()) return true
     const q = searchQuery.toLowerCase()
     return (
@@ -195,7 +240,9 @@ export default function HRMSStaffPage() {
       m.email?.toLowerCase().includes(q) ||
       m.employeeCode?.toLowerCase().includes(q) ||
       m.subjects?.toLowerCase().includes(q) ||
-      m.qualification?.toLowerCase().includes(q)
+      m.qualification?.toLowerCase().includes(q) ||
+      m.department?.toLowerCase().includes(q) ||
+      m.designation?.toLowerCase().includes(q)
     )
   })
 
@@ -467,6 +514,15 @@ export default function HRMSStaffPage() {
       ),
     },
     {
+      header: "Status",
+      key: "status",
+      render: (item) => (
+        <Badge variant={item.status === "ACTIVE" ? "positive" : item.status === "ON_LEAVE" ? "warning" : "neutral"}>
+          {item.status === "ACTIVE" ? "Active" : item.status === "ON_LEAVE" ? "On Leave" : item.status || "Active"}
+        </Badge>
+      ),
+    },
+    {
       header: "Login Account",
       key: "hasAccount",
       render: (item) => (
@@ -490,12 +546,135 @@ export default function HRMSStaffPage() {
     },
   ]
 
+  const workloadColumns: TableColumn<FacultyWorkloadItem>[] = [
+    {
+      header: "Instructor",
+      key: "staff_name",
+      render: (item) => (
+        <div className="flex flex-col">
+          <span className="font-semibold text-text-primary text-xs">{item.staff_name}</span>
+          <span className="font-mono text-[11px] text-brand-primary">{item.employee_code}</span>
+        </div>
+      ),
+    },
+    {
+      header: "Department & Specialization",
+      key: "department_name",
+      render: (item) => (
+        <div className="flex flex-col">
+          <span className="text-xs font-medium text-text-primary">{item.department_name || "Science & Mathematics"}</span>
+          <span className="text-[11px] text-text-muted">{item.specialization || item.qualification || "Core Faculty"}</span>
+        </div>
+      ),
+    },
+    {
+      header: "Designation",
+      key: "designation_name",
+      render: (item) => (
+        <span className="text-xs font-medium text-text-secondary">{item.designation_name || "Faculty Member"}</span>
+      ),
+    },
+    {
+      header: "Weekly Load",
+      key: "periods_per_week",
+      render: (item) => {
+        const periods = item.periods_per_week || 0
+        const variant = item.is_overloaded ? "error" : periods > 24 ? "warning" : "green"
+        return (
+          <div className="w-44 flex flex-col gap-1">
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-mono font-bold text-text-primary">{periods} Periods / wk</span>
+              <span className="text-[10px] text-text-muted">Max 35</span>
+            </div>
+            <ProgressBar value={periods} max={35} variant={variant} height="sm" />
+          </div>
+        )
+      },
+    },
+    {
+      header: "Sections Assigned",
+      key: "sections_count",
+      render: (item) => (
+        <Badge variant="neutral" className="font-mono text-xs">
+          {item.sections_count || 0} Sections
+        </Badge>
+      ),
+    },
+    {
+      header: "Workload Status",
+      key: "is_overloaded",
+      render: (item) => {
+        if (item.is_overloaded) {
+          return <Badge variant="error">Overloaded (&gt;28h)</Badge>
+        }
+        if ((item.periods_per_week || 0) === 0) {
+          return <Badge variant="warning">On Leave / Idle</Badge>
+        }
+        return <Badge variant="positive">Balanced Load</Badge>
+      },
+    },
+    {
+      header: "Action",
+      key: "staff_id",
+      render: (item) => (
+        <Button
+          size="dense"
+          variant="secondary"
+          disabled={computeWorkloadMutation.isPending}
+          onClick={async () => {
+            try {
+              await computeWorkloadMutation.mutateAsync({ staffId: item.staff_id })
+              setActionSuccess(`Recomputed teaching workload for ${item.staff_name}!`)
+            } catch (err: any) {
+              setConflictError(err.message || "Failed to calculate workload")
+            }
+          }}
+        >
+          Recompute
+        </Button>
+      ),
+    },
+  ]
+
   return (
     <AppShell
       pageTitle="Staff & HRMS"
-      breadcrumbs={[{ label: "Core" }, { label: "HRMS" }, { label: "Staff Management" }]}
+      breadcrumbs={[
+        { label: "Core" },
+        { label: "HRMS" },
+        {
+          label:
+            activeTab === "directory"
+              ? statusFilter === "ACTIVE"
+                ? "Active Faculty"
+                : statusFilter === "ON_LEAVE"
+                ? "On Leave / Sabbatical"
+                : "Staff Directory"
+              : activeTab === "workload"
+              ? "Teaching Workload"
+              : activeTab === "org"
+              ? "Departments & Designations"
+              : activeTab === "leaves"
+              ? "Leave Management"
+              : activeTab === "attendance"
+              ? "Staff Attendance"
+              : "HR Reports & Analytics",
+        },
+      ]}
       rightHeaderAction={
         <div className="flex items-center gap-2">
+          {activeTab === "workload" && (
+            <Button
+              size="dense"
+              variant="secondary"
+              leadingIcon={<Activity className="w-3.5 h-3.5" />}
+              onClick={() => {
+                window.location.href = "/timetable/matrix"
+              }}
+            >
+              Timetable Matrix →
+            </Button>
+          )}
           {activeTab === "directory" && (
             <>
               <Button
@@ -618,16 +797,16 @@ export default function HRMSStaffPage() {
             description="Full-time teaching personnel"
           />
           <StatCard
-            label="Accounts Provisioned"
-            value={staff.filter((s) => s.hasAccount).length.toString()}
-            icon={<Briefcase className="w-5 h-5 text-accent-blue" />}
-            description="Login User ID & Password configured"
+            label="On Leave / Sabbatical"
+            value={staff.filter((s) => s.status === "ON_LEAVE").length.toString()}
+            icon={<Clock className="w-5 h-5 text-brand-warning" />}
+            description="Staff on approved leave"
           />
           <StatCard
-            label="Pending Login Setup"
-            value={staff.filter((s) => !s.hasAccount).length.toString()}
-            icon={<Clock className="w-5 h-5 text-brand-warning" />}
-            description="Needs credentials in Admin workspace"
+            label="Teaching Workload"
+            value={workloads.length.toString()}
+            icon={<Activity className="w-5 h-5 text-brand-blue" />}
+            description={`${workloads.filter((w) => w.is_overloaded).length} overloaded (>28 periods)`}
           />
         </div>
 
@@ -639,10 +818,7 @@ export default function HRMSStaffPage() {
             return (
               <button
                 key={tab.id}
-                onClick={() => {
-                  setConflictError(null)
-                  setActiveTab(tab.id)
-                }}
+                onClick={() => handleTabChange(tab.id)}
                 className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold border-b-2 transition-colors whitespace-nowrap cursor-pointer ${
                   isActive
                     ? "border-brand-primary text-brand-primary"
@@ -678,18 +854,42 @@ export default function HRMSStaffPage() {
         {activeTab === "directory" && (
           <>
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-3 rounded-xl bg-surface border border-border-default">
-              <div className="relative w-full sm:w-80">
-                <Search className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2" />
-                <input
-                  type="text"
-                  placeholder="Search faculty by name, email, subjects, code..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-4 py-1.5 text-xs rounded-lg bg-canvas border border-border-default text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-primary"
-                />
+              <div className="flex items-center gap-2 w-full sm:w-auto flex-1">
+                <div className="relative w-full sm:w-80">
+                  <Search className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="text"
+                    placeholder="Search faculty by name, email, subjects, code..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-9 pr-4 py-1.5 text-xs rounded-lg bg-canvas border border-border-default text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-primary"
+                  />
+                </div>
+
+                {statusFilter && (
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-medium shrink-0">
+                    <span>
+                      Filtered:{" "}
+                      <strong className="font-semibold">
+                        {statusFilter === "ACTIVE"
+                          ? "Active Faculty"
+                          : statusFilter === "ON_LEAVE"
+                          ? "On Leave / Sabbatical"
+                          : statusFilter}
+                      </strong>
+                    </span>
+                    <button
+                      onClick={() => router.push("/hrms/staff", { scroll: false })}
+                      className="p-0.5 hover:bg-brand-primary/20 rounded text-brand-primary cursor-pointer"
+                      title="Clear status filter"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
               </div>
 
-              <div className="text-xs text-text-secondary font-mono">
+              <div className="text-xs text-text-secondary font-mono shrink-0">
                 Showing <span className="font-bold text-text-primary">{filteredStaff.length}</span> of {staff.length} staff records
               </div>
             </div>
@@ -708,6 +908,76 @@ export default function HRMSStaffPage() {
               )}
             />
           </>
+        )}
+
+        {/* ───────────────────────────────────────────────────────────── */}
+        {/* TAB: TEACHING WORKLOAD & FACULTY LOAD DISTRIBUTION            */}
+        {/* ───────────────────────────────────────────────────────────── */}
+        {activeTab === "workload" && (
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <StatCard
+                label="Teaching Faculty"
+                value={workloads.length.toString()}
+                icon={<Users className="w-5 h-5 text-brand-primary" />}
+                description="Assigned academic instructors"
+              />
+              <StatCard
+                label="Avg Periods / Week"
+                value={
+                  workloads.length > 0
+                    ? (
+                        workloads.reduce((acc, w) => acc + (w.periods_per_week || 0), 0) /
+                        workloads.length
+                      ).toFixed(1)
+                    : "0"
+                }
+                icon={<Clock className="w-5 h-5 text-brand-blue" />}
+                description="Per instructor average"
+              />
+              <StatCard
+                label="Overloaded (>28h)"
+                value={workloads.filter((w) => w.is_overloaded).length.toString()}
+                icon={<AlertCircle className="w-5 h-5 text-status-error" />}
+                description="Exceeding weekly threshold"
+              />
+              <StatCard
+                label="On Leave / Available"
+                value={workloads.filter((w) => (w.periods_per_week || 0) === 0).length.toString()}
+                icon={<CheckCircle2 className="w-5 h-5 text-status-warning" />}
+                description="Zero current periods assigned"
+              />
+            </div>
+
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <div>
+                  <CardTitle className="text-sm font-bold flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-brand-primary" />
+                    Faculty Teaching Workload Matrix
+                  </CardTitle>
+                  <p className="text-xs text-text-secondary mt-0.5">
+                    Live period allocations, section loads, and statutory teaching capacity monitoring.
+                  </p>
+                </div>
+              </CardHeader>
+              <CardContent className="pt-2">
+                <Table
+                  data={workloads}
+                  columns={workloadColumns}
+                  keyExtractor={(item) => item.staff_id}
+                  loading={isWorkloadsLoading}
+                  cardTitle={(item) => item.staff_name}
+                  cardSubtitle={(item) => `${item.department_name || 'Academic'} • ${item.periods_per_week}h/week`}
+                  cardBadge={(item) => (
+                    <Badge variant={item.is_overloaded ? "error" : item.periods_per_week === 0 ? "warning" : "positive"}>
+                      {item.is_overloaded ? "OVERLOADED" : item.periods_per_week === 0 ? "ON LEAVE" : "BALANCED"}
+                    </Badge>
+                  )}
+                />
+              </CardContent>
+            </Card>
+          </div>
         )}
 
         {/* ───────────────────────────────────────────────────────────── */}
@@ -1827,5 +2097,13 @@ export default function HRMSStaffPage() {
         )}
       </SlideOver>
     </AppShell>
+  )
+}
+
+export default function HRMSStaffPage() {
+  return (
+    <Suspense fallback={null}>
+      <HRMSStaffContent />
+    </Suspense>
   )
 }

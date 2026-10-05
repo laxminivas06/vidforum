@@ -111,57 +111,57 @@ sequenceDiagram
     participant P102 as .getDocumentTypeById()
     participant P103 as .findDocumentById()
     participant P104 as .verifyFacultySubjectAllocation()
-    participant P105 as .getAcademicYearById()
-    participant P106 as .getWorkingDaysCount()
-    participant P107 as .verifyFacultySectionAccess()
-    participant P108 as .getExamSubjectById()
-    participant P109 as .validateImportBatch()
-    participant P110 as .findFacultyByProfileId()
-    participant P111 as .getScopedFees()
-    participant P112 as .recordEmploymentHistory()
-    participant P113 as .linkFacultyRecord()
-    participant P114 as .findModules()
-    participant P115 as .updateStatus()
-    participant P116 as .listEntries()
-    participant P117 as .checkCandidateConflicts()
-    participant P118 as .updateUserAccess()
-    participant P119 as .resetCredentials()
-    participant P120 as .updateUserStatus()
-    participant P121 as findById()
-    participant P122 as .getClassesByInstitution()
-    participant P123 as .getCalendarConfig()
-    participant P124 as .listTextbooks()
-    participant P125 as .getBooklist()
-    participant P126 as .findApplicationById()
-    participant P127 as .getInstitutionAttendanceStats()
-    participant P128 as .getStudentAttendanceSummary()
-    participant P129 as .getScopedAttendance()
-    participant P130 as .findTemplateById()
-    participant P131 as .verifyStudentExists()
-    participant P132 as .verifyStaffExists()
-    participant P133 as .getExamById()
-    participant P134 as .listMarks()
-    participant P135 as .getStudentReportCard()
-    participant P136 as .createStaffMember()
-    participant P137 as .findAssignedClasses()
-    participant P138 as .findAssignedSubjects()
-    participant P139 as .listStudentFees()
-    participant P140 as .getInvoiceById()
-    participant P141 as .listPayments()
-    participant P142 as .getSummary()
-    participant P143 as .getStaffLeaveUsageByYear()
-    participant P144 as .upsertStaffAttendance()
-    participant P145 as .getStats()
-    participant P146 as .upsertModule()
-    participant P147 as .getRoomById()
-    participant P148 as .getPeriodById()
-    participant P149 as .getTimetableById()
-    participant P150 as .createEntry()
-    participant P151 as .setPublishStatus()
-    participant P152 as .getScopedSchedule()
-    participant P153 as findMany()
-    participant P154 as softDelete()
-    participant P155 as .listAcademicYears()
+    participant P105 as .listAcademicYears()
+    participant P106 as .getAcademicYearById()
+    participant P107 as .getWorkingDaysCount()
+    participant P108 as .verifyFacultySectionAccess()
+    participant P109 as .getExamSubjectById()
+    participant P110 as .validateImportBatch()
+    participant P111 as .findFacultyByProfileId()
+    participant P112 as .getScopedFees()
+    participant P113 as .recordEmploymentHistory()
+    participant P114 as .linkFacultyRecord()
+    participant P115 as .findModules()
+    participant P116 as .updateStatus()
+    participant P117 as .listEntries()
+    participant P118 as .checkCandidateConflicts()
+    participant P119 as .updateUserAccess()
+    participant P120 as .resetCredentials()
+    participant P121 as .updateUserStatus()
+    participant P122 as findById()
+    participant P123 as .getClassesByInstitution()
+    participant P124 as .getCalendarConfig()
+    participant P125 as .listTextbooks()
+    participant P126 as .getBooklist()
+    participant P127 as .findApplicationById()
+    participant P128 as .getInstitutionAttendanceStats()
+    participant P129 as .getStudentAttendanceSummary()
+    participant P130 as .getScopedAttendance()
+    participant P131 as .findTemplateById()
+    participant P132 as .verifyStudentExists()
+    participant P133 as .verifyStaffExists()
+    participant P134 as .getExamById()
+    participant P135 as .listMarks()
+    participant P136 as .getStudentReportCard()
+    participant P137 as .createStaffMember()
+    participant P138 as .findAssignedClasses()
+    participant P139 as .findAssignedSubjects()
+    participant P140 as .listStudentFees()
+    participant P141 as .getInvoiceById()
+    participant P142 as .listPayments()
+    participant P143 as .getSummary()
+    participant P144 as .getStaffLeaveUsageByYear()
+    participant P145 as .upsertStaffAttendance()
+    participant P146 as .getStats()
+    participant P147 as .upsertModule()
+    participant P148 as .getRoomById()
+    participant P149 as .getPeriodById()
+    participant P150 as .getTimetableById()
+    participant P151 as .createEntry()
+    participant P152 as .setPublishStatus()
+    participant P153 as .getScopedSchedule()
+    participant P154 as findMany()
+    participant P155 as softDelete()
     participant P156 as .updateAcademicYear()
     participant P157 as .getSectionsByClass()
     participant P158 as .getSubjectsByClass()
@@ -604,6 +604,8 @@ sequenceDiagram
     P106-->>- P0: return
     P0->>+ P107: calls
     P107-->>- P0: return
+    P0->>+ P108: calls
+    P108-->>- P0: return
     P0->>+ P5: calls
     P5-->>- P0: return
     P0->>+ P7: calls
@@ -614,8 +616,6 @@ sequenceDiagram
     P27-->>- P0: return
     P0->>+ P13: calls
     P13-->>- P0: return
-    P0->>+ P108: calls
-    P108-->>- P0: return
     P0->>+ P109: calls
     P109-->>- P0: return
     P0->>+ P110: calls
@@ -642,40 +642,40 @@ sequenceDiagram
     P120-->>- P0: return
     P0->>+ P121: calls
     P121-->>- P0: return
-    P0->>+ P31: calls
-    P31-->>- P0: return
     P0->>+ P122: calls
     P122-->>- P0: return
+    P0->>+ P31: calls
+    P31-->>- P0: return
     P0->>+ P123: calls
     P123-->>- P0: return
     P0->>+ P124: calls
     P124-->>- P0: return
     P0->>+ P125: calls
     P125-->>- P0: return
-    P0->>+ P33: calls
-    P33-->>- P0: return
     P0->>+ P126: calls
     P126-->>- P0: return
+    P0->>+ P33: calls
+    P33-->>- P0: return
+    P0->>+ P127: calls
+    P127-->>- P0: return
     P0->>+ P35: calls
     P35-->>- P0: return
     P0->>+ P36: calls
     P36-->>- P0: return
-    P0->>+ P127: calls
-    P127-->>- P0: return
     P0->>+ P128: calls
     P128-->>- P0: return
     P0->>+ P129: calls
     P129-->>- P0: return
+    P0->>+ P130: calls
+    P130-->>- P0: return
     P0->>+ P37: calls
     P37-->>- P0: return
     P0->>+ P16: calls
     P16-->>- P0: return
-    P0->>+ P130: calls
-    P130-->>- P0: return
-    P0->>+ P15: calls
-    P15-->>- P0: return
     P0->>+ P131: calls
     P131-->>- P0: return
+    P0->>+ P15: calls
+    P15-->>- P0: return
     P0->>+ P132: calls
     P132-->>- P0: return
     P0->>+ P133: calls
@@ -706,10 +706,10 @@ sequenceDiagram
     P145-->>- P0: return
     P0->>+ P146: calls
     P146-->>- P0: return
-    P0->>+ P45: calls
-    P45-->>- P0: return
     P0->>+ P147: calls
     P147-->>- P0: return
+    P0->>+ P45: calls
+    P45-->>- P0: return
     P0->>+ P148: calls
     P148-->>- P0: return
     P0->>+ P149: calls

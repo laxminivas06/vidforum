@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: docflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md) (2 connections)
-- [Docflow Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md) (1 connections)
-- [Policy](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md) (1 connections)
+- [Skill: agent-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (2 connections)
+- [Agent Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (1 connections)
+- [Enforcement](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: unforgit & Guidelines] Cluster]] (4 shared connections)
+- [[[Skill: pr-storyteller & PR Storyteller Skill] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/docflow/skills/docflow/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md)
+- [.agents/plugins/agent-guard/skills/agent-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md)
 
 ## Audit Trail
 

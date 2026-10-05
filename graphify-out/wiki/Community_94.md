@@ -1,23 +1,24 @@
 # Community 94
 
-> 2 nodes · cohesion 1.00
+> 3 nodes · cohesion 0.67
 
 ## Key Concepts
 
-- [server.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/server.ts#L1) (1 connections)
-- [bootstrap()](file:///C:/Antigravityyyyy/VID_School/backend/src/server.ts#L5) (1 connections)
+- [Skill: tailtest](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (2 connections)
+- [Procedure](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (1 connections)
+- [Tailtest Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[CAMERA_DECKS]] (4 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\server.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/server.ts)
+- [.agents/plugins/tailtest/skills/tailtest/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md)
 
 ## Audit Trail
 
-- EXTRACTED: 2 (100%)
+- EXTRACTED: 4 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- **frontend_components_ui_index_tablecolumn** (0 connections)
+- **frontend_app_globals** (0 connections)
 
 ## Relationships
 

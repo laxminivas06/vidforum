@@ -130,7 +130,7 @@
 
 - [x] **TASK-044**: Implement Timetable Workspace with real-time conflict detector (Teacher double-booking, room clash, period overlaps).
 
-- [x] **TASK-045**: Implement Staff / HRMS Workspace (Staff directory, leave application & approval pipeline, faculty workload charts).
+- [x] **TASK-045**: Implement Staff / HRMS Workspace (Staff directory, active faculty filter, on-leave/sabbatical filter, teaching workload matrix with academic year fallbacks, strictly isolated workspace sidebar navigation, and verified cloud database dataset).
 
 - [x] **TASK-046**: **MILESTONE REVIEW CHECKPOINT 3** — Phase 2 Operational Workspaces review.
 

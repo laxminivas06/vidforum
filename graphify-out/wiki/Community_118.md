@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/mapping/page.tsx#L1) (1 connections)
-- [AcademicsMappingRedirect()](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/mapping/page.tsx#L3) (1 connections)
+- [workspace.registry.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.registry.ts#L1) (1 connections)
+- [CANONICAL_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.registry.ts#L11) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\academics\mapping\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/mapping/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\workspaces\workspace.registry.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.registry.ts)
 
 ## Audit Trail
 

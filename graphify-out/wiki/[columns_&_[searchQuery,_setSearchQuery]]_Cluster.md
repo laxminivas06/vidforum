@@ -1,35 +1,35 @@
 # [columns & [searchQuery, setSearchQuery]] Cluster
 
-> 90 nodes · cohesion 0.02
+> 97 nodes · cohesion 0.02
 
 ## Key Concepts
 
-- [hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1) (85 connections)
-- [checkDuplicateStaff()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1578) (4 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L1) (2 connections)
-- [getAuthHeaders()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L21) (2 connections)
-- [useMyClasses()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1017) (2 connections)
-- [FacultyDashboardPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L34) (2 connections)
-- [handleDuplicateCheck()](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L165) (2 connections)
-- [API_BASE_URL](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L18) (1 connections)
-- [DEFAULT_INST_ID](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L19) (1 connections)
-- [useAcademics()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L866) (1 connections)
-- [useAcademicYears()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1597) (1 connections)
-- [useActionLeaveRequest()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1460) (1 connections)
-- [useAdmissionDocuments()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L540) (1 connections)
-- [useAdmissions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L431) (1 connections)
-- [useApplyLeave()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1432) (1 connections)
-- [useBooklist()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L2276) (1 connections)
-- [useBulkCreateStaff()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L944) (1 connections)
-- [useBulkImportStudents()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L844) (1 connections)
-- [useBulkProvisionUsers()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1110) (1 connections)
-- [useCalendarConfig()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L2069) (1 connections)
-- [useCalendarDays()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L2111) (1 connections)
-- [useClasses()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1693) (1 connections)
-- [useCloneAcademicYear()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1672) (1 connections)
-- [useCloseAcademicYear()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1654) (1 connections)
-- [useCopySubjectMatrix()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L2000) (1 connections)
-- *... and 65 more nodes in this community*
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L1) (51 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L1) (38 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/fees/page.tsx#L1) (11 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L1) (10 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L46) (5 connections)
+- [currentYear](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L870) (2 connections)
+- [{ data: academicGrades = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L66) (2 connections)
+- [{ data: enrollmentCounts = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L67) (2 connections)
+- [[errorMsg, setErrorMsg]](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L1017) (2 connections)
+- [fileInputRef](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L179) (2 connections)
+- [handleFileUpload()](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L343) (2 connections)
+- [handleLoginSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L32) (2 connections)
+- [[importReport, setImportReport]](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L1015) (2 connections)
+- [[isBulkModalOpen, setIsBulkModalOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L175) (2 connections)
+- [[isProcessing, setIsProcessing]](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/fees/page.tsx#L100) (2 connections)
+- [[parsedRows, setParsedRows]](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L1014) (2 connections)
+- [res](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L238) (2 connections)
+- [[showPassword, setShowPassword]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L188) (2 connections)
+- [totalCapacity](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L97) (2 connections)
+- [variant](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L165) (2 connections)
+- [[activeReceipt, setActiveReceipt]](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/fees/page.tsx#L101) (1 connections)
+- [activeStudents](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L93) (1 connections)
+- [admNum](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L240) (1 connections)
+- [[advancingApplicantId, setAdvancingApplicantId]](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L120) (1 connections)
+- [age](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L487) (1 connections)
+- *... and 72 more nodes in this community*
 
 ## Relationships
 
@@ -37,14 +37,17 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\faculty\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\(auth)\login\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\admissions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\app\fees\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/fees/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx)
 - [C:\Antigravityyyyy\VID_School\frontend\app\hrms\staff\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\lib\api\hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\students\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 177 (97%)
-- INFERRED: 5 (3%)
+- EXTRACTED: 221 (100%)
+- INFERRED: 1 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

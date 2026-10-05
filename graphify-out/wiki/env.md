@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: knowl](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (2 connections)
-- [Knowl Project Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (1 connections)
-- [Procedures](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (1 connections)
+- [Skill: debt-ops](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md) (2 connections)
+- [Debt-Ops Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md) (1 connections)
+- [Rules](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[router]] (4 shared connections)
+- [[[Skill: test-gap & Checks] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/knowl/skills/knowl/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md)
+- [.agents/plugins/debt-ops/skills/debt-ops/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md)
 
 ## Audit Trail
 

@@ -4,18 +4,18 @@
 
 ## Key Concepts
 
-- [Skill: local-memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (3 connections)
-- [Key Actions](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (1 connections)
-- [Local Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (1 connections)
-- [When to Use](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (1 connections)
+- [ProgressBar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L1) (3 connections)
+- [heights](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L25) (1 connections)
+- [percentage](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L23) (1 connections)
+- [variants](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L31) (1 connections)
 
 ## Relationships
 
-- [[[Skill: hol-guard & Audit Checks] Cluster]] (6 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\ProgressBar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx)
 
 ## Audit Trail
 

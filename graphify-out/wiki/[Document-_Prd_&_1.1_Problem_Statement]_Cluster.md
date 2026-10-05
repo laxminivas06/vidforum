@@ -1,92 +1,35 @@
 # [Document: Prd & 1.1 Problem Statement] Cluster
 
-> 72 nodes · cohesion 0.04
+> 92 nodes · cohesion 0.02
 
 ## Key Concepts
 
-- [HrmsService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.service.ts#L16) (30 connections)
-- [runVerification()](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-1b-hrms.ts#L11) (23 connections)
-- [.login()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.service.ts#L24) (10 connections)
-- [runR4Verification()](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-r4-provisioning.ts#L22) (10 connections)
-- [ProvisioningService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/provisioning.service.ts#L54) (8 connections)
-- [.provisionUser()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/provisioning.service.ts#L80) (8 connections)
-- [.createLog()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.repository.ts#L117) (7 connections)
-- [VidApiClient](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L7) (7 connections)
-- [.reset()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L103) (6 connections)
-- [AuthRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts#L22) (6 connections)
-- [AuthRateLimiter](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L9) (5 connections)
-- [.isLocked()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L19) (5 connections)
-- [.recordFailure()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L52) (5 connections)
-- [.findLoginSubject()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts#L42) (5 connections)
-- [.changePassword()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.service.ts#L143) (5 connections)
-- [.getStaffAttendance()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L406) (5 connections)
-- [.softDeleteStaff()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.service.ts#L435) (5 connections)
-- [.get()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L51) (5 connections)
-- [.request()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L18) (5 connections)
-- [.resetCredentials()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/provisioning.service.ts#L482) (5 connections)
-- [.updateUserAccess()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/provisioning.service.ts#L375) (5 connections)
-- [.updateUserStatus()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/provisioning.service.ts#L560) (5 connections)
-- [.getKey()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L15) (4 connections)
-- [verify-1b-hrms.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-1b-hrms.ts#L1) (4 connections)
-- [.deleteStaff()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L251) (4 connections)
-- *... and 47 more nodes in this community*
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class AuthRateLimiter {
-        +auth-rate-limiter.ts()
-        +.getKey()
-        +.isLocked()
-        +.recordFailure()
-        +.reset()
-    }
-    class AuthRepository {
-        +auth.repository.ts()
-        +.normalizeRole()
-        +.findLoginSubject()
-        +.getUserPermissions()
-        +.updatePassword()
-        +.revokeAllRefreshTokens()
-    }
-    class AuthService {
-        +auth.service.ts()
-        +.login()
-        +.changePassword()
-    }
-    class HrmsService {
-        +hrms.service.ts()
-        +.constructor()
-        +.listDesignations()
-        +.createDesignation()
-        +.deleteDesignation()
-        +.listDepartments()
-        +.createDepartment()
-        +.deleteDepartment()
-        +.listStaff()
-        +.getStaffDetails()
-    }
-    class VidApiClient {
-        +index.ts()
-        +.constructor()
-        +.request()
-        +.get()
-        +.post()
-        +.patch()
-        +.delete()
-    }
-    class ProvisioningService {
-        +provisioning.service.ts()
-        +.generateSecurePassword()
-        +.provisionUser()
-        +.bulkProvisionUsers()
-        +.updateUserAccess()
-        +.resetCredentials()
-        +.updateUserStatus()
-        +.getUserAudit()
-    }
-```
+- [hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1) (87 connections)
+- [checkDuplicateStaff()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1578) (4 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L1) (2 connections)
+- [getAuthHeaders()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L21) (2 connections)
+- [useMyClasses()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1017) (2 connections)
+- [FacultyDashboardPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx#L34) (2 connections)
+- [handleDuplicateCheck()](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L204) (2 connections)
+- [API_BASE_URL](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L18) (1 connections)
+- [DEFAULT_INST_ID](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L19) (1 connections)
+- [useAcademics()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L866) (1 connections)
+- [useAcademicYears()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1653) (1 connections)
+- [useActionLeaveRequest()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1460) (1 connections)
+- [useAdmissionDocuments()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L540) (1 connections)
+- [useAdmissions()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L431) (1 connections)
+- [useApplyLeave()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1432) (1 connections)
+- [useBooklist()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L2332) (1 connections)
+- [useBulkCreateStaff()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L944) (1 connections)
+- [useBulkImportStudents()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L844) (1 connections)
+- [useBulkProvisionUsers()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1110) (1 connections)
+- [useCalendarConfig()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L2125) (1 connections)
+- [useCalendarDays()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L2167) (1 connections)
+- [useClasses()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1749) (1 connections)
+- [useCloneAcademicYear()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1728) (1 connections)
+- [useCloseAcademicYear()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1710) (1 connections)
+- [useComputeStaffWorkload()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts#L1627) (1 connections)
+- *... and 67 more nodes in this community*
 
 ## Relationships
 
@@ -94,25 +37,14 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\audit\audit.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\auth\auth-rate-limiter.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\auth\auth.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\auth\auth.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.service.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.service.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\users\provisioning.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/provisioning.service.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\users\role-templates.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/role-templates.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\scripts\verify-1b-hrms.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-1b-hrms.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\scripts\verify-r2-auth.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-r2-auth.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\scripts\verify-r4-provisioning.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-r4-provisioning.ts)
-- [C:\Antigravityyyyy\VID_School\packages\api-client\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\faculty\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/dashboard/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\hrms\staff\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\lib\api\hooks.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/api/hooks.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 152 (53%)
-- INFERRED: 136 (47%)
+- EXTRACTED: 181 (97%)
+- INFERRED: 5 (3%)
 - AMBIGUOUS: 0 (0%)
 
 ---

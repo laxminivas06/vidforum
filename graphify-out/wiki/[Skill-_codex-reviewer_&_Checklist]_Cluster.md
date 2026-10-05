@@ -4,23 +4,37 @@
 
 ## Key Concepts
 
-- [Document: Agents](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (4 connections)
-- [1. Operating Mode & Standards](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
-- [2. Active Plugin Ecosystem & Memory](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
-- [3. Working Agreement Checklist](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
-- [VID Platform: Agent Operating Guidelines](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
+- [NotificationService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L3) (6 connections)
+- [notification.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L1) (1 connections)
+- [.getUnreadCount()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L8) (1 connections)
+- [.markAllAsRead()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L17) (1 connections)
+- [.markAsRead()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts#L13) (1 connections)
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class NotificationService {
+        +notification.service.ts()
+        +.getUserNotifications()
+        +.getUnreadCount()
+        +.markAsRead()
+        +.markAllAsRead()
+        +.sendNotification()
+    }
+```
 
 ## Relationships
 
-- [[[Skill: commit-narrator & Commit Narrator Skill] Cluster]] (8 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [AGENTS.md](file:///C:/Antigravityyyyy/VID_School/AGENTS.md)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 8 (100%)
+- EXTRACTED: 10 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -8,13 +8,13 @@
 - [[academics.repository.ts]] `EXTRACTED`
 
 ### method
+- [[.listAcademicYears()]] `EXTRACTED`
 - [[.getAcademicYearById()]] `EXTRACTED`
 - [[.getWorkingDaysCount()]] `EXTRACTED`
 - [[.getClassesByInstitution()]] `EXTRACTED`
 - [[.getCalendarConfig()]] `EXTRACTED`
 - [[.listTextbooks()]] `EXTRACTED`
 - [[.getBooklist()]] `EXTRACTED`
-- [[.listAcademicYears()]] `EXTRACTED`
 - [[.updateAcademicYear()]] `EXTRACTED`
 - [[.getSectionsByClass()]] `EXTRACTED`
 - [[.getSubjectsByClass()]] `EXTRACTED`

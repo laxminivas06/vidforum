@@ -4,15 +4,15 @@
 
 ## Key Concepts
 
-- [Card.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L1) (8 connections)
-- [activeDelta](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L122) (1 connections)
-- [activeDeltaType](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L123) (1 connections)
-- [Card](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L11) (1 connections)
-- [CardContent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L74) (1 connections)
-- [CardDescription](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L62) (1 connections)
-- [CardFooter](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L82) (1 connections)
-- [CardHeader](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L38) (1 connections)
-- [CardTitle](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L50) (1 connections)
+- [workspace.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L1) (8 connections)
+- [authHeader](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L13) (1 connections)
+- [grantedKeys](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L24) (1 connections)
+- [grantRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L35) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L8) (1 connections)
+- [row](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L45) (1 connections)
+- [token](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L17) (1 connections)
+- [user](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L12) (1 connections)
+- [workspaces](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L65) (1 connections)
 
 ## Relationships
 
@@ -20,7 +20,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Card.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\workspaces\workspace.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts)
 
 ## Audit Trail
 

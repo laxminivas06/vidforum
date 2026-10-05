@@ -1,39 +1,40 @@
 # [activeGrade & { data: grades = [], isLoading }] Cluster
 
-> 14 nodes · cohesion 0.14
+> 19 nodes · cohesion 0.11
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L1) (13 connections)
-- [[academicYear, setAcademicYear]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L42) (1 connections)
-- [[activeSection, setActiveSection]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L37) (1 connections)
-- [[boardAffiliation, setBoardAffiliation]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L40) (1 connections)
-- [[confirmToggleModule, setConfirmToggleModule]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L44) (1 connections)
-- [[contactEmail, setContactEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L41) (1 connections)
-- [handleSave()](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L63) (1 connections)
-- [{
-    institutionName,
-    enabledModules,
-    toggleOptionalModule,
-  }](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L31) (1 connections)
-- [isEnabled](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L225) (1 connections)
-- [[isSaved, setIsSaved]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L43) (1 connections)
-- [optionalModulesList](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L46) (1 connections)
-- [[schoolCode, setSchoolCode]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L39) (1 connections)
-- [[schoolName, setSchoolName]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L38) (1 connections)
-- [sections](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L55) (1 connections)
+- [Document: Antigravity Master Prompt](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (18 connections)
+- [0. ROLE & OPERATING MODE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [1. PROJECT BRIEF](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [2. REQUIRED DELIVERABLES — CREATE THESE FILES FIRST](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [3. DEVELOPMENT RULES (apply throughout, no exceptions)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [4. TECH STACK CONSTRAINTS](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [5. WORKING AGREEMENT / CHECK-IN CADENCE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [6. AGENT MEMORY USAGE](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [7. DEFINITION OF DONE (v1)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [AI Yantra Boundary](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [Backend Architecture Rules](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [/docs/DECISIONS.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [/docs/PRD.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [/docs/TASKS.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [/docs/TECHSPEC.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [Documentation / Architecture Reconciliation](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [Documentation Reconciliation](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [MASTER PROMPT — Antigravity Full-Stack Build](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
+- [Multi-Tenant Security](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[[activeRollCall, setActiveRollCall] & [attendanceRecords, setAttendanceRecords]] Cluster]] (36 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\settings\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx)
+- [Reference_docs/antigravity-master-prompt.md](file:///C:/Antigravityyyyy/VID_School/Reference_docs/antigravity-master-prompt.md)
 
 ## Audit Trail
 
-- EXTRACTED: 26 (100%)
+- EXTRACTED: 36 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

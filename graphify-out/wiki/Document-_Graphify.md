@@ -1,10 +1,11 @@
 # Document: Graphify
 
-> 1 nodes · cohesion 1.00
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [index.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/index.ts#L1) (0 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/sports/page.tsx#L1) (1 connections)
+- [SportsPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/sports/page.tsx#L8) (1 connections)
 
 ## Relationships
 
@@ -12,11 +13,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\middleware\index.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/index.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\sports\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/sports/page.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 0 (0%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

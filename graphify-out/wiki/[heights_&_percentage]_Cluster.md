@@ -4,16 +4,38 @@
 
 ## Key Concepts
 
-- [Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L1) (9 connections)
-- [ActiveIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L91) (1 connections)
-- [activeWorkspace](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L90) (1 connections)
-- [dropdownRef](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L80) (1 connections)
-- [handleClickOutside()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L97) (1 connections)
-- [isCurrent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L184) (1 connections)
-- [[isWorkspaceDropdownOpen, setIsWorkspaceDropdownOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L79) (1 connections)
-- [permittedWorkspaces](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L83) (1 connections)
-- [TOPBAR_ICON_MAP](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L31) (1 connections)
-- [WsIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L185) (1 connections)
+- [error-format.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L1) (5 connections)
+- [AppError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L25) (2 connections)
+- [PermissionDeniedError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L47) (2 connections)
+- [ResourceNotFoundError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L54) (2 connections)
+- [TenantViolationError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L40) (2 connections)
+- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L30) (1 connections)
+- [formatErrorResponse()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L61) (1 connections)
+- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L48) (1 connections)
+- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L55) (1 connections)
+- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L41) (1 connections)
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class AppError {
+        +error-format.ts()
+        +.constructor()
+    }
+    class PermissionDeniedError {
+        +error-format.ts()
+        +.constructor()
+    }
+    class ResourceNotFoundError {
+        +error-format.ts()
+        +.constructor()
+    }
+    class TenantViolationError {
+        +error-format.ts()
+        +.constructor()
+    }
+```
 
 ## Relationships
 
@@ -21,7 +43,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\common\error-format.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts)
 
 ## Audit Trail
 

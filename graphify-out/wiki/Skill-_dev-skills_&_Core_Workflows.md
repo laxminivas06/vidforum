@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [examinations.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L1) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts#L6) (1 connections)
+- [workspace.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/workspace.middleware.ts#L1) (1 connections)
+- [requireWorkspace()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/workspace.middleware.ts#L7) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\examinations\examinations.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.routes.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\workspace.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/workspace.middleware.ts)
 
 ## Audit Trail
 

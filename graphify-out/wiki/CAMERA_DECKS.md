@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: tailtest](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (2 connections)
-- [Procedure](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (1 connections)
-- [Tailtest Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md) (1 connections)
+- [Skill: memesh](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md) (2 connections)
+- [Execution Guide](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md) (1 connections)
+- [MeMesh Shared Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[Community 89]] (4 shared connections)
+- [[router]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/tailtest/skills/tailtest/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/tailtest/skills/tailtest/SKILL.md)
+- [.agents/plugins/memesh/skills/memesh/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md)
 
 ## Audit Trail
 

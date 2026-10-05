@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [workspace.registry.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.registry.ts#L1) (1 connections)
-- [CANONICAL_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.registry.ts#L11) (1 connections)
+- [finance.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.routes.ts#L1) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.routes.ts#L6) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\workspaces\workspace.registry.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.registry.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.routes.ts)
 
 ## Audit Trail
 

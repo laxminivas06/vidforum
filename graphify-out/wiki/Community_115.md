@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/calendar/page.tsx#L1) (1 connections)
-- [AcademicsCalendarRedirect()](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/calendar/page.tsx#L3) (1 connections)
+- [notification.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.routes.ts#L1) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.routes.ts#L7) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\academics\calendar\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/calendar/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.routes.ts)
 
 ## Audit Trail
 

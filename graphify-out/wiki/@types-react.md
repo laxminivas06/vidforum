@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [utils.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts#L1) (1 connections)
-- [cn()](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts#L4) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/workload/page.tsx#L1) (1 connections)
+- [HRMSWorkloadRedirect()](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/workload/page.tsx#L3) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\lib\utils.ts](file:///C:/Antigravityyyyy/VID_School/frontend/lib/utils.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\hrms\workload\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/workload/page.tsx)
 
 ## Audit Trail
 

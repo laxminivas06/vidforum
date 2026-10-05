@@ -1,41 +1,20 @@
 # [[isCollapsed, setIsCollapsed] & [isMobileMenuOpen, setIsMobileMenuOpen]] Cluster
 
-> 10 nodes · cohesion 0.20
+> 11 nodes · cohesion 0.18
 
 ## Key Concepts
 
-- [error-format.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L1) (5 connections)
-- [AppError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L25) (2 connections)
-- [PermissionDeniedError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L47) (2 connections)
-- [ResourceNotFoundError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L54) (2 connections)
-- [TenantViolationError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L40) (2 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L30) (1 connections)
-- [formatErrorResponse()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L61) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L48) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L55) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L41) (1 connections)
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class AppError {
-        +error-format.ts()
-        +.constructor()
-    }
-    class PermissionDeniedError {
-        +error-format.ts()
-        +.constructor()
-    }
-    class ResourceNotFoundError {
-        +error-format.ts()
-        +.constructor()
-    }
-    class TenantViolationError {
-        +error-format.ts()
-        +.constructor()
-    }
-```
+- [hrms.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L1) (11 connections)
+- [actionLeaveSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L61) (1 connections)
+- [applyLeaveSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L53) (1 connections)
+- [checkDuplicateSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L40) (1 connections)
+- [createDepartmentSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L34) (1 connections)
+- [createDesignationSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L30) (1 connections)
+- [createLeaveTypeSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L48) (1 connections)
+- [hrmsService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L7) (1 connections)
+- [markAttendanceSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L66) (1 connections)
+- [onboardStaffSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L10) (1 connections)
+- [updateStaffSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L22) (1 connections)
 
 ## Relationships
 
@@ -43,11 +22,11 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\common\error-format.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 18 (100%)
+- EXTRACTED: 21 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

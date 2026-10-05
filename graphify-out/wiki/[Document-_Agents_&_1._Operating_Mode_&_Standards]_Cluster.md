@@ -1,21 +1,21 @@
 # [Document: Agents & 1. Operating Mode & Standards] Cluster
 
-> 12 nodes · cohesion 0.18
+> 12 nodes · cohesion 0.17
 
 ## Key Concepts
 
-- [BulkProvisionModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L1) (11 connections)
-- [handleSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L110) (2 connections)
-- [parseCsv()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L62) (2 connections)
-- [bulkMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L31) (1 connections)
-- [[downloadSuccessToast, setDownloadSuccessToast]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L36) (1 connections)
-- [[error, setError]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L34) (1 connections)
-- [handleDownloadCredentialsCsv()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L133) (1 connections)
-- [handleDownloadTemplate()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L41) (1 connections)
-- [handleFileUpload()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L97) (1 connections)
-- [parsedPreview](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L159) (1 connections)
-- [[rawText, setRawText]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L33) (1 connections)
-- [[resultData, setResultData]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L35) (1 connections)
+- [AppShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L1) (11 connections)
+- [INSTITUTION_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L22) (1 connections)
+- [isBlockedByWorkspaceRestriction](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L98) (1 connections)
+- [isBlockedForInstitutionStaff](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L92) (1 connections)
+- [isBlockedForSuperAdmin](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L86) (1 connections)
+- [[isCollapsed, setIsCollapsed]](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L67) (1 connections)
+- [[isMobileMenuOpen, setIsMobileMenuOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L66) (1 connections)
+- [isSuperAdmin](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L85) (1 connections)
+- [pathname](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L64) (1 connections)
+- [PLATFORM_SUPER_ADMIN_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L46) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L65) (1 connections)
+- [{ user, role, enabledModules, institutionName, logout, isInitialized }](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx#L63) (1 connections)
 
 ## Relationships
 
@@ -23,11 +23,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\users\BulkProvisionModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\layout\AppShell.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/layout/AppShell.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 24 (100%)
+- EXTRACTED: 22 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

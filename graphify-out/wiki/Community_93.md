@@ -1,23 +1,24 @@
 # Community 93
 
-> 2 nodes · cohesion 1.00
+> 3 nodes · cohesion 0.67
 
 ## Key Concepts
 
-- [app](file:///C:/Antigravityyyyy/VID_School/backend/src/app.ts#L10) (1 connections)
-- [app.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/app.ts#L1) (1 connections)
+- [Skill: spec-driven](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md) (2 connections)
+- [Lifecycle Stages](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md) (1 connections)
+- [Spec-Driven Development Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[nextConfig]] (4 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\app.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/app.ts)
+- [.agents/plugins/spec-driven/skills/spec-driven/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md)
 
 ## Audit Trail
 
-- EXTRACTED: 2 (100%)
+- EXTRACTED: 4 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

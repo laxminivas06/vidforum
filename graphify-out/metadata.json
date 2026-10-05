@@ -216,7 +216,20 @@
     "212": "Frontend Globals",
     "213": "Permission UI",
     "214": "Reference Path Management",
-    "215": "Reference Path Management"
+    "215": "Reference Path Management",
+    "216": "Form Input UI",
+    "217": "Community 217",
+    "218": "Community 218",
+    "219": "Community 219",
+    "220": "Community 220",
+    "221": "Community 221",
+    "222": "Music Panel UI",
+    "223": "Community 223",
+    "224": "UI Table",
+    "225": "Community 225",
+    "226": "Frontend Globals",
+    "227": "Permission UI",
+    "228": "Reference Path Management"
   },
   "communitySummaries": {
     "0": "",
@@ -434,89 +447,121 @@
     "212": "Manages shared global variables and state used throughout the client-side application.",
     "213": "Displays a permission denied message when a user attempts to access a restricted resource.",
     "214": "Manages storage, resolution, and validation of reference paths used throughout the system.",
-    "215": "Manages storage, resolution, and validation of reference paths used throughout the system."
+    "215": "Manages storage, resolution, and validation of reference paths used throughout the system.",
+    "216": "Handles user input elements within the front-end UI, managing input rendering, validation, and interaction.",
+    "217": "",
+    "218": "",
+    "219": "",
+    "220": "",
+    "221": "",
+    "222": "Facilitates user interaction with music streaming services by displaying playback controls and track metadata.",
+    "223": "",
+    "224": "Handles rendering and interactions for tabular data in the user interface.",
+    "225": "",
+    "226": "Manages shared global variables and state used throughout the client-side application.",
+    "227": "Displays a permission denied message when a user attempts to access a restricted resource.",
+    "228": "Manages storage, resolution, and validation of reference paths used throughout the system."
   },
   "communityLinks": {
-    "5": {
-      "0": 40,
-      "7": 10,
+    "3": {
+      "0": 65,
+      "16": 4,
+      "20": 1,
       "9": 4,
-      "1": 7,
-      "17": 3
+      "2": 19,
+      "18": 3,
+      "7": 1,
+      "6": 1
     },
     "0": {
-      "5": 25,
-      "7": 11,
-      "1": 12,
-      "17": 6,
-      "2": 1
+      "2": 5,
+      "3": 18,
+      "20": 2,
+      "18": 6,
+      "19": 1
     },
-    "7": {
-      "0": 25,
-      "2": 1,
-      "1": 8,
-      "5": 1,
+    "16": {
+      "2": 2,
+      "0": 17
+    },
+    "20": {
+      "0": 7,
+      "3": 3,
+      "19": 1,
       "6": 1
     },
     "9": {
-      "1": 4,
+      "2": 4,
       "0": 19
     },
-    "1": {
-      "5": 6,
-      "0": 6,
+    "2": {
+      "3": 10,
+      "0": 4,
+      "16": 1,
       "9": 2,
-      "7": 2,
-      "17": 1
+      "18": 1
     },
-    "17": {
-      "1": 2,
+    "18": {
+      "2": 2,
       "0": 4
     },
-    "47": {
+    "48": {
       "0": 3
     },
-    "32": {
-      "1": 4,
-      "7": 1,
-      "0": 2
+    "19": {
+      "2": 4,
+      "0": 8,
+      "3": 2
     },
-    "2": {
-      "0": 1,
-      "14": 1,
-      "3": 1,
-      "8": 2,
-      "10": 5,
-      "1": 2,
-      "6": 1
+    "6": {
+      "1": 5,
+      "10": 1,
+      "4": 2,
+      "8": 2
     },
-    "16": {
-      "1": 8,
+    "17": {
+      "2": 8,
       "0": 7
     },
-    "39": {
-      "1": 1
+    "40": {
+      "2": 1
     },
-    "14": {
-      "1": 10,
+    "4": {
+      "2": 11,
+      "0": 10,
+      "6": 2,
+      "1": 3,
+      "13": 3,
+      "8": 3
+    },
+    "57": {
       "2": 1,
-      "0": 9
+      "0": 1
     },
     "11": {
       "0": 1
     },
-    "6": {},
-    "3": {
-      "8": 1,
-      "2": 9,
+    "7": {},
+    "1": {
       "10": 1,
-      "0": 1
-    },
-    "8": {
+      "6": 5,
+      "4": 2,
+      "8": 3,
+      "3": 1,
+      "7": 1,
       "2": 1
     },
     "10": {
-      "2": 1
+      "1": 1,
+      "4": 2
+    },
+    "8": {
+      "6": 1,
+      "1": 1
+    },
+    "13": {
+      "6": 2,
+      "4": 1
     }
   }
 }

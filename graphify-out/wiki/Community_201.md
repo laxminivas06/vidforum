@@ -4,11 +4,15 @@
 
 ## Key Concepts
 
-- **frontend_components_ui_index_confirmdialog** (0 connections)
+- [@types/react-dom](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L24) (0 connections)
 
 ## Relationships
 
 - No strong cross-community connections detected
+
+## Source Files
+
+- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
 
 ## Audit Trail
 

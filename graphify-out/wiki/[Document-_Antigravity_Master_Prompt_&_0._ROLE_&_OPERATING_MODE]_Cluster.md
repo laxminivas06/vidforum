@@ -33,7 +33,7 @@
 
 ## Relationships
 
-- [[[Document: Appflow & 1. Overview & Navigation Architecture] Cluster]] (94 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 

@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-attendance/monitoring/page.tsx#L1) (1 connections)
-- [[cameraDecks, setCameraDecks]](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-attendance/monitoring/page.tsx#L35) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/exams/page.tsx#L1) (1 connections)
+- [AcademicsExamsRedirect()](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/exams/page.tsx#L3) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\ai-attendance\monitoring\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-attendance/monitoring/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\academics\exams\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/exams/page.tsx)
 
 ## Audit Trail
 

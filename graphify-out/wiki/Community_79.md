@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: hol-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md) (2 connections)
-- [Audit Checks](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md) (1 connections)
-- [HOL Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md) (1 connections)
+- [Skill: commit-narrator](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (2 connections)
+- [Commit Narrator Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (1 connections)
+- [Format](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[env]] (4 shared connections)
+- [[[Skill: tailtest & Procedure] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/hol-guard/skills/hol-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/hol-guard/skills/hol-guard/SKILL.md)
+- [.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md)
 
 ## Audit Trail
 

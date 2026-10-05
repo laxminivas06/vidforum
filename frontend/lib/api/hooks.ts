@@ -1590,6 +1590,62 @@ export async function checkDuplicateStaff(data: {
   return json.data || { isDuplicate: false, reasons: [], duplicateFields: [] }
 }
 
+export interface FacultyWorkloadItem {
+  staff_id: string
+  employee_code: string
+  staff_name: string
+  department_name: string | null
+  designation_name: string | null
+  qualification: string | null
+  specialization: string | null
+  periods_per_week: number
+  sections_count: number
+  is_overloaded: boolean
+}
+
+export function useFacultyWorkloads(academicYearId?: string) {
+  const q = academicYearId ? `?academicYearId=${academicYearId}` : ""
+  return useQuery({
+    queryKey: ["hrms-faculty-workloads", academicYearId],
+    queryFn: async (): Promise<FacultyWorkloadItem[]> => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/hrms/workload${q}`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Failed to fetch faculty workloads:", err)
+      }
+      return []
+    },
+  })
+}
+
+export function useComputeStaffWorkload() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({ staffId, academicYearId }: { staffId: string; academicYearId?: string }) => {
+      const res = await fetch(`${API_BASE_URL}/hrms/workload/compute/${staffId}`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ academicYearId }),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to calculate workload")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["hrms-faculty-workloads"] })
+      queryClient.invalidateQueries({ queryKey: ["faculty-roster"] })
+    },
+  })
+}
+
 // =========================================================================
 // STEP 2: ACADEMICS & CURRICULUM HOOKS
 // =========================================================================

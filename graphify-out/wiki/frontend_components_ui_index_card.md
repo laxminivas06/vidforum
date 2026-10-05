@@ -1,10 +1,11 @@
 # frontend_components_ui_index_card
 
-> 1 nodes · cohesion 1.00
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-tutor/analytics/page.tsx#L1) (0 connections)
+- [Badge()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Badge.tsx#L10) (1 connections)
+- [Badge.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Badge.tsx#L1) (1 connections)
 
 ## Relationships
 
@@ -12,11 +13,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\ai-tutor\analytics\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/ai-tutor/analytics/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Badge.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Badge.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 0 (0%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

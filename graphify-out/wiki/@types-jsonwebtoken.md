@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/page.tsx#L1) (1 connections)
-- [HRMSRootPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/page.tsx#L3) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/profile/page.tsx#L1) (1 connections)
+- [StudentParentProfilePage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/profile/page.tsx#L32) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\hrms\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\app\profile\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/profile/page.tsx)
 
 ## Audit Trail
 

@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: test-gap](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (2 connections)
-- [Checks](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (1 connections)
-- [Test Gap Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (1 connections)
+- [Skill: metabrain](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md) (2 connections)
+- [Metabrain Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md) (1 connections)
+- [Workflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[Community 90]] (4 shared connections)
+- [[router]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/test-gap/skills/test-gap/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md)
+- [.agents/plugins/metabrain/skills/metabrain/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/metabrain/skills/metabrain/SKILL.md)
 
 ## Audit Trail
 

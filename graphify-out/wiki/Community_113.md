@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [next.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/next.config.js#L1) (1 connections)
-- [nextConfig](file:///C:/Antigravityyyyy/VID_School/frontend/next.config.js#L2) (1 connections)
+- [hrms.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L1) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L6) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\next.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/next.config.js)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts)
 
 ## Audit Trail
 

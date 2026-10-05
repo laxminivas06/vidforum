@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: spec-driven](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md) (2 connections)
-- [Lifecycle Stages](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md) (1 connections)
-- [Spec-Driven Development Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md) (1 connections)
+- [Skill: megalinter](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (2 connections)
+- [MegaLinter Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (1 connections)
+- [Target Toolchains](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[CAMERA_DECKS]] (4 shared connections)
+- [[router]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/spec-driven/skills/spec-driven/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md)
+- [.agents/plugins/megalinter/skills/megalinter/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md)
 
 ## Audit Trail
 

@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: codex-reviewer](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md) (2 connections)
-- [Checklist](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md) (1 connections)
-- [Codex Reviewer Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/attendance/page.tsx#L1) (2 connections)
+- [FacultyAttendancePage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/attendance/page.tsx#L41) (1 connections)
+- [INITIAL_ATTENDANCE](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/attendance/page.tsx#L33) (1 connections)
 
 ## Relationships
 
-- [[[Skill: tailtest & Procedure] Cluster]] (4 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\frontend\app\faculty\attendance\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/faculty/attendance/page.tsx)
 
 ## Audit Trail
 

@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [hrms.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L1) (11 connections)
-- [actionLeaveSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L60) (1 connections)
-- [applyLeaveSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L52) (1 connections)
-- [checkDuplicateSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L39) (1 connections)
-- [createDepartmentSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L33) (1 connections)
-- [createDesignationSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L29) (1 connections)
-- [createLeaveTypeSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L47) (1 connections)
-- [hrmsService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L6) (1 connections)
-- [markAttendanceSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L65) (1 connections)
-- [onboardStaffSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L9) (1 connections)
-- [updateStaffSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L21) (1 connections)
+- [ai-yantra.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L1) (10 connections)
+- [campaign](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L44) (1 connections)
+- [campRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L38) (1 connections)
+- [guardRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L47) (1 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L15) (1 connections)
+- [recRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L53) (1 connections)
+- [reply](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L107) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L16) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L6) (1 connections)
+- [{ studentId, message, subject = 'Mathematics' }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L104) (1 connections)
+- [{ title, scriptTemplate, targetFilter }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts#L35) (1 connections)
 
 ## Relationships
 
@@ -22,11 +22,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\ai-yantra\ai-yantra.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/ai-yantra/ai-yantra.routes.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 21 (100%)
+- EXTRACTED: 20 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

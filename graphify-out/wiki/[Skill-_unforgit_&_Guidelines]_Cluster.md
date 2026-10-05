@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: espresso](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md) (2 connections)
-- [Espresso Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md) (1 connections)
-- [Guidelines](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md) (1 connections)
+- [Skill: ai-native-sdlc](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (2 connections)
+- [AI-Native SDLC Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (1 connections)
+- [Gates](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (1 connections)
 
 ## Relationships
 
-- [[[Skill: wingman & Pre-Edit Verification Checklist] Cluster]] (4 shared connections)
+- [[[Skill: river-review & Review Lenses] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/espresso/skills/espresso/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md)
+- [.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md)
 
 ## Audit Trail
 

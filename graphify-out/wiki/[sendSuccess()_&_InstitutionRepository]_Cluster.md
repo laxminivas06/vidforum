@@ -1,35 +1,143 @@
 # [sendSuccess() & InstitutionRepository] Cluster
 
-> 192 nodes · cohesion 0.01
+> 217 nodes · cohesion 0.02
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L1) (76 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L1) (51 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L1) (38 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/documents/page.tsx#L1) (20 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/enrolled/page.tsx#L1) (10 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L1) (10 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx#L1) (9 connections)
-- [[searchQuery, setSearchQuery]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L82) (7 connections)
-- [.updateStatus()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.repository.ts#L298) (5 connections)
-- [[actionSuccess, setActionSuccess]](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L132) (4 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L46) (4 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx#L1) (3 connections)
-- [[actionError, setActionError]](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/documents/page.tsx#L49) (3 connections)
-- [[selectedGrade, setSelectedGrade]](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/enrolled/page.tsx#L39) (3 connections)
-- [currentYear](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx#L870) (2 connections)
-- [{ data: academicGrades = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L66) (2 connections)
-- [{ data: departments = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L96) (2 connections)
-- [{ data: enrollmentCounts = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L67) (2 connections)
-- [{ data: grades = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/enrolled/page.tsx#L45) (2 connections)
-- [[errorMsg, setErrorMsg]](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L1017) (2 connections)
-- [fileInputRef](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L140) (2 connections)
-- [handleDownloadTemplate()](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L256) (2 connections)
-- [handleFileUpload()](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L296) (2 connections)
-- [handleLoginSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L32) (2 connections)
-- [handleRejectConfirm()](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/documents/page.tsx#L104) (2 connections)
-- *... and 167 more nodes in this community*
+- [sendSuccess()](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts#L19) (204 connections)
+- [sendError()](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts#L48) (155 connections)
+- [AcademicsController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L5) (50 connections)
+- [HrmsController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L77) (27 connections)
+- [ExaminationsController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.controller.ts#L5) (26 connections)
+- [FinanceController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts#L5) (24 connections)
+- [TimetableController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.controller.ts#L5) (23 connections)
+- [AdmissionsController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.controller.ts#L5) (15 connections)
+- [AttendanceController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts#L5) (14 connections)
+- [.resolveAcademicYearId()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L6) (8 connections)
+- [StudentController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts#L5) (8 connections)
+- [status](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L1311) (7 connections)
+- [NotificationController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.controller.ts#L5) (6 connections)
+- [.listAcademicYears()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts#L8) (5 connections)
+- [.addDocument()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.controller.ts#L136) (5 connections)
+- [.getFacultyWorkloads()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L460) (5 connections)
+- [.getStaffAttendance()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L411) (5 connections)
+- [.checkWorkingDay()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L660) (4 connections)
+- [.getBooklist()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L814) (4 connections)
+- [.getCalendarConfig()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L573) (4 connections)
+- [.getCalendarDays()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L608) (4 connections)
+- [.getExamEstimates()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L493) (4 connections)
+- [.getTextbooks()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L701) (4 connections)
+- [.getWorkingDaysCount()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L678) (4 connections)
+- [.computeStaffWorkload()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L483) (4 connections)
+- *... and 192 more nodes in this community*
+
+## Class Diagram
+
+```mermaid
+classDiagram
+    class AcademicsController {
+        +academics.controller.ts()
+        +.resolveAcademicYearId()
+        +.getAcademicYears()
+        +.getAcademicYearById()
+        +.createAcademicYear()
+        +.updateAcademicYear()
+        +.setCurrentAcademicYear()
+        +.closeAcademicYear()
+        +.cloneAcademicYear()
+        +.getGrades()
+    }
+    class AdmissionsController {
+        +admissions.controller.ts()
+        +.getEnquiries()
+        +.createEnquiry()
+        +.convertEnquiry()
+        +.getApplicants()
+        +.getApplicationById()
+        +.createApplication()
+        +.bulkImport()
+        +.updateStage()
+        +.approve()
+    }
+    class AttendanceController {
+        +attendance.controller.ts()
+        +.getOrCreateSession()
+        +.getSessionById()
+        +.listSessions()
+        +.getSectionRoster()
+        +.submitRollCall()
+        +.getStudentSummary()
+        +.getScopedAttendance()
+        +.applyStudentLeave()
+        +.listStudentLeaves()
+    }
+    class ExaminationsController {
+        +examinations.controller.ts()
+        +.createExamType()
+        +.listExamTypes()
+        +.createExam()
+        +.getExamById()
+        +.listExams()
+        +.updateExamStatus()
+        +.addExamSubject()
+        +.listExamSubjects()
+        +.createExamSchedule()
+    }
+    class FinanceController {
+        +finance.controller.ts()
+        +.listFeeCategories()
+        +.createFeeCategory()
+        +.listFeeGroups()
+        +.createFeeGroup()
+        +.listFeeStructures()
+        +.getFeeStructure()
+        +.createFeeStructure()
+        +.listDiscounts()
+        +.createDiscount()
+    }
+    class HrmsController {
+        +hrms.controller.ts()
+        +.listDesignations()
+        +.createDesignation()
+        +.deleteDesignation()
+        +.listDepartments()
+        +.createDepartment()
+        +.deleteDepartment()
+        +.listStaff()
+        +.getStaffDetails()
+        +.onboardStaff()
+    }
+    class NotificationController {
+        +notification.controller.ts()
+        +.getNotifications()
+        +.getUnreadCount()
+        +.markAsRead()
+        +.markAllAsRead()
+        +.send()
+    }
+    class StudentController {
+        +student.controller.ts()
+        +.getStudents()
+        +.getStudentById()
+        +.createStudent()
+        +.updateStudent()
+        +.promote()
+        +.getEnrollmentCounts()
+        +.bulkImport()
+    }
+    class TimetableController {
+        +timetable.controller.ts()
+        +.listRooms()
+        +.createRoom()
+        +.updateRoom()
+        +.deleteRoom()
+        +.listPeriods()
+        +.createPeriod()
+        +.updatePeriod()
+        +.deletePeriod()
+        +.listTimetables()
+    }
+```
 
 ## Relationships
 
@@ -37,22 +145,31 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\institutions\institution.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.repository.ts)
-- [C:\Antigravityyyyy\VID_School\frontend\app\(auth)\login\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\admissions\documents\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/documents/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\admissions\enrolled\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/enrolled/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\admissions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/admissions/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\finance\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/finance/dashboard/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\hrms\staff\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\students\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\users\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\voice-agent\campaigns\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\auth.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/auth.middleware.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\error.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/error.middleware.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.service.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\admissions\admissions.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\admissions\admissions.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.service.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\attendance\attendance.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\examinations\examinations.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/examinations/examinations.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.service.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\notifications\notification.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/notifications/notification.service.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.repository.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.service.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\timetable\timetable.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/timetable/timetable.controller.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\utils\api-response.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/utils/api-response.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 438 (98%)
-- INFERRED: 7 (2%)
+- EXTRACTED: 419 (36%)
+- INFERRED: 729 (64%)
 - AMBIGUOUS: 0 (0%)
 
 ---

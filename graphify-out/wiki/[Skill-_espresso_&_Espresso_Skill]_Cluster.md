@@ -4,18 +4,18 @@
 
 ## Key Concepts
 
-- [Skill: brooks-lint](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (3 connections)
-- [Brooks Lint Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (1 connections)
-- [Guiding Principles](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (1 connections)
-- [Severity Classifications](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (1 connections)
+- [rbac.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L1) (3 connections)
+- [requireAnyPermission()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L70) (1 connections)
+- [requirePermission()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L36) (1 connections)
+- [requireRole()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L7) (1 connections)
 
 ## Relationships
 
-- [[[Skill: falsegreen & Falsegreen Skill] Cluster]] (6 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\rbac.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts)
 
 ## Audit Trail
 

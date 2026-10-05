@@ -1,15 +1,16 @@
 # NAVIGATION_CONFIG
 
-> 6 nodes · cohesion 0.33
+> 7 nodes · cohesion 0.29
 
 ## Key Concepts
 
-- [ConfirmDialog.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L1) (5 connections)
-- [activeCancelText](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L42) (1 connections)
-- [activeConfirmText](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L41) (1 connections)
-- [activeDestructive](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L43) (1 connections)
-- [handleClose](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L40) (1 connections)
-- [isDialogOpen](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx#L39) (1 connections)
+- [index.ts](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L1) (6 connections)
+- [ApiErrorDetailSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L51) (1 connections)
+- [ApiErrorSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L57) (1 connections)
+- [ApiSuccessSchema()](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L32) (1 connections)
+- [BaseEntitySchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L6) (1 connections)
+- [PaginationQuerySchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L19) (1 connections)
+- [TenantContextSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L75) (1 connections)
 
 ## Relationships
 
@@ -17,11 +18,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\ConfirmDialog.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ConfirmDialog.tsx)
+- [C:\Antigravityyyyy\VID_School\packages\schemas\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 10 (100%)
+- EXTRACTED: 12 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

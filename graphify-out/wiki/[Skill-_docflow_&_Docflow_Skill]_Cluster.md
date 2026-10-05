@@ -1,25 +1,26 @@
 # [Skill: docflow & Docflow Skill] Cluster
 
-> 4 nodes · cohesion 0.50
+> 5 nodes · cohesion 0.40
 
 ## Key Concepts
 
-- [ProgressBar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L1) (3 connections)
-- [heights](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L25) (1 connections)
-- [percentage](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L23) (1 connections)
-- [variants](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx#L31) (1 connections)
+- [Document: Agents](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (4 connections)
+- [1. Operating Mode & Standards](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
+- [2. Active Plugin Ecosystem & Memory](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
+- [3. Working Agreement Checklist](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
+- [VID Platform: Agent Operating Guidelines](file:///C:/Antigravityyyyy/VID_School/AGENTS.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: codex-reviewer & Checklist] Cluster]] (8 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\ProgressBar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/ProgressBar.tsx)
+- [AGENTS.md](file:///C:/Antigravityyyyy/VID_School/AGENTS.md)
 
 ## Audit Trail
 
-- EXTRACTED: 6 (100%)
+- EXTRACTED: 8 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

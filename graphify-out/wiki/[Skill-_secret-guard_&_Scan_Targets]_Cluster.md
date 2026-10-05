@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: axonflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (2 connections)
-- [AxonFlow Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (1 connections)
-- [Policies](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/home/page.tsx#L1) (2 connections)
+- [student](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/home/page.tsx#L29) (1 connections)
+- [todayClasses](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/home/page.tsx#L39) (1 connections)
 
 ## Relationships
 
-- [[[Skill: spec-driven & Lifecycle Stages] Cluster]] (4 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/axonflow/skills/axonflow/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\frontend\app\app\home\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/app/home/page.tsx)
 
 ## Audit Trail
 

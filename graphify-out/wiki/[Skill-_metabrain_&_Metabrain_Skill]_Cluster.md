@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [App.tsx](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx#L1) (2 connections)
-- [[selectedChild, setSelectedChild]](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx#L6) (1 connections)
-- [[selectedRole, setSelectedRole]](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx#L5) (1 connections)
+- [api.v1.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts#L1) (2 connections)
+- [dbOk](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts#L29) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts#L25) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\mobile\App.tsx](file:///C:/Antigravityyyyy/VID_School/mobile/App.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\routes\api.v1.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts)
 
 ## Audit Trail
 

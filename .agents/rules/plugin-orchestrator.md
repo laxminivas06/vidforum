@@ -34,6 +34,8 @@ The repository has 28 installed plugins in `.agents/plugins/`. Apply them system
 ## 5. Security & Git Phase
 - **Secret Guard (`secret-guard`) & Agent Guard (`agent-guard`)**: Block hardcoded secrets, API keys, and sensitive tokens. Ensure `.env` is never committed.
 - **Commit Narrator (`commit-narrator`)**: Author conventional, semantic git commits explaining both the change and the architectural rationale (*why*).
+- **Git Push Governance**: Strictly DO NOT push to Git/GitHub unless the user explicitly asks to push.
+- **Workspace Navigation Isolation**: Every isolated workspace (Academics, Staff/HRMS, Admissions, etc.) must render ONLY its dedicated tools in the sidebar. Never leak external workspace navigation groups into an isolated workspace.
 - **Docflow (`docflow`)**: Ensure `docs/TASKS.md`, `docs/TECH_SPEC.md`, and `docs/PRD.md` remain accurate and synchronized.
 
 ## 6. Token & Output Optimization

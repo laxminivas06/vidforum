@@ -4,18 +4,18 @@
 
 ## Key Concepts
 
-- [Skill: honcho-memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (3 connections)
-- [Honcho Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (1 connections)
-- [When to Pull Memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (1 connections)
-- [When to Save Memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md) (1 connections)
+- [optional-modules.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L1) (3 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L11) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L12) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts#L6) (1 connections)
 
 ## Relationships
 
-- [[[Skill: flaky-detector & Flaky Detector Skill] Cluster]] (6 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- [.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-honcho/skills/honcho-memory/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\optional-modules\optional-modules.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/optional-modules/optional-modules.routes.ts)
 
 ## Audit Trail
 

@@ -22,6 +22,7 @@
 - **Pre-Commit Verification:** Validate attendance and marks before database commit (zero silent failures).
 - **Auditing:** Financial and academic mutations generate immutable audit logs (`audit_logs`).
 - **Zero Duplicate Data & Dates Policy:** Strictly prohibit duplicate data, duplicate dates, duplicate record IDs, or duplicate entities across all frontend pages, tables, and mock/seed repositories. All entities must possess globally unique identifiers and distinct, realistic dates and attributes.
+- **Supabase MCP Database Protocol:** All database operations (schema inspection, table alterations, stored procedures, RPC functions, triggers, and DDL migrations) must be executed using the Supabase MCP Server (`supabase-mcp-server`, project `cyvckmjocomqzipbvbpv`), allowing direct modification, testing, and management of all PostgreSQL database functions with zero teardown of existing tested records.
 
 ---
 

@@ -14,6 +14,7 @@
 - Maintain the single student master record across all operations. Student is **never** a separate workspace.
 - Enforce multi-tenant isolation via `institution_id` on all tenant queries, models, and file storage.
 - **Zero Duplicate Data & Dates Policy:** Strictly prohibit duplicate data, duplicate dates, duplicate record IDs, duplicate tenant codes, or duplicate student records across all pages, views, tables, and seed/mock datasets. Every entity must have strictly unique identifiers and distinct, realistic dates and values.
+- **Database Operations & Supabase MCP Protocol:** Whenever interacting with, modifying, or altering database schemas, tables, views, stored procedures, triggers, or SQL functions, prioritize and use the **Supabase MCP Server** (`supabase-mcp-server`, project `cyvckmjocomqzipbvbpv`). All function modifications, DDL schema evolutions, and migrations must be executed through Supabase MCP tools (`apply_migration`, `execute_sql`, `list_tables`) with strict backward compatibility verification.
 - Respect human approval gates between major phases.
 
 ---
@@ -37,6 +38,7 @@ Refer to [docs/MEMORY.md](file:///c:/Antigravityyyyy/VID_School/docs/MEMORY.md) 
 ## 3. Working Agreement Checklist
 - **Phase 0 (Intake & Prompt Mastery):** Apply Prompt Architect on plain or informal user requests to clarify scope, inject PRD invariants (Rule 1 student master, Rule 2 tenant isolation, zero duplicate data), specify `@/components/ui/` primitives, and formulate measurable acceptance criteria.
 - **Pre-Edit:** Run Wingman data contract verification + check existing codebase components to avoid re-implementing existing code.
+- **Database Changes:** Route all schema modifications, table alterations, and function creations/edits through the **Supabase MCP Server** (`supabase-mcp-server`), ensuring all SQL functions and procedures are accurately tested and synchronized with `backend/db/migrations/`.
 - **During Code:** Apply **Ponytail Ultra** (reuse `@/components/ui/`, native features over libs, single root-cause fixes, shortest diffs, no speculative boilerplate).
 - **Post-Code:** Apply River Review (4 lenses) and Brooks Lint.
 - **Pre-Commit:** Run Secret Guard and Falsegreen test verification.

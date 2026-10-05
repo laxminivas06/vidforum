@@ -325,7 +325,7 @@ export class AcademicsController {
     try {
       const instId = req.institutionId!;
       const actorId = (req as any).user?.id || 'system';
-      const { name, code, isElective, credits, departmentId } = req.body;
+      const { name, code, isElective, type, subjectType, syllabus, credits, departmentId } = req.body;
 
       if (!name || !code) {
         sendError(res, 'Subject name and code are required', 400, 'VALIDATION_ERROR');
@@ -334,7 +334,7 @@ export class AcademicsController {
 
       const created = await academicsService.createSubject(
         instId,
-        { name, code, isElective, credits, departmentId },
+        { name, code, isElective, type, subjectType, syllabus, credits, departmentId },
         actorId
       );
       sendSuccess(res, created, 'Subject created successfully', 201);
@@ -352,12 +352,12 @@ export class AcademicsController {
       const instId = req.institutionId!;
       const actorId = (req as any).user?.id || 'system';
       const id = req.params.id as string;
-      const { name, code, isElective, credits, departmentId, isActive } = req.body;
+      const { name, code, isElective, type, subjectType, syllabus, credits, departmentId, isActive } = req.body;
 
       const updated = await academicsService.updateSubject(
         instId,
         id,
-        { name, code, isElective, credits, departmentId, isActive },
+        { name, code, isElective, type, subjectType, syllabus, credits, departmentId, isActive },
         actorId
       );
       sendSuccess(res, updated, 'Subject updated successfully');
@@ -417,7 +417,7 @@ export class AcademicsController {
       const instId = req.institutionId!;
       const actorId = (req as any).user?.id || 'system';
       const classId = req.params.classId as string;
-      const { subjectId, periodsPerWeek, maxMarks, passMarks, isMandatory } = req.body;
+      const { subjectId, periodsPerWeek, maxMarks, passMarks, isMandatory, type, subjectType, syllabus } = req.body;
 
       if (!subjectId) {
         sendError(res, 'subjectId is required', 400, 'VALIDATION_ERROR');
@@ -426,7 +426,7 @@ export class AcademicsController {
 
       const result = await academicsService.mapSubjectToGrade(
         instId,
-        { classId, subjectId, periodsPerWeek, maxMarks, passMarks, isMandatory },
+        { classId, subjectId, periodsPerWeek, maxMarks, passMarks, isMandatory, type, subjectType, syllabus },
         actorId
       );
       sendSuccess(res, result, 'Subject mapped to grade successfully', 201);
@@ -714,16 +714,45 @@ export class AcademicsController {
     try {
       const instId = req.institutionId!;
       const actorId = (req as any).user?.id || 'system';
-      const { academicYearId, classId, subjectId, title, author, publisher, edition, isbn, price, isMandatory, notes } = req.body;
+      const {
+        academicYearId,
+        classId,
+        subjectId,
+        subjectName,
+        subject,
+        title,
+        author,
+        publisher,
+        edition,
+        isbn,
+        price,
+        isMandatory,
+        notes,
+      } = req.body;
 
-      if (!academicYearId || !classId || !subjectId || !title || !author || !publisher) {
-        sendError(res, 'academicYearId, classId, subjectId, title, author, and publisher are required', 400, 'VALIDATION_ERROR');
+      const resolvedSubjectName = (subjectName || subject || '').trim();
+
+      if (!academicYearId || !classId || (!subjectId && !resolvedSubjectName) || !title || !author || !publisher) {
+        sendError(res, 'academicYearId, classId, subject, title, author, and publisher are required', 400, 'VALIDATION_ERROR');
         return;
       }
 
       const created = await academicsService.createTextbook(
         instId,
-        { academicYearId, classId, subjectId, title, author, publisher, edition, isbn, price, isMandatory, notes },
+        {
+          academicYearId,
+          classId,
+          subjectId: subjectId || undefined,
+          subjectName: resolvedSubjectName || undefined,
+          title,
+          author,
+          publisher,
+          edition,
+          isbn,
+          price,
+          isMandatory,
+          notes,
+        },
         actorId
       );
       sendSuccess(res, created, 'Preferred textbook added successfully', 201);
@@ -737,12 +766,23 @@ export class AcademicsController {
       const instId = req.institutionId!;
       const actorId = (req as any).user?.id || 'system';
       const id = req.params.id as string;
-      const { title, author, publisher, edition, isbn, price, isMandatory, notes } = req.body;
+      const { subjectId, subjectName, subject, title, author, publisher, edition, isbn, price, isMandatory, notes } = req.body;
 
       const updated = await academicsService.updateTextbook(
         instId,
         id,
-        { title, author, publisher, edition, isbn, price, isMandatory, notes },
+        {
+          subjectId,
+          subjectName: subjectName || subject,
+          title,
+          author,
+          publisher,
+          edition,
+          isbn,
+          price,
+          isMandatory,
+          notes,
+        },
         actorId
       );
       sendSuccess(res, updated, 'Preferred textbook updated successfully');

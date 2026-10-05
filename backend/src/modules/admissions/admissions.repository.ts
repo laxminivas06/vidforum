@@ -18,6 +18,8 @@ export interface ApplicantRow {
   entrance_score: number | null;
   interview_date: string | null;
   notes: string | null;
+  fee_amount?: number | string | null;
+  fee_status?: string | null;
 }
 
 export class AdmissionsRepository {
@@ -125,6 +127,8 @@ export class AdmissionsRepository {
         a.guardian_name, a.guardian_phone, a.guardian_email,
         a.stage, a.created_at AS applied_date, a.entrance_score,
         a.interview_date, a.notes,
+        COALESCE(a.fee_amount, 0)::numeric AS fee_amount,
+        COALESCE(a.fee_status, 'unpaid') AS fee_status,
         COALESCE(
           (SELECT json_agg(json_build_object(
             'id', ad.id, 'title', ad.document_type,
@@ -163,6 +167,7 @@ export class AdmissionsRepository {
     classId?: string; gradeApplying?: string; academicYearId?: string;
     guardianName?: string; guardianPhone?: string; guardianEmail?: string;
     stage?: string; notes?: string; entranceScore?: number; enquiryId?: string;
+    feeAmount?: number | string; feeStatus?: string;
   }) {
     let academicYearId = data.academicYearId;
     if (!academicYearId) {
@@ -202,18 +207,25 @@ export class AdmissionsRepository {
     };
     const stage = data.stage ? (stageMap[data.stage] || data.stage.toLowerCase().replace(' ', '_')) : 'application';
 
+    const feeAmount = data.feeAmount !== undefined && data.feeAmount !== null && !isNaN(Number(data.feeAmount))
+      ? Number(data.feeAmount)
+      : 0;
+    const feeStatus = data.feeStatus ? data.feeStatus.toLowerCase() : 'unpaid';
+
     const res = await db.query(
       `INSERT INTO applications (
          institution_id, applicant_name, date_of_birth, gender,
          applying_for_class_id, academic_year_id,
          guardian_name, guardian_phone, guardian_email,
-         stage, notes, entrance_score, enquiry_id
-       ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING *`,
+         stage, notes, entrance_score, enquiry_id,
+         fee_amount, fee_status
+       ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *`,
       [
         institutionId, data.applicantName, data.dateOfBirth || null, gender,
         classId, academicYearId,
         data.guardianName || null, data.guardianPhone || null, data.guardianEmail || null,
         stage, data.notes || null, data.entranceScore || null, data.enquiryId || null,
+        feeAmount, feeStatus,
       ]
     );
     return res.rows[0];
@@ -242,6 +254,8 @@ export class AdmissionsRepository {
           stage: r.stage || 'application',
           notes: r.notes,
           entranceScore: r.entranceScore ? parseFloat(r.entranceScore) : undefined,
+          feeAmount: r.feeAmount !== undefined && r.feeAmount !== null ? Number(r.feeAmount) : 0,
+          feeStatus: r.feeStatus || (r.feePaid === true ? 'paid' : 'unpaid'),
         });
 
         results.push({ row: i + 1, success: true, applicantName, id: app.id });
@@ -333,7 +347,7 @@ export class AdmissionsRepository {
         [institutionId, student.id, app.academic_year_id, app.applying_for_class_id, data.sectionId, data.rollNumber]
       );
 
-      await client.query("UPDATE applications SET stage = 'approved', updated_at = now() WHERE id = $1", [app.id]);
+      await client.query("UPDATE applications SET stage = 'enrolled', updated_at = now() WHERE id = $1", [app.id]);
       await client.query('COMMIT');
 
       await AuditDispatcher.dispatch({
@@ -341,7 +355,7 @@ export class AdmissionsRepository {
         action: 'admissions.application.approved',
         resource: 'admissions', resourceId: admissionId, institutionId,
         oldValue: { stage: app.stage },
-        newValue: { stage: 'approved', admissionId, studentId: student.id, admissionNumber: data.admissionNumber },
+        newValue: { stage: 'enrolled', admissionId, studentId: student.id, admissionNumber: data.admissionNumber },
       });
       return student;
     } catch (err) {
@@ -363,8 +377,18 @@ export class AdmissionsRepository {
   }
 
   async findDefaultSection(classId: string): Promise<string | null> {
-    const res = await db.query('SELECT id FROM sections WHERE class_id = $1 LIMIT 1', [classId]);
-    return res.rows[0]?.id || null;
+    if (!classId) return null;
+    const res = await db.query('SELECT id FROM sections WHERE class_id = $1 ORDER BY name ASC LIMIT 1', [classId]);
+    if (res.rows[0]?.id) return res.rows[0].id;
+    try {
+      const newSec = await db.query(
+        "INSERT INTO sections (class_id, name, capacity) VALUES ($1, 'Section A', 40) RETURNING id",
+        [classId]
+      );
+      return newSec.rows[0]?.id || null;
+    } catch {
+      return null;
+    }
   }
 
   async getPipelineStats(institutionId: string) {

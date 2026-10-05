@@ -30,6 +30,7 @@ import {
   Eye,
   RefreshCw,
   Building,
+  Banknote,
 } from "lucide-react"
 import {
   useStudents,
@@ -471,6 +472,10 @@ function DirectEnrollModal({ isOpen, onClose, academicGrades, enrollmentCounts, 
   const [emergencyPhone, setEmergencyPhone] = useState("")
   const [addressLine1, setAddressLine1] = useState("")
 
+  // Student Fees
+  const [feeAmount, setFeeAmount] = useState<string>("5000")
+  const [feeStatus, setFeeStatus] = useState<string>("paid")
+
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -522,6 +527,10 @@ function DirectEnrollModal({ isOpen, onClose, academicGrades, enrollmentCounts, 
 
     try {
       setIsSubmitting(true)
+      const notesWithFee = [
+        feeAmount ? `Admission Fee: ₹${feeAmount} (${feeStatus})` : "",
+      ].filter(Boolean).join(" | ")
+
       await createStudentMutation.mutateAsync({
         firstName,
         lastName,
@@ -538,6 +547,7 @@ function DirectEnrollModal({ isOpen, onClose, academicGrades, enrollmentCounts, 
         guardianRelationship,
         emergencyPhone,
         addressLine1,
+        notes: notesWithFee || undefined,
       })
       onSuccess()
     } catch (err: any) {
@@ -765,6 +775,43 @@ function DirectEnrollModal({ isOpen, onClose, academicGrades, enrollmentCounts, 
                 <option value="father">Father</option>
                 <option value="mother">Mother</option>
                 <option value="guardian">Guardian</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Admission Fees */}
+          <div className="text-xs font-semibold text-text-primary uppercase tracking-wider border-b border-border-subtle pb-1 mt-2">
+            4. Admission Fees & Status
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label className="text-xs font-medium text-text-secondary mb-1 block">Student Admission Fee (₹) *</label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-text-muted">₹</span>
+                <input
+                  type="number"
+                  min="0"
+                  step="100"
+                  required
+                  value={feeAmount}
+                  onChange={(e) => setFeeAmount(e.target.value)}
+                  placeholder="e.g. 5000"
+                  className="w-full pl-7 pr-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary font-mono font-medium"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="text-xs font-medium text-text-secondary mb-1 block">Fee Payment Status</label>
+              <select
+                value={feeStatus}
+                onChange={(e) => setFeeStatus(e.target.value)}
+                className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary cursor-pointer font-medium"
+              >
+                <option value="paid">Paid (Collected at Admission)</option>
+                <option value="unpaid">Unpaid / Payment Due</option>
+                <option value="partial">Partially Paid</option>
               </select>
             </div>
           </div>

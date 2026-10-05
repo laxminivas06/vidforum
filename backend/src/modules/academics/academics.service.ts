@@ -143,7 +143,9 @@ export class AcademicsService {
             name: sub.name,
             code: sub.code,
             credits: sub.credits || 4,
-            type: sub.is_elective ? 'ELECTIVE' : 'CORE',
+            type: sub.type || sub.subject_type || (sub.is_elective ? 'External' : 'Core Subject'),
+            subjectType: sub.subject_type || sub.type || (sub.is_elective ? 'External' : 'Core Subject'),
+            syllabus: sub.syllabus || null,
             periodsPerWeek: sub.periods_per_week,
             maxMarks: sub.max_marks,
             passMarks: sub.pass_marks,
@@ -350,6 +352,9 @@ export class AcademicsService {
     name: string;
     code: string;
     isElective?: boolean;
+    type?: string;
+    subjectType?: string;
+    syllabus?: string;
     credits?: number;
     departmentId?: string;
   }, actorId = 'system') {
@@ -369,6 +374,9 @@ export class AcademicsService {
     name?: string;
     code?: string;
     isElective?: boolean;
+    type?: string;
+    subjectType?: string;
+    syllabus?: string;
     credits?: number;
     departmentId?: string | null;
     isActive?: boolean;
@@ -417,7 +425,10 @@ export class AcademicsService {
     maxMarks?: number;
     passMarks?: number;
     isMandatory?: boolean;
-  }, actorId = 'system') {
+    type?: string;
+    subjectType?: string;
+    syllabus?: string;
+  }, actorId = 'system'): Promise<any> {
     const res = await academicsRepository.mapSubjectToGrade(institutionId, data);
     await AuditDispatcher.dispatch({
       actorId,
@@ -594,7 +605,8 @@ export class AcademicsService {
   async createTextbook(institutionId: string, data: {
     academicYearId: string;
     classId: string;
-    subjectId: string;
+    subjectId?: string;
+    subjectName?: string;
     title: string;
     author: string;
     publisher: string;
@@ -617,6 +629,8 @@ export class AcademicsService {
   }
 
   async updateTextbook(institutionId: string, id: string, data: {
+    subjectId?: string;
+    subjectName?: string;
     title?: string;
     author?: string;
     publisher?: string;

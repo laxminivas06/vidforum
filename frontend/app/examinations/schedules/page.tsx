@@ -37,43 +37,8 @@ interface ExamSchedule {
   status: "SCHEDULED" | "MARKS_UPLOADED" | "PUBLISHED"
 }
 
-const MOCK_EXAMS: ExamSchedule[] = [
-  {
-    id: "ex-1",
-    title: "Term 1 Mid-Term Examination",
-    grade: "Grade 10",
-    subject: "Mathematics (MAT101)",
-    date: "2026-10-05",
-    time: "09:00 AM - 12:00 PM",
-    maxMarks: 100,
-    hall: "Block B Examination Hall",
-    status: "SCHEDULED",
-  },
-  {
-    id: "ex-2",
-    title: "Term 1 Mid-Term Examination",
-    grade: "Grade 10",
-    subject: "Physics & Chemistry (SCI102)",
-    date: "2026-10-07",
-    time: "09:00 AM - 12:00 PM",
-    maxMarks: 100,
-    hall: "Block B Examination Hall",
-    status: "SCHEDULED",
-  },
-  {
-    id: "ex-3",
-    title: "Practical Assessment 1",
-    grade: "Grade 11",
-    subject: "Advanced Physics (PHY201)",
-    date: "2026-09-22",
-    time: "01:30 PM - 03:30 PM",
-    maxMarks: 50,
-    hall: "Physics Lab 3",
-    status: "MARKS_UPLOADED",
-  },
-]
-
 export default function ExaminationsPage() {
+  const [exams, setExams] = useState<ExamSchedule[]>([])
   const [importModalOpen, setImportModalOpen] = useState(false)
   const [selectedFile, setSelectedFile] = useState<string | null>(null)
   const [importSuccess, setImportSuccess] = useState(false)
@@ -166,15 +131,30 @@ export default function ExaminationsPage() {
       }
     >
       <div className="flex flex-col gap-6">
-        {/* Table */}
-        <Table
-          data={MOCK_EXAMS}
-          columns={columns}
-          keyExtractor={(item) => item.id}
-          cardTitle={(item) => item.title}
-          cardSubtitle={(item) => `${item.subject} • ${item.grade}`}
-          cardBadge={(item) => <Badge variant="neutral">{item.status}</Badge>}
-        />
+        {exams.length > 0 ? (
+          <Table
+            data={exams}
+            columns={columns}
+            keyExtractor={(item) => item.id}
+            cardTitle={(item) => item.title}
+            cardSubtitle={(item) => `${item.subject} • ${item.grade}`}
+            cardBadge={(item) => <Badge variant="neutral">{item.status}</Badge>}
+          />
+        ) : (
+          <div className="p-12 text-center bg-surface rounded-2xl border border-dashed border-border-default flex flex-col items-center justify-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-subtle border border-border-default flex items-center justify-center text-text-muted">
+              <FileSpreadsheet className="w-6 h-6" />
+            </div>
+            <div>
+              <h4 className="text-sm font-bold text-text-primary">
+                No Examination Schedules Configured
+              </h4>
+              <p className="text-xs text-text-secondary mt-1 max-w-md">
+                Create term exam schedules or import board marks ledgers via Excel spreadsheet to view assessments and generate report cards.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Excel Import SlideOver Flow */}
@@ -182,49 +162,71 @@ export default function ExaminationsPage() {
         open={importModalOpen}
         onClose={() => setImportModalOpen(false)}
         title="Import Marks Ledger via Excel"
-        subtitle="CBSE / State Board Standardized Spreadsheet Format"
+        subtitle="Standardized Spreadsheet Format"
         footer={
           <div className="flex items-center justify-between w-full">
             <span className="text-xs text-text-secondary">
-              Template: VID_Marks_Grade10_v2.xlsx
+              Excel format (.xlsx, .csv)
             </span>
-            <Button
-              size="dense"
-              variant="primary"
-              disabled={!selectedFile || importSuccess}
-              className="bg-brand-primary text-black hover:bg-emerald-400"
-              onClick={handleSimulateImport}
-            >
-              {importSuccess ? "Import Processed!" : "Validate & Commit Marks"}
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button size="dense" variant="secondary" onClick={() => setImportModalOpen(false)}>
+                Cancel
+              </Button>
+              <Button
+                size="dense"
+                variant="primary"
+                disabled={!selectedFile}
+                onClick={handleSimulateImport}
+              >
+                Validate & Ingest
+              </Button>
+            </div>
           </div>
         }
       >
-        <div className="flex flex-col gap-5 text-xs">
-          <p className="text-text-secondary">
-            Upload the graded spreadsheet containing Student Roll Numbers, Component Scores (Theory, Practical, Internal Assessment), and Examiner Signatures.
-          </p>
-
-          {/* Upload Dropzone */}
-          <div
-            onClick={() => setSelectedFile("Grade10A_Maths_MidTerm_2026.xlsx")}
-            className="p-8 border-2 border-dashed border-border-default hover:border-brand-primary rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors bg-subtle/50"
-          >
-            <FileSpreadsheet className="w-8 h-8 text-brand-primary" />
-            <div className="font-semibold text-text-primary text-sm text-center">
-              {selectedFile ? selectedFile : "Click to select or drop .xlsx / .csv file"}
+        <div className="flex flex-col gap-6 py-4">
+          <div className="p-4 rounded-xl bg-subtle border border-border-default flex items-start gap-3">
+            <Calendar className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
+            <div>
+              <div className="font-semibold text-xs text-text-primary">
+                Standardized Exam Format
+              </div>
+              <p className="text-xs text-text-secondary mt-0.5">
+                Ensure columns match: Roll Number, Student Admission ID, Marks Obtained, Max Marks.
+              </p>
             </div>
-            <span className="text-text-muted text-[11px]">
-              {selectedFile ? "File verified: 38 student rows parsed" : "Max file size: 10MB"}
-            </span>
           </div>
 
-          {selectedFile && (
-            <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center gap-2 text-xs">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>
-                Zero validation errors found. Roll numbers matched against Student Master entities.
-              </span>
+          <div className="border-2 border-dashed border-border-default rounded-xl p-8 flex flex-col items-center justify-center gap-3 bg-canvas text-center">
+            <FileSpreadsheet className="w-8 h-8 text-text-secondary" />
+            <div>
+              <div className="text-sm font-semibold text-text-primary">
+                {selectedFile ? selectedFile : "Select ledger spreadsheet to upload"}
+              </div>
+              <p className="text-xs text-text-secondary mt-0.5">
+                Drag and drop your Excel spreadsheet (.xlsx, .csv)
+              </p>
+            </div>
+            <input
+              type="file"
+              id="file-upload"
+              className="hidden"
+              accept=".xlsx,.csv"
+              onChange={(e) => setSelectedFile(e.target.files?.[0]?.name || null)}
+            />
+            <Button
+              size="dense"
+              variant="secondary"
+              onClick={() => document.getElementById("file-upload")?.click()}
+            >
+              Choose Spreadsheet
+            </Button>
+          </div>
+
+          {importSuccess && (
+            <div className="p-3 bg-positive/10 border border-positive/20 rounded-xl text-positive text-xs flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 shrink-0" />
+              <span>Marks Ledger uploaded and validated with 0 discrepancies!</span>
             </div>
           )}
         </div>

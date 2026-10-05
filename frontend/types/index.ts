@@ -57,6 +57,10 @@ export interface AcademicGrade {
   name: string
   code: string
   curriculum: string
+  sequenceOrder?: number
+  departmentId?: string
+  departmentName?: string
+  academicYearId?: string
   sections: {
     id: string
     name: string
@@ -70,7 +74,13 @@ export interface AcademicGrade {
     name: string
     code: string
     credits: number
-    type: "CORE" | "ELECTIVE" | "LAB"
+    type: "Languages" | "Core Subject" | "External" | "CORE" | "ELECTIVE" | "LAB" | string
+    subjectType?: string
+    syllabus?: string
+    periodsPerWeek?: number
+    maxMarks?: number
+    passMarks?: number
+    isMandatory?: boolean
   }[]
 }
 

@@ -25,6 +25,7 @@ import {
   Users,
   Camera,
   ArrowRight,
+  ClipboardList,
 } from "lucide-react"
 
 interface SessionItem {
@@ -39,55 +40,13 @@ interface SessionItem {
   method: "BIOMETRIC_VISION" | "MANUAL_TEACHER"
 }
 
-const MOCK_SESSIONS: SessionItem[] = [
-  {
-    id: "sess-1",
-    gradeSection: "Grade 10 - Section A",
-    period: "Period 1 (08:30 - 09:30 AM)",
-    subject: "Mathematics",
-    teacher: "Mrs. Revathi Raman",
-    present: 38,
-    total: 38,
-    status: "VERIFIED",
-    method: "BIOMETRIC_VISION",
-  },
-  {
-    id: "sess-2",
-    gradeSection: "Grade 10 - Section B",
-    period: "Period 1 (08:30 - 09:30 AM)",
-    subject: "English Literature",
-    teacher: "Ms. Shalini Gupta",
-    present: 36,
-    total: 39,
-    status: "VERIFIED",
-    method: "MANUAL_TEACHER",
-  },
-  {
-    id: "sess-3",
-    gradeSection: "Grade 11 - Section A",
-    period: "Period 2 (09:30 - 10:30 AM)",
-    subject: "Advanced Physics",
-    teacher: "Dr. Arvind Rao",
-    present: 44,
-    total: 44,
-    status: "VERIFIED",
-    method: "BIOMETRIC_VISION",
-  },
-  {
-    id: "sess-4",
-    gradeSection: "Grade 7 - Section C",
-    period: "Period 2 (09:30 - 10:30 AM)",
-    subject: "General Science",
-    teacher: "Mr. Deepak Varma",
-    present: 32,
-    total: 35,
-    status: "PENDING",
-    method: "MANUAL_TEACHER",
-  },
-]
-
 export default function AttendanceSessionsPage() {
+  const [sessions, setSessions] = useState<SessionItem[]>([])
   const [selectedSession, setSelectedSession] = useState<SessionItem | null>(null)
+
+  const totalPresent = sessions.reduce((acc, s) => acc + s.present, 0)
+  const totalStudents = sessions.reduce((acc, s) => acc + s.total, 0)
+  const verifiedCount = sessions.filter((s) => s.status === "VERIFIED").length
 
   const columns: TableColumn<SessionItem>[] = [
     {
@@ -114,7 +73,7 @@ export default function AttendanceSessionsPage() {
       header: "Pace / Ratio",
       key: "present",
       render: (item) => {
-        const pct = Math.round((item.present / item.total) * 100)
+        const pct = item.total > 0 ? Math.round((item.present / item.total) * 100) : 0
         return (
           <div className="w-32">
             <div className="flex justify-between text-[11px] font-mono mb-1">
@@ -123,7 +82,7 @@ export default function AttendanceSessionsPage() {
               </span>
               <span className="font-semibold">{pct}%</span>
             </div>
-            <ProgressBar value={item.present} max={item.total} />
+            <ProgressBar value={item.present} max={item.total || 1} />
           </div>
         )
       },
@@ -177,51 +136,67 @@ export default function AttendanceSessionsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard
             label="Overall Daily Attendance"
-            value="94.8%"
-            delta="+1.1% vs yesterday"
-            deltaType="increase"
+            value={totalStudents > 0 ? `${Math.round((totalPresent / totalStudents) * 100)}%` : "0%"}
+            delta={totalStudents > 0 ? `${totalPresent} / ${totalStudents} students` : "No sessions active"}
+            deltaType="neutral"
             icon={<CalendarCheck className="w-5 h-5" />}
-            description="2,322 / 2,450 students accounted"
+            description="Accounted for today"
           />
           <StatCard
             label="AI Vision Logged"
-            value="1,842"
-            delta="79% automated"
-            deltaType="increase"
+            value="0"
+            delta="0 automated"
+            deltaType="neutral"
             icon={<Camera className="w-5 h-5" />}
-            description="12 camera gates online"
+            description="Camera terminals standby"
           />
           <StatCard
             label="Unexcused Absences"
-            value="48"
-            delta="Voice AI notified"
+            value="0"
+            delta="Standby"
             deltaType="neutral"
             icon={<AlertTriangle className="w-5 h-5" />}
-            description="Automated parent alerts queued"
+            description="Parent notification queue"
           />
           <StatCard
             label="Verified Sessions"
-            value="24 / 28"
-            delta="4 in progress"
+            value={`${verifiedCount} / ${sessions.length}`}
+            delta={sessions.length > 0 ? `${sessions.length - verifiedCount} in progress` : "0 scheduled"}
             deltaType="neutral"
             icon={<CheckCircle2 className="w-5 h-5" />}
             description="Periods running on schedule"
           />
         </div>
 
-        {/* Sessions Table */}
-        <Table
-          data={MOCK_SESSIONS}
-          columns={columns}
-          keyExtractor={(item) => item.id}
-          cardTitle={(item) => item.gradeSection}
-          cardSubtitle={(item) => `${item.subject} • ${item.teacher}`}
-          cardBadge={(item) => (
-            <Badge variant={item.status === "VERIFIED" ? "positive" : "warning"}>
-              {item.status}
-            </Badge>
-          )}
-        />
+        {/* Sessions Table or Clean Empty State */}
+        {sessions.length > 0 ? (
+          <Table
+            data={sessions}
+            columns={columns}
+            keyExtractor={(item) => item.id}
+            cardTitle={(item) => item.gradeSection}
+            cardSubtitle={(item) => `${item.subject} • ${item.teacher}`}
+            cardBadge={(item) => (
+              <Badge variant={item.status === "VERIFIED" ? "positive" : "warning"}>
+                {item.status}
+              </Badge>
+            )}
+          />
+        ) : (
+          <div className="p-12 text-center bg-surface rounded-2xl border border-dashed border-border-default flex flex-col items-center justify-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-subtle border border-border-default flex items-center justify-center text-text-muted">
+              <ClipboardList className="w-6 h-6" />
+            </div>
+            <div>
+              <h4 className="text-sm font-bold text-text-primary">
+                No Attendance Sessions Recorded Today
+              </h4>
+              <p className="text-xs text-text-secondary mt-1 max-w-md">
+                Attendance records will automatically appear here once teachers start daily roll-call or biometric AI vision turnstiles stream turnstile check-ins.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </AppShell>
   )

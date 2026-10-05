@@ -522,6 +522,7 @@ export function useAdmissions() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admissions"] })
       queryClient.invalidateQueries({ queryKey: ["enrollment-counts"] })
+      queryClient.invalidateQueries({ queryKey: ["students"] })
     },
   })
 
@@ -763,16 +764,19 @@ export function useBulkImportStudents() {
   })
 }
 
-export function useAcademics() {
+export function useAcademics(academicYearId?: string) {
   return useQuery({
-    queryKey: ["academics-hierarchy"],
+    queryKey: ["academics-hierarchy", academicYearId || "all"],
     queryFn: async (): Promise<AcademicGrade[]> => {
       try {
-        const res = await fetch(`${API_BASE_URL}/academics/grades`, {
-          headers: { "X-Institution-Id": DEFAULT_INST_ID },
+        const url = academicYearId
+          ? `${API_BASE_URL}/academics/grades?academicYearId=${academicYearId}`
+          : `${API_BASE_URL}/academics/grades`
+        const res = await fetch(url, {
+          headers: getAuthHeaders(),
         })
         const json = await res.json()
-        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+        if (json.success && Array.isArray(json.data)) {
           return json.data
         }
       } catch (err) {
@@ -1745,6 +1749,9 @@ export function useCreateSubject() {
       name: string
       code: string
       isElective?: boolean
+      type?: string
+      subjectType?: string
+      syllabus?: string
       credits?: number
       departmentId?: string
     }) => {
@@ -1760,6 +1767,7 @@ export function useCreateSubject() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["academics-subjects"] })
       queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+      queryClient.invalidateQueries({ queryKey: ["grade-subjects"] })
     },
   })
 }
@@ -1767,7 +1775,20 @@ export function useCreateSubject() {
 export function useUpdateSubject() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: { name?: string; code?: string; isElective?: boolean; credits?: number; departmentId?: string; isActive?: boolean } }) => {
+    mutationFn: async ({ id, data }: { 
+      id: string; 
+      data: { 
+        name?: string; 
+        code?: string; 
+        isElective?: boolean; 
+        type?: string;
+        subjectType?: string;
+        syllabus?: string;
+        credits?: number; 
+        departmentId?: string | null; 
+        isActive?: boolean 
+      } 
+    }) => {
       const res = await fetch(`${API_BASE_URL}/academics/subjects/${id}`, {
         method: "PUT",
         headers: getAuthHeaders(),
@@ -1837,6 +1858,9 @@ export function useMapSubjectToGrade() {
       maxMarks?: number
       passMarks?: number
       isMandatory?: boolean
+      type?: string
+      subjectType?: string
+      syllabus?: string
     }) => {
       const res = await fetch(`${API_BASE_URL}/academics/classes/${data.classId}/grade-subjects`, {
         method: "POST",
@@ -1850,6 +1874,7 @@ export function useMapSubjectToGrade() {
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["grade-subjects", variables.classId] })
       queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-subjects"] })
     },
   })
 }
@@ -2102,7 +2127,9 @@ export function useCreateTextbook() {
     mutationFn: async (data: {
       academicYearId: string
       classId: string
-      subjectId: string
+      subjectId?: string
+      subjectName?: string
+      subject?: string
       title: string
       author: string
       publisher: string

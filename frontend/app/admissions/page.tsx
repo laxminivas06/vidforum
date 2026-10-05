@@ -42,6 +42,8 @@ import {
   Home,
   Shield,
   Layers,
+  Banknote,
+  Zap,
 } from "lucide-react"
 import {
   useAdmissions,
@@ -86,6 +88,8 @@ interface ParsedApplicantRow {
   guardianPhone: string
   guardianEmail: string
   entranceScore?: string
+  feeAmount?: string
+  feeStatus?: string
   notes?: string
   isValid: boolean
   errors: string[]
@@ -112,6 +116,10 @@ export default function AdmissionsPage() {
   const [selectedApplicant, setSelectedApplicant] = useState<Applicant | null>(null)
   const [rejectDialogOpen, setRejectDialogOpen] = useState(false)
   const [enrollingApplicant, setEnrollingApplicant] = useState(false)
+  const [enrollingApplicantId, setEnrollingApplicantId] = useState<string | null>(null)
+  const [advancingApplicantId, setAdvancingApplicantId] = useState<string | null>(null)
+  const [actionSuccess, setActionSuccess] = useState<string | null>(null)
+  const [actionError, setActionError] = useState<string | null>(null)
 
   // Modals state
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false)
@@ -158,7 +166,11 @@ export default function AdmissionsPage() {
       key: "feePaid",
       render: (item) => (
         <Badge variant={item.feePaid ? "positive" : "warning"}>
-          {item.feePaid ? "PAID ₹2,500" : "UNPAID"}
+          {item.feePaid
+            ? `PAID ₹${(item.feeAmount || 2500).toLocaleString("en-IN")}`
+            : item.feeAmount
+            ? `DUE ₹${item.feeAmount.toLocaleString("en-IN")}`
+            : "UNPAID"}
         </Badge>
       ),
     },
@@ -171,16 +183,78 @@ export default function AdmissionsPage() {
       header: "Action",
       key: "id",
       render: (item) => (
-        <Button
-          size="dense"
-          variant="secondary"
-          onClick={() => setSelectedApplicant(item)}
-        >
-          Inspect
-        </Button>
+        <div className="flex items-center gap-1.5">
+          {item.stage !== "ENROLLED" ? (
+            <>
+              <Button
+                size="dense"
+                variant="secondary"
+                disabled={advancingApplicantId === item.id || enrollingApplicantId === item.id}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleAdvanceStage(item)
+                }}
+                trailingIcon={<ChevronRight className="w-3.5 h-3.5" />}
+                title={`Advance ${item.studentName} to next stage`}
+              >
+                {advancingApplicantId === item.id ? "Moving..." : "Next Stage"}
+              </Button>
+              <Button
+                size="dense"
+                variant="primary"
+                className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold"
+                leadingIcon={<UserCheck className="w-3.5 h-3.5" />}
+                disabled={enrollingApplicantId === item.id || advancingApplicantId === item.id}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleDirectEnroll(item)
+                }}
+                title={`Directly enroll ${item.studentName} into active roster`}
+              >
+                {enrollingApplicantId === item.id ? "Enrolling..." : "Direct Enroll"}
+              </Button>
+            </>
+          ) : (
+            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-mono pr-1">
+              <CheckCircle2 className="w-3.5 h-3.5" /> Enrolled
+            </span>
+          )}
+          <Button
+            size="dense"
+            variant="ghost"
+            onClick={() => setSelectedApplicant(item)}
+          >
+            Inspect
+          </Button>
+        </div>
       ),
     },
   ]
+
+  const handleDirectEnroll = async (applicant: Applicant) => {
+    try {
+      setEnrollingApplicantId(applicant.id)
+      setActionError(null)
+      const res = await approveApplicant(applicant.id)
+      const studentId = res?.student?.id || applicant.id
+      const admNum = res?.admissionNumber || res?.student?.admission_number || res?.student?.admissionNumber || ""
+      setActionSuccess(
+        `Successfully enrolled ${applicant.studentName}! Admission #: ${admNum}. Redirecting to Student Master Profile...`
+      )
+      if (selectedApplicant?.id === applicant.id) {
+        setSelectedApplicant(null)
+      }
+      setTimeout(() => {
+        router.push(`/students/${studentId}`)
+      }, 1200)
+    } catch (err: any) {
+      console.error("Direct enrollment failed:", err)
+      setActionError(err.message || "Failed to directly enroll applicant")
+      setTimeout(() => setActionError(null), 6000)
+    } finally {
+      setEnrollingApplicantId(null)
+    }
+  }
 
   const handleEnroll = async (applicant: Applicant) => {
     try {
@@ -208,8 +282,26 @@ export default function AdmissionsPage() {
     const currentIndex = stageOrder.indexOf(applicant.stage)
     if (currentIndex < stageOrder.length - 1) {
       const nextStage = stageOrder[currentIndex + 1]
-      await updateStage({ applicantId: applicant.id, newStage: nextStage })
-      setSelectedApplicant({ ...applicant, stage: nextStage })
+      if (nextStage === "ENROLLED") {
+        await handleDirectEnroll(applicant)
+        return
+      }
+      try {
+        setAdvancingApplicantId(applicant.id)
+        setActionError(null)
+        await updateStage({ applicantId: applicant.id, newStage: nextStage })
+        setActionSuccess(`Advanced ${applicant.studentName} to stage: ${nextStage.replace("_", " ")}`)
+        setTimeout(() => setActionSuccess(null), 4000)
+        if (selectedApplicant?.id === applicant.id) {
+          setSelectedApplicant({ ...applicant, stage: nextStage })
+        }
+      } catch (err: any) {
+        console.error("Failed to advance stage:", err)
+        setActionError(err.message || "Failed to advance applicant stage")
+        setTimeout(() => setActionError(null), 5000)
+      } finally {
+        setAdvancingApplicantId(null)
+      }
     }
   }
 
@@ -274,6 +366,36 @@ export default function AdmissionsPage() {
       }
     >
       <div className="flex flex-col gap-6">
+        {/* Direct Action Notification Alerts */}
+        {actionSuccess && (
+          <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-between text-xs font-semibold animate-in fade-in shadow-sm">
+            <div className="flex items-center gap-2.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+              <span>{actionSuccess}</span>
+            </div>
+            <button
+              onClick={() => setActionSuccess(null)}
+              className="p-1 hover:bg-emerald-500/20 rounded-md transition-colors"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        )}
+        {actionError && (
+          <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-between text-xs font-semibold animate-in fade-in shadow-sm">
+            <div className="flex items-center gap-2.5">
+              <AlertCircle className="w-4 h-4 text-rose-500 shrink-0" />
+              <span>{actionError}</span>
+            </div>
+            <button
+              onClick={() => setActionError(null)}
+              className="p-1 hover:bg-rose-500/20 rounded-md transition-colors"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        )}
+
         {/* Filter Strip */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-xl bg-surface border border-border-default">
           <div className="relative w-full sm:w-80">
@@ -356,7 +478,11 @@ export default function AdmissionsPage() {
                               {applicant.studentName}
                             </span>
                             <Badge variant={applicant.feePaid ? "positive" : "warning"}>
-                              {applicant.feePaid ? "Fee Paid" : "Unpaid"}
+                              {applicant.feePaid
+                                ? `Paid ₹${(applicant.feeAmount || 2500).toLocaleString("en-IN")}`
+                                : applicant.feeAmount
+                                ? `Due ₹${applicant.feeAmount.toLocaleString("en-IN")}`
+                                : "Unpaid"}
                             </Badge>
                           </div>
 
@@ -380,6 +506,55 @@ export default function AdmissionsPage() {
                                 }
                                 /{applicant.documentsSubmitted.length} Docs Verified
                               </span>
+                            </div>
+                          )}
+
+                          {/* Two Options: Next Stage and Direct Enroll */}
+                          {applicant.stage !== "ENROLLED" ? (
+                            <div className="mt-3 pt-2.5 border-t border-border-subtle flex items-center justify-between gap-1.5">
+                              <button
+                                type="button"
+                                disabled={advancingApplicantId === applicant.id || enrollingApplicantId === applicant.id}
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  handleAdvanceStage(applicant)
+                                }}
+                                className="flex-1 inline-flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-canvas hover:bg-subtle text-text-primary border border-border-default hover:border-action-primary/50 shadow-xs transition-all active:scale-95 disabled:opacity-50 cursor-pointer"
+                                title={`Advance ${applicant.studentName} to next stage`}
+                              >
+                                <span>{advancingApplicantId === applicant.id ? "Moving..." : "Next Stage"}</span>
+                                <ChevronRight className="w-3.5 h-3.5 text-text-muted" />
+                              </button>
+
+                              <button
+                                type="button"
+                                disabled={enrollingApplicantId === applicant.id || advancingApplicantId === applicant.id}
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  handleDirectEnroll(applicant)
+                                }}
+                                className="flex-1 inline-flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 cursor-pointer"
+                                title={`Directly enroll ${applicant.studentName} into active student roster`}
+                              >
+                                <UserCheck className="w-3.5 h-3.5" />
+                                <span>
+                                  {enrollingApplicantId === applicant.id ? "Enrolling..." : "Direct Enroll"}
+                                </span>
+                              </button>
+                            </div>
+                          ) : (
+                            <div className="mt-3 pt-2 border-t border-border-subtle flex items-center justify-between text-xs">
+                              <span className="font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1 text-[11px] font-mono">
+                                <CheckCircle2 className="w-3.5 h-3.5" />
+                                Direct Enrolled
+                              </span>
+                              <Link
+                                href={`/students/${applicant.id}`}
+                                onClick={(e) => e.stopPropagation()}
+                                className="text-[11px] text-brand-primary hover:underline font-semibold"
+                              >
+                                Profile →
+                              </Link>
                             </div>
                           )}
                         </div>
@@ -411,25 +586,41 @@ export default function AdmissionsPage() {
               </Button>
 
               <div className="flex items-center gap-2">
-                {selectedApplicant.stage === "APPROVED" ? (
-                  <Button
-                    variant="primary"
-                    size="dense"
-                    disabled={enrollingApplicant}
-                    className="bg-brand-primary text-black hover:bg-emerald-400"
-                    leadingIcon={<UserCheck className="w-4 h-4" />}
-                    onClick={() => handleEnroll(selectedApplicant)}
-                  >
-                    {enrollingApplicant ? "Creating Master Record..." : "1-Click Enroll Student"}
-                  </Button>
+                {selectedApplicant.stage !== "ENROLLED" ? (
+                  <>
+                    <Button
+                      variant="secondary"
+                      size="dense"
+                      disabled={advancingApplicantId === selectedApplicant.id || enrollingApplicantId === selectedApplicant.id}
+                      trailingIcon={<ChevronRight className="w-4 h-4" />}
+                      onClick={() => handleAdvanceStage(selectedApplicant)}
+                      title={`Advance ${selectedApplicant.studentName} to next stage`}
+                    >
+                      {advancingApplicantId === selectedApplicant.id ? "Moving..." : "Next Stage"}
+                    </Button>
+                    <Button
+                      variant="primary"
+                      size="dense"
+                      disabled={enrollingApplicantId === selectedApplicant.id || advancingApplicantId === selectedApplicant.id}
+                      className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold"
+                      leadingIcon={<UserCheck className="w-4 h-4" />}
+                      onClick={() => handleDirectEnroll(selectedApplicant)}
+                      title={`Directly enroll ${selectedApplicant.studentName} into active roster`}
+                    >
+                      {enrollingApplicantId === selectedApplicant.id
+                        ? "Enrolling..."
+                        : "Direct Enroll"}
+                    </Button>
+                  </>
                 ) : (
                   <Button
                     variant="primary"
                     size="dense"
-                    trailingIcon={<ChevronRight className="w-4 h-4" />}
-                    onClick={() => handleAdvanceStage(selectedApplicant)}
+                    className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold"
+                    leadingIcon={<UserCheck className="w-4 h-4" />}
+                    onClick={() => router.push(`/students/${selectedApplicant.id}`)}
                   >
-                    Advance Stage
+                    View Student Master Profile
                   </Button>
                 )}
               </div>
@@ -505,6 +696,18 @@ export default function AdmissionsPage() {
                   <span className="font-mono text-text-primary">
                     {selectedApplicant.appliedDate}
                   </span>
+                </div>
+                <div className="flex justify-between border-t border-border-default pt-2">
+                  <span className="text-text-secondary">Student Fees:</span>
+                  <span className="font-mono font-semibold text-text-primary">
+                    ₹{(selectedApplicant.feeAmount || 2500).toLocaleString("en-IN")}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-text-secondary">Fee Status:</span>
+                  <Badge variant={selectedApplicant.feePaid ? "positive" : "warning"}>
+                    {selectedApplicant.feePaid ? "PAID" : "UNPAID"}
+                  </Badge>
                 </div>
                 {selectedApplicant.entranceScore !== undefined && selectedApplicant.entranceScore !== null && (
                   <div className="flex justify-between border-t border-border-default pt-2">
@@ -645,6 +848,10 @@ function RegisterApplicantModal({
   const [previousSchool, setPreviousSchool] = useState("")
   const [transferCertNo, setTransferCertNo] = useState("")
 
+  // Student Fees
+  const [feeAmount, setFeeAmount] = useState<string>("5000")
+  const [feeStatus, setFeeStatus] = useState<string>("paid")
+
   // Guardian
   const [guardianName, setGuardianName] = useState("")
   const [guardianRelationship, setGuardianRelationship] = useState("Father")
@@ -729,6 +936,9 @@ function RegisterApplicantModal({
         stage,
         notes: notesArray.join(" | ") || undefined,
         entranceScore: entranceScore ? parseFloat(entranceScore) : undefined,
+        feeAmount: feeAmount ? parseFloat(feeAmount) : 0,
+        feeStatus,
+        feePaid: feeStatus === "paid",
       })
 
       onSuccess()
@@ -769,7 +979,7 @@ function RegisterApplicantModal({
         <div className="flex border-b border-border-default bg-canvas px-5 pt-2 gap-2">
           {[
             { id: "demographics", label: "1. Student Bio", icon: <Users className="w-3.5 h-3.5" /> },
-            { id: "academic", label: "2. Grade & Intake", icon: <GraduationCap className="w-3.5 h-3.5" /> },
+            { id: "academic", label: "2. Grade & Fees", icon: <GraduationCap className="w-3.5 h-3.5" /> },
             { id: "guardian", label: "3. Guardian", icon: <Shield className="w-3.5 h-3.5" /> },
             { id: "notes", label: "4. Notes & Health", icon: <HeartPulse className="w-3.5 h-3.5" /> },
           ].map((tab) => (
@@ -1052,6 +1262,48 @@ function RegisterApplicantModal({
                   />
                 </div>
               </div>
+
+              {/* Student Fees & Billing Details */}
+              <div className="p-3.5 rounded-lg bg-surface border border-border-default flex flex-col gap-3">
+                <div className="flex items-center gap-2 text-xs font-semibold text-text-primary">
+                  <Banknote className="w-4 h-4 text-emerald-500" />
+                  <span>Student Fee Structure & Payment Status</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-xs font-medium text-text-secondary mb-1 block">
+                      Student Fees (₹) *
+                    </label>
+                    <div className="relative">
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-text-muted">₹</span>
+                      <input
+                        type="number"
+                        min="0"
+                        step="100"
+                        required
+                        value={feeAmount}
+                        onChange={(e) => setFeeAmount(e.target.value)}
+                        placeholder="e.g. 5000"
+                        className="w-full pl-7 pr-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary font-mono font-medium"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-text-secondary mb-1 block">
+                      Fee Payment Status
+                    </label>
+                    <select
+                      value={feeStatus}
+                      onChange={(e) => setFeeStatus(e.target.value)}
+                      className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary cursor-pointer font-medium"
+                    >
+                      <option value="paid">Paid (Collected at Registration)</option>
+                      <option value="unpaid">Unpaid / Payment Pending</option>
+                      <option value="partial">Partially Paid</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
@@ -1239,6 +1491,9 @@ function BulkApplicantsModal({
   const [fileName, setFileName] = useState<string | null>(null)
   const [defaultClassId, setDefaultClassId] = useState("")
   const [defaultAcademicYearId, setDefaultAcademicYearId] = useState("")
+  const [defaultFeeAmount, setDefaultFeeAmount] = useState<string>("5000")
+  const [defaultFeeStatus, setDefaultFeeStatus] = useState<string>("paid")
+  const [defaultStage, setDefaultStage] = useState<string>("application")
   const [isProcessing, setIsProcessing] = useState(false)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [importReport, setImportReport] = useState<{
@@ -1272,30 +1527,73 @@ function BulkApplicantsModal({
 
     const rows: ParsedApplicantRow[] = []
 
+    const headerLine = lines[0]?.toLowerCase() || ""
+    const hasHeader =
+      headerLine.startsWith("applicant") ||
+      headerLine.startsWith("name") ||
+      headerLine.startsWith("student")
+
+    const headerCols = hasHeader
+      ? lines[0].split(",").map((c) => c.trim().toLowerCase().replace(/^["']|["']$/g, ""))
+      : []
+
+    const findIdx = (keywords: string[]) => {
+      if (!hasHeader) return -1
+      return headerCols.findIndex((col) => keywords.some((k) => col.includes(k)))
+    }
+
+    const nameIdx = findIdx(["applicant", "student", "name"])
+    const dobIdx = findIdx(["birth", "dob", "date"])
+    const genderIdx = findIdx(["gender", "sex"])
+    const gradeIdx = findIdx(["grade", "class"])
+    const gNameIdx = findIdx(["guardian", "parent", "father", "mother"])
+    const gPhoneIdx = findIdx(["phone", "mobile", "contact"])
+    const gEmailIdx = findIdx(["email", "mail"])
+    const scoreIdx = findIdx(["score", "entrance", "exam", "test"])
+    const feeAmtIdx = findIdx(["fee amount", "fee_amount", "fees", "fee", "amount"])
+    const feeStatusIdx = findIdx(["fee status", "fee_status", "payment status", "payment", "status"])
+    const notesIdx = findIdx(["note", "remark", "comment"])
+
     lines.forEach((line, index) => {
       // Skip header row if detected
-      if (
-        index === 0 &&
-        (line.toLowerCase().startsWith("applicant") ||
-          line.toLowerCase().startsWith("name") ||
-          line.toLowerCase().startsWith("student"))
-      ) {
-        return
-      }
+      if (index === 0 && hasHeader) return
 
       // Split by comma
       const cols = line.split(",").map((c) => c.trim().replace(/^["']|["']$/g, ""))
       if (cols.length < 2) return
 
-      const applicantName = cols[0] || ""
-      const dateOfBirth = cols[1] || ""
-      const gender = (cols[2] || "male").toLowerCase()
-      const gradeApplying = cols[3] || ""
-      const guardianName = cols[4] || ""
-      const guardianPhone = cols[5] || ""
-      const guardianEmail = cols[6] || ""
-      const entranceScore = cols[7] || ""
-      const notes = cols.slice(8).join(", ") || ""
+      const applicantName = nameIdx >= 0 ? cols[nameIdx] || "" : cols[0] || ""
+      const dateOfBirth = dobIdx >= 0 ? cols[dobIdx] || "" : cols[1] || ""
+      const gender = ((genderIdx >= 0 ? cols[genderIdx] : cols[2]) || "male").toLowerCase()
+      const gradeApplying = gradeIdx >= 0 ? cols[gradeIdx] || "" : cols[3] || ""
+      const guardianName = gNameIdx >= 0 ? cols[gNameIdx] || "" : cols[4] || ""
+      const guardianPhone = gPhoneIdx >= 0 ? cols[gPhoneIdx] || "" : cols[5] || ""
+      const guardianEmail = gEmailIdx >= 0 ? cols[gEmailIdx] || "" : cols[6] || ""
+      const entranceScore = scoreIdx >= 0 ? cols[scoreIdx] || "" : cols[7] || ""
+
+      let feeAmount = defaultFeeAmount
+      let feeStatus = defaultFeeStatus
+      let notes = ""
+
+      if (feeAmtIdx >= 0 && cols[feeAmtIdx]) {
+        feeAmount = cols[feeAmtIdx]
+      } else if (!hasHeader && cols.length >= 10 && cols[8]) {
+        feeAmount = cols[8]
+      }
+
+      if (feeStatusIdx >= 0 && cols[feeStatusIdx]) {
+        feeStatus = cols[feeStatusIdx]
+      } else if (!hasHeader && cols.length >= 10 && cols[9]) {
+        feeStatus = cols[9]
+      }
+
+      if (notesIdx >= 0 && cols[notesIdx]) {
+        notes = cols[notesIdx]
+      } else if (cols.length >= 11) {
+        notes = cols.slice(10).join(", ")
+      } else if (cols.length >= 9) {
+        notes = cols.slice(8).join(", ")
+      }
 
       const errors: string[] = []
       if (!applicantName) errors.push("Missing applicant name")
@@ -1312,6 +1610,8 @@ function BulkApplicantsModal({
         guardianPhone,
         guardianEmail,
         entranceScore,
+        feeAmount,
+        feeStatus,
         notes,
         isValid: errors.length === 0,
         errors,
@@ -1319,7 +1619,7 @@ function BulkApplicantsModal({
     })
 
     return rows
-  }, [rawText])
+  }, [rawText, defaultFeeAmount, defaultFeeStatus])
 
   const validCount = parsedRows.filter((r) => r.isValid).length
   const invalidCount = parsedRows.filter((r) => !r.isValid).length
@@ -1327,10 +1627,10 @@ function BulkApplicantsModal({
   // Download Sample Template CSV
   const handleDownloadTemplate = () => {
     const csvContent =
-      "Applicant Name,Date of Birth,Gender,Grade Applying,Guardian Name,Guardian Phone,Guardian Email,Entrance Score,Notes\n" +
-      "Rohit Verma,2015-05-14,male,Grade 7,Suresh Verma,9876543210,suresh.verma@example.com,88,Transfer applicant from Delhi\n" +
-      "Ananya Sen,2014-08-22,female,Grade 8,Pooja Sen,9876543211,pooja.sen@example.com,92,Merit scholarship candidate\n" +
-      "Kabir Mehta,2016-01-10,male,Grade 6,Rakesh Mehta,9876543212,rakesh.mehta@example.com,78,Sibling already enrolled\n"
+      "Applicant Name,Date of Birth,Gender,Grade Applying,Guardian Name,Guardian Phone,Guardian Email,Entrance Score,Fee Amount,Fee Status,Notes\n" +
+      "Rohit Verma,2015-05-14,male,Grade 7,Suresh Verma,9876543210,suresh.verma@example.com,88,5000,paid,Transfer applicant from Delhi\n" +
+      "Ananya Sen,2014-08-22,female,Grade 8,Pooja Sen,9876543211,pooja.sen@example.com,92,6000,unpaid,Merit scholarship candidate\n" +
+      "Kabir Mehta,2016-01-10,male,Grade 6,Rakesh Mehta,9876543212,rakesh.mehta@example.com,78,5000,paid,Sibling already enrolled\n"
 
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
     const url = URL.createObjectURL(blob)
@@ -1368,19 +1668,27 @@ function BulkApplicantsModal({
 
       const payload = parsedRows
         .filter((r) => r.isValid)
-        .map((r) => ({
-          applicantName: r.applicantName,
-          dateOfBirth: r.dateOfBirth || undefined,
-          gender: r.gender,
-          gradeApplying: r.gradeApplying || undefined,
-          classId: defaultClassId || undefined,
-          guardianName: r.guardianName,
-          guardianPhone: r.guardianPhone,
-          guardianEmail: r.guardianEmail || undefined,
-          entranceScore: r.entranceScore ? parseFloat(r.entranceScore) : undefined,
-          notes: r.notes || undefined,
-          stage: "application",
-        }))
+        .map((r) => {
+          const rowFee = r.feeAmount || defaultFeeAmount || "0"
+          const rowFeeStatus = (r.feeStatus || defaultFeeStatus || "unpaid").toLowerCase()
+          return {
+            applicantName: r.applicantName,
+            dateOfBirth: r.dateOfBirth || undefined,
+            gender: r.gender,
+            gradeApplying: r.gradeApplying || undefined,
+            classId: defaultClassId || undefined,
+            guardianName: r.guardianName,
+            guardianPhone: r.guardianPhone,
+            guardianEmail: r.guardianEmail || undefined,
+            entranceScore: r.entranceScore ? parseFloat(r.entranceScore) : undefined,
+            feeAmount: parseFloat(rowFee) || 0,
+            feeStatus: rowFeeStatus,
+            feePaid: rowFeeStatus === "paid",
+            notes: r.notes || undefined,
+            stage: defaultStage,
+            directEnroll: defaultStage === "enrolled",
+          }
+        })
 
       const report = await bulkImportApplicants({
         applicants: payload,
@@ -1430,16 +1738,22 @@ function BulkApplicantsModal({
 
             <div>
               <h4 className="text-base font-bold text-text-primary">
-                Bulk Ingestion Completed!
+                {defaultStage === "enrolled"
+                  ? "⚡ Bulk Direct Enrollment Completed!"
+                  : "Bulk Ingestion Completed!"}
               </h4>
               <p className="text-xs text-text-secondary mt-1">
-                Processed {importReport.total} records into admissions pipeline.
+                {defaultStage === "enrolled"
+                  ? `Successfully enrolled ${importReport.succeeded} student(s) directly into the active roster with admission IDs and classroom allocations.`
+                  : `Successfully processed ${importReport.total} records into admissions pipeline.`}
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4 w-full max-w-sm">
               <div className="p-3 rounded-lg bg-surface border border-border-default text-center">
-                <span className="text-[11px] text-text-secondary uppercase font-mono">Succeeded</span>
+                <span className="text-[11px] text-text-secondary uppercase font-mono">
+                  {defaultStage === "enrolled" ? "Enrolled" : "Succeeded"}
+                </span>
                 <div className="text-xl font-bold font-mono text-emerald-400 mt-0.5">
                   {importReport.succeeded}
                 </div>
@@ -1451,6 +1765,12 @@ function BulkApplicantsModal({
                 </div>
               </div>
             </div>
+
+            {defaultStage === "enrolled" && importReport.succeeded > 0 && (
+              <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 max-w-md">
+                All enrolled students are now visible in the Student Directory and can be managed directly under the <strong>Students</strong> module.
+              </div>
+            )}
 
             {importReport.results && importReport.results.some((r: any) => !r.success) && (
               <div className="w-full text-left bg-canvas border border-border-default rounded-lg p-3 max-h-40 overflow-y-auto text-xs">
@@ -1488,17 +1808,38 @@ function BulkApplicantsModal({
               </div>
             )}
 
-            {/* Target Defaults */}
-            <div className="p-3.5 rounded-lg bg-canvas border border-border-default flex flex-col sm:flex-row items-center justify-between gap-3">
-              <div className="flex items-center gap-3 w-full sm:w-auto">
-                <div className="w-full sm:w-48">
+            {/* Target Defaults & Fee Structure */}
+            <div className="p-4 rounded-xl bg-canvas border border-border-default space-y-3.5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border-subtle pb-2.5">
+                <div>
+                  <h4 className="text-xs font-semibold text-text-primary uppercase tracking-wider font-mono">
+                    Batch Intake Configuration & Fee Defaults
+                  </h4>
+                  <p className="text-[11px] text-text-muted mt-0.5">
+                    Configure intake pipeline destination, fallback class assignment, and baseline fee structure.
+                  </p>
+                </div>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="dense"
+                  leadingIcon={<Download className="w-3.5 h-3.5" />}
+                  onClick={handleDownloadTemplate}
+                >
+                  Download Template CSV
+                </Button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
+                {/* 1. Academic Year */}
+                <div>
                   <label className="text-[11px] font-medium text-text-secondary mb-1 block">
                     Target Academic Year
                   </label>
                   <select
                     value={defaultAcademicYearId}
                     onChange={(e) => setDefaultAcademicYearId(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs bg-surface border border-border-default rounded-lg text-text-primary cursor-pointer"
+                    className="w-full px-2.5 py-1.5 text-xs bg-surface border border-border-default rounded-lg text-text-primary cursor-pointer focus:outline-none focus:border-brand-primary"
                   >
                     {academicYears.map((y: any) => (
                       <option key={y.id} value={y.id}>
@@ -1508,14 +1849,15 @@ function BulkApplicantsModal({
                   </select>
                 </div>
 
-                <div className="w-full sm:w-48">
+                {/* 2. Fallback Grade */}
+                <div>
                   <label className="text-[11px] font-medium text-text-secondary mb-1 block">
-                    Fallback Class (if not in row)
+                    Fallback Class (if blank)
                   </label>
                   <select
                     value={defaultClassId}
                     onChange={(e) => setDefaultClassId(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs bg-surface border border-border-default rounded-lg text-text-primary cursor-pointer font-medium"
+                    className="w-full px-2.5 py-1.5 text-xs bg-surface border border-border-default rounded-lg text-text-primary cursor-pointer font-medium focus:outline-none focus:border-brand-primary"
                   >
                     {academicGrades.map((g: any) => (
                       <option key={g.id} value={g.id}>
@@ -1524,17 +1866,76 @@ function BulkApplicantsModal({
                     ))}
                   </select>
                 </div>
+
+                {/* 3. Intake Action / Mode */}
+                <div>
+                  <label className="text-[11px] font-medium text-text-secondary mb-1 flex items-center justify-between">
+                    <span>Intake Mode</span>
+                    {defaultStage === "enrolled" && (
+                      <span className="text-[10px] font-bold text-emerald-400 font-mono">⚡ Direct</span>
+                    )}
+                  </label>
+                  <select
+                    value={defaultStage}
+                    onChange={(e) => setDefaultStage(e.target.value)}
+                    className={`w-full px-2.5 py-1.5 text-xs border rounded-lg font-semibold cursor-pointer focus:outline-none ${
+                      defaultStage === "enrolled"
+                        ? "bg-emerald-950/40 border-emerald-500/50 text-emerald-300"
+                        : "bg-surface border-border-default text-text-primary"
+                    }`}
+                  >
+                    <option value="application">Pipeline (Applied)</option>
+                    <option value="enrolled">⚡ Direct Enroll (Admit)</option>
+                    <option value="enquiry">Inquiry Stage (Lead)</option>
+                  </select>
+                </div>
+
+                {/* 4. Default Fee Amount */}
+                <div>
+                  <label className="text-[11px] font-medium text-text-secondary mb-1 block">
+                    Default Fee (₹)
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs font-mono text-text-muted">
+                      ₹
+                    </span>
+                    <input
+                      type="number"
+                      min="0"
+                      step="500"
+                      value={defaultFeeAmount}
+                      onChange={(e) => setDefaultFeeAmount(e.target.value)}
+                      placeholder="5000"
+                      className="w-full pl-6 pr-2.5 py-1.5 text-xs bg-surface border border-border-default rounded-lg text-text-primary font-mono focus:outline-none focus:border-brand-primary"
+                    />
+                  </div>
+                </div>
+
+                {/* 5. Default Fee Status */}
+                <div>
+                  <label className="text-[11px] font-medium text-text-secondary mb-1 block">
+                    Fee Status
+                  </label>
+                  <select
+                    value={defaultFeeStatus}
+                    onChange={(e) => setDefaultFeeStatus(e.target.value)}
+                    className="w-full px-2.5 py-1.5 text-xs bg-surface border border-border-default rounded-lg text-text-primary cursor-pointer focus:outline-none focus:border-brand-primary"
+                  >
+                    <option value="paid">Paid (Fully Collected)</option>
+                    <option value="unpaid">Unpaid (Payment Due)</option>
+                    <option value="partial">Partial</option>
+                  </select>
+                </div>
               </div>
 
-              <Button
-                type="button"
-                variant="secondary"
-                size="dense"
-                leadingIcon={<Download className="w-3.5 h-3.5" />}
-                onClick={handleDownloadTemplate}
-              >
-                Download Template CSV
-              </Button>
+              {defaultStage === "enrolled" && (
+                <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2">
+                  <UserCheck className="w-4 h-4 shrink-0 text-emerald-400" />
+                  <span>
+                    <strong>⚡ Direct Enrollment Enabled:</strong> Each valid row will be directly admitted into active student master roster, assigned a unique admission number (<code className="font-mono text-emerald-200">SIA-YYYY-XXXX</code>), and assigned classroom sections immediately upon import.
+                  </span>
+                </div>
+              )}
             </div>
 
             {/* Ingestion Mode Toggle */}
@@ -1611,7 +2012,7 @@ function BulkApplicantsModal({
                   rows={5}
                   value={rawText}
                   onChange={(e) => setRawText(e.target.value)}
-                  placeholder={`Applicant Name,Date of Birth,Gender,Grade Applying,Guardian Name,Guardian Phone,Guardian Email,Entrance Score,Notes\nRohit Verma,2015-05-14,male,Grade 7,Suresh Verma,9876543210,suresh.verma@example.com,88,Transfer candidate`}
+                  placeholder={`Applicant Name,Date of Birth,Gender,Grade Applying,Guardian Name,Guardian Phone,Guardian Email,Entrance Score,Fee Amount,Fee Status,Notes\nRohit Verma,2015-05-14,male,Grade 7,Suresh Verma,9876543210,suresh.verma@example.com,88,5000,paid,Transfer candidate`}
                   className="w-full px-3 py-2 text-xs font-mono bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary resize-none"
                 />
               </div>
@@ -1634,6 +2035,9 @@ function BulkApplicantsModal({
                         <th className="p-2">Grade</th>
                         <th className="p-2">Guardian</th>
                         <th className="p-2 font-mono">Phone</th>
+                        <th className="p-2">Fee (₹)</th>
+                        <th className="p-2">Payment</th>
+                        <th className="p-2">Intake</th>
                         <th className="p-2">Status</th>
                       </tr>
                     </thead>
@@ -1646,6 +2050,31 @@ function BulkApplicantsModal({
                           <td className="p-2 text-text-secondary">{row.gradeApplying || "Default"}</td>
                           <td className="p-2 text-text-primary">{row.guardianName || "—"}</td>
                           <td className="p-2 font-mono text-text-secondary">{row.guardianPhone || "—"}</td>
+                          <td className="p-2 font-mono text-text-primary font-medium">
+                            ₹{Number(row.feeAmount || defaultFeeAmount || 0).toLocaleString()}
+                          </td>
+                          <td className="p-2">
+                            <span
+                              className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase font-mono ${
+                                (row.feeStatus || defaultFeeStatus) === "paid"
+                                  ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30"
+                                  : "bg-amber-500/10 text-amber-400 border border-amber-500/30"
+                              }`}
+                            >
+                              {row.feeStatus || defaultFeeStatus}
+                            </span>
+                          </td>
+                          <td className="p-2">
+                            {defaultStage === "enrolled" ? (
+                              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-400 font-mono">
+                                ⚡ Direct Enroll
+                              </span>
+                            ) : (
+                              <span className="text-[11px] text-text-secondary font-mono">
+                                Pipeline
+                              </span>
+                            )}
+                          </td>
                           <td className="p-2">
                             {row.isValid ? (
                               <Badge variant="positive">Ready</Badge>
@@ -1667,16 +2096,31 @@ function BulkApplicantsModal({
                 Cancel
               </Button>
 
-              <Button
+              <button
                 type="button"
-                variant="primary"
-                size="dense"
                 disabled={validCount === 0 || isProcessing}
-                leadingIcon={<CheckCircle2 className="w-3.5 h-3.5" />}
                 onClick={handleImport}
+                className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold shadow-sm transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${
+                  defaultStage === "enrolled"
+                    ? "bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white shadow-emerald-900/30"
+                    : "bg-action-primary hover:bg-action-primary/90 text-white"
+                }`}
               >
-                {isProcessing ? "Importing Applicants..." : `Import ${validCount} Applicants`}
-              </Button>
+                {defaultStage === "enrolled" ? (
+                  <UserCheck className="w-4 h-4" />
+                ) : (
+                  <CheckCircle2 className="w-4 h-4" />
+                )}
+                <span>
+                  {isProcessing
+                    ? defaultStage === "enrolled"
+                      ? "Enrolling & Assigning Student IDs..."
+                      : "Importing Applicants..."
+                    : defaultStage === "enrolled"
+                    ? `⚡ Directly Enroll ${validCount} Students`
+                    : `Import ${validCount} Applicants to Pipeline`}
+                </span>
+              </button>
             </div>
           </div>
         )}

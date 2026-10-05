@@ -285,13 +285,14 @@ export class AcademicsRepository {
             for (const book of sourceBooks.rows) {
               await client.query(
                 `INSERT INTO preferred_textbooks (
-                  institution_id, academic_year_id, class_id, subject_id, title, author, publisher, edition, isbn, price, is_mandatory, notes
-                ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
+                  institution_id, academic_year_id, class_id, subject_id, subject_name, title, author, publisher, edition, isbn, price, is_mandatory, notes
+                ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`,
                 [
                   institutionId,
                   newYear.id,
                   newCls.id,
                   book.subject_id,
+                  book.subject_name || null,
                   book.title,
                   book.author,
                   book.publisher,
@@ -336,14 +337,14 @@ export class AcademicsRepository {
              (SELECT count(*) FROM students WHERE current_class_id = c.id AND status = 'active') as enrolled_count,
              (SELECT COALESCE(sum(capacity), 0) FROM sections WHERE class_id = c.id) as total_capacity
       FROM classes c
-      JOIN academic_years ay ON ay.id = c.academic_year_id
+      LEFT JOIN academic_years ay ON ay.id = c.academic_year_id
       LEFT JOIN departments d ON d.id = c.department_id
       WHERE c.institution_id = $1
     `;
     const params: any[] = [institutionId];
 
     if (academicYearId) {
-      query += ` AND c.academic_year_id = $2`;
+      query += ` AND (c.academic_year_id = $2 OR c.academic_year_id IS NULL)`;
       params.push(academicYearId);
     }
 
@@ -370,6 +371,9 @@ export class AcademicsRepository {
   async getSubjectsByClass(classId: string) {
     const res = await db.query(
       `SELECT sub.id, sub.name, sub.code, sub.is_elective, sub.credits,
+              COALESCE(gs.subject_type, sub.subject_type, CASE WHEN sub.is_elective THEN 'External' ELSE 'Core Subject' END) as type,
+              COALESCE(gs.subject_type, sub.subject_type, CASE WHEN sub.is_elective THEN 'External' ELSE 'Core Subject' END) as subject_type,
+              COALESCE(gs.syllabus, sub.syllabus) as syllabus,
               COALESCE(gs.periods_per_week, 5) as periods_per_week,
               COALESCE(gs.max_marks, 100) as max_marks,
               COALESCE(gs.pass_marks, 35) as pass_marks,
@@ -609,7 +613,10 @@ export class AcademicsRepository {
 
   async listSubjects(institutionId: string) {
     const res = await db.query(
-      `SELECT s.*, d.name as department_name,
+      `SELECT s.*,
+              COALESCE(s.subject_type, CASE WHEN s.is_elective THEN 'External' ELSE 'Core Subject' END) as type,
+              COALESCE(s.subject_type, CASE WHEN s.is_elective THEN 'External' ELSE 'Core Subject' END) as subject_type,
+              d.name as department_name,
               (SELECT count(DISTINCT class_id) FROM grade_subjects WHERE subject_id = s.id) as classes_count
        FROM subjects s
        LEFT JOIN departments d ON d.id = s.department_id
@@ -624,6 +631,9 @@ export class AcademicsRepository {
     name: string; 
     code: string; 
     isElective?: boolean;
+    type?: string;
+    subjectType?: string;
+    syllabus?: string;
     credits?: number;
     departmentId?: string;
   }) {
@@ -638,17 +648,23 @@ export class AcademicsRepository {
       throw err;
     }
 
+    const sType = data.type || data.subjectType || (data.isElective ? 'External' : 'Core Subject');
+    const isElective = data.isElective ?? (sType === 'External');
+
     const res = await db.query(
-      `INSERT INTO subjects (institution_id, name, code, is_elective, credits, department_id, is_active)
-       VALUES ($1, $2, $3, $4, $5, $6, true)
-       RETURNING *`,
+      `INSERT INTO subjects (institution_id, name, code, is_elective, credits, department_id, is_active, subject_type, syllabus)
+       VALUES ($1, $2, $3, $4, $5, $6, true, $7, $8)
+       RETURNING *,
+                 subject_type as type`,
       [
         institutionId, 
         data.name, 
         data.code.toUpperCase().trim(), 
-        data.isElective ?? false, 
+        isElective, 
         data.credits ?? 4.0, 
-        data.departmentId || null
+        data.departmentId || null,
+        sType,
+        data.syllabus || null
       ]
     );
     return res.rows[0];
@@ -658,6 +674,9 @@ export class AcademicsRepository {
     name?: string;
     code?: string;
     isElective?: boolean;
+    type?: string;
+    subjectType?: string;
+    syllabus?: string;
     credits?: number;
     departmentId?: string | null;
     isActive?: boolean;
@@ -687,9 +706,19 @@ export class AcademicsRepository {
       fields.push(`code = $${idx++}`);
       values.push(data.code.toUpperCase().trim());
     }
-    if (data.isElective !== undefined) {
+    const sType = data.type || data.subjectType;
+    if (sType !== undefined) {
+      fields.push(`subject_type = $${idx++}`);
+      values.push(sType);
+      fields.push(`is_elective = $${idx++}`);
+      values.push(sType === 'External');
+    } else if (data.isElective !== undefined) {
       fields.push(`is_elective = $${idx++}`);
       values.push(data.isElective);
+    }
+    if (data.syllabus !== undefined) {
+      fields.push(`syllabus = $${idx++}`);
+      values.push(data.syllabus);
     }
     if (data.credits !== undefined) {
       fields.push(`credits = $${idx++}`);
@@ -705,9 +734,29 @@ export class AcademicsRepository {
     }
 
     const res = await db.query(
-      `UPDATE subjects SET ${fields.join(', ')} WHERE institution_id = $1 AND id = $2 RETURNING *`,
+      `UPDATE subjects SET ${fields.join(', ')} WHERE institution_id = $1 AND id = $2 RETURNING *, subject_type as type`,
       values
     );
+
+    // Also cascade subject_type and syllabus updates to grade_subjects
+    if (sType !== undefined || data.syllabus !== undefined) {
+      const gsUpdates: string[] = [];
+      const gsVals: any[] = [institutionId, id];
+      let gsIdx = 3;
+      if (sType !== undefined) {
+        gsUpdates.push(`subject_type = $${gsIdx++}`);
+        gsVals.push(sType);
+      }
+      if (data.syllabus !== undefined) {
+        gsUpdates.push(`syllabus = $${gsIdx++}`);
+        gsVals.push(data.syllabus);
+      }
+      await db.query(
+        `UPDATE grade_subjects SET ${gsUpdates.join(', ')} WHERE institution_id = $1 AND subject_id = $2`,
+        gsVals
+      );
+    }
+
     return res.rows[0];
   }
 
@@ -740,7 +789,10 @@ export class AcademicsRepository {
 
   async getGradeSubjects(institutionId: string, classId: string) {
     const res = await db.query(
-      `SELECT gs.*, sub.name as subject_name, sub.code as subject_code, sub.is_elective, sub.credits
+      `SELECT gs.*, sub.name as subject_name, sub.code as subject_code, sub.is_elective, sub.credits,
+              COALESCE(gs.subject_type, sub.subject_type, CASE WHEN sub.is_elective THEN 'External' ELSE 'Core Subject' END) as type,
+              COALESCE(gs.subject_type, sub.subject_type, CASE WHEN sub.is_elective THEN 'External' ELSE 'Core Subject' END) as subject_type,
+              COALESCE(gs.syllabus, sub.syllabus) as syllabus
        FROM grade_subjects gs
        JOIN subjects sub ON sub.id = gs.subject_id
        WHERE gs.class_id = $1 AND gs.institution_id = $2
@@ -757,24 +809,52 @@ export class AcademicsRepository {
     maxMarks?: number;
     passMarks?: number;
     isMandatory?: boolean;
+    type?: string;
+    subjectType?: string;
+    syllabus?: string;
   }) {
     const periods = data.periodsPerWeek ?? 5;
     const maxMarks = data.maxMarks ?? 100;
     const passMarks = data.passMarks ?? 35;
     const isMandatory = data.isMandatory ?? true;
+    const sType = data.type || data.subjectType;
+    const syllabus = data.syllabus;
 
     // Insert or update grade_subjects
     const res = await db.query(
-      `INSERT INTO grade_subjects (institution_id, class_id, subject_id, periods_per_week, max_marks, pass_marks, is_mandatory)
-       VALUES ($1, $2, $3, $4, $5, $6, $7)
+      `INSERT INTO grade_subjects (institution_id, class_id, subject_id, periods_per_week, max_marks, pass_marks, is_mandatory, subject_type, syllabus)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
        ON CONFLICT (class_id, subject_id)
        DO UPDATE SET periods_per_week = EXCLUDED.periods_per_week,
                      max_marks = EXCLUDED.max_marks,
                      pass_marks = EXCLUDED.pass_marks,
-                     is_mandatory = EXCLUDED.is_mandatory
+                     is_mandatory = EXCLUDED.is_mandatory,
+                     subject_type = COALESCE(EXCLUDED.subject_type, grade_subjects.subject_type),
+                     syllabus = COALESCE(EXCLUDED.syllabus, grade_subjects.syllabus)
        RETURNING *`,
-      [institutionId, data.classId, data.subjectId, periods, maxMarks, passMarks, isMandatory]
+      [institutionId, data.classId, data.subjectId, periods, maxMarks, passMarks, isMandatory, sType || null, syllabus || null]
     );
+
+    // Sync subjects table subject_type / syllabus if provided
+    if (sType || syllabus !== undefined) {
+      const subFields: string[] = [];
+      const subVals: any[] = [institutionId, data.subjectId];
+      let subIdx = 3;
+      if (sType) {
+        subFields.push(`subject_type = $${subIdx++}`);
+        subVals.push(sType);
+        subFields.push(`is_elective = $${subIdx++}`);
+        subVals.push(sType === 'External');
+      }
+      if (syllabus !== undefined) {
+        subFields.push(`syllabus = $${subIdx++}`);
+        subVals.push(syllabus);
+      }
+      await db.query(
+        `UPDATE subjects SET ${subFields.join(', ')} WHERE institution_id = $1 AND id = $2`,
+        subVals
+      );
+    }
 
     // Sync legacy class_subjects table
     await db.query(
@@ -1142,10 +1222,10 @@ export class AcademicsRepository {
   async listTextbooks(institutionId: string, academicYearId: string, classId?: string, subjectId?: string) {
     let query = `
       SELECT pt.*, c.name as class_name, c.sequence_order as class_sequence,
-             sub.name as subject_name, sub.code as subject_code
+             COALESCE(pt.subject_name, sub.name, 'General') as subject_name, sub.code as subject_code
       FROM preferred_textbooks pt
       JOIN classes c ON c.id = pt.class_id
-      JOIN subjects sub ON sub.id = pt.subject_id
+      LEFT JOIN subjects sub ON sub.id = pt.subject_id
       WHERE pt.institution_id = $1 AND pt.academic_year_id = $2
     `;
     const params: any[] = [institutionId, academicYearId];
@@ -1155,11 +1235,11 @@ export class AcademicsRepository {
       params.push(classId);
     }
     if (subjectId) {
-      query += ` AND pt.subject_id = $${params.length + 1}`;
+      query += ` AND (pt.subject_id = $${params.length + 1} OR pt.subject_name ILIKE $${params.length + 1})`;
       params.push(subjectId);
     }
 
-    query += ` ORDER BY c.sequence_order ASC, sub.name ASC, pt.title ASC`;
+    query += ` ORDER BY c.sequence_order ASC, COALESCE(pt.subject_name, sub.name) ASC, pt.title ASC`;
     const res = await db.query(query, params);
     return res.rows;
   }
@@ -1167,7 +1247,8 @@ export class AcademicsRepository {
   async createTextbook(institutionId: string, data: {
     academicYearId: string;
     classId: string;
-    subjectId: string;
+    subjectId?: string;
+    subjectName?: string;
     title: string;
     author: string;
     publisher: string;
@@ -1177,17 +1258,58 @@ export class AcademicsRepository {
     isMandatory?: boolean;
     notes?: string;
   }) {
+    let resolvedSubjectId = data.subjectId || null;
+    let resolvedSubjectName = (data.subjectName || '').trim() || null;
+
+    if (!resolvedSubjectId && resolvedSubjectName) {
+      const foundSub = await db.query(
+        `SELECT id, name FROM subjects WHERE institution_id = $1 AND LOWER(TRIM(name)) = LOWER(TRIM($2)) LIMIT 1`,
+        [institutionId, resolvedSubjectName]
+      );
+      if (foundSub.rows.length > 0) {
+        resolvedSubjectId = foundSub.rows[0].id;
+        resolvedSubjectName = foundSub.rows[0].name;
+      } else {
+        try {
+          const rawCode = resolvedSubjectName.replace(/[^A-Za-z0-9]/g, '').slice(0, 4).toUpperCase() || 'SUB';
+          const randomSuffix = Math.floor(100 + Math.random() * 900);
+          const generatedCode = `${rawCode}${randomSuffix}`;
+          const newSub = await db.query(
+            `INSERT INTO subjects (institution_id, name, code, is_elective, subject_type, credits)
+             VALUES ($1, $2, $3, false, 'Core Subject', 4)
+             RETURNING id, name`,
+            [institutionId, resolvedSubjectName, generatedCode]
+          );
+          if (newSub.rows.length > 0) {
+            resolvedSubjectId = newSub.rows[0].id;
+            resolvedSubjectName = newSub.rows[0].name;
+          }
+        } catch {
+          // If creation fails, keep resolvedSubjectId null and save resolvedSubjectName
+        }
+      }
+    } else if (resolvedSubjectId && !resolvedSubjectName) {
+      const foundSub = await db.query(
+        `SELECT name FROM subjects WHERE id = $1 LIMIT 1`,
+        [resolvedSubjectId]
+      );
+      if (foundSub.rows.length > 0) {
+        resolvedSubjectName = foundSub.rows[0].name;
+      }
+    }
+
     const res = await db.query(
       `INSERT INTO preferred_textbooks (
-        institution_id, academic_year_id, class_id, subject_id, 
+        institution_id, academic_year_id, class_id, subject_id, subject_name,
         title, author, publisher, edition, isbn, price, is_mandatory, notes
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
       RETURNING *`,
       [
         institutionId,
         data.academicYearId,
         data.classId,
-        data.subjectId,
+        resolvedSubjectId,
+        resolvedSubjectName,
         data.title,
         data.author,
         data.publisher,
@@ -1202,6 +1324,8 @@ export class AcademicsRepository {
   }
 
   async updateTextbook(institutionId: string, id: string, data: {
+    subjectId?: string;
+    subjectName?: string;
     title?: string;
     author?: string;
     publisher?: string;
@@ -1215,6 +1339,14 @@ export class AcademicsRepository {
     const values: any[] = [institutionId, id];
     let idx = 3;
 
+    if (data.subjectId !== undefined) {
+      fields.push(`subject_id = $${idx++}`);
+      values.push(data.subjectId || null);
+    }
+    if (data.subjectName !== undefined) {
+      fields.push(`subject_name = $${idx++}`);
+      values.push(data.subjectName || null);
+    }
     if (data.title !== undefined) {
       fields.push(`title = $${idx++}`);
       values.push(data.title);

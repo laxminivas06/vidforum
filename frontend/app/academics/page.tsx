@@ -83,7 +83,7 @@ export default function AcademicsWorkspacePage() {
   const activeYearId = selectedYearId || currentYear?.id || ""
 
   // Hierarchy & Grades
-  const { data: grades = [], isLoading: isGradesLoading } = useAcademics()
+  const { data: grades = [], isLoading: isGradesLoading } = useAcademics(activeYearId)
   const [selectedGradeId, setSelectedGradeId] = useState<string>("")
   const activeGrade = grades.find((g) => g.id === selectedGradeId) || grades[0]
 
@@ -115,6 +115,7 @@ export default function AcademicsWorkspacePage() {
   const [textbookClassId, setTextbookClassId] = useState<string>("")
   const activeTextbookClassId = textbookClassId || classes[0]?.id || ""
   const { data: textbooks = [] } = useTextbooks(activeYearId, activeTextbookClassId || undefined)
+  const { data: allPreferredTextbooks = [] } = useTextbooks(activeYearId)
   const { data: booklistData } = useBooklist(activeYearId, activeTextbookClassId)
 
   // Modals
@@ -162,6 +163,8 @@ export default function AcademicsWorkspacePage() {
   const [newSubCode, setNewSubCode] = useState("")
   const [newSubCredits, setNewSubCredits] = useState(4)
   const [newSubElective, setNewSubElective] = useState(false)
+  const [newSubType, setNewSubType] = useState<string>("Core Subject")
+  const [newSubSyllabus, setNewSubSyllabus] = useState<string>("")
   const [newSubDeptId, setNewSubDeptId] = useState("")
 
   const [mapSubjectId, setMapSubjectId] = useState("")
@@ -189,6 +192,7 @@ export default function AcademicsWorkspacePage() {
   const [tbEdition, setTbEdition] = useState("2026 Edition")
   const [tbIsbn, setTbIsbn] = useState("")
   const [tbPrice, setTbPrice] = useState(350)
+  const [tbSubject, setTbSubject] = useState("")
   const [tbSubjectId, setTbSubjectId] = useState("")
   const [tbMandatory, setTbMandatory] = useState(true)
 
@@ -243,6 +247,8 @@ export default function AcademicsWorkspacePage() {
   const [editSubName, setEditSubName] = useState("")
   const [editSubCode, setEditSubCode] = useState("")
   const [editSubCredits, setEditSubCredits] = useState(4)
+  const [editSubType, setEditSubType] = useState<string>("Core Subject")
+  const [editSubSyllabus, setEditSubSyllabus] = useState<string>("")
   const [editSubIsElective, setEditSubIsElective] = useState(false)
   const [editSubPeriods, setEditSubPeriods] = useState(5)
   const [editSubMaxMarks, setEditSubMaxMarks] = useState(100)
@@ -257,6 +263,27 @@ export default function AcademicsWorkspacePage() {
   const [newGradeSubMaxMarks, setNewGradeSubMaxMarks] = useState(100)
   const [newGradeSubPassMarks, setNewGradeSubPassMarks] = useState(35)
   const [newGradeSubMandatory, setNewGradeSubMandatory] = useState(true)
+
+  // Combined Preferred Textbooks (A1) for Syllabus selector
+  const availableSyllabusBooks = useMemo(() => {
+    const list: any[] = []
+    const seen = new Set<string>()
+    textbooks.forEach((b: any) => {
+      const key = `${b.title} - ${b.publisher || ''}`.toLowerCase()
+      if (!seen.has(key)) {
+        seen.add(key)
+        list.push(b)
+      }
+    })
+    allPreferredTextbooks.forEach((b: any) => {
+      const key = `${b.title} - ${b.publisher || ''}`.toLowerCase()
+      if (!seen.has(key)) {
+        seen.add(key)
+        list.push(b)
+      }
+    })
+    return list
+  }, [textbooks, allPreferredTextbooks])
 
   // Class & Subject Mutations
   const createClassMutation = useCreateClass()
@@ -278,13 +305,18 @@ export default function AcademicsWorkspacePage() {
         maxMarks: s.max_marks || 100,
         passMarks: s.pass_marks || 35,
         isMandatory: s.is_mandatory ?? true,
-        type: s.is_elective ? "ELECTIVE" : "CORE",
-        isElective: !!s.is_elective,
+        type: s.type || s.subject_type || (s.is_elective ? "External" : "Core Subject"),
+        subjectType: s.subject_type || s.type || (s.is_elective ? "External" : "Core Subject"),
+        syllabus: s.syllabus || "",
+        isElective: s.type === "External" || !!s.is_elective,
       }))
     } else if (currentSubjectGrade?.subjects) {
       list = currentSubjectGrade.subjects.map((s: any) => ({
         ...s,
-        isElective: s.type === "ELECTIVE",
+        type: s.type || s.subjectType || (s.type === "ELECTIVE" ? "External" : "Core Subject"),
+        subjectType: s.subjectType || s.type || (s.type === "ELECTIVE" ? "External" : "Core Subject"),
+        syllabus: s.syllabus || "",
+        isElective: s.type === "External" || s.type === "ELECTIVE",
       }))
     }
 
@@ -298,7 +330,10 @@ export default function AcademicsWorkspacePage() {
     setEditSubName(sub.name)
     setEditSubCode(sub.code)
     setEditSubCredits(sub.credits || 4)
-    setEditSubIsElective(sub.isElective || sub.type === "ELECTIVE")
+    const resolvedType = sub.type || sub.subjectType || (sub.isElective ? "External" : "Core Subject")
+    setEditSubType(resolvedType)
+    setEditSubSyllabus(sub.syllabus || "")
+    setEditSubIsElective(resolvedType === "External" || sub.isElective)
     setEditSubPeriods(sub.periodsPerWeek || 5)
     setEditSubMaxMarks(sub.maxMarks || 100)
     setEditSubPassMarks(sub.passMarks || 35)
@@ -318,7 +353,10 @@ export default function AcademicsWorkspacePage() {
           name: editSubName.trim(),
           code: editSubCode.trim().toUpperCase(),
           credits: editSubCredits,
-          isElective: editSubIsElective,
+          isElective: editSubType === "External",
+          type: editSubType,
+          subjectType: editSubType,
+          syllabus: editSubSyllabus.trim(),
         },
       })
       if (activeSubjectGradeId) {
@@ -329,6 +367,9 @@ export default function AcademicsWorkspacePage() {
           maxMarks: editSubMaxMarks,
           passMarks: editSubPassMarks,
           isMandatory: editSubMandatory,
+          type: editSubType,
+          subjectType: editSubType,
+          syllabus: editSubSyllabus.trim(),
         })
       }
       triggerSuccess(`Subject "${editSubName}" updated successfully for ${currentSubjectGrade?.name}!`)
@@ -356,7 +397,10 @@ export default function AcademicsWorkspacePage() {
           name: newSubName.trim(),
           code: newSubCode.trim().toUpperCase(),
           credits: newSubCredits,
-          isElective: newSubElective,
+          isElective: newSubType === "External",
+          type: newSubType,
+          subjectType: newSubType,
+          syllabus: newSubSyllabus.trim(),
           departmentId: newSubDeptId || departments[0]?.id || undefined,
         })
         subjectIdToMap = created.id
@@ -375,12 +419,17 @@ export default function AcademicsWorkspacePage() {
         maxMarks: newGradeSubMaxMarks,
         passMarks: newGradeSubPassMarks,
         isMandatory: newGradeSubMandatory,
+        type: newSubType,
+        subjectType: newSubType,
+        syllabus: newSubSyllabus.trim(),
       })
 
       triggerSuccess(`Subject added to ${currentSubjectGrade?.name} successfully!`)
       setIsAddSubjectToGradeModalOpen(false)
       setNewSubName("")
       setNewSubCode("")
+      setNewSubType("Core Subject")
+      setNewSubSyllabus("")
       setCatalogSubjectId("")
     } catch (err: any) {
       triggerError(err.message || "Failed to add subject")
@@ -936,6 +985,8 @@ export default function AcademicsWorkspacePage() {
                       setNewSubName("")
                       setNewSubCode("")
                       setNewSubCredits(4)
+                      setNewSubType("Core Subject")
+                      setNewSubSyllabus("")
                       setNewSubElective(false)
                       setCatalogSubjectId("")
                       setIsAddSubjectToGradeModalOpen(true)
@@ -1010,6 +1061,8 @@ export default function AcademicsWorkspacePage() {
                       setNewSubName("")
                       setNewSubCode("")
                       setNewSubCredits(4)
+                      setNewSubType("Core Subject")
+                      setNewSubSyllabus("")
                       setNewSubElective(false)
                       setCatalogSubjectId("")
                       setIsAddSubjectToGradeModalOpen(true)
@@ -1031,8 +1084,22 @@ export default function AcademicsWorkspacePage() {
                             {sub.code}
                           </span>
                           <div className="flex items-center gap-1.5">
-                            <Badge variant={sub.type === "CORE" || !sub.isElective ? "positive" : "neutral"} size="sm">
-                              {sub.type === "CORE" || !sub.isElective ? "CORE" : "ELECTIVE"}
+                            <Badge
+                              variant={
+                                sub.type === "Languages"
+                                  ? "neutral"
+                                  : sub.type === "Core Subject" || sub.type === "CORE"
+                                  ? "positive"
+                                  : "warning"
+                              }
+                              size="sm"
+                              className={
+                                sub.type === "Languages"
+                                  ? "bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-950 dark:text-purple-300 dark:border-purple-800"
+                                  : ""
+                              }
+                            >
+                              {sub.type || "Core Subject"}
                             </Badge>
                             {sub.isMandatory && (
                               <Badge variant="neutral" size="sm" className="text-[10px]">
@@ -1044,6 +1111,12 @@ export default function AcademicsWorkspacePage() {
                         <CardTitle className="text-sm font-bold text-text-primary mt-2">
                           {sub.name}
                         </CardTitle>
+                        {sub.syllabus && (
+                          <div className="flex items-center gap-1.5 text-[11px] text-text-secondary mt-1 bg-subtle px-2 py-1 rounded-md border border-border-subtle">
+                            <BookMarked className="w-3.5 h-3.5 text-brand-primary shrink-0" />
+                            <span className="truncate">Syllabus: <strong className="text-text-primary font-medium">{sub.syllabus}</strong></span>
+                          </div>
+                        )}
                       </CardHeader>
                       <CardContent className="flex flex-col gap-2.5 text-xs text-text-secondary pt-0">
                         <div className="grid grid-cols-2 gap-2 p-2.5 rounded-lg bg-subtle border border-border-subtle font-mono text-[11px]">
@@ -1972,14 +2045,17 @@ export default function AcademicsWorkspacePage() {
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="font-semibold text-text-primary block mb-1">Type</label>
+                      <label className="font-semibold text-text-primary block mb-1">
+                        Type <span className="text-status-error">*</span>
+                      </label>
                       <select
-                        value={newSubElective ? "ELECTIVE" : "CORE"}
-                        onChange={(e) => setNewSubElective(e.target.value === "ELECTIVE")}
+                        value={newSubType}
+                        onChange={(e) => setNewSubType(e.target.value)}
                         className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
                       >
-                        <option value="CORE">CORE Subject</option>
-                        <option value="ELECTIVE">ELECTIVE Subject</option>
+                        <option value="Languages">Languages</option>
+                        <option value="Core Subject">Core Subject</option>
+                        <option value="External">External</option>
                       </select>
                     </div>
                     <div>
@@ -1994,24 +2070,124 @@ export default function AcademicsWorkspacePage() {
                       />
                     </div>
                   </div>
+
+                  <div>
+                    <label className="font-semibold text-text-primary block mb-1">
+                      Syllabus
+                    </label>
+                    <div className="flex flex-col gap-1.5">
+                      {availableSyllabusBooks.length > 0 && (
+                        <select
+                          value={newSubSyllabus}
+                          onChange={(e) => setNewSubSyllabus(e.target.value)}
+                          className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary text-xs"
+                        >
+                          <option value="">-- Select Syllabus Copy / Book from Preferred Textbooks (A1) --</option>
+                          {availableSyllabusBooks.map((tb: any) => (
+                            <option key={tb.id} value={`${tb.title}${tb.author ? ` by ${tb.author}` : ''}${tb.publisher ? ` (${tb.publisher})` : ''}`}>
+                              📖 {tb.title} {tb.publisher ? `(${tb.publisher})` : ''} {tb.edition ? `• ${tb.edition}` : ''}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+                      <input
+                        type="text"
+                        value={newSubSyllabus}
+                        onChange={(e) => setNewSubSyllabus(e.target.value)}
+                        placeholder="Select from Preferred Textbooks (A1) above or type syllabus copy reference..."
+                        className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                      />
+                    </div>
+                  </div>
                 </>
               ) : (
-                <div>
-                  <label className="font-semibold text-text-primary block mb-1">
-                    Select Subject from School Master Catalog <span className="text-status-error">*</span>
-                  </label>
-                  <select
-                    value={catalogSubjectId}
-                    onChange={(e) => setCatalogSubjectId(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
-                  >
-                    <option value="">-- Choose a Subject --</option>
-                    {subjects.map((sub: any) => (
-                      <option key={sub.id} value={sub.id}>
-                        {sub.name} ({sub.code}) • {sub.is_elective ? "Elective" : "Core"}
-                      </option>
-                    ))}
-                  </select>
+                <div className="flex flex-col gap-3">
+                  <div>
+                    <label className="font-semibold text-text-primary block mb-1">
+                      Select Subject from School Master Catalog <span className="text-status-error">*</span>
+                    </label>
+                    <select
+                      value={catalogSubjectId}
+                      onChange={(e) => {
+                        const sid = e.target.value
+                        setCatalogSubjectId(sid)
+                        const found = subjects.find((s: any) => s.id === sid)
+                        if (found) {
+                          if (found.type || found.subject_type) {
+                            setNewSubType(found.type || found.subject_type)
+                          }
+                          if (found.syllabus) {
+                            setNewSubSyllabus(found.syllabus)
+                          }
+                        }
+                      }}
+                      className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                    >
+                      <option value="">-- Choose a Subject --</option>
+                      {subjects.map((sub: any) => (
+                        <option key={sub.id} value={sub.id}>
+                          {sub.name} ({sub.code}) • {sub.type || sub.subject_type || (sub.is_elective ? "External" : "Core Subject")}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-semibold text-text-primary block mb-1">
+                        Type <span className="text-status-error">*</span>
+                      </label>
+                      <select
+                        value={newSubType}
+                        onChange={(e) => setNewSubType(e.target.value)}
+                        className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                      >
+                        <option value="Languages">Languages</option>
+                        <option value="Core Subject">Core Subject</option>
+                        <option value="External">External</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="font-semibold text-text-primary block mb-1">Credits</label>
+                      <input
+                        type="number"
+                        min={1}
+                        max={10}
+                        value={newSubCredits}
+                        onChange={(e) => setNewSubCredits(parseInt(e.target.value, 10) || 4)}
+                        className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-mono"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="font-semibold text-text-primary block mb-1">
+                      Syllabus
+                    </label>
+                    <div className="flex flex-col gap-1.5">
+                      {availableSyllabusBooks.length > 0 && (
+                        <select
+                          value={newSubSyllabus}
+                          onChange={(e) => setNewSubSyllabus(e.target.value)}
+                          className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary text-xs"
+                        >
+                          <option value="">-- Select Syllabus Copy / Book from Preferred Textbooks (A1) --</option>
+                          {availableSyllabusBooks.map((tb: any) => (
+                            <option key={tb.id} value={`${tb.title}${tb.author ? ` by ${tb.author}` : ''}${tb.publisher ? ` (${tb.publisher})` : ''}`}>
+                              📖 {tb.title} {tb.publisher ? `(${tb.publisher})` : ''} {tb.edition ? `• ${tb.edition}` : ''}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+                      <input
+                        type="text"
+                        value={newSubSyllabus}
+                        onChange={(e) => setNewSubSyllabus(e.target.value)}
+                        placeholder="Select from Preferred Textbooks (A1) above or type syllabus copy reference..."
+                        className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                      />
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -2149,14 +2325,21 @@ export default function AcademicsWorkspacePage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-semibold text-text-primary block mb-1">Subject Type</label>
+                  <label className="font-semibold text-text-primary block mb-1">
+                    Type <span className="text-status-error">*</span>
+                  </label>
                   <select
-                    value={editSubIsElective ? "ELECTIVE" : "CORE"}
-                    onChange={(e) => setEditSubIsElective(e.target.value === "ELECTIVE")}
+                    value={editSubType}
+                    onChange={(e) => {
+                      const val = e.target.value
+                      setEditSubType(val)
+                      setEditSubIsElective(val === "External")
+                    }}
                     className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
                   >
-                    <option value="CORE">CORE</option>
-                    <option value="ELECTIVE">ELECTIVE</option>
+                    <option value="Languages">Languages</option>
+                    <option value="Core Subject">Core Subject</option>
+                    <option value="External">External</option>
                   </select>
                 </div>
                 <div>
@@ -2168,6 +2351,35 @@ export default function AcademicsWorkspacePage() {
                     value={editSubCredits}
                     onChange={(e) => setEditSubCredits(parseInt(e.target.value, 10) || 4)}
                     className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-mono"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="font-semibold text-text-primary block mb-1">
+                  Syllabus
+                </label>
+                <div className="flex flex-col gap-1.5">
+                  {availableSyllabusBooks.length > 0 && (
+                    <select
+                      value={editSubSyllabus}
+                      onChange={(e) => setEditSubSyllabus(e.target.value)}
+                      className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary text-xs"
+                    >
+                      <option value="">-- Select Syllabus Copy / Book from Preferred Textbooks (A1) --</option>
+                      {availableSyllabusBooks.map((tb: any) => (
+                        <option key={tb.id} value={`${tb.title}${tb.author ? ` by ${tb.author}` : ''}${tb.publisher ? ` (${tb.publisher})` : ''}`}>
+                          📖 {tb.title} {tb.publisher ? `(${tb.publisher})` : ''} {tb.edition ? `• ${tb.edition}` : ''}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                  <input
+                    type="text"
+                    value={editSubSyllabus}
+                    onChange={(e) => setEditSubSyllabus(e.target.value)}
+                    placeholder="Select from Preferred Textbooks (A1) above or type syllabus copy reference..."
+                    className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
                   />
                 </div>
               </div>
@@ -2436,27 +2648,64 @@ export default function AcademicsWorkspacePage() {
                   placeholder="e.g. CS101"
                 />
               </div>
-              <div>
-                <label className="font-semibold text-text-primary block mb-1">Credits</label>
-                <input
-                  type="number"
-                  step="0.5"
-                  value={newSubCredits}
-                  onChange={(e) => setNewSubCredits(parseFloat(e.target.value))}
-                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-mono"
-                />
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="font-semibold text-text-primary block mb-1">
+                    Type <span className="text-status-error">*</span>
+                  </label>
+                  <select
+                    value={newSubType}
+                    onChange={(e) => {
+                      const val = e.target.value
+                      setNewSubType(val)
+                      setNewSubElective(val === "External")
+                    }}
+                    className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                  >
+                    <option value="Languages">Languages</option>
+                    <option value="Core Subject">Core Subject</option>
+                    <option value="External">External</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="font-semibold text-text-primary block mb-1">Credits</label>
+                  <input
+                    type="number"
+                    step="0.5"
+                    value={newSubCredits}
+                    onChange={(e) => setNewSubCredits(parseFloat(e.target.value))}
+                    className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-mono"
+                  />
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="electiveCheck"
-                  checked={newSubElective}
-                  onChange={(e) => setNewSubElective(e.target.checked)}
-                  className="rounded border-border-default"
-                />
-                <label htmlFor="electiveCheck" className="text-xs font-semibold text-text-primary">
-                  Elective Subject (Optional)
+
+              <div>
+                <label className="font-semibold text-text-primary block mb-1">
+                  Syllabus
                 </label>
+                <div className="flex flex-col gap-1.5">
+                  {availableSyllabusBooks.length > 0 && (
+                    <select
+                      value={newSubSyllabus}
+                      onChange={(e) => setNewSubSyllabus(e.target.value)}
+                      className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary text-xs"
+                    >
+                      <option value="">-- Select Syllabus Copy / Book from Preferred Textbooks (A1) --</option>
+                      {availableSyllabusBooks.map((tb: any) => (
+                        <option key={tb.id} value={`${tb.title}${tb.author ? ` by ${tb.author}` : ''}${tb.publisher ? ` (${tb.publisher})` : ''}`}>
+                          📖 {tb.title} {tb.publisher ? `(${tb.publisher})` : ''} {tb.edition ? `• ${tb.edition}` : ''}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                  <input
+                    type="text"
+                    value={newSubSyllabus}
+                    onChange={(e) => setNewSubSyllabus(e.target.value)}
+                    placeholder="Select from Preferred Textbooks (A1) above or type syllabus copy reference..."
+                    className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                  />
+                </div>
               </div>
             </div>
             <div className="flex justify-end gap-2 pt-2 border-t border-border-default">
@@ -2471,13 +2720,18 @@ export default function AcademicsWorkspacePage() {
                   try {
                     await createSubjectMutation.mutateAsync({
                       name: newSubName.trim(),
-                      code: newSubCode.trim(),
+                      code: newSubCode.trim().toUpperCase(),
                       credits: newSubCredits,
-                      isElective: newSubElective,
+                      isElective: newSubType === "External",
+                      type: newSubType,
+                      subjectType: newSubType,
+                      syllabus: newSubSyllabus.trim(),
                     })
                     triggerSuccess(`Subject ${newSubName} created successfully!`)
                     setNewSubName("")
                     setNewSubCode("")
+                    setNewSubType("Core Subject")
+                    setNewSubSyllabus("")
                     setIsAddSubjectModalOpen(false)
                   } catch (err: any) {
                     triggerError(err.message)
@@ -2893,19 +3147,29 @@ export default function AcademicsWorkspacePage() {
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="font-semibold text-text-primary block mb-1">Subject</label>
-                  <select
-                    value={tbSubjectId}
-                    onChange={(e) => setTbSubjectId(e.target.value)}
+                  <label className="font-semibold text-text-primary block mb-1">
+                    Subject <span className="text-status-error">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={tbSubject}
+                    onChange={(e) => {
+                      const val = e.target.value
+                      setTbSubject(val)
+                      const matched = subjects.find(
+                        (s: any) => s.name?.toLowerCase() === val.trim().toLowerCase()
+                      )
+                      setTbSubjectId(matched?.id || "")
+                    }}
+                    list="preferred-tb-subject-list"
+                    placeholder="Enter subject name..."
                     className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
-                  >
-                    <option value="">Select Subject</option>
+                  />
+                  <datalist id="preferred-tb-subject-list">
                     {subjects.map((s: any) => (
-                      <option key={s.id} value={s.id}>
-                        {s.name}
-                      </option>
+                      <option key={s.id} value={s.name} />
                     ))}
-                  </select>
+                  </datalist>
                 </div>
                 <div>
                   <label className="font-semibold text-text-primary block mb-1">Estimated Price (₹)</label>
@@ -2962,17 +3226,24 @@ export default function AcademicsWorkspacePage() {
                 size="dense"
                 variant="primary"
                 onClick={async () => {
-                  if (!tbTitle || !tbAuthor || !tbPublisher || !tbSubjectId) return
+                  if (!tbTitle.trim() || !tbAuthor.trim() || !tbPublisher.trim() || !tbSubject.trim()) {
+                    triggerError("Title, Author, Publisher, and Subject are required")
+                    return
+                  }
                   try {
+                    const matchedSub = subjects.find(
+                      (s: any) => s.name?.toLowerCase() === tbSubject.trim().toLowerCase() || s.id === tbSubjectId
+                    )
                     await createTextbookMutation.mutateAsync({
                       academicYearId: activeYearId,
                       classId: activeTextbookClassId,
-                      subjectId: tbSubjectId,
-                      title: tbTitle,
-                      author: tbAuthor,
-                      publisher: tbPublisher,
-                      edition: tbEdition,
-                      isbn: tbIsbn,
+                      subjectId: matchedSub?.id || tbSubjectId || undefined,
+                      subjectName: tbSubject.trim(),
+                      title: tbTitle.trim(),
+                      author: tbAuthor.trim(),
+                      publisher: tbPublisher.trim(),
+                      edition: tbEdition.trim(),
+                      isbn: tbIsbn.trim(),
                       price: tbPrice,
                       isMandatory: tbMandatory,
                     })
@@ -2980,6 +3251,8 @@ export default function AcademicsWorkspacePage() {
                     setTbTitle("")
                     setTbAuthor("")
                     setTbPublisher("")
+                    setTbSubject("")
+                    setTbSubjectId("")
                     setIsAddTextbookModalOpen(false)
                   } catch (err: any) {
                     triggerError(err.message)

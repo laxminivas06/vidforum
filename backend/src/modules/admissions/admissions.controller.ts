@@ -60,14 +60,17 @@ export class AdmissionsController {
 
   async createApplication(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { applicantName, dateOfBirth, gender, classId, gradeApplying, academicYearId, guardianName, guardianPhone, guardianEmail, stage, notes, entranceScore, enquiryId } = req.body;
+      const { applicantName, dateOfBirth, gender, classId, gradeApplying, academicYearId, guardianName, guardianPhone, guardianEmail, stage, notes, entranceScore, enquiryId, feeAmount, feeStatus, feePaid } = req.body;
       if (!applicantName) {
         sendError(res, 'applicantName is required', 400);
         return;
       }
+      const resolvedFeeStatus = feeStatus || (feePaid === true ? 'paid' : 'unpaid');
       const created = await admissionsService.createApplication(req.institutionId!, {
         applicantName, dateOfBirth, gender, classId, gradeApplying, academicYearId,
         guardianName, guardianPhone, guardianEmail, stage, notes, entranceScore, enquiryId,
+        feeAmount: feeAmount !== undefined ? Number(feeAmount) : 0,
+        feeStatus: resolvedFeeStatus,
       });
       sendSuccess(res, created, 'Application submitted successfully', 201);
     } catch (error) { next(error); }

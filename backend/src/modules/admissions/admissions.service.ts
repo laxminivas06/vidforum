@@ -1,4 +1,5 @@
 import { admissionsRepository } from './admissions.repository';
+import { db } from '../../config/database';
 
 export const STAGE_MAP_TO_UI: Record<string, string> = {
   enquiry: 'INQUIRY', application: 'APPLIED',
@@ -48,6 +49,9 @@ export class AdmissionsService {
       entranceScore: row.entrance_score,
       interviewDate: row.interview_date,
       notes: row.notes,
+      feeAmount: Number(row.fee_amount || 0),
+      feePaid: row.fee_status === 'paid' || row.fee_status === 'PAID',
+      feeStatus: row.fee_status || 'unpaid',
     }));
   }
 
@@ -62,7 +66,19 @@ export class AdmissionsService {
   }
 
   async bulkImport(institutionId: string, rows: any[], defaultAcademicYearId?: string, actorId?: string) {
-    return admissionsRepository.bulkInsertApplicants(institutionId, rows, defaultAcademicYearId, actorId);
+    const report = await admissionsRepository.bulkInsertApplicants(institutionId, rows, defaultAcademicYearId, actorId);
+    for (let i = 0; i < report.results.length; i++) {
+      const res = report.results[i];
+      const r = rows[i];
+      if (res && res.success && res.id && (r.stage === 'enrolled' || r.directEnroll === true || r.isDirectEnroll === true)) {
+        try {
+          await this.approveApplication(res.id, institutionId, actorId);
+        } catch (err: any) {
+          console.warn(`Direct enroll error for row ${i + 1}:`, err.message);
+        }
+      }
+    }
+    return report;
   }
 
   async updateStage(applicationId: string, stage: string, actorId?: string) {
@@ -75,8 +91,22 @@ export class AdmissionsService {
   async approveApplication(applicationId: string, institutionId: string, actorId?: string) {
     const app = await admissionsRepository.findApplicationById(applicationId, institutionId);
     if (!app) throw new Error('Application not found');
-    const sectionId = await admissionsRepository.findDefaultSection(app.applying_for_class_id);
-    if (!sectionId) throw new Error('No section found for this class');
+
+    let classId = app.applying_for_class_id;
+    if (!classId) {
+      const defaultC = await db.query(
+        'SELECT id FROM classes WHERE institution_id = $1 ORDER BY sequence_order ASC, name ASC LIMIT 1',
+        [institutionId]
+      );
+      classId = defaultC.rows[0]?.id;
+      if (classId) {
+        await db.query('UPDATE applications SET applying_for_class_id = $1 WHERE id = $2', [classId, applicationId]);
+        app.applying_for_class_id = classId;
+      }
+    }
+
+    const sectionId = await admissionsRepository.findDefaultSection(classId);
+    if (!sectionId) throw new Error('No classroom section could be assigned for this grade/class');
 
     const count = await admissionsRepository.countStudents(institutionId);
     const year = new Date().getFullYear();
@@ -86,13 +116,13 @@ export class AdmissionsService {
       suffix++;
       admissionNumber = `SIA-${year}-${String(suffix).padStart(4, '0')}`;
     }
-    const names = app.applicant_name.trim().split(' ');
+    const names = (app.applicant_name || 'New Student').trim().split(' ');
 
     const student = await admissionsRepository.executeApprovalTransaction(applicationId, institutionId, {
       sectionId,
       admissionNumber,
-      firstName: names[0],
-      lastName: names.slice(1).join(' ') || 'Student',
+      firstName: names[0] || 'Student',
+      lastName: names.slice(1).join(' ') || 'Enrolled',
       rollNumber: `${count + 1}`,
       actorId,
     });

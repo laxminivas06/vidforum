@@ -166,7 +166,7 @@ export interface StudentProfileProps {
 }
 
 export const StudentProfile: React.FC<StudentProfileProps> = ({
-  student: initialStudent = MOCK_STUDENT,
+  student: initialStudent,
   studentId,
   isSlideOver = false,
   onClose,
@@ -174,7 +174,7 @@ export const StudentProfile: React.FC<StudentProfileProps> = ({
 }) => {
   const { data: liveMaster, isLoading } = useStudentMaster(studentId)
 
-  const student: StudentMasterData = useMemo(() => {
+  const student: StudentMasterData | null = useMemo(() => {
     if (liveMaster && liveMaster.profile) {
       const p = liveMaster.profile
       const primaryGuardian = liveMaster.guardians?.find((g: any) => g.is_primary_contact) || liveMaster.guardians?.[0]
@@ -221,26 +221,18 @@ export const StudentProfile: React.FC<StudentProfileProps> = ({
           outstandingDue: Number(liveMaster.finance?.balance_due) || 0,
           status: Number(liveMaster.finance?.balance_due) > 0 ? 'PARTIAL' : 'PAID',
         },
-        recentMarks: [
-          { subject: "Mathematics", examName: "Formative Assessment", marksObtained: 92, maxMarks: 100, grade: "A+" },
-          { subject: "Science", examName: "Formative Assessment", marksObtained: 89, maxMarks: 100, grade: "A" },
-        ],
-        documents: [
-          { id: "doc-1", title: "Birth Certificate", docType: "Identity", verified: true, date: "2026-06-01" },
-          { id: "doc-2", title: "Transfer Certificate", docType: "Academic", verified: true, date: "2026-06-01" },
-        ],
+        recentMarks: [],
+        documents: [],
         aiTutor: {
-          totalDoubtsSolved: 14,
-          masteryPercentage: 88,
-          weakTopics: ["Quadratic Equations", "Optics"],
-          recommendedPractice: "Chapter 4 Problem Set",
+          totalDoubtsSolved: 0,
+          masteryPercentage: 0,
+          weakTopics: [],
+          recommendedPractice: "No remedial practices assigned.",
         },
       }
     }
-    return studentId
-      ? { ...initialStudent, id: studentId, studentIdNumber: studentId }
-      : initialStudent
-  }, [liveMaster, studentId, initialStudent])
+    return initialStudent || null
+  }, [liveMaster, initialStudent])
 
   const [activeTab, setActiveTab] = useState<
     "personal" | "academic" | "attendance" | "exams" | "fees" | "documents" | "timetable" | "ai"
@@ -283,6 +275,22 @@ export const StudentProfile: React.FC<StudentProfileProps> = ({
       ),
     },
   ]
+
+  if (!student) {
+    return (
+      <div className="p-12 text-center bg-surface rounded-2xl border border-dashed border-border-default flex flex-col items-center justify-center gap-3">
+        <div className="w-12 h-12 rounded-xl bg-subtle border border-border-default flex items-center justify-center text-text-muted">
+          <User className="w-6 h-6" />
+        </div>
+        <div>
+          <h4 className="text-sm font-bold text-text-primary">No Student Record Selected</h4>
+          <p className="text-xs text-text-secondary mt-1 max-w-sm">
+            Select a student from the class roster to view their 360° academic dossier, attendance history, and report cards.
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-6">

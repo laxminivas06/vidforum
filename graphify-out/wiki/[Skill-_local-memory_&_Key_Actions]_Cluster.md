@@ -1,19 +1,17 @@
 # [Skill: local-memory & Key Actions] Cluster
 
-> 10 nodes · cohesion 0.20
+> 8 nodes · cohesion 0.25
 
 ## Key Concepts
 
-- [Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L1) (9 connections)
-- [ActiveIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L91) (1 connections)
-- [activeWorkspace](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L90) (1 connections)
-- [dropdownRef](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L80) (1 connections)
-- [handleClickOutside()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L97) (1 connections)
-- [isCurrent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L184) (1 connections)
-- [[isWorkspaceDropdownOpen, setIsWorkspaceDropdownOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L79) (1 connections)
-- [permittedWorkspaces](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L83) (1 connections)
-- [TOPBAR_ICON_MAP](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L31) (1 connections)
-- [WsIcon](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx#L185) (1 connections)
+- [Table.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L1) (7 connections)
+- [handleSort()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L54) (1 connections)
+- [isTableLoading](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L52) (1 connections)
+- [mobileSubtitleCol](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L79) (1 connections)
+- [mobileTitleCol](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L78) (1 connections)
+- [[sortDir, setSortDir]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L50) (1 connections)
+- [sortedData](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L63) (1 connections)
+- [[sortKey, setSortKey]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L49) (1 connections)
 
 ## Relationships
 
@@ -21,11 +19,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Topbar.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Topbar.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Table.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 18 (100%)
+- EXTRACTED: 14 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

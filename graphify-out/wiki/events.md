@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: secret-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (2 connections)
-- [Scan Targets](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
-- [Secret Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
+- [Skill: unforgit](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (2 connections)
+- [Guidelines](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (1 connections)
+- [Unforgit Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[Community 92]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/secret-guard/skills/secret-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md)
+- [.agents/plugins/unforgit/skills/unforgit/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md)
 
 ## Audit Trail
 

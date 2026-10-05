@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: commit-narrator](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (2 connections)
-- [Commit Narrator Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (1 connections)
-- [Format](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md) (1 connections)
+- [Skill: flaky-detector](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (2 connections)
+- [Flaky Detector Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (1 connections)
+- [Instructions](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[Community 79]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/commit-narrator/skills/commit-narrator/SKILL.md)
+- [.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/flaky-detector/skills/flaky-detector/SKILL.md)
 
 ## Audit Trail
 

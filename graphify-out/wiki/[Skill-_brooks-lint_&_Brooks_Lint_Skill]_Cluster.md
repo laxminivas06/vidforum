@@ -1,41 +1,18 @@
 # [Skill: brooks-lint & Brooks Lint Skill] Cluster
 
-> 10 nodes · cohesion 0.20
+> 9 nodes · cohesion 0.22
 
 ## Key Concepts
 
-- [error-format.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L1) (5 connections)
-- [AppError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L25) (2 connections)
-- [PermissionDeniedError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L47) (2 connections)
-- [ResourceNotFoundError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L54) (2 connections)
-- [TenantViolationError](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L40) (2 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L30) (1 connections)
-- [formatErrorResponse()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L61) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L48) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L55) (1 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts#L41) (1 connections)
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class AppError {
-        +error-format.ts()
-        +.constructor()
-    }
-    class PermissionDeniedError {
-        +error-format.ts()
-        +.constructor()
-    }
-    class ResourceNotFoundError {
-        +error-format.ts()
-        +.constructor()
-    }
-    class TenantViolationError {
-        +error-format.ts()
-        +.constructor()
-    }
-```
+- [workspace.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L1) (8 connections)
+- [authHeader](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L13) (1 connections)
+- [grantedKeys](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L24) (1 connections)
+- [grantRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L35) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L8) (1 connections)
+- [row](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L45) (1 connections)
+- [token](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L17) (1 connections)
+- [user](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L12) (1 connections)
+- [workspaces](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts#L65) (1 connections)
 
 ## Relationships
 
@@ -43,11 +20,11 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\common\error-format.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/error-format.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\workspaces\workspace.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.routes.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 18 (100%)
+- EXTRACTED: 16 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

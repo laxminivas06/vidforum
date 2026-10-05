@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [next.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/next.config.js#L1) (1 connections)
-- [nextConfig](file:///C:/Antigravityyyyy/VID_School/frontend/next.config.js#L2) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/mapping/page.tsx#L1) (1 connections)
+- [AcademicsMappingRedirect()](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/mapping/page.tsx#L3) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\next.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/next.config.js)
+- [C:\Antigravityyyyy\VID_School\frontend\app\academics\mapping\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/academics/mapping/page.tsx)
 
 ## Audit Trail
 

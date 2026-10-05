@@ -2,34 +2,34 @@
   "hotspots": [
     {
       "label": "AcademicsRepository",
-      "risk": 0.618,
+      "risk": 0.636,
       "type": "CLASS"
     },
     {
       "label": "AcademicsController",
-      "risk": 0.559,
+      "risk": 0.491,
       "type": "CLASS"
     },
     {
       "label": "DocumentsService",
-      "risk": 0.443,
+      "risk": 0.374,
       "type": "CLASS"
     },
     {
       "label": "HrmsService",
-      "risk": 0.385,
+      "risk": 0.329,
       "type": "CLASS"
     },
     {
-      "label": "ExaminationsRepository",
-      "risk": 0.357,
+      "label": "HrmsRepository",
+      "risk": 0.309,
       "type": "CLASS"
     }
   ],
   "blast_radius": {
-    "query": 280,
-    "sendSuccess()": 200,
-    "sendError()": 153,
+    "query": 286,
+    "sendSuccess()": 204,
+    "sendError()": 155,
     "institutions": 73,
     "AcademicsRepository": 51
   }

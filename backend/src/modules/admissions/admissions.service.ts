@@ -133,6 +133,22 @@ export class AdmissionsService {
   async getPipelineStats(institutionId: string) {
     return admissionsRepository.getPipelineStats(institutionId);
   }
+
+  async getAdmissionDocuments(institutionId: string, filters: { status?: string; search?: string } = {}) {
+    return admissionsRepository.getAdmissionDocuments(institutionId, filters);
+  }
+
+  async updateDocumentStatus(documentId: string, institutionId: string, status: string, actorId?: string) {
+    return admissionsRepository.updateDocumentStatus(documentId, institutionId, status, actorId);
+  }
+
+  async addAdmissionDocument(institutionId: string, applicationId: string, data: { documentType: string; storageKey?: string; status?: string }) {
+    return admissionsRepository.addAdmissionDocument(institutionId, applicationId, data.documentType, data.storageKey, data.status);
+  }
+
+  async getEnrolledStudents(institutionId: string, filters: { search?: string; classId?: string } = {}) {
+    return admissionsRepository.getEnrolledStudents(institutionId, filters);
+  }
 }
 
 export const admissionsService = new AdmissionsService();

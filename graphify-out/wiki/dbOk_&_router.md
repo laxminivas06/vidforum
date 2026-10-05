@@ -1,17 +1,16 @@
 # dbOk & router
 
-> 8 nodes · cohesion 0.25
+> 7 nodes · cohesion 0.48
 
 ## Key Concepts
 
-- [Table.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L1) (7 connections)
-- [handleSort()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L54) (1 connections)
-- [isTableLoading](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L52) (1 connections)
-- [mobileSubtitleCol](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L79) (1 connections)
-- [mobileTitleCol](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L78) (1 connections)
-- [[sortDir, setSortDir]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L50) (1 connections)
-- [sortedData](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L63) (1 connections)
-- [[sortKey, setSortKey]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx#L49) (1 connections)
+- [tenant-repository.base.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L1) (6 connections)
+- [findById()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L53) (4 connections)
+- [validateTenant()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L44) (4 connections)
+- [findMany()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L81) (3 connections)
+- [softDelete()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L138) (3 connections)
+- [findByIdOrFail()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L70) (2 connections)
+- [constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts#L37) (1 connections)
 
 ## Relationships
 
@@ -19,12 +18,12 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Table.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Table.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\common\tenant-repository.base.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/tenant-repository.base.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 14 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 20 (87%)
+- INFERRED: 3 (13%)
 - AMBIGUOUS: 0 (0%)
 
 ---

@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [institution.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.routes.ts#L1) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.routes.ts#L4) (1 connections)
+- [next.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/next.config.js#L1) (1 connections)
+- [nextConfig](file:///C:/Antigravityyyyy/VID_School/frontend/next.config.js#L2) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\institutions\institution.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/institutions/institution.routes.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\next.config.js](file:///C:/Antigravityyyyy/VID_School/frontend/next.config.js)
 
 ## Audit Trail
 

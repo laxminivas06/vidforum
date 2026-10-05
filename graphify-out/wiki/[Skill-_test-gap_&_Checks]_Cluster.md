@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: agent-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (2 connections)
-- [Agent Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (1 connections)
-- [Enforcement](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (1 connections)
+- [Skill: debt-ops](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md) (2 connections)
+- [Debt-Ops Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md) (1 connections)
+- [Rules](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: token-optimizer & Best Practices] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/agent-guard/skills/agent-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md)
+- [.agents/plugins/debt-ops/skills/debt-ops/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/debt-ops/skills/debt-ops/SKILL.md)
 
 ## Audit Trail
 

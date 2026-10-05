@@ -1,86 +1,46 @@
 # [Document: Memory & 1.1 Architecture & Stack Contract] Cluster
 
-> 28 nodes · cohesion 0.11
+> 24 nodes · cohesion 0.08
 
 ## Key Concepts
 
-- [runR4Verification()](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-r4-provisioning.ts#L22) (10 connections)
-- [ProvisioningService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/provisioning.service.ts#L54) (8 connections)
-- [.provisionUser()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/provisioning.service.ts#L80) (8 connections)
-- [.createLog()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.repository.ts#L117) (7 connections)
-- [AuditRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.repository.ts#L18) (5 connections)
-- [.resetCredentials()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/provisioning.service.ts#L482) (5 connections)
-- [.updateUserAccess()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/provisioning.service.ts#L375) (5 connections)
-- [.updateUserStatus()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/provisioning.service.ts#L560) (5 connections)
-- [.getLogById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.controller.ts#L38) (4 connections)
-- [.getLogs()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.controller.ts#L6) (4 connections)
-- [.bulkProvisionUsers()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/provisioning.service.ts#L292) (4 connections)
-- [resolveRoleTemplate()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/role-templates.ts#L99) (4 connections)
-- [AuditController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.controller.ts#L5) (3 connections)
-- [.findLogById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.repository.ts#L98) (3 connections)
-- [.findLogs()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.repository.ts#L23) (3 connections)
-- [AuditService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.service.ts#L3) (3 connections)
-- [.getAuditLogById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.service.ts#L15) (3 connections)
-- [.getAuditLogs()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.service.ts#L4) (3 connections)
-- [.generateSecurePassword()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/provisioning.service.ts#L59) (3 connections)
-- [.getUserAudit()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/provisioning.service.ts#L641) (3 connections)
-- [role-templates.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/role-templates.ts#L1) (2 connections)
-- [.constructor()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.repository.ts#L19) (1 connections)
-- [audit.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.controller.ts#L1) (1 connections)
-- [audit.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.repository.ts#L1) (1 connections)
-- [audit.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.service.ts#L1) (1 connections)
-- *... and 3 more nodes in this community*
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class AuditController {
-        +audit.controller.ts()
-        +.getLogs()
-        +.getLogById()
-    }
-    class AuditRepository {
-        +audit.repository.ts()
-        +.constructor()
-        +.findLogs()
-        +.findLogById()
-        +.createLog()
-    }
-    class AuditService {
-        +audit.service.ts()
-        +.getAuditLogs()
-        +.getAuditLogById()
-    }
-    class ProvisioningService {
-        +provisioning.service.ts()
-        +.generateSecurePassword()
-        +.provisionUser()
-        +.bulkProvisionUsers()
-        +.updateUserAccess()
-        +.resetCredentials()
-        +.updateUserStatus()
-        +.getUserAudit()
-    }
-```
+- [Document: Tech Spec](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (23 connections)
+- [1.1 Backend Architecture — Layered MVC](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [1. Technical Stack Selection & Justification](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [2. High-Level Architecture Diagram](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [3. Repository & Folder Structure](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [4.1 Schema Definition across 16 Core Domains](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [4. Database Schema & Multi-Tenant Data Model](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [5.1 Route Inventory (Section 26 Mapping)](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [5.2 Sample Request & Response Schemas](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [5. API Contracts & Endpoint Specification](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [6. Authentication, Security & Tenant Isolation](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [7. Responsive UI Specification & Breakpoints](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [8. Third-Party Integrations & Environment Variables](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Admission Approval $\to$ Student Creation Pipeline](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [AI Yantra Intelligence](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Cache & Message Broker / Job Queue](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Detailed Entity Specifications:](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [External Integrations](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Multi-Tenant PostgreSQL Database](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Object Storage](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Platform & Server](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Required Environment Variables (.env)](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Technical Specification: VID (Virtual Identification) Platform](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [Timetable Conflict Detection](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[errorCount & { examId, subjectId }] Cluster]] (46 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\audit\audit.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.controller.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\audit\audit.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\audit\audit.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/audit/audit.service.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\users\provisioning.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/provisioning.service.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\users\role-templates.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/role-templates.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\scripts\verify-r4-provisioning.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-r4-provisioning.ts)
+- [docs/TECH_SPEC.md](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md)
 
 ## Audit Trail
 
-- EXTRACTED: 50 (49%)
-- INFERRED: 52 (51%)
+- EXTRACTED: 46 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

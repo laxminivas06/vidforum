@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [app](file:///C:/Antigravityyyyy/VID_School/backend/src/app.ts#L10) (1 connections)
-- [app.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/app.ts#L1) (1 connections)
+- [workspace.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/workspace.middleware.ts#L1) (1 connections)
+- [requireWorkspace()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/workspace.middleware.ts#L7) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\app.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/app.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\workspace.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/workspace.middleware.ts)
 
 ## Audit Trail
 

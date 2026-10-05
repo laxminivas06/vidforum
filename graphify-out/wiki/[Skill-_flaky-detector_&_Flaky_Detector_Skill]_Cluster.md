@@ -4,18 +4,18 @@
 
 ## Key Concepts
 
-- [Skill: brooks-lint](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (3 connections)
-- [Brooks Lint Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (1 connections)
-- [Guiding Principles](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (1 connections)
-- [Severity Classifications](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md) (1 connections)
+- [Skill: local-memory](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (3 connections)
+- [Key Actions](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (1 connections)
+- [Local Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (1 connections)
+- [When to Use](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: hol-guard & Audit Checks] Cluster]] (6 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/brooks-lint/skills/brooks-lint/SKILL.md)
+- [.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/mcp-local-memory/skills/local-memory/SKILL.md)
 
 ## Audit Trail
 

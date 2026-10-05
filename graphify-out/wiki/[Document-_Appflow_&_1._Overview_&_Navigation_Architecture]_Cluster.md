@@ -1,70 +1,35 @@
 # [Document: Appflow & 1. Overview & Navigation Architecture] Cluster
 
-> 39 nodes · cohesion 0.07
+> 48 nodes · cohesion 0.04
 
 ## Key Concepts
 
-- [.login()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.service.ts#L24) (10 connections)
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L1) (10 connections)
-- [VidApiClient](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L7) (7 connections)
-- [.reset()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L103) (6 connections)
-- [AuthRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts#L22) (6 connections)
-- [AuthRateLimiter](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L9) (5 connections)
-- [.isLocked()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L19) (5 connections)
-- [.recordFailure()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L52) (5 connections)
-- [.findLoginSubject()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts#L42) (5 connections)
-- [.changePassword()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.service.ts#L143) (5 connections)
-- [.get()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L51) (5 connections)
-- [.request()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L18) (5 connections)
-- [.getKey()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts#L15) (4 connections)
-- [.getUserPermissions()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts#L112) (3 connections)
-- [.updatePassword()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts#L156) (3 connections)
-- [AuthService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.service.ts#L23) (3 connections)
-- [.delete()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L71) (3 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L45) (3 connections)
-- [runTests()](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-r2-auth.ts#L8) (3 connections)
-- [.normalizeRole()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts#L23) (2 connections)
-- [.revokeAllRefreshTokens()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts#L203) (2 connections)
-- [auth.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.service.ts#L1) (2 connections)
-- [.patch()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L63) (2 connections)
-- [.post()](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts#L55) (2 connections)
-- [handleLoginSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx#L32) (2 connections)
-- *... and 14 more nodes in this community*
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class AuthRateLimiter {
-        +auth-rate-limiter.ts()
-        +.getKey()
-        +.isLocked()
-        +.recordFailure()
-        +.reset()
-    }
-    class AuthRepository {
-        +auth.repository.ts()
-        +.normalizeRole()
-        +.findLoginSubject()
-        +.getUserPermissions()
-        +.updatePassword()
-        +.revokeAllRefreshTokens()
-    }
-    class AuthService {
-        +auth.service.ts()
-        +.login()
-        +.changePassword()
-    }
-    class VidApiClient {
-        +index.ts()
-        +.constructor()
-        +.request()
-        +.get()
-        +.post()
-        +.patch()
-        +.delete()
-    }
-```
+- [users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L1) (48 connections)
+- [adminEmails](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L605) (1 connections)
+- [adminRoleId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L636) (1 connections)
+- [adminRoleRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L635) (1 connections)
+- [authId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L612) (1 connections)
+- [authUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L611) (1 connections)
+- [cleanEmail](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L47) (1 connections)
+- [client](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L38) (1 connections)
+- [current](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L147) (1 connections)
+- [currentRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L136) (1 connections)
+- [defaultPassHash](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L600) (1 connections)
+- [displayName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L48) (1 connections)
+- [getUserAgent()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L337) (1 connections)
+- [id](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L132) (1 connections)
+- [ins](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L614) (1 connections)
+- [insertAuth](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L84) (1 connections)
+- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L51) (1 connections)
+- [institutionId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L445) (1 connections)
+- [instName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L52) (1 connections)
+- [instRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L54) (1 connections)
+- [{ name, email, role = 'FACULTY', institutionName }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L40) (1 connections)
+- [{ name, email, role, institutionName, status }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L133) (1 connections)
+- [newUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L109) (1 connections)
+- [ngsId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L603) (1 connections)
+- [ngsRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L602) (1 connections)
+- *... and 23 more nodes in this community*
 
 ## Relationships
 
@@ -72,19 +37,12 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\auth\auth-rate-limiter.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth-rate-limiter.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\auth\auth.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\auth\auth.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/auth/auth.service.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\scripts\verify-r2-auth.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/scripts/verify-r2-auth.ts)
-- [C:\Antigravityyyyy\VID_School\frontend\app\(auth)\login\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/%28auth%29/login/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx)
-- [C:\Antigravityyyyy\VID_School\frontend\app\students\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx)
-- [C:\Antigravityyyyy\VID_School\packages\api-client\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/api-client/src/index.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 85 (69%)
-- INFERRED: 38 (31%)
+- EXTRACTED: 95 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

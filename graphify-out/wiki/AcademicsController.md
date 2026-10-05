@@ -1,6 +1,6 @@
 # AcademicsController
 
-> God node · 49 connections · [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L5)
+> God node · 50 connections · [C:\Antigravityyyyy\VID_School\backend\src\modules\academics\academics.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/academics/academics.controller.ts#L5)
 
 ## Connections by Relation
 
@@ -8,7 +8,15 @@
 - [[academics.controller.ts]] `EXTRACTED`
 
 ### method
+- [[.resolveAcademicYearId()]] `EXTRACTED`
+- [[.getExamEstimates()]] `EXTRACTED`
+- [[.getCalendarConfig()]] `EXTRACTED`
+- [[.getCalendarDays()]] `EXTRACTED`
 - [[.checkWorkingDay()]] `EXTRACTED`
+- [[.getWorkingDaysCount()]] `EXTRACTED`
+- [[.getTextbooks()]] `EXTRACTED`
+- [[.getBooklist()]] `EXTRACTED`
+- [[.getAcademicYears()]] `EXTRACTED`
 - [[.getAcademicYearById()]] `EXTRACTED`
 - [[.createAcademicYear()]] `EXTRACTED`
 - [[.cloneAcademicYear()]] `EXTRACTED`
@@ -20,14 +28,6 @@
 - [[.deleteSection()]] `EXTRACTED`
 - [[.createSubject()]] `EXTRACTED`
 - [[.updateSubject()]] `EXTRACTED`
-- [[.deleteSubject()]] `EXTRACTED`
-- [[.mapSubjectToGrade()]] `EXTRACTED`
-- [[.copySubjectMatrix()]] `EXTRACTED`
-- [[.getExamEstimates()]] `EXTRACTED`
-- [[.createExamEstimate()]] `EXTRACTED`
-- [[.getCalendarConfig()]] `EXTRACTED`
-- [[.saveCalendarConfig()]] `EXTRACTED`
-- [[.getCalendarDays()]] `EXTRACTED`
 
 ---
 

@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [index.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/index.ts#L1) (0 connections)
+- [index.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/index.ts#L1) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\middleware\index.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/index.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\common\index.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/common/index.ts)
 
 ## Audit Trail
 

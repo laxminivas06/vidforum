@@ -391,6 +391,193 @@ export class AdmissionsRepository {
     }
   }
 
+  async getAdmissionDocuments(institutionId: string, filters: { status?: string; search?: string } = {}) {
+    let query = `
+      SELECT 
+        ad.id,
+        ad.application_id,
+        ad.document_type AS title,
+        ad.storage_key AS file_name,
+        LOWER(ad.verification_status::text) AS status,
+        ad.verified_at,
+        ad.created_at AS upload_date,
+        a.applicant_name,
+        c.name AS grade_applying,
+        a.guardian_name,
+        a.guardian_phone,
+        a.stage AS applicant_stage
+      FROM admission_documents ad
+      JOIN applications a ON a.id = ad.application_id
+      LEFT JOIN classes c ON c.id = a.applying_for_class_id
+      WHERE a.institution_id = $1
+    `;
+    const params: any[] = [institutionId];
+    let idx = 2;
+
+    if (filters.status && filters.status !== 'ALL') {
+      query += ` AND LOWER(ad.verification_status) = $${idx++}`;
+      params.push(filters.status.toLowerCase());
+    }
+
+    if (filters.search) {
+      query += ` AND (a.applicant_name ILIKE $${idx} OR ad.document_type ILIKE $${idx})`;
+      params.push(`%${filters.search}%`);
+      idx++;
+    }
+
+    query += ` ORDER BY ad.created_at DESC`;
+
+    const res = await db.query(query, params);
+    return res.rows.map((r, i) => ({
+      id: r.id,
+      applicationId: r.application_id,
+      applicationNumber: `APP-${new Date().getFullYear()}-${String(i + 1).padStart(4, '0')}`,
+      title: r.title,
+      fileName: r.file_name || `${r.title.toLowerCase().replace(/[^a-z0-9]/g, '_')}.pdf`,
+      status: (r.status || 'pending').toUpperCase(),
+      verifiedAt: r.verified_at,
+      uploadDate: r.upload_date ? new Date(r.upload_date).toISOString().split('T')[0] : '',
+      applicantName: r.applicant_name,
+      gradeApplying: r.grade_applying || 'N/A',
+      guardianName: r.guardian_name || 'N/A',
+      guardianPhone: r.guardian_phone || '',
+      applicantStage: r.applicant_stage,
+    }));
+  }
+
+  async updateDocumentStatus(documentId: string, institutionId: string, status: string, actorId?: string) {
+    const validStatus = ['pending', 'verified', 'rejected'].includes(status.toLowerCase())
+      ? status.toLowerCase()
+      : 'pending';
+
+    const verifiedAt = validStatus === 'verified' ? new Date() : null;
+
+    let verifiedBy = null;
+    if (actorId) {
+      const prof = await db.query('SELECT id FROM profiles WHERE id = $1', [actorId]);
+      if (prof.rows.length > 0) verifiedBy = actorId;
+    }
+
+    const res = await db.query(
+      `UPDATE admission_documents ad
+       SET verification_status = $1,
+           verified_at = $2,
+           verified_by = $3
+       FROM applications a
+       WHERE ad.id = $4 AND ad.application_id = a.id AND a.institution_id = $5
+       RETURNING ad.*`,
+      [validStatus, verifiedAt, verifiedBy, documentId, institutionId]
+    );
+    return res.rows[0];
+  }
+
+  async addAdmissionDocument(institutionId: string, applicationId: string, documentType: string, storageKey?: string, status: string = 'pending') {
+    const validStatus = ['pending', 'verified', 'rejected'].includes(status.toLowerCase())
+      ? status.toLowerCase()
+      : 'pending';
+
+    // Verify application belongs to institution
+    const appCheck = await db.query('SELECT id FROM applications WHERE id = $1 AND institution_id = $2', [applicationId, institutionId]);
+    if (appCheck.rows.length === 0) {
+      throw new Error('Application not found for this institution');
+    }
+
+    const res = await db.query(
+      `INSERT INTO admission_documents (application_id, document_type, storage_key, verification_status)
+       VALUES ($1, $2, $3, $4)
+       RETURNING *`,
+      [
+        applicationId,
+        documentType,
+        storageKey || `admissions/doc_${Date.now()}_${documentType.toLowerCase().replace(/[^a-z0-9]/g, '_')}.pdf`,
+        validStatus,
+      ]
+    );
+    return res.rows[0];
+  }
+
+  async getEnrolledStudents(institutionId: string, filters: { search?: string; classId?: string } = {}) {
+    let query = `
+      SELECT 
+        a.id AS application_id,
+        a.applicant_name AS student_name,
+        a.gender,
+        a.date_of_birth,
+        c.id AS class_id,
+        c.name AS grade_name,
+        COALESCE(s.admission_number, 'ADM-' || substring(a.id::text, 1, 8)) AS admission_number,
+        COALESCE(s.id, a.id) AS student_id,
+        COALESCE(s.created_at::date, a.updated_at::date, now()::date) AS enrollment_date,
+        a.guardian_name,
+        a.guardian_phone,
+        a.guardian_email,
+        COALESCE(a.fee_amount, 2500) AS fee_amount,
+        COALESCE(a.fee_status, 'paid') AS fee_status,
+        a.created_at AS application_date,
+        a.updated_at AS enrolled_date,
+        COALESCE(
+          (SELECT json_agg(json_build_object(
+            'id', ad.id, 'title', ad.document_type,
+            'status', UPPER(ad.verification_status::text),
+            'fileName', ad.storage_key,
+            'uploadDate', to_char(ad.created_at, 'YYYY-MM-DD')
+          )) FROM admission_documents ad WHERE ad.application_id = a.id),
+          '[]'::json
+        ) AS documents
+      FROM applications a
+      LEFT JOIN classes c ON c.id = a.applying_for_class_id
+      LEFT JOIN LATERAL (
+        SELECT s2.id, s2.admission_number, s2.created_at 
+        FROM admissions adm2
+        JOIN students s2 ON s2.admission_id = adm2.id
+        WHERE adm2.application_id = a.id
+        ORDER BY s2.created_at DESC
+        LIMIT 1
+      ) s ON true
+      WHERE a.institution_id = $1 AND a.stage = 'enrolled'
+    `;
+    const params: any[] = [institutionId];
+    let idx = 2;
+
+    if (filters.classId && filters.classId !== 'ALL') {
+      query += ` AND a.applying_for_class_id = $${idx++}`;
+      params.push(filters.classId);
+    }
+
+    if (filters.search) {
+      query += ` AND (a.applicant_name ILIKE $${idx} OR s.admission_number ILIKE $${idx} OR a.guardian_name ILIKE $${idx})`;
+      params.push(`%${filters.search}%`);
+      idx++;
+    }
+
+    query += ` ORDER BY a.updated_at DESC`;
+
+    const res = await db.query(query, params);
+    return res.rows.map((r, i) => ({
+      id: r.application_id,
+      applicationId: r.application_id,
+      studentId: r.student_id || r.application_id,
+      studentName: r.student_name,
+      applicationNumber: `APP-${new Date().getFullYear()}-${String(i + 1).padStart(4, '0')}`,
+      admissionNumber: r.admission_number,
+      gender: r.gender || 'Not specified',
+      dateOfBirth: r.date_of_birth ? new Date(r.date_of_birth).toISOString().split('T')[0] : '',
+      gradeName: r.grade_name || 'Class 1',
+      classId: r.class_id || '',
+      enrollmentDate: r.enrollment_date ? new Date(r.enrollment_date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+      enrolledDate: r.enrolled_date ? new Date(r.enrolled_date).toISOString().split('T')[0] : '',
+      guardianName: r.guardian_name || 'N/A',
+      guardianPhone: r.guardian_phone || '',
+      guardianEmail: r.guardian_email || '',
+      feeAmount: Number(r.fee_amount || 0),
+      feePaid: r.fee_status === 'paid' || r.fee_status === 'PAID',
+      feeStatus: r.fee_status || 'paid',
+      documents: r.documents || [],
+      documentsVerified: (r.documents || []).filter((d: any) => d.status === 'VERIFIED').length,
+      totalDocuments: (r.documents || []).length,
+    }));
+  }
+
   async getPipelineStats(institutionId: string) {
     const res = await db.query(
       `SELECT stage, COUNT(*)::int AS count FROM applications WHERE institution_id = $1 GROUP BY stage`,

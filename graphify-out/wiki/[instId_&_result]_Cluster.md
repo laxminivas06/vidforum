@@ -1,21 +1,20 @@
 # [instId & result] Cluster
 
-> 12 nodes · cohesion 0.18
+> 11 nodes · cohesion 0.18
 
 ## Key Concepts
 
-- [BulkProvisionModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L1) (11 connections)
-- [handleSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L110) (2 connections)
-- [parseCsv()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L62) (2 connections)
-- [bulkMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L31) (1 connections)
-- [[downloadSuccessToast, setDownloadSuccessToast]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L36) (1 connections)
-- [[error, setError]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L34) (1 connections)
-- [handleDownloadCredentialsCsv()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L133) (1 connections)
-- [handleDownloadTemplate()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L41) (1 connections)
-- [handleFileUpload()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L97) (1 connections)
-- [parsedPreview](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L159) (1 connections)
-- [[rawText, setRawText]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L33) (1 connections)
-- [[resultData, setResultData]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L35) (1 connections)
+- [hrms.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L1) (11 connections)
+- [actionLeaveSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L60) (1 connections)
+- [applyLeaveSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L52) (1 connections)
+- [checkDuplicateSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L39) (1 connections)
+- [createDepartmentSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L33) (1 connections)
+- [createDesignationSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L29) (1 connections)
+- [createLeaveTypeSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L47) (1 connections)
+- [hrmsService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L6) (1 connections)
+- [markAttendanceSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L65) (1 connections)
+- [onboardStaffSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L9) (1 connections)
+- [updateStaffSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts#L21) (1 connections)
 
 ## Relationships
 
@@ -23,11 +22,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\users\BulkProvisionModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.controller.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 24 (100%)
+- EXTRACTED: 21 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -1,21 +1,21 @@
 # [Document: Agents & 1. Operating Mode & Standards] Cluster
 
-> 12 nodes · cohesion 0.17
+> 12 nodes · cohesion 0.18
 
 ## Key Concepts
 
-- [EditAdminWorkspacesModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L1) (11 connections)
-- [[error, setError]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L39) (1 connections)
-- [handleDeselectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L66) (1 connections)
-- [handleSave()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L70) (1 connections)
-- [handleSelectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L62) (1 connections)
-- [handleToggleWorkspace()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L56) (1 connections)
-- [initial](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L45) (1 connections)
-- [isChecked](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L212) (1 connections)
-- [[isSubmitting, setIsSubmitting]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L41) (1 connections)
-- [[selectedWorkspaces, setSelectedWorkspaces]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L38) (1 connections)
-- [[successBanner, setSuccessBanner]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L40) (1 connections)
-- [updateWorkspacesMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx#L37) (1 connections)
+- [BulkProvisionModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L1) (11 connections)
+- [handleSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L110) (2 connections)
+- [parseCsv()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L62) (2 connections)
+- [bulkMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L31) (1 connections)
+- [[downloadSuccessToast, setDownloadSuccessToast]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L36) (1 connections)
+- [[error, setError]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L34) (1 connections)
+- [handleDownloadCredentialsCsv()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L133) (1 connections)
+- [handleDownloadTemplate()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L41) (1 connections)
+- [handleFileUpload()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L97) (1 connections)
+- [parsedPreview](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L159) (1 connections)
+- [[rawText, setRawText]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L33) (1 connections)
+- [[resultData, setResultData]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx#L35) (1 connections)
 
 ## Relationships
 
@@ -23,11 +23,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\institutions\EditAdminWorkspacesModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/EditAdminWorkspacesModal.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\users\BulkProvisionModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/BulkProvisionModal.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 22 (100%)
+- EXTRACTED: 24 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

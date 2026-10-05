@@ -46,9 +46,8 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     routes: ["/admissions"],
     navItems: [
       { title: "Applications Kanban", href: "/admissions", iconName: "LayoutDashboard" },
-      { title: "Lead Inquiries", href: "/admissions?stage=INQUIRY", iconName: "UserCheck", badge: "Live" },
-      { title: "Document Verification", href: "/admissions?stage=DOCUMENT_VERIFICATION", iconName: "FileText" },
-      { title: "Enrolled Roster", href: "/admissions?stage=ENROLLED", iconName: "CheckCircle2" },
+      { title: "Document Verification", href: "/admissions/documents", iconName: "FileText", badge: "Desk" },
+      { title: "Enrolled Students", href: "/admissions/enrolled", iconName: "CheckCircle2", badge: "Roster" },
     ],
   },
   {
@@ -58,12 +57,16 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     category: "CORE",
     description: "Grade hierarchies, sections, subjects and curriculum catalog",
     iconName: "GraduationCap",
-    primaryRoute: "/academics/hierarchy",
+    primaryRoute: "/academics",
     routes: ["/academics"],
     navItems: [
-      { title: "Classes or Grades", href: "/academics/hierarchy", iconName: "Layers" },
+      { title: "Classes or Grades", href: "/academics", iconName: "Layers" },
       { title: "Subject Master", href: "/academics?tab=subjects", iconName: "BookOpen" },
       { title: "Curriculum Mapping", href: "/academics?tab=mapping", iconName: "GraduationCap" },
+      { title: "Year Exam Schedule", href: "/academics?tab=exams", iconName: "CalendarCheck" },
+      { title: "Preferred Textbooks", href: "/academics?tab=textbooks", iconName: "BookMarked" },
+      { title: "Academic Years", href: "/academics?tab=years", iconName: "Calendar" },
+      { title: "Working Days & Schedule", href: "/academics?tab=calendar", iconName: "Clock" },
     ],
   },
   {

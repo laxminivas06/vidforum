@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx#L1) (2 connections)
-- [MOCK_CAMPAIGNS](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx#L42) (1 connections)
-- [VoiceAgentCampaignsPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx#L75) (1 connections)
+- [Skill: axonflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (2 connections)
+- [AxonFlow Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (1 connections)
+- [Policies](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: spec-driven & Lifecycle Stages] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\voice-agent\campaigns\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/voice-agent/campaigns/page.tsx)
+- [.agents/plugins/axonflow/skills/axonflow/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md)
 
 ## Audit Trail
 

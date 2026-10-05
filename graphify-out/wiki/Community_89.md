@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: pr-storyteller](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md) (2 connections)
-- [PR Storyteller Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md) (1 connections)
-- [Structure](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md) (1 connections)
+- [Skill: test-gap](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (2 connections)
+- [Checks](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (1 connections)
+- [Test Gap Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[Community 90]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/pr-storyteller/skills/pr-storyteller/SKILL.md)
+- [.agents/plugins/test-gap/skills/test-gap/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/test-gap/skills/test-gap/SKILL.md)
 
 ## Audit Trail
 

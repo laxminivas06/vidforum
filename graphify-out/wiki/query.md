@@ -1,6 +1,6 @@
 # query
 
-> God node · 280 connections · [C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L446)
+> God node · 286 connections · [C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L446)
 
 ## Call Trace Diagram
 
@@ -39,43 +39,43 @@ sequenceDiagram
     participant P30 as .publishTimetable()
     participant P31 as tenantMiddleware()
     participant P32 as .createAcademicYear()
-    participant P33 as .generateClassMatrix()
-    participant P34 as .updateApplicationStage()
-    participant P35 as .executeApprovalTransaction()
-    participant P36 as .applyStudentLeave()
-    participant P37 as .decideStudentLeave()
-    participant P38 as .deleteDocument()
-    participant P39 as .processDocumentRequest()
-    participant P40 as .submitMarksBatch()
-    participant P41 as .commitExcelImport()
-    participant P42 as .processPayment()
-    participant P43 as .markStaffAttendanceBatch()
-    participant P44 as .createStudent()
-    participant P45 as .updateAcademicYear()
-    participant P46 as .setCurrentAcademicYear()
-    participant P47 as .cloneAcademicYear()
-    participant P48 as .createSubject()
-    participant P49 as .mapSubjectToGrade()
-    participant P50 as .copySubjectMatrix()
-    participant P51 as .createExamEstimate()
-    participant P52 as .saveCalendarConfig()
-    participant P53 as .createCalendarDay()
-    participant P54 as .createTextbook()
-    participant P55 as .getOrCreateSession()
-    participant P56 as .createTemplate()
-    participant P57 as .calculateResults()
-    participant P58 as .createDesignation()
-    participant P59 as .deleteDesignation()
-    participant P60 as .deleteDepartment()
-    participant P61 as .createLeaveType()
-    participant P62 as .markAllStaffPresent()
-    participant P63 as .updateStudent()
-    participant P64 as .unpublishTimetable()
-    participant P65 as .closeAcademicYear()
-    participant P66 as .createClass()
-    participant P67 as .updateClass()
-    participant P68 as .deleteClass()
-    participant P69 as .createSection()
+    participant P33 as .createClass()
+    participant P34 as .generateClassMatrix()
+    participant P35 as .updateApplicationStage()
+    participant P36 as .executeApprovalTransaction()
+    participant P37 as .applyStudentLeave()
+    participant P38 as .decideStudentLeave()
+    participant P39 as .deleteDocument()
+    participant P40 as .processDocumentRequest()
+    participant P41 as .submitMarksBatch()
+    participant P42 as .commitExcelImport()
+    participant P43 as .processPayment()
+    participant P44 as .markStaffAttendanceBatch()
+    participant P45 as .createStudent()
+    participant P46 as .updateAcademicYear()
+    participant P47 as .setCurrentAcademicYear()
+    participant P48 as .cloneAcademicYear()
+    participant P49 as .createSection()
+    participant P50 as .createSubject()
+    participant P51 as .mapSubjectToGrade()
+    participant P52 as .copySubjectMatrix()
+    participant P53 as .createExamEstimate()
+    participant P54 as .saveCalendarConfig()
+    participant P55 as .createCalendarDay()
+    participant P56 as .createTextbook()
+    participant P57 as .getOrCreateSession()
+    participant P58 as .createTemplate()
+    participant P59 as .calculateResults()
+    participant P60 as .createDesignation()
+    participant P61 as .deleteDesignation()
+    participant P62 as .deleteDepartment()
+    participant P63 as .createLeaveType()
+    participant P64 as .markAllStaffPresent()
+    participant P65 as .updateStudent()
+    participant P66 as .unpublishTimetable()
+    participant P67 as .closeAcademicYear()
+    participant P68 as .updateClass()
+    participant P69 as .deleteClass()
     participant P70 as .updateSection()
     participant P71 as .deleteSection()
     participant P72 as .updateSubject()
@@ -100,259 +100,264 @@ sequenceDiagram
     participant P91 as .createSubstitution()
     participant P92 as runVerification()
     participant P93 as runVerification()
-    participant P94 as .findByIdOrCode()
-    participant P95 as runR4Verification()
-    participant P96 as .verifyParentChildLink()
-    participant P97 as .provisionUser()
-    participant P98 as .createLog()
-    participant P99 as .calculateExamResults()
-    participant P100 as .getStaffById()
-    participant P101 as .getDocumentTypeById()
-    participant P102 as .findDocumentById()
-    participant P103 as .verifyFacultySubjectAllocation()
-    participant P104 as .getAcademicYearById()
-    participant P105 as .getWorkingDaysCount()
-    participant P106 as .verifyFacultySectionAccess()
-    participant P107 as .getExamSubjectById()
-    participant P108 as .validateImportBatch()
-    participant P109 as .findFacultyByProfileId()
-    participant P110 as .getScopedFees()
-    participant P111 as .recordEmploymentHistory()
-    participant P112 as .linkFacultyRecord()
-    participant P113 as .findModules()
-    participant P114 as .listEntries()
-    participant P115 as .checkCandidateConflicts()
-    participant P116 as .updateUserAccess()
-    participant P117 as .resetCredentials()
-    participant P118 as .updateUserStatus()
-    participant P119 as findById()
-    participant P120 as .getClassesByInstitution()
-    participant P121 as .getCalendarConfig()
-    participant P122 as .listTextbooks()
-    participant P123 as .getBooklist()
-    participant P124 as .findApplicationById()
-    participant P125 as .getInstitutionAttendanceStats()
-    participant P126 as .getStudentAttendanceSummary()
-    participant P127 as .getScopedAttendance()
-    participant P128 as .findTemplateById()
-    participant P129 as .verifyStudentExists()
-    participant P130 as .verifyStaffExists()
-    participant P131 as .getExamById()
-    participant P132 as .listMarks()
-    participant P133 as .getStudentReportCard()
-    participant P134 as .createStaffMember()
-    participant P135 as .findAssignedClasses()
-    participant P136 as .findAssignedSubjects()
-    participant P137 as .listStudentFees()
-    participant P138 as .getInvoiceById()
-    participant P139 as .listPayments()
-    participant P140 as .getSummary()
-    participant P141 as .getStaffLeaveUsageByYear()
-    participant P142 as .upsertStaffAttendance()
-    participant P143 as .getStats()
-    participant P144 as .upsertModule()
-    participant P145 as .getRoomById()
-    participant P146 as .getPeriodById()
-    participant P147 as .getTimetableById()
-    participant P148 as .createEntry()
-    participant P149 as .setPublishStatus()
-    participant P150 as .getScopedSchedule()
-    participant P151 as findMany()
-    participant P152 as softDelete()
-    participant P153 as .listAcademicYears()
-    participant P154 as .updateAcademicYear()
-    participant P155 as .getSectionsByClass()
-    participant P156 as .getSubjectsByClass()
-    participant P157 as .isClassInUse()
-    participant P158 as .deleteClass()
-    participant P159 as .isSectionInUse()
-    participant P160 as .deleteSection()
-    participant P161 as .listSubjects()
-    participant P162 as .isSubjectInUse()
-    participant P163 as .deleteSubject()
-    participant P164 as .listExamEstimates()
-    participant P165 as .listCalendarDays()
-    participant P166 as .isWorkingDay()
-    participant P167 as .listDepartments()
-    participant P168 as .listAllocations()
-    participant P169 as .findEnquiries()
-    participant P170 as .convertEnquiryToApplication()
-    participant P171 as .findApplicantsByInstitution()
-    participant P172 as .createApplication()
-    participant P173 as .countStudents()
-    participant P174 as .existsAdmissionNumber()
-    participant P175 as .findDefaultSection()
-    participant P176 as .getOrCreateSession()
-    participant P177 as .getSessionById()
-    participant P178 as .getSectionRosterForSession()
-    participant P179 as .createStudentLeaveRequest()
-    participant P180 as .listStudentLeaveRequests()
-    participant P181 as .listStudentLeaves()
-    participant P182 as .findLogs()
-    participant P183 as .findLogById()
-    participant P184 as .updatePassword()
-    participant P185 as .softDeleteDocument()
-    participant P186 as .updateTemplate()
-    participant P187 as .createRequest()
-    participant P188 as .findRequestById()
-    participant P189 as .listRequests()
-    participant P190 as .updateRequestStatus()
-    participant P191 as .verifyFacultyStudentLink()
-    participant P192 as .publishExam()
-    participant P193 as .addExamSubject()
-    participant P194 as .listExamSubjects()
-    participant P195 as .createExamSchedule()
-    participant P196 as .resolveGrade()
-    participant P197 as .listStudentReportCards()
-    participant P198 as .findFacultyByInstitution()
-    participant P199 as .findFacultyById()
-    participant P200 as .findSectionStudents()
-    participant P201 as .getFeeStructureById()
-    participant P202 as .listInvoices()
-    participant P203 as .getReceiptByPaymentId()
-    participant P204 as .isWebhookEventProcessed()
-    participant P205 as .recordWebhookEvent()
-    participant P206 as .isDesignationInUse()
-    participant P207 as .deleteDesignation()
-    participant P208 as .isDepartmentInUse()
-    participant P209 as .deleteDepartment()
-    participant P210 as .findStaffByEmployeeCode()
-    participant P211 as .findStaffByProfileId()
-    participant P212 as .createStaff()
-    participant P213 as .closeActiveEmploymentHistory()
-    participant P214 as .getEmploymentHistory()
-    participant P215 as .getLeaveTypeById()
-    participant P216 as .createLeaveRequest()
-    participant P217 as .getLeaveRequestById()
-    participant P218 as .checkOverlappingLeave()
-    participant P219 as .updateLeaveRequestAction()
-    participant P220 as .upsertStaffWorkload()
-    participant P221 as .markAllStaffPresent()
-    participant P222 as .findAll()
-    participant P223 as .create()
-    participant P224 as .createAdmin()
-    participant P225 as .findAdmins()
-    participant P226 as .updateAdminWorkspaces()
-    participant P227 as .updateStatus()
-    participant P228 as .findForUser()
-    participant P229 as .createNotification()
-    participant P230 as .findStudents()
-    participant P231 as .findStudentMasterById()
-    participant P232 as .promote()
-    participant P233 as .countStudents()
-    participant P234 as .updateRoom()
-    participant P235 as .updatePeriod()
-    participant P236 as .listSubstitutions()
-    participant P237 as .getUserAudit()
-    participant P238 as runTests()
-    participant P239 as main()
-    participant P240 as .createAcademicYear()
-    participant P241 as .setCurrentAcademicYear()
-    participant P242 as .closeAcademicYear()
-    participant P243 as .cloneAcademicYear()
-    participant P244 as .getHierarchy()
-    participant P245 as .createClass()
-    participant P246 as .updateClass()
-    participant P247 as .generateClassMatrix()
-    participant P248 as .createSection()
-    participant P249 as .updateSection()
-    participant P250 as .createSubject()
-    participant P251 as .updateSubject()
-    participant P252 as .getGradeSubjects()
-    participant P253 as .mapSubjectToGrade()
-    participant P254 as .removeSubjectFromGrade()
-    participant P255 as .copySubjectMatrix()
-    participant P256 as .createExamEstimate()
-    participant P257 as .updateExamEstimate()
-    participant P258 as .deleteExamEstimate()
-    participant P259 as .saveCalendarConfig()
-    participant P260 as .createCalendarDay()
-    participant P261 as .deleteCalendarDay()
-    participant P262 as .createTextbook()
-    participant P263 as .updateTextbook()
-    participant P264 as .deleteTextbook()
-    participant P265 as .createDepartment()
-    participant P266 as .linkSubjectToClass()
-    participant P267 as .createAllocation()
-    participant P268 as .createEnquiry()
-    participant P269 as .getPipelineStats()
-    participant P270 as .listSessions()
-    participant P271 as .getStudentAttendanceSummary()
-    participant P272 as .listStaffAttendance()
-    participant P273 as .revokeAllRefreshTokens()
-    participant P274 as .listDocumentTypes()
-    participant P275 as .createDocumentType()
-    participant P276 as .findDocumentsByOwner()
-    participant P277 as .listDocuments()
-    participant P278 as .verifyDocument()
-    participant P279 as .getVerificationHistory()
-    participant P280 as .createTemplate()
-    participant P281 as .listTemplates()
-    participant P282 as .deleteTemplate()
-    participant P283 as .verifyParentChildLink()
-    participant P284 as .createExamType()
-    participant P285 as .listExamTypes()
-    participant P286 as .createExam()
-    participant P287 as .listExams()
-    participant P288 as .updateExamStatus()
-    participant P289 as .listExamSchedules()
-    participant P290 as .createExamRoom()
-    participant P291 as .assignInvigilator()
-    participant P292 as .createGradeScale()
-    participant P293 as .listGradeScales()
-    participant P294 as .addGradeTier()
-    participant P295 as .listMarks()
-    participant P296 as .verifyMarks()
-    participant P297 as .getStudentReportCard()
-    participant P298 as .listStudentReportCards()
-    participant P299 as .listFeeCategories()
-    participant P300 as .createFeeCategory()
-    participant P301 as .listFeeGroups()
-    participant P302 as .createFeeGroup()
-    participant P303 as .listFeeStructures()
-    participant P304 as .listDiscounts()
-    participant P305 as .createDiscount()
-    participant P306 as .listScholarships()
-    participant P307 as .createScholarship()
-    participant P308 as .listDesignations()
-    participant P309 as .findDesignationByName()
-    participant P310 as .createDesignation()
-    participant P311 as .listDepartments()
-    participant P312 as .createDepartment()
-    participant P313 as .listStaff()
-    participant P314 as .updateStaff()
-    participant P315 as .softDeleteStaff()
-    participant P316 as .listLeaveTypes()
-    participant P317 as .createLeaveType()
-    participant P318 as .listLeaveRequests()
-    participant P319 as .getStaffAttendanceByDate()
-    participant P320 as .getStaffAttendanceHistory()
-    participant P321 as .getMonthlyAttendanceAggregates()
-    participant P322 as .computeStaffWorkload()
-    participant P323 as .listFacultyWorkloads()
-    participant P324 as .checkDuplicateStaff()
-    participant P325 as .getHRReportSummary()
-    participant P326 as .getUnreadCount()
-    participant P327 as .markAsRead()
-    participant P328 as .markAllAsRead()
-    participant P329 as .getClassEnrollmentCounts()
-    participant P330 as .listRooms()
-    participant P331 as .createRoom()
-    participant P332 as .deleteRoom()
-    participant P333 as .listPeriods()
-    participant P334 as .createPeriod()
-    participant P335 as .deletePeriod()
-    participant P336 as .listTimetables()
-    participant P337 as .createTimetable()
-    participant P338 as .deleteTimetable()
-    participant P339 as .deleteEntry()
-    participant P340 as .createSubstitution()
-    participant P341 as main()
-    participant P342 as main()
-    participant P343 as main()
-    participant P344 as main()
-    participant P345 as seedHyderabadDemo()
-    participant P346 as runTests()
+    participant P94 as .approveApplication()
+    participant P95 as .findByIdOrCode()
+    participant P96 as runR4Verification()
+    participant P97 as .verifyParentChildLink()
+    participant P98 as .provisionUser()
+    participant P99 as .createLog()
+    participant P100 as .calculateExamResults()
+    participant P101 as .getStaffById()
+    participant P102 as .getDocumentTypeById()
+    participant P103 as .findDocumentById()
+    participant P104 as .verifyFacultySubjectAllocation()
+    participant P105 as .getAcademicYearById()
+    participant P106 as .getWorkingDaysCount()
+    participant P107 as .verifyFacultySectionAccess()
+    participant P108 as .getExamSubjectById()
+    participant P109 as .validateImportBatch()
+    participant P110 as .findFacultyByProfileId()
+    participant P111 as .getScopedFees()
+    participant P112 as .recordEmploymentHistory()
+    participant P113 as .linkFacultyRecord()
+    participant P114 as .findModules()
+    participant P115 as .updateStatus()
+    participant P116 as .listEntries()
+    participant P117 as .checkCandidateConflicts()
+    participant P118 as .updateUserAccess()
+    participant P119 as .resetCredentials()
+    participant P120 as .updateUserStatus()
+    participant P121 as findById()
+    participant P122 as .getClassesByInstitution()
+    participant P123 as .getCalendarConfig()
+    participant P124 as .listTextbooks()
+    participant P125 as .getBooklist()
+    participant P126 as .findApplicationById()
+    participant P127 as .getInstitutionAttendanceStats()
+    participant P128 as .getStudentAttendanceSummary()
+    participant P129 as .getScopedAttendance()
+    participant P130 as .findTemplateById()
+    participant P131 as .verifyStudentExists()
+    participant P132 as .verifyStaffExists()
+    participant P133 as .getExamById()
+    participant P134 as .listMarks()
+    participant P135 as .getStudentReportCard()
+    participant P136 as .createStaffMember()
+    participant P137 as .findAssignedClasses()
+    participant P138 as .findAssignedSubjects()
+    participant P139 as .listStudentFees()
+    participant P140 as .getInvoiceById()
+    participant P141 as .listPayments()
+    participant P142 as .getSummary()
+    participant P143 as .getStaffLeaveUsageByYear()
+    participant P144 as .upsertStaffAttendance()
+    participant P145 as .getStats()
+    participant P146 as .upsertModule()
+    participant P147 as .getRoomById()
+    participant P148 as .getPeriodById()
+    participant P149 as .getTimetableById()
+    participant P150 as .createEntry()
+    participant P151 as .setPublishStatus()
+    participant P152 as .getScopedSchedule()
+    participant P153 as findMany()
+    participant P154 as softDelete()
+    participant P155 as .listAcademicYears()
+    participant P156 as .updateAcademicYear()
+    participant P157 as .getSectionsByClass()
+    participant P158 as .getSubjectsByClass()
+    participant P159 as .isClassInUse()
+    participant P160 as .deleteClass()
+    participant P161 as .isSectionInUse()
+    participant P162 as .deleteSection()
+    participant P163 as .listSubjects()
+    participant P164 as .isSubjectInUse()
+    participant P165 as .deleteSubject()
+    participant P166 as .listExamEstimates()
+    participant P167 as .listCalendarDays()
+    participant P168 as .isWorkingDay()
+    participant P169 as .listDepartments()
+    participant P170 as .listAllocations()
+    participant P171 as .findEnquiries()
+    participant P172 as .convertEnquiryToApplication()
+    participant P173 as .findApplicantsByInstitution()
+    participant P174 as .createApplication()
+    participant P175 as .countStudents()
+    participant P176 as .existsAdmissionNumber()
+    participant P177 as .findDefaultSection()
+    participant P178 as .getOrCreateSession()
+    participant P179 as .getSessionById()
+    participant P180 as .getSectionRosterForSession()
+    participant P181 as .createStudentLeaveRequest()
+    participant P182 as .listStudentLeaveRequests()
+    participant P183 as .listStudentLeaves()
+    participant P184 as .findLogs()
+    participant P185 as .findLogById()
+    participant P186 as .updatePassword()
+    participant P187 as .softDeleteDocument()
+    participant P188 as .updateTemplate()
+    participant P189 as .createRequest()
+    participant P190 as .findRequestById()
+    participant P191 as .listRequests()
+    participant P192 as .updateRequestStatus()
+    participant P193 as .verifyFacultyStudentLink()
+    participant P194 as .publishExam()
+    participant P195 as .addExamSubject()
+    participant P196 as .listExamSubjects()
+    participant P197 as .createExamSchedule()
+    participant P198 as .resolveGrade()
+    participant P199 as .listStudentReportCards()
+    participant P200 as .findFacultyByInstitution()
+    participant P201 as .findFacultyById()
+    participant P202 as .findSectionStudents()
+    participant P203 as .getFeeStructureById()
+    participant P204 as .listInvoices()
+    participant P205 as .getReceiptByPaymentId()
+    participant P206 as .isWebhookEventProcessed()
+    participant P207 as .recordWebhookEvent()
+    participant P208 as .isDesignationInUse()
+    participant P209 as .deleteDesignation()
+    participant P210 as .isDepartmentInUse()
+    participant P211 as .deleteDepartment()
+    participant P212 as .findStaffByEmployeeCode()
+    participant P213 as .findStaffByProfileId()
+    participant P214 as .createStaff()
+    participant P215 as .closeActiveEmploymentHistory()
+    participant P216 as .getEmploymentHistory()
+    participant P217 as .getLeaveTypeById()
+    participant P218 as .createLeaveRequest()
+    participant P219 as .getLeaveRequestById()
+    participant P220 as .checkOverlappingLeave()
+    participant P221 as .updateLeaveRequestAction()
+    participant P222 as .upsertStaffWorkload()
+    participant P223 as .markAllStaffPresent()
+    participant P224 as .findAll()
+    participant P225 as .create()
+    participant P226 as .createAdmin()
+    participant P227 as .findAdmins()
+    participant P228 as .updateAdminWorkspaces()
+    participant P229 as .findForUser()
+    participant P230 as .createNotification()
+    participant P231 as .findStudents()
+    participant P232 as .findStudentMasterById()
+    participant P233 as .promote()
+    participant P234 as .countStudents()
+    participant P235 as .updateRoom()
+    participant P236 as .updatePeriod()
+    participant P237 as .listSubstitutions()
+    participant P238 as .getUserAudit()
+    participant P239 as runTests()
+    participant P240 as main()
+    participant P241 as .createAcademicYear()
+    participant P242 as .setCurrentAcademicYear()
+    participant P243 as .closeAcademicYear()
+    participant P244 as .cloneAcademicYear()
+    participant P245 as .getHierarchy()
+    participant P246 as .createClass()
+    participant P247 as .updateClass()
+    participant P248 as .generateClassMatrix()
+    participant P249 as .createSection()
+    participant P250 as .updateSection()
+    participant P251 as .createSubject()
+    participant P252 as .updateSubject()
+    participant P253 as .getGradeSubjects()
+    participant P254 as .mapSubjectToGrade()
+    participant P255 as .removeSubjectFromGrade()
+    participant P256 as .copySubjectMatrix()
+    participant P257 as .createExamEstimate()
+    participant P258 as .updateExamEstimate()
+    participant P259 as .deleteExamEstimate()
+    participant P260 as .saveCalendarConfig()
+    participant P261 as .createCalendarDay()
+    participant P262 as .deleteCalendarDay()
+    participant P263 as .createTextbook()
+    participant P264 as .updateTextbook()
+    participant P265 as .deleteTextbook()
+    participant P266 as .createDepartment()
+    participant P267 as .linkSubjectToClass()
+    participant P268 as .createAllocation()
+    participant P269 as .createEnquiry()
+    participant P270 as .getAdmissionDocuments()
+    participant P271 as .updateDocumentStatus()
+    participant P272 as .addAdmissionDocument()
+    participant P273 as .getEnrolledStudents()
+    participant P274 as .getPipelineStats()
+    participant P275 as .listSessions()
+    participant P276 as .getStudentAttendanceSummary()
+    participant P277 as .listStaffAttendance()
+    participant P278 as .revokeAllRefreshTokens()
+    participant P279 as .listDocumentTypes()
+    participant P280 as .createDocumentType()
+    participant P281 as .findDocumentsByOwner()
+    participant P282 as .listDocuments()
+    participant P283 as .verifyDocument()
+    participant P284 as .getVerificationHistory()
+    participant P285 as .createTemplate()
+    participant P286 as .listTemplates()
+    participant P287 as .deleteTemplate()
+    participant P288 as .verifyParentChildLink()
+    participant P289 as .createExamType()
+    participant P290 as .listExamTypes()
+    participant P291 as .createExam()
+    participant P292 as .listExams()
+    participant P293 as .updateExamStatus()
+    participant P294 as .listExamSchedules()
+    participant P295 as .createExamRoom()
+    participant P296 as .assignInvigilator()
+    participant P297 as .createGradeScale()
+    participant P298 as .listGradeScales()
+    participant P299 as .addGradeTier()
+    participant P300 as .listMarks()
+    participant P301 as .verifyMarks()
+    participant P302 as .getStudentReportCard()
+    participant P303 as .listStudentReportCards()
+    participant P304 as .listFeeCategories()
+    participant P305 as .createFeeCategory()
+    participant P306 as .listFeeGroups()
+    participant P307 as .createFeeGroup()
+    participant P308 as .listFeeStructures()
+    participant P309 as .listDiscounts()
+    participant P310 as .createDiscount()
+    participant P311 as .listScholarships()
+    participant P312 as .createScholarship()
+    participant P313 as .listDesignations()
+    participant P314 as .findDesignationByName()
+    participant P315 as .createDesignation()
+    participant P316 as .listDepartments()
+    participant P317 as .createDepartment()
+    participant P318 as .listStaff()
+    participant P319 as .updateStaff()
+    participant P320 as .softDeleteStaff()
+    participant P321 as .listLeaveTypes()
+    participant P322 as .createLeaveType()
+    participant P323 as .listLeaveRequests()
+    participant P324 as .getStaffAttendanceByDate()
+    participant P325 as .getStaffAttendanceHistory()
+    participant P326 as .getMonthlyAttendanceAggregates()
+    participant P327 as .computeStaffWorkload()
+    participant P328 as .listFacultyWorkloads()
+    participant P329 as .checkDuplicateStaff()
+    participant P330 as .getHRReportSummary()
+    participant P331 as .getUnreadCount()
+    participant P332 as .markAsRead()
+    participant P333 as .markAllAsRead()
+    participant P334 as .getClassEnrollmentCounts()
+    participant P335 as .listRooms()
+    participant P336 as .createRoom()
+    participant P337 as .deleteRoom()
+    participant P338 as .listPeriods()
+    participant P339 as .createPeriod()
+    participant P340 as .deletePeriod()
+    participant P341 as .listTimetables()
+    participant P342 as .createTimetable()
+    participant P343 as .deleteTimetable()
+    participant P344 as .deleteEntry()
+    participant P345 as .createSubstitution()
+    participant P346 as main()
+    participant P347 as main()
+    participant P348 as main()
+    participant P349 as main()
+    participant P350 as seedHyderabadDemo()
+    participant P351 as runTests()
     P0->>+ P1: calls
     P1-->>- P0: return
     P1->>+ P0: calls
@@ -439,10 +444,10 @@ sequenceDiagram
     P36-->>- P1: return
     P1->>+ P37: calls
     P37-->>- P1: return
-    P1->>+ P14: calls
-    P14-->>- P1: return
     P1->>+ P38: calls
     P38-->>- P1: return
+    P1->>+ P14: calls
+    P14-->>- P1: return
     P1->>+ P39: calls
     P39-->>- P1: return
     P1->>+ P40: calls
@@ -557,46 +562,48 @@ sequenceDiagram
     P93-->>- P0: return
     P0->>+ P94: calls
     P94-->>- P0: return
-    P0->>+ P2: calls
-    P2-->>- P0: return
     P0->>+ P95: calls
     P95-->>- P0: return
-    P0->>+ P10: calls
-    P10-->>- P0: return
+    P0->>+ P2: calls
+    P2-->>- P0: return
     P0->>+ P96: calls
     P96-->>- P0: return
-    P0->>+ P17: calls
-    P17-->>- P0: return
+    P0->>+ P10: calls
+    P10-->>- P0: return
     P0->>+ P97: calls
     P97-->>- P0: return
-    P0->>+ P20: calls
-    P20-->>- P0: return
+    P0->>+ P17: calls
+    P17-->>- P0: return
     P0->>+ P98: calls
     P98-->>- P0: return
-    P0->>+ P12: calls
-    P12-->>- P0: return
+    P0->>+ P20: calls
+    P20-->>- P0: return
     P0->>+ P99: calls
     P99-->>- P0: return
+    P0->>+ P12: calls
+    P12-->>- P0: return
     P0->>+ P100: calls
     P100-->>- P0: return
+    P0->>+ P101: calls
+    P101-->>- P0: return
     P0->>+ P23: calls
     P23-->>- P0: return
     P0->>+ P4: calls
     P4-->>- P0: return
-    P0->>+ P101: calls
-    P101-->>- P0: return
     P0->>+ P102: calls
     P102-->>- P0: return
     P0->>+ P103: calls
     P103-->>- P0: return
-    P0->>+ P26: calls
-    P26-->>- P0: return
     P0->>+ P104: calls
     P104-->>- P0: return
+    P0->>+ P26: calls
+    P26-->>- P0: return
     P0->>+ P105: calls
     P105-->>- P0: return
     P0->>+ P106: calls
     P106-->>- P0: return
+    P0->>+ P107: calls
+    P107-->>- P0: return
     P0->>+ P5: calls
     P5-->>- P0: return
     P0->>+ P7: calls
@@ -607,8 +614,6 @@ sequenceDiagram
     P27-->>- P0: return
     P0->>+ P13: calls
     P13-->>- P0: return
-    P0->>+ P107: calls
-    P107-->>- P0: return
     P0->>+ P108: calls
     P108-->>- P0: return
     P0->>+ P109: calls
@@ -633,40 +638,42 @@ sequenceDiagram
     P118-->>- P0: return
     P0->>+ P119: calls
     P119-->>- P0: return
-    P0->>+ P31: calls
-    P31-->>- P0: return
     P0->>+ P120: calls
     P120-->>- P0: return
     P0->>+ P121: calls
     P121-->>- P0: return
+    P0->>+ P31: calls
+    P31-->>- P0: return
     P0->>+ P122: calls
     P122-->>- P0: return
     P0->>+ P123: calls
     P123-->>- P0: return
     P0->>+ P124: calls
     P124-->>- P0: return
-    P0->>+ P34: calls
-    P34-->>- P0: return
-    P0->>+ P35: calls
-    P35-->>- P0: return
     P0->>+ P125: calls
     P125-->>- P0: return
+    P0->>+ P33: calls
+    P33-->>- P0: return
     P0->>+ P126: calls
     P126-->>- P0: return
-    P0->>+ P127: calls
-    P127-->>- P0: return
+    P0->>+ P35: calls
+    P35-->>- P0: return
     P0->>+ P36: calls
     P36-->>- P0: return
-    P0->>+ P16: calls
-    P16-->>- P0: return
+    P0->>+ P127: calls
+    P127-->>- P0: return
     P0->>+ P128: calls
     P128-->>- P0: return
-    P0->>+ P15: calls
-    P15-->>- P0: return
     P0->>+ P129: calls
     P129-->>- P0: return
+    P0->>+ P37: calls
+    P37-->>- P0: return
+    P0->>+ P16: calls
+    P16-->>- P0: return
     P0->>+ P130: calls
     P130-->>- P0: return
+    P0->>+ P15: calls
+    P15-->>- P0: return
     P0->>+ P131: calls
     P131-->>- P0: return
     P0->>+ P132: calls
@@ -695,12 +702,12 @@ sequenceDiagram
     P143-->>- P0: return
     P0->>+ P144: calls
     P144-->>- P0: return
-    P0->>+ P44: calls
-    P44-->>- P0: return
     P0->>+ P145: calls
     P145-->>- P0: return
     P0->>+ P146: calls
     P146-->>- P0: return
+    P0->>+ P45: calls
+    P45-->>- P0: return
     P0->>+ P147: calls
     P147-->>- P0: return
     P0->>+ P148: calls
@@ -775,12 +782,12 @@ sequenceDiagram
     P182-->>- P0: return
     P0->>+ P183: calls
     P183-->>- P0: return
-    P0->>+ P8: calls
-    P8-->>- P0: return
     P0->>+ P184: calls
     P184-->>- P0: return
     P0->>+ P185: calls
     P185-->>- P0: return
+    P0->>+ P8: calls
+    P8-->>- P0: return
     P0->>+ P186: calls
     P186-->>- P0: return
     P0->>+ P187: calls
@@ -873,10 +880,10 @@ sequenceDiagram
     P230-->>- P0: return
     P0->>+ P231: calls
     P231-->>- P0: return
-    P0->>+ P63: calls
-    P63-->>- P0: return
     P0->>+ P232: calls
     P232-->>- P0: return
+    P0->>+ P65: calls
+    P65-->>- P0: return
     P0->>+ P233: calls
     P233-->>- P0: return
     P0->>+ P234: calls
@@ -1105,6 +1112,16 @@ sequenceDiagram
     P345-->>- P0: return
     P0->>+ P346: calls
     P346-->>- P0: return
+    P0->>+ P347: calls
+    P347-->>- P0: return
+    P0->>+ P348: calls
+    P348-->>- P0: return
+    P0->>+ P349: calls
+    P349-->>- P0: return
+    P0->>+ P350: calls
+    P350-->>- P0: return
+    P0->>+ P351: calls
+    P351-->>- P0: return
 ```
 
 ## Connections by Relation
@@ -1114,6 +1131,7 @@ sequenceDiagram
 - [[runVerification()]] `INFERRED`
 - [[runVerification()]] `INFERRED`
 - [[runVerification()]] `INFERRED`
+- [[.approveApplication()]] `INFERRED`
 - [[.findByIdOrCode()]] `INFERRED`
 - [[.login()]] `INFERRED`
 - [[runR4Verification()]] `INFERRED`
@@ -1129,7 +1147,6 @@ sequenceDiagram
 - [[.createStaffDirect()]] `INFERRED`
 - [[.reset()]] `INFERRED`
 - [[.getDocumentTypeById()]] `INFERRED`
-- [[.findDocumentById()]] `INFERRED`
 
 ### contains
 - [[users.routes.ts]] `EXTRACTED`

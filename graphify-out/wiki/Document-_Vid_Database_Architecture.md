@@ -2,7 +2,7 @@
 
 > God node · 47 connections · [docs/VID_Database_Architecture.md](file:///C:/Antigravityyyyy/VID_School/docs/VID_Database_Architecture.md)
 
-**Community:** [[[handleAdvanceStage() & handleEnroll()] Cluster]]
+**Community:** [[[Document: Appflow & 1. Overview & Navigation Architecture] Cluster]]
 
 ## Connections by Relation
 

@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: spec-driven](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md) (2 connections)
-- [Lifecycle Stages](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md) (1 connections)
-- [Spec-Driven Development Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md) (1 connections)
+- [Skill: wingman](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md) (2 connections)
+- [Pre-Edit Verification Checklist](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md) (1 connections)
+- [Wingman Data-Contract Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[Community 93]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/spec-driven/skills/spec-driven/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md)
+- [.agents/plugins/wingman/skills/wingman/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md)
 
 ## Audit Trail
 

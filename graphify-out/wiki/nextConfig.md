@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: memesh](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md) (2 connections)
-- [Execution Guide](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md) (1 connections)
-- [MeMesh Shared Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md) (1 connections)
+- [Skill: spec-driven](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md) (2 connections)
+- [Lifecycle Stages](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md) (1 connections)
+- [Spec-Driven Development Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[CAMERA_DECKS]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/memesh/skills/memesh/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/memesh/skills/memesh/SKILL.md)
+- [.agents/plugins/spec-driven/skills/spec-driven/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/spec-driven/skills/spec-driven/SKILL.md)
 
 ## Audit Trail
 

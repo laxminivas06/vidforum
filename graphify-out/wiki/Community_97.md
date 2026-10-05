@@ -1,12 +1,11 @@
 # Community 97
 
-> 3 nodes · cohesion 0.67
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [Skill: wingman](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md) (2 connections)
-- [Pre-Edit Verification Checklist](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md) (1 connections)
-- [Wingman Data-Contract Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md) (1 connections)
+- [resource-guard.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/resource-guard.middleware.ts#L1) (1 connections)
+- [resourceGuard()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/resource-guard.middleware.ts#L14) (1 connections)
 
 ## Relationships
 
@@ -14,11 +13,11 @@
 
 ## Source Files
 
-- [.agents/plugins/wingman/skills/wingman/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/wingman/skills/wingman/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\resource-guard.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/resource-guard.middleware.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 4 (100%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

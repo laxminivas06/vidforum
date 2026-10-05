@@ -4,9 +4,9 @@
 
 ## Key Concepts
 
-- [api.v1.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts#L1) (2 connections)
-- [dbOk](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts#L29) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts#L25) (1 connections)
+- [navigation.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L1) (2 connections)
+- [getFilteredNavigation()](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L193) (1 connections)
+- [NAVIGATION_CONFIG](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts#L27) (1 connections)
 
 ## Relationships
 
@@ -14,7 +14,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\routes\api.v1.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/routes/api.v1.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\config\navigation.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/navigation.ts)
 
 ## Audit Trail
 

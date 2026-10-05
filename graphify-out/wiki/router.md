@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: megalinter](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (2 connections)
-- [MegaLinter Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (1 connections)
-- [Target Toolchains](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md) (1 connections)
+- [Skill: secret-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (2 connections)
+- [Scan Targets](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
+- [Secret Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[nextConfig]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/megalinter/skills/megalinter/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/megalinter/skills/megalinter/SKILL.md)
+- [.agents/plugins/secret-guard/skills/secret-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/secret-guard/skills/secret-guard/SKILL.md)
 
 ## Audit Trail
 

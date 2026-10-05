@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: codex-reviewer](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md) (2 connections)
-- [Checklist](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md) (1 connections)
-- [Codex Reviewer Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md) (1 connections)
+- [Skill: falsegreen](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md) (2 connections)
+- [Falsegreen Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md) (1 connections)
+- [Patterns to Flag](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[app]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/codex-reviewer/skills/codex-reviewer/SKILL.md)
+- [.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/falsegreen-skill/skills/falsegreen/SKILL.md)
 
 ## Audit Trail
 

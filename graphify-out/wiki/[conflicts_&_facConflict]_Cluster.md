@@ -1,43 +1,40 @@
 # [conflicts & facConflict] Cluster
 
-> 22 nodes · cohesion 0.09
+> 19 nodes · cohesion 0.11
 
 ## Key Concepts
 
-- [Document: Prd](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (21 connections)
-- [1.1 Problem Statement](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [1.2 Core Principle & Philosophy](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [1. Executive Summary & Product Vision](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [2. Target Users & Personas](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [3.1 Workspace Classification Matrix](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [3.2 The Student Master Entity](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [3.3 The 30 Non-Negotiable Rules](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [3. Product Scope & Modular Architecture](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [4. Development Phases & Release Strategy](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [5.1 Super Admin](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [5.2 Institution Admin](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [5.3 Admissions Team](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [5.4 Academic Coordinator & Faculty](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [5. User Stories per Feature (Phase 1 MVP Highlights)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [6. Out-of-Scope Items (Strict Boundaries)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [7. Open Questions & Engineering Assumptions](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [Phase 1: MVP Core Foundation (Immediate Focus)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [Phase 2: Core Operational Workspaces](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [Phase 3: AI Yantra Intelligence Layer](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [Phase 4: Optional Modules & Mobile Experience](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
-- [Product Requirements Document (PRD): VID (Virtual Identification)](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md) (1 connections)
+- [Document: Appflow](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (18 connections)
+- [1. Overview & Navigation Architecture](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.1 Authentication](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.2 Super Admin Console (/(super-admin))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.3 Institution Admin Workspace (/(institution-admin))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.4 Core Workspaces (/(core))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.5 AI Yantra Services (/(ai-yantra))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.6 Optional Modular Workspaces (/(optional))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.7 Central Student Master Profile (/students/id)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2.8 Mobile Parent & Student Portal (/(mobile)/app)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [2. Complete Route Hierarchy & Screen Inventory](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [3.1 Login & Tenant Resolution](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [3.2 Institution Admin Settings Shell (Two-Pane)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [3.3 Admissions Workspace (Kanban & Slide-Over)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [3.4 Student Master Profile Shell](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [3. Deep-Dive Screen Specifications](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [4. Navigation & Optional Module Matrix (/config/navigation.ts)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [5. Development Phases](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [VID (Virtual Identification) — Application Flow & Architecture Document](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[certificateId & instId] Cluster]] (36 shared connections)
 
 ## Source Files
 
-- [docs/PRD.md](file:///C:/Antigravityyyyy/VID_School/docs/PRD.md)
+- [docs/AppFlow.md](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md)
 
 ## Audit Trail
 
-- EXTRACTED: 42 (100%)
+- EXTRACTED: 36 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

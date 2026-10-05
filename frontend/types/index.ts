@@ -52,6 +52,52 @@ export interface Applicant {
   notes?: string
 }
 
+export interface AdmissionDocumentItem {
+  id: string
+  applicationId: string
+  applicationNumber: string
+  title: string
+  fileName: string
+  status: "VERIFIED" | "PENDING" | "REJECTED"
+  verifiedAt?: string | null
+  uploadDate: string
+  applicantName: string
+  gradeApplying: string
+  guardianName: string
+  guardianPhone: string
+  applicantStage: string
+}
+
+export interface EnrolledApplicantItem {
+  id: string
+  applicationId: string
+  studentId: string
+  studentName: string
+  applicationNumber: string
+  admissionNumber: string
+  gender: string
+  dateOfBirth: string
+  gradeName: string
+  classId: string
+  enrollmentDate: string
+  enrolledDate: string
+  guardianName: string
+  guardianPhone: string
+  guardianEmail: string
+  feeAmount: number
+  feePaid: boolean
+  feeStatus: string
+  documents: {
+    id: string
+    title: string
+    status: "VERIFIED" | "PENDING" | "REJECTED"
+    fileName: string
+    uploadDate: string
+  }[]
+  documentsVerified: number
+  totalDocuments: number
+}
+
 export interface AcademicGrade {
   id: string
   name: string

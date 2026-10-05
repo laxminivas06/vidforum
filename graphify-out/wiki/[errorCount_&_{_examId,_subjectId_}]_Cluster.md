@@ -1,33 +1,31 @@
 # [errorCount & { examId, subjectId }] Cluster
 
-> 24 nodes · cohesion 0.08
+> 22 nodes · cohesion 0.10
 
 ## Key Concepts
 
-- [Document: Tech Spec](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (23 connections)
-- [1.1 Backend Architecture — Layered MVC](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [1. Technical Stack Selection & Justification](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [2. High-Level Architecture Diagram](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [3. Repository & Folder Structure](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [4.1 Schema Definition across 16 Core Domains](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [4. Database Schema & Multi-Tenant Data Model](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [5.1 Route Inventory (Section 26 Mapping)](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [5.2 Sample Request & Response Schemas](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [5. API Contracts & Endpoint Specification](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [6. Authentication, Security & Tenant Isolation](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [7. Responsive UI Specification & Breakpoints](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [8. Third-Party Integrations & Environment Variables](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Admission Approval $\to$ Student Creation Pipeline](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [AI Yantra Intelligence](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Cache & Message Broker / Job Queue](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Detailed Entity Specifications:](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [External Integrations](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Multi-Tenant PostgreSQL Database](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Object Storage](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Platform & Server](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Required Environment Variables (.env)](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Technical Specification: VID (Virtual Identification) Platform](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
-- [Timetable Conflict Detection](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md) (1 connections)
+- [ProvisionTenantModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L1) (21 connections)
+- [autoGenerateCode()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L90) (2 connections)
+- [handleNameChange()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L68) (2 connections)
+- [handleSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L155) (2 connections)
+- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L132) (2 connections)
+- [[boardAffiliation, setBoardAffiliation]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L55) (1 connections)
+- [[code, setCode]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L54) (1 connections)
+- [[contactEmail, setContactEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L56) (1 connections)
+- [[contactPhone, setContactPhone]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L57) (1 connections)
+- [createInstitutionMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L65) (1 connections)
+- [[customDomain, setCustomDomain]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L60) (1 connections)
+- [effectiveDomain](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L101) (1 connections)
+- [[errors, setErrors]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L62) (1 connections)
+- [[isCustomDomain, setIsCustomDomain]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L61) (1 connections)
+- [isSelected](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L445) (1 connections)
+- [[name, setName]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L53) (1 connections)
+- [PLAN_OPTIONS](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L33) (1 connections)
+- [[plan, setPlan]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L59) (1 connections)
+- [POPULAR_BOARDS](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L39) (1 connections)
+- [REGION_OPTIONS](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L26) (1 connections)
+- [[region, setRegion]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L58) (1 connections)
+- [[submittedSuccess, setSubmittedSuccess]](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx#L63) (1 connections)
 
 ## Relationships
 
@@ -35,7 +33,7 @@
 
 ## Source Files
 
-- [docs/TECH_SPEC.md](file:///C:/Antigravityyyyy/VID_School/docs/TECH_SPEC.md)
+- [C:\Antigravityyyyy\VID_School\frontend\components\institutions\ProvisionTenantModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/institutions/ProvisionTenantModal.tsx)
 
 ## Audit Trail
 

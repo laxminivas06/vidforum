@@ -1,15 +1,14 @@
 # [Skill: axonflow & AxonFlow Skill] Cluster
 
-> 6 nodes · cohesion 0.33
+> 5 nodes · cohesion 0.50
 
 ## Key Concepts
 
-- [verify_actions.ts](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L1) (5 connections)
-- [BACKEND_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L15) (1 connections)
-- [ROOT_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L14) (1 connections)
-- [runAllSuites()](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L50) (1 connections)
-- [SUITES](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L17) (1 connections)
-- [{ totalFailed }](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts#L104) (1 connections)
+- [workspaces.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L1) (4 connections)
+- [getWorkspaceForPath()](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L240) (2 connections)
+- [isPathAllowedForWorkspaces()](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L255) (2 connections)
+- [PLATFORM_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L22) (1 connections)
+- [SUPER_ADMIN_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L217) (1 connections)
 
 ## Relationships
 
@@ -17,7 +16,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\scripts\verify_actions.ts](file:///C:/Antigravityyyyy/VID_School/scripts/verify_actions.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\config\workspaces.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts)
 
 ## Audit Trail
 

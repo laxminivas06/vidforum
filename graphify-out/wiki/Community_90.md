@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: river-review](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md) (2 connections)
-- [Review Lenses](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md) (1 connections)
-- [River Review Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md) (1 connections)
+- [Skill: token-optimizer](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md) (2 connections)
+- [Best Practices](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md) (1 connections)
+- [Token Optimizer Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[events]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/river-review/skills/river-review/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/river-review/skills/river-review/SKILL.md)
+- [.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/token-optimizer/skills/token-optimizer/SKILL.md)
 
 ## Audit Trail
 

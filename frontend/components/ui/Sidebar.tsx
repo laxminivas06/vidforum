@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useSearchParams } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { getFilteredNavigation, RoleType, NavItem } from "@/config/navigation"
 import { PLATFORM_WORKSPACES, getWorkspaceForPath } from "@/config/workspaces"
@@ -46,6 +46,7 @@ import {
   UserCheck,
   FileCheck,
   ChevronRight,
+  BookMarked,
 } from "lucide-react"
 
 // Icon registry matching navigation.ts and workspaces.ts
@@ -84,6 +85,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
   CheckCircle2,
   UserCheck,
   FileCheck,
+  BookMarked,
 }
 
 export interface SidebarProps {
@@ -112,6 +114,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   currentPath,
 }) => {
   const routerPathname = usePathname()
+  const routerSearchParams = useSearchParams()
   const pathname = currentPath || routerPathname
   const [currentSearch, setCurrentSearch] = useState("")
 
@@ -119,7 +122,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     if (typeof window !== "undefined") {
       setCurrentSearch(window.location.search)
     }
-  }, [pathname])
+  }, [pathname, routerSearchParams])
 
   const renderIcon = (name: string, isActive: boolean) => {
     const IconComponent = ICON_MAP[name] || LayoutDashboard

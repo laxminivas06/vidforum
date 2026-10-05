@@ -1,46 +1,26 @@
 # [certificateId & instId] Cluster
 
-> 19 nodes · cohesion 0.11
+> 17 nodes · cohesion 0.15
 
 ## Key Concepts
 
-- [FinanceService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L4) (24 connections)
-- [.assignFeeToStudent()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L81) (2 connections)
-- [.createFeeStructure()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L33) (2 connections)
-- [.processRefund()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L229) (2 connections)
-- [finance.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L1) (1 connections)
-- [.createDiscount()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L66) (1 connections)
-- [.createFeeCategory()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L10) (1 connections)
-- [.createFeeGroup()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L19) (1 connections)
-- [.createScholarship()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L75) (1 connections)
-- [.getScopedFees()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L259) (1 connections)
-- [.getStudentFeeLedger()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L116) (1 connections)
-- [.listDiscounts()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L62) (1 connections)
-- [.listFeeCategories()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L6) (1 connections)
-- [.listFeeGroups()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L15) (1 connections)
-- [.listFeeStructures()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L25) (1 connections)
-- [.listInvoices()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L121) (1 connections)
-- [.listPayments()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L161) (1 connections)
-- [.listScholarships()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L71) (1 connections)
-- [.listStudentFees()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts#L112) (1 connections)
-
-## Class Diagram
-
-```mermaid
-classDiagram
-    class FinanceService {
-        +finance.service.ts()
-        +.listFeeCategories()
-        +.createFeeCategory()
-        +.listFeeGroups()
-        +.createFeeGroup()
-        +.listFeeStructures()
-        +.getFeeStructure()
-        +.createFeeStructure()
-        +.listDiscounts()
-        +.createDiscount()
-    }
-```
+- [gate_report.ts](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L1) (8 connections)
+- [scan_forbidden.ts](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L1) (7 connections)
+- [generateGateReport()](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L35) (4 connections)
+- [getAllFiles()](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L43) (3 connections)
+- [runScan()](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L58) (3 connections)
+- [getGitCommit()](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L11) (2 connections)
+- [runCommand()](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L20) (2 connections)
+- [shouldExclude()](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L39) (2 connections)
+- [BACKEND_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L7) (1 connections)
+- [DOCS_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L9) (1 connections)
+- [FRONTEND_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L8) (1 connections)
+- [ROOT_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L6) (1 connections)
+- [{ success }](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts#L145) (1 connections)
+- [EXCLUDED_PATTERNS](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L23) (1 connections)
+- [ROOT_DIR](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L11) (1 connections)
+- [SCAN_DIRS](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L13) (1 connections)
+- [{ violations, filesScanned }](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts#L144) (1 connections)
 
 ## Relationships
 
@@ -48,12 +28,13 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.service.ts)
+- [C:\Antigravityyyyy\VID_School\scripts\gate_report.ts](file:///C:/Antigravityyyyy/VID_School/scripts/gate_report.ts)
+- [C:\Antigravityyyyy\VID_School\scripts\scan_forbidden.ts](file:///C:/Antigravityyyyy/VID_School/scripts/scan_forbidden.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 42 (93%)
-- INFERRED: 3 (7%)
+- EXTRACTED: 38 (95%)
+- INFERRED: 2 (5%)
 - AMBIGUOUS: 0 (0%)
 
 ---

@@ -1,30 +1,29 @@
 # Community 46
 
-> 9 nodes · cohesion 0.22
+> 8 nodes · cohesion 0.25
 
 ## Key Concepts
 
-- [Card.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L1) (8 connections)
-- [activeDelta](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L122) (1 connections)
-- [activeDeltaType](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L123) (1 connections)
-- [Card](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L11) (1 connections)
-- [CardContent](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L74) (1 connections)
-- [CardDescription](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L62) (1 connections)
-- [CardFooter](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L82) (1 connections)
-- [CardHeader](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L38) (1 connections)
-- [CardTitle](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx#L50) (1 connections)
+- [Document: Plugin Orchestrator](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (7 connections)
+- [1. Memory Phase (Start of Session & Pre-Edit)](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [2. Planning & SDLC Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [3. Implementation & Testing Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [4. Code Quality & Review Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [5. Security & Git Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [6. Token & Output Optimization](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [Plugin Orchestration Rules](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[dbOk & router]] (14 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Card.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Card.tsx)
+- [.agents/rules/plugin-orchestrator.md](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md)
 
 ## Audit Trail
 
-- EXTRACTED: 16 (100%)
+- EXTRACTED: 14 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

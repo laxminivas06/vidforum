@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [hrms.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L1) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts#L6) (1 connections)
+- [workspace.registry.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.registry.ts#L1) (1 connections)
+- [CANONICAL_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.registry.ts#L11) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\hrms\hrms.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/hrms/hrms.routes.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\workspaces\workspace.registry.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/workspaces/workspace.registry.ts)
 
 ## Audit Trail
 

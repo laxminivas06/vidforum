@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useState, useMemo } from "react"
+import React, { useState, useMemo, useEffect, Suspense } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { AppShell } from "@/components/layout/AppShell"
 import {
   Card,
@@ -73,8 +74,33 @@ import {
 
 type TabType = "hierarchy" | "subjects" | "mapping" | "calendar" | "exams" | "textbooks" | "years"
 
-export default function AcademicsWorkspacePage() {
-  const [activeTab, setActiveTab] = useState<TabType>("hierarchy")
+function AcademicsWorkspaceContent() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const tabQuery = (searchParams?.get("tab") as TabType) || null
+
+  const validTabs: TabType[] = ["hierarchy", "subjects", "mapping", "calendar", "exams", "textbooks", "years"]
+  const initialTab: TabType = (tabQuery && validTabs.includes(tabQuery)) ? tabQuery : "hierarchy"
+
+  const [activeTab, setActiveTab] = useState<TabType>(initialTab)
+
+  // Synchronize activeTab with URL search parameter
+  useEffect(() => {
+    if (tabQuery && validTabs.includes(tabQuery)) {
+      setActiveTab(tabQuery)
+    } else if (!tabQuery) {
+      setActiveTab("hierarchy")
+    }
+  }, [tabQuery])
+
+  const handleTabChange = (newTab: TabType) => {
+    setActiveTab(newTab)
+    if (newTab === "hierarchy") {
+      router.push("/academics", { scroll: false })
+    } else {
+      router.push(`/academics?tab=${newTab}`, { scroll: false })
+    }
+  }
 
   // Academic Years
   const { data: academicYears = [], isLoading: isYearsLoading } = useAcademicYears()
@@ -493,6 +519,16 @@ export default function AcademicsWorkspacePage() {
               ? "Classes or Grades"
               : activeTab === "subjects"
               ? "Subject Master"
+              : activeTab === "mapping"
+              ? "Curriculum Mapping"
+              : activeTab === "calendar"
+              ? "Year Schedule & Working Days"
+              : activeTab === "exams"
+              ? "Year Exam Schedule"
+              : activeTab === "textbooks"
+              ? "Preferred Textbooks"
+              : activeTab === "years"
+              ? "Academic Years"
               : activeTab,
         },
       ]}
@@ -698,8 +734,8 @@ export default function AcademicsWorkspacePage() {
             { id: "subjects", label: "Subject Master", icon: BookOpen },
             { id: "mapping", label: "Curriculum Mapping", icon: Layers },
             { id: "calendar", label: "Year Schedule & Working Days", icon: CalendarDays },
-            { id: "exams", label: "Exam Estimates (A2)", icon: Clock },
-            { id: "textbooks", label: "Preferred Textbooks (A1)", icon: BookMarked },
+            { id: "exams", label: "Year Exam Schedule", icon: Clock },
+            { id: "textbooks", label: "Preferred Textbooks", icon: BookMarked },
             { id: "years", label: "Academic Years", icon: Calendar },
           ].map((tab) => {
             const Icon = tab.icon
@@ -707,7 +743,7 @@ export default function AcademicsWorkspacePage() {
             return (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as TabType)}
+                onClick={() => handleTabChange(tab.id as TabType)}
                 className={`flex items-center gap-2 px-3.5 py-2.5 text-xs font-medium border-b-2 whitespace-nowrap transition-colors ${
                   isActive
                     ? "border-action-primary text-action-primary bg-action-primary/5 font-semibold"
@@ -898,7 +934,7 @@ export default function AcademicsWorkspacePage() {
                           variant="ghost"
                           onClick={() => {
                             setMappingClassId(activeGrade.id)
-                            setActiveTab("mapping")
+                            handleTabChange("mapping")
                           }}
                         >
                           Configure Mapping Matrix →
@@ -3513,5 +3549,13 @@ export default function AcademicsWorkspacePage() {
         </div>
       )}
     </AppShell>
+  )
+}
+
+export default function AcademicsWorkspacePage() {
+  return (
+    <Suspense fallback={null}>
+      <AcademicsWorkspaceContent />
+    </Suspense>
   )
 }

@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/page.tsx#L1) (1 connections)
-- [DocumentsRootPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/page.tsx#L3) (1 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/billing/page.tsx#L1) (1 connections)
+- [BillingPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/billing/page.tsx#L8) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\documents\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\billing\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/billing/page.tsx)
 
 ## Audit Trail
 

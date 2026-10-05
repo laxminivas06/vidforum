@@ -3,6 +3,13 @@ import { academicsService } from './academics.service';
 import { sendSuccess, sendError } from '../../utils/api-response';
 
 export class AcademicsController {
+  private async resolveAcademicYearId(instId: string, providedYearId?: string): Promise<string | undefined> {
+    if (providedYearId) return providedYearId;
+    const years = await academicsService.getAcademicYears(instId);
+    const currYear = years.find((y: any) => y.is_current) || years[0];
+    return currYear?.id;
+  }
+
   // =========================================================================
   // ACADEMIC YEARS
   // =========================================================================
@@ -486,11 +493,11 @@ export class AcademicsController {
   async getExamEstimates(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const instId = req.institutionId!;
-      const academicYearId = req.query.academicYearId as string;
+      const academicYearId = await this.resolveAcademicYearId(instId, req.query.academicYearId as string);
       const classId = req.query.classId as string | undefined;
 
       if (!academicYearId) {
-        sendError(res, 'academicYearId query parameter is required', 400, 'VALIDATION_ERROR');
+        sendError(res, 'No academic year configured for this institution', 400, 'VALIDATION_ERROR');
         return;
       }
 
@@ -566,10 +573,10 @@ export class AcademicsController {
   async getCalendarConfig(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const instId = req.institutionId!;
-      const academicYearId = req.query.academicYearId as string;
+      const academicYearId = await this.resolveAcademicYearId(instId, req.query.academicYearId as string);
 
       if (!academicYearId) {
-        sendError(res, 'academicYearId query parameter is required', 400, 'VALIDATION_ERROR');
+        sendError(res, 'No academic year configured for this institution', 400, 'VALIDATION_ERROR');
         return;
       }
 
@@ -601,10 +608,10 @@ export class AcademicsController {
   async getCalendarDays(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const instId = req.institutionId!;
-      const academicYearId = req.query.academicYearId as string;
+      const academicYearId = await this.resolveAcademicYearId(instId, req.query.academicYearId as string);
 
       if (!academicYearId) {
-        sendError(res, 'academicYearId query parameter is required', 400, 'VALIDATION_ERROR');
+        sendError(res, 'No academic year configured for this institution', 400, 'VALIDATION_ERROR');
         return;
       }
 
@@ -671,12 +678,12 @@ export class AcademicsController {
   async getWorkingDaysCount(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const instId = req.institutionId!;
-      const academicYearId = req.query.academicYearId as string;
+      const academicYearId = await this.resolveAcademicYearId(instId, req.query.academicYearId as string);
       const startDate = req.query.startDate as string | undefined;
       const endDate = req.query.endDate as string | undefined;
 
       if (!academicYearId) {
-        sendError(res, 'academicYearId query parameter is required', 400, 'VALIDATION_ERROR');
+        sendError(res, 'No academic year configured for this institution', 400, 'VALIDATION_ERROR');
         return;
       }
 
@@ -694,12 +701,12 @@ export class AcademicsController {
   async getTextbooks(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const instId = req.institutionId!;
-      const academicYearId = req.query.academicYearId as string;
+      const academicYearId = await this.resolveAcademicYearId(instId, req.query.academicYearId as string);
       const classId = req.query.classId as string | undefined;
       const subjectId = req.query.subjectId as string | undefined;
 
       if (!academicYearId) {
-        sendError(res, 'academicYearId query parameter is required', 400, 'VALIDATION_ERROR');
+        sendError(res, 'No academic year configured for this institution', 400, 'VALIDATION_ERROR');
         return;
       }
 
@@ -807,11 +814,11 @@ export class AcademicsController {
   async getBooklist(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const instId = req.institutionId!;
-      const academicYearId = req.query.academicYearId as string;
+      const academicYearId = await this.resolveAcademicYearId(instId, req.query.academicYearId as string);
       const classId = req.query.classId as string;
 
       if (!academicYearId || !classId) {
-        sendError(res, 'academicYearId and classId query parameters are required', 400, 'VALIDATION_ERROR');
+        sendError(res, 'classId query parameter is required', 400, 'VALIDATION_ERROR');
         return;
       }
 

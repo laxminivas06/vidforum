@@ -59,7 +59,7 @@ export const NAVIGATION_CONFIG: Record<RoleType, NavGroup[]> = {
       label: "CORE",
       items: [
         { title: "Admissions", href: "/admissions", iconName: "UserPlus" },
-        { title: "Academics", href: "/academics/hierarchy", iconName: "GraduationCap" },
+        { title: "Academics", href: "/academics", iconName: "GraduationCap" },
         { title: "Faculty Management", href: "/faculty/dashboard", iconName: "BookOpen" },
         { title: "Attendance Roll", href: "/attendance/sessions", iconName: "CalendarCheck" },
         { title: "Examinations", href: "/examinations/schedules", iconName: "FileSpreadsheet" },
@@ -114,9 +114,9 @@ export const NAVIGATION_CONFIG: Record<RoleType, NavGroup[]> = {
     {
       label: "ADMISSIONS",
       items: [
-        { title: "Admissions Kanban", href: "/admissions", iconName: "LayoutDashboard" },
-        { title: "Lead Inquiries", href: "/admissions/enquiries", iconName: "UserPlus" },
-        { title: "Document Vault", href: "/documents/vault", iconName: "FileText" },
+        { title: "Applications Kanban", href: "/admissions", iconName: "LayoutDashboard" },
+        { title: "Document Verification", href: "/admissions/documents", iconName: "FileText" },
+        { title: "Enrolled Students", href: "/admissions/enrolled", iconName: "CheckCircle2" },
       ],
     },
   ],

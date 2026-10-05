@@ -1,17 +1,16 @@
 # MOCK_SESSIONS
 
-> 8 nodes · cohesion 0.25
+> 7 nodes · cohesion 0.29
 
 ## Key Concepts
 
-- [Document: Plugin Orchestrator](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (7 connections)
-- [1. Memory Phase (Start of Session & Pre-Edit)](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [2. Planning & SDLC Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [3. Implementation & Testing Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [4. Code Quality & Review Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [5. Security & Git Phase](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [6. Token & Output Optimization](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
-- [Plugin Orchestration Rules](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md) (1 connections)
+- [UserAuditModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L1) (6 connections)
+- [{ data: logs = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L20) (1 connections)
+- [isAccess](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L64) (1 connections)
+- [isProvision](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L62) (1 connections)
+- [isReset](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L63) (1 connections)
+- [isStatus](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L65) (1 connections)
+- [targetId](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L19) (1 connections)
 
 ## Relationships
 
@@ -19,11 +18,11 @@
 
 ## Source Files
 
-- [.agents/rules/plugin-orchestrator.md](file:///C:/Antigravityyyyy/VID_School/.agents/rules/plugin-orchestrator.md)
+- [C:\Antigravityyyyy\VID_School\frontend\components\users\UserAuditModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 14 (100%)
+- EXTRACTED: 12 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- [lucide-react](file:///C:/Antigravityyyyy/VID_School/frontend/package.json#L14) (0 connections)
+- [index.ts](file:///C:/Antigravityyyyy/VID_School/frontend/types/index.ts#L1) (0 connections)
 
 ## Relationships
 
@@ -12,7 +12,7 @@
 
 ## Source Files
 
-- [frontend/package.json](file:///C:/Antigravityyyyy/VID_School/frontend/package.json)
+- [C:\Antigravityyyyy\VID_School\frontend\types\index.ts](file:///C:/Antigravityyyyy/VID_School/frontend/types/index.ts)
 
 ## Audit Trail
 

@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx#L1) (2 connections)
-- [ExaminationsPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx#L76) (1 connections)
-- [MOCK_EXAMS](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx#L40) (1 connections)
+- [Skill: ai-native-sdlc](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (2 connections)
+- [AI-Native SDLC Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (1 connections)
+- [Gates](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: secret-guard & Scan Targets] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\examinations\schedules\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx)
+- [.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/ai-native-sdlc/skills/ai-native-sdlc/SKILL.md)
 
 ## Audit Trail
 

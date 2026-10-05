@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: docflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md) (2 connections)
-- [Docflow Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md) (1 connections)
-- [Policy](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md) (1 connections)
+- [Skill: knowl](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (2 connections)
+- [Knowl Project Memory Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (1 connections)
+- [Procedures](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[router]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/docflow/skills/docflow/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/docflow/skills/docflow/SKILL.md)
+- [.agents/plugins/knowl/skills/knowl/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/knowl/skills/knowl/SKILL.md)
 
 ## Audit Trail
 

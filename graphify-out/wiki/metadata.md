@@ -1,17 +1,16 @@
 # metadata
 
-> 8 nodes · cohesion 0.25
+> 7 nodes · cohesion 0.29
 
 ## Key Concepts
 
-- [index.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L1) (7 connections)
-- [cn()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L72) (1 connections)
-- [containerRef](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L128) (1 connections)
-- [filteredOptions](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L132) (1 connections)
-- [handleClickOutside()](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L139) (1 connections)
-- [[isOpen, setIsOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L126) (1 connections)
-- [[searchTerm, setSearchTerm]](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L127) (1 connections)
-- [selectedOption](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx#L130) (1 connections)
+- [StudentProfile.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L1) (6 connections)
+- [[activeTab, setActiveTab]](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L237) (1 connections)
+- [{ data: liveMaster, isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L175) (1 connections)
+- [isActive](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L355) (1 connections)
+- [MOCK_STUDENT](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L98) (1 connections)
+- [student](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L177) (1 connections)
+- [tabs](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx#L241) (1 connections)
 
 ## Relationships
 
@@ -19,11 +18,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\ui\Form\index.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/ui/Form/index.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\components\student\StudentProfile.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/student/StudentProfile.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 14 (100%)
+- EXTRACTED: 12 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -1,28 +1,24 @@
 # [activeDelta & activeDeltaType] Cluster
 
-> 19 nodes · cohesion 0.11
+> 15 nodes · cohesion 0.13
 
 ## Key Concepts
 
-- [Document: Appflow](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (18 connections)
-- [1. Overview & Navigation Architecture](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.1 Authentication](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.2 Super Admin Console (/(super-admin))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.3 Institution Admin Workspace (/(institution-admin))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.4 Core Workspaces (/(core))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.5 AI Yantra Services (/(ai-yantra))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.6 Optional Modular Workspaces (/(optional))](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.7 Central Student Master Profile (/students/id)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2.8 Mobile Parent & Student Portal (/(mobile)/app)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [2. Complete Route Hierarchy & Screen Inventory](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.1 Login & Tenant Resolution](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.2 Institution Admin Settings Shell (Two-Pane)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.3 Admissions Workspace (Kanban & Slide-Over)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3.4 Student Master Profile Shell](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [3. Deep-Dive Screen Specifications](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [4. Navigation & Optional Module Matrix (/config/navigation.ts)](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [5. Development Phases](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
-- [VID (Virtual Identification) — Application Flow & Architecture Document](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md) (1 connections)
+- [EditUserAccessModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L1) (14 connections)
+- [{ data: roleTemplates = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L33) (1 connections)
+- [[error, setError]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L38) (1 connections)
+- [handleDeselectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L76) (1 connections)
+- [handleSave()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L80) (1 connections)
+- [handleSelectAll()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L72) (1 connections)
+- [handleTemplateChange()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L58) (1 connections)
+- [handleToggleWorkspace()](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L66) (1 connections)
+- [initialWorkspaces](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L46) (1 connections)
+- [isSelected](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L185) (1 connections)
+- [[selectedTemplate, setSelectedTemplate]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L36) (1 connections)
+- [[selectedWorkspaces, setSelectedWorkspaces]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L37) (1 connections)
+- [[successBanner, setSuccessBanner]](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L39) (1 connections)
+- [tplKey](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L43) (1 connections)
+- [updateAccessMutation](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx#L34) (1 connections)
 
 ## Relationships
 
@@ -30,11 +26,11 @@
 
 ## Source Files
 
-- [docs/AppFlow.md](file:///C:/Antigravityyyyy/VID_School/docs/AppFlow.md)
+- [C:\Antigravityyyyy\VID_School\frontend\components\users\EditUserAccessModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/EditUserAccessModal.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 36 (100%)
+- EXTRACTED: 28 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

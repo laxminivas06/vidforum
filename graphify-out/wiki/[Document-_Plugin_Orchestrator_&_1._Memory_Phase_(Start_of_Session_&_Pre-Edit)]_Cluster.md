@@ -4,32 +4,28 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L1) (13 connections)
-- [[academicYear, setAcademicYear]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L42) (1 connections)
-- [[activeSection, setActiveSection]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L37) (1 connections)
-- [[boardAffiliation, setBoardAffiliation]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L40) (1 connections)
-- [[confirmToggleModule, setConfirmToggleModule]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L44) (1 connections)
-- [[contactEmail, setContactEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L41) (1 connections)
-- [handleSave()](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L63) (1 connections)
-- [{
-    institutionName,
-    enabledModules,
-    toggleOptionalModule,
-  }](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L31) (1 connections)
-- [isEnabled](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L225) (1 connections)
-- [[isSaved, setIsSaved]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L43) (1 connections)
-- [optionalModulesList](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L46) (1 connections)
-- [[schoolCode, setSchoolCode]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L39) (1 connections)
-- [[schoolName, setSchoolName]](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L38) (1 connections)
-- [sections](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx#L55) (1 connections)
+- [VID Platform Educational Ecosystem Specification](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (13 connections)
+- [Academics & Curriculum](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Admissions & Enrollment](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Alumni Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Attendance Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Communication & Notifications](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Examination & Grading](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Fee & Financial Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Hostel Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Human Resources & Payroll](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Learning Management System (LMS)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Library Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Student Information System (SIS)](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
+- [Transportation Management](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[ICON_MAP & IconComponent] Cluster]] (26 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\settings\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/settings/page.tsx)
+- [Reference_docs/VID Platform.pdf](file:///C:/Antigravityyyyy/VID_School/Reference_docs/VID%20Platform.pdf)
 
 ## Audit Trail
 

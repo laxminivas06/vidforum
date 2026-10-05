@@ -1,14 +1,13 @@
 # [Skill: commit-narrator & Commit Narrator Skill] Cluster
 
-> 5 nodes · cohesion 0.50
+> 4 nodes · cohesion 0.50
 
 ## Key Concepts
 
-- [workspaces.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L1) (4 connections)
-- [getWorkspaceForPath()](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L237) (2 connections)
-- [isPathAllowedForWorkspaces()](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L252) (2 connections)
-- [PLATFORM_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L22) (1 connections)
-- [SUPER_ADMIN_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts#L214) (1 connections)
+- [rbac.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L1) (3 connections)
+- [requireAnyPermission()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L70) (1 connections)
+- [requirePermission()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L36) (1 connections)
+- [requireRole()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts#L7) (1 connections)
 
 ## Relationships
 
@@ -16,11 +15,11 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\config\workspaces.ts](file:///C:/Antigravityyyyy/VID_School/frontend/config/workspaces.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\rbac.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/rbac.middleware.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 10 (100%)
+- EXTRACTED: 6 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx#L1) (2 connections)
-- [AttendanceSessionsPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx#L89) (1 connections)
-- [MOCK_SESSIONS](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx#L42) (1 connections)
+- [Skill: agent-guard](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (2 connections)
+- [Agent Guard Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (1 connections)
+- [Enforcement](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: river-review & Review Lenses] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\app\attendance\sessions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx)
+- [.agents/plugins/agent-guard/skills/agent-guard/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/agent-guard/skills/agent-guard/SKILL.md)
 
 ## Audit Trail
 

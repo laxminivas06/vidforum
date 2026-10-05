@@ -1,72 +1,44 @@
 # [[academicYear, setAcademicYear] & [activeSection, setActiveSection]] Cluster
 
-> 30 nodes · cohesion 0.11
+> 32 nodes · cohesion 0.06
 
 ## Key Concepts
 
-- [FacultyController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L5) (9 connections)
-- [FacultyRepository](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L24) (9 connections)
-- [FacultyService](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L3) (9 connections)
-- [.getFacultyProfile()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L68) (6 connections)
-- [.findFacultyByProfileId()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L231) (5 connections)
-- [.getFaculty()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L6) (4 connections)
-- [.createStaffMember()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L72) (4 connections)
-- [.findAssignedClasses()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L245) (4 connections)
-- [.findAssignedSubjects()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L264) (4 connections)
-- [.getMyAssignedClasses()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L84) (4 connections)
-- [.getMyAssignedSubjects()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L92) (4 connections)
-- [.createFaculty()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L80) (3 connections)
-- [.createFacultyBulk()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L90) (3 connections)
-- [.getFacultyById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L69) (3 connections)
-- [.getMyClasses()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L36) (3 connections)
-- [.getMyProfile()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L25) (3 connections)
-- [.getMySubjects()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L47) (3 connections)
-- [.getSectionStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts#L58) (3 connections)
-- [.createStaffBulk()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L191) (3 connections)
-- [.findFacultyById()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L218) (3 connections)
-- [.findFacultyByInstitution()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L25) (3 connections)
-- [.findSectionStudents()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts#L283) (3 connections)
-- [.addStaffBulk()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L56) (3 connections)
-- [.addStaffMember()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L52) (3 connections)
-- [.getFacultyList()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts#L4) (3 connections)
-- *... and 5 more nodes in this community*
+- [documents.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L1) (29 connections)
+- [DocumentsController](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L73) (3 connections)
+- [actor](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L109) (1 connections)
+- [bonafideSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L42) (1 connections)
+- [certificate](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L267) (1 connections)
+- [created](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L110) (1 connections)
+- [createTemplateSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L27) (1 connections)
+- [createTypeSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L6) (1 connections)
+- [doc](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L125) (1 connections)
+- [docTypeId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L218) (1 connections)
+- [.getActor()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L82) (1 connections)
+- [.getService()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L74) (1 connections)
+- [filters](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L147) (1 connections)
+- [history](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L193) (1 connections)
+- [paramToStr()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L68) (1 connections)
+- [parsed](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L107) (1 connections)
+- [processed](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L322) (1 connections)
+- [processRequestSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L62) (1 connections)
+- [request](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L294) (1 connections)
+- [requestDocumentSchema](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L55) (1 connections)
+- [requests](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L310) (1 connections)
+- [result](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L156) (1 connections)
+- [service](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L97) (1 connections)
+- [template](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L208) (1 connections)
+- [templates](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts#L219) (1 connections)
+- *... and 7 more nodes in this community*
 
 ## Class Diagram
 
 ```mermaid
 classDiagram
-    class FacultyController {
-        +faculty.controller.ts()
-        +.getFaculty()
-        +.getMyProfile()
-        +.getMyClasses()
-        +.getMySubjects()
-        +.getSectionStudents()
-        +.getFacultyById()
-        +.createFaculty()
-        +.createFacultyBulk()
-    }
-    class FacultyRepository {
-        +faculty.repository.ts()
-        +.findFacultyByInstitution()
-        +.createStaffMember()
-        +.createStaffBulk()
-        +.findFacultyById()
-        +.findFacultyByProfileId()
-        +.findAssignedClasses()
-        +.findAssignedSubjects()
-        +.findSectionStudents()
-    }
-    class FacultyService {
-        +faculty.service.ts()
-        +.getFacultyList()
-        +.addStaffMember()
-        +.addStaffBulk()
-        +.getFacultyMember()
-        +.getFacultyProfile()
-        +.getMyAssignedClasses()
-        +.getMyAssignedSubjects()
-        +.getSectionStudentRoster()
+    class DocumentsController {
+        +documents.controller.ts()
+        +.getService()
+        +.getActor()
     }
 ```
 
@@ -76,14 +48,12 @@ classDiagram
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\faculty\faculty.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.controller.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\faculty\faculty.repository.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.repository.ts)
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\faculty\faculty.service.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.service.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\documents\documents.controller.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/documents/documents.controller.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 56 (50%)
-- INFERRED: 57 (50%)
+- EXTRACTED: 62 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

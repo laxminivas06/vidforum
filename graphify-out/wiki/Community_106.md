@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L6) (1 connections)
-- [attendance.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts#L1) (1 connections)
+- [finance.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.routes.ts#L1) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.routes.ts#L6) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\attendance\attendance.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/attendance/attendance.routes.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\finance\finance.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/finance/finance.routes.ts)
 
 ## Audit Trail
 

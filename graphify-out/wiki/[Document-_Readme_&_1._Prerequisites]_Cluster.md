@@ -1,35 +1,35 @@
 # [Document: Readme & 1. Prerequisites] Cluster
 
-> 48 nodes · cohesion 0.04
+> 70 nodes · cohesion 0.03
 
 ## Key Concepts
 
-- [users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L1) (48 connections)
-- [adminEmails](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L605) (1 connections)
-- [adminRoleId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L636) (1 connections)
-- [adminRoleRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L635) (1 connections)
-- [authId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L612) (1 connections)
-- [authUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L611) (1 connections)
-- [cleanEmail](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L47) (1 connections)
-- [client](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L38) (1 connections)
-- [current](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L147) (1 connections)
-- [currentRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L136) (1 connections)
-- [defaultPassHash](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L600) (1 connections)
-- [displayName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L48) (1 connections)
-- [getUserAgent()](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L337) (1 connections)
-- [id](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L132) (1 connections)
-- [ins](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L614) (1 connections)
-- [insertAuth](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L84) (1 connections)
-- [instId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L51) (1 connections)
-- [institutionId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L445) (1 connections)
-- [instName](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L52) (1 connections)
-- [instRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L54) (1 connections)
-- [{ name, email, role = 'FACULTY', institutionName }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L40) (1 connections)
-- [{ name, email, role, institutionName, status }](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L133) (1 connections)
-- [newUser](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L109) (1 connections)
-- [ngsId](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L603) (1 connections)
-- [ngsRes](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts#L602) (1 connections)
-- *... and 23 more nodes in this community*
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L1) (55 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L1) (17 connections)
+- [[activeTab, setActiveTab]](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L85) (3 connections)
+- [generateRandomPassword()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L273) (3 connections)
+- [{ data: institutions = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L42) (2 connections)
+- [handleProvisionSubmit()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L283) (2 connections)
+- [handleStaffSelection()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L248) (2 connections)
+- [updateStatusMutation](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L43) (2 connections)
+- [[accountFilter, setAccountFilter]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L181) (1 connections)
+- [[actionType, setActionType]](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L47) (1 connections)
+- [applicantColumns](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L390) (1 connections)
+- [async()](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L420) (1 connections)
+- [[confirmDialogOpen, setConfirmDialogOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L166) (1 connections)
+- [[copySuccessToast, setCopySuccessToast]](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L192) (1 connections)
+- [DashboardPage()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L109) (1 connections)
+- [{ data: applicants, isLoading: appsLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L155) (1 connections)
+- [{ data: facultyAccounts = [], isLoading: accountsLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L157) (1 connections)
+- [{ data: fees }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L156) (1 connections)
+- [{ data: instituteAdmins = [], refetch: refetchAdmins }](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L54) (1 connections)
+- [{ data: roleTemplates = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L159) (1 connections)
+- [{ data: staffList = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L158) (1 connections)
+- [DEFAULT_FACULTY_WORKSPACES](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L83) (1 connections)
+- [filtered](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx#L56) (1 connections)
+- [filteredAccounts](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L229) (1 connections)
+- [handleCopyCredentials()](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx#L368) (1 connections)
+- *... and 45 more nodes in this community*
 
 ## Relationships
 
@@ -37,11 +37,13 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\users\users.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/users/users.routes.ts)
+- [C:\Antigravityyyyy\VID_School\frontend\app\dashboard\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/dashboard/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\hrms\staff\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\institutions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/institutions/page.tsx)
 
 ## Audit Trail
 
-- EXTRACTED: 95 (100%)
+- EXTRACTED: 148 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

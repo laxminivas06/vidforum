@@ -24,4 +24,12 @@ router.post('/applicants/bulk',            tenantMiddleware, admissionsControlle
 router.post('/applications/bulk',          tenantMiddleware, admissionsController.bulkImport.bind(admissionsController));
 router.post('/applicants/:id/approve',    tenantMiddleware, admissionsController.approve.bind(admissionsController));
 
+// Documents
+router.get('/documents',                  tenantMiddleware, admissionsController.getDocuments.bind(admissionsController));
+router.patch('/documents/:id/status',     tenantMiddleware, admissionsController.updateDocumentStatus.bind(admissionsController));
+router.post('/applications/:id/documents',tenantMiddleware, admissionsController.addDocument.bind(admissionsController));
+
+// Enrolled Students
+router.get('/enrolled',                   tenantMiddleware, admissionsController.getEnrolled.bind(admissionsController));
+
 export default router;

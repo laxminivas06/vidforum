@@ -112,6 +112,50 @@ export class AdmissionsController {
       sendSuccess(res, stats);
     } catch (error) { next(error); }
   }
+
+  // Documents
+  async getDocuments(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const documents = await admissionsService.getAdmissionDocuments(req.institutionId!, {
+        status: req.query.status as string | undefined,
+        search: req.query.search as string | undefined,
+      });
+      sendSuccess(res, documents);
+    } catch (error) { next(error); }
+  }
+
+  async updateDocumentStatus(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const { status } = req.body;
+      if (!status) { sendError(res, 'Status is required (pending, verified, rejected)', 400); return; }
+      const doc = await admissionsService.updateDocumentStatus(req.params.id as string, req.institutionId!, status, req.user?.id);
+      sendSuccess(res, doc, `Document marked as ${status}`);
+    } catch (error) { next(error); }
+  }
+
+  async addDocument(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const { documentType, storageKey, status } = req.body;
+      if (!documentType) { sendError(res, 'documentType is required', 400); return; }
+      const doc = await admissionsService.addAdmissionDocument(req.institutionId!, req.params.id as string, {
+        documentType,
+        storageKey,
+        status: status || 'pending',
+      });
+      sendSuccess(res, doc, 'Document attached successfully', 201);
+    } catch (error) { next(error); }
+  }
+
+  // Enrolled Students
+  async getEnrolled(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const students = await admissionsService.getEnrolledStudents(req.institutionId!, {
+        search: req.query.search as string | undefined,
+        classId: req.query.classId as string | undefined,
+      });
+      sendSuccess(res, students);
+    } catch (error) { next(error); }
+  }
 }
 
 export const admissionsController = new AdmissionsController();

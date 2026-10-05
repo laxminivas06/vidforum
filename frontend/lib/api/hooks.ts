@@ -10,6 +10,8 @@ import {
   StudentListItem,
   ClassEnrollmentCount,
   EnquiryItem,
+  AdmissionDocumentItem,
+  EnrolledApplicantItem,
 } from "@/types"
 
 // --- TanStack Query Hooks (Live Backend with Database Persistence) ---
@@ -533,6 +535,103 @@ export function useAdmissions() {
     createApplicant: createApplicantMutation.mutateAsync,
     bulkImportApplicants: bulkImportApplicantsMutation.mutateAsync,
   }
+}
+
+export function useAdmissionDocuments(filters?: { status?: string; search?: string }) {
+  const queryClient = useQueryClient()
+  const qParams = new URLSearchParams()
+  if (filters?.status) qParams.set("status", filters.status)
+  if (filters?.search) qParams.set("search", filters.search)
+
+  const query = useQuery({
+    queryKey: ["admission-documents", filters],
+    queryFn: async (): Promise<AdmissionDocumentItem[]> => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/admissions/documents?${qParams.toString()}`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Failed to fetch admission documents:", err)
+      }
+      return []
+    },
+  })
+
+  const updateStatusMutation = useMutation({
+    mutationFn: async ({ documentId, status }: { documentId: string; status: "verified" | "rejected" | "pending" }) => {
+      const res = await fetch(`${API_BASE_URL}/admissions/documents/${documentId}/status`, {
+        method: "PATCH",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ status }),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to update document status")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admission-documents"] })
+      queryClient.invalidateQueries({ queryKey: ["admissions"] })
+      queryClient.invalidateQueries({ queryKey: ["enrolled-applicants"] })
+    },
+  })
+
+  const addDocumentMutation = useMutation({
+    mutationFn: async ({ applicationId, documentType, storageKey, status }: { applicationId: string; documentType: string; storageKey?: string; status?: string }) => {
+      const res = await fetch(`${API_BASE_URL}/admissions/applications/${applicationId}/documents`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ documentType, storageKey, status: status || "pending" }),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Failed to attach document")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admission-documents"] })
+      queryClient.invalidateQueries({ queryKey: ["admissions"] })
+      queryClient.invalidateQueries({ queryKey: ["enrolled-applicants"] })
+    },
+  })
+
+  return {
+    ...query,
+    updateStatus: updateStatusMutation.mutateAsync,
+    isUpdating: updateStatusMutation.isPending,
+    addDocument: addDocumentMutation.mutateAsync,
+    isAdding: addDocumentMutation.isPending,
+  }
+}
+
+export function useEnrolledApplicants(filters?: { search?: string; classId?: string }) {
+  const qParams = new URLSearchParams()
+  if (filters?.search) qParams.set("search", filters.search)
+  if (filters?.classId) qParams.set("classId", filters.classId)
+
+  return useQuery({
+    queryKey: ["enrolled-applicants", filters],
+    queryFn: async (): Promise<EnrolledApplicantItem[]> => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/admissions/enrolled?${qParams.toString()}`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Failed to fetch enrolled applicants:", err)
+      }
+      return []
+    },
+  })
 }
 
 export function useEnquiries(filters?: { search?: string; status?: string }) {

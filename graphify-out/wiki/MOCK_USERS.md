@@ -4,13 +4,13 @@
 
 ## Key Concepts
 
-- [UserAuditModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L1) (6 connections)
-- [{ data: logs = [], isLoading }](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L20) (1 connections)
-- [isAccess](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L64) (1 connections)
-- [isProvision](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L62) (1 connections)
-- [isReset](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L63) (1 connections)
-- [isStatus](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L65) (1 connections)
-- [targetId](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx#L19) (1 connections)
+- [index.ts](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L1) (6 connections)
+- [ApiErrorDetailSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L51) (1 connections)
+- [ApiErrorSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L57) (1 connections)
+- [ApiSuccessSchema()](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L32) (1 connections)
+- [BaseEntitySchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L6) (1 connections)
+- [PaginationQuerySchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L19) (1 connections)
+- [TenantContextSchema](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts#L75) (1 connections)
 
 ## Relationships
 
@@ -18,7 +18,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\frontend\components\users\UserAuditModal.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/components/users/UserAuditModal.tsx)
+- [C:\Antigravityyyyy\VID_School\packages\schemas\src\index.ts](file:///C:/Antigravityyyyy/VID_School/packages/schemas/src/index.ts)
 
 ## Audit Trail
 

@@ -4,17 +4,17 @@
 
 ## Key Concepts
 
-- [Skill: axonflow](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (2 connections)
-- [AxonFlow Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (1 connections)
-- [Policies](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md) (1 connections)
+- [Skill: espresso](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md) (2 connections)
+- [Espresso Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md) (1 connections)
+- [Guidelines](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md) (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [[[Skill: wingman & Pre-Edit Verification Checklist] Cluster]] (4 shared connections)
 
 ## Source Files
 
-- [.agents/plugins/axonflow/skills/axonflow/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/axonflow/skills/axonflow/SKILL.md)
+- [.agents/plugins/espresso/skills/espresso/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/espresso/skills/espresso/SKILL.md)
 
 ## Audit Trail
 

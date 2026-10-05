@@ -4,8 +4,8 @@
 
 ## Key Concepts
 
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.routes.ts#L5) (1 connections)
-- [admissions.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.routes.ts#L1) (1 connections)
+- [faculty.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.routes.ts#L1) (1 connections)
+- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.routes.ts#L6) (1 connections)
 
 ## Relationships
 
@@ -13,7 +13,7 @@
 
 ## Source Files
 
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\admissions\admissions.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/admissions/admissions.routes.ts)
+- [C:\Antigravityyyyy\VID_School\backend\src\modules\faculty\faculty.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/faculty/faculty.routes.ts)
 
 ## Audit Trail
 

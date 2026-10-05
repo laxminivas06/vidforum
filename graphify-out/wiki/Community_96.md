@@ -1,12 +1,11 @@
 # Community 96
 
-> 3 nodes · cohesion 0.67
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- [Skill: unforgit](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (2 connections)
-- [Guidelines](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (1 connections)
-- [Unforgit Skill](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md) (1 connections)
+- [module-guard.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/module-guard.middleware.ts#L1) (1 connections)
+- [requireModuleEnabled()](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/module-guard.middleware.ts#L9) (1 connections)
 
 ## Relationships
 
@@ -14,11 +13,11 @@
 
 ## Source Files
 
-- [.agents/plugins/unforgit/skills/unforgit/SKILL.md](file:///C:/Antigravityyyyy/VID_School/.agents/plugins/unforgit/skills/unforgit/SKILL.md)
+- [C:\Antigravityyyyy\VID_School\backend\src\middleware\module-guard.middleware.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/middleware/module-guard.middleware.ts)
 
 ## Audit Trail
 
-- EXTRACTED: 4 (100%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -232,4 +232,19 @@ To eliminate token waste and avoid repeatedly loading raw source files into LLM 
 - **Single Source of Truth:** `useInstitutions()` and `usePlatformUsers()` prioritize live Supabase PostgreSQL responses, retaining localStorage solely as an offline fallback when network is unavailable.
 
 ---
+
+## 8. Isolated Workspace Navigation & Academics/Admissions Synchronization
+- **Workspace Tool Isolation:** The sidebar enforces strict isolated workspace boundaries: when inside a dedicated workspace (e.g. `/academics`, `/admissions`), only that workspace's dedicated tools are rendered, completely eliminating cross-workspace contamination.
+- **Academics Workspace Capabilities:** Exposes all 7 educational planning functionalities directly from the isolated sidebar:
+  1. **Classes or Grades** (`/academics`): Section management, capacity tracking, class matrix generator.
+  2. **Subject Master** (`/academics?tab=subjects`): Grade-scoped subject catalog, credit definitions, core vs. elective types, syllabus linking.
+  3. **Curriculum Mapping** (`/academics?tab=mapping`): Period allocations, max/pass marks, copy matrix across grades.
+  4. **Year Exam Schedule** (`/academics?tab=exams`): Assessment milestones, window dates, target grades.
+  5. **Preferred Textbooks** (`/academics?tab=textbooks`): Prescribed textbook catalog, publisher, edition, and printable booklists.
+  6. **Academic Years** (`/academics?tab=years`): Academic year lifecycles, active status toggling, and structure cloning.
+  7. **Working Days & Schedule** (`/academics?tab=calendar`): Calendar event days, working Saturdays, and holiday management.
+- **Deep Linking & Subroute Redirects:** Subroutes (`/academics/subjects`, `/academics/mapping`, `/academics/exams`, `/academics/textbooks`, `/academics/years`, `/academics/calendar`) redirect seamlessly to `/academics?tab=<tab_name>`, with URL search parameters and sidebar in constant bidirectional synchronization via Next.js App Router `useSearchParams()`.
+- **Backend Academics Controller:** All academic query endpoints automatically resolve the active academic year fallback (`resolveAcademicYearId`), eliminating 400 Bad Request errors when queries omit an explicit `academicYearId`.
+
+---
 *End of MEMORY.md*

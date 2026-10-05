@@ -142,9 +142,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
     activeWorkspace.id !== "dashboard"
 
   // 2. Compute Navigation Items:
-  // If in an isolated workspace, show ONLY that workspace's tools
-  // If in hub/dashboard mode, show the global workspaces directory
+  // Show active workspace tools at the top while preserving full workspace navigation groups
   const navigationGroups = React.useMemo(() => {
+    const baseGroups = getFilteredNavigation(role, enabledModules, assignedWorkspaces)
+
     if (isInsideIsolatedWorkspace && activeWorkspace) {
       // Filter workspace items if any optional module is disabled
       const scopedItems = activeWorkspace.navItems.filter((item) => {
@@ -154,22 +155,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
         return true
       })
 
-      return [
-        {
-          label: `${activeWorkspace.shortName.toUpperCase()} TOOLS`,
-          items: scopedItems.map((item) => ({
-            title: item.title,
-            href: item.href,
-            iconName: item.iconName,
-            badge: item.badge,
-            badgeVariant: item.badgeVariant,
-          })),
-        },
-      ]
+      const workspaceToolsGroup = {
+        label: `${activeWorkspace.shortName.toUpperCase()} TOOLS`,
+        items: scopedItems.map((item) => ({
+          title: item.title,
+          href: item.href,
+          iconName: item.iconName,
+          badge: item.badge,
+          badgeVariant: item.badgeVariant,
+        })),
+      }
+
+      // Keep active workspace tools prominent at the top, followed by full workspaces
+      return [workspaceToolsGroup, ...baseGroups]
     }
 
-    // Otherwise, render role-filtered navigation (Hub / Platform Console)
-    return getFilteredNavigation(role, enabledModules, assignedWorkspaces)
+    // Otherwise, render full role-filtered navigation
+    return baseGroups
   }, [role, enabledModules, assignedWorkspaces, isInsideIsolatedWorkspace, activeWorkspace])
 
   const sidebarContent = (

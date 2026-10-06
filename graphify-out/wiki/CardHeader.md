@@ -1,52 +1,59 @@
 # CardHeader
 
-> God node · 39 connections · `frontend/components/ui/Card.tsx`
+> God node · 63 connections · `frontend/components/ui/Card.tsx`
 
-**Community:** [Frontend App Routes & UI Workspaces](Frontend_App_Routes_&_UI_Workspaces.md)
+**Community:** [Attendance Faculty Examinations](Attendance_Faculty_Examinations.md)
 
 ## Connections by Relation
 
 ### calls
+- AcademicsWorkspaceContent() `EXTRACTED`
 - cn() `EXTRACTED`
+- HRMSStaffContent() `EXTRACTED`
 - InstitutionAdminDashboard() `EXTRACTED`
-- AcademicsHierarchyPage() `EXTRACTED`
 - FacultyDashboardPage() `EXTRACTED`
 - AIAttendanceMonitoringPage() `EXTRACTED`
+- CounterFeeCollectionPage() `EXTRACTED`
 - AITutorAnalyticsPage() `EXTRACTED`
+- StudentFeesPage() `EXTRACTED`
+- StudentParentHomePage() `EXTRACTED`
+- StudentParentProfilePage() `EXTRACTED`
 - EventsPage() `EXTRACTED`
+- ExcelImportEnginePage() `EXTRACTED`
+- FeeStructuresPage() `EXTRACTED`
 - HostelPage() `EXTRACTED`
 - InventoryPage() `EXTRACTED`
 - SportsPage() `EXTRACTED`
 - TransportPage() `EXTRACTED`
 - AIConfigPage() `EXTRACTED`
-- LibraryPage() `EXTRACTED`
-- SecurityPage() `EXTRACTED`
+- StudentAttendancePage() `EXTRACTED`
+- *…and 2 more `calls` connection(s) not listed (lowest-degree first to go)*
 
 ### contains
 - Card.tsx `EXTRACTED`
 
 ### imports
-- app/dashboard/page.tsx `EXTRACTED`
-- finance/dashboard/page.tsx `EXTRACTED`
-- institutions/page.tsx `EXTRACTED`
-- faculty/dashboard/page.tsx `EXTRACTED`
 - staff/page.tsx `EXTRACTED`
+- app/dashboard/page.tsx `EXTRACTED`
+- frontend/app/academics/page.tsx `EXTRACTED`
+- institutions/page.tsx `EXTRACTED`
+- finance/dashboard/page.tsx `EXTRACTED`
+- faculty/dashboard/page.tsx `EXTRACTED`
 - campaigns/page.tsx `EXTRACTED`
-- sessions/page.tsx `EXTRACTED`
 - settings/page.tsx `EXTRACTED`
-- vault/page.tsx `EXTRACTED`
+- sessions/page.tsx `EXTRACTED`
 - schedules/page.tsx `EXTRACTED`
-- hierarchy/page.tsx `EXTRACTED`
+- enquiries/page.tsx `EXTRACTED`
+- vault/page.tsx `EXTRACTED`
+- marks/page.tsx `EXTRACTED`
+- my-students/page.tsx `EXTRACTED`
+- invoices/page.tsx `EXTRACTED`
+- conflicts/page.tsx `EXTRACTED`
 - analytics/page.tsx `EXTRACTED`
-- ai-attendance/monitoring/page.tsx `EXTRACTED`
-- billing/page.tsx `EXTRACTED`
+- report-cards/page.tsx `EXTRACTED`
+- collect/page.tsx `EXTRACTED`
 - matrix/page.tsx `EXTRACTED`
-- transport/page.tsx `EXTRACTED`
-- ai-config/page.tsx `EXTRACTED`
-- events/page.tsx `EXTRACTED`
-- hostel/page.tsx `EXTRACTED`
-- inventory/page.tsx `EXTRACTED`
-- *…and 4 more `imports` connection(s) not listed (lowest-degree first to go)*
+- *…and 20 more `imports` connection(s) not listed (lowest-degree first to go)*
 
 ---
 

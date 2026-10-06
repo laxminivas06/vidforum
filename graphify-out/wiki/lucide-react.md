@@ -1,26 +1,37 @@
 # lucide-react
 
-> 2 nodes · cohesion 1.00
+> God node · 67 connections · `frontend/package.json`
 
-## Key Concepts
+**Community:** [Student Studentprofile Users](Student_Studentprofile_Users.md)
 
-- [student.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.routes.ts#L1) (1 connections)
-- [router](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.routes.ts#L5) (1 connections)
+## Connections by Relation
 
-## Relationships
+### imports
+- frontend/package.json `EXTRACTED`
 
-- No strong cross-community connections detected
-
-## Source Files
-
-- [C:\Antigravityyyyy\VID_School\backend\src\modules\students\student.routes.ts](file:///C:/Antigravityyyyy/VID_School/backend/src/modules/students/student.routes.ts)
-
-## Audit Trail
-
-- EXTRACTED: 2 (100%)
-- INFERRED: 0 (0%)
-- AMBIGUOUS: 0 (0%)
+### imports_from
+- AppShell.tsx `EXTRACTED`
+- staff/page.tsx `EXTRACTED`
+- app/dashboard/page.tsx `EXTRACTED`
+- frontend/app/academics/page.tsx `EXTRACTED`
+- institutions/page.tsx `EXTRACTED`
+- students/page.tsx `EXTRACTED`
+- finance/dashboard/page.tsx `EXTRACTED`
+- admissions/page.tsx `EXTRACTED`
+- faculty/dashboard/page.tsx `EXTRACTED`
+- users/page.tsx `EXTRACTED`
+- campaigns/page.tsx `EXTRACTED`
+- settings/page.tsx `EXTRACTED`
+- sessions/page.tsx `EXTRACTED`
+- schedules/page.tsx `EXTRACTED`
+- admissions/documents/page.tsx `EXTRACTED`
+- enquiries/page.tsx `EXTRACTED`
+- vault/page.tsx `EXTRACTED`
+- marks/page.tsx `EXTRACTED`
+- my-students/page.tsx `EXTRACTED`
+- invoices/page.tsx `EXTRACTED`
+- *…and 46 more `imports_from` connection(s) not listed (lowest-degree first to go)*
 
 ---
 
-*Part of the graphify knowledge wiki. See [[index]] to navigate.*
+*Part of the graphify knowledge wiki. See [index](index.md) to navigate.*

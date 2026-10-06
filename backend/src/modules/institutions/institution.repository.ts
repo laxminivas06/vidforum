@@ -102,6 +102,9 @@ export class InstitutionRepository {
     const client = await db.getClient();
     try {
       await client.query('BEGIN');
+      const inst = await this.findByIdOrCode(data.institutionId);
+      const targetInstitutionId = inst?.id || data.institutionId;
+
       const cleanEmail = data.email.trim().toLowerCase();
       const cleanUserId = data.userId.trim().toLowerCase();
       const displayName = data.name?.trim() || data.userId.trim();
@@ -139,7 +142,7 @@ export class InstitutionRepository {
         VALUES ($1, $2, $3, $4, 'active', true)
         ON CONFLICT (id) DO UPDATE
           SET full_name = EXCLUDED.full_name, default_institution_id = EXCLUDED.default_institution_id, updated_at = now()
-      `, [profileId, displayName, cleanEmail, data.institutionId]);
+      `, [profileId, displayName, cleanEmail, targetInstitutionId]);
 
       await client.query(`
         DELETE FROM user_roles WHERE profile_id = $1 AND role_id = $2
@@ -148,7 +151,7 @@ export class InstitutionRepository {
       await client.query(`
         INSERT INTO user_roles (id, profile_id, role_id, institution_id, scope, granted_at)
         VALUES (gen_random_uuid(), $1, $2, $3, $4, now())
-      `, [profileId, adminRoleId, data.institutionId, JSON.stringify({ workspaces: data.workspaces })]);
+      `, [profileId, adminRoleId, targetInstitutionId, JSON.stringify({ workspaces: data.workspaces })]);
 
       await client.query('COMMIT');
       return { profileId };
@@ -175,7 +178,7 @@ export class InstitutionRepository {
       FROM profiles p
       JOIN user_roles ur ON ur.profile_id = p.id
       LEFT JOIN institutions i ON i.id = ur.institution_id
-      WHERE ur.institution_id = $1 OR i.code = $1
+      WHERE ur.institution_id::text = $1 OR LOWER(i.code) = LOWER($1) OR i.id::text = $1
       ORDER BY p.created_at DESC
     `, [institutionId]);
     return res.rows;
@@ -191,7 +194,7 @@ export class InstitutionRepository {
        FROM profiles p
        WHERE ur.profile_id = p.id
          AND (p.id::text = $2 OR LOWER(p.email) = LOWER($2))
-         AND (ur.institution_id = $3 OR ur.institution_id IS NULL)
+         AND (ur.institution_id::text = $3 OR ur.institution_id IS NULL)
        RETURNING p.id, p.email, p.full_name as name, ur.scope->'workspaces' as workspaces`,
       [JSON.stringify(workspaces), adminIdOrEmail.trim(), instId]
     );

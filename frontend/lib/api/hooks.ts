@@ -14,8 +14,19 @@ import {
   EnrolledApplicantItem,
 } from "@/types"
 
-// --- TanStack Query Hooks (Live Backend with Database Persistence) ---
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1"
+function getApiBaseUrl(): string {
+  if (process.env.NEXT_PUBLIC_API_URL) return process.env.NEXT_PUBLIC_API_URL
+  if (
+    typeof window !== "undefined" &&
+    window.location.hostname &&
+    window.location.hostname !== "localhost" &&
+    window.location.hostname !== "127.0.0.1"
+  ) {
+    return `${window.location.protocol}//${window.location.hostname}:5000/api/v1`
+  }
+  return "http://localhost:5000/api/v1"
+}
+const API_BASE_URL = getApiBaseUrl()
 const DEFAULT_INST_ID = "18b3b9a6-0791-47f4-bbd0-bf7c0221e18f"
 
 export function getAuthHeaders(): Record<string, string> {
@@ -171,6 +182,19 @@ export function useInstitutionAdmins(institutionId?: string) {
     queryKey: ["institution-admins", institutionId],
     queryFn: async (): Promise<any[]> => {
       if (!institutionId) return []
+      let backendAdmins: any[] = []
+      try {
+        const res = await fetch(`${API_BASE_URL}/institutions/${institutionId}/admins`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          backendAdmins = json.data
+        }
+      } catch (err) {
+        // Backend offline
+      }
+
       let customAdmins: any[] = []
       if (typeof window !== "undefined") {
         try {
@@ -188,18 +212,8 @@ export function useInstitutionAdmins(institutionId?: string) {
         }
       }
 
-      let backendAdmins: any[] = []
-      try {
-        const res = await fetch(`${API_BASE_URL}/institutions/${institutionId}/admins`)
-        const json = await res.json()
-        if (json.success && Array.isArray(json.data)) {
-          backendAdmins = json.data
-        }
-      } catch (err) {
-        // Backend offline
-      }
-
-      const merged = [...customAdmins, ...backendAdmins]
+      // Centralized Cloud DB records take precedence over local browser storage
+      const merged = [...backendAdmins, ...customAdmins]
       const seen = new Set<string>()
       return merged.filter((a) => {
         const key = (a.userId || a.email || a.id).toLowerCase()

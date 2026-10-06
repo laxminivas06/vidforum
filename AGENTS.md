@@ -14,6 +14,7 @@
 - Maintain the single student master record across all operations. Student is **never** a separate workspace.
 - Enforce multi-tenant isolation via `institution_id` on all tenant queries, models, and file storage.
 - **Zero Duplicate Data & Dates Policy:** Strictly prohibit duplicate data, duplicate dates, duplicate record IDs, duplicate tenant codes, or duplicate student records across all pages, views, tables, and seed/mock datasets. Every entity must have strictly unique identifiers and distinct, realistic dates and values.
+- **Zero LocalStorage for Working/Domain Data Policy:** Strictly prohibit storing, caching, or retrieving any working, domain, or operational application data (e.g., institutions, admins, workspaces, users, students, grades, subjects, textbooks, admissions, fees) in browser `localStorage` or `sessionStorage`. All application state must be stored in and fetched strictly from the centralized cloud database (Supabase PostgreSQL via backend API). Local storage is exclusively restricted to ephemeral auth session tokens (`vid_auth_token`).
 - **Database Operations & Supabase MCP Protocol:** Whenever interacting with, modifying, or altering database schemas, tables, views, stored procedures, triggers, or SQL functions, prioritize and use the **Supabase MCP Server** (`supabase-mcp-server`, project `cyvckmjocomqzipbvbpv`). All function modifications, DDL schema evolutions, and migrations must be executed through Supabase MCP tools (`apply_migration`, `execute_sql`, `list_tables`) with strict backward compatibility verification.
 - Respect human approval gates between major phases.
 
@@ -44,4 +45,5 @@ Refer to [docs/MEMORY.md](file:///c:/Antigravityyyyy/VID_School/docs/MEMORY.md) 
 - **Pre-Commit:** Run Secret Guard and Falsegreen test verification.
 - **Commit & Git Governance:** Use Commit Narrator for semantic commit messages with architectural context. Strictly DO NOT push to Git / GitHub unless the user explicitly requests a git push in the prompt.
 - **Workspace Navigation Isolation Policy:** Strictly enforce isolated workspace navigation across all workspaces (Academics, Staff/HRMS, Admissions, etc.): when inside a workspace, display ONLY that workspace's dedicated tools in the sidebar. Never leak other workspace navigation items into an isolated workspace.
+- **Centralized Cloud State Enforcement:** Prohibit adding `localStorage.setItem` or `localStorage.getItem` for domain entities in frontend components or hooks. Mutate cloud database via backend API and use TanStack Query invalidation (`queryClient.invalidateQueries`) to refresh state across clients.
 - **Post-Commit:** Update docs with Docflow and persist durable conclusions to Honcho & Unforgit.

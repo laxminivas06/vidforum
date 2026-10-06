@@ -183,12 +183,9 @@ export default function UsersPage() {
         createdAt: created.createdAt || new Date().toISOString().split("T")[0],
       }
 
-      // Update state and persist
+      // Update state
       const updated = [finalUser, ...users.filter((u) => u.email.toLowerCase() !== finalUser.email.toLowerCase())]
       setUsers(updated)
-      if (typeof window !== "undefined") {
-        localStorage.setItem("vid_platform_users", JSON.stringify(updated))
-      }
 
       setSuccessMessage(`User ${finalUser.name} created and saved to cloud database!`)
       setName("")
@@ -270,9 +267,6 @@ export default function UsersPage() {
           : u
       )
       setUsers(updatedList)
-      if (typeof window !== "undefined") {
-        localStorage.setItem("vid_platform_users", JSON.stringify(updatedList))
-      }
 
       setEditSuccessMessage("User updated and synced to cloud database!")
       setTimeout(() => {

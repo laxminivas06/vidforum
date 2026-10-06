@@ -64,17 +64,7 @@ export function useInstitutions() {
           return json.data
         }
       } catch (err) {
-        console.warn("Backend unavailable, falling back to local storage:", err)
-      }
-
-      // Offline fallback only
-      if (typeof window !== "undefined") {
-        try {
-          const raw = localStorage.getItem("vid_custom_institutions")
-          if (raw) return JSON.parse(raw)
-        } catch (e) {
-          console.warn("Failed to parse custom institutions", e)
-        }
+        console.warn("Backend unavailable:", err)
       }
       return []
     },
@@ -115,21 +105,7 @@ export function useCreateInstitution() {
       }
       return json.data
     },
-    onSuccess: (newInstitution) => {
-      if (typeof window !== "undefined") {
-        try {
-          const raw = localStorage.getItem("vid_custom_institutions")
-          const current: Institution[] = raw ? JSON.parse(raw) : []
-          const updated = [
-            newInstitution,
-            ...current.filter((i) => i.code !== newInstitution.code && i.id !== newInstitution.id),
-          ]
-          localStorage.setItem("vid_custom_institutions", JSON.stringify(updated))
-        } catch (e) {
-          console.warn("Failed to persist custom institution", e)
-        }
-      }
-
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["institutions"] })
     },
   })
@@ -154,24 +130,7 @@ export function useUpdateInstitutionStatus() {
       }
       return json.data
     },
-    onSuccess: (updatedInst) => {
-      if (typeof window !== "undefined") {
-        try {
-          const raw = localStorage.getItem("vid_custom_institutions")
-          if (raw) {
-            const current = JSON.parse(raw)
-            const updated = current.map((i: any) =>
-              i.id === updatedInst.id || i.code === updatedInst.code
-                ? { ...i, status: updatedInst.status }
-                : i
-            )
-            localStorage.setItem("vid_custom_institutions", JSON.stringify(updated))
-          }
-        } catch (e) {
-          // ignore
-        }
-      }
-
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["institutions"] })
     },
   })
@@ -182,45 +141,18 @@ export function useInstitutionAdmins(institutionId?: string) {
     queryKey: ["institution-admins", institutionId],
     queryFn: async (): Promise<any[]> => {
       if (!institutionId) return []
-      let backendAdmins: any[] = []
       try {
         const res = await fetch(`${API_BASE_URL}/institutions/${institutionId}/admins`, {
           headers: getAuthHeaders(),
         })
         const json = await res.json()
         if (json.success && Array.isArray(json.data)) {
-          backendAdmins = json.data
+          return json.data
         }
       } catch (err) {
-        // Backend offline
+        console.warn("Backend admins fetch error:", err)
       }
-
-      let customAdmins: any[] = []
-      if (typeof window !== "undefined") {
-        try {
-          const raw = localStorage.getItem("vid_institute_admins")
-          if (raw) {
-            const parsed = JSON.parse(raw)
-            customAdmins = parsed.filter(
-              (a: any) =>
-                a.institutionId === institutionId ||
-                a.institutionCode?.toLowerCase() === institutionId.toLowerCase()
-            )
-          }
-        } catch (e) {
-          console.warn("Failed to parse custom institute admins", e)
-        }
-      }
-
-      // Centralized Cloud DB records take precedence over local browser storage
-      const merged = [...backendAdmins, ...customAdmins]
-      const seen = new Set<string>()
-      return merged.filter((a) => {
-        const key = (a.userId || a.email || a.id).toLowerCase()
-        if (seen.has(key)) return false
-        seen.add(key)
-        return true
-      })
+      return []
     },
     enabled: !!institutionId,
   })
@@ -290,22 +222,6 @@ export function useUpdateAdminWorkspaces() {
     onSuccess: (_, variables) => {
       if (typeof window !== "undefined") {
         try {
-          const raw = localStorage.getItem("vid_institute_admins")
-          if (raw) {
-            const list = JSON.parse(raw)
-            const updated = list.map((a: any) => {
-              if (
-                a.id === variables.adminId ||
-                a.userId?.toLowerCase() === variables.adminId.toLowerCase() ||
-                a.email?.toLowerCase() === variables.adminId.toLowerCase()
-              ) {
-                return { ...a, workspaces: variables.workspaces }
-              }
-              return a
-            })
-            localStorage.setItem("vid_institute_admins", JSON.stringify(updated))
-          }
-
           const rawSession = localStorage.getItem("vid_session_user")
           if (rawSession) {
             const sessionUser = JSON.parse(rawSession)
@@ -318,7 +234,7 @@ export function useUpdateAdminWorkspaces() {
             }
           }
         } catch (e) {
-          console.warn("Failed to update local storage for workspaces", e)
+          // ignore
         }
       }
 
@@ -343,14 +259,15 @@ export function usePlatformUsers() {
   return useQuery({
     queryKey: ["platform-users"],
     queryFn: async (): Promise<PlatformUserItem[]> => {
-      let backendList: PlatformUserItem[] = []
       try {
-        const res = await fetch(`${API_BASE_URL}/users`)
+        const res = await fetch(`${API_BASE_URL}/users`, {
+          headers: getAuthHeaders(),
+        })
         const json = await res.json()
         if (json.success && Array.isArray(json.data)) {
-          backendList = json.data.map((u: any) => ({
+          return json.data.map((u: any) => ({
             id: u.id,
-            name: u.name,
+            name: u.name || u.full_name || "Platform User",
             email: u.email,
             role: (u.role || "FACULTY").toUpperCase().replace(/\s+/g, "_"),
             institution: u.institution || "VID Global Platform",
@@ -360,27 +277,9 @@ export function usePlatformUsers() {
           }))
         }
       } catch (err) {
-        console.warn("Backend users unavailable, falling back to local:", err)
+        console.warn("Backend users unavailable:", err)
       }
-
-      let localUsers: PlatformUserItem[] = []
-      if (typeof window !== "undefined") {
-        try {
-          const raw = localStorage.getItem("vid_platform_users")
-          if (raw) localUsers = JSON.parse(raw)
-        } catch (e) {
-          // ignore
-        }
-      }
-
-      const combined = backendList.length > 0 ? backendList : localUsers
-      const seen = new Set<string>()
-      return combined.filter((u) => {
-        const key = (u.email || u.id).toLowerCase()
-        if (seen.has(key)) return false
-        seen.add(key)
-        return true
-      })
+      return []
     },
   })
 }

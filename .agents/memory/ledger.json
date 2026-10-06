@@ -5,6 +5,11 @@
   "installed_plugins_count": 28,
   "memory_policies": [
     {
+      "id": "team-collaboration-zero-isolation",
+      "rule": "Team Collaboration & Zero-Isolation Rule",
+      "mandate": "Whole-team multi-user architecture; zero hardcoded user accounts or bypasses; zero machine-specific paths; and fail-open local development reliability so all teammates work cleanly out-of-the-box."
+    },
+    {
       "id": "zero-local-storage-data",
       "rule": "Zero LocalStorage for Working/Domain Data",
       "mandate": "Strictly prohibit storing, caching, or retrieving application domain data (institutions, admins, users, workspaces, admissions, academics, fees) in localStorage or sessionStorage. All working data must strictly live in the centralized Supabase Cloud PostgreSQL database."

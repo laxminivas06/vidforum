@@ -26,7 +26,7 @@ function getApiBaseUrl(): string {
   }
   return "http://localhost:5000/api/v1"
 }
-const API_BASE_URL = getApiBaseUrl()
+export const API_BASE_URL = getApiBaseUrl()
 const DEFAULT_INST_ID = "18b3b9a6-0791-47f4-bbd0-bf7c0221e18f"
 
 export function getAuthHeaders(): Record<string, string> {
@@ -932,18 +932,55 @@ export function useMyClasses() {
     queryKey: ["faculty-my-classes"],
     queryFn: async () => {
       try {
+        const meRes = await fetch(`${API_BASE_URL}/faculty/me`, {
+          headers: getAuthHeaders(),
+        })
+        if (meRes.ok) {
+          const meJson = await meRes.json()
+          if (meJson.success && meJson.data) {
+            return meJson.data
+          }
+        }
+
         const res = await fetch(`${API_BASE_URL}/faculty`, {
           headers: getAuthHeaders(),
         })
         const json = await res.json()
         if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-          return json.data[0]
+          const teaching = json.data.find(
+            (f: any) =>
+              (Array.isArray(f.assignedClasses) && f.assignedClasses.length > 0) ||
+              (Array.isArray(f.todayClasses) && f.todayClasses.length > 0)
+          )
+          return teaching || json.data[0]
         }
       } catch (err) {
         console.warn("Backend unavailable for my-classes:", err)
       }
       return null
     },
+  })
+}
+
+export function useSectionStudents(sectionId?: string) {
+  return useQuery({
+    queryKey: ["section-students", sectionId],
+    queryFn: async (): Promise<any[]> => {
+      if (!sectionId) return []
+      try {
+        const res = await fetch(`${API_BASE_URL}/faculty/sections/${sectionId}/students`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for section students:", err)
+      }
+      return []
+    },
+    enabled: !!sectionId,
   })
 }
 

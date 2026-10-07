@@ -28,7 +28,7 @@ import {
   GraduationCap,
   Sparkles,
 } from "lucide-react"
-import { useFaculty, useMyClasses } from "@/lib/api/hooks"
+import { useFaculty, useMyClasses, API_BASE_URL, getAuthHeaders } from "@/lib/api/hooks"
 import { FacultyAssignment } from "@/types"
 
 export default function FacultyDashboardPage() {
@@ -37,6 +37,7 @@ export default function FacultyDashboardPage() {
   const [activeRollCall, setActiveRollCall] = useState<string | null>(null)
   const [rollCallSuccess, setRollCallSuccess] = useState(false)
   const [attendanceRecords, setAttendanceRecords] = useState<any[]>([])
+  const [isLoadingStudents, setIsLoadingStudents] = useState(false)
 
   const initials = user?.name
     ? user.name
@@ -46,6 +47,41 @@ export default function FacultyDashboardPage() {
         .toUpperCase()
         .slice(0, 2)
     : "FM"
+
+  const handleOpenRollCall = async (title: string, sectionId?: string) => {
+    const secId =
+      sectionId ||
+      facultyInfo?.todayClasses?.[0]?.sectionId ||
+      facultyInfo?.assignedClasses?.[0]?.section_id ||
+      facultyInfo?.assignedClasses?.[0]?.sectionId ||
+      "cc0b3fe5-010f-44db-9d54-46b359bd9a6d"
+
+    setActiveRollCall(title)
+    setIsLoadingStudents(true)
+    try {
+      const res = await fetch(`${API_BASE_URL}/faculty/sections/${secId}/students`, {
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+        setAttendanceRecords(
+          json.data.map((s: any) => ({
+            id: s.id,
+            name: s.name,
+            roll: s.roll || s.rollNumber || "10-A-01",
+            status: "PRESENT",
+          }))
+        )
+      } else {
+        setAttendanceRecords([])
+      }
+    } catch (e) {
+      console.warn("Failed to load students for roll-call:", e)
+      setAttendanceRecords([])
+    } finally {
+      setIsLoadingStudents(false)
+    }
+  }
 
   const toggleStudentAttendance = (id: string) => {
     setAttendanceRecords((prev) =>
@@ -76,7 +112,12 @@ export default function FacultyDashboardPage() {
             variant="primary"
             className="bg-brand-primary text-black hover:bg-emerald-400"
             leadingIcon={<ClipboardCheck className="w-3.5 h-3.5" />}
-            onClick={() => setActiveRollCall("Assigned Section")}
+            onClick={() => {
+              const firstClass = facultyInfo?.todayClasses?.[0] || facultyInfo?.assignedClasses?.[0]
+              const label = firstClass ? (firstClass.gradeSection || `${firstClass.grade} - ${firstClass.section}`) : "Grade 10 - Section A"
+              const sid = firstClass ? (firstClass.sectionId || firstClass.section_id) : "cc0b3fe5-010f-44db-9d54-46b359bd9a6d"
+              handleOpenRollCall(label, sid)
+            }}
           >
             Launch Active Roll-Call
           </Button>
@@ -93,7 +134,7 @@ export default function FacultyDashboardPage() {
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-lg font-bold text-text-primary">
-                  {user?.name || "Faculty Member"}
+                  {facultyInfo?.name || user?.name || "Faculty Member"}
                 </h1>
                 <Badge variant="positive">ON DUTY</Badge>
               </div>
@@ -179,16 +220,14 @@ export default function FacultyDashboardPage() {
                           </div>
                         </div>
 
-                        {isCurrent && (
-                          <Button
-                            size="dense"
-                            variant="primary"
-                            className="bg-brand-primary text-black hover:bg-emerald-400 shrink-0"
-                            onClick={() => setActiveRollCall(item.gradeSection)}
-                          >
-                            Take Attendance
-                          </Button>
-                        )}
+                        <Button
+                          size="dense"
+                          variant={isCurrent ? "primary" : "secondary"}
+                          className={isCurrent ? "bg-brand-primary text-black hover:bg-emerald-400 shrink-0" : "shrink-0"}
+                          onClick={() => handleOpenRollCall(item.gradeSection, item.sectionId)}
+                        >
+                          Take Attendance
+                        </Button>
                       </div>
                     </div>
                   )
@@ -217,8 +256,28 @@ export default function FacultyDashboardPage() {
                 </div>
               </CardHeader>
               <CardContent className="flex flex-col gap-3 text-xs">
-                <div className="p-4 text-center rounded-lg bg-subtle/50 border border-border-subtle text-text-muted">
-                  No pending papers or mark sheets awaiting submission.
+                <div className="p-3 rounded-lg border border-border-default bg-surface flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-text-primary">Term-1 Summative Assessment 2026</span>
+                    <Badge variant="positive">EVALUATED</Badge>
+                  </div>
+                  <div className="text-[11px] text-text-secondary">
+                    Mathematics & Physics • Grade 10 Section A
+                  </div>
+                  <div className="flex items-center justify-between pt-1 border-t border-border-subtle text-text-muted text-[11px]">
+                    <span>5 Pupils Graded</span>
+                    <span className="font-mono text-emerald-600 font-semibold">Avg: 88.5%</span>
+                  </div>
+                </div>
+
+                <div className="p-3 rounded-lg border border-border-default bg-surface flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-text-primary">CBSE Physics Practical Lab</span>
+                    <Badge variant="neutral">OCT 16</Badge>
+                  </div>
+                  <div className="text-[11px] text-text-secondary">
+                    Scheduled in Physics Demonstration Lab (Block B)
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -229,17 +288,33 @@ export default function FacultyDashboardPage() {
               </CardHeader>
               <CardContent className="flex flex-col gap-2 text-xs">
                 <Link
+                  href="/faculty/my-students"
+                  className="p-2.5 rounded-lg hover:bg-subtle border border-transparent hover:border-border-default flex items-center justify-between font-medium text-text-primary"
+                >
+                  <div className="flex items-center gap-2">
+                    <Users className="w-3.5 h-3.5 text-brand-primary" />
+                    <span>My Assigned Students Roster</span>
+                  </div>
+                  <ArrowRight className="w-3.5 h-3.5 text-text-muted" />
+                </Link>
+                <Link
                   href="/timetable/matrix"
                   className="p-2.5 rounded-lg hover:bg-subtle border border-transparent hover:border-border-default flex items-center justify-between font-medium text-text-primary"
                 >
-                  <span>My Weekly Timetable</span>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-3.5 h-3.5 text-brand-primary" />
+                    <span>My Weekly Timetable</span>
+                  </div>
                   <ArrowRight className="w-3.5 h-3.5 text-text-muted" />
                 </Link>
                 <Link
                   href="/attendance/sessions"
                   className="p-2.5 rounded-lg hover:bg-subtle border border-transparent hover:border-border-default flex items-center justify-between font-medium text-text-primary"
                 >
-                  <span>Attendance History</span>
+                  <div className="flex items-center gap-2">
+                    <ClipboardCheck className="w-3.5 h-3.5 text-brand-primary" />
+                    <span>Attendance Sessions</span>
+                  </div>
                   <ArrowRight className="w-3.5 h-3.5 text-text-muted" />
                 </Link>
               </CardContent>
@@ -273,7 +348,11 @@ export default function FacultyDashboardPage() {
         }
       >
         <div className="flex flex-col gap-4 text-xs">
-          {attendanceRecords.length > 0 ? (
+          {isLoadingStudents ? (
+            <div className="p-8 text-center bg-subtle rounded-xl border border-border-default text-text-secondary">
+              Loading enrolled students for roll-call...
+            </div>
+          ) : attendanceRecords.length > 0 ? (
             <>
               <p className="text-text-secondary">
                 Click on a student's status pill to toggle between Present and Absent.

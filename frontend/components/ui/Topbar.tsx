@@ -25,8 +25,10 @@ import {
   Settings,
   Building2,
   Package,
+  Keyboard,
 } from "lucide-react"
 import { PLATFORM_WORKSPACES, getWorkspaceForPath, PlatformWorkspace } from "@/config/workspaces"
+import { getModifierLabel } from "@/lib/utils/keyboard"
 
 const TOPBAR_ICON_MAP: Record<string, React.ElementType> = {
   LayoutDashboard,
@@ -59,6 +61,7 @@ export interface TopbarProps {
   rightActions?: React.ReactNode
   assignedWorkspaces?: string[]
   currentPath?: string
+  onShortcutsClick?: () => void
 }
 
 export const Topbar: React.FC<TopbarProps> = ({
@@ -71,6 +74,7 @@ export const Topbar: React.FC<TopbarProps> = ({
   notificationCount = 3,
   onOpenMobileMenu,
   onSearchClick,
+  onShortcutsClick,
   onNotificationClick,
   rightActions,
   assignedWorkspaces,
@@ -245,10 +249,27 @@ export const Topbar: React.FC<TopbarProps> = ({
           <button
             type="button"
             onClick={onSearchClick}
-            className="p-2 text-text-secondary hover:text-text-primary hover:bg-subtle rounded-lg focus:outline-none transition-colors"
+            className="flex items-center gap-2 px-2.5 py-1.5 text-text-secondary hover:text-text-primary hover:bg-subtle rounded-lg border border-border-default/70 focus:outline-none transition-colors"
+            title={`Search across platform (${getModifierLabel()}K)`}
             aria-label="Search across workspace"
           >
-            <Search className="w-4 h-4" />
+            <Search className="w-3.5 h-3.5 text-text-muted" />
+            <span className="hidden md:inline text-xs text-text-muted">Search...</span>
+            <kbd className="hidden sm:inline-flex items-center text-[10px] font-mono font-medium text-text-muted bg-canvas px-1.5 py-0.5 rounded border border-border-default">
+              {getModifierLabel()}K
+            </kbd>
+          </button>
+        )}
+
+        {onShortcutsClick && (
+          <button
+            type="button"
+            onClick={onShortcutsClick}
+            className="p-2 text-text-secondary hover:text-text-primary hover:bg-subtle rounded-lg focus:outline-none transition-colors"
+            title="Keyboard Shortcuts Cheat Sheet (? or ⌘/)"
+            aria-label="Keyboard Shortcuts"
+          >
+            <Keyboard className="w-4 h-4" />
           </button>
         )}
 

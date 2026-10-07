@@ -1,0 +1,9 @@
+{
+  "name": "AI-Native SDLC",
+  "id": "ai-native-sdlc",
+  "version": "1.0.0",
+  "category": "SDLC Discipline",
+  "description": "Plan/design/build/test/deploy/maintain with human approval gates baked in.",
+  "repository": "https://github.com/bashebr/ai-native-sdlc",
+  "skills": "./skills/ai-native-sdlc"
+}

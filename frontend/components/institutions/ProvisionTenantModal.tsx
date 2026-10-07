@@ -184,6 +184,26 @@ export const ProvisionTenantModal: React.FC<ProvisionTenantModalProps> = ({
     }
   }
 
+  // Keyboard navigation: Escape closes, Cmd/Ctrl+Enter submits
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault()
+        e.stopPropagation()
+        onClose()
+      } else if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        e.stopPropagation()
+        handleSubmit(e as any)
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [isOpen, onClose, handleSubmit])
+
   if (!isOpen) return null
 
   return (

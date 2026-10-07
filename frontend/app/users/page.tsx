@@ -281,6 +281,46 @@ export default function UsersPage() {
     }
   }
 
+  // Keyboard navigation: Escape closes modals, Cmd/Ctrl+Enter submits
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (isModalOpen) {
+          e.preventDefault()
+          setIsModalOpen(false)
+        } else if (isEditModalOpen) {
+          e.preventDefault()
+          setIsEditModalOpen(false)
+        }
+      } else if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+        if (isModalOpen && !isSubmitting) {
+          e.preventDefault()
+          handleAddUser(e as any)
+        } else if (isEditModalOpen && !isEditSubmitting) {
+          e.preventDefault()
+          handleSaveEdit(e as any)
+        }
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [
+    isModalOpen,
+    isEditModalOpen,
+    isSubmitting,
+    isEditSubmitting,
+    name,
+    email,
+    role,
+    institution,
+    editName,
+    editEmail,
+    editRole,
+    editInstitution,
+    editStatus,
+  ])
+
   const columns: TableColumn<PlatformUser>[] = [
     {
       header: "User Details",

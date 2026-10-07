@@ -1,0 +1,8 @@
+{
+  "name": "openapi-gen",
+  "id": "openapi-gen",
+  "version": "1.0.0",
+  "category": "API Synchronization",
+  "description": "API contract synchronization between Express /api/v1 endpoints and Next.js TanStack Query hooks.",
+  "skills": "./skills/openapi-gen"
+}

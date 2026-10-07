@@ -35,6 +35,26 @@ export const BulkProvisionModal: React.FC<BulkProvisionModalProps> = ({
   const [resultData, setResultData] = useState<any | null>(null)
   const [downloadSuccessToast, setDownloadSuccessToast] = useState<string | null>(null)
 
+  // Keyboard navigation: Escape closes, Cmd/Ctrl+Enter submits
+  React.useEffect(() => {
+    if (!isOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault()
+        e.stopPropagation()
+        onClose()
+      } else if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        e.stopPropagation()
+        handleSubmit(e as any)
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [isOpen, onClose, rawText])
+
   if (!isOpen) return null
 
   // 1. Download Sample CSV

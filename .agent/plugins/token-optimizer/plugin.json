@@ -1,0 +1,9 @@
+{
+  "name": "token-optimizer",
+  "id": "token-optimizer",
+  "version": "1.0.0",
+  "category": "Optimization",
+  "description": "Diff-only re-reads, paths-only search, local ledger tracking actual token ROI per tool.",
+  "repository": "https://github.com/ooples/token-optimizer-mcp",
+  "skills": "./skills/token-optimizer"
+}

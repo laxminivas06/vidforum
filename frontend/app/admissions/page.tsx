@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useMemo, useRef } from "react"
+import React, { useState, useMemo, useRef, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { AppShell } from "@/components/layout/AppShell"
@@ -52,6 +52,15 @@ import {
   useEnrollmentCounts,
 } from "@/lib/api/hooks"
 import { Applicant, AdmissionStage } from "@/types"
+import {
+  useEscapeKey,
+  useSubmitKey,
+  useKeybinding,
+} from "@/lib/hooks/useKeyboardShortcuts"
+import {
+  getModifierLabel,
+  isModifierPressed,
+} from "@/lib/utils/keyboard"
 
 const STAGES: { key: AdmissionStage; label: string; color: string }[] = [
   { key: "INQUIRY", label: "Inquiry", color: "bg-neutral-500" },
@@ -313,6 +322,36 @@ export default function AdmissionsPage() {
     }
   }
 
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const newApplicantBtnRef = useRef<HTMLButtonElement>(null)
+  const bulkApplicantBtnRef = useRef<HTMLButtonElement>(null)
+  const isAnyModalOpen = isRegisterModalOpen || isBulkModalOpen || rejectDialogOpen || !!selectedApplicant
+
+  // Keyboard navigation shortcuts on Admissions Desk
+  useKeybinding("n", () => setIsRegisterModalOpen(true), { enabled: !isAnyModalOpen })
+  useKeybinding("c", () => setIsRegisterModalOpen(true), { enabled: !isAnyModalOpen })
+  useKeybinding("n", () => setIsRegisterModalOpen(true), { alt: true, enabled: !isAnyModalOpen })
+
+  useKeybinding("b", () => setIsBulkModalOpen(true), { enabled: !isAnyModalOpen })
+  useKeybinding("b", () => setIsBulkModalOpen(true), { alt: true, enabled: !isAnyModalOpen })
+
+  useKeybinding("1", () => setViewMode("kanban"), { enabled: !isAnyModalOpen })
+  useKeybinding("k", () => setViewMode("kanban"), { enabled: !isAnyModalOpen })
+
+  useKeybinding("2", () => setViewMode("table"), { enabled: !isAnyModalOpen })
+  useKeybinding("t", () => setViewMode("table"), { enabled: !isAnyModalOpen })
+
+  useKeybinding("/", (e) => {
+    e.preventDefault()
+    searchInputRef.current?.focus()
+  }, { enabled: !isAnyModalOpen })
+
+  useEscapeKey(() => {
+    if (selectedApplicant && !rejectDialogOpen) {
+      setSelectedApplicant(null)
+    }
+  }, !!selectedApplicant && !rejectDialogOpen && !isRegisterModalOpen && !isBulkModalOpen)
+
   return (
     <AppShell
       pageTitle="Admissions Desk"
@@ -328,7 +367,7 @@ export default function AdmissionsPage() {
                   ? "bg-action-primary text-white"
                   : "text-text-secondary hover:text-text-primary"
               }`}
-              title="Kanban Board View"
+              title="Kanban Board View (1 or K)"
             >
               <Kanban className="w-3.5 h-3.5" />
             </button>
@@ -339,28 +378,38 @@ export default function AdmissionsPage() {
                   ? "bg-action-primary text-white"
                   : "text-text-secondary hover:text-text-primary"
               }`}
-              title="Directory Table View"
+              title="Directory Table View (2 or T)"
             >
               <List className="w-3.5 h-3.5" />
             </button>
           </div>
 
           <Button
+            ref={bulkApplicantBtnRef}
             size="dense"
             variant="secondary"
             leadingIcon={<Upload className="w-3.5 h-3.5" />}
             onClick={() => setIsBulkModalOpen(true)}
+            title="Bulk Applicants (B or Alt+B)"
           >
             Bulk Applicants
+            <span className="hidden sm:inline-block ml-1 px-1 py-0.2 rounded bg-surface border border-border-default text-[9px] font-mono text-text-muted">
+              B
+            </span>
           </Button>
 
           <Button
+            ref={newApplicantBtnRef}
             size="dense"
             variant="primary"
             leadingIcon={<Plus className="w-3.5 h-3.5" />}
             onClick={() => setIsRegisterModalOpen(true)}
+            title="New Applicant (N or Alt+N)"
           >
             New Applicant
+            <span className="hidden sm:inline-block ml-1 px-1 py-0.2 rounded bg-black/20 text-[9px] font-mono text-white/90">
+              N
+            </span>
           </Button>
         </div>
       }
@@ -401,12 +450,16 @@ export default function AdmissionsPage() {
           <div className="relative w-full sm:w-80">
             <Search className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2" />
             <input
+              ref={searchInputRef}
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by student name or application #..."
-              className="w-full pl-9 pr-4 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-action-primary text-text-primary"
+              placeholder="Search by student name or application #... (/)"
+              className="w-full pl-9 pr-7 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-action-primary text-text-primary"
             />
+            <kbd className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-text-muted font-mono px-1 py-0.5 rounded bg-surface border border-border-default">
+              /
+            </kbd>
           </div>
 
           <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -779,8 +832,15 @@ export default function AdmissionsPage() {
       {/* New Applicant Registration Modal */}
       <RegisterApplicantModal
         isOpen={isRegisterModalOpen}
-        onClose={() => setIsRegisterModalOpen(false)}
-        onSuccess={() => setIsRegisterModalOpen(false)}
+        onClose={() => {
+          setIsRegisterModalOpen(false)
+          setTimeout(() => newApplicantBtnRef.current?.focus(), 50)
+        }}
+        onSuccess={() => {
+          setIsRegisterModalOpen(false)
+          setActionSuccess("Applicant registered successfully!")
+          setTimeout(() => newApplicantBtnRef.current?.focus(), 50)
+        }}
         academicYears={academicYears}
         academicGrades={academicGrades}
         enrollmentCounts={enrollmentCounts}
@@ -790,8 +850,15 @@ export default function AdmissionsPage() {
       {/* Bulk Applicants Ingestion Modal */}
       <BulkApplicantsModal
         isOpen={isBulkModalOpen}
-        onClose={() => setIsBulkModalOpen(false)}
-        onSuccess={() => setIsBulkModalOpen(false)}
+        onClose={() => {
+          setIsBulkModalOpen(false)
+          setTimeout(() => bulkApplicantBtnRef.current?.focus(), 50)
+        }}
+        onSuccess={() => {
+          setIsBulkModalOpen(false)
+          setActionSuccess("Bulk applicants imported successfully!")
+          setTimeout(() => bulkApplicantBtnRef.current?.focus(), 50)
+        }}
         academicYears={academicYears}
         academicGrades={academicGrades}
         bulkImportApplicants={bulkImportApplicants}
@@ -825,6 +892,38 @@ function RegisterApplicantModal({
   const [activeTab, setActiveTab] = useState<"demographics" | "academic" | "guardian" | "notes">("demographics")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
+
+  // Input Refs for smooth auto-focus and field-by-field keyboard navigation
+  const firstNameRef = useRef<HTMLInputElement>(null)
+  const lastNameRef = useRef<HTMLInputElement>(null)
+  const dobRef = useRef<HTMLInputElement>(null)
+  const genderRef = useRef<HTMLSelectElement>(null)
+  const bloodGroupRef = useRef<HTMLSelectElement>(null)
+  const studentEmailRef = useRef<HTMLInputElement>(null)
+  const studentPhoneRef = useRef<HTMLInputElement>(null)
+  const addressLine1Ref = useRef<HTMLInputElement>(null)
+  const cityRef = useRef<HTMLInputElement>(null)
+  const stateRef = useRef<HTMLInputElement>(null)
+  const pincodeRef = useRef<HTMLInputElement>(null)
+
+  const classSelectRef = useRef<HTMLSelectElement>(null)
+  const academicYearRef = useRef<HTMLSelectElement>(null)
+  const stageRef = useRef<HTMLSelectElement>(null)
+  const entranceScoreRef = useRef<HTMLInputElement>(null)
+  const previousSchoolRef = useRef<HTMLInputElement>(null)
+  const transferCertNoRef = useRef<HTMLInputElement>(null)
+  const feeAmountRef = useRef<HTMLInputElement>(null)
+  const feeStatusRef = useRef<HTMLSelectElement>(null)
+
+  const guardianNameRef = useRef<HTMLInputElement>(null)
+  const guardianRelationshipRef = useRef<HTMLSelectElement>(null)
+  const guardianPhoneRef = useRef<HTMLInputElement>(null)
+  const guardianEmailRef = useRef<HTMLInputElement>(null)
+  const guardianOccupationRef = useRef<HTMLInputElement>(null)
+  const emergencyPhoneRef = useRef<HTMLInputElement>(null)
+
+  const medicalNotesRef = useRef<HTMLInputElement>(null)
+  const notesRef = useRef<HTMLTextAreaElement>(null)
 
   // Student Demographics
   const [firstName, setFirstName] = useState("")
@@ -886,28 +985,49 @@ function RegisterApplicantModal({
     return enrollmentCounts.find((c: any) => c.class_id === classId)
   }, [enrollmentCounts, classId])
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  // Helper to focus the first input of a tab
+  const focusTabFirstInput = (tab: "demographics" | "academic" | "guardian" | "notes") => {
+    setTimeout(() => {
+      if (tab === "demographics") firstNameRef.current?.focus()
+      else if (tab === "academic") classSelectRef.current?.focus()
+      else if (tab === "guardian") guardianNameRef.current?.focus()
+      else if (tab === "notes") medicalNotesRef.current?.focus()
+    }, 50)
+  }
+
+  // Submit Logic with intelligent tab-focusing on validation failure
+  const submitApplication = async () => {
+    if (isSubmitting) return
     setErrorMsg(null)
 
     if (!firstName.trim() || !lastName.trim()) {
       setErrorMsg("Please provide both First Name and Last Name.")
       setActiveTab("demographics")
+      setTimeout(() => {
+        if (!firstName.trim()) firstNameRef.current?.focus()
+        else lastNameRef.current?.focus()
+      }, 50)
       return
     }
     if (!dateOfBirth) {
       setErrorMsg("Please select the applicant's Date of Birth.")
       setActiveTab("demographics")
+      setTimeout(() => dobRef.current?.focus(), 50)
       return
     }
     if (!classId) {
       setErrorMsg("Please choose the applying grade/class.")
       setActiveTab("academic")
+      setTimeout(() => classSelectRef.current?.focus(), 50)
       return
     }
     if (!guardianName.trim() || !guardianPhone.trim()) {
       setErrorMsg("Please provide Guardian Name and Primary Phone Number.")
       setActiveTab("guardian")
+      setTimeout(() => {
+        if (!guardianName.trim()) guardianNameRef.current?.focus()
+        else guardianPhoneRef.current?.focus()
+      }, 50)
       return
     }
 
@@ -949,11 +1069,173 @@ function RegisterApplicantModal({
     }
   }
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    submitApplication()
+  }
+
+  // Smooth Tab Advancement & Sequential Section Flow
+  const goToNextTab = () => {
+    setErrorMsg(null)
+    if (activeTab === "demographics") {
+      if (!firstName.trim() || !lastName.trim()) {
+        setErrorMsg("Please provide both First Name and Last Name.")
+        if (!firstName.trim()) firstNameRef.current?.focus()
+        else lastNameRef.current?.focus()
+        return
+      }
+      if (!dateOfBirth) {
+        setErrorMsg("Please select the applicant's Date of Birth.")
+        dobRef.current?.focus()
+        return
+      }
+      setActiveTab("academic")
+      focusTabFirstInput("academic")
+    } else if (activeTab === "academic") {
+      if (!classId) {
+        setErrorMsg("Please choose the applying grade/class.")
+        classSelectRef.current?.focus()
+        return
+      }
+      setActiveTab("guardian")
+      focusTabFirstInput("guardian")
+    } else if (activeTab === "guardian") {
+      if (!guardianName.trim() || !guardianPhone.trim()) {
+        setErrorMsg("Please provide Guardian Name and Primary Phone Number.")
+        if (!guardianName.trim()) guardianNameRef.current?.focus()
+        else guardianPhoneRef.current?.focus()
+        return
+      }
+      setActiveTab("notes")
+      focusTabFirstInput("notes")
+    } else if (activeTab === "notes") {
+      submitApplication()
+    }
+  }
+
+  const goToPrevTab = () => {
+    setErrorMsg(null)
+    const tabs: ("demographics" | "academic" | "guardian" | "notes")[] = [
+      "demographics",
+      "academic",
+      "guardian",
+      "notes",
+    ]
+    const idx = tabs.indexOf(activeTab)
+    if (idx > 0) {
+      const prev = tabs[idx - 1]
+      setActiveTab(prev)
+      focusTabFirstInput(prev)
+    }
+  }
+
+  // Sequential field keydown handler: Enter moves to next field, Cmd/Ctrl+Enter submits
+  const handleFieldKeyDown = (
+    e: React.KeyboardEvent,
+    nextRef?: React.RefObject<HTMLElement | null>,
+    isSectionEnd?: boolean
+  ) => {
+    if (e.key === "Enter") {
+      // 1. Cmd/Ctrl + Enter triggers immediate submit across entire form
+      if (isModifierPressed(e)) {
+        e.preventDefault()
+        e.stopPropagation()
+        submitApplication()
+        return
+      }
+
+      // 2. Plain Enter navigates to next field or next section
+      e.preventDefault()
+      e.stopPropagation()
+
+      if (nextRef?.current) {
+        nextRef.current.focus()
+      } else if (isSectionEnd) {
+        goToNextTab()
+      }
+    }
+  }
+
+  // Keybinding 1: Escape key dismisses modal
+  useEscapeKey(onClose, isOpen)
+
+  // Keybinding 2: Cmd+Enter (Mac) / Ctrl+Enter (Windows) submits application
+  useSubmitKey(
+    () => {
+      submitApplication()
+    },
+    { requireModifier: true, enabled: isOpen && !isSubmitting }
+  )
+
+  // Keybinding 3: Alt+1..4 for direct tab navigation, Alt+ArrowRight / Alt+ArrowLeft for next/prev section
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleModalKeyDown = (e: KeyboardEvent) => {
+      // 1. Direct tab switching: Alt + 1..4 (or Cmd/Ctrl + 1..4)
+      if ((e.altKey || isModifierPressed(e)) && ["1", "2", "3", "4"].includes(e.key)) {
+        e.preventDefault()
+        e.stopPropagation()
+        const tabs: ("demographics" | "academic" | "guardian" | "notes")[] = [
+          "demographics",
+          "academic",
+          "guardian",
+          "notes",
+        ]
+        const target = tabs[parseInt(e.key, 10) - 1]
+        if (target) {
+          setErrorMsg(null)
+          setActiveTab(target)
+          focusTabFirstInput(target)
+        }
+        return
+      }
+
+      // 2. Alt + ArrowRight -> next section
+      if (e.altKey && e.key === "ArrowRight") {
+        e.preventDefault()
+        e.stopPropagation()
+        goToNextTab()
+        return
+      }
+
+      // 3. Alt + ArrowLeft -> previous section
+      if (e.altKey && e.key === "ArrowLeft") {
+        e.preventDefault()
+        e.stopPropagation()
+        goToPrevTab()
+        return
+      }
+    }
+
+    window.addEventListener("keydown", handleModalKeyDown)
+    return () => window.removeEventListener("keydown", handleModalKeyDown)
+  }, [isOpen, activeTab, firstName, lastName, dateOfBirth, classId, guardianName, guardianPhone, isSubmitting])
+
+  // Auto-focus first input on modal open
+  useEffect(() => {
+    if (isOpen) {
+      setActiveTab("demographics")
+      setErrorMsg(null)
+      const timer = setTimeout(() => {
+        firstNameRef.current?.focus()
+      }, 60)
+      return () => clearTimeout(timer)
+    }
+  }, [isOpen])
+
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
-      <div className="bg-surface border border-border-default rounded-xl shadow-2xl max-w-3xl w-full my-8 overflow-hidden">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose()
+      }}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div className="bg-surface border border-border-default rounded-xl shadow-2xl max-w-3xl w-full my-8 overflow-hidden animate-in zoom-in-95 duration-150">
         {/* Modal Header */}
         <div className="flex items-center justify-between p-5 border-b border-border-default bg-subtle">
           <div>
@@ -970,6 +1252,7 @@ function RegisterApplicantModal({
           <button
             onClick={onClose}
             className="p-1 rounded-lg hover:bg-surface text-text-muted hover:text-text-primary transition-colors"
+            title="Close (Esc)"
           >
             <X className="w-5 h-5" />
           </button>
@@ -986,23 +1269,30 @@ function RegisterApplicantModal({
             <button
               key={tab.id}
               type="button"
-              onClick={() => setActiveTab(tab.id as any)}
-              className={`flex items-center gap-2 pb-2.5 px-3 text-xs font-semibold border-b-2 transition-colors ${
+              onClick={() => {
+                setErrorMsg(null)
+                setActiveTab(tab.id as any)
+                focusTabFirstInput(tab.id as any)
+              }}
+              className={`flex items-center gap-1.5 pb-2.5 px-3 text-xs font-semibold border-b-2 transition-colors ${
                 activeTab === tab.id
                   ? "border-brand-primary text-brand-primary"
                   : "border-transparent text-text-secondary hover:text-text-primary"
               }`}
             >
               {tab.icon}
-              {tab.label}
+              <span>{tab.label}</span>
             </button>
           ))}
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit} className="p-5 flex flex-col gap-4 max-h-[70vh] overflow-y-auto">
+        <form
+          onSubmit={handleSubmit}
+          className="p-5 flex flex-col gap-4 max-h-[70vh] overflow-y-auto"
+        >
           {errorMsg && (
-            <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-xs flex items-center gap-2">
+            <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-xs flex items-center gap-2 animate-in fade-in">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{errorMsg}</span>
             </div>
@@ -1017,10 +1307,12 @@ function RegisterApplicantModal({
                     First Name *
                   </label>
                   <input
+                    ref={firstNameRef}
                     type="text"
                     required
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, lastNameRef)}
                     placeholder="e.g. Aarav"
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary"
                   />
@@ -1030,10 +1322,12 @@ function RegisterApplicantModal({
                     Last Name *
                   </label>
                   <input
+                    ref={lastNameRef}
                     type="text"
                     required
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, dobRef)}
                     placeholder="e.g. Sharma"
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary"
                   />
@@ -1051,10 +1345,12 @@ function RegisterApplicantModal({
                     )}
                   </div>
                   <input
+                    ref={dobRef}
                     type="date"
                     required
                     value={dateOfBirth}
                     onChange={(e) => setDateOfBirth(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, genderRef)}
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary font-mono cursor-pointer"
                   />
                 </div>
@@ -1062,8 +1358,10 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Gender *</label>
                   <select
+                    ref={genderRef}
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, bloodGroupRef)}
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary cursor-pointer"
                   >
                     <option value="male">Male</option>
@@ -1075,8 +1373,10 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Blood Group</label>
                   <select
+                    ref={bloodGroupRef}
                     value={bloodGroup}
                     onChange={(e) => setBloodGroup(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, studentEmailRef)}
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary cursor-pointer"
                   >
                     <option value="">Select (Optional)</option>
@@ -1096,9 +1396,11 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Student Email</label>
                   <input
+                    ref={studentEmailRef}
                     type="email"
                     value={studentEmail}
                     onChange={(e) => setStudentEmail(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, studentPhoneRef)}
                     placeholder="student@example.com (optional)"
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary"
                   />
@@ -1106,9 +1408,11 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Student Phone</label>
                   <input
+                    ref={studentPhoneRef}
                     type="tel"
                     value={studentPhone}
                     onChange={(e) => setStudentPhone(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, addressLine1Ref)}
                     placeholder="e.g. 9876543210 (optional)"
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary font-mono"
                   />
@@ -1118,9 +1422,11 @@ function RegisterApplicantModal({
               <div>
                 <label className="text-xs font-medium text-text-secondary mb-1 block">Residential Address</label>
                 <input
+                  ref={addressLine1Ref}
                   type="text"
                   value={addressLine1}
                   onChange={(e) => setAddressLine1(e.target.value)}
+                  onKeyDown={(e) => handleFieldKeyDown(e, cityRef)}
                   placeholder="House / Flat No., Street, Landmark"
                   className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary"
                 />
@@ -1130,9 +1436,11 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">City</label>
                   <input
+                    ref={cityRef}
                     type="text"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, stateRef)}
                     placeholder="e.g. Hyderabad"
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary"
                   />
@@ -1140,9 +1448,11 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">State</label>
                   <input
+                    ref={stateRef}
                     type="text"
                     value={state}
                     onChange={(e) => setState(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, pincodeRef)}
                     placeholder="e.g. Telangana"
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary"
                   />
@@ -1150,9 +1460,11 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Pincode</label>
                   <input
+                    ref={pincodeRef}
                     type="text"
                     value={pincode}
                     onChange={(e) => setPincode(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, undefined, true)}
                     placeholder="e.g. 500081"
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary font-mono"
                   />
@@ -1175,9 +1487,11 @@ function RegisterApplicantModal({
                     )}
                   </div>
                   <select
+                    ref={classSelectRef}
                     required
                     value={classId}
                     onChange={(e) => setClassId(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, academicYearRef)}
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary cursor-pointer font-medium"
                   >
                     <option value="">Select Applying Grade</option>
@@ -1196,9 +1510,11 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Academic Year *</label>
                   <select
+                    ref={academicYearRef}
                     required
                     value={academicYearId}
                     onChange={(e) => setAcademicYearId(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, stageRef)}
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary cursor-pointer"
                   >
                     {academicYears.map((y: any) => (
@@ -1214,8 +1530,10 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Initial Pipeline Stage</label>
                   <select
+                    ref={stageRef}
                     value={stage}
                     onChange={(e) => setStage(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, entranceScoreRef)}
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary cursor-pointer font-medium"
                   >
                     <option value="APPLIED">Applied (Formal Application)</option>
@@ -1228,12 +1546,14 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Entrance Test Score (/ 100)</label>
                   <input
+                    ref={entranceScoreRef}
                     type="number"
                     min="0"
                     max="100"
                     step="0.5"
                     value={entranceScore}
                     onChange={(e) => setEntranceScore(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, previousSchoolRef)}
                     placeholder="e.g. 85.5 (optional)"
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary font-mono"
                   />
@@ -1244,9 +1564,11 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Previous School Attended</label>
                   <input
+                    ref={previousSchoolRef}
                     type="text"
                     value={previousSchool}
                     onChange={(e) => setPreviousSchool(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, transferCertNoRef)}
                     placeholder="e.g. St. Xavier's High School"
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary"
                   />
@@ -1254,9 +1576,11 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Transfer Certificate (TC) Number</label>
                   <input
+                    ref={transferCertNoRef}
                     type="text"
                     value={transferCertNo}
                     onChange={(e) => setTransferCertNo(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, feeAmountRef)}
                     placeholder="e.g. TC-2026-9812"
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary font-mono"
                   />
@@ -1277,12 +1601,14 @@ function RegisterApplicantModal({
                     <div className="relative">
                       <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-text-muted">₹</span>
                       <input
+                        ref={feeAmountRef}
                         type="number"
                         min="0"
                         step="100"
                         required
                         value={feeAmount}
                         onChange={(e) => setFeeAmount(e.target.value)}
+                        onKeyDown={(e) => handleFieldKeyDown(e, feeStatusRef)}
                         placeholder="e.g. 5000"
                         className="w-full pl-7 pr-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary font-mono font-medium"
                       />
@@ -1293,8 +1619,10 @@ function RegisterApplicantModal({
                       Fee Payment Status
                     </label>
                     <select
+                      ref={feeStatusRef}
                       value={feeStatus}
                       onChange={(e) => setFeeStatus(e.target.value)}
+                      onKeyDown={(e) => handleFieldKeyDown(e, undefined, true)}
                       className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary cursor-pointer font-medium"
                     >
                       <option value="paid">Paid (Collected at Registration)</option>
@@ -1314,10 +1642,12 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Guardian Full Name *</label>
                   <input
+                    ref={guardianNameRef}
                     type="text"
                     required
                     value={guardianName}
                     onChange={(e) => setGuardianName(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, guardianRelationshipRef)}
                     placeholder="e.g. Rajesh Sharma"
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary"
                   />
@@ -1326,8 +1656,10 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Relationship *</label>
                   <select
+                    ref={guardianRelationshipRef}
                     value={guardianRelationship}
                     onChange={(e) => setGuardianRelationship(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, guardianPhoneRef)}
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary cursor-pointer"
                   >
                     <option value="Father">Father</option>
@@ -1341,10 +1673,12 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Primary Mobile Phone *</label>
                   <input
+                    ref={guardianPhoneRef}
                     type="tel"
                     required
                     value={guardianPhone}
                     onChange={(e) => setGuardianPhone(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, guardianEmailRef)}
                     placeholder="e.g. 9876543210"
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary font-mono"
                   />
@@ -1353,9 +1687,11 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Guardian Email</label>
                   <input
+                    ref={guardianEmailRef}
                     type="email"
                     value={guardianEmail}
                     onChange={(e) => setGuardianEmail(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, guardianOccupationRef)}
                     placeholder="parent@example.com"
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary"
                   />
@@ -1366,9 +1702,11 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Occupation / Organization</label>
                   <input
+                    ref={guardianOccupationRef}
                     type="text"
                     value={guardianOccupation}
                     onChange={(e) => setGuardianOccupation(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, emergencyPhoneRef)}
                     placeholder="e.g. Software Architect, Tech Corp"
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary"
                   />
@@ -1376,9 +1714,11 @@ function RegisterApplicantModal({
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">Secondary Emergency Phone</label>
                   <input
+                    ref={emergencyPhoneRef}
                     type="tel"
                     value={emergencyPhone}
                     onChange={(e) => setEmergencyPhone(e.target.value)}
+                    onKeyDown={(e) => handleFieldKeyDown(e, undefined, true)}
                     placeholder="e.g. 9848012345 (optional)"
                     className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary font-mono"
                   />
@@ -1395,9 +1735,11 @@ function RegisterApplicantModal({
                   Medical Notes & Allergies
                 </label>
                 <input
+                  ref={medicalNotesRef}
                   type="text"
                   value={medicalNotes}
                   onChange={(e) => setMedicalNotes(e.target.value)}
+                  onKeyDown={(e) => handleFieldKeyDown(e, notesRef)}
                   placeholder="e.g. Peanut allergy, Asthma inhaler required, None"
                   className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary"
                 />
@@ -1408,10 +1750,18 @@ function RegisterApplicantModal({
                   Administrative / Interview Remarks
                 </label>
                 <textarea
+                  ref={notesRef}
                   rows={3}
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Special talents, sports quota, sibling discounts, or intake observations..."
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && isModifierPressed(e)) {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      submitApplication()
+                    }
+                  }}
+                  placeholder="Special talents, sports quota, sibling discounts, or intake observations... (Press Enter for newline, Cmd/Ctrl+Enter to submit)"
                   className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary resize-none"
                 />
               </div>
@@ -1419,11 +1769,7 @@ function RegisterApplicantModal({
           )}
 
           {/* Footer Controls */}
-          <div className="flex items-center justify-between pt-4 border-t border-border-default mt-2">
-            <div className="text-[11px] text-text-muted">
-              * Required fields. All data is isolated under institution tenant policy.
-            </div>
-
+          <div className="flex items-center justify-end pt-4 border-t border-border-default mt-2">
             <div className="flex items-center gap-2">
               <Button type="button" variant="secondary" size="dense" onClick={onClose} disabled={isSubmitting}>
                 Cancel
@@ -1434,16 +1780,7 @@ function RegisterApplicantModal({
                   variant="secondary"
                   size="dense"
                   trailingIcon={<ChevronRight className="w-3.5 h-3.5" />}
-                  onClick={() => {
-                    const tabs: ("demographics" | "academic" | "guardian" | "notes")[] = [
-                      "demographics",
-                      "academic",
-                      "guardian",
-                      "notes",
-                    ]
-                    const idx = tabs.indexOf(activeTab)
-                    if (idx < tabs.length - 1) setActiveTab(tabs[idx + 1])
-                  }}
+                  onClick={goToNextTab}
                 >
                   Next Section
                 </Button>
@@ -1502,6 +1839,40 @@ function BulkApplicantsModal({
     failed: number
     results: any[]
   } | null>(null)
+
+  // Keybinding 1: Escape key closes modal
+  useEscapeKey(onClose, isOpen)
+
+  // Keybinding 2: Cmd+Enter (Mac) / Ctrl+Enter (Windows) triggers bulk import
+  useSubmitKey(
+    () => {
+      if (importReport) {
+        setImportReport(null)
+        setRawText("")
+        setFileName(null)
+        onSuccess()
+      } else if (validCount > 0 && !isProcessing) {
+        handleImport()
+      }
+    },
+    { requireModifier: true, enabled: isOpen }
+  )
+
+  // Report screen key listener for quick Enter / Esc dismissal
+  useEffect(() => {
+    if (!isOpen || !importReport) return
+    const handleReportKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" || e.key === "Enter") {
+        e.preventDefault()
+        setImportReport(null)
+        setRawText("")
+        setFileName(null)
+        onSuccess()
+      }
+    }
+    window.addEventListener("keydown", handleReportKey)
+    return () => window.removeEventListener("keydown", handleReportKey)
+  }, [isOpen, importReport, onSuccess])
 
   // Initialize active year and class
   React.useEffect(() => {
@@ -1706,7 +2077,14 @@ function BulkApplicantsModal({
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose()
+      }}
+      role="dialog"
+      aria-modal="true"
+    >
       <div className="bg-surface border border-border-default rounded-xl shadow-2xl max-w-4xl w-full my-8 overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between p-5 border-b border-border-default bg-subtle">
@@ -1796,6 +2174,9 @@ function BulkApplicantsModal({
               }}
             >
               Done & Return to Desk
+              <span className="ml-1.5 px-1.5 py-0.5 rounded bg-black/20 text-[9px] font-mono text-white">
+                ↵ or Esc
+              </span>
             </Button>
           </div>
         ) : (

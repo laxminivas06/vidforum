@@ -1,0 +1,9 @@
+{
+  "name": "Test Gap",
+  "id": "test-gap",
+  "version": "1.0.0",
+  "category": "Testing",
+  "description": "Finds lines in your diff with no test coverage.",
+  "repository": "https://github.com/hashgraph-online/awesome-ai-plugins",
+  "skills": "./skills/test-gap"
+}

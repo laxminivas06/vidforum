@@ -19,6 +19,22 @@ export const UserAuditModal: React.FC<UserAuditModalProps> = ({
   const targetId = user?.profileId || user?.id
   const { data: logs = [], isLoading } = useUserAudit(isOpen ? targetId : undefined)
 
+  // Keyboard navigation: Escape closes modal
+  React.useEffect(() => {
+    if (!isOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault()
+        e.stopPropagation()
+        onClose()
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [isOpen, onClose])
+
   if (!isOpen || !user) return null
 
   return (

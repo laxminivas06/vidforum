@@ -1,0 +1,9 @@
+{
+  "name": "Honcho",
+  "id": "codex-honcho",
+  "version": "0.1.1",
+  "category": "Memory",
+  "description": "Captures each session and injects relevant context back at session start via persistent conclusions.",
+  "repository": "https://github.com/plastic-labs/codex-honcho",
+  "skills": "./skills/honcho-memory"
+}

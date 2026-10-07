@@ -1,0 +1,9 @@
+{
+  "name": "MegaLinter",
+  "id": "megalinter",
+  "version": "1.0.0",
+  "category": "Code Quality",
+  "description": "100+ linters/formatters across 69+ languages in one pass.",
+  "repository": "https://github.com/oxsecurity/megalinter",
+  "skills": "./skills/megalinter"
+}

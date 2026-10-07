@@ -53,6 +53,26 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
     }
   }, [isDialogOpen])
 
+  // Keyboard navigation: Enter confirms, Escape cancels
+  useEffect(() => {
+    if (!isDialogOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault()
+        e.stopPropagation()
+        if (!isLoading) handleClose()
+      } else if (e.key === "Enter") {
+        e.preventDefault()
+        e.stopPropagation()
+        if (!isLoading) onConfirm()
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [isDialogOpen, isLoading, handleClose, onConfirm])
+
   if (!isDialogOpen) return null
 
   return (

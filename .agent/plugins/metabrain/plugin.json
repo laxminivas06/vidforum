@@ -1,0 +1,9 @@
+{
+  "name": "metabrain",
+  "id": "metabrain",
+  "version": "1.0.0",
+  "category": "Memory",
+  "description": "SQLite memory server where patterns graduate into hypotheses then preferences.",
+  "repository": "https://github.com/ariaxhan/metabrain",
+  "skills": "./skills/metabrain"
+}

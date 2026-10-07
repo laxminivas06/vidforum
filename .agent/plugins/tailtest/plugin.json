@@ -1,0 +1,9 @@
+{
+  "name": "tailtest",
+  "id": "tailtest",
+  "version": "1.0.0",
+  "category": "Testing",
+  "description": "Auto-detects changed files and writes/runs tests, 8 languages, zero config.",
+  "repository": "https://github.com/avansaber/tailtest-codex",
+  "skills": "./skills/tailtest"
+}

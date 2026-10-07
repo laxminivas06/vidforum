@@ -1,12 +1,18 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/AuthContext"
 import { Sidebar } from "@/components/ui/Sidebar"
 import { Topbar } from "@/components/ui/Topbar"
-import { PermissionDenied, Button } from "@/components/ui"
+import {
+  PermissionDenied,
+  Button,
+  CommandPalette,
+  ShortcutsHelpModal,
+} from "@/components/ui"
+import { isTextInputTarget } from "@/lib/utils/keyboard"
 import { ArrowLeft } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -65,6 +71,107 @@ export const AppShell: React.FC<AppShellProps> = ({
   const router = useRouter()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isPaletteOpen, setIsPaletteOpen] = useState(false)
+  const [isShortcutsHelpOpen, setIsShortcutsHelpOpen] = useState(false)
+  const lastKeyRef = useRef<{ key: string; time: number } | null>(null)
+
+  // Global Cross-Platform Keyboard Shortcuts Listener
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // 1. Command Palette: Cmd+K (Mac) or Ctrl+K (Windows/Linux)
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault()
+        e.stopPropagation()
+        setIsPaletteOpen((prev) => !prev)
+        return
+      }
+
+      // 2. Toggle Sidebar: Cmd+B (Mac) or Ctrl+B (Windows/Linux)
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "b") {
+        e.preventDefault()
+        e.stopPropagation()
+        setIsCollapsed((prev) => !prev)
+        return
+      }
+
+      // 3. Shortcuts Help: Cmd+/ or Ctrl+/
+      if ((e.metaKey || e.ctrlKey) && (e.key === "/" || e.code === "Slash")) {
+        e.preventDefault()
+        e.stopPropagation()
+        setIsShortcutsHelpOpen((prev) => !prev)
+        return
+      }
+
+      // 4. Escape: Close palette, help, or mobile menu
+      if (e.key === "Escape") {
+        if (isPaletteOpen) {
+          e.preventDefault()
+          setIsPaletteOpen(false)
+          return
+        }
+        if (isShortcutsHelpOpen) {
+          e.preventDefault()
+          setIsShortcutsHelpOpen(false)
+          return
+        }
+        if (isMobileMenuOpen) {
+          e.preventDefault()
+          setIsMobileMenuOpen(false)
+          return
+        }
+      }
+
+      // 5. If typing in an input/textarea, do NOT handle single-letter chords
+      if (isTextInputTarget(e.target)) {
+        return
+      }
+
+      // 6. Press "?" for keyboard shortcuts cheat sheet
+      if (e.key === "?" || (e.shiftKey && e.key === "/")) {
+        e.preventDefault()
+        setIsShortcutsHelpOpen(true)
+        return
+      }
+
+      // 7. Sequential chords: "G" then <key>
+      const now = Date.now()
+      if (e.key.toLowerCase() === "g" && !e.metaKey && !e.ctrlKey) {
+        lastKeyRef.current = { key: "g", time: now }
+        return
+      }
+
+      if (lastKeyRef.current && lastKeyRef.current.key === "g" && now - lastKeyRef.current.time < 1200) {
+        const nextKey = e.key.toLowerCase()
+        lastKeyRef.current = null
+
+        if (nextKey === "d") {
+          e.preventDefault()
+          router.push("/dashboard")
+        } else if (nextKey === "a") {
+          e.preventDefault()
+          router.push("/academics")
+        } else if (nextKey === "s") {
+          e.preventDefault()
+          router.push("/admissions")
+        } else if (nextKey === "u") {
+          e.preventDefault()
+          router.push("/users")
+        } else if (nextKey === "i") {
+          e.preventDefault()
+          router.push("/institutions")
+        } else if (nextKey === "f") {
+          e.preventDefault()
+          router.push("/finance")
+        } else if (nextKey === "e") {
+          e.preventDefault()
+          router.push("/examinations")
+        }
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [isPaletteOpen, isShortcutsHelpOpen, isMobileMenuOpen, router])
 
   // Redirect to login if user is not authenticated
   React.useEffect(() => {
@@ -125,6 +232,8 @@ export const AppShell: React.FC<AppShellProps> = ({
           userName={user?.name || (isSuperAdmin ? "VID Platform Super Admin" : "Dr. Alistair Vance")}
           userRole={role.replace("_", " ")}
           onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
+          onSearchClick={() => setIsPaletteOpen(true)}
+          onShortcutsClick={() => setIsShortcutsHelpOpen(true)}
           rightActions={rightHeaderAction}
           assignedWorkspaces={user?.assignedWorkspaces}
           currentPath={pathname}
@@ -177,6 +286,19 @@ export const AppShell: React.FC<AppShellProps> = ({
           )}
         </main>
       </div>
+
+      {/* Global Command Palette (Cmd+K / Ctrl+K) */}
+      <CommandPalette
+        isOpen={isPaletteOpen}
+        onClose={() => setIsPaletteOpen(false)}
+        onOpenShortcutsHelp={() => setIsShortcutsHelpOpen(true)}
+      />
+
+      {/* Global Keyboard Shortcuts Cheat Sheet (? or Cmd+/) */}
+      <ShortcutsHelpModal
+        isOpen={isShortcutsHelpOpen}
+        onClose={() => setIsShortcutsHelpOpen(false)}
+      />
     </div>
   )
 }

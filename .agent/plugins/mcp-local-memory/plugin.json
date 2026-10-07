@@ -1,0 +1,9 @@
+{
+  "name": "mcp-local-memory",
+  "id": "mcp-local-memory",
+  "version": "1.0.0",
+  "category": "Memory",
+  "description": "Lightweight local memory server, entities/relations/time-based recall across sessions.",
+  "repository": "https://github.com/modelcontextprotocol/servers",
+  "skills": "./skills/local-memory"
+}

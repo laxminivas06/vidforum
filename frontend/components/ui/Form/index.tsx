@@ -125,7 +125,9 @@ export const Select: React.FC<SelectProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
+  const [highlightedIndex, setHighlightedIndex] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
+  const listRef = useRef<HTMLDivElement>(null)
 
   const selectedOption = options.find((opt) => opt.value === value)
 
@@ -134,6 +136,10 @@ export const Select: React.FC<SelectProps> = ({
       opt.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (opt.sublabel && opt.sublabel.toLowerCase().includes(searchTerm.toLowerCase()))
   )
+
+  useEffect(() => {
+    setHighlightedIndex(0)
+  }, [searchTerm, isOpen])
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -148,8 +154,51 @@ export const Select: React.FC<SelectProps> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
+  const handleSelectOption = (val: string) => {
+    onChange(val)
+    setIsOpen(false)
+    setSearchTerm("")
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!isOpen) {
+      if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+        e.preventDefault()
+        setIsOpen(true)
+      }
+      return
+    }
+
+    if (e.key === "Escape") {
+      e.preventDefault()
+      e.stopPropagation()
+      setIsOpen(false)
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault()
+      setHighlightedIndex((prev) =>
+        prev < filteredOptions.length - 1 ? prev + 1 : 0
+      )
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault()
+      setHighlightedIndex((prev) =>
+        prev > 0 ? prev - 1 : filteredOptions.length - 1
+      )
+    } else if (e.key === "Enter") {
+      e.preventDefault()
+      e.stopPropagation()
+      const selected = filteredOptions[highlightedIndex]
+      if (selected) {
+        handleSelectOption(selected.value)
+      }
+    }
+  }
+
   return (
-    <div ref={containerRef} className={cn("relative w-full", className)}>
+    <div
+      ref={containerRef}
+      onKeyDown={handleKeyDown}
+      className={cn("relative w-full", className)}
+    >
       <button
         type="button"
         disabled={disabled}
@@ -182,7 +231,7 @@ export const Select: React.FC<SelectProps> = ({
       </button>
 
       {isOpen && (
-        <div className="absolute z-50 mt-1 w-full rounded-xl border border-border-default bg-canvas shadow-lg py-1.5 max-h-60 overflow-hidden flex flex-col">
+        <div className="absolute z-50 mt-1 w-full rounded-xl border border-border-default bg-canvas shadow-lg py-1.5 max-h-60 overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-100">
           {searchable && (
             <div className="px-2 pb-1.5 border-b border-border-default/50">
               <div className="relative flex items-center">
@@ -191,7 +240,7 @@ export const Select: React.FC<SelectProps> = ({
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Search..."
+                  placeholder="Search options..."
                   className="w-full h-8 pl-8 pr-3 text-xs bg-subtle rounded-md focus:outline-none focus:ring-1 focus:ring-action-black/20"
                   autoFocus
                 />
@@ -199,38 +248,54 @@ export const Select: React.FC<SelectProps> = ({
             </div>
           )}
 
-          <div className="overflow-y-auto py-1">
+          <div ref={listRef} className="overflow-y-auto py-1">
             {filteredOptions.length === 0 ? (
               <div className="px-3 py-2 text-xs text-text-muted text-center">
                 No matching options
               </div>
             ) : (
-              filteredOptions.map((opt) => (
-                <div
-                  key={opt.value}
-                  onClick={() => {
-                    onChange(opt.value)
-                    setIsOpen(false)
-                    setSearchTerm("")
-                  }}
-                  className={cn(
-                    "px-3 py-2 text-xs sm:text-sm flex items-center justify-between cursor-pointer transition-colors",
-                    opt.value === value
-                      ? "bg-badge-neutral text-text-primary font-medium"
-                      : "text-text-secondary hover:bg-subtle hover:text-text-primary"
-                  )}
-                >
-                  <div>
-                    <div>{opt.label}</div>
-                    {opt.sublabel && (
-                      <div className="text-[11px] text-text-muted">{opt.sublabel}</div>
+              filteredOptions.map((opt, idx) => {
+                const isSelected = opt.value === value
+                const isHighlighted = idx === highlightedIndex
+
+                return (
+                  <div
+                    key={opt.value}
+                    onClick={() => handleSelectOption(opt.value)}
+                    onMouseEnter={() => setHighlightedIndex(idx)}
+                    className={cn(
+                      "px-3 py-2 text-xs sm:text-sm flex items-center justify-between cursor-pointer transition-colors",
+                      isHighlighted
+                        ? "bg-action-black text-canvas font-medium"
+                        : isSelected
+                        ? "bg-badge-neutral text-text-primary font-medium"
+                        : "text-text-secondary hover:bg-subtle hover:text-text-primary"
+                    )}
+                  >
+                    <div>
+                      <div>{opt.label}</div>
+                      {opt.sublabel && (
+                        <div
+                          className={cn(
+                            "text-[11px]",
+                            isHighlighted ? "text-neutral-300" : "text-text-muted"
+                          )}
+                        >
+                          {opt.sublabel}
+                        </div>
+                      )}
+                    </div>
+                    {isSelected && (
+                      <Check
+                        className={cn(
+                          "w-4 h-4 shrink-0",
+                          isHighlighted ? "text-canvas" : "text-brand-green"
+                        )}
+                      />
                     )}
                   </div>
-                  {opt.value === value && (
-                    <Check className="w-4 h-4 text-brand-green shrink-0" />
-                  )}
-                </div>
-              ))
+                )
+              })
             )}
           </div>
         </div>

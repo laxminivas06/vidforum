@@ -46,6 +46,8 @@ export const SlideOver: React.FC<SlideOverProps> = ({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isPanelOpen) {
+        e.preventDefault()
+        e.stopPropagation()
         onClose()
       }
     }

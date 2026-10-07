@@ -1,0 +1,8 @@
+{
+  "name": "prompt-architect",
+  "id": "prompt-architect",
+  "version": "1.0.0",
+  "category": "Intake & Prompt Engineering",
+  "description": "Transforms plain-language user requests into optimized, well-structured, architecture-aware specifications before code execution.",
+  "skills": "./skills/prompt-architect"
+}

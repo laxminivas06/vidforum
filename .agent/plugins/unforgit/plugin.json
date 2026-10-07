@@ -1,0 +1,9 @@
+{
+  "name": "Unforgit",
+  "id": "unforgit",
+  "version": "1.0.0",
+  "category": "Memory",
+  "description": "Git-backed memory for decisions, conventions, gotchas, playbooks committed with the codebase.",
+  "repository": "https://github.com/MiguelMedeiros/unforgit-codex-plugin",
+  "skills": "./skills/unforgit"
+}

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useMemo } from "react"
+import React, { useState, useMemo, useRef } from "react"
 import Link from "next/link"
 import { AppShell } from "@/components/layout/AppShell"
 import {
@@ -33,6 +33,8 @@ import {
 } from "lucide-react"
 import { useEnrolledApplicants, useAcademics } from "@/lib/api/hooks"
 import { EnrolledApplicantItem } from "@/types"
+import { useEscapeKey, useKeybinding } from "@/lib/hooks/useKeyboardShortcuts"
+import { getModifierLabel } from "@/lib/utils/keyboard"
 
 export default function EnrolledStudentsPage() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -40,6 +42,22 @@ export default function EnrolledStudentsPage() {
   const [feeStatusFilter, setFeeStatusFilter] = useState("ALL")
   const [selectedStudent, setSelectedStudent] = useState<EnrolledApplicantItem | null>(null)
   const [admissionSlipStudent, setAdmissionSlipStudent] = useState<EnrolledApplicantItem | null>(null)
+
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const isAnyOverlayOpen = Boolean(admissionSlipStudent) || Boolean(selectedStudent)
+
+  useKeybinding("/", (e) => {
+    e.preventDefault()
+    searchInputRef.current?.focus()
+  }, { enabled: !isAnyOverlayOpen })
+
+  useEscapeKey(() => {
+    if (admissionSlipStudent) {
+      setAdmissionSlipStudent(null)
+    } else if (selectedStudent) {
+      setSelectedStudent(null)
+    }
+  }, isAnyOverlayOpen)
 
   const { data: enrolledStudents = [], isLoading } = useEnrolledApplicants()
   const { data: grades = [] } = useAcademics()
@@ -325,10 +343,11 @@ export default function EnrolledStudentsPage() {
             <div className="relative w-full sm:w-72">
               <Search className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2" />
               <input
+                ref={searchInputRef}
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search name, admission #, guardian..."
+                placeholder="Search name, admission #, guardian... (/)"
                 className="w-full pl-9 pr-3 py-1.5 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary"
               />
             </div>

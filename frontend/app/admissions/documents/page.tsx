@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useMemo } from "react"
+import React, { useState, useMemo, useRef, useEffect } from "react"
 import Link from "next/link"
 import { AppShell } from "@/components/layout/AppShell"
 import {
@@ -36,6 +36,15 @@ import {
   useAcademics,
 } from "@/lib/api/hooks"
 import { AdmissionDocumentItem } from "@/types"
+import {
+  useEscapeKey,
+  useSubmitKey,
+  useKeybinding,
+} from "@/lib/hooks/useKeyboardShortcuts"
+import {
+  getModifierLabel,
+  isModifierPressed,
+} from "@/lib/utils/keyboard"
 
 export default function AdmissionDocumentsPage() {
   const [statusFilter, setStatusFilter] = useState<string>("ALL")
@@ -53,9 +62,64 @@ export default function AdmissionDocumentsPage() {
   const [docType, setDocType] = useState<string>("Birth Certificate")
   const [uploadedFileName, setUploadedFileName] = useState<string>("")
 
+  // Element Refs for keyboard focus management
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const uploadBtnRef = useRef<HTMLButtonElement>(null)
+  const applicantSelectRef = useRef<HTMLSelectElement>(null)
+  const docTypeSelectRef = useRef<HTMLSelectElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const uploadSubmitBtnRef = useRef<HTMLButtonElement>(null)
+
+  const isAnyOverlayOpen = Boolean(rejectDocId) || Boolean(previewDoc) || isUploadModalOpen || Boolean(selectedDoc)
+
   const { data: documents = [], isLoading, updateStatus, isUpdating, addDocument, isAdding } = useAdmissionDocuments()
   const { data: applicants = [] } = useAdmissions()
   const { data: grades = [] } = useAcademics()
+
+  // Desk keybindings
+  useKeybinding("/", (e) => {
+    e.preventDefault()
+    searchInputRef.current?.focus()
+  }, { enabled: !isAnyOverlayOpen })
+
+  useKeybinding("u", () => setIsUploadModalOpen(true), { enabled: !isAnyOverlayOpen })
+  useKeybinding("n", () => setIsUploadModalOpen(true), { enabled: !isAnyOverlayOpen })
+  useKeybinding("u", () => setIsUploadModalOpen(true), { alt: true, enabled: !isAnyOverlayOpen })
+  useKeybinding("n", () => setIsUploadModalOpen(true), { alt: true, enabled: !isAnyOverlayOpen })
+
+  // Auto-focus first input when upload modal opens
+  useEffect(() => {
+    if (isUploadModalOpen) {
+      setTimeout(() => applicantSelectRef.current?.focus(), 60)
+    }
+  }, [isUploadModalOpen])
+
+  // Escape key handler across all overlays
+  useEscapeKey(() => {
+    if (rejectDocId) {
+      setRejectDocId(null)
+    } else if (previewDoc) {
+      setPreviewDoc(null)
+    } else if (isUploadModalOpen) {
+      setIsUploadModalOpen(false)
+      setTimeout(() => uploadBtnRef.current?.focus(), 50)
+    } else if (selectedDoc) {
+      setSelectedDoc(null)
+    }
+  }, isAnyOverlayOpen)
+
+  // Document preview hotkeys
+  useKeybinding("v", () => {
+    if (previewDoc && previewDoc.status !== "VERIFIED" && !rejectDocId) {
+      handleVerify(previewDoc)
+    }
+  }, { enabled: Boolean(previewDoc) && !rejectDocId })
+
+  useKeybinding("r", () => {
+    if (previewDoc && previewDoc.status !== "REJECTED" && !rejectDocId) {
+      setRejectDocId(previewDoc.id)
+    }
+  }, { enabled: Boolean(previewDoc) && !rejectDocId })
 
   // Filtered documents
   const filteredDocs = useMemo(() => {
@@ -118,10 +182,10 @@ export default function AdmissionDocumentsPage() {
     }
   }
 
-  const handleUploadSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const executeUpload = async () => {
     if (!selectedApplicantId) {
       setActionError("Please select an applicant from the pipeline")
+      applicantSelectRef.current?.focus()
       return
     }
     try {
@@ -137,12 +201,27 @@ export default function AdmissionDocumentsPage() {
       setIsUploadModalOpen(false)
       setSelectedApplicantId("")
       setUploadedFileName("")
-      setTimeout(() => setActionSuccess(null), 4000)
+      setTimeout(() => {
+        setActionSuccess(null)
+        uploadBtnRef.current?.focus()
+      }, 50)
     } catch (err: any) {
       setActionError(err.message || "Failed to upload document")
       setTimeout(() => setActionError(null), 5000)
     }
   }
+
+  const handleUploadSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    executeUpload()
+  }
+
+  // Submit modal form via Cmd+Enter / Ctrl+Enter
+  useSubmitKey(() => {
+    if (isUploadModalOpen && !isAdding) {
+      executeUpload()
+    }
+  }, { requireModifier: true, enabled: isUploadModalOpen })
 
   const tableColumns: TableColumn<AdmissionDocumentItem>[] = [
     {
@@ -272,12 +351,17 @@ export default function AdmissionDocumentsPage() {
             </Button>
           </Link>
           <Button
+            ref={uploadBtnRef}
             size="dense"
             variant="primary"
             leadingIcon={<Upload className="w-3.5 h-3.5" />}
             onClick={() => setIsUploadModalOpen(true)}
+            title="Upload Document (U or Alt+U)"
           >
             Upload Document
+            <span className="hidden sm:inline-block ml-1 px-1 py-0.2 rounded bg-black/20 text-[9px] font-mono text-white/90">
+              U
+            </span>
           </Button>
         </div>
       }
@@ -374,10 +458,11 @@ export default function AdmissionDocumentsPage() {
             <div className="relative w-full sm:w-64">
               <Search className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2" />
               <input
+                ref={searchInputRef}
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search applicant or doc name..."
+                placeholder="Search applicant or doc name... (/)"
                 className="w-full pl-9 pr-3 py-1.5 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary"
               />
             </div>
@@ -442,8 +527,15 @@ export default function AdmissionDocumentsPage() {
                   Select Applicant <span className="text-rose-500">*</span>
                 </label>
                 <select
+                  ref={applicantSelectRef}
                   value={selectedApplicantId}
                   onChange={(e) => setSelectedApplicantId(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !isModifierPressed(e)) {
+                      e.preventDefault()
+                      docTypeSelectRef.current?.focus()
+                    }
+                  }}
                   required
                   className="w-full text-xs bg-canvas border border-border-default rounded-lg px-3 py-2 text-text-primary focus:outline-none focus:border-brand-primary"
                 >
@@ -461,8 +553,15 @@ export default function AdmissionDocumentsPage() {
                   Document Type <span className="text-rose-500">*</span>
                 </label>
                 <select
+                  ref={docTypeSelectRef}
                   value={docType}
                   onChange={(e) => setDocType(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !isModifierPressed(e)) {
+                      e.preventDefault()
+                      fileInputRef.current?.focus()
+                    }
+                  }}
                   className="w-full text-xs bg-canvas border border-border-default rounded-lg px-3 py-2 text-text-primary focus:outline-none focus:border-brand-primary"
                 >
                   <option value="Birth Certificate">Birth Certificate</option>
@@ -483,6 +582,7 @@ export default function AdmissionDocumentsPage() {
                 <div className="border-2 border-dashed border-border-default rounded-xl p-4 text-center hover:border-brand-primary/50 transition-colors bg-subtle">
                   <FileText className="w-8 h-8 text-text-muted mx-auto mb-2" />
                   <input
+                    ref={fileInputRef}
                     type="file"
                     accept=".pdf,.png,.jpg,.jpeg"
                     onChange={(e) => {
@@ -500,16 +600,20 @@ export default function AdmissionDocumentsPage() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-border-default">
+              <div className="flex items-center justify-end pt-3 border-t border-border-default gap-2.5">
                 <Button
                   type="button"
                   variant="secondary"
                   size="dense"
-                  onClick={() => setIsUploadModalOpen(false)}
+                  onClick={() => {
+                    setIsUploadModalOpen(false)
+                    setTimeout(() => uploadBtnRef.current?.focus(), 50)
+                  }}
                 >
                   Cancel
                 </Button>
                 <Button
+                  ref={uploadSubmitBtnRef}
                   type="submit"
                   variant="primary"
                   size="dense"

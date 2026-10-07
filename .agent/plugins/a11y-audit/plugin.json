@@ -1,0 +1,8 @@
+{
+  "name": "a11y-audit",
+  "id": "a11y-audit",
+  "version": "1.0.0",
+  "category": "Quality & Accessibility",
+  "description": "Automated WCAG 2.1 AA accessibility auditing and touch-target verification for VID Platform.",
+  "skills": "./skills/a11y-audit"
+}

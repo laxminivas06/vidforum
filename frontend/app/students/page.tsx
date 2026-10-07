@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useMemo } from "react"
+import React, { useState, useMemo, useRef, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { AppShell } from "@/components/layout/AppShell"
@@ -41,6 +41,15 @@ import {
   useBulkImportStudents,
 } from "@/lib/api/hooks"
 import { StudentListItem } from "@/types"
+import {
+  useEscapeKey,
+  useSubmitKey,
+  useKeybinding,
+} from "@/lib/hooks/useKeyboardShortcuts"
+import {
+  getModifierLabel,
+  isModifierPressed,
+} from "@/lib/utils/keyboard"
 
 export default function StudentsDirectoryPage() {
   const router = useRouter()
@@ -241,6 +250,18 @@ export default function StudentsDirectoryPage() {
     document.body.removeChild(link)
   }
 
+  const searchRef = useRef<HTMLInputElement>(null)
+  const isAnyModalOpen = isEnrollModalOpen || isPromoteModalOpen || isImportModalOpen
+
+  // Keyboard navigation shortcuts
+  useKeybinding("n", () => setIsEnrollModalOpen(true), { enabled: !isAnyModalOpen })
+  useKeybinding("c", () => setIsEnrollModalOpen(true), { enabled: !isAnyModalOpen })
+  useKeybinding("b", () => setIsImportModalOpen(true), { enabled: !isAnyModalOpen })
+  useKeybinding("/", (e) => {
+    e.preventDefault()
+    searchRef.current?.focus()
+  }, { enabled: !isAnyModalOpen })
+
   return (
     <AppShell
       pageTitle="Students Master Directory"
@@ -260,8 +281,12 @@ export default function StudentsDirectoryPage() {
             variant="secondary"
             leadingIcon={<Upload className="w-3.5 h-3.5" />}
             onClick={() => setIsImportModalOpen(true)}
+            title="Bulk Import (B)"
           >
             Bulk Import
+            <span className="hidden sm:inline-block ml-1 px-1 py-0.2 rounded bg-surface border border-border-default text-[9px] font-mono text-text-muted">
+              B
+            </span>
           </Button>
           <Button
             size="dense"
@@ -269,8 +294,12 @@ export default function StudentsDirectoryPage() {
             className="bg-brand-primary text-black hover:bg-emerald-400"
             leadingIcon={<Plus className="w-3.5 h-3.5" />}
             onClick={() => setIsEnrollModalOpen(true)}
+            title={`Enroll Student (${getModifierLabel()}+N or N)`}
           >
             Enroll Student
+            <span className="hidden sm:inline-block ml-1 px-1 py-0.2 rounded bg-black/20 text-[9px] font-mono text-black font-semibold">
+              N
+            </span>
           </Button>
         </div>
       }
@@ -310,12 +339,16 @@ export default function StudentsDirectoryPage() {
             <div className="relative flex-1 max-w-sm">
               <Search className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2" />
               <input
+                ref={searchRef}
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search by student name or admission #..."
-                className="w-full pl-9 pr-4 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary"
+                placeholder="Search by student name or admission #... (/)"
+                className="w-full pl-9 pr-7 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary"
               />
+              <kbd className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-text-muted font-mono px-1 py-0.5 rounded bg-surface border border-border-default">
+                /
+              </kbd>
             </div>
 
             {/* Class Filter */}
@@ -511,12 +544,14 @@ function DirectEnrollModal({ isOpen, onClose, academicGrades, enrollmentCounts, 
     }
   }, [academicGrades, classId])
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const firstNameRef = useRef<HTMLInputElement>(null)
+
+  const executeEnroll = async () => {
     setErrorMsg(null)
 
     if (!firstName || !lastName || !dateOfBirth || !gender || !classId || !sectionId) {
       setErrorMsg("Please fill all mandatory fields (Name, DOB, Gender, Class, Section).")
+      if (!firstName) firstNameRef.current?.focus()
       return
     }
 
@@ -557,11 +592,35 @@ function DirectEnrollModal({ isOpen, onClose, academicGrades, enrollmentCounts, 
     }
   }
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    executeEnroll()
+  }
+
+  // Keybindings: Esc closes, Cmd+Enter / Ctrl+Enter submits
+  useEscapeKey(onClose, isOpen)
+  useSubmitKey(() => executeEnroll(), { requireModifier: true, enabled: isOpen && !isSubmitting })
+
+  useEffect(() => {
+    if (isOpen) {
+      setErrorMsg(null)
+      const timer = setTimeout(() => firstNameRef.current?.focus(), 60)
+      return () => clearTimeout(timer)
+    }
+  }, [isOpen])
+
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
-      <div className="bg-surface border border-border-default rounded-xl shadow-2xl max-w-2xl w-full my-8 overflow-hidden">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose()
+      }}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div className="bg-surface border border-border-default rounded-xl shadow-2xl max-w-2xl w-full my-8 overflow-hidden animate-in zoom-in-95 duration-150">
         {/* Modal Header */}
         <div className="flex items-center justify-between p-5 border-b border-border-default bg-subtle">
           <div>
@@ -570,7 +629,7 @@ function DirectEnrollModal({ isOpen, onClose, academicGrades, enrollmentCounts, 
               Create a new student master record and guardian linkage with capacity validation
             </p>
           </div>
-          <button onClick={onClose} className="p-1 rounded-lg hover:bg-surface text-text-muted hover:text-text-primary">
+          <button onClick={onClose} className="p-1 rounded-lg hover:bg-surface text-text-muted hover:text-text-primary" title="Close (Esc)">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -593,6 +652,7 @@ function DirectEnrollModal({ isOpen, onClose, academicGrades, enrollmentCounts, 
             <div>
               <label className="text-xs font-medium text-text-secondary mb-1 block">First Name *</label>
               <input
+                ref={firstNameRef}
                 type="text"
                 required
                 value={firstName}
@@ -817,19 +877,21 @@ function DirectEnrollModal({ isOpen, onClose, academicGrades, enrollmentCounts, 
           </div>
 
           {/* Modal Footer */}
-          <div className="flex items-center justify-end gap-2 pt-4 border-t border-border-default mt-2">
-            <Button size="dense" variant="secondary" onClick={onClose} type="button">
-              Cancel
-            </Button>
-            <Button
-              size="dense"
-              variant="primary"
-              type="submit"
-              disabled={isSubmitting || isClassAtCapacity}
-              className="bg-brand-primary text-black hover:bg-emerald-400"
-            >
-              {isSubmitting ? "Enrolling Student..." : "Enroll Student"}
-            </Button>
+          <div className="flex items-center justify-end pt-4 border-t border-border-default mt-2">
+            <div className="flex items-center gap-2">
+              <Button size="dense" variant="secondary" onClick={onClose} type="button">
+                Cancel
+              </Button>
+              <Button
+                size="dense"
+                variant="primary"
+                type="submit"
+                disabled={isSubmitting || isClassAtCapacity}
+                className="bg-brand-primary text-black hover:bg-emerald-400"
+              >
+                {isSubmitting ? "Enrolling Student..." : "Enroll Student"}
+              </Button>
+            </div>
           </div>
         </form>
       </div>
@@ -892,9 +954,20 @@ function PromotionWizardModal({ isOpen, student, onClose, academicGrades, onSucc
     }
   }
 
+  // Keybindings: Esc dismisses, Cmd+Enter / Ctrl+Enter submits
+  useEscapeKey(onClose, isOpen)
+  useSubmitKey((e) => handlePromote(e as any), { requireModifier: true, enabled: isOpen && !isSubmitting })
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="bg-surface border border-border-default rounded-xl shadow-2xl max-w-lg w-full overflow-hidden">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose()
+      }}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div className="bg-surface border border-border-default rounded-xl shadow-2xl max-w-lg w-full overflow-hidden animate-in zoom-in-95 duration-150">
         <div className="flex items-center justify-between p-5 border-b border-border-default bg-subtle">
           <div>
             <h3 className="text-base font-semibold text-text-primary">Promotion Wizard</h3>
@@ -902,7 +975,7 @@ function PromotionWizardModal({ isOpen, student, onClose, academicGrades, onSucc
               Promote or transition {student.name} to the next academic level
             </p>
           </div>
-          <button onClick={onClose} className="p-1 rounded-lg hover:bg-surface text-text-muted hover:text-text-primary">
+          <button onClick={onClose} className="p-1 rounded-lg hover:bg-surface text-text-muted hover:text-text-primary" title="Close (Esc)">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -978,19 +1051,21 @@ function PromotionWizardModal({ isOpen, student, onClose, academicGrades, onSucc
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-2 pt-4 border-t border-border-default">
-            <Button size="dense" variant="secondary" onClick={onClose} type="button">
-              Cancel
-            </Button>
-            <Button
-              size="dense"
-              variant="primary"
-              type="submit"
-              disabled={isSubmitting}
-              className="bg-brand-primary text-black hover:bg-emerald-400"
-            >
-              {isSubmitting ? "Promoting..." : "Confirm Promotion"}
-            </Button>
+          <div className="flex items-center justify-end pt-4 border-t border-border-default">
+            <div className="flex items-center gap-2">
+              <Button size="dense" variant="secondary" onClick={onClose} type="button">
+                Cancel
+              </Button>
+              <Button
+                size="dense"
+                variant="primary"
+                type="submit"
+                disabled={isSubmitting}
+                className="bg-brand-primary text-black hover:bg-emerald-400"
+              >
+                {isSubmitting ? "Promoting..." : "Confirm Promotion"}
+              </Button>
+            </div>
           </div>
         </form>
       </div>
@@ -1062,11 +1137,41 @@ Sneha,Patel,2012-08-20,female,18b3b9a6-0791-47f4-bbd0-bf7c0221e18f,18b3b9a6-0791
     }
   }
 
+  // Keybindings: Esc dismisses, Cmd+Enter / Ctrl+Enter executes import
+  useEscapeKey(onClose, isOpen)
+  useSubmitKey(() => {
+    if (importReport) {
+      onSuccess()
+    } else if (parsedRows.length > 0 && !isSubmitting) {
+      handleRunImport()
+    }
+  }, { requireModifier: true, enabled: isOpen })
+
+  // Report screen Enter/Esc dismissal
+  useEffect(() => {
+    if (!isOpen || !importReport) return
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" || e.key === "Enter") {
+        e.preventDefault()
+        onSuccess()
+      }
+    }
+    window.addEventListener("keydown", handleKey)
+    return () => window.removeEventListener("keydown", handleKey)
+  }, [isOpen, importReport, onSuccess])
+
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
-      <div className="bg-surface border border-border-default rounded-xl shadow-2xl max-w-2xl w-full my-8 overflow-hidden">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose()
+      }}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div className="bg-surface border border-border-default rounded-xl shadow-2xl max-w-2xl w-full my-8 overflow-hidden animate-in zoom-in-95 duration-150">
         <div className="flex items-center justify-between p-5 border-b border-border-default bg-subtle">
           <div>
             <h3 className="text-base font-semibold text-text-primary">Bulk Student Import</h3>
@@ -1074,7 +1179,7 @@ Sneha,Patel,2012-08-20,female,18b3b9a6-0791-47f4-bbd0-bf7c0221e18f,18b3b9a6-0791
               Import students from CSV with server-side validation and atomic reporting
             </p>
           </div>
-          <button onClick={onClose} className="p-1 rounded-lg hover:bg-surface text-text-muted hover:text-text-primary">
+          <button onClick={onClose} className="p-1 rounded-lg hover:bg-surface text-text-muted hover:text-text-primary" title="Close (Esc)">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -1173,6 +1278,9 @@ Sneha,Patel,2012-08-20,female,18b3b9a6-0791-47f4-bbd0-bf7c0221e18f,18b3b9a6-0791
                   onClick={onSuccess}
                 >
                   Done & Refresh Directory
+                  <span className="hidden sm:inline-block ml-1.5 px-1.5 py-0.5 rounded bg-black/20 text-[9px] font-mono text-black font-semibold">
+                    ↵ or Esc
+                  </span>
                 </Button>
               </div>
             </div>

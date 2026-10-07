@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useMemo } from "react"
+import React, { useState, useMemo, useRef, useEffect } from "react"
 import Link from "next/link"
 import { AppShell } from "@/components/layout/AppShell"
 import {
@@ -29,6 +29,8 @@ import {
   Users,
   Sparkles,
 } from "lucide-react"
+import { useEscapeKey, useSubmitKey, useKeybinding } from "@/lib/hooks/useKeyboardShortcuts"
+import { getModifierLabel, isModifierPressed } from "@/lib/utils/keyboard"
 
 interface LeadInquiry {
   id: string
@@ -109,19 +111,31 @@ export default function AdmissionsEnquiriesPage() {
   const [newSource, setNewSource] = useState<LeadInquiry["source"]>("Walk-in")
   const [newNotes, setNewNotes] = useState("")
 
-  const filteredInquiries = useMemo(() => {
-    return inquiries.filter((inq) => {
-      const matchesSearch =
-        inq.studentName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        inq.parentName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        inq.phone.includes(searchQuery)
-      const matchesStatus = statusFilter === "ALL" || inq.status === statusFilter
-      return matchesSearch && matchesStatus
-    })
-  }, [inquiries, searchQuery, statusFilter])
+  // Element Refs for keyboard focus management
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const addBtnRef = useRef<HTMLButtonElement>(null)
+  const studentNameInputRef = useRef<HTMLInputElement>(null)
+  const parentNameInputRef = useRef<HTMLInputElement>(null)
+  const phoneInputRef = useRef<HTMLInputElement>(null)
+  const emailInputRef = useRef<HTMLInputElement>(null)
+  const notesInputRef = useRef<HTMLTextAreaElement>(null)
 
-  const handleAddInquiry = (e: React.FormEvent) => {
+  // Desk keybindings
+  useKeybinding("n", () => setIsAddModalOpen(true), { enabled: !isAddModalOpen })
+  useKeybinding("c", () => setIsAddModalOpen(true), { enabled: !isAddModalOpen })
+  useKeybinding("n", () => setIsAddModalOpen(true), { alt: true, enabled: !isAddModalOpen })
+  useKeybinding("/", (e) => {
     e.preventDefault()
+    searchInputRef.current?.focus()
+  }, { enabled: !isAddModalOpen })
+
+  // Modal keybindings
+  useEscapeKey(() => {
+    setIsAddModalOpen(false)
+    setTimeout(() => addBtnRef.current?.focus(), 50)
+  }, isAddModalOpen)
+
+  const saveInquiry = () => {
     if (!newStudentName.trim() || !newParentName.trim() || !newPhone.trim()) return
 
     const newEntry: LeadInquiry = {
@@ -144,6 +158,35 @@ export default function AdmissionsEnquiriesPage() {
     setNewPhone("")
     setNewEmail("")
     setNewNotes("")
+    setTimeout(() => addBtnRef.current?.focus(), 50)
+  }
+
+  useSubmitKey(() => {
+    if (isAddModalOpen) {
+      saveInquiry()
+    }
+  }, { requireModifier: true, enabled: isAddModalOpen })
+
+  useEffect(() => {
+    if (isAddModalOpen) {
+      setTimeout(() => studentNameInputRef.current?.focus(), 60)
+    }
+  }, [isAddModalOpen])
+
+  const filteredInquiries = useMemo(() => {
+    return inquiries.filter((inq) => {
+      const matchesSearch =
+        inq.studentName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        inq.parentName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        inq.phone.includes(searchQuery)
+      const matchesStatus = statusFilter === "ALL" || inq.status === statusFilter
+      return matchesSearch && matchesStatus
+    })
+  }, [inquiries, searchQuery, statusFilter])
+
+  const handleAddInquiry = (e: React.FormEvent) => {
+    e.preventDefault()
+    saveInquiry()
   }
 
   const columns: TableColumn<LeadInquiry>[] = [
@@ -232,12 +275,17 @@ export default function AdmissionsEnquiriesPage() {
       rightHeaderAction={
         <div className="flex items-center gap-2">
           <Button
+            ref={addBtnRef}
             size="dense"
             variant="primary"
             leadingIcon={<Plus className="w-3.5 h-3.5" />}
             onClick={() => setIsAddModalOpen(true)}
+            title="New Lead Inquiry (N or Alt+N)"
           >
             New Lead Inquiry
+            <span className="hidden sm:inline-block ml-1 px-1 py-0.2 rounded bg-black/20 text-[9px] font-mono text-white/90">
+              N
+            </span>
           </Button>
         </div>
       }
@@ -302,8 +350,9 @@ export default function AdmissionsEnquiriesPage() {
           <div className="relative w-full sm:w-72">
             <Search className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2" />
             <input
+              ref={searchInputRef}
               type="text"
-              placeholder="Search student, parent, phone..."
+              placeholder="Search student, parent, phone... (/)"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-canvas border border-border-default rounded-lg pl-9 pr-3 py-1.5 text-xs text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-primary"
@@ -338,16 +387,28 @@ export default function AdmissionsEnquiriesPage() {
 
       {/* Add Lead Inquiry Modal */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
-          <div className="w-full max-w-md bg-surface border border-border-default rounded-2xl shadow-2xl p-6">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setIsAddModalOpen(false)
+              setTimeout(() => addBtnRef.current?.focus(), 50)
+            }
+          }}
+        >
+          <div className="w-full max-w-md bg-surface border border-border-default rounded-2xl shadow-2xl p-6 animate-in zoom-in-95 duration-150">
             <div className="flex items-center justify-between pb-3 border-b border-border-default">
               <h3 className="font-bold text-text-primary text-base flex items-center gap-2">
                 <UserPlus className="w-4 h-4 text-brand-primary" />
                 <span>Record New Lead Inquiry</span>
               </h3>
               <button
-                onClick={() => setIsAddModalOpen(false)}
-                className="text-text-muted hover:text-text-primary text-sm p-1"
+                onClick={() => {
+                  setIsAddModalOpen(false)
+                  setTimeout(() => addBtnRef.current?.focus(), 50)
+                }}
+                className="text-text-muted hover:text-text-primary text-sm p-1 rounded-md"
+                title="Close (Esc)"
               >
                 ✕
               </button>
@@ -358,12 +419,19 @@ export default function AdmissionsEnquiriesPage() {
                   Prospective Student Name *
                 </label>
                 <input
+                  ref={studentNameInputRef}
                   type="text"
                   required
                   placeholder="e.g. Sai Teja"
                   value={newStudentName}
                   onChange={(e) => setNewStudentName(e.target.value)}
-                  className="w-full bg-canvas border border-border-default rounded-lg px-3 py-2 text-xs text-text-primary"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !isModifierPressed(e)) {
+                      e.preventDefault()
+                      parentNameInputRef.current?.focus()
+                    }
+                  }}
+                  className="w-full bg-canvas border border-border-default rounded-lg px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-brand-primary"
                 />
               </div>
               <div className="grid grid-cols-2 gap-3">
@@ -372,12 +440,19 @@ export default function AdmissionsEnquiriesPage() {
                     Parent / Guardian Name *
                   </label>
                   <input
+                    ref={parentNameInputRef}
                     type="text"
                     required
                     placeholder="e.g. Srikanth Rao"
                     value={newParentName}
                     onChange={(e) => setNewParentName(e.target.value)}
-                    className="w-full bg-canvas border border-border-default rounded-lg px-3 py-2 text-xs text-text-primary"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !isModifierPressed(e)) {
+                        e.preventDefault()
+                        phoneInputRef.current?.focus()
+                      }
+                    }}
+                    className="w-full bg-canvas border border-border-default rounded-lg px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-brand-primary"
                   />
                 </div>
                 <div>
@@ -385,12 +460,19 @@ export default function AdmissionsEnquiriesPage() {
                     Phone Number *
                   </label>
                   <input
+                    ref={phoneInputRef}
                     type="tel"
                     required
                     placeholder="+91 98480..."
                     value={newPhone}
                     onChange={(e) => setNewPhone(e.target.value)}
-                    className="w-full bg-canvas border border-border-default rounded-lg px-3 py-2 text-xs text-text-primary font-mono"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !isModifierPressed(e)) {
+                        e.preventDefault()
+                        emailInputRef.current?.focus()
+                      }
+                    }}
+                    className="w-full bg-canvas border border-border-default rounded-lg px-3 py-2 text-xs text-text-primary font-mono focus:outline-none focus:border-brand-primary"
                   />
                 </div>
               </div>
@@ -402,7 +484,7 @@ export default function AdmissionsEnquiriesPage() {
                   <select
                     value={newGrade}
                     onChange={(e) => setNewGrade(e.target.value)}
-                    className="w-full bg-canvas border border-border-default rounded-lg px-3 py-2 text-xs text-text-primary"
+                    className="w-full bg-canvas border border-border-default rounded-lg px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-brand-primary"
                   >
                     <option value="Class 10 (CBSE)">Class 10 (CBSE)</option>
                     <option value="Class 9 (CBSE)">Class 9 (CBSE)</option>
@@ -416,7 +498,7 @@ export default function AdmissionsEnquiriesPage() {
                   <select
                     value={newSource}
                     onChange={(e) => setNewSource(e.target.value as any)}
-                    className="w-full bg-canvas border border-border-default rounded-lg px-3 py-2 text-xs text-text-primary"
+                    className="w-full bg-canvas border border-border-default rounded-lg px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-brand-primary"
                   >
                     <option value="Walk-in">Walk-in</option>
                     <option value="Website Form">Website Form</option>
@@ -430,11 +512,18 @@ export default function AdmissionsEnquiriesPage() {
                   Email Address
                 </label>
                 <input
+                  ref={emailInputRef}
                   type="email"
                   placeholder="parent@example.com"
                   value={newEmail}
                   onChange={(e) => setNewEmail(e.target.value)}
-                  className="w-full bg-canvas border border-border-default rounded-lg px-3 py-2 text-xs text-text-primary"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !isModifierPressed(e)) {
+                      e.preventDefault()
+                      notesInputRef.current?.focus()
+                    }
+                  }}
+                  className="w-full bg-canvas border border-border-default rounded-lg px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-brand-primary"
                 />
               </div>
               <div>
@@ -442,20 +531,37 @@ export default function AdmissionsEnquiriesPage() {
                   Counseling Notes
                 </label>
                 <textarea
+                  ref={notesInputRef}
                   rows={2}
-                  placeholder="Student interest, curriculum preference..."
+                  placeholder="Student interest, curriculum preference... (Press Enter for newline, Cmd/Ctrl+Enter to save)"
                   value={newNotes}
                   onChange={(e) => setNewNotes(e.target.value)}
-                  className="w-full bg-canvas border border-border-default rounded-lg px-3 py-2 text-xs text-text-primary"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && isModifierPressed(e)) {
+                      e.preventDefault()
+                      saveInquiry()
+                    }
+                  }}
+                  className="w-full bg-canvas border border-border-default rounded-lg px-3 py-2 text-xs text-text-primary resize-none focus:outline-none focus:border-brand-primary"
                 />
               </div>
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-border-default mt-4">
-                <Button size="dense" variant="secondary" onClick={() => setIsAddModalOpen(false)}>
-                  Cancel
-                </Button>
-                <Button size="dense" variant="primary" type="submit">
-                  Save Inquiry
-                </Button>
+              <div className="flex items-center justify-end pt-3 border-t border-border-default mt-4">
+                <div className="flex items-center gap-2">
+                  <Button
+                    size="dense"
+                    variant="secondary"
+                    type="button"
+                    onClick={() => {
+                      setIsAddModalOpen(false)
+                      setTimeout(() => addBtnRef.current?.focus(), 50)
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                  <Button size="dense" variant="primary" type="submit">
+                    Save Inquiry
+                  </Button>
+                </div>
               </div>
             </form>
           </div>

@@ -114,6 +114,7 @@ export interface AcademicGrade {
     capacity: number
     enrolled: number
     classTeacher: string
+    classTeacherStaffId?: string | null
   }[]
   subjects: {
     id: string

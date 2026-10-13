@@ -55,6 +55,27 @@ router.get(
   facultyController.getSectionStudents.bind(facultyController)
 );
 
+// GET /api/v1/faculty/me/mentees
+router.get(
+  '/me/mentees',
+  tenantMiddleware,
+  facultyController.getMyMentees.bind(facultyController)
+);
+
+// PATCH /api/v1/faculty/mentees/:studentId/notes
+router.patch(
+  '/mentees/:studentId/notes',
+  tenantMiddleware,
+  facultyController.updateMenteeNote.bind(facultyController)
+);
+
+// GET /api/v1/faculty/:id/mentees
+router.get(
+  '/:id/mentees',
+  tenantMiddleware,
+  facultyController.getFacultyMentees.bind(facultyController)
+);
+
 // GET /api/v1/faculty/:id
 router.get(
   '/:id',

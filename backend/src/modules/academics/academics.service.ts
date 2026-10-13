@@ -169,6 +169,7 @@ export class AcademicsService {
     sequenceOrder?: number;
     initialSection?: string;
     initialCapacity?: number;
+    initialClassTeacherStaffId?: string;
   }, actorId = 'system') {
     let targetYearId = data.academicYearId;
     if (!targetYearId) {
@@ -221,6 +222,7 @@ export class AcademicsService {
       await academicsRepository.createSection(institutionId, created.id, {
         name: secName,
         capacity: data.initialCapacity || 40,
+        classTeacherStaffId: data.initialClassTeacherStaffId || undefined,
       });
     } catch (secErr) {
       console.warn('Initial section note:', (secErr as any)?.message);

@@ -985,6 +985,72 @@ export function useSectionStudents(sectionId?: string) {
   })
 }
 
+export function useFacultyMentees(facultyId?: string) {
+  return useQuery({
+    queryKey: ["faculty-mentees", facultyId || "me"],
+    queryFn: async (): Promise<{
+      staffId?: string
+      isClassMentor: boolean
+      mentoredSections: Array<{
+        sectionId: string
+        sectionName: string
+        classId: string
+        className: string
+        gradeSection: string
+        studentCount: number
+      }>
+      students: any[]
+    }> => {
+      try {
+        const url = facultyId
+          ? `${API_BASE_URL}/faculty/${facultyId}/mentees`
+          : `${API_BASE_URL}/faculty/me/mentees`
+        const res = await fetch(url, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && json.data) {
+          return {
+            staffId: json.data.staffId,
+            isClassMentor: !!json.data.isClassMentor,
+            mentoredSections: Array.isArray(json.data.mentoredSections) ? json.data.mentoredSections : [],
+            students: Array.isArray(json.data.students) ? json.data.students : [],
+          }
+        }
+      } catch (err) {
+        console.warn("Backend unavailable for faculty mentees:", err)
+      }
+      return {
+        isClassMentor: false,
+        mentoredSections: [],
+        students: [],
+      }
+    },
+  })
+}
+
+export function useUpdateMenteeNote() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (payload: { studentId: string; notes: string }): Promise<any> => {
+      const res = await fetch(`${API_BASE_URL}/faculty/mentees/${payload.studentId}/notes`, {
+        method: "PATCH",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ notes: payload.notes }),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) {
+        throw new Error(json.error?.message || json.message || "Failed to update mentee note")
+      }
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["faculty-mentees"] })
+      queryClient.invalidateQueries({ queryKey: ["section-students"] })
+    },
+  })
+}
+
 export function useFinance() {
   return useQuery({
     queryKey: ["finance-records"],
@@ -1754,6 +1820,7 @@ export function useCreateClass() {
       sequenceOrder?: number
       initialSection?: string
       initialCapacity?: number
+      initialClassTeacherStaffId?: string
     }) => {
       const res = await fetch(`${API_BASE_URL}/academics/classes`, {
         method: "POST",
@@ -1813,7 +1880,7 @@ export function useDeleteClass() {
 export function useCreateSection() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: async ({ classId, data }: { classId: string; data: { name: string; capacity?: number; classTeacherStaffId?: string } }) => {
+    mutationFn: async ({ classId, data }: { classId: string; data: { name: string; capacity?: number; classTeacherStaffId?: string | null } }) => {
       const res = await fetch(`${API_BASE_URL}/academics/classes/${classId}/sections`, {
         method: "POST",
         headers: getAuthHeaders(),
@@ -1821,6 +1888,45 @@ export function useCreateSection() {
       })
       const json = await res.json()
       if (!res.ok) throw new Error(json.message || "Failed to create section")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-classes"] })
+    },
+  })
+}
+
+export function useUpdateSection() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({ id, data }: { id: string; data: { name?: string; capacity?: number; classTeacherStaffId?: string | null } }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/sections/${id}`, {
+        method: "PUT",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to update section")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-classes"] })
+    },
+  })
+}
+
+export function useDeleteSection() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const res = await fetch(`${API_BASE_URL}/academics/sections/${id}`, {
+        method: "DELETE",
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to delete section")
       return json.data
     },
     onSuccess: () => {

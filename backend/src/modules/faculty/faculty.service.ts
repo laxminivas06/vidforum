@@ -36,6 +36,8 @@ export class FacultyService {
         userId: row.userId || row.email,
         hasAccount: !!row.hasAccount,
         assignedClasses: assigned,
+        mentoredSections: Array.isArray(row.mentoredSections) ? row.mentoredSections : [],
+        isClassMentor: Array.isArray(row.mentoredSections) && row.mentoredSections.length > 0,
         batchesCount: assigned.length,
         studentsCount: studentsCount || 0,
         todayClasses,
@@ -122,6 +124,22 @@ export class FacultyService {
 
   async getSectionStudentRoster(sectionId: string, institutionId: string) {
     return await facultyRepository.findSectionStudents(sectionId, institutionId);
+  }
+
+  async getMyMentees(profileId: string, institutionId: string) {
+    const member = await facultyRepository.findFacultyByProfileId(profileId, institutionId);
+    if (!member) {
+      throw new Error('Faculty profile not found');
+    }
+    return await facultyRepository.findFacultyMentees(member.id, institutionId);
+  }
+
+  async getFacultyMentees(staffId: string, institutionId: string) {
+    return await facultyRepository.findFacultyMentees(staffId, institutionId);
+  }
+
+  async updateStudentMentorNotes(studentId: string, institutionId: string, notes: string) {
+    return await facultyRepository.updateStudentMentorNotes(studentId, institutionId, notes);
   }
 }
 

@@ -58,6 +58,8 @@ import {
   useDeleteClass,
   useGenerateClassMatrix,
   useCreateSection,
+  useUpdateSection,
+  useDeleteSection,
   useSubjects,
   useCreateSubject,
   useUpdateSubject,
@@ -210,6 +212,8 @@ function AcademicsWorkspaceContent() {
   const cloneYearMutation = useCloneAcademicYear()
   const generateMatrixMutation = useGenerateClassMatrix()
   const createSectionMutation = useCreateSection()
+  const updateSectionMutation = useUpdateSection()
+  const deleteSectionMutation = useDeleteSection()
   const createSubjectMutation = useCreateSubject()
   const mapSubjectMutation = useMapSubjectToGrade()
   const removeSubjectMutation = useRemoveSubjectFromGrade()
@@ -276,6 +280,21 @@ function AcademicsWorkspaceContent() {
 
   const [secName, setSecName] = useState("")
   const [secCapacity, setSecCapacity] = useState(40)
+  const [secMentorStaffId, setSecMentorStaffId] = useState("")
+
+  // Edit Section & Class Mentor state
+  const [isEditSectionModalOpen, setIsEditSectionModalOpen] = useState(false)
+  const [editingSection, setEditingSection] = useState<any | null>(null)
+  const [editSecName, setEditSecName] = useState("")
+  const [editSecCapacity, setEditSecCapacity] = useState(40)
+  const [editSecMentorStaffId, setEditSecMentorStaffId] = useState<string>("")
+
+  // Edit Class / Grade state
+  const [isEditClassModalOpen, setIsEditClassModalOpen] = useState(false)
+  const [editingClass, setEditingClass] = useState<any | null>(null)
+  const [editClassName, setEditClassName] = useState("")
+  const [editClassDeptId, setEditClassDeptId] = useState("")
+  const [editClassSeq, setEditClassSeq] = useState<number>(1)
 
   // Filtered subjects
   const filteredSubjects = useMemo(() => {
@@ -302,6 +321,7 @@ function AcademicsWorkspaceContent() {
   const [newClassSection, setNewClassSection] = useState("Section A")
   const [newClassCapacity, setNewClassCapacity] = useState(40)
   const [newClassDeptId, setNewClassDeptId] = useState("")
+  const [newClassMentorStaffId, setNewClassMentorStaffId] = useState("")
 
   // Subject Master (Grade-Scoped) state
   const [selectedSubjectGradeId, setSelectedSubjectGradeId] = useState<string>("")
@@ -533,6 +553,7 @@ function AcademicsWorkspaceContent() {
         sequenceOrder: grades.length + 1,
         initialSection: newClassSection.trim() || "Section A",
         initialCapacity: newClassCapacity || 40,
+        initialClassTeacherStaffId: newClassMentorStaffId || undefined,
       })
 
       triggerSuccess(`Class / Grade "${newClassName}" added successfully with ${newClassSection || "Section A"}!`)
@@ -544,8 +565,104 @@ function AcademicsWorkspaceContent() {
       setNewClassName("")
       setNewClassSection("Section A")
       setNewClassCapacity(40)
+      setNewClassMentorStaffId("")
     } catch (err: any) {
       triggerError(err.message || "Failed to create class / grade")
+    }
+  }
+
+  const handleOpenEditClass = (cls: any) => {
+    setEditingClass(cls)
+    setEditClassName(cls.name || "")
+    setEditClassDeptId(cls.departmentId || "")
+    setEditClassSeq(cls.sequenceOrder || 1)
+    setIsEditClassModalOpen(true)
+  }
+
+  const handleSaveClassEdit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!editingClass?.id || !editClassName.trim()) {
+      triggerError("Class / Grade name is required.")
+      return
+    }
+    try {
+      await updateClassMutation.mutateAsync({
+        id: editingClass.id,
+        data: {
+          name: editClassName.trim(),
+          departmentId: editClassDeptId || undefined,
+          sequenceOrder: editClassSeq,
+        },
+      })
+      triggerSuccess(`Class / Grade "${editClassName}" updated successfully!`)
+      setIsEditClassModalOpen(false)
+      setEditingClass(null)
+    } catch (err: any) {
+      triggerError(err.message || "Failed to update class")
+    }
+  }
+
+  const handleDeleteClass = async (cls: any) => {
+    if (confirm(`Are you sure you want to delete class "${cls.name}"? This action cannot be undone.`)) {
+      try {
+        await deleteClassMutation.mutateAsync(cls.id)
+        triggerSuccess(`Class "${cls.name}" deleted successfully.`)
+        if (selectedGradeId === cls.id) {
+          setSelectedGradeId("")
+        }
+      } catch (err: any) {
+        triggerError(err.message || "Failed to delete class. Make sure no students or sections are active.")
+      }
+    }
+  }
+
+  const handleOpenEditSection = (section: any) => {
+    setEditingSection(section)
+    setEditSecName(section.name || "")
+    setEditSecCapacity(section.capacity || 40)
+    setEditSecMentorStaffId(section.classTeacherStaffId || "")
+    setIsEditSectionModalOpen(true)
+  }
+
+  const handleSaveSectionEdit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!editingSection?.id || !editSecName.trim()) {
+      triggerError("Section name is required.")
+      return
+    }
+    try {
+      await updateSectionMutation.mutateAsync({
+        id: editingSection.id,
+        data: {
+          name: editSecName.trim(),
+          capacity: editSecCapacity,
+          classTeacherStaffId: editSecMentorStaffId || null,
+        },
+      })
+      const mentor = facultyList.find((f: any) => f.id === editSecMentorStaffId)
+      triggerSuccess(
+        mentor
+          ? `Section "${editSecName}" updated with Class Mentor: ${mentor.name}!`
+          : `Section "${editSecName}" updated successfully!`
+      )
+      setIsEditSectionModalOpen(false)
+      setEditingSection(null)
+    } catch (err: any) {
+      triggerError(err.message || "Failed to update section")
+    }
+  }
+
+  const handleDeleteSection = async (section: any) => {
+    if (confirm(`Are you sure you want to delete section "${section.name}"?`)) {
+      try {
+        await deleteSectionMutation.mutateAsync(section.id)
+        triggerSuccess(`Section "${section.name}" deleted successfully.`)
+        if (selectedSectionId === section.id) {
+          setSelectedSectionId("")
+        }
+      } catch (err: any) {
+        triggerError(err.message || "Failed to delete section. Make sure no students are enrolled.")
+      }
     }
   }
 
@@ -1070,13 +1187,30 @@ function AcademicsWorkspaceContent() {
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-semibold text-sm">{grade.name}</span>
-                        <span
-                          className={`text-xs font-mono px-2 py-0.5 rounded-full ${
-                            isSelected ? "bg-white/20 text-white" : "bg-subtle text-text-secondary"
-                          }`}
-                        >
-                          {grade.code}
-                        </span>
+                        <div className="flex items-center gap-1.5">
+                          <span
+                            className={`text-xs font-mono px-2 py-0.5 rounded-full ${
+                              isSelected ? "bg-white/20 text-white" : "bg-subtle text-text-secondary"
+                            }`}
+                          >
+                            {grade.code}
+                          </span>
+                          <button
+                            type="button"
+                            title="Edit Class / Grade"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              handleOpenEditClass(grade)
+                            }}
+                            className={`p-1 rounded-md transition-colors ${
+                              isSelected
+                                ? "text-white/80 hover:text-white hover:bg-white/20"
+                                : "text-text-muted hover:text-text-primary hover:bg-subtle"
+                            }`}
+                          >
+                            <Pencil className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
                       </div>
 
                       <div className={`text-xs mt-2 ${isSelected ? "text-neutral-300" : "text-text-secondary"}`}>
@@ -1132,14 +1266,29 @@ function AcademicsWorkspaceContent() {
                       </p>
                     </div>
 
-                    <Button
-                      size="dense"
-                      variant="secondary"
-                      leadingIcon={<Plus className="w-3.5 h-3.5" />}
-                      onClick={() => setIsAddSectionModalOpen(true)}
-                    >
-                      Add Section
-                    </Button>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        size="dense"
+                        variant="secondary"
+                        leadingIcon={<Pencil className="w-3.5 h-3.5" />}
+                        onClick={() => handleOpenEditClass(activeGrade)}
+                      >
+                        Edit Class
+                      </Button>
+                      <Button
+                        size="dense"
+                        variant="primary"
+                        leadingIcon={<Plus className="w-3.5 h-3.5" />}
+                        onClick={() => {
+                          setSecName("")
+                          setSecCapacity(40)
+                          setSecMentorStaffId("")
+                          setIsAddSectionModalOpen(true)
+                        }}
+                      >
+                        Add Section
+                      </Button>
+                    </div>
                   </div>
 
                   {/* Sections Grid - Clickable for Section Selection */}
@@ -1180,22 +1329,66 @@ function AcademicsWorkspaceContent() {
                                     </Badge>
                                   )}
                                 </div>
-                                <Badge variant={pct >= 95 ? "warning" : "positive"}>
-                                  {pct}% Capacity
-                                </Badge>
+                                <div className="flex items-center gap-1.5">
+                                  <Badge variant={pct >= 95 ? "warning" : "positive"}>
+                                    {pct}% Capacity
+                                  </Badge>
+                                  <button
+                                    type="button"
+                                    title="Edit Section & Class Mentor"
+                                    onClick={(e) => {
+                                      e.stopPropagation()
+                                      handleOpenEditSection(section)
+                                    }}
+                                    className="p-1 rounded-md text-text-muted hover:text-action-primary hover:bg-subtle transition-colors"
+                                  >
+                                    <Pencil className="w-3.5 h-3.5" />
+                                  </button>
+                                </div>
                               </div>
                             </CardHeader>
                             <CardContent className="flex flex-col gap-3 text-xs">
                               <div className="flex items-center gap-2 text-text-secondary">
-                                <DoorOpen className="w-3.5 h-3.5 text-text-muted" />
+                                <DoorOpen className="w-3.5 h-3.5 text-text-muted shrink-0" />
                                 <span>{section.room}</span>
                               </div>
 
-                              <div className="flex items-center gap-2 text-text-secondary">
-                                <Users className="w-3.5 h-3.5 text-text-muted" />
-                                <span className="font-semibold text-text-primary">
-                                  {section.classTeacher}
-                                </span>
+                              {/* Class Mentor Highlight Card */}
+                              <div className="p-2.5 rounded-lg bg-subtle/80 border border-border-subtle flex items-center justify-between gap-2">
+                                <div className="flex items-center gap-2 min-w-0">
+                                  <div
+                                    className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
+                                      section.classTeacher && section.classTeacher !== "Unassigned"
+                                        ? "bg-brand-primary/10 text-brand-primary font-bold"
+                                        : "bg-neutral-500/10 text-neutral-400"
+                                    }`}
+                                  >
+                                    <Users className="w-3.5 h-3.5" />
+                                  </div>
+                                  <div className="min-w-0 flex flex-col">
+                                    <span className="text-[10px] uppercase font-mono tracking-wider text-text-muted">
+                                      Class Mentor
+                                    </span>
+                                    <span className="font-semibold text-text-primary text-xs truncate">
+                                      {section.classTeacher && section.classTeacher !== "Unassigned"
+                                        ? section.classTeacher
+                                        : "No Mentor Assigned"}
+                                    </span>
+                                  </div>
+                                </div>
+                                <Button
+                                  size="dense"
+                                  variant="ghost"
+                                  className="h-6 px-2 text-[11px] shrink-0 font-medium"
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    handleOpenEditSection(section)
+                                  }}
+                                >
+                                  {section.classTeacher && section.classTeacher !== "Unassigned"
+                                    ? "Edit Mentor"
+                                    : "Assign Mentor"}
+                                </Button>
                               </div>
 
                               <div className="pt-2 border-t border-border-subtle">
@@ -1213,6 +1406,33 @@ function AcademicsWorkspaceContent() {
                                 <span className="font-semibold text-text-primary">
                                   {sectionAllocCount} / {activeGrade.subjects.length} Assigned
                                 </span>
+                              </div>
+
+                              <div className="pt-2 border-t border-border-subtle flex items-center gap-2">
+                                <Button
+                                  size="dense"
+                                  variant="secondary"
+                                  leadingIcon={<Pencil className="w-3 h-3" />}
+                                  className="flex-1 text-xs h-7 justify-center"
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    handleOpenEditSection(section)
+                                  }}
+                                >
+                                  Edit Section
+                                </Button>
+                                <Button
+                                  size="dense"
+                                  variant="ghost"
+                                  className="text-xs h-7 px-2 text-text-muted hover:text-status-error"
+                                  title="Delete Section"
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    handleDeleteSection(section)
+                                  }}
+                                >
+                                  <Trash2 className="w-3.5 h-3.5" />
+                                </Button>
                               </div>
                             </CardContent>
                           </Card>
@@ -2371,6 +2591,24 @@ function AcademicsWorkspaceContent() {
                 </div>
               </div>
 
+              <div>
+                <label className="font-semibold text-text-primary block mb-1">
+                  Class Mentor for Initial Section (Optional)
+                </label>
+                <select
+                  value={newClassMentorStaffId}
+                  onChange={(e) => setNewClassMentorStaffId(e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                >
+                  <option value="">-- No Class Mentor (Unassigned) --</option>
+                  {facultyList.map((faculty: any) => (
+                    <option key={faculty.id} value={faculty.id}>
+                      {faculty.name} ({faculty.employeeCode}) • {faculty.department || faculty.designation || "Faculty"}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <div className="flex justify-end gap-2 pt-3 border-t border-border-default mt-2">
                 <Button
                   type="button"
@@ -2388,6 +2626,117 @@ function AcademicsWorkspaceContent() {
                 >
                   + Create Class / Grade
                 </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* MODAL: EDIT CLASS / GRADE                                                  */}
+      {/* ========================================================================= */}
+      {isEditClassModalOpen && editingClass && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in">
+          <div className="bg-surface rounded-2xl border border-border-default max-w-md w-full p-6 shadow-2xl flex flex-col gap-4">
+            <div className="flex items-center justify-between pb-2 border-b border-border-default">
+              <div>
+                <h3 className="text-base font-bold text-text-primary">
+                  Edit Class / Grade: {editingClass.name}
+                </h3>
+                <p className="text-xs text-text-secondary mt-0.5">
+                  Update class naming, department, and promotion sequence
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsEditClassModalOpen(false)
+                  setEditingClass(null)
+                }}
+                className="p-1 rounded-lg text-text-muted hover:text-text-primary hover:bg-subtle"
+              >
+                <XCircle className="w-5 h-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveClassEdit} className="flex flex-col gap-3 text-xs">
+              <div>
+                <label className="font-semibold text-text-primary block mb-1">
+                  Class / Grade Name <span className="text-status-error">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={editClassName}
+                  onChange={(e) => setEditClassName(e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-semibold"
+                />
+              </div>
+
+              <div>
+                <label className="font-semibold text-text-primary block mb-1">Department</label>
+                <select
+                  value={editClassDeptId}
+                  onChange={(e) => setEditClassDeptId(e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                >
+                  <option value="">Default Department</option>
+                  {departments.map((d: any) => (
+                    <option key={d.id} value={d.id}>
+                      {d.name} ({d.code})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="font-semibold text-text-primary block mb-1">
+                  Sequence Order (for promotion ordering)
+                </label>
+                <input
+                  type="number"
+                  min={1}
+                  max={50}
+                  value={editClassSeq}
+                  onChange={(e) => setEditClassSeq(parseInt(e.target.value, 10) || 1)}
+                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-mono"
+                />
+              </div>
+
+              <div className="flex items-center justify-between pt-3 border-t border-border-default mt-2">
+                <Button
+                  type="button"
+                  size="dense"
+                  variant="ghost"
+                  className="text-status-error hover:bg-red-500/10"
+                  onClick={() => {
+                    handleDeleteClass(editingClass)
+                    setIsEditClassModalOpen(false)
+                  }}
+                >
+                  Delete Class
+                </Button>
+                <div className="flex items-center gap-2">
+                  <Button
+                    type="button"
+                    size="dense"
+                    variant="ghost"
+                    onClick={() => {
+                      setIsEditClassModalOpen(false)
+                      setEditingClass(null)
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    type="submit"
+                    size="dense"
+                    variant="primary"
+                    isLoading={updateClassMutation.isPending}
+                  >
+                    Save Changes
+                  </Button>
+                </div>
               </div>
             </form>
           </div>
@@ -2998,55 +3347,217 @@ function AcademicsWorkspaceContent() {
       {/* MODAL: ADD SECTION */}
       {/* ========================================================================= */}
       {isAddSectionModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in">
           <div className="bg-surface rounded-2xl border border-border-default max-w-md w-full p-6 shadow-2xl flex flex-col gap-4">
-            <h3 className="text-base font-bold text-text-primary">Add Classroom Section</h3>
+            <div className="flex items-center justify-between pb-2 border-b border-border-default">
+              <div>
+                <h3 className="text-base font-bold text-text-primary">Add Classroom Section</h3>
+                <p className="text-xs text-text-secondary mt-0.5">
+                  Create a new section under {activeGrade?.name}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsAddSectionModalOpen(false)}
+                className="p-1 rounded-lg text-text-muted hover:text-text-primary hover:bg-subtle"
+              >
+                <XCircle className="w-5 h-5" />
+              </button>
+            </div>
+
             <div className="flex flex-col gap-3 text-xs">
               <div>
-                <label className="font-semibold text-text-primary block mb-1">Section Name (e.g. Section C)</label>
+                <label className="font-semibold text-text-primary block mb-1">Section Name (e.g. Section C) <span className="text-status-error">*</span></label>
                 <input
                   type="text"
                   value={secName}
                   onChange={(e) => setSecName(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-semibold"
                   placeholder="Section C"
                 />
               </div>
+
+              <div>
+                <label className="font-semibold text-text-primary block mb-1">
+                  Class Mentor (Optional)
+                </label>
+                <select
+                  value={secMentorStaffId}
+                  onChange={(e) => setSecMentorStaffId(e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                >
+                  <option value="">-- No Class Mentor (Unassigned) --</option>
+                  {facultyList.map((faculty: any) => (
+                    <option key={faculty.id} value={faculty.id}>
+                      {faculty.name} ({faculty.employeeCode}) • {faculty.department || faculty.designation || "Faculty"}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <div>
                 <label className="font-semibold text-text-primary block mb-1">Seating Capacity</label>
                 <input
                   type="number"
+                  min={1}
+                  max={200}
                   value={secCapacity}
-                  onChange={(e) => setSecCapacity(parseInt(e.target.value, 10))}
-                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary"
+                  onChange={(e) => setSecCapacity(parseInt(e.target.value, 10) || 40)}
+                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-mono"
                 />
               </div>
             </div>
-            <div className="flex justify-end gap-2 pt-2 border-t border-border-default">
+
+            <div className="flex justify-end gap-2 pt-3 border-t border-border-default mt-2">
               <Button size="dense" variant="ghost" onClick={() => setIsAddSectionModalOpen(false)}>
                 Cancel
               </Button>
               <Button
                 size="dense"
                 variant="primary"
+                isLoading={createSectionMutation.isPending}
                 onClick={async () => {
-                  if (!secName.trim() || !activeGrade?.id) return
+                  if (!secName.trim() || !activeGrade?.id) {
+                    triggerError("Section name is required")
+                    return
+                  }
                   try {
                     await createSectionMutation.mutateAsync({
                       classId: activeGrade.id,
-                      data: { name: secName.trim(), capacity: secCapacity },
+                      data: {
+                        name: secName.trim(),
+                        capacity: secCapacity,
+                        classTeacherStaffId: secMentorStaffId || undefined,
+                      },
                     })
                     triggerSuccess(`Added ${secName} to ${activeGrade.name}`)
                     setSecName("")
+                    setSecCapacity(40)
+                    setSecMentorStaffId("")
                     setIsAddSectionModalOpen(false)
                   } catch (err: any) {
-                    triggerError(err.message)
+                    triggerError(err.message || "Failed to create section")
                   }
                 }}
               >
-                Add Section
+                + Add Section
               </Button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* MODAL: EDIT SECTION & CLASS MENTOR                                        */}
+      {/* ========================================================================= */}
+      {isEditSectionModalOpen && editingSection && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in">
+          <div className="bg-surface rounded-2xl border border-border-default max-w-md w-full p-6 shadow-2xl flex flex-col gap-4">
+            <div className="flex items-center justify-between pb-2 border-b border-border-default">
+              <div>
+                <h3 className="text-base font-bold text-text-primary">
+                  Edit Section: {editingSection.name}
+                </h3>
+                <p className="text-xs text-text-secondary mt-0.5">
+                  Update classroom section name, seating capacity, and assign Class Mentor
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsEditSectionModalOpen(false)
+                  setEditingSection(null)
+                }}
+                className="p-1 rounded-lg text-text-muted hover:text-text-primary hover:bg-subtle"
+              >
+                <XCircle className="w-5 h-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveSectionEdit} className="flex flex-col gap-3 text-xs">
+              <div>
+                <label className="font-semibold text-text-primary block mb-1">
+                  Section Name <span className="text-status-error">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={editSecName}
+                  onChange={(e) => setEditSecName(e.target.value)}
+                  placeholder="e.g. Section A, Section B"
+                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-semibold"
+                />
+              </div>
+
+              <div>
+                <label className="font-semibold text-text-primary block mb-1">
+                  Class Mentor (Designated Class Teacher / Mentor)
+                </label>
+                <select
+                  value={editSecMentorStaffId}
+                  onChange={(e) => setEditSecMentorStaffId(e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-medium"
+                >
+                  <option value="">-- No Mentor Assigned (Unassigned) --</option>
+                  {facultyList.map((faculty: any) => (
+                    <option key={faculty.id} value={faculty.id}>
+                      {faculty.name} ({faculty.employeeCode}) • {faculty.department || faculty.designation || "Faculty"}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-[11px] text-text-secondary mt-1">
+                  The designated mentor oversees student attendance, discipline, and parent communication for this section.
+                </p>
+              </div>
+
+              <div>
+                <label className="font-semibold text-text-primary block mb-1">Seating Capacity</label>
+                <input
+                  type="number"
+                  min={1}
+                  max={200}
+                  value={editSecCapacity}
+                  onChange={(e) => setEditSecCapacity(parseInt(e.target.value, 10) || 40)}
+                  className="w-full px-3 py-2 rounded-lg border border-border-default bg-subtle text-text-primary font-mono"
+                />
+              </div>
+
+              <div className="flex items-center justify-between pt-3 border-t border-border-default mt-2">
+                <Button
+                  type="button"
+                  size="dense"
+                  variant="ghost"
+                  className="text-status-error hover:bg-red-500/10"
+                  onClick={() => {
+                    handleDeleteSection(editingSection)
+                    setIsEditSectionModalOpen(false)
+                  }}
+                >
+                  Delete Section
+                </Button>
+                <div className="flex items-center gap-2">
+                  <Button
+                    type="button"
+                    size="dense"
+                    variant="ghost"
+                    onClick={() => {
+                      setIsEditSectionModalOpen(false)
+                      setEditingSection(null)
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    type="submit"
+                    size="dense"
+                    variant="primary"
+                    isLoading={updateSectionMutation.isPending}
+                  >
+                    Save Changes
+                  </Button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       )}

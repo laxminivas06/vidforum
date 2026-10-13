@@ -98,6 +98,40 @@ export class FacultyController {
       next(error);
     }
   }
+
+  async getMyMentees(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const instId = req.institutionId!;
+      const userId = req.user!.id;
+      const data = await facultyService.getMyMentees(userId, instId);
+      sendSuccess(res, data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getFacultyMentees(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const instId = req.institutionId!;
+      const staffId = (req.params.id || req.params.staffId) as string;
+      const data = await facultyService.getFacultyMentees(staffId, instId);
+      sendSuccess(res, data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async updateMenteeNote(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const instId = req.institutionId!;
+      const studentId = req.params.studentId as string;
+      const notes = (req.body.notes || req.body.mentorNotes || '').trim();
+      const result = await facultyService.updateStudentMentorNotes(studentId, instId, notes);
+      sendSuccess(res, result, 'Mentorship session note recorded successfully');
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const facultyController = new FacultyController();

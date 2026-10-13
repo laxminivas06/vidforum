@@ -168,7 +168,7 @@ export class AcademicsController {
     try {
       const instId = req.institutionId!;
       const actorId = (req as any).user?.id || 'system';
-      const { name, academicYearId, departmentId, sequenceOrder, initialSection, initialCapacity } = req.body;
+      const { name, academicYearId, departmentId, sequenceOrder, initialSection, initialCapacity, initialClassTeacherStaffId } = req.body;
 
       if (!name || !name.trim()) {
         sendError(res, 'Class / Grade name is required', 400, 'VALIDATION_ERROR');
@@ -177,7 +177,7 @@ export class AcademicsController {
 
       const created = await academicsService.createClass(
         instId,
-        { name, academicYearId, departmentId, sequenceOrder, initialSection, initialCapacity },
+        { name, academicYearId, departmentId, sequenceOrder, initialSection, initialCapacity, initialClassTeacherStaffId },
         actorId
       );
       sendSuccess(res, created, 'Class created successfully', 201);

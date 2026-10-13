@@ -574,7 +574,7 @@ export class AcademicsRepository {
     }
     if (data.classTeacherStaffId !== undefined) {
       fields.push(`class_teacher_staff_id = $${idx++}`);
-      values.push(data.classTeacherStaffId);
+      values.push(data.classTeacherStaffId || null);
     }
 
     const res = await db.query(

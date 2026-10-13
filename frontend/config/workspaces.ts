@@ -19,6 +19,21 @@ export interface PlatformWorkspace {
   navItems: WorkspaceNavItem[]
 }
 
+export const WORKSPACE_ORDER: string[] = [
+  "dashboard",
+  "hrms",
+  "academics",
+  "admissions",
+  "faculty",
+  "examinations",
+  "attendance",
+  "timetable",
+  "finance",
+  "documents",
+  "campus_life",
+  "settings",
+]
+
 export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
   {
     id: "dashboard",
@@ -36,18 +51,19 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     ],
   },
   {
-    id: "admissions",
-    name: "Admissions & Enrollment",
-    shortName: "Admissions",
+    id: "hrms",
+    name: "Staff & HRMS Workspace",
+    shortName: "Staff / HRMS",
     category: "CORE",
-    description: "Applicant Kanban, inquiry management and student enrollment pipeline",
-    iconName: "UserPlus",
-    primaryRoute: "/admissions",
-    routes: ["/admissions"],
+    description: "Staff directory, designations, leave management, attendance and payroll",
+    iconName: "Briefcase",
+    primaryRoute: "/hrms/staff",
+    routes: ["/hrms"],
     navItems: [
-      { title: "Applications Kanban", href: "/admissions", iconName: "LayoutDashboard" },
-      { title: "Document Verification", href: "/admissions/documents", iconName: "FileText", badge: "Desk" },
-      { title: "Enrolled Students", href: "/admissions/enrolled", iconName: "CheckCircle2", badge: "Roster" },
+      { title: "Staff Directory", href: "/hrms/staff", iconName: "Users" },
+      { title: "Active Faculty", href: "/hrms/staff?status=ACTIVE", iconName: "CheckCircle2" },
+      { title: "On Leave / Sabbatical", href: "/hrms/staff?status=ON_LEAVE", iconName: "Clock" },
+      { title: "Teaching Workload", href: "/hrms/staff?tab=workload", iconName: "Activity" },
     ],
   },
   {
@@ -70,19 +86,49 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     ],
   },
   {
+    id: "admissions",
+    name: "Admissions & Enrollment",
+    shortName: "Admissions",
+    category: "CORE",
+    description: "Applicant Kanban, inquiry management and student enrollment pipeline",
+    iconName: "UserPlus",
+    primaryRoute: "/admissions",
+    routes: ["/admissions"],
+    navItems: [
+      { title: "Applications Kanban", href: "/admissions", iconName: "LayoutDashboard" },
+      { title: "Document Verification", href: "/admissions/documents", iconName: "FileText", badge: "Desk" },
+      { title: "Enrolled Students", href: "/admissions/enrolled", iconName: "CheckCircle2", badge: "Roster" },
+    ],
+  },
+  {
     id: "faculty",
     name: "Faculty Management",
     shortName: "Faculty",
     category: "CORE",
-    description: "Teaching staff allocation, teacher profiles and workloads",
+    description: "Teaching staff allocation, teacher profiles, assigned courses and mentee tracking",
     iconName: "BookOpen",
     primaryRoute: "/faculty/dashboard",
     routes: ["/faculty"],
     navItems: [
-      { title: "Faculty Overview", href: "/faculty/dashboard", iconName: "LayoutDashboard" },
-      { title: "My Assigned Sections", href: "/faculty/dashboard?view=sections", iconName: "Users" },
-      { title: "Roll-Call Attendance", href: "/attendance/sessions", iconName: "CalendarCheck" },
-      { title: "Marks & Assessments", href: "/examinations/schedules", iconName: "FileSpreadsheet" },
+      { title: "Faculty Dashboard", href: "/faculty/dashboard", iconName: "LayoutDashboard" },
+      { title: "My Assigned Courses", href: "/faculty/courses", iconName: "BookOpen" },
+      { title: "My Mentees", href: "/faculty/mentees", iconName: "Users" },
+      { title: "Marks and Assignment", href: "/faculty/marks-assignments", iconName: "FileSpreadsheet" },
+    ],
+  },
+  {
+    id: "examinations",
+    name: "Examinations & Gradebook",
+    shortName: "Exams",
+    category: "CORE",
+    description: "Exam schedules, mark entries, grading rules, Excel import and report cards",
+    iconName: "FileSpreadsheet",
+    primaryRoute: "/examinations/schedules",
+    routes: ["/examinations"],
+    navItems: [
+      { title: "Exam Schedules", href: "/examinations/schedules", iconName: "Calendar" },
+      { title: "Marks Upload Queue", href: "/examinations/schedules?tab=marks", iconName: "FileSpreadsheet" },
+      { title: "Report Cards & Ranks", href: "/examinations/schedules?tab=reports", iconName: "Award" },
     ],
   },
   {
@@ -102,18 +148,18 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     ],
   },
   {
-    id: "examinations",
-    name: "Examinations & Gradebook",
-    shortName: "Exams",
+    id: "timetable",
+    name: "Timetable & Schedules",
+    shortName: "Timetable",
     category: "CORE",
-    description: "Exam schedules, mark entries, grading rules, Excel import and report cards",
-    iconName: "FileSpreadsheet",
-    primaryRoute: "/examinations/schedules",
-    routes: ["/examinations"],
+    description: "Class timetable matrices, conflict detection and teacher substitutions",
+    iconName: "Clock",
+    primaryRoute: "/timetable/matrix",
+    routes: ["/timetable"],
     navItems: [
-      { title: "Exam Schedules", href: "/examinations/schedules", iconName: "Calendar" },
-      { title: "Marks Upload Queue", href: "/examinations/schedules?tab=marks", iconName: "FileSpreadsheet" },
-      { title: "Report Cards & Ranks", href: "/examinations/schedules?tab=reports", iconName: "Award" },
+      { title: "Timetable Matrix", href: "/timetable/matrix", iconName: "Clock" },
+      { title: "Grade 10 Matrix", href: "/timetable/matrix?grade=Grade+10+-+Section+A", iconName: "Calendar" },
+      { title: "Grade 11 Matrix", href: "/timetable/matrix?grade=Grade+11+-+Section+A", iconName: "Layers" },
     ],
   },
   {
@@ -149,37 +195,6 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     ],
   },
   {
-    id: "hrms",
-    name: "Staff & HRMS Workspace",
-    shortName: "Staff / HRMS",
-    category: "CORE",
-    description: "Staff directory, designations, leave management, attendance and payroll",
-    iconName: "Briefcase",
-    primaryRoute: "/hrms/staff",
-    routes: ["/hrms"],
-    navItems: [
-      { title: "Staff Directory", href: "/hrms/staff", iconName: "Users" },
-      { title: "Active Faculty", href: "/hrms/staff?status=ACTIVE", iconName: "CheckCircle2" },
-      { title: "On Leave / Sabbatical", href: "/hrms/staff?status=ON_LEAVE", iconName: "Clock" },
-      { title: "Teaching Workload", href: "/hrms/staff?tab=workload", iconName: "Activity" },
-    ],
-  },
-  {
-    id: "timetable",
-    name: "Timetable & Schedules",
-    shortName: "Timetable",
-    category: "CORE",
-    description: "Class timetable matrices, conflict detection and teacher substitutions",
-    iconName: "Clock",
-    primaryRoute: "/timetable/matrix",
-    routes: ["/timetable"],
-    navItems: [
-      { title: "Timetable Matrix", href: "/timetable/matrix", iconName: "Clock" },
-      { title: "Grade 10 Matrix", href: "/timetable/matrix?grade=Grade+10+-+Section+A", iconName: "Calendar" },
-      { title: "Grade 11 Matrix", href: "/timetable/matrix?grade=Grade+11+-+Section+A", iconName: "Layers" },
-    ],
-  },
-  {
     id: "campus_life",
     name: "Campus Services",
     shortName: "Campus Services",
@@ -199,7 +214,7 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
   },
   {
     id: "settings",
-    name: "Institutional Settings",
+    name: "Institute Settings",
     shortName: "Settings",
     category: "SETTINGS",
     description: "School branding, academic calendar years and tenant settings",
@@ -212,6 +227,23 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     ],
   },
 ]
+
+export function sortWorkspaceIds(ids: string[]): string[] {
+  return [...ids].sort((a, b) => {
+    const idxA = WORKSPACE_ORDER.indexOf(a)
+    const idxB = WORKSPACE_ORDER.indexOf(b)
+    const orderA = idxA === -1 ? 999 : idxA
+    const orderB = idxB === -1 ? 999 : idxB
+    return orderA - orderB
+  })
+}
+
+export function getPermittedWorkspaces(assignedWorkspaces?: string[]): PlatformWorkspace[] {
+  if (!assignedWorkspaces || assignedWorkspaces.length === 0 || assignedWorkspaces.includes("*")) {
+    return PLATFORM_WORKSPACES
+  }
+  return PLATFORM_WORKSPACES.filter((ws) => assignedWorkspaces.includes(ws.id))
+}
 
 // Super Admin Platform Workspaces
 export const SUPER_ADMIN_WORKSPACES: PlatformWorkspace[] = [

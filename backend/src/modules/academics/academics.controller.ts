@@ -885,6 +885,17 @@ export class AcademicsController {
       next(error);
     }
   }
+
+  async removeAllocation(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const instId = req.institutionId!;
+      const { sectionId, subjectId } = req.body;
+      const removed = await academicsService.removeAllocation(instId, { sectionId, subjectId });
+      sendSuccess(res, removed, 'Faculty allocation removed');
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const academicsController = new AcademicsController();

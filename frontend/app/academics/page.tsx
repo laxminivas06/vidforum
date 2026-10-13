@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useMemo, useEffect, Suspense } from "react"
+import React, { useState, useMemo, useEffect, useRef, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { AppShell } from "@/components/layout/AppShell"
 import {
@@ -35,7 +35,16 @@ import {
   ShieldCheck,
   AlertCircle,
   Pencil,
+  Phone,
+  Mail,
+  Filter,
+  ArrowRightLeft,
+  X,
+  Briefcase,
+  Check,
+  CornerDownLeft,
 } from "lucide-react"
+import { cn } from "@/lib/utils"
 import {
   useAcademics,
   useAcademicYears,
@@ -70,7 +79,12 @@ import {
   useDeleteTextbook,
   useBooklist,
   useDepartments,
+  useFaculty,
+  useAllocations,
+  useCreateAllocation,
+  useRemoveAllocation,
 } from "@/lib/api/hooks"
+import { FacultyMember } from "@/types"
 
 type TabType = "hierarchy" | "subjects" | "mapping" | "calendar" | "exams" | "textbooks" | "years"
 
@@ -112,6 +126,34 @@ function AcademicsWorkspaceContent() {
   const { data: grades = [], isLoading: isGradesLoading } = useAcademics(activeYearId)
   const [selectedGradeId, setSelectedGradeId] = useState<string>("")
   const activeGrade = grades.find((g) => g.id === selectedGradeId) || grades[0]
+
+  // Faculty Allocations & Roster
+  const { data: allocations = [] } = useAllocations()
+  const { data: facultyList = [], isLoading: isFacultyLoading } = useFaculty()
+  const createAllocationMutation = useCreateAllocation()
+  const removeAllocationMutation = useRemoveAllocation()
+
+  // Selected Section for Hierarchy Tab
+  const [selectedSectionId, setSelectedSectionId] = useState<string>("")
+  const activeSection = useMemo(() => {
+    if (!activeGrade?.sections?.length) return null
+    return activeGrade.sections.find((s: any) => s.id === selectedSectionId) || activeGrade.sections[0]
+  }, [activeGrade, selectedSectionId])
+
+  // Quick Search & Assign Overlay State (Ctrl+K Style)
+  const [assignModalState, setAssignModalState] = useState<{
+    isOpen: boolean
+    section: any | null
+    subject: any | null
+  }>({
+    isOpen: false,
+    section: null,
+    subject: null,
+  })
+  const [teacherSearchQuery, setTeacherSearchQuery] = useState<string>("")
+  const [selectedIndex, setSelectedIndex] = useState<number>(0)
+  const searchOverlayInputRef = useRef<HTMLInputElement>(null)
+  const searchOverlayListRef = useRef<HTMLDivElement>(null)
 
   // Classes & Departments
   const { data: classes = [] } = useClasses(activeYearId)
@@ -507,6 +549,227 @@ function AcademicsWorkspaceContent() {
     }
   }
 
+  // Extract key subject tokens for smart qualification matching
+  const getSubjectKeywords = (subjectName: string): string[] => {
+    if (!subjectName) return []
+    const name = subjectName.toLowerCase()
+    const kw = new Set<string>()
+
+    if (name.includes("english")) kw.add("english")
+    if (name.includes("hindi")) kw.add("hindi")
+    if (name.includes("telugu")) kw.add("telugu")
+    if (name.includes("sanskrit")) kw.add("sanskrit")
+    if (name.includes("science")) {
+      kw.add("science")
+      kw.add("physics")
+      kw.add("chemistry")
+      kw.add("biology")
+      kw.add("natural sciences")
+    }
+    if (name.includes("math")) {
+      kw.add("math")
+      kw.add("mathematics")
+    }
+    if (name.includes("social") || name.includes("history") || name.includes("geography")) {
+      kw.add("social")
+      kw.add("humanities")
+      kw.add("history")
+      kw.add("geography")
+    }
+    if (name.includes("technology") || name.includes("coding") || name.includes("computer") || name.includes("it")) {
+      kw.add("computer")
+      kw.add("technology")
+      kw.add("coding")
+      kw.add("it")
+    }
+    if (name.includes("physical") || name.includes("health") || name.includes("sports")) {
+      kw.add("physical")
+      kw.add("sports")
+      kw.add("health")
+      kw.add("pet")
+    }
+
+    name
+      .replace(/[^a-z0-9]/g, " ")
+      .split(/\s+/)
+      .filter((w) => w.length >= 4 && !["course", "standard", "general", "elective", "language", "literature"].includes(w))
+      .forEach((w) => kw.add(w))
+
+    return Array.from(kw)
+  }
+
+  // Check if faculty can teach subject using token and field matching
+  const canTeachSubject = (faculty: FacultyMember, subjectName: string, subjectCode?: string): boolean => {
+    if (!subjectName) return false
+    const sNorm = subjectName.toLowerCase().trim()
+    const cNorm = subjectCode ? subjectCode.toLowerCase().trim() : ""
+    const keywords = getSubjectKeywords(subjectName)
+
+    const testMatch = (val?: string): boolean => {
+      if (!val) return false
+      const v = val.toLowerCase()
+      if (v.includes(sNorm) || sNorm.includes(v)) return true
+      if (cNorm && v.includes(cNorm)) return true
+      return keywords.some((k) => v.includes(k))
+    }
+
+    if (testMatch(faculty.subjects)) return true
+    if (testMatch(faculty.department)) return true
+    if (testMatch(faculty.qualification)) return true
+
+    if (Array.isArray(faculty.assignedClasses)) {
+      if (faculty.assignedClasses.some((a) => testMatch(a.subject))) return true
+    }
+
+    return false
+  }
+
+  // Multi-attribute search across all faculty details EXCEPT house address
+  const matchesFacultySearch = (faculty: FacultyMember, query: string): boolean => {
+    if (!query.trim()) return true
+    const q = query.toLowerCase().trim()
+    const cleanQ = q.replace(/[\s\-\+\(\)]/g, "")
+
+    // Match all details EXCEPT house address (strict privacy constraint)
+    if (faculty.name?.toLowerCase().includes(q)) return true
+    if (faculty.employeeCode?.toLowerCase().includes(q)) return true
+    if (faculty.userId?.toLowerCase().includes(q)) return true
+    if (faculty.email?.toLowerCase().includes(q)) return true
+    if (faculty.phone?.toLowerCase().includes(q)) return true
+    if (cleanQ.length >= 3 && faculty.phone?.replace(/[\s\-\+\(\)]/g, "").includes(cleanQ)) return true
+    if (faculty.department?.toLowerCase().includes(q)) return true
+    if (faculty.designation?.toLowerCase().includes(q)) return true
+    if (faculty.qualification?.toLowerCase().includes(q)) return true
+    if (faculty.university?.toLowerCase().includes(q)) return true
+    if (faculty.experience?.toLowerCase().includes(q)) return true
+    if (faculty.gender?.toLowerCase() === q) return true
+    if (faculty.status?.toLowerCase().includes(q)) return true
+    if (faculty.subjects?.toLowerCase().includes(q)) return true
+
+    return false
+  }
+
+  const openAssignModal = (section: any, subject: any) => {
+    setAssignModalState({
+      isOpen: true,
+      section,
+      subject,
+    })
+    setTeacherSearchQuery("")
+    setSelectedIndex(0)
+    setTimeout(() => {
+      searchOverlayInputRef.current?.focus()
+    }, 50)
+  }
+
+  const candidateTeachers = useMemo(() => {
+    if (!assignModalState.isOpen || !assignModalState.subject) return []
+    const targetSubName = assignModalState.subject.name
+    const targetSubCode = assignModalState.subject.code
+
+    let list = facultyList
+
+    if (teacherSearchQuery.trim()) {
+      list = list.filter((faculty) => matchesFacultySearch(faculty, teacherSearchQuery))
+    }
+
+    // Sort: Qualified specialists for this subject first, then alphabetical by name
+    return [...list].sort((a, b) => {
+      const aSpec = canTeachSubject(a, targetSubName, targetSubCode) ? 1 : 0
+      const bSpec = canTeachSubject(b, targetSubName, targetSubCode) ? 1 : 0
+      if (aSpec !== bSpec) return bSpec - aSpec
+      return a.name.localeCompare(b.name)
+    })
+  }, [assignModalState, facultyList, teacherSearchQuery])
+
+  const currentTargetAllocation = useMemo(() => {
+    if (!assignModalState.isOpen || !assignModalState.section || !assignModalState.subject) return null
+    return allocations.find(
+      (a) => a.sectionId === assignModalState.section.id && a.subjectId === assignModalState.subject.id
+    )
+  }, [assignModalState, allocations])
+
+  // Keyboard navigation inside quick assign overlay (Ctrl+K style)
+  useEffect(() => {
+    if (!assignModalState.isOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault()
+        setAssignModalState({ isOpen: false, section: null, subject: null })
+        return
+      }
+
+      if (e.key === "ArrowDown") {
+        e.preventDefault()
+        setSelectedIndex((prev) =>
+          prev < candidateTeachers.length - 1 ? prev + 1 : 0
+        )
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault()
+        setSelectedIndex((prev) =>
+          prev > 0 ? prev - 1 : candidateTeachers.length - 1
+        )
+      } else if (e.key === "Enter") {
+        e.preventDefault()
+        const selected = candidateTeachers[selectedIndex]
+        if (selected) {
+          handleAssignTeacher(selected)
+        }
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [assignModalState.isOpen, candidateTeachers, selectedIndex])
+
+  // Scroll active item into view
+  useEffect(() => {
+    if (!searchOverlayListRef.current) return
+    const activeEl = searchOverlayListRef.current.querySelector(
+      `[data-index="${selectedIndex}"]`
+    ) as HTMLElement
+    if (activeEl) {
+      activeEl.scrollIntoView({ block: "nearest" })
+    }
+  }, [selectedIndex])
+
+  const handleAssignTeacher = async (faculty: FacultyMember) => {
+    if (!assignModalState.section || !assignModalState.subject) return
+    try {
+      await createAllocationMutation.mutateAsync({
+        staffId: faculty.id,
+        sectionId: assignModalState.section.id,
+        subjectId: assignModalState.subject.id,
+        academicYearId: activeYearId,
+      })
+      triggerSuccess(
+        `Successfully assigned ${faculty.name} to teach ${assignModalState.subject.name} for ${assignModalState.section.name}!`
+      )
+      setAssignModalState({ isOpen: false, section: null, subject: null })
+    } catch (err: any) {
+      triggerError(err.message || "Failed to assign teacher")
+    }
+  }
+
+  const handleRemoveAllocation = async (section: any, subject: any, teacherName?: string) => {
+    if (
+      confirm(
+        `Are you sure you want to remove ${teacherName || "assigned teacher"} from ${subject.name} in ${section.name}?`
+      )
+    ) {
+      try {
+        await removeAllocationMutation.mutateAsync({
+          sectionId: section.id,
+          subjectId: subject.id,
+        })
+        triggerSuccess(`Removed teacher assignment for ${subject.name} in ${section.name}.`)
+      } catch (err: any) {
+        triggerError(err.message || "Failed to remove assignment")
+      }
+    }
+  }
+
   return (
     <AppShell
       pageTitle="Academics & Curriculum Management"
@@ -879,89 +1142,221 @@ function AcademicsWorkspaceContent() {
                     </Button>
                   </div>
 
-                  {/* Sections Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {activeGrade.sections.map((section) => {
-                      const pct = Math.round((section.enrolled / (section.capacity || 40)) * 100)
-                      return (
-                        <Card key={section.id}>
-                          <CardHeader className="pb-2">
-                            <div className="flex items-center justify-between">
-                              <CardTitle className="text-sm font-semibold">{section.name}</CardTitle>
-                              <Badge variant={pct >= 95 ? "warning" : "positive"}>
-                                {pct}% Capacity
-                              </Badge>
-                            </div>
-                          </CardHeader>
-                          <CardContent className="flex flex-col gap-3 text-xs">
-                            <div className="flex items-center gap-2 text-text-secondary">
-                              <DoorOpen className="w-3.5 h-3.5 text-text-muted" />
-                              <span>{section.room}</span>
-                            </div>
+                  {/* Sections Grid - Clickable for Section Selection */}
+                  <div>
+                    <div className="flex items-center justify-between mb-2 px-0.5">
+                      <span className="text-xs font-semibold text-text-secondary uppercase tracking-wider font-mono">
+                        Select Section to Manage Subjects & Faculty ({activeGrade.sections.length})
+                      </span>
+                      {activeSection && (
+                        <span className="text-xs font-medium text-action-primary">
+                          Active: {activeSection.name}
+                        </span>
+                      )}
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {activeGrade.sections.map((section) => {
+                        const pct = Math.round((section.enrolled / (section.capacity || 40)) * 100)
+                        const isSelected = section.id === activeSection?.id
+                        const sectionAllocCount = allocations.filter((a) => a.sectionId === section.id).length
 
-                            <div className="flex items-center gap-2 text-text-secondary">
-                              <Users className="w-3.5 h-3.5 text-text-muted" />
-                              <span className="font-semibold text-text-primary">
-                                {section.classTeacher}
-                              </span>
-                            </div>
+                        return (
+                          <Card
+                            key={section.id}
+                            onClick={() => setSelectedSectionId(section.id)}
+                            className={`cursor-pointer transition-all border-2 ${
+                              isSelected
+                                ? "border-action-primary ring-2 ring-action-primary/20 bg-action-primary/[0.02] shadow-md"
+                                : "border-border-default hover:border-action-primary/50 hover:shadow-xs"
+                            }`}
+                          >
+                            <CardHeader className="pb-2">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-1.5">
+                                  <CardTitle className="text-sm font-semibold">{section.name}</CardTitle>
+                                  {isSelected && (
+                                    <Badge variant="positive" className="text-[10px] py-0 px-1.5 flex items-center gap-0.5">
+                                      <Check className="w-2.5 h-2.5" /> Selected
+                                    </Badge>
+                                  )}
+                                </div>
+                                <Badge variant={pct >= 95 ? "warning" : "positive"}>
+                                  {pct}% Capacity
+                                </Badge>
+                              </div>
+                            </CardHeader>
+                            <CardContent className="flex flex-col gap-3 text-xs">
+                              <div className="flex items-center gap-2 text-text-secondary">
+                                <DoorOpen className="w-3.5 h-3.5 text-text-muted" />
+                                <span>{section.room}</span>
+                              </div>
 
-                            <div className="pt-2 border-t border-border-subtle">
-                              <div className="flex justify-between font-mono text-[11px] text-text-muted mb-1">
-                                <span>Enrolled:</span>
+                              <div className="flex items-center gap-2 text-text-secondary">
+                                <Users className="w-3.5 h-3.5 text-text-muted" />
                                 <span className="font-semibold text-text-primary">
-                                  {section.enrolled} / {section.capacity} seats
+                                  {section.classTeacher}
                                 </span>
                               </div>
-                              <ProgressBar value={section.enrolled} max={section.capacity} />
-                            </div>
-                          </CardContent>
-                        </Card>
-                      )
-                    })}
+
+                              <div className="pt-2 border-t border-border-subtle">
+                                <div className="flex justify-between font-mono text-[11px] text-text-muted mb-1">
+                                  <span>Enrolled:</span>
+                                  <span className="font-semibold text-text-primary">
+                                    {section.enrolled} / {section.capacity} seats
+                                  </span>
+                                </div>
+                                <ProgressBar value={section.enrolled} max={section.capacity} />
+                              </div>
+
+                              <div className="pt-1.5 border-t border-border-subtle flex items-center justify-between text-[11px]">
+                                <span className="text-text-muted">Subject Allocations:</span>
+                                <span className="font-semibold text-text-primary">
+                                  {sectionAllocCount} / {activeGrade.subjects.length} Assigned
+                                </span>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        )
+                      })}
+                    </div>
                   </div>
 
-                  {/* Prescribed Curriculum & Subject Offerings */}
-                  <Card>
-                    <CardHeader>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <BookOpen className="w-4 h-4 text-brand-primary" />
-                          <CardTitle className="text-sm">Prescribed Curriculum & Subject Offerings</CardTitle>
-                        </div>
-                        <Button
-                          size="dense"
-                          variant="ghost"
-                          onClick={() => {
-                            setMappingClassId(activeGrade.id)
-                            handleTabChange("mapping")
-                          }}
-                        >
-                          Configure Mapping Matrix →
-                        </Button>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {activeGrade.subjects.map((sub: any) => (
-                          <div
-                            key={sub.id}
-                            className="p-3 rounded-lg bg-subtle border border-border-default flex items-center justify-between"
-                          >
-                            <div>
-                              <div className="font-semibold text-xs text-text-primary">{sub.name}</div>
-                              <div className="text-[11px] font-mono text-text-secondary mt-0.5">
-                                {sub.code} • {sub.credits} Credits • {sub.periodsPerWeek || 5} Periods/Wk
-                              </div>
+                  {/* Prescribed Curriculum & Section-Specific Teacher Allocations */}
+                  {activeSection && (
+                    <Card className="border border-border-default shadow-xs">
+                      <CardHeader className="bg-subtle/40 border-b border-border-subtle pb-3">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                          <div className="flex items-center gap-3">
+                            <div className="w-9 h-9 rounded-lg bg-action-primary/10 border border-action-primary/20 flex items-center justify-center text-action-primary shrink-0">
+                              <BookOpen className="w-4 h-4" />
                             </div>
-                            <Badge variant={sub.type === "CORE" ? "positive" : "neutral"}>
-                              {sub.type}
-                            </Badge>
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <CardTitle className="text-sm font-bold text-text-primary">
+                                  Section Subject & Teacher Allocations — {activeGrade.name} ({activeSection.name})
+                                </CardTitle>
+                                <Badge variant="neutral" className="font-mono text-[11px]">
+                                  {activeSection.name}
+                                </Badge>
+                              </div>
+                              <p className="text-xs text-text-secondary mt-0.5">
+                                Prescribed subjects for {activeSection.name}. Assign designated subject teachers to deliver curriculum for this section.
+                              </p>
+                            </div>
                           </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
+                          <div className="flex items-center gap-2">
+                            <Badge
+                              variant={
+                                activeGrade.subjects.length > 0 &&
+                                allocations.filter((a) => a.sectionId === activeSection.id).length === activeGrade.subjects.length
+                                  ? "positive"
+                                  : "warning"
+                              }
+                              className="text-xs"
+                            >
+                              {allocations.filter((a) => a.sectionId === activeSection.id).length} / {activeGrade.subjects.length} Assigned
+                            </Badge>
+                            <Button
+                              size="dense"
+                              variant="ghost"
+                              onClick={() => {
+                                setMappingClassId(activeGrade.id)
+                                handleTabChange("mapping")
+                              }}
+                            >
+                              Configure Mapping Matrix →
+                            </Button>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="p-4">
+                        {activeGrade.subjects.length === 0 ? (
+                          <div className="p-8 text-center text-text-secondary text-xs">
+                            No subjects mapped to {activeGrade.name} yet. Click "Configure Mapping Matrix" to prescribe subjects.
+                          </div>
+                        ) : (
+                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            {activeGrade.subjects.map((sub: any) => {
+                              const assigned = allocations.find(
+                                (a) => a.sectionId === activeSection.id && a.subjectId === sub.id
+                              )
+                              return (
+                                <div
+                                  key={sub.id}
+                                  className={`p-3.5 rounded-xl border transition-all flex items-center justify-between gap-3 shadow-xs ${
+                                    assigned
+                                      ? "bg-surface border-border-default hover:border-green-500/40"
+                                      : "bg-surface border-border-default hover:border-border-hover"
+                                  }`}
+                                >
+                                  {/* Left: Subject Title, Code, Credits & Type */}
+                                  <div className="min-w-0 flex-1">
+                                    <div className="flex items-center gap-2 flex-wrap">
+                                      <h4 className="font-bold text-sm text-text-primary">
+                                        {sub.name}
+                                      </h4>
+                                      <span className="text-xs font-mono text-text-muted">
+                                        ({sub.code})
+                                      </span>
+                                      <Badge
+                                        variant={sub.type === "CORE" || sub.type === "Core Subject" ? "positive" : "neutral"}
+                                        className="text-[10px] py-0 px-1.5"
+                                      >
+                                        {sub.type || "Core"}
+                                      </Badge>
+                                    </div>
+                                    <div className="text-[11px] font-mono text-text-secondary mt-0.5">
+                                      {sub.credits} Credits • {sub.periodsPerWeek || 5} Periods/Wk
+                                    </div>
+                                  </div>
+
+                                  {/* Right: Search / Assign Button beside subject name */}
+                                  <div className="shrink-0 flex items-center gap-1.5">
+                                    {assigned ? (
+                                      <div className="flex items-center gap-1">
+                                        {/* Assigned state: Primary Green color (the green we used) */}
+                                        <button
+                                          type="button"
+                                          onClick={() => openAssignModal(activeSection, sub)}
+                                          className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg border border-green-500/30 bg-green-500/10 hover:bg-green-500/20 text-green-700 dark:text-green-400 font-semibold text-xs transition-all shadow-xs group"
+                                          title={`Assigned to ${assigned.teacherName} (${assigned.employeeCode}) — Click to change teacher`}
+                                        >
+                                          <div className="w-4 h-4 rounded-full bg-green-600 text-white text-[9px] font-bold flex items-center justify-center shrink-0">
+                                            {assigned.teacherName.split(" ").map((n: string) => n[0]).slice(0, 2).join("").toUpperCase()}
+                                          </div>
+                                          <span className="truncate max-w-[130px]">{assigned.teacherName}</span>
+                                          <Search className="w-3 h-3 text-green-600/70 group-hover:text-green-700 shrink-0" />
+                                        </button>
+                                        <button
+                                          type="button"
+                                          onClick={() => handleRemoveAllocation(activeSection, sub, assigned.teacherName)}
+                                          className="p-1.5 rounded-lg text-text-muted hover:text-red-600 hover:bg-red-500/10 transition-colors"
+                                          title="Unassign teacher"
+                                        >
+                                          <Trash2 className="w-3.5 h-3.5" />
+                                        </button>
+                                      </div>
+                                    ) : (
+                                      /* Not Assigned state: Unassigned color button */
+                                      <button
+                                        type="button"
+                                        onClick={() => openAssignModal(activeSection, sub)}
+                                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border-default bg-subtle hover:bg-border-subtle text-text-secondary hover:text-text-primary font-medium text-xs transition-all shadow-xs"
+                                        title="Click to search and assign teacher"
+                                      >
+                                        <Search className="w-3.5 h-3.5 text-text-muted" />
+                                        <span>Assign Teacher</span>
+                                      </button>
+                                    )}
+                                  </div>
+                                </div>
+                              )
+                            })}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  )}
                 </>
               ) : (
                 <div className="p-8 text-center bg-surface rounded-xl border border-border-default text-text-secondary text-sm">
@@ -3544,6 +3939,209 @@ function AcademicsWorkspaceContent() {
               >
                 Clone Year Structure
               </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* QUICK SEARCH & ASSIGN OVERLAY (CTRL+K STYLE WITH BACKGROUND BLUR)         */}
+      {/* ========================================================================= */}
+      {assignModalState.isOpen && assignModalState.subject && assignModalState.section && (
+        <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 select-none">
+          {/* Backdrop with background blur */}
+          <div
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-150"
+            onClick={() => setAssignModalState({ isOpen: false, section: null, subject: null })}
+            aria-hidden="true"
+          />
+
+          {/* Search Palette Container */}
+          <div
+            className="relative w-full max-w-2xl bg-canvas border border-border-default rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[75vh] z-10 animate-in zoom-in-95 duration-150"
+            role="dialog"
+            aria-modal="true"
+          >
+            {/* Search Input Bar (Identical to Ctrl+K) */}
+            <div className="flex items-center gap-3 px-4 py-3.5 border-b border-border-default bg-surface/50">
+              <Search className="w-5 h-5 text-text-muted shrink-0" />
+              <input
+                ref={searchOverlayInputRef}
+                type="text"
+                value={teacherSearchQuery}
+                onChange={(e) => {
+                  setTeacherSearchQuery(e.target.value)
+                  setSelectedIndex(0)
+                }}
+                placeholder={`Search teacher for ${assignModalState.subject.name} by name, user ID, phone, email, qualification...`}
+                className="w-full bg-transparent text-sm text-text-primary placeholder:text-text-muted focus:outline-none"
+                autoFocus
+              />
+              <div className="flex items-center gap-1.5 shrink-0">
+                <span className="text-[11px] font-semibold text-text-secondary bg-subtle px-2 py-0.5 rounded border border-border-default truncate max-w-[150px]">
+                  {assignModalState.subject.name}
+                </span>
+                <kbd className="px-1.5 py-0.5 text-[10px] font-mono font-medium text-text-muted bg-subtle border border-border-default rounded">
+                  Esc
+                </kbd>
+              </div>
+            </div>
+
+            {/* Results List */}
+            <div ref={searchOverlayListRef} className="overflow-y-auto p-2 space-y-1 flex-1">
+              {isFacultyLoading ? (
+                <div className="py-12 text-center text-text-muted text-xs">
+                  Loading faculty roster...
+                </div>
+              ) : candidateTeachers.length === 0 ? (
+                <div className="py-12 text-center text-text-muted text-xs">
+                  No matching faculty found for &ldquo;{teacherSearchQuery}&rdquo;
+                </div>
+              ) : (
+                candidateTeachers.map((faculty, idx) => {
+                  const isAssigned = currentTargetAllocation?.staffId === faculty.id
+                  const isSpecialist = canTeachSubject(
+                    faculty,
+                    assignModalState.subject.name,
+                    assignModalState.subject.code
+                  )
+                  const isSelected = idx === selectedIndex
+
+                  return (
+                    <div
+                      key={faculty.id}
+                      data-index={idx}
+                      onClick={() => handleAssignTeacher(faculty)}
+                      onMouseEnter={() => setSelectedIndex(idx)}
+                      className={cn(
+                        "flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl cursor-pointer text-xs transition-colors",
+                        isSelected
+                          ? "bg-action-black text-canvas font-medium shadow-xs"
+                          : isAssigned
+                          ? "bg-green-500/10 text-text-primary border border-green-500/25"
+                          : "text-text-primary hover:bg-subtle"
+                      )}
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div
+                          className={cn(
+                            "w-8 h-8 rounded-full text-xs font-bold flex items-center justify-center shrink-0",
+                            isSelected
+                              ? "bg-white/20 text-white"
+                              : isAssigned
+                              ? "bg-green-600 text-white"
+                              : "bg-brand-primary/10 text-brand-primary"
+                          )}
+                        >
+                          {faculty.name
+                            .split(" ")
+                            .map((n: string) => n[0])
+                            .slice(0, 2)
+                            .join("")
+                            .toUpperCase()}
+                        </div>
+
+                        <div className="min-w-0 flex flex-col">
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold truncate">{faculty.name}</span>
+                            <span
+                              className={cn(
+                                "text-[10px] font-mono px-1.5 py-0.2 rounded border",
+                                isSelected
+                                  ? "border-white/30 text-white/80"
+                                  : "border-border-subtle bg-subtle text-text-muted"
+                              )}
+                            >
+                              {faculty.employeeCode}
+                            </span>
+                            {isSpecialist && (
+                              <span
+                                className={cn(
+                                  "text-[10px] px-1.5 py-0.2 rounded font-medium",
+                                  isSelected
+                                    ? "bg-green-400/30 text-white"
+                                    : "bg-green-500/15 text-green-700 dark:text-green-400"
+                                )}
+                              >
+                                Specialist
+                              </span>
+                            )}
+                          </div>
+
+                          <div
+                            className={cn(
+                              "text-[11px] truncate flex items-center gap-1.5 mt-0.5",
+                              isSelected ? "text-white/80" : "text-text-secondary"
+                            )}
+                          >
+                            <span>{faculty.designation || "Faculty"}</span>
+                            <span>•</span>
+                            <span>{faculty.department}</span>
+                            {faculty.qualification && (
+                              <>
+                                <span>•</span>
+                                <span>{faculty.qualification}</span>
+                              </>
+                            )}
+                            {faculty.phone && (
+                              <>
+                                <span>•</span>
+                                <span>{faculty.phone}</span>
+                              </>
+                            )}
+                            {faculty.email && (
+                              <>
+                                <span>•</span>
+                                <span>{faculty.email}</span>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="shrink-0 flex items-center gap-2">
+                        {isAssigned ? (
+                          <span
+                            className={cn(
+                              "px-2 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-1",
+                              isSelected
+                                ? "bg-white/20 text-white"
+                                : "bg-green-500/20 text-green-700 dark:text-green-400"
+                            )}
+                          >
+                            <Check className="w-3 h-3" /> Assigned
+                          </span>
+                        ) : (
+                          <span
+                            className={cn(
+                              "text-[11px] flex items-center gap-1 font-medium",
+                              isSelected ? "text-white" : "text-action-primary"
+                            )}
+                          >
+                            Assign <CornerDownLeft className="w-3 h-3" />
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })
+              )}
+            </div>
+
+            {/* Subtle Overlay Footer */}
+            <div className="flex items-center justify-between px-4 py-2.5 border-t border-border-default bg-surface/30 text-[11px] text-text-muted">
+              <div className="flex items-center gap-3">
+                <span className="flex items-center gap-1">
+                  <kbd className="px-1 py-0.2 text-[10px] bg-subtle border border-border-default rounded">↑↓</kbd> to navigate
+                </span>
+                <span className="flex items-center gap-1">
+                  <kbd className="px-1 py-0.2 text-[10px] bg-subtle border border-border-default rounded">↵</kbd> to assign
+                </span>
+                <span className="flex items-center gap-1">
+                  <kbd className="px-1 py-0.2 text-[10px] bg-subtle border border-border-default rounded">esc</kbd> to close
+                </span>
+              </div>
+              <span>{candidateTeachers.length} teachers</span>
             </div>
           </div>
         </div>

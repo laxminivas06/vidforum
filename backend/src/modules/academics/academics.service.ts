@@ -689,8 +689,12 @@ export class AcademicsService {
     return await academicsRepository.listAllocations(institutionId);
   }
 
-  async createAllocation(institutionId: string, data: { staffId: string; sectionId: string; subjectId: string; academicYearId: string }) {
+  async createAllocation(institutionId: string, data: { staffId: string; sectionId: string; subjectId: string; academicYearId?: string }) {
     return await academicsRepository.createAllocation(institutionId, data);
+  }
+
+  async removeAllocation(institutionId: string, data: { sectionId: string; subjectId: string }) {
+    return await academicsRepository.removeAllocation(institutionId, data);
   }
 }
 

@@ -26,8 +26,9 @@ import {
   Building2,
   Package,
   Keyboard,
+  ShieldCheck,
 } from "lucide-react"
-import { PLATFORM_WORKSPACES, getWorkspaceForPath, PlatformWorkspace } from "@/config/workspaces"
+import { PLATFORM_WORKSPACES, getWorkspaceForPath, getPermittedWorkspaces, PlatformWorkspace } from "@/config/workspaces"
 import { getModifierLabel } from "@/lib/utils/keyboard"
 
 const TOPBAR_ICON_MAP: Record<string, React.ElementType> = {
@@ -45,6 +46,7 @@ const TOPBAR_ICON_MAP: Record<string, React.ElementType> = {
   Building2,
   Package,
   Layers,
+  ShieldCheck,
 }
 
 export interface TopbarProps {
@@ -83,12 +85,9 @@ export const Topbar: React.FC<TopbarProps> = ({
   const [isWorkspaceDropdownOpen, setIsWorkspaceDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  // Filter workspaces strictly to those assigned/permitted
+  // Filter workspaces strictly to those assigned/permitted in canonical order
   const permittedWorkspaces = React.useMemo(() => {
-    if (!assignedWorkspaces) return PLATFORM_WORKSPACES
-    return PLATFORM_WORKSPACES.filter(
-      (ws) => ws.id === "dashboard" || assignedWorkspaces.includes(ws.id)
-    )
+    return getPermittedWorkspaces(assignedWorkspaces)
   }, [assignedWorkspaces])
 
   const activeWorkspace = getWorkspaceForPath(currentPath)
@@ -154,79 +153,51 @@ export const Topbar: React.FC<TopbarProps> = ({
               </div>
 
               <div className="max-h-80 overflow-y-auto py-1 space-y-1">
-                {/* 1. Institute Admin Workspace Option */}
-                <Link
-                  href="/dashboard"
-                  onClick={() => setIsWorkspaceDropdownOpen(false)}
-                  className={cn(
-                    "flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs transition-colors",
-                    currentPath === "/dashboard"
-                      ? "bg-action-black text-canvas font-semibold shadow-xs"
-                      : "text-text-primary hover:bg-subtle"
-                  )}
-                >
-                  <div className="w-6 h-6 rounded-md bg-action-black/5 dark:bg-white/10 flex items-center justify-center shrink-0">
-                    <LayoutDashboard className="w-3.5 h-3.5 text-brand-primary" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="font-semibold text-xs truncate">Institute Admin Workspace</div>
-                    <div className="text-[10px] text-text-secondary truncate">
-                      Tenant admin, faculty accounts & overview
-                    </div>
-                  </div>
-                  {currentPath === "/dashboard" && (
-                    <Check className="w-3.5 h-3.5 text-brand-green shrink-0" />
-                  )}
-                </Link>
+                {permittedWorkspaces.map((ws) => {
+                  const isCurrent =
+                    activeWorkspace?.id === ws.id ||
+                    (ws.id === "dashboard" && (currentPath === "/dashboard" || currentPath === ""))
+                  const WsIcon = TOPBAR_ICON_MAP[ws.iconName] || Briefcase
 
-                <div className="my-1 border-t border-border-subtle/80" />
-
-                {/* 2. Isolated Workspace Items */}
-                {permittedWorkspaces
-                  .filter((ws) => ws.id !== "dashboard")
-                  .map((ws) => {
-                    const isCurrent = activeWorkspace?.id === ws.id
-                    const WsIcon = TOPBAR_ICON_MAP[ws.iconName] || Briefcase
-
-                    return (
-                      <Link
-                        key={ws.id}
-                        href={ws.primaryRoute}
-                        onClick={() => setIsWorkspaceDropdownOpen(false)}
+                  return (
+                    <Link
+                      key={ws.id}
+                      href={ws.primaryRoute}
+                      onClick={() => setIsWorkspaceDropdownOpen(false)}
+                      className={cn(
+                        "flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs transition-colors",
+                        isCurrent
+                          ? "bg-action-black text-canvas font-semibold shadow-xs"
+                          : "text-text-primary hover:bg-subtle"
+                      )}
+                    >
+                      <div
                         className={cn(
-                          "flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs transition-colors",
+                          "w-6 h-6 rounded-md flex items-center justify-center shrink-0",
                           isCurrent
-                            ? "bg-action-black text-canvas font-semibold shadow-xs"
-                            : "text-text-primary hover:bg-subtle"
+                            ? "bg-white/20 text-canvas"
+                            : "bg-subtle text-text-secondary"
                         )}
                       >
+                        <WsIcon className="w-3.5 h-3.5" />
+                      </div>
+                      <div className="min-w-0 flex-1 truncate pr-2">
+                        <div className="font-semibold truncate">{ws.name}</div>
                         <div
                           className={cn(
-                            "w-6 h-6 rounded-md flex items-center justify-center shrink-0",
-                            isCurrent
-                              ? "bg-white/20 text-canvas"
-                              : "bg-subtle text-text-secondary"
+                            "text-[10px] truncate",
+                            isCurrent ? "text-neutral-300" : "text-text-secondary"
                           )}
                         >
-                          <WsIcon className="w-3.5 h-3.5" />
+                          {ws.description}
                         </div>
-                        <div className="min-w-0 flex-1 truncate pr-2">
-                          <div className="font-semibold truncate">{ws.name}</div>
-                          <div
-                            className={cn(
-                              "text-[10px] truncate",
-                              isCurrent ? "text-neutral-300" : "text-text-secondary"
-                            )}
-                          >
-                            {ws.description}
-                          </div>
-                        </div>
-                        {isCurrent && (
-                          <Check className="w-3.5 h-3.5 shrink-0 text-brand-green" />
-                        )}
-                      </Link>
-                    )
-                  })}
+                      </div>
+                      {isCurrent && (
+                        <Check className="w-3.5 h-3.5 shrink-0 text-brand-green" />
+                      )}
+                    </Link>
+                  )
+                })}
               </div>
             </div>
           )}

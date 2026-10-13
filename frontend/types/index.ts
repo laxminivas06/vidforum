@@ -131,11 +131,21 @@ export interface AcademicGrade {
 }
 
 export interface FacultyAssignment {
-  grade: string
-  section: string
-  subject: string
-  room: string
-  schedule: string
+  grade?: string
+  section?: string
+  subject?: string
+  room?: string
+  schedule?: string
+  section_id?: string
+  sectionId?: string
+  class_id?: string
+  class_name?: string
+  section_name?: string
+  subject_id?: string
+  subject_name?: string
+  subject_code?: string
+  student_count?: number
+  academic_year?: string
 }
 
 export interface FacultyMember {

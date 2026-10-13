@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
+import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/AuthContext"
 import { AppShell } from "@/components/layout/AppShell"
 import {
@@ -78,13 +79,13 @@ import {
 } from "@/lib/api/hooks"
 import { EditUserAccessModal, BulkProvisionModal, UserAuditModal } from "@/components/users"
 import { Institution, Applicant } from "@/types"
-import { PLATFORM_WORKSPACES } from "@/config/workspaces"
+import { PLATFORM_WORKSPACES, getPermittedWorkspaces, sortWorkspaceIds } from "@/config/workspaces"
 
 const DEFAULT_FACULTY_WORKSPACES = [
-  "faculty",
   "academics",
-  "attendance",
+  "faculty",
   "examinations",
+  "attendance",
   "timetable",
 ]
 
@@ -151,7 +152,11 @@ export default function DashboardPage() {
 // 1. INSTITUTION ADMIN WORKSPACE (Replaces Executive Workspace Hub)
 // ─────────────────────────────────────────────────────────────
 function InstitutionAdminDashboard() {
-  const { institutionName } = useAuth()
+  const { institutionName, user } = useAuth()
+  const userPermittedWorkspaces = React.useMemo(() => {
+    return getPermittedWorkspaces(user?.assignedWorkspaces)
+  }, [user?.assignedWorkspaces])
+
   const { data: applicants, isLoading: appsLoading } = useAdmissions()
   const { data: fees } = useFinance()
   const { data: facultyAccounts = [], isLoading: accountsLoading } = useFacultyAccounts()
@@ -367,9 +372,10 @@ function InstitutionAdminDashboard() {
   // Copy Credentials to Clipboard
   const handleCopyCredentials = (userId: string, email: string, pwd?: string, workspaces?: string[]) => {
     const loginUrl = typeof window !== "undefined" ? `${window.location.origin}/login` : "http://localhost:3000/login"
-    const wsNames = workspaces && workspaces.length > 0
-      ? workspaces.map((wId) => PLATFORM_WORKSPACES.find((w) => w.id === wId)?.shortName || wId).join(", ")
-      : "Faculty, Academics, Attendance, Exams, Timetable"
+    const sortedList = sortWorkspaceIds(workspaces || [])
+    const wsNames = sortedList.length > 0
+      ? sortedList.map((wId) => PLATFORM_WORKSPACES.find((w) => w.id === wId)?.shortName || wId).join(", ")
+      : "Academics, Faculty, Exams, Attendance, Timetable"
     const text = `VID Platform User Credentials:\nUser ID / Login ID: ${userId || email}\nEmail: ${email}\nInitial Password: ${pwd || "[Generated at setup]"}\nPermitted Workspaces: ${wsNames}\nNotice: Password change mandatory on first login.\nLogin Portal: ${loginUrl}`
     navigator.clipboard.writeText(text)
     setCopySuccessToast(`Credentials copied! You can now send this User ID & Password to the user.`)
@@ -537,7 +543,7 @@ function InstitutionAdminDashboard() {
         }
         return (
           <div className="flex flex-wrap gap-1 max-w-xs">
-            {list.map((wsId: string) => {
+            {sortWorkspaceIds(list).map((wsId: string) => {
               const ws = PLATFORM_WORKSPACES.find((w) => w.id === wsId)
               return (
                 <span
@@ -965,13 +971,14 @@ function InstitutionAdminDashboard() {
                   </p>
                 </div>
                 <div className="text-xs font-mono text-text-muted shrink-0">
-                  10 Isolated Workspaces Configured
+                  {userPermittedWorkspaces.length} Workspaces Available
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                {PLATFORM_WORKSPACES.filter((ws) => ws.id !== "dashboard").map((ws) => {
+                {userPermittedWorkspaces.map((ws) => {
                   const IconComp = WORKSPACE_ICONS[ws.iconName] || Briefcase
+                  const isCurrent = ws.id === "dashboard"
                   return (
                     <div
                       key={ws.id}
@@ -1019,9 +1026,14 @@ function InstitutionAdminDashboard() {
                       <div className="mt-4 pt-2">
                         <Link
                           href={ws.primaryRoute}
-                          className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-action-black text-canvas hover:bg-neutral-800 text-xs font-semibold shadow-xs transition-colors"
+                          className={cn(
+                            "w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-semibold shadow-xs transition-colors",
+                            isCurrent
+                              ? "bg-brand-primary/10 border border-brand-primary/30 text-brand-primary hover:bg-brand-primary/20"
+                              : "bg-action-black text-canvas hover:bg-neutral-800"
+                          )}
                         >
-                          <span>Enter {ws.shortName}</span>
+                          <span>{isCurrent ? "Active (Institute Admin)" : `Enter ${ws.shortName}`}</span>
                           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                         </Link>
                       </div>
@@ -1209,7 +1221,7 @@ function InstitutionAdminDashboard() {
                         <span className="text-brand-primary font-bold">{provisionSuccessData.workspaces?.length || 0} Enabled</span>
                       </div>
                       <div className="flex flex-wrap gap-1 font-sans">
-                        {(provisionSuccessData.workspaces || []).map((wsId: string) => {
+                        {sortWorkspaceIds(provisionSuccessData.workspaces || []).map((wsId: string) => {
                           const ws = PLATFORM_WORKSPACES.find((w) => w.id === wsId)
                           return (
                             <span

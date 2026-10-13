@@ -98,14 +98,12 @@ export const NAVIGATION_CONFIG: Record<RoleType, NavGroup[]> = {
 
   FACULTY: [
     {
-      label: "MY WORKSPACE",
+      label: "FACULTY MANAGEMENT",
       items: [
         { title: "Faculty Dashboard", href: "/faculty/dashboard", iconName: "LayoutDashboard" },
-        { title: "Today's Schedule", href: "/timetable/matrix", iconName: "Clock" },
-        { title: "My Classes & Sections", href: "/faculty/my-students", iconName: "BookOpen" },
-        { title: "Roll-Call Attendance", href: "/faculty/attendance", iconName: "CalendarCheck" },
-        { title: "Marks & Assessments", href: "/examinations/marks", iconName: "FileSpreadsheet" },
-        { title: "AI Tutor Companion", href: "/ai-tutor/chat", iconName: "Bot" },
+        { title: "My Assigned Courses", href: "/faculty/courses", iconName: "BookOpen" },
+        { title: "My Mentees", href: "/faculty/mentees", iconName: "Users" },
+        { title: "Marks and Assignment", href: "/faculty/marks-assignments", iconName: "FileSpreadsheet" },
       ],
     },
   ],

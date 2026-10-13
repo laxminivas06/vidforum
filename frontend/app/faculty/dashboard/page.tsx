@@ -103,24 +103,20 @@ export default function FacultyDashboardPage() {
 
   return (
     <AppShell
-      pageTitle="Faculty Workspace"
-      breadcrumbs={[{ label: "Faculty" }, { label: "My Classes & Schedule" }]}
+      pageTitle="Faculty Dashboard"
+      breadcrumbs={[{ label: "Faculty" }, { label: "Faculty Dashboard" }]}
       rightHeaderAction={
         <div className="flex items-center gap-2">
-          <Button
-            size="dense"
-            variant="primary"
-            className="bg-brand-primary text-black hover:bg-emerald-400"
-            leadingIcon={<ClipboardCheck className="w-3.5 h-3.5" />}
-            onClick={() => {
-              const firstClass = facultyInfo?.todayClasses?.[0] || facultyInfo?.assignedClasses?.[0]
-              const label = firstClass ? (firstClass.gradeSection || `${firstClass.grade} - ${firstClass.section}`) : "Grade 10 - Section A"
-              const sid = firstClass ? (firstClass.sectionId || firstClass.section_id) : "cc0b3fe5-010f-44db-9d54-46b359bd9a6d"
-              handleOpenRollCall(label, sid)
-            }}
-          >
-            Launch Active Roll-Call
-          </Button>
+          <Link href="/faculty/courses">
+            <Button
+              size="dense"
+              variant="primary"
+              className="bg-brand-primary text-black hover:bg-emerald-400"
+              leadingIcon={<ClipboardCheck className="w-3.5 h-3.5" />}
+            >
+              Open Assigned Courses & Roll-Call
+            </Button>
+          </Link>
         </div>
       }
     >
@@ -279,41 +275,49 @@ export default function FacultyDashboardPage() {
                     Scheduled in Physics Demonstration Lab (Block B)
                   </div>
                 </div>
+
+                <Link
+                  href="/faculty/marks-assignments"
+                  className="mt-1 pt-2 border-t border-border-subtle flex items-center justify-between text-brand-primary font-medium hover:underline"
+                >
+                  <span>Open Marks & Assignments</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-sm">Assigned Class Actions</CardTitle>
+                <CardTitle className="text-sm">Faculty Workspace Navigation</CardTitle>
               </CardHeader>
               <CardContent className="flex flex-col gap-2 text-xs">
                 <Link
-                  href="/faculty/my-students"
+                  href="/faculty/courses"
+                  className="p-2.5 rounded-lg hover:bg-subtle border border-transparent hover:border-border-default flex items-center justify-between font-medium text-text-primary"
+                >
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-3.5 h-3.5 text-brand-primary" />
+                    <span>My Assigned Courses & Roll-Call</span>
+                  </div>
+                  <ArrowRight className="w-3.5 h-3.5 text-text-muted" />
+                </Link>
+                <Link
+                  href="/faculty/mentees"
                   className="p-2.5 rounded-lg hover:bg-subtle border border-transparent hover:border-border-default flex items-center justify-between font-medium text-text-primary"
                 >
                   <div className="flex items-center gap-2">
                     <Users className="w-3.5 h-3.5 text-brand-primary" />
-                    <span>My Assigned Students Roster</span>
+                    <span>My Mentees</span>
                   </div>
                   <ArrowRight className="w-3.5 h-3.5 text-text-muted" />
                 </Link>
                 <Link
-                  href="/timetable/matrix"
-                  className="p-2.5 rounded-lg hover:bg-subtle border border-transparent hover:border-border-default flex items-center justify-between font-medium text-text-primary"
-                >
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-3.5 h-3.5 text-brand-primary" />
-                    <span>My Weekly Timetable</span>
-                  </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-text-muted" />
-                </Link>
-                <Link
-                  href="/attendance/sessions"
+                  href="/faculty/marks-assignments"
                   className="p-2.5 rounded-lg hover:bg-subtle border border-transparent hover:border-border-default flex items-center justify-between font-medium text-text-primary"
                 >
                   <div className="flex items-center gap-2">
                     <ClipboardCheck className="w-3.5 h-3.5 text-brand-primary" />
-                    <span>Attendance Sessions</span>
+                    <span>Marks and Assignment</span>
                   </div>
                   <ArrowRight className="w-3.5 h-3.5 text-text-muted" />
                 </Link>

@@ -13,6 +13,7 @@ import {
   AdmissionDocumentItem,
   EnrolledApplicantItem,
 } from "@/types"
+import { sortWorkspaceIds } from "@/config/workspaces"
 
 function getApiBaseUrl(): string {
   if (process.env.NEXT_PUBLIC_API_URL) return process.env.NEXT_PUBLIC_API_URL
@@ -229,7 +230,7 @@ export function useUpdateAdminWorkspaces() {
               sessionUser.id === variables.adminId ||
               sessionUser.email?.toLowerCase() === variables.adminId.toLowerCase()
             ) {
-              sessionUser.assignedWorkspaces = variables.workspaces
+              sessionUser.assignedWorkspaces = sortWorkspaceIds(variables.workspaces)
               localStorage.setItem("vid_session_user", JSON.stringify(sessionUser))
             }
           }
@@ -2018,6 +2019,86 @@ export function useCopySubjectMatrix() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["grade-subjects"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+    },
+  })
+}
+
+export interface FacultyAllocationItem {
+  id: string
+  staffId: string
+  sectionId: string
+  subjectId: string
+  academicYearId: string
+  teacherName: string
+  teacherEmail?: string
+  teacherPhone?: string
+  employeeCode: string
+  designation?: string
+  department?: string
+  classId: string
+  className: string
+  sectionName: string
+  subjectName: string
+}
+
+export function useAllocations() {
+  return useQuery({
+    queryKey: ["academics-allocations"],
+    queryFn: async (): Promise<FacultyAllocationItem[]> => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/academics/allocations`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Failed to fetch faculty allocations:", err)
+      }
+      return []
+    },
+  })
+}
+
+export function useCreateAllocation() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: { staffId: string; sectionId: string; subjectId: string; academicYearId?: string }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/allocations`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) throw new Error(json.message || "Failed to assign teacher")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-allocations"] })
+      queryClient.invalidateQueries({ queryKey: ["faculty-roster"] })
+      queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
+    },
+  })
+}
+
+export function useRemoveAllocation() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (data: { sectionId: string; subjectId: string }) => {
+      const res = await fetch(`${API_BASE_URL}/academics/allocations/remove`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok || !json.success) throw new Error(json.message || "Failed to remove assignment")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["academics-allocations"] })
+      queryClient.invalidateQueries({ queryKey: ["faculty-roster"] })
       queryClient.invalidateQueries({ queryKey: ["academics-hierarchy"] })
     },
   })

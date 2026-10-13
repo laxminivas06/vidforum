@@ -324,4 +324,16 @@ router.post(
   academicsController.createAllocation.bind(academicsController)
 );
 
+router.post(
+  '/allocations/remove',
+  tenantMiddleware,
+  academicsController.removeAllocation.bind(academicsController)
+);
+
+router.delete(
+  '/allocations',
+  tenantMiddleware,
+  academicsController.removeAllocation.bind(academicsController)
+);
+
 export default router;

@@ -266,7 +266,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 </div>
               </div>
               <Badge variant="neutral" className="text-[9px] font-mono shrink-0 px-1 py-0">
-                {assignedWorkspaces ? `${assignedWorkspaces.length}` : "10 Core"}
+                {assignedWorkspaces ? `${assignedWorkspaces.length}` : "12 Workspaces"}
               </Badge>
             </div>
           </div>

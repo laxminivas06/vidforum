@@ -1,0 +1,317 @@
+---
+name: perf-optimization
+description: >
+  Profile-driven performance optimization protocol. Use when profiling data (CPU, heap, trace)
+  is available or when the user requests performance analysis. Covers methodology (Profile →
+  Analyze → Opportunity Scan → Prioritize → Optimize → Benchmark), optimization pattern catalog,
+  safety invariants, and when-to-stop heuristics. Language-specific tooling is in languages/*.md.
+---
+
+# Performance Optimization Skill
+
+## When to Use
+
+- User provides profiling data (pprof, flamegraph, py-spy, Chrome DevTools, Dart DevTools)
+- User asks to analyze or optimize performance of a specific component
+- A benchmark regression is detected
+- After deploying a new feature that touches a hot path
+
+## Contents
+
+| Reference | Purpose | Used By |
+|---|---|---|
+| `references/perf-dimensions.md` | 6 MECE performance dimension scope cards + subagent prompt template | Coordinator dispatching parallel subagents in `/perf-optimize` workflow |
+| `references/perf-report-template.md` | Structured report template for performance analysis and results output | Coordinator writing Phase 3 analysis report and Phase 6 results |
+
+## Usage
+
+The `/perf-optimize` workflow loads this skill automatically.
+
+- **Methodology & patterns:** The coordinator reads this file for the core methodology (Profile → Analyze → Optimize → Benchmark), optimization pattern catalog, anti-patterns, and when-to-stop heuristics.
+- **Dimension scope cards:** Read `references/perf-dimensions.md` to get the scope definition for each dimension (A–F) and the system prompt template for subagent dispatch.
+- **Report template:** Read `references/perf-report-template.md` when writing the Phase 3 analysis report and updating it with Phase 6 implementation results.
+- **Language modules:** Read `languages/{lang}.md` for language-specific profiling tools, irreducible floors, and runtime-specific patterns.
+
+## Core Methodology
+
+```mermaid
+graph LR
+    P1[Profile] --> P2[Analyze]
+    P2 --> P2b[Opportunity Scan]
+    P2b --> P3[Prioritize]
+    P3 --> P4[Optimize]
+    P4 --> P5[Benchmark]
+    P5 --> P6{Improvement?}
+    P6 -->|Yes| P7[Verify & Ship]
+    P6 -->|No| P3
+```
+
+### Step 1: Profile
+
+Collect profiling data using the language-appropriate tool. Load the relevant `languages/*.md` module for exact commands.
+
+**Output:** Raw profiling data (CPU profile, heap profile, or trace).
+
+### Step 2: Analyze
+
+Read the profile. Focus on these principles (universal across all runtimes):
+
+1. **Focus on `cum` (cumulative):** The total resources consumed by a function AND everything it called. This finds the expensive architectural flows.
+2. **Contextualize `flat`:** Resources consumed by the function itself only. If a runtime function (GC, malloc, syscall) has high flat time, trace it UP the call chain to find the user-land code that triggered it.
+3. **Ignore runtime noise:** Scheduler overhead (`runtime.mcall`, `runtime.systemstack`, GC workers) will always appear. Note if GC pressure is high, but don't try to "fix" the scheduler.
+4. **Separate benchmark artifacts from production cost:** Test harness allocations (e.g., `httptest.NewRequest`, `ResponseRecorder`) inflate heap profiles but don't exist in production.
+
+**Output:** Structured analysis document in `docs/research_logs/{component}-perf-analysis.md`.
+
+### Step 2b: Opportunity Scan
+
+**Scope:** Apply this checklist ONLY within the hot paths identified by the profiler in Step 2. Do NOT scan the entire codebase — that leads to premature optimization. The profiler pointed you at specific modules; now systematically scan those modules for these categories of waste.
+
+**Concurrency & Parallelism:**
+- Sequential I/O calls that could run concurrently (parallel fetch, gather, join)
+- Task/goroutine/thread spawn overhead exceeding the work itself
+- Locks held across I/O boundaries (database calls, network, file system)
+- Unbounded queues or channels causing memory pressure under load
+- CPU-bound work running on an async/event-loop runtime instead of a worker pool
+
+**Memory & Allocation:**
+- Heap allocations inside hot loops (new objects per iteration)
+- Missing pre-sized collections (growing arrays/maps from zero)
+- Unnecessary copies where borrowing, referencing, or copy-on-write suffices
+- Temporary objects that could be reused across iterations (buffer pools)
+- Large structures passed by value instead of by reference
+
+**Data Structures & Algorithms:**
+- Linear scans (O(n)) where hash-based lookups (O(1)) would work
+- Nested iterations creating O(n²) behavior replaceable with single-pass or hash-based approaches
+- Missing early returns or short-circuit evaluation skipping unnecessary work
+- Redundant sorting of already-sorted data or where ordering is not required
+- Inefficient string building (concatenation in loops instead of buffered writes)
+
+**Serialization & I/O:**
+- Full deserialization when only a subset of fields is needed
+- Missing buffered I/O on file or network streams
+- Repeated serialization of the same unchanged data (cache the serialized bytes)
+- Synchronous/blocking I/O on an async runtime
+- Excessive debug/trace logging in hot paths without level gating
+
+**Caching & Lazy Initialization:**
+- Repeated expensive computations with identical inputs (regex compilation, template parsing, config loading)
+- Missing lazy initialization for rarely-used resources
+- Redundant work that could be memoized or pre-computed at startup
+
+**Output:** Append opportunity scan findings to the analysis document. Each finding must reference the profiler evidence that led to the hot path.
+
+### Step 3: Prioritize
+
+Rank fixes by **impact/risk ratio**:
+
+| Priority | Criteria |
+|---|---|
+| Do first | Low risk, high impact (caching, pre-allocation, fast-reject) |
+| Do second | Medium risk, high impact (library swap, algorithm change) |
+| Do last | High risk, high impact (major refactor, custom implementation) |
+| Skip | Any risk, low impact (micro-optimization below noise floor) |
+
+**Rule:** If a fix requires more than 1 day AND saves < 20% on the hot path, defer it.
+
+### Step 4: Optimize
+
+Implement one fix at a time. For each fix:
+1. Write tests FIRST (TDD — Red → Green → Refactor)
+2. Implement the fix
+3. Add `PERF:` inline comments explaining the optimization rationale — what the profiler showed and why the new approach is faster. Without these, a future developer may "clean up" the optimization thinking it's unnecessary complexity.
+4. Run all existing tests to verify no regression
+5. Benchmark immediately
+6. Run quality checks (formatter, linter, security scanner)
+7. Commit independently using the structured format below
+
+**Never batch multiple optimizations into one commit.** Each fix must be independently verifiable and revertable.
+
+**Commit format:**
+
+```
+perf(scope): one-line description
+
+What: <the optimization implemented>
+Why: <what the profiler showed — the performance problem it solves>
+Impact: <expected improvement, e.g., "Eliminates ~500 allocations per request">
+Measurement: <how to verify, e.g., "Run BenchmarkX, compare allocs/op">
+```
+
+**Size guidance:** Each fix should be a focused, minimal change. If a fix requires > ~100 lines of changes or touches > 3 files, re-evaluate whether it's actually a refactor in disguise — and if so, use the `/refactor` workflow instead. Performance commits are surgical; architectural restructuring is a separate concern.
+
+### Step 5: Benchmark
+
+Compare before/after with the **exact same benchmark configuration** (same `-benchtime`, same `-count`, same machine load). Report:
+- `ns/op` (latency)
+- `B/op` (memory per operation)
+- `allocs/op` (heap allocations per operation)
+
+### Step 6: When to Stop
+
+**Stop optimizing when any of these are true:**
+- Remaining CPU is in hardware-optimized assembly (AES-NI, P-256, SIMD) — you cannot beat the hardware
+- Remaining allocations are from the language runtime itself (GC, goroutine stacks, HTTP server internals)
+- The fix requires a custom implementation of a well-audited library — the security/maintenance risk outweighs the perf gain
+- The measured improvement is < 5% and within benchmark noise
+- The remaining optimization requires a large architectural refactor (> 3 files, > 100 lines) — defer to a dedicated `/refactor` session with its own testing and verification
+
+> **Documenting failures:** Record optimizations that were **tried but didn't work** in the
+> research log (`docs/research_logs/{component}-perf-analysis.md`). For each failed or skipped
+> optimization, document: (1) what was tried, (2) expected improvement, (3) actual result,
+> and (4) why it didn't work. This prevents future sessions from repeating the same failed
+> experiments. Also note any surprising profiler findings that reveal codebase-specific
+> performance characteristics.
+
+---
+
+## Optimization Pattern Catalog
+
+These are generic, language-agnostic patterns. Apply them when the profiling data shows the corresponding symptom.
+
+### Pattern: Result Caching
+
+**Symptom:** Same expensive computation repeated with identical inputs (crypto verification, JSON parsing, regex compilation).
+
+**Fix:** Cache results keyed by input hash. Use bounded LRU with TTL to prevent memory exhaustion.
+
+**Safety invariant:** When caching security-sensitive results (auth tokens, permission checks):
+- ALWAYS re-validate expiry/revocation on cache hit
+- ALWAYS bound cache size (DoS protection)
+- ALWAYS set TTL shorter than the security credential's validity period
+
+### Pattern: Pre-allocation
+
+**Symptom:** High `allocs/op` from repeatedly constructing the same objects (option structs, config slices, header maps).
+
+**Fix:** Build the object once at init time, share it read-only across requests. Safe for concurrent use if the object is immutable after construction.
+
+### Pattern: Fast-Reject / Short-Circuit
+
+**Symptom:** Expensive validation path runs even for clearly invalid inputs.
+
+**Fix:** Add a cheap structural pre-check before the expensive path. Examples: check string length before regex, count delimiters before parsing, check content-type before deserialization.
+
+### Pattern: Library Swap
+
+**Symptom:** High allocation count or CPU in a third-party library's internal parsing/serialization.
+
+**Fix:** Replace with a library that uses lower-allocation strategies (manual scanners vs `encoding/json.Decoder`, zero-copy parsing, arena allocation).
+
+**Safety invariant:** When swapping security-critical libraries (JWT, TLS, crypto):
+- Explicitly restrict accepted algorithms (prevent algorithm confusion attacks)
+- Verify the replacement library is well-audited and actively maintained
+- Run the full existing test suite — no behavioral change allowed
+
+### Pattern: Pooling
+
+**Symptom:** High GC pressure from many short-lived objects of the same type being allocated and discarded rapidly.
+
+**Fix:** Use an object pool (sync.Pool in Go, object pool in Java, arena in Rust) to reuse allocations.
+
+**Caveat:** Only effective when objects are uniform in size and have a clear acquire/release lifecycle. Misuse creates subtle bugs.
+
+### Pattern: Batching
+
+**Symptom:** Many small I/O operations (DB queries, HTTP calls, file writes) dominating wall-clock time.
+
+**Fix:** Batch operations into fewer, larger calls. Examples: batch INSERT, pipeline Redis commands, buffer writes.
+
+### Pattern: Artifact Partitioning by Change Frequency
+
+**Symptom:** Deploying a small change invalidates a large cached artifact (JS bundle, Docker image, compiled binary), forcing consumers to re-download/rebuild the entire thing.
+
+**Fix:** Partition build artifacts by change frequency so that stable layers survive volatile deploys:
+- **Stable layer**: dependencies, vendor libraries, base images — changes rarely
+- **Volatile layer**: application code — changes on every deploy
+
+**Examples across stacks:**
+- **JS/Bundler**: Vite `manualChunks` / Webpack `splitChunks` to isolate vendor libraries into separate chunks
+- **Docker**: multi-stage builds with `COPY go.mod` + `RUN go mod download` BEFORE `COPY . .` — dependency layer caches across builds
+- **Monorepo**: separate packages by change frequency so CI only rebuilds what changed
+
+**Safety invariant:** Total artifact size stays the same or slightly increases (chunk overhead). The benefit is on **repeat consumption** — stable layers serve from cache.
+
+**When NOT to apply:** One-shot artifacts with no caching benefit (single-use CI, ephemeral environments).
+
+### Pattern: Dependency Discovery Parallelization
+
+**Symptom:** Sequential resource discovery creates waterfalls — each resource is discovered only after the previous one completes (download → parse → discover next → download → ...).
+
+**Fix:** Declare dependencies as early as possible so the system can fetch them in parallel:
+- Move resource declarations upstream (earlier in the boot/parse sequence)
+- Use explicit hints to bypass sequential discovery chains
+
+**Examples across stacks:**
+- **Browser**: `<link rel="preconnect">` to establish connections before CSS/JS requests them; move CSS `@import` to HTML `<link>` for parallel discovery
+- **Go**: `go mod download` before build to prefetch modules
+- **DB**: connection pool warm-up at startup instead of on first query
+- **DNS**: `dns-prefetch` hints for domains the app will contact
+
+**Safety invariant:** Only pre-declare resources you WILL use. Unused preconnects/prefetches waste resources (TCP connections, DNS queries, module downloads).
+
+### Pattern: Concurrent-Fetch Dedup
+
+**Symptom:** Network tab shows two identical API calls fired at the same time. Multiple UI components mount simultaneously and each independently calls the same fetch function.
+
+**Fix:** Add a loading-state guard (semaphore) at the store/service layer:
+
+```
+async function fetchData() {
+    if (isLoading) return    // ← drop duplicate in-flight request
+    isLoading = true
+    try { data = await api.getData() }
+    finally { isLoading = false }
+}
+```
+
+**When to apply:** When the same data store is used by multiple co-mounted components (e.g., a navigation bar and a page view both calling `fetchProfile()` on mount).
+
+**Caveat:** This is a simple semaphore, not request dedup. If the data needs refreshing after the in-flight call completes, the caller should retry. For advanced use cases, consider a proper request dedup cache (e.g., TanStack Query's `staleTime`).
+
+---
+
+## Anti-Patterns (Things NOT to Do)
+
+1. **Don't optimize runtime internals.** If `runtime.mallocgc` or `runtime.gcBgMarkWorker` is high, fix the USER CODE that triggers allocations — don't try to tune the GC directly.
+2. **Don't replace battle-tested crypto with custom implementations.** The performance ceiling of ECDSA/RSA is in the math. Accept it.
+3. **Don't optimize based on gut feeling.** Always profile first. Premature optimization is the root of all evil.
+4. **Don't combine multiple optimizations into one commit.** If a combined commit causes a regression, you can't isolate which fix is at fault.
+5. **Don't disable security features for performance.** Algorithm restriction, input validation, and expiry checks are non-negotiable.
+6. **Don't profile without a stable baseline.** Run benchmarks with fixed parameters (`-benchtime`, `-count`, same machine load). Without a reproducible baseline, before/after comparisons are meaningless noise.
+
+---
+
+## Language Modules
+
+Load the relevant language module when working with a specific runtime:
+
+| Module | Use when |
+|---|---|
+| [Go](languages/go.md) | Go services, APIs, CLI tools |
+| [TypeScript](languages/typescript.md) | Node.js/Deno backend (event loop, streams, connection pools) |
+| [Python](languages/python.md) | Python services, CLI, data pipelines |
+| [Rust](languages/rust.md) | Rust binaries, libraries |
+| [Java](languages/java.md) | Java/JVM services (JFR, GC tuning, JIT, JMH benchmarks) |
+| [C#](languages/csharp.md) | C#/.NET services (Span, ObjectPool, EF Core, BenchmarkDotNet) |
+| [Swift](languages/swift.md) | Swift apps (Instruments, value types, TaskGroup, os_signpost) |
+| [Flutter](languages/flutter.md) | Flutter apps (const widgets, ListView.builder, isolates, DevTools) |
+| [C++](languages/cpp.md) | C++ (data-oriented design, cache locality, SIMD, Google Benchmark) |
+| [Kotlin](languages/kotlin.md) | Kotlin/JVM (inline functions, sequences, value classes, coroutine overhead) |
+| [PHP](languages/php.md) | PHP (OPcache/JIT, eager loading, caching, queue offloading, phpbench) |
+| [Ruby](languages/ruby.md) | Ruby/Rails (eager loading, batch processing, caching, stackprof) |
+| [Frontend](languages/frontend.md) | Web frontends (JS/TS bundle, rendering, network) |
+
+> **Contributing:** After completing a perf optimization session, extract generalizable patterns
+> from your `docs/research_logs/` findings into this catalog. Project-specific details stay in
+> the research log; reusable patterns belong here.
+
+## Profiling Scripts
+
+Language-specific data extraction scripts live in `scripts/`:
+
+| Script | Purpose |
+|---|---|
+| [go-pprof.sh](scripts/go-pprof.sh) | Extract Go pprof CPU/heap profiles into agent-readable markdown |
+| [frontend-lighthouse.sh](scripts/frontend-lighthouse.sh) | Two modes: `lighthouse` (Core Web Vitals, needs Chrome) or `bundle` (Vite chunk analysis, always works) |

@@ -1459,11 +1459,16 @@ export class AcademicsRepository {
   async listAllocations(institutionId: string) {
     const res = await db.query(
       `SELECT fa.id, fa.staff_id as "staffId", fa.section_id as "sectionId", fa.subject_id as "subjectId", fa.academic_year_id as "academicYearId",
-              p.full_name as "teacherName", st.employee_code as "employeeCode",
+              p.full_name as "teacherName", p.email as "teacherEmail", p.phone as "teacherPhone",
+              st.employee_code as "employeeCode",
+              COALESCE(des.name, 'Faculty') as "designation",
+              COALESCE(d.name, 'Academic') as "department",
               c.id as "classId", c.name as "className", sec.name as "sectionName", sub.name as "subjectName"
        FROM faculty_assignments fa
        JOIN staff st ON st.id = fa.staff_id
        JOIN profiles p ON p.id = st.profile_id
+       LEFT JOIN departments d ON d.id = st.department_id
+       LEFT JOIN designations des ON des.id = st.designation_id
        JOIN sections sec ON sec.id = fa.section_id
        JOIN classes c ON c.id = sec.class_id
        JOIN subjects sub ON sub.id = fa.subject_id
@@ -1474,14 +1479,45 @@ export class AcademicsRepository {
     return res.rows;
   }
 
-  async createAllocation(institutionId: string, data: { staffId: string; sectionId: string; subjectId: string; academicYearId: string }) {
+  async createAllocation(institutionId: string, data: { staffId: string; sectionId: string; subjectId: string; academicYearId?: string }) {
+    let yearId = data.academicYearId;
+    if (!yearId) {
+      const yearLookup = await db.query(
+        `SELECT c.academic_year_id FROM sections sec JOIN classes c ON c.id = sec.class_id WHERE sec.id = $1`,
+        [data.sectionId]
+      );
+      yearId = yearLookup.rows[0]?.academic_year_id;
+      if (!yearId) {
+        const defaultYear = await db.query(
+          `SELECT id FROM academic_years WHERE institution_id = $1 AND is_current = true LIMIT 1`,
+          [institutionId]
+        );
+        yearId = defaultYear.rows[0]?.id;
+      }
+    }
+
+    // Cleanly replace any existing assignment for this section and subject
+    await db.query(
+      `DELETE FROM faculty_assignments
+       WHERE institution_id = $1 AND section_id = $2 AND subject_id = $3`,
+      [institutionId, data.sectionId, data.subjectId]
+    );
+
     const res = await db.query(
       `INSERT INTO faculty_assignments (institution_id, staff_id, section_id, subject_id, academic_year_id)
        VALUES ($1, $2, $3, $4, $5)
-       ON CONFLICT (staff_id, subject_id, section_id, academic_year_id) WHERE effective_to IS NULL
-       DO UPDATE SET effective_to = NULL
        RETURNING *`,
-      [institutionId, data.staffId, data.sectionId, data.subjectId, data.academicYearId]
+      [institutionId, data.staffId, data.sectionId, data.subjectId, yearId]
+    );
+    return res.rows[0];
+  }
+
+  async removeAllocation(institutionId: string, data: { sectionId: string; subjectId: string }) {
+    const res = await db.query(
+      `DELETE FROM faculty_assignments
+       WHERE institution_id = $1 AND section_id = $2 AND subject_id = $3
+       RETURNING *`,
+      [institutionId, data.sectionId, data.subjectId]
     );
     return res.rows[0];
   }

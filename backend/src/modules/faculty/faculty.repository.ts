@@ -51,6 +51,9 @@ export class FacultyRepository {
             'grade', c.name,
             'section', sec.name,
             'subject', sub.name,
+            'subject_id', sub.id,
+            'subject_code', sub.code,
+            'student_count', COALESCE((SELECT count(*)::int FROM students s WHERE s.current_section_id = sec.id AND s.status = 'active'), 0),
             'room', ('Block ' || chr(65 + (ascii(substr(sec.name, length(sec.name), 1)) % 3)) || ' - Room 20' || (ascii(substr(sec.name, length(sec.name), 1)) - 64)),
             'schedule', 'Mon/Wed/Fri 08:30 - 09:30'
           ))
@@ -253,13 +256,20 @@ export class FacultyRepository {
          c.name as class_name, 
          sec.id as section_id, 
          sec.name as section_name,
-         ay.name as academic_year
+         sub.id as subject_id,
+         sub.name as subject_name,
+         sub.code as subject_code,
+         ay.name as academic_year,
+         COALESCE((SELECT count(*)::int FROM students s WHERE s.current_section_id = sec.id AND s.status = 'active'), 0) as student_count,
+         ('Block ' || chr(65 + (ascii(substr(sec.name, length(sec.name), 1)) % 3)) || ' - Room 20' || (ascii(substr(sec.name, length(sec.name), 1)) - 64)) as room,
+         'Mon/Wed/Fri 08:30 - 09:30' as schedule
        FROM faculty_assignments fa
        JOIN sections sec ON sec.id = fa.section_id
        JOIN classes c ON c.id = sec.class_id
+       LEFT JOIN subjects sub ON sub.id = fa.subject_id
        JOIN academic_years ay ON ay.id = fa.academic_year_id
        WHERE fa.staff_id = $1 AND (fa.effective_to IS NULL OR fa.effective_to >= CURRENT_DATE)
-       ORDER BY c.name, sec.name`,
+       ORDER BY sub.name, c.name, sec.name`,
       [staffId]
     );
     return res.rows;

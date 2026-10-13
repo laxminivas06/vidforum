@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState } from "react"
 import { RoleType } from "@/config/navigation"
 import { PermissionDenied } from "@/components/ui"
+import { sortWorkspaceIds } from "@/config/workspaces"
 
 export interface UserProfile {
   id: string
@@ -172,6 +173,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
         if (savedUserStr && savedRole && token) {
           const parsedUser = JSON.parse(savedUserStr)
+          if (parsedUser && Array.isArray(parsedUser.assignedWorkspaces)) {
+            parsedUser.assignedWorkspaces = sortWorkspaceIds(parsedUser.assignedWorkspaces)
+          }
           setUser(parsedUser)
           setRole(savedRole)
           setPermissions(ROLE_PERMISSIONS[savedRole] || ALL_PERMISSIONS)
@@ -247,7 +251,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       institutionId: backendUser.institutionId || `inst-${institutionSlug}`,
       institutionName: backendUser.institutionName || (resolvedRole === "SUPER_ADMIN" ? "VID Global Platform" : "Partner Institution"),
       institutionCode: backendUser.institutionCode,
-      assignedWorkspaces: backendUser.assignedWorkspaces || [],
+      assignedWorkspaces: sortWorkspaceIds(backendUser.assignedWorkspaces || []),
       mustChangePassword: Boolean(backendUser.mustChangePassword),
     }
 

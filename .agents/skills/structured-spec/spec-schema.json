@@ -1,0 +1,170 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/irahardianto/awesome-agv/main/.agents/skills/structured-spec/spec-schema.json",
+  "title": "Structured Spec Frontmatter Schema",
+  "description": "Validates the YAML frontmatter of Structured Spec v2.0.0 documents. Annotation bodies are validated by manual review against specification.md §4, not by this schema.",
+  "type": "object",
+  "required": ["$schema", "spec_id", "title", "doc_type", "status", "version", "owners", "created", "modified"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://raw.githubusercontent.com/irahardianto/awesome-agv/main/.agents/skills/structured-spec/spec-schema.json"
+    },
+    "spec_id": {
+      "type": "string",
+      "description": "Globally unique identifier. Convention: DOCTYPE-PROJECT-FEATURE-VN",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "doc_type": {
+      "type": "string",
+      "description": "Document profile. Closed set; see profiles/ for each.",
+      "enum": ["prd", "sdd", "implementation-plan", "tsd", "bdd", "adr", "custom"]
+    },
+    "status": {
+      "type": "string",
+      "description": "Lifecycle status. Determines completeness enforcement; see specification.md 6.3.",
+      "enum": ["draft", "in-review", "approved", "deprecated", "superseded"]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$"
+    },
+    "owners": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1
+    },
+    "created": { "type": "string", "format": "date" },
+    "modified": { "type": "string", "format": "date" },
+    "supersedes": {
+      "type": "string",
+      "description": "spec_id of the document this version replaces."
+    },
+    "superseded_by": {
+      "type": "string",
+      "description": "spec_id of the document that replaces this version."
+    },
+    "stakeholders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "role"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "role": {
+            "type": "string",
+            "enum": ["product-manager", "tech-lead", "engineer", "designer", "qa", "devops", "security", "executive", "other"]
+          },
+          "team": { "type": "string" }
+        }
+      }
+    },
+    "stack_profile": {
+      "type": "object",
+      "description": "Free-form technology hints. Values are project-specific strings, not a controlled vocabulary.",
+      "required": ["primary_language"],
+      "additionalProperties": false,
+      "properties": {
+        "primary_language": { "type": "string", "minLength": 1 },
+        "secondary_languages": { "type": "array", "items": { "type": "string" } },
+        "runtime": { "type": "string" },
+        "framework": { "type": "string" },
+        "database": { "type": "string" },
+        "cache": { "type": "string" },
+        "message_broker": { "type": "string" },
+        "infrastructure": { "type": "string" },
+        "container_runtime": { "type": "string" },
+        "platform": { "type": "string" },
+        "ci_cd": { "type": "string" },
+        "monitoring": { "type": "string" }
+      }
+    },
+    "contract_types_used": {
+      "type": "array",
+      "description": "Contract types present in this document. Test types are NOT contract types; see taxonomy.md.",
+      "uniqueItems": true,
+      "items": {
+        "anyOf": [
+          {
+            "type": "string",
+            "enum": [
+              "api-contract",
+              "data-schema",
+              "domain-model",
+              "infrastructure",
+              "messaging",
+              "security-policy",
+              "operational",
+              "config"
+            ]
+          },
+          {
+            "type": "string",
+            "pattern": "^x-[a-z0-9]+(-[a-z0-9]+)*$",
+            "description": "Project-specific custom contract type."
+          }
+        ]
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "specs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "spec_ids this document depends on."
+        },
+        "external_systems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "interface"],
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "interface": { "type": "string" },
+              "ownership": { "type": "string", "enum": ["internal", "external", "third-party"] },
+              "sla": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "milestones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "target_date"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "target_date": { "type": "string", "format": "date" },
+          "description": { "type": "string" },
+          "status": { "type": "string", "enum": ["planned", "in-progress", "completed", "blocked"] }
+        }
+      }
+    },
+    "risk_assessment": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["risk", "severity", "mitigation"],
+        "additionalProperties": false,
+        "properties": {
+          "risk": { "type": "string" },
+          "severity": { "type": "string", "enum": ["critical", "high", "medium", "low"] },
+          "mitigation": { "type": "string" },
+          "owner": { "type": "string" }
+        }
+      }
+    }
+  }
+}

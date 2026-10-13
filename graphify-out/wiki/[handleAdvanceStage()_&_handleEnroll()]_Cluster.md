@@ -1,0 +1,56 @@
+# [handleAdvanceStage() & handleEnroll()] Cluster
+
+> 69 nodes · cohesion 0.03
+
+## Key Concepts
+
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L1) (39 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx#L1) (15 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/import/page.tsx#L1) (7 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx#L1) (6 connections)
+- [handleKeyDown()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L286) (5 connections)
+- [columns](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L324) (4 connections)
+- [page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/vault/page.tsx#L1) (3 connections)
+- [handleAddUser()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L158) (3 connections)
+- [totalStudents](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx#L101) (3 connections)
+- [[email, setEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L89) (2 connections)
+- [handleDownloadTemplate()](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx#L307) (2 connections)
+- [handleSaveEdit()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L220) (2 connections)
+- [[name, setName]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L88) (2 connections)
+- [[newGrade, setNewGrade]](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx#L106) (2 connections)
+- [[selectedDoc, setSelectedDoc]](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/vault/page.tsx#L42) (2 connections)
+- [[selectedFile, setSelectedFile]](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx#L101) (2 connections)
+- [validate()](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L140) (2 connections)
+- [adminCount](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L391) (1 connections)
+- [[createModalOpen, setCreateModalOpen]](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx#L100) (1 connections)
+- [createUserMutation](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L78) (1 connections)
+- [{ data: dbUsers = [], isLoading: isLoadingUsers }](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L77) (1 connections)
+- [{ data: institutions = [] }](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L76) (1 connections)
+- [DEFAULT_USERS](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L46) (1 connections)
+- [[docs, setDocs]](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/vault/page.tsx#L41) (1 connections)
+- [[editEmail, setEditEmail]](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx#L100) (1 connections)
+- *... and 44 more nodes in this community*
+
+## Relationships
+
+- No strong cross-community connections detected
+
+## Source Files
+
+- [C:\Antigravityyyyy\VID_School\frontend\app\attendance\sessions\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/attendance/sessions/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\documents\vault\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/documents/vault/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\examinations\import\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/import/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\examinations\schedules\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/examinations/schedules/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\hrms\staff\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/hrms/staff/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\students\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/students/page.tsx)
+- [C:\Antigravityyyyy\VID_School\frontend\app\users\page.tsx](file:///C:/Antigravityyyyy/VID_School/frontend/app/users/page.tsx)
+
+## Audit Trail
+
+- EXTRACTED: 153 (100%)
+- INFERRED: 0 (0%)
+- AMBIGUOUS: 0 (0%)
+
+---
+
+*Part of the graphify knowledge wiki. See [[index]] to navigate.*

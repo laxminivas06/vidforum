@@ -1,19 +1,19 @@
-# Architectural Compass - C:\Antigravityyyyy\VID_School (2026-10-05)
+# Architectural Compass - C:\Antigravityyyyy\VID_School (2026-10-13)
 
 > [!NOTE]
 > This is a token-optimized summary. For deep logic, see GRAPH_REPORT.md.
 
 ## Core Abstractions (God Nodes)
-1. `query` (286 edges)
-2. `sendSuccess()` (204 edges)
+1. `query` (289 edges)
+2. `sendSuccess()` (205 edges)
 3. `sendError()` (155 edges)
-4. `institutions` (73 edges)
-5. `AcademicsRepository` (51 edges)
-6. `AcademicsController` (50 edges)
-7. `AcademicsService` (49 edges)
-8. `Document: Vid Database Architecture` (47 edges)
-9. `HrmsRepository` (40 edges)
-10. `ExaminationsRepository` (30 edges)
+4. `AcademicsRepository` (52 edges)
+5. `AcademicsController` (51 edges)
+6. `AcademicsService` (50 edges)
+7. `HrmsRepository` (40 edges)
+8. `ExaminationsRepository` (30 edges)
+9. `HrmsService` (30 edges)
+10. `DocumentsRepository` (27 edges)
 
 ## System Layers
 - **L0: Global/Entry**: 

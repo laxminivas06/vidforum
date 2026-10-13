@@ -7,30 +7,30 @@
     },
     {
       "label": "AcademicsController",
-      "risk": 0.491,
+      "risk": 0.49,
       "type": "CLASS"
     },
     {
       "label": "DocumentsService",
-      "risk": 0.374,
+      "risk": 0.369,
       "type": "CLASS"
     },
     {
       "label": "HrmsService",
-      "risk": 0.329,
+      "risk": 0.324,
       "type": "CLASS"
     },
     {
       "label": "HrmsRepository",
-      "risk": 0.309,
+      "risk": 0.304,
       "type": "CLASS"
     }
   ],
   "blast_radius": {
-    "query": 286,
-    "sendSuccess()": 204,
+    "query": 289,
+    "sendSuccess()": 205,
     "sendError()": 155,
-    "institutions": 73,
-    "AcademicsRepository": 51
+    "AcademicsRepository": 52,
+    "AcademicsController": 51
   }
 }

@@ -1,62 +1,47 @@
 import { facultyRepository } from './faculty.repository';
 
 export class FacultyService {
-  async getFacultyList(institutionId: string) {
-    const raw = await facultyRepository.findFacultyByInstitution(institutionId);
+  async getFacultyList(institutionId: string, teachingOnly?: boolean) {
+    const raw = await facultyRepository.findFacultyByInstitution(institutionId, teachingOnly);
 
-    return await Promise.all(
-      raw.map(async (row: any) => {
-        const assigned = row.assignedClasses || [];
-        const studentsCount = await facultyRepository.countStudentsTaught(row.id).catch(() => 0);
-        const todayClassesRaw = await facultyRepository.findFacultyTodayClasses(row.id, institutionId).catch(() => []);
+    return raw.map((row: any) => {
+      const assigned = Array.isArray(row.assignedClasses) ? row.assignedClasses : [];
+      const studentsCount = assigned.reduce((acc: number, ac: any) => acc + (Number(ac.student_count) || 0), 0);
 
-        let todayClasses = todayClassesRaw.map((tc: any, idx: number) => ({
-          period: tc.period || `Period ${idx + 1}`,
-          time: tc.time || '08:30 - 09:15 AM',
-          gradeSection: tc.gradeSection,
-          sectionId: tc.sectionId,
-          subject: tc.subject,
-          room: tc.room,
-          status: idx === 0 ? 'IN_PROGRESS' : idx === 1 ? 'UPCOMING' : 'COMPLETED',
-        }));
+      const todayClasses = assigned.slice(0, 3).map((ac: any, idx: number) => ({
+        period: `Period ${idx + 1}`,
+        time: idx === 0 ? '08:30 - 09:15 AM' : idx === 1 ? '09:15 - 10:00 AM' : '10:15 - 11:00 AM',
+        gradeSection: `${ac.grade || ac.class_name} - ${ac.section || ac.section_name}`,
+        sectionId: ac.section_id,
+        subject: ac.subject,
+        room: ac.room || 'Room 101',
+        status: idx === 0 ? 'IN_PROGRESS' : 'UPCOMING',
+      }));
 
-        if (todayClasses.length === 0 && assigned.length > 0) {
-          todayClasses = assigned.slice(0, 3).map((ac: any, idx: number) => ({
-            period: `Period ${idx + 1}`,
-            time: idx === 0 ? '08:30 - 09:15 AM' : idx === 1 ? '09:15 - 10:00 AM' : '10:15 - 11:00 AM',
-            gradeSection: `${ac.grade} - ${ac.section}`,
-            sectionId: ac.section_id,
-            subject: ac.subject,
-            room: ac.room || 'Room 101',
-            status: idx === 0 ? 'IN_PROGRESS' : 'UPCOMING',
-          }));
-        }
-
-        return {
-          id: row.id,
-          employeeCode: row.employeeCode,
-          name: row.name,
-          designation: row.designation || 'Lecturer',
-          department: row.department || 'Academic Department',
-          email: row.email,
-          phone: row.phone || '',
-          qualification: row.qualification || '',
-          university: row.university || '',
-          subjects: row.subjects || '',
-          experience: row.experience || '',
-          address: row.address || '',
-          dateOfBirth: row.dateOfBirth ? new Date(row.dateOfBirth).toISOString().split('T')[0] : '',
-          gender: row.gender || '',
-          userId: row.userId || row.email,
-          hasAccount: !!row.hasAccount,
-          assignedClasses: assigned,
-          batchesCount: assigned.length,
-          studentsCount: studentsCount || 0,
-          todayClasses,
-          status: (row.status || 'ACTIVE').toUpperCase(),
-        };
-      })
-    );
+      return {
+        id: row.id,
+        employeeCode: row.employeeCode,
+        name: row.name,
+        designation: row.designation || 'Lecturer',
+        department: row.department || 'Academic Department',
+        email: row.email,
+        phone: row.phone || '',
+        qualification: row.qualification || '',
+        university: row.university || '',
+        subjects: row.subjects || '',
+        experience: row.experience || '',
+        address: row.address || '',
+        dateOfBirth: row.dateOfBirth ? new Date(row.dateOfBirth).toISOString().split('T')[0] : '',
+        gender: row.gender || '',
+        userId: row.userId || row.email,
+        hasAccount: !!row.hasAccount,
+        assignedClasses: assigned,
+        batchesCount: assigned.length,
+        studentsCount: studentsCount || 0,
+        todayClasses,
+        status: (row.status || 'ACTIVE').toUpperCase().replace(/-/g, '_'),
+      };
+    });
   }
 
   async addStaffMember(institutionId: string, data: any) {

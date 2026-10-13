@@ -223,8 +223,8 @@ export default function MyMenteesPage() {
         {/* Top Header Card */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 bg-surface border border-border-default rounded-2xl shadow-xs">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-600 flex items-center justify-center font-bold">
-              <HeartHandshake className="w-5 h-5 text-purple-600" />
+            <div className="w-10 h-10 rounded-xl bg-subtle border border-border-default text-brand-primary flex items-center justify-center font-bold">
+              <HeartHandshake className="w-5 h-5 text-brand-primary" />
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -260,8 +260,8 @@ export default function MyMenteesPage() {
 
         {/* Feedback Alert */}
         {feedbackSaved && (
-          <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl text-emerald-800 dark:text-emerald-300 text-xs flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+          <div className="p-3 bg-subtle border border-status-success/30 rounded-xl text-status-success text-xs flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-status-success shrink-0" />
             <span>{feedbackSaved}</span>
           </div>
         )}
@@ -274,7 +274,7 @@ export default function MyMenteesPage() {
                 <span className="text-xs text-text-secondary font-medium">Total Mentees</span>
                 <p className="text-2xl font-bold text-text-primary mt-1">{menteesList.length}</p>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 flex items-center justify-center">
+              <div className="p-2 rounded-lg bg-subtle border border-border-default text-brand-primary flex items-center justify-center">
                 <Users className="w-5 h-5" />
               </div>
             </CardContent>
@@ -284,9 +284,9 @@ export default function MyMenteesPage() {
             <CardContent className="p-4 flex items-center justify-between">
               <div>
                 <span className="text-xs text-text-secondary font-medium">Excelling Mentees</span>
-                <p className="text-2xl font-bold text-emerald-600 mt-1">{excellingCount}</p>
+                <p className="text-2xl font-bold text-status-success mt-1">{excellingCount}</p>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 flex items-center justify-center">
+              <div className="p-2 rounded-lg bg-subtle border border-border-default text-brand-primary flex items-center justify-center">
                 <Award className="w-5 h-5" />
               </div>
             </CardContent>
@@ -296,9 +296,9 @@ export default function MyMenteesPage() {
             <CardContent className="p-4 flex items-center justify-between">
               <div>
                 <span className="text-xs text-text-secondary font-medium">Needs Attention</span>
-                <p className="text-2xl font-bold text-red-600 mt-1">{supportCount}</p>
+                <p className="text-2xl font-bold text-status-error mt-1">{supportCount}</p>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-950/40 text-red-600 flex items-center justify-center">
+              <div className="p-2 rounded-lg bg-subtle border border-border-default text-status-error flex items-center justify-center">
                 <AlertCircle className="w-5 h-5" />
               </div>
             </CardContent>
@@ -308,7 +308,7 @@ export default function MyMenteesPage() {
             <CardContent className="p-4 flex items-center justify-between">
               <div>
                 <span className="text-xs text-text-secondary font-medium">Avg Attendance</span>
-                <p className="text-2xl font-bold text-brand-primary mt-1">
+                <p className="text-2xl font-bold text-text-primary mt-1">
                   {menteesList.length
                     ? Math.round(
                         menteesList.reduce((acc, m) => acc + m.attendancePct, 0) / menteesList.length
@@ -317,7 +317,7 @@ export default function MyMenteesPage() {
                   %
                 </p>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-brand-primary flex items-center justify-center">
+              <div className="p-2 rounded-lg bg-subtle border border-border-default text-brand-primary flex items-center justify-center">
                 <CalendarCheck className="w-5 h-5" />
               </div>
             </CardContent>
@@ -332,10 +332,10 @@ export default function MyMenteesPage() {
                 key={st}
                 type="button"
                 onClick={() => setStatusFilter(st)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                   statusFilter === st
-                    ? "bg-brand-primary text-black"
-                    : "bg-canvas text-text-secondary hover:text-text-primary border border-border-default"
+                    ? "bg-action-black text-canvas shadow-xs font-bold"
+                    : "text-text-secondary hover:text-text-primary hover:bg-subtle"
                 }`}
               >
                 {st === "ALL" ? "All Mentees" : st.replace("_", " ")}
@@ -404,7 +404,7 @@ export default function MyMenteesPage() {
                   </div>
                   <div>
                     <span className="text-[10px] text-text-muted uppercase font-bold">Academic Avg</span>
-                    <p className="text-xs font-mono font-bold text-emerald-600 mt-0.5">
+                    <p className="text-xs font-mono font-bold text-status-success mt-0.5">
                       {mentee.marksAvgPct}%
                     </p>
                   </div>
@@ -517,7 +517,6 @@ export default function MyMenteesPage() {
                 <Button
                   size="dense"
                   variant="primary"
-                  className="bg-brand-primary text-black hover:bg-emerald-400 font-bold"
                   onClick={handleSaveMentorNote}
                 >
                   Save Mentorship Note

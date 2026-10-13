@@ -437,7 +437,7 @@ export default function MyAssignedCoursesPage() {
                     <p className="text-2xl font-bold text-text-primary mt-1">{courses.length}</p>
                     <span className="text-[11px] text-text-muted mt-0.5 block">Unique subject disciplines</span>
                   </div>
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 flex items-center justify-center">
+                  <div className="p-2 rounded-lg bg-subtle border border-border-default text-brand-primary flex items-center justify-center">
                     <BookOpen className="w-5 h-5" />
                   </div>
                 </CardContent>
@@ -452,7 +452,7 @@ export default function MyAssignedCoursesPage() {
                     </p>
                     <span className="text-[11px] text-text-muted mt-0.5 block">Allocated teaching cohorts</span>
                   </div>
-                  <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-600 flex items-center justify-center">
+                  <div className="p-2 rounded-lg bg-subtle border border-border-default text-brand-primary flex items-center justify-center">
                     <Layers className="w-5 h-5" />
                   </div>
                 </CardContent>
@@ -467,7 +467,7 @@ export default function MyAssignedCoursesPage() {
                     </p>
                     <span className="text-[11px] text-text-muted mt-0.5 block">Students under instruction</span>
                   </div>
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 flex items-center justify-center">
+                  <div className="p-2 rounded-lg bg-subtle border border-border-default text-brand-primary flex items-center justify-center">
                     <Users className="w-5 h-5" />
                   </div>
                 </CardContent>
@@ -495,7 +495,7 @@ export default function MyAssignedCoursesPage() {
                 >
                   <div>
                     <div className="flex items-start justify-between gap-3 mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 flex items-center justify-center font-bold">
+                      <div className="w-10 h-10 rounded-xl bg-subtle border border-border-default text-brand-primary flex items-center justify-center font-bold">
                         <GraduationCap className="w-5 h-5" />
                       </div>
                       <Badge variant="neutral" className="font-mono text-[11px]">
@@ -572,11 +572,11 @@ export default function MyAssignedCoursesPage() {
             </div>
 
             {/* Instruction Banner */}
-            <div className="p-4 bg-blue-50/60 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/50 rounded-xl text-blue-900 dark:text-blue-300 text-xs flex items-start gap-3">
-              <Layers className="w-4 h-4 mt-0.5 text-blue-600 shrink-0" />
+            <div className="p-4 bg-subtle border border-border-default rounded-xl text-text-secondary text-xs flex items-start gap-3">
+              <Layers className="w-4 h-4 mt-0.5 text-brand-primary shrink-0" />
               <div>
-                <p className="font-semibold">Classes & Sections for {currentCourse.name}</p>
-                <p className="text-blue-800 dark:text-blue-400 mt-0.5">
+                <p className="font-semibold text-text-primary">Classes & Sections for {currentCourse.name}</p>
+                <p className="text-text-secondary mt-0.5">
                   Click on any Class and Section below to open the student roster and record manual attendance roll call.
                 </p>
               </div>
@@ -592,7 +592,7 @@ export default function MyAssignedCoursesPage() {
                 >
                   <div>
                     <div className="flex items-start justify-between gap-2 mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-600 flex items-center justify-center font-bold">
+                      <div className="w-10 h-10 rounded-xl bg-subtle border border-border-default text-brand-primary flex items-center justify-center font-bold">
                         <Layers className="w-5 h-5" />
                       </div>
                       <Badge variant="positive">
@@ -665,7 +665,6 @@ export default function MyAssignedCoursesPage() {
                 <Button
                   size="dense"
                   variant="primary"
-                  className="bg-brand-primary text-black hover:bg-emerald-400 font-bold"
                   leadingIcon={<Save className="w-3.5 h-3.5" />}
                   onClick={handleSaveAttendance}
                   disabled={isSubmitting}
@@ -677,14 +676,14 @@ export default function MyAssignedCoursesPage() {
 
             {/* Success Feedback Alert */}
             {saveSuccessMessage && (
-              <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl text-emerald-800 dark:text-emerald-300 text-xs flex items-center justify-between gap-2 shadow-xs">
+              <div className="p-3 bg-subtle border border-status-success/30 rounded-xl text-status-success text-xs flex items-center justify-between gap-2 shadow-xs">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
+                  <CheckCircle2 className="w-4 h-4 shrink-0 text-status-success" />
                   <span>{saveSuccessMessage}</span>
                 </div>
                 <button
                   onClick={() => setSaveSuccessMessage(null)}
-                  className="text-emerald-700 hover:text-emerald-900 font-bold text-xs"
+                  className="text-status-success hover:opacity-80 font-bold text-xs"
                 >
                   ✕
                 </button>
@@ -702,20 +701,20 @@ export default function MyAssignedCoursesPage() {
 
               <Card>
                 <CardContent className="p-3.5">
-                  <span className="text-[11px] font-semibold text-emerald-600 uppercase">Present</span>
+                  <span className="text-[11px] font-semibold text-status-success uppercase">Present</span>
                   <div className="flex items-baseline gap-1.5 mt-0.5">
-                    <span className="text-xl font-bold text-emerald-600">{presentCount}</span>
-                    <span className="text-xs font-mono text-emerald-600/80">({presentPct}%)</span>
+                    <span className="text-xl font-bold text-status-success">{presentCount}</span>
+                    <span className="text-xs font-mono text-status-success/80">({presentPct}%)</span>
                   </div>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardContent className="p-3.5">
-                  <span className="text-[11px] font-semibold text-red-600 uppercase">Absent</span>
+                  <span className="text-[11px] font-semibold text-status-error uppercase">Absent</span>
                   <div className="flex items-baseline gap-1.5 mt-0.5">
-                    <span className="text-xl font-bold text-red-600">{absentCount}</span>
-                    <span className="text-xs font-mono text-red-600/80">
+                    <span className="text-xl font-bold text-status-error">{absentCount}</span>
+                    <span className="text-xs font-mono text-status-error/80">
                       ({attendanceRoster.length ? Math.round((absentCount / attendanceRoster.length) * 100) : 0}%)
                     </span>
                   </div>
@@ -724,15 +723,15 @@ export default function MyAssignedCoursesPage() {
 
               <Card>
                 <CardContent className="p-3.5">
-                  <span className="text-[11px] font-semibold text-amber-600 uppercase">Late</span>
-                  <p className="text-xl font-bold text-amber-600 mt-0.5">{lateCount}</p>
+                  <span className="text-[11px] font-semibold text-status-warning uppercase">Late</span>
+                  <p className="text-xl font-bold text-status-warning mt-0.5">{lateCount}</p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardContent className="p-3.5">
-                  <span className="text-[11px] font-semibold text-blue-600 uppercase">Excused</span>
-                  <p className="text-xl font-bold text-blue-600 mt-0.5">{excusedCount}</p>
+                  <span className="text-[11px] font-semibold text-status-info uppercase">Excused</span>
+                  <p className="text-xl font-bold text-status-info mt-0.5">{excusedCount}</p>
                 </CardContent>
               </Card>
             </div>
@@ -796,10 +795,10 @@ export default function MyAssignedCoursesPage() {
                   </h4>
                 </div>
                 <div className="flex items-center gap-2 text-[11px] text-text-muted">
-                  <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500" /> Present (P)
-                  <span className="inline-block w-2.5 h-2.5 rounded-full bg-red-500 ml-1.5" /> Absent (A)
-                  <span className="inline-block w-2.5 h-2.5 rounded-full bg-amber-500 ml-1.5" /> Late (L)
-                  <span className="inline-block w-2.5 h-2.5 rounded-full bg-blue-500 ml-1.5" /> Excused (E)
+                  <span className="inline-block w-2.5 h-2.5 rounded-full bg-status-success" /> Present (P)
+                  <span className="inline-block w-2.5 h-2.5 rounded-full bg-status-error ml-1.5" /> Absent (A)
+                  <span className="inline-block w-2.5 h-2.5 rounded-full bg-status-warning ml-1.5" /> Late (L)
+                  <span className="inline-block w-2.5 h-2.5 rounded-full bg-status-info ml-1.5" /> Excused (E)
                 </div>
               </div>
 
@@ -848,10 +847,10 @@ export default function MyAssignedCoursesPage() {
                           <td className="py-3 px-4">
                             <div className="flex items-center justify-center gap-1.5">
                               {[
-                                { key: "PRESENT", label: "P", title: "Present", color: "hover:border-emerald-500", active: "bg-emerald-600 text-white border-emerald-600 shadow-xs" },
-                                { key: "ABSENT", label: "A", title: "Absent", color: "hover:border-red-500", active: "bg-red-600 text-white border-red-600 shadow-xs" },
-                                { key: "LATE", label: "L", title: "Late", color: "hover:border-amber-500", active: "bg-amber-600 text-white border-amber-600 shadow-xs" },
-                                { key: "EXCUSED", label: "E", title: "Excused", color: "hover:border-blue-500", active: "bg-blue-600 text-white border-blue-600 shadow-xs" },
+                                { key: "PRESENT", label: "P", title: "Present", color: "hover:border-status-success", active: "bg-status-success text-canvas border-status-success shadow-xs" },
+                                { key: "ABSENT", label: "A", title: "Absent", color: "hover:border-status-error", active: "bg-status-error text-canvas border-status-error shadow-xs" },
+                                { key: "LATE", label: "L", title: "Late", color: "hover:border-status-warning", active: "bg-status-warning text-canvas border-status-warning shadow-xs" },
+                                { key: "EXCUSED", label: "E", title: "Excused", color: "hover:border-status-info", active: "bg-status-info text-canvas border-status-info shadow-xs" },
                               ].map((btn) => (
                                 <button
                                   key={btn.key}
@@ -892,10 +891,10 @@ export default function MyAssignedCoursesPage() {
                             <span
                               className={`font-semibold ${
                                 student.attendancePct >= 90
-                                  ? "text-emerald-600"
+                                  ? "text-status-success"
                                   : student.attendancePct >= 75
                                   ? "text-text-primary"
-                                  : "text-red-600"
+                                  : "text-status-error"
                               }`}
                             >
                               {student.attendancePct}%
@@ -944,7 +943,6 @@ export default function MyAssignedCoursesPage() {
                 <Button
                   size="dense"
                   variant="primary"
-                  className="bg-brand-primary text-black hover:bg-emerald-400 font-bold"
                   leadingIcon={<Save className="w-3.5 h-3.5" />}
                   onClick={handleSaveAttendance}
                   disabled={isSubmitting}

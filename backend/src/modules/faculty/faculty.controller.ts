@@ -7,15 +7,16 @@ export class FacultyController {
     try {
       const instId = req.institutionId!;
       const user = req.user;
-      const isFacultyOnly = user && (user.role === 'FACULTY' || user.role === 'Faculty');
+      const scope = req.query.scope as string;
+      const teachingOnly = req.query.teachingOnly === 'true';
 
-      if (isFacultyOnly) {
+      if (scope === 'self' && user) {
         const profile = await facultyService.getFacultyProfile(user.id, instId);
         sendSuccess(res, [profile]);
         return;
       }
 
-      const faculty = await facultyService.getFacultyList(instId);
+      const faculty = await facultyService.getFacultyList(instId, teachingOnly ? true : undefined);
       sendSuccess(res, faculty);
     } catch (error) {
       next(error);

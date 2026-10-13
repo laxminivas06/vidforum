@@ -228,8 +228,12 @@ function HRMSStaffContent() {
   // --- Filtered staff list ---
   const filteredStaff = staff.filter((m) => {
     // 1. Status Filter from URL or selection
-    if (statusFilter && m.status !== statusFilter) {
-      return false
+    if (statusFilter) {
+      const memberStatus = (m.status || "ACTIVE").toUpperCase().replace(/-/g, "_")
+      const targetFilter = statusFilter.toUpperCase().replace(/-/g, "_")
+      if (memberStatus !== targetFilter) {
+        return false
+      }
     }
 
     // 2. Text Search Query
@@ -516,11 +520,14 @@ function HRMSStaffContent() {
     {
       header: "Status",
       key: "status",
-      render: (item) => (
-        <Badge variant={item.status === "ACTIVE" ? "positive" : item.status === "ON_LEAVE" ? "warning" : "neutral"}>
-          {item.status === "ACTIVE" ? "Active" : item.status === "ON_LEAVE" ? "On Leave" : item.status || "Active"}
-        </Badge>
-      ),
+      render: (item) => {
+        const st = (item.status || "ACTIVE").toUpperCase().replace(/-/g, "_")
+        return (
+          <Badge variant={st === "ACTIVE" ? "positive" : st === "ON_LEAVE" ? "warning" : "neutral"}>
+            {st === "ACTIVE" ? "Active" : st === "ON_LEAVE" ? "On Leave" : item.status || "Active"}
+          </Badge>
+        )
+      },
     },
     {
       header: "Login Account",
@@ -792,13 +799,13 @@ function HRMSStaffContent() {
           />
           <StatCard
             label="Active Faculty"
-            value={staff.filter((s) => s.status === "ACTIVE").length.toString()}
+            value={staff.filter((s) => (s.status || "ACTIVE").toUpperCase().replace(/-/g, "_") === "ACTIVE").length.toString()}
             icon={<CheckCircle2 className="w-5 h-5 text-brand-green" />}
             description="Full-time teaching personnel"
           />
           <StatCard
             label="On Leave / Sabbatical"
-            value={staff.filter((s) => s.status === "ON_LEAVE").length.toString()}
+            value={staff.filter((s) => (s.status || "").toUpperCase().replace(/-/g, "_") === "ON_LEAVE").length.toString()}
             icon={<Clock className="w-5 h-5 text-brand-warning" />}
             description="Staff on approved leave"
           />

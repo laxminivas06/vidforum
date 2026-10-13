@@ -57,7 +57,7 @@ router.use('/students', authMiddleware, studentRoutes);
 // Strict Workspace Enforcement
 router.use('/academics', authMiddleware, requireWorkspace('academics'), academicRoutes);
 router.use('/admissions', authMiddleware, requireWorkspace('admissions'), admissionsRoutes);
-router.use('/faculty', authMiddleware, requireWorkspace('faculty'), facultyRoutes);
+router.use('/faculty', authMiddleware, requireWorkspace(['faculty', 'hrms']), facultyRoutes);
 router.use('/attendance', authMiddleware, requireWorkspace('attendance'), attendanceRoutes);
 router.use('/examinations', authMiddleware, requireWorkspace('examinations'), examRoutes);
 router.use('/finance', authMiddleware, requireWorkspace('finance'), financeRoutes);

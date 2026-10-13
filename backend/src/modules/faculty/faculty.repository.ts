@@ -22,7 +22,7 @@ export interface StaffMemberInput {
 }
 
 export class FacultyRepository {
-  async findFacultyByInstitution(institutionId: string) {
+  async findFacultyByInstitution(institutionId: string, teachingOnly?: boolean) {
     const query = `
       SELECT 
         st.id,
@@ -69,10 +69,12 @@ export class FacultyRepository {
       LEFT JOIN auth.users u ON u.id = p.id
       LEFT JOIN departments d ON d.id = st.department_id
       LEFT JOIN designations des ON des.id = st.designation_id
-      WHERE (st.institution_id = $1 OR $1 IS NULL) AND st.is_teaching_staff = true
+      WHERE (st.institution_id = $1 OR $1 IS NULL) 
+        AND st.deleted_at IS NULL
+        AND ($2::boolean IS NULL OR st.is_teaching_staff = $2)
       ORDER BY st.created_at DESC, st.employee_code ASC
     `;
-    const res = await db.query(query, [institutionId]);
+    const res = await db.query(query, [institutionId, teachingOnly ?? null]);
     return res.rows;
   }
 
@@ -135,7 +137,34 @@ export class FacultyRepository {
         [profileId, facultyRoleId, institutionId]
       );
 
-      // 4. Generate unique employee code
+      // 4. Resolve department_id and designation_id
+      let departmentId: string | null = null;
+      if (data.department) {
+        const dRes = await client.query(
+          `SELECT id FROM departments WHERE (institution_id = $1 OR $1 IS NULL) AND LOWER(name) = LOWER($2) LIMIT 1`,
+          [institutionId, data.department.trim()]
+        );
+        if (dRes.rows.length > 0) {
+          departmentId = dRes.rows[0].id;
+        }
+      }
+
+      let designationId: string | null = null;
+      if (data.designation) {
+        const desRes = await client.query(
+          `SELECT id FROM designations WHERE (institution_id = $1 OR $1 IS NULL) AND LOWER(name) = LOWER($2) LIMIT 1`,
+          [institutionId, data.designation.trim()]
+        );
+        if (desRes.rows.length > 0) {
+          designationId = desRes.rows[0].id;
+        }
+      }
+
+      const isTeaching = (data as any).isTeachingStaff !== undefined
+        ? Boolean((data as any).isTeachingStaff)
+        : (data.subjects ? true : true);
+
+      // Generate unique employee code
       const codeSuffix = Math.floor(1000 + Math.random() * 9000);
       const employeeCode = `FAC-EMP-${codeSuffix}`;
 
@@ -143,17 +172,23 @@ export class FacultyRepository {
       const staffRes = await client.query(
         `INSERT INTO staff (
            id, institution_id, profile_id, employee_code, is_teaching_staff,
+           department_id, designation_id,
            employment_status, date_of_joining, qualification, university,
            subjects, experience, address, date_of_birth, gender
          ) VALUES (
-           gen_random_uuid(), $1, $2, $3, true, 'active', CURRENT_DATE,
-           $4, $5, $6, $7, $8, $9, $10
+           gen_random_uuid(), $1, $2, $3, $4,
+           $5, $6,
+           'active', CURRENT_DATE,
+           $7, $8, $9, $10, $11, $12, $13
          )
          RETURNING *`,
         [
           institutionId,
           profileId,
           employeeCode,
+          isTeaching,
+          departmentId,
+          designationId,
           data.qualification || null,
           data.university || null,
           data.subjects || null,

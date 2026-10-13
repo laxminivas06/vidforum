@@ -111,7 +111,6 @@ export default function FacultyDashboardPage() {
             <Button
               size="dense"
               variant="primary"
-              className="bg-brand-primary text-black hover:bg-emerald-400"
               leadingIcon={<ClipboardCheck className="w-3.5 h-3.5" />}
             >
               Open Assigned Courses & Roll-Call
@@ -219,7 +218,7 @@ export default function FacultyDashboardPage() {
                         <Button
                           size="dense"
                           variant={isCurrent ? "primary" : "secondary"}
-                          className={isCurrent ? "bg-brand-primary text-black hover:bg-emerald-400 shrink-0" : "shrink-0"}
+                          className="shrink-0"
                           onClick={() => handleOpenRollCall(item.gradeSection, item.sectionId)}
                         >
                           Take Attendance
@@ -262,7 +261,7 @@ export default function FacultyDashboardPage() {
                   </div>
                   <div className="flex items-center justify-between pt-1 border-t border-border-subtle text-text-muted text-[11px]">
                     <span>5 Pupils Graded</span>
-                    <span className="font-mono text-emerald-600 font-semibold">Avg: 88.5%</span>
+                    <span className="font-mono text-status-success font-semibold">Avg: 88.5%</span>
                   </div>
                 </div>
 
@@ -343,7 +342,6 @@ export default function FacultyDashboardPage() {
               size="dense"
               variant="primary"
               disabled={attendanceRecords.length === 0}
-              className="bg-brand-primary text-black hover:bg-emerald-400"
               onClick={handleCompleteRollCall}
             >
               {rollCallSuccess ? "Submitted!" : "Submit & Lock Attendance"}
@@ -371,7 +369,7 @@ export default function FacultyDashboardPage() {
                       className={`p-3 rounded-lg border flex items-center justify-between cursor-pointer transition-all ${
                         isPresent
                           ? "bg-surface border-border-default"
-                          : "bg-red-50/50 border-red-200"
+                          : "bg-status-error/10 border-status-error/30"
                       }`}
                     >
                       <div>

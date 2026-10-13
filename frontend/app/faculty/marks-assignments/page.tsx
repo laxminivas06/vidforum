@@ -239,16 +239,16 @@ export default function MarksAndAssignmentsPage() {
     }, 600)
   }
 
-  // Compute Grade from score
+  // Compute Grade from score using predefined tokens
   const getGrade = (marks: number | "", isAbsent: boolean) => {
-    if (isAbsent) return { grade: "ABS", color: "bg-red-500/10 text-red-600 border-red-500/30" }
-    if (marks === "") return { grade: "--", color: "bg-neutral-500/10 text-neutral-500 border-neutral-500/30" }
+    if (isAbsent) return { grade: "ABS", color: "bg-status-error/10 text-status-error border-status-error/30" }
+    if (marks === "") return { grade: "--", color: "bg-badge-neutral text-text-muted border-border-default" }
     const pct = (Number(marks) / maxMarksLimit) * 100
-    if (pct >= 90) return { grade: "A+", color: "bg-emerald-500/10 text-emerald-600 border-emerald-500/30" }
-    if (pct >= 80) return { grade: "A", color: "bg-emerald-500/10 text-emerald-600 border-emerald-500/30" }
-    if (pct >= 70) return { grade: "B", color: "bg-blue-500/10 text-blue-600 border-blue-500/30" }
-    if (pct >= 60) return { grade: "C", color: "bg-amber-500/10 text-amber-600 border-amber-500/30" }
-    return { grade: "F", color: "bg-red-500/10 text-red-600 border-red-500/30" }
+    if (pct >= 90) return { grade: "A+", color: "bg-status-success/10 text-status-success border-status-success/30" }
+    if (pct >= 80) return { grade: "A", color: "bg-status-success/10 text-status-success border-status-success/30" }
+    if (pct >= 70) return { grade: "B", color: "bg-status-info/10 text-status-info border-status-info/30" }
+    if (pct >= 60) return { grade: "C", color: "bg-status-warning/10 text-status-warning border-status-warning/30" }
+    return { grade: "F", color: "bg-status-error/10 text-status-error border-status-error/30" }
   }
 
   const filteredMarks = marksRoster.filter(
@@ -266,7 +266,6 @@ export default function MarksAndAssignmentsPage() {
           <Button
             size="dense"
             variant="primary"
-            className="bg-brand-primary text-black hover:bg-emerald-400 font-bold"
             leadingIcon={<Plus className="w-3.5 h-3.5" />}
             onClick={() => setIsCreateModalOpen(true)}
           >
@@ -276,7 +275,6 @@ export default function MarksAndAssignmentsPage() {
           <Button
             size="dense"
             variant="primary"
-            className="bg-brand-primary text-black hover:bg-emerald-400 font-bold"
             leadingIcon={<Save className="w-3.5 h-3.5" />}
             onClick={handleSaveMarks}
             disabled={isSubmittingMarks}
@@ -313,8 +311,8 @@ export default function MarksAndAssignmentsPage() {
               onClick={() => setActiveTab("ASSIGNMENTS")}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === "ASSIGNMENTS"
-                  ? "bg-brand-primary text-black font-bold shadow-xs"
-                  : "text-text-secondary hover:text-text-primary"
+                  ? "bg-action-black text-canvas font-bold shadow-xs"
+                  : "text-text-secondary hover:text-text-primary hover:bg-subtle"
               }`}
             >
               Course Assignments
@@ -324,8 +322,8 @@ export default function MarksAndAssignmentsPage() {
               onClick={() => setActiveTab("MARKS_ENTRY")}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === "MARKS_ENTRY"
-                  ? "bg-brand-primary text-black font-bold shadow-xs"
-                  : "text-text-secondary hover:text-text-primary"
+                  ? "bg-action-black text-canvas font-bold shadow-xs"
+                  : "text-text-secondary hover:text-text-primary hover:bg-subtle"
               }`}
             >
               Marks & Assessment Entry
@@ -335,14 +333,14 @@ export default function MarksAndAssignmentsPage() {
 
         {/* Feedback Alert */}
         {saveSuccessMessage && (
-          <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl text-emerald-800 dark:text-emerald-300 text-xs flex items-center justify-between gap-2 shadow-xs">
+          <div className="p-3 bg-subtle border border-status-success/30 rounded-xl text-status-success text-xs flex items-center justify-between gap-2 shadow-xs">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <CheckCircle2 className="w-4 h-4 text-status-success shrink-0" />
               <span>{saveSuccessMessage}</span>
             </div>
             <button
               onClick={() => setSaveSuccessMessage(null)}
-              className="text-emerald-700 hover:text-emerald-900 font-bold text-xs"
+              className="text-status-success hover:opacity-80 font-bold text-xs"
             >
               ✕
             </button>
@@ -364,7 +362,7 @@ export default function MarksAndAssignmentsPage() {
                       {assignments.filter((a) => a.status === "ACTIVE").length}
                     </p>
                   </div>
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 flex items-center justify-center">
+                  <div className="p-2 rounded-lg bg-subtle border border-border-default text-brand-primary flex items-center justify-center">
                     <FileText className="w-5 h-5" />
                   </div>
                 </CardContent>
@@ -374,11 +372,11 @@ export default function MarksAndAssignmentsPage() {
                 <CardContent className="p-4 flex items-center justify-between">
                   <div>
                     <span className="text-xs text-text-secondary font-medium">Total Submissions</span>
-                    <p className="text-2xl font-bold text-emerald-600 mt-1">
+                    <p className="text-2xl font-bold text-status-success mt-1">
                       {assignments.reduce((acc, a) => acc + a.submittedCount, 0)}
                     </p>
                   </div>
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 flex items-center justify-center">
+                  <div className="p-2 rounded-lg bg-subtle border border-border-default text-brand-primary flex items-center justify-center">
                     <CheckCircle2 className="w-5 h-5" />
                   </div>
                 </CardContent>
@@ -388,7 +386,7 @@ export default function MarksAndAssignmentsPage() {
                 <CardContent className="p-4 flex items-center justify-between">
                   <div>
                     <span className="text-xs text-text-secondary font-medium">Submission Rate</span>
-                    <p className="text-2xl font-bold text-brand-primary mt-1">
+                    <p className="text-2xl font-bold text-text-primary mt-1">
                       {Math.round(
                         (assignments.reduce((acc, a) => acc + a.submittedCount, 0) /
                           Math.max(1, assignments.reduce((acc, a) => acc + a.totalCount, 0))) *
@@ -397,7 +395,7 @@ export default function MarksAndAssignmentsPage() {
                       %
                     </p>
                   </div>
-                  <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-600 flex items-center justify-center">
+                  <div className="p-2 rounded-lg bg-subtle border border-border-default text-brand-primary flex items-center justify-center">
                     <Award className="w-5 h-5" />
                   </div>
                 </CardContent>
@@ -617,14 +615,14 @@ export default function MarksAndAssignmentsPage() {
                                 onChange={(e) => handleMarksChange(row.studentId, e.target.value)}
                                 className={`w-20 bg-canvas border rounded-lg px-2.5 py-1 text-xs font-mono font-bold text-text-primary focus:outline-none focus:ring-1 ${
                                   isOverLimit
-                                    ? "border-red-500 text-red-600 focus:ring-red-500"
+                                    ? "border-status-error text-status-error focus:ring-status-error"
                                     : "border-border-default focus:ring-brand-primary"
                                 } disabled:opacity-40 disabled:bg-subtle`}
                               />
                               <span className="text-[11px] font-mono text-text-muted">/ {maxMarksLimit}</span>
                             </div>
                             {isOverLimit && (
-                              <span className="text-[10px] text-red-600 font-semibold block mt-0.5">
+                              <span className="text-[10px] text-status-error font-semibold block mt-0.5">
                                 Exceeds max marks!
                               </span>
                             )}
@@ -684,7 +682,6 @@ export default function MarksAndAssignmentsPage() {
                 <Button
                   size="dense"
                   variant="primary"
-                  className="bg-brand-primary text-black hover:bg-emerald-400 font-bold"
                   leadingIcon={<Save className="w-3.5 h-3.5" />}
                   onClick={handleSaveMarks}
                   disabled={isSubmittingMarks}
@@ -785,7 +782,6 @@ export default function MarksAndAssignmentsPage() {
                 <Button
                   size="dense"
                   variant="primary"
-                  className="bg-brand-primary text-black hover:bg-emerald-400 font-bold"
                   onClick={handleCreateAssignment}
                 >
                   Create & Distribute

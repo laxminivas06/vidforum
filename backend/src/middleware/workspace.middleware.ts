@@ -4,7 +4,10 @@ import { sendError } from '../utils/api-response';
 import { AuditDispatcher } from '../common/audit-dispatcher';
 import { CANONICAL_WORKSPACES } from '../modules/workspaces/workspace.registry';
 
-export function requireWorkspace(workspaceKey: string) {
+export function requireWorkspace(workspaceKey: string | string[]) {
+  const requiredKeys = Array.isArray(workspaceKey) ? workspaceKey : [workspaceKey];
+  const primaryKey = requiredKeys[0];
+
   return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const user = req.user;
 
@@ -19,7 +22,7 @@ export function requireWorkspace(workspaceKey: string) {
     // 1. Super Admin access policy
     if (user.role === 'SUPER_ADMIN') {
       const allowedForSuperAdmin = ['platform', 'dashboard', 'settings', 'campus_life'];
-      if (allowedForSuperAdmin.includes(workspaceKey)) {
+      if (requiredKeys.some((k) => allowedForSuperAdmin.includes(k))) {
         next();
         return;
       }
@@ -28,15 +31,15 @@ export function requireWorkspace(workspaceKey: string) {
         actorId: user.id,
         action: 'workspace.access.denied',
         resource: 'workspace',
-        resourceId: workspaceKey,
-        newValue: { reason: 'Super Admin isolated from operational workspace', attemptedWorkspace: workspaceKey },
+        resourceId: primaryKey,
+        newValue: { reason: 'Super Admin isolated from operational workspace', attemptedWorkspace: primaryKey },
         ipAddress: clientIp,
         userAgent,
       });
 
       sendError(
         res,
-        `Access denied: Super Administrator is isolated from tenant-operational '${workspaceKey}' workspace.`,
+        `Access denied: Super Administrator is isolated from tenant-operational '${primaryKey}' workspace.`,
         403,
         'WORKSPACE_ACCESS_DENIED'
       );
@@ -45,7 +48,7 @@ export function requireWorkspace(workspaceKey: string) {
 
     // 2. Institution Admin access policy: full grant across all 12 operational workspaces
     if (user.role === 'INSTITUTION_ADMIN') {
-      if (workspaceKey === 'platform') {
+      if (requiredKeys.length === 1 && requiredKeys[0] === 'platform') {
         sendError(res, 'Access denied: Platform console is reserved for Super Administrators.', 403, 'WORKSPACE_ACCESS_DENIED');
         return;
       }
@@ -83,15 +86,16 @@ export function requireWorkspace(workspaceKey: string) {
         grantedWorkspaces = matchingWorkspaces;
       }
 
-      // Check if requested workspace is granted
-      if (!grantedWorkspaces.includes(workspaceKey)) {
+      // Check if any requested workspace is granted
+      const hasAccess = requiredKeys.some((k) => grantedWorkspaces.includes(k));
+      if (!hasAccess) {
         await AuditDispatcher.dispatch({
           actorId: user.id,
           action: 'workspace.access.denied',
           resource: 'workspace',
-          resourceId: workspaceKey,
+          resourceId: primaryKey,
           institutionId: user.institutionId,
-          oldValue: { attemptedWorkspace: workspaceKey },
+          oldValue: { attemptedWorkspace: primaryKey },
           newValue: { grantedWorkspaces, reason: 'Unauthorized workspace access' },
           ipAddress: clientIp,
           userAgent,
@@ -99,7 +103,7 @@ export function requireWorkspace(workspaceKey: string) {
 
         sendError(
           res,
-          `Access denied: you do not have permission to access the '${workspaceKey}' workspace.`,
+          `Access denied: you do not have permission to access the '${primaryKey}' workspace.`,
           403,
           'WORKSPACE_ACCESS_DENIED'
         );

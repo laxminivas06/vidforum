@@ -20,19 +20,20 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-
-      - name: Install Root Dependencies
-        run: npm ci || npm install
+          cache-dependency-path: |
+            package-lock.json
+            backend/package-lock.json
+            frontend/package-lock.json
 
       - name: Validate Backend
         working-directory: ./backend
         run: |
-          npm ci || npm install
+          npm ci
           npm run build
 
       - name: Validate Frontend (Web)
         working-directory: ./frontend
         run: |
-          npm ci || npm install
+          npm ci
           npx tsc --noEmit
           npm run build

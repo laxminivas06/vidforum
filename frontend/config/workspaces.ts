@@ -31,6 +31,7 @@ export const WORKSPACE_ORDER: string[] = [
   "finance",
   "documents",
   "campus_life",
+  "ai_yantra",
   "settings",
 ]
 
@@ -210,6 +211,21 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
       { title: "Library Catalog", href: "/library", iconName: "Library", optionalModuleKey: "library" },
       { title: "Sports & Teams", href: "/sports", iconName: "Trophy", optionalModuleKey: "sports" },
       { title: "Inventory & Assets", href: "/inventory", iconName: "Package", optionalModuleKey: "inventory" },
+    ],
+  },
+  {
+    id: "ai_yantra",
+    name: "AI Yantra Workspace",
+    shortName: "AI Yantra",
+    category: "SERVICES",
+    description: "Multilingual conversational voice agent, biometric facial attendance, and intelligent tutoring insights",
+    iconName: "Cpu",
+    primaryRoute: "/voice-agent/campaigns",
+    routes: ["/voice-agent", "/ai-attendance", "/ai-tutor"],
+    navItems: [
+      { title: "Voice Agent Campaigns", href: "/voice-agent/campaigns", iconName: "PhoneCall", badge: "AI" },
+      { title: "AI Attendance Vision", href: "/ai-attendance/monitoring", iconName: "ScanFace", badge: "Live" },
+      { title: "AI Tutor Insights", href: "/ai-tutor/analytics", iconName: "Bot" },
     ],
   },
   {

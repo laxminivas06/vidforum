@@ -2488,5 +2488,174 @@ export function useBooklist(academicYearId?: string, classId?: string) {
   })
 }
 
+// ==========================================
+// AI Yantra — Voice Agent Hooks
+// ==========================================
+
+export interface VoiceCampaignItem {
+  id: string
+  title: string
+  trigger: "EVENT_NOTICE" | "FEE_REMINDER" | "ATTENDANCE_ALERT" | "EXAM_ANNOUNCEMENT"
+  targetCount: number
+  completedCalls: number
+  connectedRate: string
+  language: string
+  languageCode: string
+  scriptTemplate: string
+  status: "ACTIVE_DISPATCH" | "COMPLETED" | "SCHEDULED"
+  createdAt?: string
+}
+
+export interface VoiceCallLogItem {
+  id: string
+  status: string
+  duration_seconds: number
+  started_at: string
+  ended_at?: string
+  conversation_payload?: any
+  phone: string
+  guardian_name?: string
+}
+
+export function useVoiceCampaigns() {
+  return useQuery({
+    queryKey: ["voice-campaigns"],
+    queryFn: async (): Promise<VoiceCampaignItem[]> => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/campaigns`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Error fetching voice campaigns:", err)
+      }
+      return []
+    },
+    staleTime: 5000,
+  })
+}
+
+export function useVoiceCampaignCalls(campaignId?: string) {
+  return useQuery({
+    queryKey: ["voice-campaign-calls", campaignId],
+    queryFn: async (): Promise<VoiceCallLogItem[]> => {
+      if (!campaignId) return []
+      try {
+        const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/campaigns/${campaignId}/calls`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Error fetching campaign calls:", err)
+      }
+      return []
+    },
+    enabled: !!campaignId,
+  })
+}
+
+export function useCreateVoiceCampaign() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (payload: {
+      name: string
+      useCase: string
+      language: string
+      scriptText: string
+      targetGradeId?: string
+      targetSectionId?: string
+      scheduledAt?: string
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/campaigns`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(payload),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to create campaign")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["voice-campaigns"] })
+    },
+  })
+}
+
+export function useLaunchVoiceCampaign() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (campaignId: string) => {
+      const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/campaigns/${campaignId}/launch`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to launch campaign")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["voice-campaigns"] })
+      queryClient.invalidateQueries({ queryKey: ["voice-campaign-calls"] })
+    },
+  })
+}
+
+export function useSynthesizeVoicePreview() {
+  return useMutation({
+    mutationFn: async (payload: { text: string; language?: string; speaker?: string }) => {
+      const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/synthesize-preview`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(payload),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to synthesize speech")
+      return json.data
+    },
+  })
+}
+
+export function useVoiceChatPreview() {
+  return useMutation({
+    mutationFn: async (payload: {
+      message: string
+      history?: Array<{ role: string; content: string }>
+      studentAdmissionNumber?: string
+      synthesizeAudio?: boolean
+    }) => {
+      const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/chat-preview`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(payload),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to query conversational agent")
+      return json.data
+    },
+  })
+}
+
+export function useDispatchTestCall() {
+  return useMutation({
+    mutationFn: async (payload: { phone?: string; studentAdmissionNumber?: string; useCase?: string }) => {
+      const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/call-test`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(payload),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to dispatch test call")
+      return json.data
+    },
+  })
+}
+
+
 
 

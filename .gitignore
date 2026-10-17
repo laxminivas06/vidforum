@@ -44,3 +44,13 @@ web/
 graphify-out/cache/
 graphify-out/.graphify_python
 graphify-out/.graphify_root
+
+# Python & AI Runtime
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+venv/
+.venv/
+attendance/Face-Recognition-Attendance-System/attendance_project/attendance.xlsx
+attendance/Face-Recognition-Attendance-System/attendance_project/attendance_latest.json

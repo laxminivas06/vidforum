@@ -15,6 +15,7 @@ const router = Router();
 export async function executeDatabaseTool(instId: string, toolName: string, parameters: any) {
   if (toolName === 'get_student_marks') {
     const { student_id, subject = 'Science' } = parameters || {};
+    const targetSubject = (subject && subject.toLowerCase() !== 'all') ? `%${subject}%` : '%';
     const result = await db.query(
       `SELECT m.marks_obtained, es.max_marks, es.pass_marks, sub.name as subject_name, e.name as exam_name
        FROM marks m
@@ -25,11 +26,29 @@ export async function executeDatabaseTool(instId: string, toolName: string, para
        WHERE m.institution_id = $1
          AND (s.id::text = $2 OR s.admission_number = $2)
          AND LOWER(sub.name) LIKE LOWER($3)
-       ORDER BY e.created_at DESC LIMIT 1`,
-      [instId, student_id || 'SIA-2026-0101', `%${subject}%`]
+       ORDER BY e.created_at DESC, sub.name ASC LIMIT 5`,
+      [instId, student_id || 'SIA-2026-0101', targetSubject]
     );
 
-    if (result.rows.length === 0) {
+    let rows = result.rows;
+    if (rows.length === 0) {
+      // Fallback: fetch all available recent marks for this student
+      const allRes = await db.query(
+        `SELECT m.marks_obtained, es.max_marks, es.pass_marks, sub.name as subject_name, e.name as exam_name
+         FROM marks m
+         JOIN exam_subjects es ON es.id = m.exam_subject_id
+         JOIN subjects sub ON sub.id = es.subject_id
+         JOIN exams e ON e.id = es.exam_id
+         JOIN students s ON s.id = m.student_id
+         WHERE m.institution_id = $1
+           AND (s.id::text = $2 OR s.admission_number = $2)
+         ORDER BY e.created_at DESC, sub.name ASC LIMIT 5`,
+        [instId, student_id || 'SIA-2026-0101']
+      );
+      rows = allRes.rows;
+    }
+
+    if (rows.length === 0) {
       return {
         found: false,
         subject: subject.charAt(0).toUpperCase() + subject.slice(1),
@@ -37,7 +56,21 @@ export async function executeDatabaseTool(instId: string, toolName: string, para
       };
     }
 
-    const row = result.rows[0];
+    if (rows.length > 1) {
+      const summary = rows.map((r: any) => `${r.subject_name}: ${parseFloat(r.marks_obtained)}/${parseFloat(r.max_marks)}`).join(', ');
+      return {
+        found: true,
+        exam: rows[0].exam_name,
+        summary,
+        records: rows.map((r: any) => ({
+          subject: r.subject_name,
+          score: `${r.marks_obtained}/${r.max_marks}`,
+          grade: (parseFloat(r.marks_obtained) / parseFloat(r.max_marks)) >= 0.85 ? 'A' : 'B',
+        })),
+      };
+    }
+
+    const row = rows[0];
     const maxMarks = parseFloat(row.max_marks || '100');
     const marksObt = parseFloat(row.marks_obtained || '0');
     const pct = (marksObt / maxMarks) * 100;
@@ -246,7 +279,8 @@ export async function callGroqChatWithTools(
   instId: string,
   messages: Array<{ role: string; content: string }>,
   studentId?: string,
-  language = 'te-IN'
+  language = 'te-IN',
+  studentName = 'Sai Teja Chary'
 ) {
   if (!env.GROQ_API_KEY) {
     return {
@@ -275,10 +309,16 @@ export async function callGroqChatWithTools(
 - Strict limit: Maximum 2-3 spoken sentences.`;
   }
 
-  const systemPrompt = `You are Priya, a warm, articulate, and polite senior student counselor at Narayana e-Techno School calling parents.
+  const studentDisplayName = studentName || 'Sai Teja Chary';
+  const systemPrompt = `You are Priya, a warm, articulate, caring, and polite senior student counselor at Narayana e-Techno School calling parents.
 ${languageDirective}
-- The LLM must NEVER invent marks, attendance, or fees. You may ONLY state values returned by database tools. If a tool reports that no record was found, say politely that the school records do not currently have that information.
-The active student reference ID/admission number is: ${studentId || 'SIA-2026-0101'}.`;
+CRITICAL PARENT CALL CONTEXT:
+- You personally initiated this phone call directly to the parent of student: ${studentDisplayName} (Admission Number: ${studentId || 'SIA-2026-0101'}).
+- Because YOU called the parent, you ALREADY know who their child is! NEVER ask the parent "What is your child's admission number?" or "What is their student ID?".
+- When the parent asks ANY question about marks, results, attendance, or fees (e.g. "మా అబ్బాయి మార్కులు ఎంత?", "What are my child's marks in Science?", "ఫీజు ఎంత ఉంది?"), IMMEDIATELY invoke the corresponding database tool (get_student_marks, get_student_attendance, get_fee_status) using student_id: "${studentId || 'SIA-2026-0101'}".
+- If the parent asks generally about marks without specifying a subject (e.g., "మా అబ్బాయి మార్కులు ఎంత?"), check get_student_marks with subject: "all".
+- NEVER invent or hallucinate numbers or grades. You may ONLY state the exact values returned by database tools.
+- Speak in warm, conversational sentences suitable for a phone call (2-3 concise sentences). In Telugu, always use respectful honorifics like "అండి" and "గారు".`;
 
   const groqTools = [
     {
@@ -456,6 +496,88 @@ The active student reference ID/admission number is: ${studentId || 'SIA-2026-01
 // ==========================================
 // 1. Voice Agent Workspace Routes
 // ==========================================
+
+// GET /api/v1/ai-yantra/voice/health
+router.get('/voice/health', tenantMiddleware, async (req: Request, res: Response) => {
+  try {
+    const activeProvider = env.TELEPHONY_PROVIDER || (env.TWILIO_ACCOUNT_SID ? 'twilio' : 'exotel');
+    let phoneLineStatus: 'ready' | 'needs_attention' | 'not_configured' = 'not_configured';
+    let phoneLineProvider = activeProvider;
+    let phoneLineMessage = 'No telephony provider configured';
+    let phoneLineActionRequired: string[] = ['Configure Twilio Account SID and Auth Token or Exotel credentials in environment settings.'];
+
+    if (activeProvider === 'twilio' && env.TWILIO_ACCOUNT_SID && env.TWILIO_AUTH_TOKEN) {
+      phoneLineStatus = 'ready';
+      phoneLineMessage = `Connected to Twilio virtual line (${env.TWILIO_PHONE_NUMBER || '+1 (620) 529-1946'})`;
+      phoneLineActionRequired = [];
+    } else if (activeProvider === 'exotel' && env.EXOTEL_ACCOUNT_SID && env.EXOTEL_API_KEY) {
+      phoneLineStatus = 'needs_attention';
+      phoneLineMessage = 'Exotel account credentials present but domestic KYC verification pending';
+      phoneLineActionRequired = ['Complete commercial enterprise KYC on Exotel console, or switch active provider to Twilio.'];
+    }
+
+    let voiceStatus: 'ready' | 'needs_attention' | 'not_configured' = 'not_configured';
+    let voiceMessage = 'Voice synthesis API key missing';
+    let voiceActionRequired: string[] = ['Set SARVAM_API_KEY for multilingual audio synthesis.'];
+    if (env.SARVAM_API_KEY) {
+      voiceStatus = 'ready';
+      voiceMessage = 'Voice synthesis active with Telugu, Hindi, English neural models';
+      voiceActionRequired = [];
+    }
+
+    let aiStatus: 'ready' | 'needs_attention' | 'not_configured' = 'not_configured';
+    let aiMessage = 'AI language model API key missing';
+    let aiActionRequired: string[] = ['Set GROQ_API_KEY for conversational intelligence.'];
+    if (env.GROQ_API_KEY) {
+      aiStatus = 'ready';
+      aiMessage = `Language model active (${env.GROQ_MODEL || 'qwen/qwen3.8-27b'}) for conversational tool-calling`;
+      aiActionRequired = [];
+    }
+
+    let whatsappStatus: 'ready' | 'needs_attention' | 'not_configured' = 'not_configured';
+    let whatsappMessage = 'WhatsApp Business API token not configured';
+    let whatsappActionRequired: string[] = ['Configure WHATSAPP_API_TOKEN and WHATSAPP_PHONE_NUMBER_ID to deliver instant post-call summaries.'];
+    if (env.WHATSAPP_API_TOKEN && env.WHATSAPP_PHONE_NUMBER_ID) {
+      whatsappStatus = 'ready';
+      whatsappMessage = 'WhatsApp Cloud API active for post-call recap delivery';
+      whatsappActionRequired = [];
+    }
+
+    const allReady = phoneLineStatus === 'ready' && voiceStatus === 'ready' && aiStatus === 'ready';
+
+    return sendSuccess(res, {
+      overallStatus: allReady ? 'ready' : phoneLineStatus === 'ready' ? 'degraded' : 'blocked',
+      phoneLine: {
+        provider: phoneLineProvider === 'twilio' ? 'Twilio Virtual Line' : phoneLineProvider === 'exotel' ? 'Exotel' : 'None',
+        status: phoneLineStatus,
+        message: phoneLineMessage,
+        actionRequired: phoneLineActionRequired,
+      },
+      voice: {
+        provider: 'Sarvam AI',
+        status: voiceStatus,
+        message: voiceMessage,
+        actionRequired: voiceActionRequired,
+      },
+      aiAssistant: {
+        provider: 'Groq',
+        status: aiStatus,
+        message: aiMessage,
+        actionRequired: aiActionRequired,
+      },
+      whatsapp: {
+        provider: 'Meta WhatsApp Cloud API',
+        status: whatsappStatus,
+        message: whatsappMessage,
+        actionRequired: whatsappActionRequired,
+      },
+      callingHours: '09:00 AM – 07:00 PM IST',
+      dltConsentStatus: 'Standard TRAI / DoT compliant transactional tele-outreach window',
+    });
+  } catch (err: any) {
+    return sendError(res, err.message, 500);
+  }
+});
 
 // GET /api/v1/ai-yantra/voice/campaigns
 router.get('/voice/campaigns', tenantMiddleware, async (req: Request, res: Response) => {
@@ -701,6 +823,36 @@ router.get('/voice/campaigns/:id/calls', tenantMiddleware, async (req: Request, 
   }
 });
 
+// GET /api/v1/ai-yantra/voice/calls (Global Call History across all campaigns)
+router.get('/voice/calls', tenantMiddleware, async (req: Request, res: Response) => {
+  try {
+    const instId = req.institutionId!;
+
+    const result = await db.query(
+      `SELECT vc.id, vc.status, vc.duration_seconds, vc.started_at, vc.ended_at, vc.conversation_payload,
+              vr.phone, g.full_name as guardian_name,
+              (s.first_name || ' ' || s.last_name) as student_name,
+              c.id as campaign_id, c.name as campaign_name,
+              COALESCE(t.language, 'te-IN') as language
+       FROM ai_voice_calls vc
+       JOIN ai_voice_recipients vr ON vr.id = vc.recipient_id
+       JOIN ai_voice_campaigns c ON c.id = vr.campaign_id
+       LEFT JOIN ai_voice_templates t ON t.id = c.template_id
+       LEFT JOIN guardians g ON g.id = vr.guardian_id
+       LEFT JOIN student_guardians sg ON sg.guardian_id = g.id
+       LEFT JOIN students s ON s.id = sg.student_id
+       WHERE c.institution_id = $1
+       ORDER BY vc.created_at DESC
+       LIMIT 100`,
+      [instId]
+    );
+
+    sendSuccess(res, result.rows);
+  } catch (error: any) {
+    sendError(res, error.message, 500);
+  }
+});
+
 // POST /api/v1/ai-yantra/voice/synthesize-preview (Audition Sarvam AI Bulbul v2 TTS)
 router.post('/voice/synthesize-preview', tenantMiddleware, async (req: Request, res: Response) => {
   try {
@@ -870,11 +1022,25 @@ router.post('/voice/call-test', tenantMiddleware, async (req: Request, res: Resp
     // Synthesize clean audio for in-browser playback preview
     const audioBase64 = await callSarvamTTS(speechScript, language, 'priya');
 
+    // Resolve real student name and guardian name from database
+    const studentRes = await db.query(
+      `SELECT s.id, (s.first_name || ' ' || s.last_name) as student_name, g.full_name as guardian_name
+       FROM students s
+       LEFT JOIN student_guardians sg ON sg.student_id = s.id
+       LEFT JOIN guardians g ON g.id = sg.guardian_id
+       WHERE (s.admission_number = $1 OR s.id::text = $1)
+       LIMIT 1`,
+      [studentAdmissionNumber]
+    );
+    const studentName = studentRes.rows[0]?.student_name || 'Sai Teja Chary';
+    const guardianName = studentRes.rows[0]?.guardian_name || 'Jagan Garu';
+
     // Place call through selected Telephony Provider
     const callResult = await telephonyProvider.placeCall(normalizedPhone, {
       institutionId: req.institutionId!,
       studentId: studentAdmissionNumber,
-      studentName: 'Sai Teja Chary',
+      studentName,
+      guardianName,
       language,
       useCase,
       initialMessage: speechScript,

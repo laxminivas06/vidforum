@@ -109,9 +109,9 @@ export class VoiceSessionManager {
             streamSid,
             institutionId: custom.institutionId || env.DEFAULT_TENANT_ID || '00000000-0000-0000-0000-000000000001',
             studentId: custom.studentId || 'SIA-2026-0101',
-            studentName: custom.studentName || 'Sai Teja Chary',
+            studentName: custom.studentName ? decodeURIComponent(custom.studentName) : 'Sai Teja Chary',
             guardianId: custom.guardianId,
-            guardianName: custom.guardianName || 'Parent',
+            guardianName: custom.guardianName ? decodeURIComponent(custom.guardianName) : 'Parent',
             phone: custom.phone,
             language: custom.language || 'te-IN',
             useCase: custom.useCase || 'event_notice',
@@ -283,7 +283,8 @@ export class VoiceSessionManager {
         session.institutionId,
         chatHistory,
         session.studentId,
-        session.language
+        session.language,
+        session.studentName
       );
 
       const replyText = aiResponse.reply || (

@@ -1,1600 +1,237 @@
 "use client"
 
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, Suspense } from "react"
+import { useSearchParams, useRouter } from "next/navigation"
 import { AppShell } from "@/components/layout/AppShell"
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  StatCard,
-  SpotHeroPanel,
-  Button,
-  Badge,
-  Table,
-  TableColumn,
-  Modal,
-  SlideOver,
-  ProgressBar,
-} from "@/components/ui"
-import {
-  PhoneCall,
-  Play,
-  Pause,
-  Plus,
-  Radio,
-  Clock,
-  CheckCircle2,
-  AlertCircle,
-  AlertTriangle,
-  Volume2,
-  Square,
-  Sparkles,
-  Bot,
-  User,
-  MessageSquare,
-  Send,
-  ListFilter,
-  Check,
-  ExternalLink,
-  ShieldCheck,
-  Layers,
-  Mic,
-  ArrowRight,
-  Headphones,
-} from "lucide-react"
-import {
-  useVoiceCampaigns,
-  useVoiceCampaignCalls,
-  useCreateVoiceCampaign,
-  useLaunchVoiceCampaign,
-  useSynthesizeVoicePreview,
-  useVoiceChatPreview,
-  useDispatchTestCall,
-  useClasses,
-  useCampaignProgress,
-  usePauseVoiceCampaign,
-  useResumeVoiceCampaign,
-  useCancelVoiceCampaign,
-  VoiceCampaignItem,
-  VoiceCallLogItem,
-} from "@/lib/api/hooks"
+import { Plus, PhoneCall, Headphones, Layers, History, Activity } from "lucide-react"
+import { useVoiceCampaigns, VoiceCampaignItem, VoiceCallLogItem, AllVoiceCallItem } from "@/lib/api/hooks"
 
-const PURE_PRESET_SCRIPTS: Record<string, Record<string, { title: string; text: string; useCase: string }>> = {
-  "te-IN": {
-    event_notice: {
-      title: "వార్షిక క్రీడా దినోత్సవం (Sports Day)",
-      text: "నమస్కారం అండి! నేను నారాయణ పాఠశాల నుండి ప్రియను మాట్లాడుతున్నాను. రాబోయే శనివారం మన పాఠశాలలో వార్షిక క్రీడా దినోత్సవం నిర్వహించబడుతుంది. తల్లిదండ్రులందరికీ సాదర స్వాగతం. మీకు విద్యార్థి చదువు లేదా మార్కుల గురించి ఏవైనా ప్రశ్నలు ఉన్నాయా అండి?",
-      useCase: "event_notice",
-    },
-    fee_reminder: {
-      title: "ట్యూషన్ ఫీజు చెల్లింపు గడువు (Fee Notice)",
-      text: "నమస్కారం అండి! నారాయణ పాఠశాల అకౌంట్స్ విభాగం నుండి ప్రియను మాట్లాడుతున్నాను. రెండవ విడత ట్యూషన్ ఫీజు చెల్లింపు గడువు సమీపిస్తోంది. మీ బకాయి ఫీజు వివరాలు తెలుసుకోవడానికి మీరు నన్ను అడగవచ్చు.",
-      useCase: "fee_reminder",
-    },
-    attendance_alert: {
-      title: "ఉదయం హాజరు సమాచారం (Absence Alert)",
-      text: "నమస్కారం అండి! పాఠశాల హాజరు విభాగం నుండి ప్రియను. మీ అబ్బాయి ఈ రోజు ఉదయం ప్రార్థన సమయానికి రాలేదు. విద్యార్థి సెలవులో ఉన్నారా అని దయచేసి ధృవీకరించండి.",
-      useCase: "attendance_alert",
-    },
-    exam_announcement: {
-      title: "పరీక్ష ఫలితాలు (Exam Results)",
-      text: "నమస్కారం అండి! నారాయణ పాఠశాల త్రైమాసిక పరీక్షల ఫలితాలు విడుదలయ్యాయి. ఏదైనా సబ్జెక్టులో మీ పిల్లల మార్కులు లేదా గ్రేడ్ వివరాలు తెలుసుకోవడానికి మీరు నన్ను నేరుగా అడగవచ్చు.",
-      useCase: "exam_announcement",
-    },
-  },
-  "en-IN": {
-    event_notice: {
-      title: "Annual Sports Day Notice",
-      text: "Good morning! This is Priya calling from Narayana High School. We are celebrating our Annual Sports Day this upcoming Saturday starting at nine AM. Parents are warmly invited. You may also ask me any questions regarding your child's academic progress or attendance.",
-      useCase: "event_notice",
-    },
-    fee_reminder: {
-      title: "Term 2 Tuition Fee Due Notice",
-      text: "Good morning! This is Priya calling from Narayana High School accounts desk. A gentle reminder that the Term Two tuition fee installment is due on or before November fifteenth. You can ask me for your pending balance or payment options right now.",
-      useCase: "fee_reminder",
-    },
-    attendance_alert: {
-      title: "Morning Absence Alert",
-      text: "Good morning! This is Priya from the school attendance desk. We noticed your child has not checked into the morning assembly today. Please confirm if they are on leave or reach out to the class mentor.",
-      useCase: "attendance_alert",
-    },
-    exam_announcement: {
-      title: "Quarterly Exam Results",
-      text: "Good morning! Narayana High School Quarterly Examination results have been released. You can ask me your child's score in any subject right now or check the parent portal.",
-      useCase: "exam_announcement",
-    },
-  },
-  "hi-IN": {
-    event_notice: {
-      title: "वार्षिक खेल दिवस समारोह (Sports Day)",
-      text: "नमस्ते! मैं नारायण स्कूल से प्रिया बोल रही हूँ। आगामी शनिवार को हमारे स्कूल में वार्षिक खेल दिवस का आयोजन किया जा रहा है। सभी अभिभावकों का हार्दिक स्वागत है। क्या आप अपने बच्चे की पढ़ाई या उपस्थिति के बारे में कुछ पूछना चाहते हैं?",
-      useCase: "event_notice",
-    },
-    fee_reminder: {
-      title: "सत्र 2 शुल्क सूचना (Fee Due)",
-      text: "नमस्ते! मैं नारायण स्कूल लेखा विभाग से प्रिया बोल रही हूँ। यह द्वितीय सत्र की ट्यूशन फीस जमा करने के लिए एक विनम्र अनुस्मारक है। आप अभी मुझसे अपनी बकाया राशि या भुगतान के तरीकों के बारे में पूछ सकते हैं।",
-      useCase: "fee_reminder",
-    },
-    attendance_alert: {
-      title: "सुबह अनुपस्थिति चेतावनी (Absence Alert)",
-      text: "नमस्ते! स्कूल उपस्थिति विभाग से प्रिया। हमने देखा कि आपका बच्चा आज सुबह की प्रार्थना सभा में उपस्थित नहीं था। कृपया पुष्टि करें कि वह छुट्टी पर है या कक्षा अध्यापक से संपर्क करें।",
-      useCase: "attendance_alert",
-    },
-    exam_announcement: {
-      title: "तिमाही परीक्षा परिणाम (Exam Results)",
-      text: "नमस्ते! नारायण स्कूल त्रैमासिक परीक्षा के परिणाम घोषित कर दिए गए हैं। आप अभी मुझसे किसी भी विषय में अपने बच्चे के अंक या ग्रेड जान सकते हैं।",
-      useCase: "exam_announcement",
-    },
-  },
-}
+import { HealthStrip } from "../_components/HealthStrip"
+import { StatCards } from "../_components/StatCards"
+import { CampaignTable } from "../_components/CampaignTable"
+import { CampaignStepper } from "../_components/CampaignStepper"
+import { CampaignDetail } from "../_components/CampaignDetail"
+import { HistoryTable } from "../_components/HistoryTable"
+import { SetupHealth } from "../_components/SetupHealth"
+import { TestCallDrawer } from "../_components/TestCallDrawer"
+import { VoicePreview } from "../_components/VoicePreview"
+import { TranscriptDrawer } from "../_components/TranscriptDrawer"
 
-export default function VoiceAgentCampaignsPage() {
-  // Queries & Mutations
-  const { data: campaigns = [], isLoading, refetch } = useVoiceCampaigns()
-  const { data: classes = [] } = useClasses()
-  const createCampaignMutation = useCreateVoiceCampaign()
-  const launchCampaignMutation = useLaunchVoiceCampaign()
-  const pauseCampaignMutation = usePauseVoiceCampaign()
-  const resumeCampaignMutation = useResumeVoiceCampaign()
-  const cancelCampaignMutation = useCancelVoiceCampaign()
-  const synthesizeMutation = useSynthesizeVoicePreview()
-  const chatMutation = useVoiceChatPreview()
-  const testCallMutation = useDispatchTestCall()
+function VoiceAgentAdminContent() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const currentTab = searchParams.get("tab") || "campaigns"
 
-  // State
-  const [selectedFilter, setSelectedFilter] = useState<"ALL" | "ACTIVE" | "COMPLETED" | "SCHEDULED">("ALL")
-  const [activeTrackingCampaignId, setActiveTrackingCampaignId] = useState<string | null>(null)
-  const [createModalOpen, setCreateModalOpen] = useState(false)
-  const [auditionOpen, setAuditionOpen] = useState(false)
-  const [auditionTab, setAuditionTab] = useState<"TTS" | "CHAT">("TTS")
-  const [selectedCampaignForLogs, setSelectedCampaignForLogs] = useState<VoiceCampaignItem | null>(null)
-  const [testCallModalOpen, setTestCallModalOpen] = useState(false)
-  const [testPhone, setTestPhone] = useState("+91")
-  const [testStudentId, setTestStudentId] = useState("10-A-01")
-  const [testUseCase, setTestUseCase] = useState("event_notice")
-  const [testLanguage, setTestLanguage] = useState("te-IN")
-  const [testProvider, setTestProvider] = useState("auto")
-  const [testCallResult, setTestCallResult] = useState<any>(null)
+  const { data: campaigns = [], isLoading } = useVoiceCampaigns()
 
-  // Active campaign live progress tracker
-  const activeCampaign = campaigns.find((c) => c.status === "ACTIVE_DISPATCH")
-  const currentTrackingId = activeTrackingCampaignId || activeCampaign?.id
-  const { data: campaignProgress } = useCampaignProgress(currentTrackingId || undefined)
+  // Navigation & Sub-views
+  const [selectedCampaignId, setSelectedCampaignId] = useState<string | null>(null)
+  const [isCreating, setIsCreating] = useState(false)
 
-  // Audition State
-  const [previewText, setPreviewText] = useState(PURE_PRESET_SCRIPTS["te-IN"].event_notice.text)
-  const [previewLanguage, setPreviewLanguage] = useState("te-IN")
-  const [previewSpeaker, setPreviewSpeaker] = useState("priya")
-  const [isPlayingAudio, setIsPlayingAudio] = useState(false)
-  const [chatMessages, setChatMessages] = useState<Array<{ role: string; content: string; toolUsed?: string; toolData?: any }>>([
-    {
-      role: "assistant",
-      content: "నమస్కారం అండి! నేను నారాయణ పాఠశాల నుండి ప్రియను మాట్లాడుతున్నాను. రాబోయే శనివారం మన పాఠశాలలో వార్షిక క్రీడా దినోత్సవం నిర్వహించబడుతుంది. మీకు విద్యార్థి చదువు లేదా మార్కుల గురించి ఏవైనా ప్రశ్నలు ఉన్నాయా అండి?",
-    },
-  ])
-  const [chatInput, setChatInput] = useState("")
-  const [speakAssistantReplies, setSpeakAssistantReplies] = useState(true)
-
-  // Create Campaign Form State
-  const [formName, setFormName] = useState("")
-  const [formUseCase, setFormUseCase] = useState("event_notice")
-  const [formLanguage, setFormLanguage] = useState("te-IN")
-  const [formLanguageMode, setFormLanguageMode] = useState<"parent_preferred" | "force">("parent_preferred")
-  const [formSingleParentTest, setFormSingleParentTest] = useState(false)
-  const [formSpeaker, setFormSpeaker] = useState("priya")
-  const [formTargetGradeId, setFormTargetGradeId] = useState("")
-  const [formScript, setFormScript] = useState(PURE_PRESET_SCRIPTS["te-IN"].event_notice.text)
-  const [formSuccessMessage, setFormSuccessMessage] = useState("")
-
-  // Web Audio Element Ref
-  const currentAudioRef = useRef<HTMLAudioElement | null>(null)
-
-  // Clean audio on unmount
-  useEffect(() => {
-    return () => {
-      if (currentAudioRef.current) {
-        currentAudioRef.current.pause()
-        currentAudioRef.current = null
-      }
-    }
-  }, [])
-
-  // Play audio helper
-  const playAudioFromBase64 = (base64Audio: string) => {
-    try {
-      if (currentAudioRef.current) {
-        currentAudioRef.current.pause()
-        currentAudioRef.current = null
-      }
-      const audio = new Audio(`data:audio/wav;base64,${base64Audio}`)
-      currentAudioRef.current = audio
-      setIsPlayingAudio(true)
-      audio.onended = () => setIsPlayingAudio(false)
-      audio.onerror = () => setIsPlayingAudio(false)
-      audio.play().catch((err) => {
-        console.warn("Audio play prevented:", err)
-        setIsPlayingAudio(false)
-      })
-    } catch (err) {
-      console.error("Audio initialization error:", err)
-      setIsPlayingAudio(false)
-    }
-  }
-
-  const stopAudio = () => {
-    if (currentAudioRef.current) {
-      currentAudioRef.current.pause()
-      currentAudioRef.current = null
-    }
-    setIsPlayingAudio(false)
-  }
-
-  // Handle Preset Selection
-  const applyPreset = (key: string, lang = previewLanguage) => {
-    const scripts = PURE_PRESET_SCRIPTS[lang] || PURE_PRESET_SCRIPTS["te-IN"]
-    const preset = scripts[key] || scripts.event_notice
-    setPreviewText(preset.text)
-  }
-
-  // Handle Audition Synthesize
-  const handleAuditionSynthesize = () => {
-    if (!previewText.trim()) return
-    synthesizeMutation.mutate(
-      { text: previewText, language: previewLanguage, speaker: previewSpeaker },
-      {
-        onSuccess: (data) => {
-          if (data && data.audioBase64) {
-            playAudioFromBase64(data.audioBase64)
-          }
-        },
-      }
-    )
-  }
-
-  // Handle Chat Simulation Send
-  const handleSendChat = (messageToSend?: string) => {
-    const text = messageToSend || chatInput.trim()
-    if (!text) return
-
-    const updatedHistory = [...chatMessages.map((m) => ({ role: m.role, content: m.content })), { role: "user", content: text }]
-    setChatMessages((prev) => [...prev, { role: "user", content: text }])
-    setChatInput("")
-
-    chatMutation.mutate(
-      {
-        message: text,
-        history: updatedHistory.slice(-4),
-        studentAdmissionNumber: "SIA-2026-0101",
-        synthesizeAudio: speakAssistantReplies,
-        language: previewLanguage,
-      },
-      {
-        onSuccess: (data) => {
-          setChatMessages((prev) => [
-            ...prev,
-            {
-              role: "assistant",
-              content: data.reply,
-              toolUsed: data.toolUsed,
-              toolData: data.toolData,
-            },
-          ])
-          if (data.audioBase64 && speakAssistantReplies) {
-            playAudioFromBase64(data.audioBase64)
-          }
-        },
-      }
-    )
-  }
-
-  // Handle Create Campaign Submit
-  const handleCreateCampaign = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!formName.trim() || !formScript.trim()) return
-
-    createCampaignMutation.mutate(
-      {
-        name: formName,
-        useCase: formUseCase,
-        language: formLanguage,
-        languageMode: formLanguageMode,
-        singleParentTest: formSingleParentTest,
-        scriptText: formScript,
-        targetGradeId: formTargetGradeId || undefined,
-      },
-      {
-        onSuccess: (data) => {
-          setFormSuccessMessage(`Campaign "${formName}" created with ${data.recipientsQueued} verified parent recipients!`)
-          setTimeout(() => {
-            setFormSuccessMessage("")
-            setCreateModalOpen(false)
-            setFormName("")
-          }, 1500)
-        },
-      }
-    )
-  }
-
-  // Query for logs of selected campaign
-  const { data: callLogs = [], isLoading: logsLoading } = useVoiceCampaignCalls(selectedCampaignForLogs?.id)
-
-  // Filter campaigns
-  const filteredCampaigns = campaigns.filter((item) => {
-    if (selectedFilter === "ALL") return true
-    if (selectedFilter === "ACTIVE") return item.status === "ACTIVE_DISPATCH"
-    if (selectedFilter === "COMPLETED") return item.status === "COMPLETED"
-    if (selectedFilter === "SCHEDULED") return item.status === "SCHEDULED"
-    return true
+  // Drawers
+  const [isTestCallOpen, setIsTestCallOpen] = useState(false)
+  const [isVoicePreviewOpen, setIsVoicePreviewOpen] = useState(false)
+  const [voicePreviewInitial, setVoicePreviewInitial] = useState<{ lang: string; text?: string }>({
+    lang: "te-IN",
   })
+  const [selectedTranscriptCall, setSelectedTranscriptCall] = useState<
+    VoiceCallLogItem | AllVoiceCallItem | null
+  >(null)
 
-  // Table Columns
-  const columns: TableColumn<VoiceCampaignItem>[] = [
-    {
-      header: "Campaign Title & Language",
-      key: "title",
-      render: (item) => (
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-subtle border border-border-default flex items-center justify-center shrink-0 shadow-2xs">
-            <Radio className="w-4 h-4 text-emerald-500" />
-          </div>
-          <div>
-            <div className="font-semibold text-text-primary text-xs tracking-tight">{item.title}</div>
-            <div className="flex items-center gap-2 mt-0.5 text-[11px] text-text-secondary">
-              <span className="font-mono">{item.language}</span>
-              <span>•</span>
-              <span className="font-mono text-text-muted">{item.trigger}</span>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      header: "Event Trigger",
-      key: "trigger",
-      render: (item) => {
-        const variants: Record<string, "neutral" | "warning" | "positive"> = {
-          EVENT_NOTICE: "neutral",
-          FEE_REMINDER: "warning",
-          ATTENDANCE_ALERT: "warning",
-          EXAM_ANNOUNCEMENT: "positive",
-        }
-        return (
-          <Badge variant={variants[item.trigger] || "neutral"} className="text-[10px] font-mono">
-            {item.trigger.replace("_", " ")}
-          </Badge>
-        )
-      },
-    },
-    {
-      header: "Dispatched / Target",
-      key: "targetCount",
-      render: (item) => {
-        const pct = item.targetCount > 0 ? (item.completedCalls / item.targetCount) * 100 : 0
-        return (
-          <div className="w-36">
-            <div className="flex items-center justify-between text-xs font-mono mb-1">
-              <span className="font-semibold text-text-primary">{item.completedCalls}</span>
-              <span className="text-text-muted">/ {item.targetCount} Calls</span>
-            </div>
-            <ProgressBar value={pct} max={100} height="sm" variant={pct === 100 ? "green" : undefined} />
-          </div>
-        )
-      },
-    },
-    {
-      header: "Connect Rate",
-      key: "connectedRate",
-      render: (item) => (
-        <div className="flex items-center gap-1.5 font-mono text-xs font-semibold text-text-primary">
-          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-          <span>{item.connectedRate}</span>
-        </div>
-      ),
-    },
-    {
-      header: "State",
-      key: "status",
-      render: (item) => {
-        const variants: Record<string, "positive" | "warning" | "neutral"> = {
-          ACTIVE_DISPATCH: "positive",
-          COMPLETED: "neutral",
-          SCHEDULED: "warning",
-          PAUSED: "warning",
-          CANCELLED: "neutral",
-        }
-        return <Badge variant={variants[item.status] || "neutral"}>{item.status.replace("_", " ")}</Badge>
-      },
-    },
-    {
-      header: "Controls",
-      key: "id",
-      render: (item) => (
-        <div className="flex items-center gap-1.5">
-          {item.status === "ACTIVE_DISPATCH" ? (
-            <Button
-              size="dense"
-              variant="secondary"
-              leadingIcon={<Pause className="w-3 h-3 text-amber-500" />}
-              isLoading={pauseCampaignMutation.isPending}
-              onClick={() => {
-                setActiveTrackingCampaignId(item.id)
-                pauseCampaignMutation.mutate(item.id)
-              }}
-            >
-              Pause
-            </Button>
-          ) : item.status === "PAUSED" ? (
-            <Button
-              size="dense"
-              variant="secondary"
-              leadingIcon={<Play className="w-3 h-3 text-emerald-500" />}
-              isLoading={resumeCampaignMutation.isPending}
-              onClick={() => {
-                setActiveTrackingCampaignId(item.id)
-                resumeCampaignMutation.mutate(item.id)
-              }}
-            >
-              Resume
-            </Button>
-          ) : item.status !== "COMPLETED" ? (
-            <Button
-              size="dense"
-              variant="secondary"
-              leadingIcon={<Play className="w-3 h-3 text-emerald-500" />}
-              isLoading={launchCampaignMutation.isPending}
-              onClick={() => {
-                setActiveTrackingCampaignId(item.id)
-                launchCampaignMutation.mutate(item.id)
-              }}
-            >
-              Launch
-            </Button>
-          ) : null}
+  const selectedCampaign = campaigns.find((c) => c.id === selectedCampaignId)
 
-          {item.status !== "COMPLETED" && (
-            <Button
-              size="dense"
-              variant="ghost"
-              className="text-rose-600 hover:bg-rose-500/10 text-xs"
-              isLoading={cancelCampaignMutation.isPending}
-              onClick={() => cancelCampaignMutation.mutate(item.id)}
-            >
-              Cancel
-            </Button>
-          )}
+  const setTab = (tab: "campaigns" | "history" | "health") => {
+    // Reset inner states when switching tabs
+    setSelectedCampaignId(null)
+    setIsCreating(false)
+    router.push(`/voice-agent/campaigns?tab=${tab}`)
+  }
 
-          <Button
-            size="dense"
-            variant="ghost"
-            leadingIcon={<Headphones className="w-3 h-3" />}
-            onClick={() => {
-              setPreviewText(item.scriptTemplate || PURE_PRESET_SCRIPTS["te-IN"].event_notice.text)
-              setPreviewLanguage(item.languageCode || "te-IN")
-              setAuditionTab("TTS")
-              setAuditionOpen(true)
-            }}
-          >
-            Audition
-          </Button>
-          <Button
-            size="dense"
-            variant="ghost"
-            leadingIcon={<MessageSquare className="w-3 h-3" />}
-            onClick={() => setSelectedCampaignForLogs(item)}
-          >
-            Logs
-          </Button>
-        </div>
-      ),
-    },
-  ]
-
-  // KPI calculations
-  const totalTarget = campaigns.reduce((acc, c) => acc + (c.targetCount || 0), 0)
-  const totalCompleted = campaigns.reduce((acc, c) => acc + (c.completedCalls || 0), 0)
-  const overallRate = totalTarget > 0 ? `${Math.round((totalCompleted / totalTarget) * 100)}%` : "96.4%"
-  const activeCount = campaigns.filter((c) => c.status === "ACTIVE_DISPATCH").length
+  const handleOpenVoicePreview = (lang: string = "te-IN", text?: string) => {
+    setVoicePreviewInitial({ lang, text })
+    setIsVoicePreviewOpen(true)
+  }
 
   return (
     <AppShell
-      pageTitle="AI Voice Agent — Multilingual Outbound Dispatch"
-      breadcrumbs={[{ label: "AI Yantra" }, { label: "Voice Agent Campaigns" }]}
-      rightHeaderAction={
-        <div className="flex items-center gap-2.5">
-          <Button
-            size="dense"
-            variant="secondary"
-            leadingIcon={<PhoneCall className="w-3.5 h-3.5 text-sky-500" />}
-            onClick={() => {
-              setTestCallResult(null)
-              setTestCallModalOpen(true)
-            }}
-          >
-            Dispatch Test Call
-          </Button>
-          <Button
-            size="dense"
-            variant="secondary"
-            leadingIcon={<Volume2 className="w-3.5 h-3.5 text-emerald-500" />}
-            onClick={() => {
-              setAuditionTab("TTS")
-              setAuditionOpen(true)
-            }}
-          >
-            Audition Voice Studio
-          </Button>
-          <Button
-            size="dense"
-            variant="primary"
-            className="bg-brand-primary text-black hover:bg-emerald-400 font-semibold shadow-xs"
-            leadingIcon={<Plus className="w-3.5 h-3.5" />}
-            onClick={() => setCreateModalOpen(true)}
-          >
-            Create Voice Campaign
-          </Button>
-        </div>
-      }
+      pageTitle="Voice Agent"
+      breadcrumbs={[{ label: "Virtual Office", href: "/voice-agent" }, { label: "Voice Agent" }]}
     >
-      <div className="flex flex-col gap-6">
-        {/* Spot Hero Panel */}
-        <SpotHeroPanel
-          badgeText="TELEPHONY DISPATCH ENGINE // SARVAM BULBUL v2 + GROQ LPU + EXOTEL"
-          headline="Conversational Voice Outbound Infrastructure"
-          description="Automated parent outreach in polite colloquial Telugu (Tenglish), Hindi, and English. Handles live parent questions on marks, attendance, and fees with instant barge-in and 3-second WhatsApp follow-up recovery."
-          actions={
-            <div className="flex items-center gap-3">
-              <Button
-                size="default"
-                variant="primary"
-                className="bg-brand-primary text-black hover:bg-emerald-400 font-semibold"
-                leadingIcon={<Volume2 className="w-4 h-4" />}
-                onClick={() => {
-                  setAuditionTab("CHAT")
-                  setAuditionOpen(true)
-                }}
-              >
-                Test Conversational Agent
-              </Button>
-              <Button
-                size="default"
-                variant="secondary"
-                leadingIcon={<Plus className="w-4 h-4" />}
-                onClick={() => setCreateModalOpen(true)}
-              >
-                Schedule New Campaign
-              </Button>
-            </div>
-          }
-        />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+        {/* Health status notification bar at top */}
+        <HealthStrip onFixClick={() => setTab("health")} />
 
-        {/* Telephony KPIs */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatCard
-            label="Active Outbound Campaigns"
-            value={`${activeCount} Active`}
-            delta={campaigns.length > 0 ? `${campaigns.length} total scheduled` : "Queue ready"}
-            deltaType="neutral"
-            icon={<PhoneCall className="w-5 h-5 text-emerald-500" />}
-            description="Parallel SIP dialing lines"
-          />
-          <StatCard
-            label="Parent Reach & Delivery"
-            value={`${totalCompleted} Calls`}
-            delta={`${totalTarget} total parents queued`}
-            deltaType="increase"
-            icon={<CheckCircle2 className="w-5 h-5 text-blue-500" />}
-            description="Verified guardian phone records"
-          />
-          <StatCard
-            label="Average Connection Rate"
-            value={overallRate}
-            delta="Zero Truecaller spam flags"
-            deltaType="increase"
-            icon={<Radio className="w-5 h-5 text-purple-500" />}
-            description="Indian domestic virtual CLI (+91)"
-          />
-          <StatCard
-            label="Campaign Cost Efficiency"
-            value="₹4.09 / Call"
-            delta="87.2% savings vs human staff"
-            deltaType="increase"
-            icon={<Sparkles className="w-5 h-5 text-amber-500" />}
-            description="90-sec call + WhatsApp recap"
-          />
-        </div>
-
-        {/* Live Sequential Dialer Progress Banner */}
-        {campaignProgress && (
-          <Card className="border border-border-default shadow-xs overflow-hidden">
-            <div className="p-4 bg-gradient-to-r from-emerald-500/5 via-sky-500/5 to-transparent border-b border-border-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center shrink-0">
-                  <Radio className="w-4 h-4 text-brand-primary animate-pulse" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-text-primary">Sequential Dialer In Progress</span>
-                    <Badge variant={campaignProgress.status === "ACTIVE_DISPATCH" ? "positive" : campaignProgress.status === "PAUSED" ? "warning" : "neutral"}>
-                      {campaignProgress.status.replace("_", " ")}
-                    </Badge>
-                    <Badge variant={campaignProgress.callingWindowOpen ? "positive" : "warning"}>
-                      {campaignProgress.callingWindowOpen ? "Calling Window Open (09:00 - 19:00 IST)" : "Calling Window Paused (Closed)"}
-                    </Badge>
-                  </div>
-                  <p className="text-[11px] text-text-secondary mt-0.5">
-                    1-at-a-time parent sequence with 3s interval • 30-min spacing on busy/no-answer retries • Survives restarts
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2">
-                {campaignProgress.status === "ACTIVE_DISPATCH" ? (
-                  <Button
-                    size="dense"
-                    variant="secondary"
-                    leadingIcon={<Pause className="w-3.5 h-3.5 text-amber-500" />}
-                    isLoading={pauseCampaignMutation.isPending}
-                    onClick={() => pauseCampaignMutation.mutate(campaignProgress.campaignId)}
-                  >
-                    Pause Campaign
-                  </Button>
-                ) : campaignProgress.status === "PAUSED" ? (
-                  <Button
-                    size="dense"
-                    variant="secondary"
-                    leadingIcon={<Play className="w-3.5 h-3.5 text-emerald-500" />}
-                    isLoading={resumeCampaignMutation.isPending}
-                    onClick={() => resumeCampaignMutation.mutate(campaignProgress.campaignId)}
-                  >
-                    Resume Campaign
-                  </Button>
-                ) : null}
-
-                {campaignProgress.status !== "COMPLETED" && (
-                  <Button
-                    size="dense"
-                    variant="secondary"
-                    className="text-rose-600 hover:bg-rose-500/10 text-xs"
-                    isLoading={cancelCampaignMutation.isPending}
-                    onClick={() => cancelCampaignMutation.mutate(campaignProgress.campaignId)}
-                  >
-                    Cancel Campaign
-                  </Button>
-                )}
-              </div>
-            </div>
-
-            <div className="p-4 space-y-3">
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-semibold text-text-primary">
-                  Progress: {campaignProgress.completedCount} of {campaignProgress.totalRecipients} Guardians Contacted
-                </span>
-                <span className="font-mono text-text-muted">
-                  {campaignProgress.totalRecipients > 0
-                    ? `${Math.round((campaignProgress.completedCount / campaignProgress.totalRecipients) * 100)}%`
-                    : "0%"}
-                </span>
-              </div>
-
-              <ProgressBar
-                value={campaignProgress.totalRecipients > 0 ? (campaignProgress.completedCount / campaignProgress.totalRecipients) * 100 : 0}
-                variant="green"
-              />
-
-              {campaignProgress.currentRecipient ? (
-                <div className="p-2.5 bg-subtle/50 rounded-xl border border-border-default flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                    <span className="font-medium text-text-primary">
-                      Current Target: {campaignProgress.currentRecipient.guardianName} ({campaignProgress.currentRecipient.phone})
-                    </span>
-                    <span className="text-text-muted text-[11px]">
-                      Student: {campaignProgress.currentRecipient.studentName}
-                    </span>
-                  </div>
-                  <Badge variant="warning">{campaignProgress.currentRecipient.status.toUpperCase()}</Badge>
-                </div>
-              ) : (
-                <div className="text-[11px] text-text-muted">
-                  Sequential queue active. Waiting for next eligible recipient.
-                </div>
-              )}
-            </div>
-          </Card>
-        )}
-
-        {/* Filter Navigation & Table Card */}
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-4 border-b border-border-default">
-            <div>
-              <CardTitle className="text-sm font-bold text-text-primary flex items-center gap-2">
-                <PhoneCall className="w-4 h-4 text-emerald-500" />
-                Telephony Outbound Campaigns
-              </CardTitle>
-              <p className="text-xs text-text-secondary mt-0.5">
-                Manage automated calling campaigns linked to your institutional PBX and Sarvam voice pipeline
-              </p>
-            </div>
-
-            {/* Filter Chips */}
-            <div className="flex items-center gap-1.5 p-1 bg-subtle rounded-xl border border-border-default text-xs font-medium">
-              {(["ALL", "ACTIVE", "SCHEDULED", "COMPLETED"] as const).map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setSelectedFilter(tab)}
-                  className={`px-3 py-1 rounded-lg transition-colors cursor-pointer ${
-                    selectedFilter === tab
-                      ? "bg-surface text-text-primary shadow-2xs font-semibold"
-                      : "text-text-secondary hover:text-text-primary"
-                  }`}
-                >
-                  {tab === "ALL" ? "All Campaigns" : tab.charAt(0) + tab.slice(1).toLowerCase()}
-                </button>
-              ))}
-            </div>
-          </CardHeader>
-
-          <CardContent className="pt-4">
-            {filteredCampaigns.length > 0 ? (
-              <Table
-                data={filteredCampaigns}
-                columns={columns}
-                keyExtractor={(item) => item.id}
-                cardTitle={(item) => item.title}
-                cardSubtitle={(item) => `${item.language} • ${item.completedCalls}/${item.targetCount} calls`}
-                cardBadge={(item) => <Badge variant="neutral">{item.status}</Badge>}
-              />
-            ) : (
-              <div className="p-12 text-center bg-subtle/30 rounded-2xl border border-dashed border-border-default flex flex-col items-center justify-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-subtle border border-border-default flex items-center justify-center text-text-muted">
-                  <PhoneCall className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-text-primary">No Matching Voice Campaigns Found</h4>
-                  <p className="text-xs text-text-secondary mt-1 max-w-md">
-                    Schedule automated parent outreach for upcoming school events, report card releases, or fee due reminders.
-                  </p>
-                </div>
-                <Button
-                  size="dense"
-                  variant="primary"
-                  className="bg-brand-primary text-black hover:bg-emerald-400 mt-2"
-                  leadingIcon={<Plus className="w-3.5 h-3.5" />}
-                  onClick={() => setCreateModalOpen(true)}
-                >
-                  Create First Campaign
-                </Button>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* ======================================================== */}
-      {/* 1. AUDITION & CONVERSATIONAL TESTING STUDIO MODAL        */}
-      {/* ======================================================== */}
-      <Modal
-        isOpen={auditionOpen}
-        onClose={() => {
-          stopAudio()
-          setAuditionOpen(false)
-        }}
-        title="Voice Agent Studio & Interactive Audition"
-        subtitle="Powered by Sarvam AI Bulbul v2 + Groq Llama 3.3 70B Conversational LPUs"
-        maxWidth="2xl"
-      >
-        <div className="flex flex-col h-full">
-          {/* Studio Tab Switcher */}
-          <div className="px-6 pt-4 pb-3 border-b border-border-default bg-subtle/40 flex items-center gap-3">
-            <button
-              onClick={() => {
-                stopAudio()
-                setAuditionTab("TTS")
-              }}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-colors ${
-                auditionTab === "TTS"
-                  ? "bg-surface text-text-primary shadow-2xs border border-border-default"
-                  : "text-text-secondary hover:text-text-primary"
-              }`}
-            >
-              <Volume2 className="w-3.5 h-3.5 text-emerald-500" />
-              Voice Synthesis Audition (TTS)
-            </button>
-            <button
-              onClick={() => {
-                stopAudio()
-                setAuditionTab("CHAT")
-              }}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-colors ${
-                auditionTab === "CHAT"
-                  ? "bg-surface text-text-primary shadow-2xs border border-border-default"
-                  : "text-text-secondary hover:text-text-primary"
-              }`}
-            >
-              <Bot className="w-3.5 h-3.5 text-blue-500" />
-              Live In-Call Tool Calling (Groq LLM)
-            </button>
-          </div>
-
-          {/* TAB 1: TTS AUDITION */}
-          {auditionTab === "TTS" && (
-            <div className="p-6 space-y-5">
-              {/* Voice & Speaker Settings */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-text-primary mb-1.5">Voice Model Persona</label>
-                  <select
-                    value={previewSpeaker}
-                    onChange={(e) => setPreviewSpeaker(e.target.value)}
-                    className="w-full text-xs bg-surface border border-border-default rounded-xl px-3 py-2 text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                  >
-                    <option value="priya">Priya (Senior Counselor — Warm Female, Indian Cadence)</option>
-                    <option value="aravind">Aravind (Academic Coordinator — Professional Male)</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-text-primary mb-1.5">Spoken Language</label>
-                  <select
-                    value={previewLanguage}
-                    onChange={(e) => {
-                      const newLang = e.target.value
-                      setPreviewLanguage(newLang)
-                      const scripts = PURE_PRESET_SCRIPTS[newLang] || PURE_PRESET_SCRIPTS["te-IN"]
-                      setPreviewText(scripts.event_notice.text)
-                    }}
-                    className="w-full text-xs bg-surface border border-border-default rounded-xl px-3 py-2 text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                  >
-                    <option value="te-IN">Telugu (తెలుగు - 100% Pure Native Script)</option>
-                    <option value="en-IN">Indian English (Pure English - Clear Neutral Accent)</option>
-                    <option value="hi-IN">Hindi (हिंदी - Pure Shuddh)</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Preset Buttons */}
-              <div>
-                <label className="block text-xs font-semibold text-text-secondary mb-2">Load Pre-Tuned Script Template</label>
-                <div className="flex flex-wrap gap-2">
-                  {Object.entries(PURE_PRESET_SCRIPTS[previewLanguage] || PURE_PRESET_SCRIPTS["te-IN"]).map(([key, item]) => (
-                    <button
-                      key={key}
-                      onClick={() => applyPreset(key, previewLanguage)}
-                      className="px-2.5 py-1 text-[11px] bg-subtle hover:bg-surface border border-border-default rounded-lg text-text-primary transition-colors cursor-pointer"
-                    >
-                      {item.title}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Text Input */}
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <label className="text-xs font-semibold text-text-primary">Spoken Script Preview</label>
-                  <span className="text-[11px] text-text-muted font-mono">{previewText.length} characters</span>
-                </div>
-                <textarea
-                  value={previewText}
-                  onChange={(e) => setPreviewText(e.target.value)}
-                  rows={4}
-                  className="w-full text-xs bg-surface border border-border-default rounded-xl p-3 text-text-primary font-sans leading-relaxed focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
-                  placeholder="Enter script text..."
-                />
-              </div>
-
-              {/* Playback Controls & Waveform */}
-              <div className="p-4 rounded-xl bg-subtle/50 border border-border-default flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Button
-                    size="default"
-                    variant="primary"
-                    className="bg-brand-primary text-black hover:bg-emerald-400 font-semibold"
-                    leadingIcon={isPlayingAudio ? <Square className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current" />}
-                    isLoading={synthesizeMutation.isPending}
-                    onClick={() => {
-                      if (isPlayingAudio) {
-                        stopAudio()
-                      } else {
-                        handleAuditionSynthesize()
-                      }
-                    }}
-                  >
-                    {isPlayingAudio ? "Stop Audio" : "Listen Voice Preview"}
-                  </Button>
-
-                  {isPlayingAudio && (
-                    <div className="flex items-center gap-1">
-                      <span className="w-1.5 h-4 bg-emerald-500 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                      <span className="w-1.5 h-6 bg-emerald-500 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                      <span className="w-1.5 h-5 bg-emerald-500 rounded-full animate-bounce" />
-                      <span className="text-xs font-mono text-emerald-600 font-semibold ml-2">Playing Sarvam Bulbul v2 Audio</span>
-                    </div>
-                  )}
-
-                  {!isPlayingAudio && synthesizeMutation.isSuccess && (
-                    <span className="text-xs text-text-secondary flex items-center gap-1">
-                      <Check className="w-3.5 h-3.5 text-emerald-500" /> Synthesized in 1.4s
-                    </span>
-                  )}
-                </div>
-
-                <div className="text-[11px] font-mono text-text-muted">Est. Duration: ~{Math.ceil(previewText.length / 15)}s</div>
-              </div>
-            </div>
-          )}
-
-          {/* TAB 2: INTERACTIVE CHAT SIMULATION */}
-          {auditionTab === "CHAT" && (
-            <div className="p-6 flex flex-col h-[500px]">
-              {/* Language Switcher & Quick Prompts */}
-              <div className="mb-3 space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="text-[11px] font-semibold text-text-secondary">Conversation Language:</div>
-                  <div className="flex items-center gap-1.5">
-                    {[
-                      { code: "te-IN", label: "తెలుగు (Pure Telugu)" },
-                      { code: "en-IN", label: "English" },
-                      { code: "hi-IN", label: "हिंदी (Pure Hindi)" },
-                    ].map((lang) => (
-                      <button
-                        key={lang.code}
-                        type="button"
-                        onClick={() => {
-                          setPreviewLanguage(lang.code)
-                          const welcome =
-                            lang.code === "te-IN"
-                              ? "నమస్కారం అండి! నేను నారాయణ పాఠశాల నుండి ప్రియను మాట్లాడుతున్నాను. రాబోయే శనివారం మన పాఠశాలలో వార్షిక క్రీడా దినోత్సవం నిర్వహించబడుతుంది. మీకు విద్యార్థి చదువు లేదా మార్కుల గురించి ఏవైనా ప్రశ్నలు ఉన్నాయా అండి?"
-                              : lang.code === "hi-IN"
-                              ? "नमस्ते! मैं नारायण स्कूल से प्रिया बोल रही हूँ। आगामी शनिवार को हमारे स्कूल में वार्षिक खेल दिवस का आयोजन किया जा रहा है। क्या आप अपने बच्चे की पढ़ाई या उपस्थिति के बारे में कुछ पूछना चाहते हैं?"
-                              : "Good morning! This is Priya calling from Narayana High School. We are celebrating our Annual Sports Day this upcoming Saturday. Do you have any questions regarding your child's academics or attendance?"
-                          setChatMessages([{ role: "assistant", content: welcome }])
-                        }}
-                        className={`px-2.5 py-1 text-[11px] rounded-lg border transition-colors cursor-pointer ${
-                          previewLanguage === lang.code
-                            ? "bg-brand-primary/10 border-brand-primary text-brand-primary font-semibold"
-                            : "bg-subtle border-border-default text-text-secondary hover:text-text-primary"
-                        }`}
-                      >
-                        {lang.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-1.5">
-                  {(previewLanguage === "te-IN"
-                    ? [
-                        "సాయి తేజా కి సైన్స్ లో ఎన్ని మార్కులు వచ్చాయి?",
-                        "అతని మొత్తం హాజరు శాతం ఎంత?",
-                        "మేము చెల్లించాల్సిన బకాయి ఫీజు ఎంత?",
-                        "వార్షిక క్రీడా దినోత్సవం ఎప్పుడు?",
-                      ]
-                    : previewLanguage === "hi-IN"
-                    ? [
-                        "साई तेजा के साइंस में कितने अंक आए हैं?",
-                        "उसकी कुल उपस्थिति प्रतिशत कितनी है?",
-                        "हमारी बकाया ट्यूशन फीस कितनी है?",
-                        "वार्षिक खेल दिवस समारोह कब है?",
-                      ]
-                    : [
-                        "Can you tell me Sai Teja's marks in Science?",
-                        "What is his overall attendance percentage?",
-                        "What is our pending tuition fee balance?",
-                        "When is the Annual Sports Day celebration?",
-                      ]
-                  ).map((chip) => (
-                    <button
-                      key={chip}
-                      type="button"
-                      onClick={() => handleSendChat(chip)}
-                      className="px-2 py-0.5 text-[11px] bg-subtle hover:bg-surface border border-border-default rounded-md text-text-primary transition-colors cursor-pointer"
-                    >
-                      {chip}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Chat Messages */}
-              <div className="flex-1 overflow-y-auto space-y-3 p-3 bg-subtle/20 rounded-xl border border-border-default mb-3">
-                {chatMessages.map((msg, idx) => (
-                  <div
-                    key={idx}
-                    className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}
-                  >
-                    <div className="flex items-center gap-1.5 mb-1 text-[10px] text-text-muted font-mono">
-                      {msg.role === "user" ? (
-                        <>
-                          <span>Parent</span>
-                          <User className="w-3 h-3 text-blue-500" />
-                        </>
-                      ) : (
-                        <>
-                          <Bot className="w-3 h-3 text-emerald-500" />
-                          <span>Priya (AI Counselor)</span>
-                        </>
-                      )}
-                    </div>
-
-                    <div
-                      className={`max-w-[85%] rounded-2xl px-3.5 py-2 text-xs leading-relaxed ${
-                        msg.role === "user"
-                          ? "bg-action-black text-canvas rounded-br-xs"
-                          : "bg-surface border border-border-default text-text-primary rounded-bl-xs shadow-2xs"
-                      }`}
-                    >
-                      {msg.content}
-                    </div>
-
-                    {msg.toolUsed && (
-                      <div className="mt-1.5 flex items-center gap-1.5 px-2 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-[10px] text-emerald-600 font-mono">
-                        <Sparkles className="w-3 h-3 text-emerald-500" />
-                        <span>Executed Tool: {msg.toolUsed}</span>
-                        {msg.toolData?.score && <span>(Score: {msg.toolData.score})</span>}
-                        {msg.toolData?.attendancePercentage && <span>(Attendance: {msg.toolData.attendancePercentage})</span>}
-                        {msg.toolData?.balanceDue && <span>(Balance: {msg.toolData.balanceDue})</span>}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Chat Input */}
-              <div className="flex items-center gap-2">
-                <input
-                  type="text"
-                  value={chatInput}
-                  onChange={(e) => setChatInput(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault()
-                      handleSendChat()
-                    }
-                  }}
-                  placeholder="Ask Priya a question as a parent..."
-                  className="flex-1 text-xs bg-surface border border-border-default rounded-xl px-3.5 py-2.5 text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                />
-                <Button
-                  size="default"
-                  variant="primary"
-                  className="bg-brand-primary text-black hover:bg-emerald-400 font-semibold"
-                  leadingIcon={<Send className="w-3.5 h-3.5" />}
-                  isLoading={chatMutation.isPending}
-                  onClick={() => handleSendChat()}
-                >
-                  Ask
-                </Button>
-              </div>
-
-              <div className="mt-2 flex items-center justify-between text-[11px] text-text-muted">
-                <label className="flex items-center gap-1.5 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={speakAssistantReplies}
-                    onChange={(e) => setSpeakAssistantReplies(e.target.checked)}
-                    className="rounded text-brand-primary focus:ring-0"
-                  />
-                  <span>Speak replies aloud using Sarvam Bulbul TTS</span>
-                </label>
-                <span>Student Reference: Sai Teja Chary (SIA-2026-0101)</span>
-              </div>
-            </div>
-          )}
-
-          {/* Clean Modal Footer */}
-          <div className="p-4 border-t border-border-default bg-surface flex items-center justify-end">
-            <Button
-              size="default"
-              variant="secondary"
-              onClick={() => {
-                stopAudio()
-                setAuditionOpen(false)
-              }}
-            >
-              Close Studio
-            </Button>
-          </div>
-        </div>
-      </Modal>
-
-      {/* ======================================================== */}
-      {/* 2. CREATE VOICE CAMPAIGN MODAL                           */}
-      {/* ======================================================== */}
-      <Modal
-        isOpen={createModalOpen}
-        onClose={() => setCreateModalOpen(false)}
-        title="Create Outbound Voice Campaign"
-        subtitle="Automated telephony dispatch to verified parent phone numbers"
-        maxWidth="xl"
-      >
-        <form onSubmit={handleCreateCampaign} className="p-6 space-y-4">
-          {formSuccessMessage && (
-            <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 rounded-xl text-xs font-semibold flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-              <span>{formSuccessMessage}</span>
-            </div>
-          )}
-
+        {/* Header - Calm, Scannable, School Administrator Focused */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-200/80 pb-5">
           <div>
-            <label className="block text-xs font-semibold text-text-primary mb-1">Campaign Title *</label>
-            <input
-              type="text"
-              required
-              value={formName}
-              onChange={(e) => setFormName(e.target.value)}
-              placeholder="e.g. Grade 10 — Mid-Term Exam Announcement"
-              className="w-full text-xs bg-surface border border-border-default rounded-xl px-3 py-2 text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-semibold text-text-primary mb-1">Campaign Use Case</label>
-              <select
-                value={formUseCase}
-                onChange={(e) => {
-                  const newUseCase = e.target.value
-                  setFormUseCase(newUseCase)
-                  const scripts = PURE_PRESET_SCRIPTS[formLanguage] || PURE_PRESET_SCRIPTS["te-IN"]
-                  if (scripts[newUseCase]) {
-                    setFormScript(scripts[newUseCase].text)
-                  }
-                }}
-                className="w-full text-xs bg-surface border border-border-default rounded-xl px-3 py-2 text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-              >
-                <option value="event_notice">School Event / Sports Day Notice</option>
-                <option value="fee_reminder">Term Tuition Fee Due Reminder</option>
-                <option value="attendance_alert">Unexcused Absence Alert</option>
-                <option value="exam_announcement">Quarterly Exam Report Card</option>
-              </select>
+            <div className="flex items-center gap-2 text-xs font-medium text-zinc-500 mb-1">
+              <span>Virtual Office</span>
+              <span>/</span>
+              <span className="text-zinc-800">Voice Agent</span>
             </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-text-primary mb-1">Target Grade Filter</label>
-              <select
-                value={formTargetGradeId}
-                onChange={(e) => setFormTargetGradeId(e.target.value)}
-                className="w-full text-xs bg-surface border border-border-default rounded-xl px-3 py-2 text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-              >
-                <option value="">All Enrolled Students (Campus Wide)</option>
-                {classes.map((c: any) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-semibold text-text-primary mb-1">Language</label>
-              <select
-                value={formLanguage}
-                onChange={(e) => {
-                  const newLang = e.target.value
-                  setFormLanguage(newLang)
-                  const scripts = PURE_PRESET_SCRIPTS[newLang] || PURE_PRESET_SCRIPTS["te-IN"]
-                  if (scripts[formUseCase]) {
-                    setFormScript(scripts[formUseCase].text)
-                  }
-                }}
-                className="w-full text-xs bg-surface border border-border-default rounded-xl px-3 py-2 text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-              >
-                <option value="te-IN">Telugu (తెలుగు - Pure Native Script)</option>
-                <option value="en-IN">Indian English (Pure English)</option>
-                <option value="hi-IN">Hindi (हिंदी - Pure Shuddh)</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs font-semibold text-text-primary mb-1">Voice Persona</label>
-              <select
-                value={formSpeaker}
-                onChange={(e) => setFormSpeaker(e.target.value)}
-                className="w-full text-xs bg-surface border border-border-default rounded-xl px-3 py-2 text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-              >
-                <option value="priya">Priya (Warm Female Counselor)</option>
-                <option value="aravind">Aravind (Coordinator Male)</option>
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <div className="flex items-center justify-between mb-1">
-              <label className="text-xs font-semibold text-text-primary">Opening Spoken Script *</label>
-              <span className="text-[11px] text-text-muted font-mono">{formScript.length} chars</span>
-            </div>
-            <textarea
-              required
-              rows={4}
-              value={formScript}
-              onChange={(e) => setFormScript(e.target.value)}
-              className="w-full text-xs bg-surface border border-border-default rounded-xl p-3 text-text-primary font-sans leading-relaxed focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-semibold text-text-primary mb-1">Language Dialing Strategy</label>
-              <select
-                value={formLanguageMode}
-                onChange={(e) => setFormLanguageMode(e.target.value as "parent_preferred" | "force")}
-                className="w-full text-xs bg-surface border border-border-default rounded-xl px-3 py-2 text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-              >
-                <option value="parent_preferred">Use Each Parent's Preferred Language (Telugu/English/Hindi)</option>
-                <option value="force">Force Selected Language for All Parents</option>
-              </select>
-            </div>
-            <div className="flex flex-col justify-end">
-              <label className="flex items-center gap-2 p-2 bg-subtle/50 rounded-xl border border-border-default cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={formSingleParentTest}
-                  onChange={(e) => setFormSingleParentTest(e.target.checked)}
-                  className="rounded text-brand-primary focus:ring-0 w-4 h-4"
-                />
-                <span className="text-xs font-medium text-text-primary">
-                  Call 1 parent first as a test
-                </span>
-              </label>
-            </div>
-          </div>
-
-          <div className="p-3 bg-subtle/50 rounded-xl border border-border-default flex items-center justify-between text-xs text-text-secondary">
-            <span className="flex items-center gap-1.5 font-medium">
-              <ShieldCheck className="w-4 h-4 text-emerald-500" />
-              PRD Rule 2 Multi-Tenant Protected
-            </span>
-            <span>Calling Window: 09:00 - 19:00 IST</span>
-          </div>
-
-          {/* Clean Modal Footer (No Keybinding Indicators) */}
-          <div className="pt-2 flex items-center justify-end gap-3 border-t border-border-default">
-            <Button
-              type="button"
-              variant="secondary"
-              size="default"
-              onClick={() => setCreateModalOpen(false)}
-            >
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              variant="primary"
-              size="default"
-              className="bg-brand-primary text-black hover:bg-emerald-400 font-semibold"
-              isLoading={createCampaignMutation.isPending}
-            >
-              Create & Queue Campaign
-            </Button>
-          </div>
-        </form>
-      </Modal>
-
-      {/* ======================================================== */}
-      {/* 3. CAMPAIGN CALL LOGS SLIDEOVER                          */}
-      {/* ======================================================== */}
-      <SlideOver
-        open={!!selectedCampaignForLogs}
-        onClose={() => setSelectedCampaignForLogs(null)}
-        title={selectedCampaignForLogs?.title || "Campaign Logs"}
-        subtitle={`Telephony Call Delivery Audit • ${selectedCampaignForLogs?.targetCount || 0} Recipients`}
-        width="wide"
-        footerActions={
-          <Button size="default" variant="secondary" onClick={() => setSelectedCampaignForLogs(null)}>
-            Close Logs
-          </Button>
-        }
-      >
-        <div className="space-y-4">
-          <div className="p-3.5 bg-subtle/40 rounded-xl border border-border-default flex items-center justify-between text-xs">
-            <div>
-              <div className="font-semibold text-text-primary">{selectedCampaignForLogs?.title}</div>
-              <div className="text-[11px] text-text-secondary mt-0.5">
-                Language: {selectedCampaignForLogs?.language} • Status: {selectedCampaignForLogs?.status}
-              </div>
-            </div>
-            <Badge variant="positive">WhatsApp Recap Enabled</Badge>
-          </div>
-
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold text-text-primary tracking-tight">Recipient Call Ledger</h4>
-
-            {callLogs.length > 0 ? (
-              callLogs.map((log) => {
-                const payload = typeof log.conversation_payload === "string"
-                  ? JSON.parse(log.conversation_payload)
-                  : log.conversation_payload || {}
-
-                return (
-                  <div
-                    key={log.id}
-                    className="p-3.5 bg-surface border border-border-default rounded-xl space-y-2 text-xs"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="font-semibold text-text-primary">{log.guardian_name || "Parent"}</span>
-                        <span className="font-mono text-text-muted text-[11px]">{log.phone}</span>
-                      </div>
-                      <Badge variant={log.status === "completed" ? "positive" : "warning"}>
-                        {log.status.toUpperCase()}
-                      </Badge>
-                    </div>
-
-                    {payload.student_name && (
-                      <div className="text-[11px] text-text-secondary">
-                        Student: <span className="font-medium text-text-primary">{payload.student_name}</span> ({payload.admission_number || "SIA"})
-                      </div>
-                    )}
-
-                    {payload.transcript && (
-                      <div className="p-2 bg-subtle/60 rounded-lg text-[11px] text-text-secondary italic">
-                        "{payload.transcript}"
-                      </div>
-                    )}
-
-                    {payload.language && (
-                      <div className="flex items-center gap-2">
-                        <span className="text-[10px] text-text-muted">Dialed in:</span>
-                        <Badge variant="neutral">{payload.language}</Badge>
-                      </div>
-                    )}
-
-                    {payload.marksQueried && (
-                      <div className="p-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-[11px] text-emerald-700 dark:text-emerald-300">
-                        <strong>Tool Queried:</strong> {payload.marksQueried.subject} — Score: {payload.marksQueried.score} (Grade: {payload.marksQueried.grade})
-                      </div>
-                    )}
-
-                    {payload.error && (
-                      <div className="p-2 bg-amber-500/10 border border-amber-500/20 rounded-lg text-[11px] text-amber-700 dark:text-amber-300">
-                        <strong>Carrier Error:</strong> {payload.error}
-                        {payload.actionRequired && <div className="mt-0.5 text-[10px] text-text-muted font-normal">{payload.actionRequired}</div>}
-                      </div>
-                    )}
-
-                    <div className="flex items-center justify-between text-[11px] text-text-muted pt-1 border-t border-border-subtle">
-                      <span>Duration: {log.duration_seconds || 0} seconds</span>
-                      <span className="text-emerald-600 font-medium">WhatsApp Recap Dispatched</span>
-                    </div>
-                  </div>
-                )
-              })
-            ) : (
-              <div className="p-8 text-center text-xs text-text-secondary">
-                {logsLoading ? "Loading call logs..." : "No call logs recorded yet for this campaign."}
-              </div>
-            )}
-          </div>
-        </div>
-      </SlideOver>
-
-      {/* ======================================================== */}
-      {/* 4. DISPATCH SINGLE TEST CALL MODAL                       */}
-      {/* ======================================================== */}
-      <Modal
-        isOpen={testCallModalOpen}
-        onClose={() => setTestCallModalOpen(false)}
-        title="Dispatch Single Test Phone Call"
-        subtitle="Trigger a live or simulated carrier outbound phone call to test audio & tool delivery"
-        maxWidth="md"
-      >
-        <form
-          onSubmit={(e) => {
-            e.preventDefault()
-            if (!testPhone || testPhone.length < 10) return
-            testCallMutation.mutate(
-              {
-                phone: testPhone,
-                studentAdmissionNumber: testStudentId,
-                useCase: testUseCase,
-                language: testLanguage,
-                provider: testProvider,
-              },
-              {
-                onSuccess: (data: any) => {
-                  setTestCallResult(data)
-                  if (data?.audioBase64) {
-                    playAudioFromBase64(data.audioBase64)
-                  }
-                },
-              }
-            )
-          }}
-          className="p-6 space-y-4"
-        >
-          <div>
-            <label className="block text-xs font-semibold text-text-primary mb-1">
-              Destination Phone Number (+91)
-            </label>
-            <input
-              type="text"
-              value={testPhone}
-              onChange={(e) => setTestPhone(e.target.value)}
-              placeholder="+919876543210"
-              className="w-full text-xs font-mono px-3 py-2 bg-surface border border-border-default rounded-xl focus:outline-hidden focus:ring-1 focus:ring-brand-primary"
-              required
-            />
-            <p className="text-[11px] text-text-muted mt-1">
-              Include country code (+91 for India). The chosen carrier gateway will place a real PSTN call.
+            <h1 className="text-2xl font-bold tracking-tight text-zinc-900">Voice Agent</h1>
+            <p className="text-sm text-zinc-500 mt-0.5">
+              Call parents across grades in their preferred language with automated updates and follow-ups.
             </p>
           </div>
 
-          <div>
-            <label className="block text-xs font-semibold text-text-primary mb-1">
-              Telephony Provider Gateway
-            </label>
-            <select
-              value={testProvider}
-              onChange={(e) => setTestProvider(e.target.value)}
-              className="w-full text-xs px-3 py-2 bg-surface border border-border-default rounded-xl focus:outline-hidden focus:ring-1 focus:ring-brand-primary"
+          {/* Action Button Hierarchy: Exactly ONE Primary Green Button */}
+          <div className="flex items-center gap-2.5">
+            <button
+              onClick={() => handleOpenVoicePreview("te-IN")}
+              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors"
             >
-              <option value="auto">Auto (Twilio if configured, fallback to Exotel)</option>
-              <option value="twilio">Twilio Voice Gateway</option>
-              <option value="exotel">Exotel PSTN Gateway</option>
-            </select>
-          </div>
+              <Headphones className="w-3.5 h-3.5 text-zinc-500" />
+              Preview voice
+            </button>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div>
-              <label className="block text-xs font-semibold text-text-primary mb-1">
-                Student Admission No
-              </label>
-              <input
-                type="text"
-                value={testStudentId}
-                onChange={(e) => setTestStudentId(e.target.value)}
-                placeholder="10-A-01"
-                className="w-full text-xs font-mono px-3 py-2 bg-surface border border-border-default rounded-xl focus:outline-hidden focus:ring-1 focus:ring-brand-primary"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-semibold text-text-primary mb-1">
-                Spoken Language
-              </label>
-              <select
-                value={testLanguage}
-                onChange={(e) => setTestLanguage(e.target.value)}
-                className="w-full text-xs px-3 py-2 bg-surface border border-border-default rounded-xl focus:outline-hidden focus:ring-1 focus:ring-brand-primary"
-              >
-                <option value="te-IN">Telugu (తెలుగు - Pure Native)</option>
-                <option value="en-IN">Indian English (Pure English)</option>
-                <option value="hi-IN">Hindi (हिंदी - Pure Hindi)</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs font-semibold text-text-primary mb-1">
-                Call Scenario
-              </label>
-              <select
-                value={testUseCase}
-                onChange={(e) => setTestUseCase(e.target.value)}
-                className="w-full text-xs px-3 py-2 bg-surface border border-border-default rounded-xl focus:outline-hidden focus:ring-1 focus:ring-brand-primary"
-              >
-                <option value="event_notice">Annual Sports Day Notice</option>
-                <option value="fee_reminder">Term 2 Fee Due Reminder</option>
-                <option value="attendance_alert">Morning Absence Alert</option>
-                <option value="exam_announcement">Quarterly Exam Report Card</option>
-              </select>
-            </div>
-          </div>
+            <button
+              onClick={() => setIsTestCallOpen(true)}
+              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-zinc-700 bg-white border border-zinc-300 hover:bg-zinc-50 rounded-lg transition-colors shadow-sm"
+            >
+              <PhoneCall className="w-3.5 h-3.5 text-zinc-500" />
+              Test call
+            </button>
 
-          {testCallResult && (
-            <div className="space-y-3">
-              {testCallResult.status === "DIALED_LIVE" || testCallResult.status === "INITIATED" ? (
-                <div className="p-3.5 bg-emerald-500/10 border border-emerald-500/30 rounded-xl space-y-1 text-xs">
-                  <div className="flex items-center gap-1.5 font-semibold text-emerald-600">
-                    <CheckCircle2 className="w-4 h-4" />
-                    <span>Live Outbound Call Dispatched Successfully!</span>
-                  </div>
-                  <div className="font-mono text-[11px] text-text-secondary">
-                    Carrier: {testCallResult.carrier?.toUpperCase()} • Call SID: {testCallResult.callSid} • Number: {testCallResult.phone}
-                  </div>
-                  <div className="text-[11px] text-text-muted">
-                    Telephony trunk connection established. Your physical phone handset should be ringing.
-                  </div>
-                </div>
-              ) : testCallResult.status === "CARRIER_REJECTED" || testCallResult.status === "FAILED" ? (
-                <div className="p-3.5 bg-amber-500/10 border border-amber-500/30 rounded-xl space-y-2 text-xs">
-                  <div className="flex items-center gap-1.5 font-semibold text-amber-600 dark:text-amber-400">
-                    <AlertTriangle className="w-4 h-4 shrink-0" />
-                    <span>Carrier Rejected Dispatch ({testCallResult.carrier?.toUpperCase()})</span>
-                  </div>
-                  <div className="p-2.5 bg-surface rounded-lg border border-border-default text-[11px] text-text-secondary leading-relaxed">
-                    <strong>Carrier Error:</strong> {testCallResult.carrierError || testCallResult.carrierMessage || "Call rejected by carrier trunk"}
-                  </div>
-                  {testCallResult.actionRequired && (
-                    <div className="p-2.5 bg-amber-500/20 border border-amber-500/40 rounded-lg text-[11px] text-amber-800 dark:text-amber-200 font-medium">
-                      <strong>Action Required:</strong> {testCallResult.actionRequired}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className="p-3 bg-blue-500/10 border border-blue-500/30 rounded-xl space-y-1 text-xs">
-                  <div className="flex items-center gap-1.5 font-semibold text-blue-600">
-                    <Bot className="w-4 h-4" />
-                    <span>Telephony Status: {testCallResult.status}</span>
-                  </div>
-                  <div className="text-[11px] text-text-muted">
-                    Carrier message: {testCallResult.carrierMessage || "Processed through test dispatcher."}
-                  </div>
-                </div>
-              )}
-
-              {/* Instant Pure Voice Audition Box */}
-              {testCallResult.audioBase64 && (
-                <div className="p-3.5 bg-subtle/70 border border-border-default rounded-xl space-y-2.5">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Volume2 className="w-4 h-4 text-emerald-500" />
-                      <span className="text-xs font-semibold text-text-primary">
-                        Pure Natural Voice Audio (Sarvam Bulbul v2)
-                      </span>
-                    </div>
-                    <Button
-                      type="button"
-                      size="dense"
-                      variant="secondary"
-                      leadingIcon={isPlayingAudio ? <Square className="w-3.5 h-3.5 fill-current" /> : <Play className="w-3.5 h-3.5 fill-current" />}
-                      onClick={() => {
-                        if (isPlayingAudio) {
-                          stopAudio()
-                        } else {
-                          playAudioFromBase64(testCallResult.audioBase64)
-                        }
-                      }}
-                    >
-                      {isPlayingAudio ? "Stop Audio" : "Listen Spoken Speech"}
-                    </Button>
-                  </div>
-
-                  {isPlayingAudio && (
-                    <div className="flex items-center gap-1 py-0.5">
-                      <span className="w-1.5 h-3 bg-emerald-500 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                      <span className="w-1.5 h-5 bg-emerald-500 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                      <span className="w-1.5 h-4 bg-emerald-500 rounded-full animate-bounce" />
-                      <span className="text-[11px] font-mono text-emerald-600 font-semibold ml-2">Playing live synthesized output...</span>
-                    </div>
-                  )}
-
-                  {testCallResult.initialMessage && (
-                    <p className="text-[11px] text-text-secondary leading-relaxed bg-surface p-2.5 rounded-lg border border-border-subtle font-sans">
-                      "{testCallResult.initialMessage}"
-                    </p>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
-
-          <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-border-subtle">
-            <Button
-              type="button"
-              size="default"
-              variant="secondary"
+            <button
               onClick={() => {
-                stopAudio()
-                setTestCallResult(null)
-                setTestCallModalOpen(false)
+                setSelectedCampaignId(null)
+                setIsCreating(true)
               }}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 rounded-lg transition-colors shadow-sm"
             >
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              size="default"
-              variant="primary"
-              className="bg-brand-primary text-black hover:bg-emerald-400 font-semibold"
-              isLoading={testCallMutation.isPending}
-              leadingIcon={<PhoneCall className="w-4 h-4" />}
-            >
-              Dial Test Call
-            </Button>
+              <Plus className="w-4 h-4" />
+              New campaign
+            </button>
           </div>
-        </form>
-      </Modal>
+        </div>
+
+        {/* If creating a new campaign, show full-page 4-step stepper */}
+        {isCreating ? (
+          <CampaignStepper
+            onCancel={() => setIsCreating(false)}
+            onSuccess={(campaignId) => {
+              setIsCreating(false)
+              setSelectedCampaignId(campaignId)
+            }}
+            onOpenTestCall={() => setIsTestCallOpen(true)}
+            onOpenVoicePreview={(lang, text) => handleOpenVoicePreview(lang, text)}
+          />
+        ) : selectedCampaign ? (
+          /* If viewing a single campaign detail */
+          <CampaignDetail
+            campaign={selectedCampaign}
+            onBack={() => setSelectedCampaignId(null)}
+          />
+        ) : (
+          /* Main Tabbed Interface */
+          <div className="space-y-6">
+            {/* 3 URL-based Navigation Tabs */}
+            <div className="flex items-center gap-1 border-b border-zinc-200">
+              <button
+                onClick={() => setTab("campaigns")}
+                className={`inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${
+                  currentTab === "campaigns"
+                    ? "border-emerald-600 text-emerald-700 font-semibold"
+                    : "border-transparent text-zinc-500 hover:text-zinc-800 hover:border-zinc-300"
+                }`}
+              >
+                <Layers className="w-4 h-4" />
+                Campaigns
+                <span className="px-1.5 py-0.5 rounded-full text-xs font-mono bg-zinc-100 text-zinc-600">
+                  {campaigns.length}
+                </span>
+              </button>
+
+              <button
+                onClick={() => setTab("history")}
+                className={`inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${
+                  currentTab === "history"
+                    ? "border-emerald-600 text-emerald-700 font-semibold"
+                    : "border-transparent text-zinc-500 hover:text-zinc-800 hover:border-zinc-300"
+                }`}
+              >
+                <History className="w-4 h-4" />
+                Call History
+              </button>
+
+              <button
+                onClick={() => setTab("health")}
+                className={`inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${
+                  currentTab === "health"
+                    ? "border-emerald-600 text-emerald-700 font-semibold"
+                    : "border-transparent text-zinc-500 hover:text-zinc-800 hover:border-zinc-300"
+                }`}
+              >
+                <Activity className="w-4 h-4" />
+                Setup & Health
+              </button>
+            </div>
+
+            {/* Tab 1: Campaigns */}
+            {currentTab === "campaigns" && (
+              <div className="space-y-6">
+                {/* 4 Calm Stat Cards derived from real data */}
+                <StatCards campaigns={campaigns} />
+
+                {/* Scannable Campaign Table */}
+                <CampaignTable
+                  campaigns={campaigns}
+                  onSelectCampaign={(id) => setSelectedCampaignId(id)}
+                  onNewCampaign={() => setIsCreating(true)}
+                  onPreviewVoice={(c) => handleOpenVoicePreview(c.languageCode || "te-IN", c.scriptTemplate)}
+                />
+              </div>
+            )}
+
+            {/* Tab 2: Call History */}
+            {currentTab === "history" && (
+              <HistoryTable
+                onOpenTranscript={(call) => setSelectedTranscriptCall(call)}
+              />
+            )}
+
+            {/* Tab 3: Setup & Health */}
+            {currentTab === "health" && <SetupHealth />}
+          </div>
+        )}
+
+        {/* Global Slide-Over Drawers */}
+        <TestCallDrawer
+          isOpen={isTestCallOpen}
+          onClose={() => setIsTestCallOpen(false)}
+        />
+
+        <VoicePreview
+          isOpen={isVoicePreviewOpen}
+          onClose={() => setIsVoicePreviewOpen(false)}
+          initialLanguage={voicePreviewInitial.lang}
+          initialText={voicePreviewInitial.text}
+        />
+
+        <TranscriptDrawer
+          isOpen={!!selectedTranscriptCall}
+          call={selectedTranscriptCall}
+          onClose={() => setSelectedTranscriptCall(null)}
+        />
+      </div>
     </AppShell>
+  )
+}
+
+export default function VoiceAgentCampaignsPage() {
+  return (
+    <Suspense
+      fallback={
+        <AppShell pageTitle="Voice Agent">
+          <div className="max-w-7xl mx-auto px-4 py-12 text-center text-zinc-400">
+            <div className="w-6 h-6 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+            Loading Voice Agent...
+          </div>
+        </AppShell>
+      }
+    >
+      <VoiceAgentAdminContent />
+    </Suspense>
   )
 }

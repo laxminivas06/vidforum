@@ -223,8 +223,8 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     primaryRoute: "/voice-agent/campaigns",
     routes: ["/voice-agent", "/ai-attendance", "/ai-tutor"],
     navItems: [
-      { title: "Voice Agent Campaigns", href: "/voice-agent/campaigns", iconName: "PhoneCall", badge: "AI" },
-      { title: "AI Attendance Vision", href: "/ai-attendance/monitoring", iconName: "ScanFace", badge: "Live" },
+      { title: "Voice Agent", href: "/voice-agent/campaigns", iconName: "PhoneCall", badge: "AI" },
+      { title: "AI Attendance", href: "/ai-attendance/monitoring", iconName: "ScanFace", badge: "Live" },
       { title: "AI Tutor Insights", href: "/ai-tutor/analytics", iconName: "Bot" },
     ],
   },

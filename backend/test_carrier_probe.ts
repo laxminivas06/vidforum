@@ -3,8 +3,8 @@ async function runCarrierProbe() {
   console.log('AI Yantra: Real Carrier Test Call Probe (Phase 7.4)');
   console.log('====================================================\n');
 
-  const testPhone = '+919876543210';
-  const providers = ['exotel', 'twilio', 'auto'];
+  const testPhone = '+919553706650';
+  const providers = ['twilio', 'exotel', 'auto'];
 
   for (const prov of providers) {
     console.log(`\n----------------------------------------------------`);

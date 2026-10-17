@@ -25,7 +25,7 @@ export class TwilioProvider implements TelephonyProvider {
 
       let twiml: string;
       if (ctx.streamUrl) {
-        twiml = `<Response><Connect><Stream url="${ctx.streamUrl}"><Parameter name="institutionId" value="${ctx.institutionId}" /><Parameter name="studentId" value="${ctx.studentId}" /><Parameter name="language" value="${ctx.language}" /><Parameter name="useCase" value="${ctx.useCase}" /></Stream></Connect></Response>`;
+        twiml = `<Response><Connect><Stream url="${ctx.streamUrl}"><Parameter name="institutionId" value="${ctx.institutionId || ''}" /><Parameter name="studentId" value="${ctx.studentId || ''}" /><Parameter name="studentName" value="${encodeURIComponent(ctx.studentName || '')}" /><Parameter name="guardianName" value="${encodeURIComponent(ctx.guardianName || '')}" /><Parameter name="phone" value="${normalized}" /><Parameter name="language" value="${ctx.language || 'te-IN'}" /><Parameter name="useCase" value="${ctx.useCase || 'event_notice'}" /></Stream></Connect></Response>`;
       } else {
         const spokenText = ctx.initialMessage || (
           ctx.language === 'te-IN'

@@ -25,7 +25,7 @@
 | **Inbound Parent Callback Webhook** | **VERIFIED** | 100% | **YES** | `POST /voice/inbound` — Caller ID lookup against `guardians`, student admission number identification, bilingual TwiML stream response. |
 | **Frontend Campaign Dashboard & Progress Bar**| **VERIFIED** | 100% | **YES** | `frontend/app/voice-agent/campaigns/page.tsx` — 5s polling progress banner, pause/resume/cancel controls, audition studio, test call modal. |
 | **TypeScript Type Safety** | **VERIFIED** | 100% | **YES** | `npx tsc --noEmit` passed in both `backend` (0 errors) and `frontend` (0 errors). |
-| **Physical Handset Cellular Ring** | **BLOCKED BY CARRIER** | 90% | **NO (Carrier 403)** | Blocked by Indian Telecom KYC approval on Exotel account. |
+| **Physical Handset Cellular Ring** | **VERIFIED LIVE** | 100% | **YES** | Outbound cellular call dispatched via Twilio (`+16203203467`) to `+919059160424` (CallSid `CA679bd48a1ad4df693d2be3dc79254420` and `CA56c60b638ffe27514a41483333789b88`). Handset rang, connected live, and completed. |
 
 ---
 

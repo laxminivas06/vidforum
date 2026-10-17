@@ -368,7 +368,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <aside
         className={cn(
           "hidden md:block shrink-0 h-screen sticky top-0 transition-all duration-200 z-30",
-          collapsed ? "w-16" : "w-[230px]"
+          collapsed ? "w-16" : "w-64"
         )}
       >
         {sidebarContent}

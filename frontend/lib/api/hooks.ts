@@ -2502,7 +2502,9 @@ export interface VoiceCampaignItem {
   language: string
   languageCode: string
   scriptTemplate: string
-  status: "ACTIVE_DISPATCH" | "COMPLETED" | "SCHEDULED" | "PAUSED" | "CANCELLED"
+  status: "ACTIVE_DISPATCH" | "RUNNING" | "COMPLETED" | "SCHEDULED" | "PAUSED" | "CANCELLED"
+  targetAudience?: string
+  scheduled_at?: string
   createdAt?: string
 }
 
@@ -2756,6 +2758,74 @@ export function useDispatchTestCall() {
     },
   })
 }
+
+export interface VoiceHealthCapability {
+  provider: string
+  status: "ready" | "needs_attention" | "not_configured"
+  message: string
+  actionRequired: string[]
+}
+
+export interface VoiceHealthData {
+  overallStatus: "ready" | "degraded" | "blocked"
+  phoneLine: VoiceHealthCapability
+  voice: VoiceHealthCapability
+  aiAssistant: VoiceHealthCapability
+  whatsapp: VoiceHealthCapability
+  callingHours: string
+  dltConsentStatus: string
+}
+
+export function useVoiceHealth() {
+  return useQuery({
+    queryKey: ["voice-health"],
+    queryFn: async (): Promise<VoiceHealthData | null> => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/health`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && json.data) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Error fetching voice health:", err)
+      }
+      return null
+    },
+    staleTime: 10000,
+    refetchInterval: 30000,
+  })
+}
+
+export interface AllVoiceCallItem extends VoiceCallLogItem {
+  student_name?: string
+  campaign_id?: string
+  campaign_name?: string
+  language?: string
+}
+
+export function useVoiceAllCalls() {
+  return useQuery({
+    queryKey: ["voice-all-calls"],
+    queryFn: async (): Promise<AllVoiceCallItem[]> => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/calls`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && Array.isArray(json.data)) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Error fetching all voice calls:", err)
+      }
+      return []
+    },
+    staleTime: 5000,
+  })
+}
+
 
 
 

@@ -53,8 +53,6 @@ export const EditUserAccessModal: React.FC<EditUserAccessModalProps> = ({
     }
   }, [user, isOpen])
 
-  if (!isOpen || !user) return null
-
   const handleTemplateChange = (tplKey: string) => {
     setSelectedTemplate(tplKey)
     const found = roleTemplates.find((t: any) => t.key === tplKey)
@@ -77,8 +75,9 @@ export const EditUserAccessModal: React.FC<EditUserAccessModalProps> = ({
     setSelectedWorkspaces([])
   }
 
-  const handleSave = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSave = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault()
+    if (!user) return
     setError(null)
 
     try {
@@ -112,13 +111,15 @@ export const EditUserAccessModal: React.FC<EditUserAccessModalProps> = ({
       } else if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault()
         e.stopPropagation()
-        handleSave(e as any)
+        handleSave()
       }
     }
 
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [isOpen, onClose, handleSave])
+
+  if (!isOpen || !user) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs animate-in fade-in">

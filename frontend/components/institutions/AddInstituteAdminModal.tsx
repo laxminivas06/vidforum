@@ -42,8 +42,6 @@ export const AddInstituteAdminModal: React.FC<AddInstituteAdminModalProps> = ({
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [successBanner, setSuccessBanner] = useState<string | null>(null)
 
-  if (!isOpen || !institution) return null
-
   const handleToggleWorkspace = (id: string) => {
     setSelectedWorkspaces((prev) =>
       prev.includes(id) ? prev.filter((w) => w !== id) : [...prev, id]
@@ -86,9 +84,9 @@ export const AddInstituteAdminModal: React.FC<AddInstituteAdminModalProps> = ({
     return Object.keys(errs).length === 0
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!validate()) return
+  const handleSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault()
+    if (!institution || !validate()) return
 
     try {
       await createAdminMutation.mutateAsync({
@@ -132,13 +130,15 @@ export const AddInstituteAdminModal: React.FC<AddInstituteAdminModalProps> = ({
       } else if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault()
         e.stopPropagation()
-        handleSubmit(e as any)
+        handleSubmit()
       }
     }
 
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [isOpen, onClose, handleSubmit])
+
+  if (!isOpen || !institution) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/65 backdrop-blur-sm animate-in fade-in duration-200">

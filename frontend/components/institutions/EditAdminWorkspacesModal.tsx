@@ -51,8 +51,6 @@ export const EditAdminWorkspacesModal: React.FC<EditAdminWorkspacesModalProps> =
     }
   }, [admin, isOpen])
 
-  if (!isOpen || !institution || !admin) return null
-
   const handleToggleWorkspace = (id: string) => {
     setSelectedWorkspaces((prev) =>
       prev.includes(id) ? prev.filter((w) => w !== id) : [...prev, id]
@@ -67,8 +65,9 @@ export const EditAdminWorkspacesModal: React.FC<EditAdminWorkspacesModalProps> =
     setSelectedWorkspaces([])
   }
 
-  const handleSave = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSave = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault()
+    if (!institution || !admin) return
     setIsSubmitting(true)
     setError(null)
 
@@ -109,7 +108,7 @@ export const EditAdminWorkspacesModal: React.FC<EditAdminWorkspacesModalProps> =
         e.preventDefault()
         e.stopPropagation()
         if (!isSubmitting) {
-          handleSave(e as any)
+          handleSave()
         }
       }
     }
@@ -117,6 +116,8 @@ export const EditAdminWorkspacesModal: React.FC<EditAdminWorkspacesModalProps> =
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [isOpen, isSubmitting, onClose, handleSave])
+
+  if (!isOpen || !institution || !admin) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">

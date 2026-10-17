@@ -2,6 +2,10 @@ import { app } from './app';
 import { env } from './config/env';
 import { db, pool } from './config/database';
 
+import { WebSocketServer } from 'ws';
+import { voiceSessionManager } from './modules/ai-yantra/voice-agent.service';
+import { campaignWorkerService } from './modules/ai-yantra/campaign-worker.service';
+
 async function bootstrap() {
   console.log(' Starting VID Platform Backend Server...');
 
@@ -9,12 +13,28 @@ async function bootstrap() {
   const dbConnected = await db.testConnection();
   if (!dbConnected) {
     console.error(' Database connectivity check failed. Check Supabase credentials.');
+  } else {
+    campaignWorkerService.resumeRunningCampaigns().catch((err) => {
+      console.error('[CAMPAIGN WORKER] Startup resume error:', err.message);
+    });
   }
 
   const server = app.listen(env.PORT, () => {
     console.log(` VID Platform Backend is running on http://localhost:${env.PORT}`);
     console.log(` Health check available at: http://localhost:${env.PORT}/api/v1/health`);
     console.log(` Multi-tenant database connected to: ${env.DB_HOST}:${env.DB_PORT}/${env.DB_NAME}`);
+  });
+
+  // Attach Telephony Live Stream WebSocket Server
+  const wss = new WebSocketServer({ server });
+  wss.on('connection', (ws, req) => {
+    const pathname = req.url ? new URL(req.url, 'http://localhost').pathname : '';
+    if (pathname.includes('/voice/stream')) {
+      console.log(`[WS] Inbound telephony stream attached on ${pathname}`);
+      voiceSessionManager.handleConnection(ws);
+    } else {
+      ws.close(1008, 'Unsupported WebSocket route');
+    }
   });
 
   // Graceful shutdown

@@ -2502,7 +2502,7 @@ export interface VoiceCampaignItem {
   language: string
   languageCode: string
   scriptTemplate: string
-  status: "ACTIVE_DISPATCH" | "COMPLETED" | "SCHEDULED"
+  status: "ACTIVE_DISPATCH" | "COMPLETED" | "SCHEDULED" | "PAUSED" | "CANCELLED"
   createdAt?: string
 }
 
@@ -2571,6 +2571,8 @@ export function useCreateVoiceCampaign() {
       targetGradeId?: string
       targetSectionId?: string
       scheduledAt?: string
+      languageMode?: string
+      singleParentTest?: boolean
     }) => {
       const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/campaigns`, {
         method: "POST",
@@ -2602,6 +2604,104 @@ export function useLaunchVoiceCampaign() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["voice-campaigns"] })
       queryClient.invalidateQueries({ queryKey: ["voice-campaign-calls"] })
+      queryClient.invalidateQueries({ queryKey: ["voice-campaign-progress"] })
+    },
+  })
+}
+
+export interface CampaignProgress {
+  campaignId: string
+  status: string
+  totalRecipients: number
+  completedCount: number
+  inProgressCount: number
+  queuedCount: number
+  failedCount: number
+  currentRecipient: {
+    phone: string
+    guardianName: string
+    studentName: string
+    status: string
+  } | null
+  callingWindowOpen: boolean
+}
+
+export function useCampaignProgress(campaignId?: string) {
+  return useQuery({
+    queryKey: ["voice-campaign-progress", campaignId],
+    queryFn: async (): Promise<CampaignProgress | null> => {
+      if (!campaignId) return null
+      try {
+        const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/campaigns/${campaignId}/progress`, {
+          headers: getAuthHeaders(),
+        })
+        const json = await res.json()
+        if (json.success && json.data) {
+          return json.data
+        }
+      } catch (err) {
+        console.warn("Error fetching campaign progress:", err)
+      }
+      return null
+    },
+    enabled: !!campaignId,
+    refetchInterval: 5000,
+  })
+}
+
+export function usePauseVoiceCampaign() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (campaignId: string) => {
+      const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/campaigns/${campaignId}/pause`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to pause campaign")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["voice-campaigns"] })
+      queryClient.invalidateQueries({ queryKey: ["voice-campaign-progress"] })
+    },
+  })
+}
+
+export function useResumeVoiceCampaign() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (campaignId: string) => {
+      const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/campaigns/${campaignId}/resume`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to resume campaign")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["voice-campaigns"] })
+      queryClient.invalidateQueries({ queryKey: ["voice-campaign-progress"] })
+    },
+  })
+}
+
+export function useCancelVoiceCampaign() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (campaignId: string) => {
+      const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/campaigns/${campaignId}/cancel`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || "Failed to cancel campaign")
+      return json.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["voice-campaigns"] })
+      queryClient.invalidateQueries({ queryKey: ["voice-campaign-progress"] })
     },
   })
 }
@@ -2628,6 +2728,7 @@ export function useVoiceChatPreview() {
       history?: Array<{ role: string; content: string }>
       studentAdmissionNumber?: string
       synthesizeAudio?: boolean
+      language?: string
     }) => {
       const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/chat-preview`, {
         method: "POST",
@@ -2643,7 +2744,7 @@ export function useVoiceChatPreview() {
 
 export function useDispatchTestCall() {
   return useMutation({
-    mutationFn: async (payload: { phone?: string; studentAdmissionNumber?: string; useCase?: string }) => {
+    mutationFn: async (payload: { phone?: string; studentAdmissionNumber?: string; useCase?: string; language?: string; provider?: string }) => {
       const res = await fetch(`${API_BASE_URL}/ai-yantra/voice/call-test`, {
         method: "POST",
         headers: getAuthHeaders(),

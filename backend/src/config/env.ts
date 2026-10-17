@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import path from 'path';
-
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 export const env = {
@@ -32,4 +32,12 @@ export const env = {
   EXOTEL_API_KEY: process.env.EXOTEL_API_KEY || '',
   EXOTEL_API_TOKEN: process.env.EXOTEL_API_TOKEN || '',
   EXOTEL_CALLER_ID: process.env.EXOTEL_CALLER_ID || '+918047123456',
+  TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID || '',
+  TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN || '',
+  TWILIO_PHONE_NUMBER: process.env.TWILIO_PHONE_NUMBER || '',
+  TELEPHONY_PROVIDER: process.env.TELEPHONY_PROVIDER || 'auto',
+  PUBLIC_BASE_URL: process.env.PUBLIC_BASE_URL || '',
+  WHATSAPP_API_TOKEN: process.env.WHATSAPP_API_TOKEN || '',
+  WHATSAPP_PHONE_NUMBER_ID: process.env.WHATSAPP_PHONE_NUMBER_ID || '',
+  DEFAULT_TENANT_ID: process.env.DEFAULT_TENANT_ID || '00000000-0000-0000-0000-000000000001',
 };

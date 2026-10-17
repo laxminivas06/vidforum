@@ -140,9 +140,14 @@
 
 ### 3.1 Yantra Voice Agent
 
-- [x] **TASK-047**: Implement Voice Agent schema (`ai_voice_campaigns`, `ai_voice_calls`) — Deployed in Supabase PostgreSQL (`backend/db/schema.sql`).
-- [x] **TASK-048**: Build Voice Campaign API (`/api/v1/ai-yantra/voice/campaigns`, `/call`) — Implemented in `backend/src/modules/ai-yantra/ai-yantra.routes.ts`.
-- [/] **TASK-049**: Build Voice Agent Web UI (Campaign manager, call queue, interactive audio playback dialog simulator).
+- [x] **TASK-047**: Implement Voice Agent schema (`ai_voice_campaigns`, `ai_voice_calls`, `ai_voice_recipients`, `guardians.preferred_language`, `guardians.do_not_call`) — Deployed in Supabase PostgreSQL (`backend/db/schema.sql` and `backend/db/migrations/016_ai_voice_guardian_preferences.sql`).
+- [x] **TASK-048**: Build Voice Campaign API (`/api/v1/ai-yantra/voice/campaigns`, `/call-test`, `/stream`, `/tools/execute`, `/inbound`, `/webhook/call-ended`) — Implemented in `backend/src/modules/ai-yantra/ai-yantra.routes.ts`.
+- [x] **TASK-049**: Build Voice Agent Web UI — Completed in `frontend/app/voice-agent/campaigns/page.tsx` (Sequential campaign launcher, live dialer progress bar with 5s polling, pause/resume/cancel controls, audition studio, single test call modal with carrier rejection reporting, and call logs drawer).
+- [x] **TASK-049A**: Implement Telephony Provider Abstraction (Exotel PSTN + Twilio fallback, E.164 normalization, phone masking, verbatim error surfacing without fake calls).
+- [x] **TASK-049B**: Implement Bidirectional Audio Pipeline (ITU-T G.711 mu-law, 8kHz <-> 16kHz resampling, VAD energy, Sarvam Saaras streaming STT, Groq tool loop, Sarvam Bulbul TTS, barge-in buffer clearing).
+- [x] **TASK-049C**: Implement Sequential Campaign Dialer (`campaign-worker.service.ts`: 1-at-a-time dialer, 09:00-19:00 IST calling window, 30-min retry spacing, DNC opt-out check, crash recovery).
+- [x] **TASK-049D**: Implement Automated Post-Call Recovery (WhatsApp recap delivery on premature drop via Meta Graph API, inbound callback handler with student ID lookup).
+- [x] **TASK-049E**: Language Purity & Carrier Verification Suite (`backend/test_voice_agent_purity_tools.ts` passing for pure Telugu/English/Hindi, `backend/test_campaign_worker.ts` passing for sequential flow, `backend/test_carrier_probe.ts` passing for honest carrier audit).
 
 ### 3.2 Yantra AI Attendance
 

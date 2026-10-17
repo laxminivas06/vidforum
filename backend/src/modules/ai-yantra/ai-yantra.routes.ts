@@ -3,6 +3,8 @@ import { db } from '../../config/database';
 import { env } from '../../config/env';
 import { sendSuccess, sendError } from '../../utils/api-response';
 import { tenantMiddleware } from '../../middleware/tenant.middleware';
+import { getTelephonyProvider, normalizeE164, maskPhoneNumber } from './telephony';
+import { campaignWorkerService } from './campaign-worker.service';
 
 const router = Router();
 
@@ -29,12 +31,9 @@ export async function executeDatabaseTool(instId: string, toolName: string, para
 
     if (result.rows.length === 0) {
       return {
-        found: true,
+        found: false,
         subject: subject.charAt(0).toUpperCase() + subject.slice(1),
-        exam: 'Quarterly Assessment',
-        score: '88/100',
-        grade: 'A',
-        isProjected: true,
+        message: `No exam record found in database for student ${student_id} in ${subject}.`,
       };
     }
 
@@ -66,12 +65,20 @@ export async function executeDatabaseTool(instId: string, toolName: string, para
 
     const total = parseInt(stats.rows[0]?.total_days || '0', 10);
     const present = parseInt(stats.rows[0]?.present_days || '0', 10);
-    const percentage = total > 0 ? ((present / total) * 100).toFixed(1) : '96.2';
+
+    if (total === 0) {
+      return {
+        found: false,
+        message: `No recorded attendance sessions found for student ${student_id}.`,
+      };
+    }
+
+    const percentage = ((present / total) * 100).toFixed(1);
 
     return {
       found: true,
-      presentDays: present || 24,
-      totalDays: total || 25,
+      presentDays: present,
+      totalDays: total,
       attendancePercentage: `${percentage}%`,
     };
   }
@@ -103,13 +110,8 @@ export async function executeDatabaseTool(instId: string, toolName: string, para
     }
 
     return {
-      found: true,
-      studentName: 'Student',
-      totalFee: '₹65,000',
-      balanceDue: '₹14,500',
-      dueDate: 'November 15, 2026',
-      status: 'PARTIALLY_PAID',
-      term: 'Term 2 Tuition & Activity Fee',
+      found: false,
+      message: `No fee ledger records found for student ${student_id}.`,
     };
   }
 
@@ -146,26 +148,136 @@ export async function callSarvamTTS(text: string, language = 'te-IN', speaker = 
   }
 }
 
+let resolvedGroqModel: string | null = null;
+
+export async function getVerifiedGroqModel(): Promise<string> {
+  if (resolvedGroqModel) return resolvedGroqModel;
+
+  const target = env.GROQ_MODEL || 'qwen/qwen3.8-27b';
+  try {
+    const res = await fetch('https://api.groq.com/openai/v1/models', {
+      headers: { 'Authorization': `Bearer ${env.GROQ_API_KEY}` },
+    });
+    if (res.ok) {
+      const data: any = await res.json();
+      const available = (data.data || []).map((m: any) => m.id);
+      if (available.includes(target)) {
+        resolvedGroqModel = target;
+        return resolvedGroqModel;
+      }
+      if (available.includes('llama-3.3-70b-versatile')) {
+        resolvedGroqModel = 'llama-3.3-70b-versatile';
+        return resolvedGroqModel;
+      }
+      if (available.includes('qwen/qwen3.8-27b')) {
+        resolvedGroqModel = 'qwen/qwen3.8-27b';
+        return resolvedGroqModel;
+      }
+      resolvedGroqModel = available[0] || target;
+      return resolvedGroqModel || target;
+    }
+  } catch (err) {
+    console.warn('[GROQ MODEL RESOLUTION] Fallback to configured model:', target);
+  }
+  resolvedGroqModel = target;
+  return resolvedGroqModel;
+}
+
+export function validateScriptPurity(text: string, language: string): { valid: boolean; reason?: string } {
+  if (!text || !text.trim()) return { valid: false, reason: 'Empty text' };
+
+  // Strip numbers, punctuation, quotes, symbols, whitespace
+  const stripped = text.replace(/[\d\s.,!?'"():;\/\-–—%₹$#@*+<>\[\]]/g, '');
+  if (!stripped) return { valid: true };
+
+  if (language === 'te-IN') {
+    // In pure Telugu, Latin letters (a-z, A-Z) are strictly prohibited
+    const latinMatch = stripped.match(/[a-zA-Z]/g);
+    if (latinMatch && latinMatch.length > 0) {
+      return {
+        valid: false,
+        reason: `Contains ${latinMatch.length} English/Latin characters in pure Telugu mode (${latinMatch.slice(0, 5).join(', ')})`,
+      };
+    }
+    // Check Telugu Unicode range \u0C00-\u0C7F
+    const nonTelugu = stripped.replace(/[\u0C00-\u0C7F]/g, '');
+    if (nonTelugu.length > 2) {
+      return {
+        valid: false,
+        reason: `Contains non-Telugu characters: ${nonTelugu.slice(0, 5)}`,
+      };
+    }
+    return { valid: true };
+  }
+
+  if (language === 'hi-IN') {
+    const latinMatch = stripped.match(/[a-zA-Z]/g);
+    if (latinMatch && latinMatch.length > 0) {
+      return {
+        valid: false,
+        reason: `Contains Latin characters in pure Hindi mode`,
+      };
+    }
+    const nonHindi = stripped.replace(/[\u0900-\u097F]/g, '');
+    if (nonHindi.length > 2) {
+      return {
+        valid: false,
+        reason: `Contains non-Devanagari characters: ${nonHindi.slice(0, 5)}`,
+      };
+    }
+    return { valid: true };
+  }
+
+  if (language === 'en-IN') {
+    const indicMatch = stripped.match(/[\u0C00-\u0C7F\u0900-\u097F]/g);
+    if (indicMatch && indicMatch.length > 0) {
+      return {
+        valid: false,
+        reason: `Contains Indic script in pure English mode`,
+      };
+    }
+    return { valid: true };
+  }
+
+  return { valid: true };
+}
+
 export async function callGroqChatWithTools(
   instId: string,
   messages: Array<{ role: string; content: string }>,
-  studentId?: string
+  studentId?: string,
+  language = 'te-IN'
 ) {
   if (!env.GROQ_API_KEY) {
-    return { reply: "Namaskaram andi! This is Priya from the school administration. How may I assist you today?" };
+    return {
+      reply: language === 'te-IN'
+        ? "నమస్కారం అండి! పాఠశాల యాజమాన్యం నుంచి ప్రియ మాట్లాడుతున్నాను. మీకు ఎలా సహాయపడగలను?"
+        : "Hello! This is Priya from the school administration. How may I assist you today?"
+    };
+  }
+
+  const modelToUse = await getVerifiedGroqModel();
+
+  let languageDirective = '';
+  if (language === 'te-IN') {
+    languageDirective = `CRITICAL LANGUAGE REQUIREMENT: You MUST respond strictly in 100% PURE, NATURAL, POLITE TELUGU (తెలుగు) using proper TELUGU SCRIPT ONLY.
+- ABSOLUTELY ZERO ENGLISH WORDS, ZERO CODE-MIXING, ZERO "TENGLISH".
+- Do NOT output English words like "marks", "Science", "Quarterly", "A grade" in Latin/English script. Write them cleanly in Telugu script: "మార్కులు", "సైన్స్", "త్రైమాసిక పరీక్ష", "ఎ గ్రేడ్".
+- Always maintain warmth and respect with "అండి" and polite Telugu phrasing.
+- Strict limit: Maximum 2-3 spoken sentences.`;
+  } else if (language === 'hi-IN') {
+    languageDirective = `CRITICAL LANGUAGE REQUIREMENT: You MUST respond strictly in 100% PURE, POLITE HINDI (हिंदी) using DEVANAGARI SCRIPT ONLY.
+- ABSOLUTELY ZERO ENGLISH WORDS. NO CODE-MIXING.
+- Strict limit: Maximum 2-3 spoken sentences.`;
+  } else {
+    languageDirective = `CRITICAL LANGUAGE REQUIREMENT: You MUST respond strictly in 100% FLUENT, POLITE, PROFESSIONAL ENGLISH.
+- ABSOLUTELY NO REGIONAL WORDS.
+- Strict limit: Maximum 2-3 spoken sentences.`;
   }
 
   const systemPrompt = `You are Priya, a warm, articulate, and polite senior student counselor at Narayana e-Techno School calling parents.
-Language & Tone Rules (Zero-Gibberish Protocol):
-- Speak natural conversational Telugu mixed with standard English school words (Tenglish), just like educated teachers speak in Hyderabad/Vijayawada.
-- Always use polite honorifics: use "andi" at phrase endings and address the parent respectfully.
-- NEVER translate technical school terms into archaic Telugu:
-  * Use "Science marks", NEVER "Vignana Saasthra Gunaankalu".
-  * Use "Sports Day", NEVER "Kreeda Dinotsavamu".
-  * Use "Class 10-A", NEVER "Padava Tharagathi A Vibhagamu".
-  * Use "Attendance percentage", NEVER "Haajaru Shatham".
-- Keep replies concise (1 to 2 warm spoken sentences suitable for a phone call).
-- If the parent asks about marks, attendance, or fees, use the provided tools to query accurate real-time data.
+${languageDirective}
+- The LLM must NEVER invent marks, attendance, or fees. You may ONLY state values returned by database tools. If a tool reports that no record was found, say politely that the school records do not currently have that information.
 The active student reference ID/admission number is: ${studentId || 'SIA-2026-0101'}.`;
 
   const groqTools = [
@@ -226,11 +338,11 @@ The active student reference ID/admission number is: ${studentId || 'SIA-2026-01
       'Authorization': `Bearer ${env.GROQ_API_KEY}`,
     },
     body: JSON.stringify({
-      model: env.GROQ_MODEL || 'qwen/qwen3.8-27b',
+      model: modelToUse,
       messages: chatMessages,
       tools: groqTools,
       tool_choice: 'auto',
-      temperature: 0.3,
+      temperature: 0.2,
       max_tokens: 250,
     }),
   });
@@ -242,21 +354,27 @@ The active student reference ID/admission number is: ${studentId || 'SIA-2026-01
   const data: any = await res.json();
   const choice = data.choices && data.choices[0];
   if (!choice) {
-    return { reply: "Namaskaram andi! We look forward to seeing you at the school event." };
+    return { reply: language === 'te-IN' ? "నమస్కారం అండి! పాఠశాల కార్యక్రమాలకు మీ సహకారం కోరుతున్నాము." : "Thank you for connecting with us." };
   }
+
+  let finalReply = choice.message.content || '';
+  let toolUsedName: string | undefined;
+  let toolResultData: any;
 
   if (choice.message.tool_calls && choice.message.tool_calls.length > 0) {
     const toolCall = choice.message.tool_calls[0];
-    const fnName = toolCall.function.name;
+    toolUsedName = toolCall.function?.name || '';
     let args: any = {};
     try {
-      args = JSON.parse(toolCall.function.arguments);
+      args = JSON.parse(toolCall.function?.arguments || '{}');
     } catch (e) {}
 
     if (!args.student_id) args.student_id = studentId || 'SIA-2026-0101';
 
     // Execute tool against live database
-    const toolResult = await executeDatabaseTool(instId, fnName, args);
+    if (toolUsedName) {
+      toolResultData = await executeDatabaseTool(instId, toolUsedName, args);
+    }
 
     // Call Groq again with tool output
     const secondRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -266,32 +384,72 @@ The active student reference ID/admission number is: ${studentId || 'SIA-2026-01
         'Authorization': `Bearer ${env.GROQ_API_KEY}`,
       },
       body: JSON.stringify({
-        model: env.GROQ_MODEL || 'qwen/qwen3.8-27b',
+        model: modelToUse,
         messages: [
           ...chatMessages,
           choice.message,
           {
             role: 'tool',
             tool_call_id: toolCall.id,
-            content: JSON.stringify(toolResult),
+            content: JSON.stringify(toolResultData),
           },
         ],
-        temperature: 0.3,
+        temperature: 0.2,
         max_tokens: 200,
       }),
     });
 
     const secondData: any = await secondRes.json();
-    const reply = secondData.choices?.[0]?.message?.content || "Sare andi! Academic details have been verified.";
-    return {
-      reply,
-      toolUsed: fnName,
-      toolData: toolResult,
-    };
+    finalReply = secondData.choices?.[0]?.message?.content || finalReply;
+  }
+
+  // Language Purity Enforcement: Validate output against target language script
+  let purity = validateScriptPurity(finalReply, language);
+  if (!purity.valid) {
+    console.warn(`[PURITY VALIDATOR] Output failed purity check: ${purity.reason}. Regenerating once with strict enforcement...`);
+    const retryPrompt = [
+      ...chatMessages,
+      { role: 'assistant', content: finalReply },
+      {
+        role: 'user',
+        content: language === 'te-IN'
+          ? 'ముఖ్యమైన ఆదేశం: మీ సమాధానంలో ఇంగ్లీష్ లేదా రోమన్ అక్షరాలు పూర్తిగా నిషేధం. కేవలం 100% స్వచ్ఛమైన తెలుగు లిపి (Telugu Script మాత్రమే) ఉపయోగించి 2-3 చిన్న వాక్యాలలో సమాధానం చెప్పండి.'
+          : language === 'hi-IN'
+          ? 'कड़ा निर्देश: आपके उत्तर में अंग्रेजी शब्द या रोमन लिपि पूरी तरह वर्जित है। केवल 100% शुद्ध देवनागरी हिंदी में 2-3 वाक्यों में उत्तर दें।'
+          : 'Strict instruction: Do not mix regional language words. Speak in 100% pure, professional Indian English in 2-3 short sentences.',
+      },
+    ];
+
+    try {
+      const retryRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${env.GROQ_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: modelToUse,
+          messages: retryPrompt,
+          temperature: 0.1,
+          max_tokens: 250,
+        }),
+      });
+      if (retryRes.ok) {
+        const retryData: any = await retryRes.json();
+        const candidate = retryData.choices?.[0]?.message?.content?.trim();
+        if (candidate) {
+          finalReply = candidate;
+        }
+      }
+    } catch (retryErr) {
+      console.warn('[PURITY RETRY ERROR]', retryErr);
+    }
   }
 
   return {
-    reply: choice.message.content,
+    reply: finalReply,
+    toolUsed: toolUsedName,
+    toolData: toolResultData,
   };
 }
 
@@ -353,10 +511,12 @@ router.post('/voice/campaigns', tenantMiddleware, async (req: Request, res: Resp
       name,
       useCase = 'event_notice',
       language = 'te-IN',
+      languageMode = 'parent_preferred',
       scriptText,
       targetGradeId,
       targetSectionId,
       scheduledAt,
+      singleParentTest = false,
     } = req.body;
 
     if (!name || !scriptText) {
@@ -382,6 +542,8 @@ router.post('/voice/campaigns', tenantMiddleware, async (req: Request, res: Resp
     // 3. Select target recipients (guardians of students) based on filter
     let query = `
       SELECT DISTINCT ON (g.id) g.id as guardian_id, g.phone, g.full_name as guardian_name,
+             COALESCE(g.preferred_language, 'te-IN') as preferred_language,
+             COALESCE(g.do_not_call, false) as do_not_call,
              s.id as student_id, (s.first_name || ' ' || s.last_name) as student_name, s.admission_number
       FROM students s
       JOIN student_guardians sg ON sg.student_id = s.id
@@ -399,22 +561,29 @@ router.post('/voice/campaigns', tenantMiddleware, async (req: Request, res: Resp
       params.push(targetGradeId);
     }
 
-    query += ` LIMIT 50`;
+    if (singleParentTest) {
+      query += ` LIMIT 1`;
+    } else {
+      query += ` LIMIT 100`;
+    }
     const recipientsRes = await db.query(query, params);
 
     // 4. Insert recipients and queued calls
     for (const r of recipientsRes.rows) {
       const rec = await db.query(
-        `INSERT INTO ai_voice_recipients (campaign_id, guardian_id, phone)
-         VALUES ($1, $2, $3) RETURNING id`,
+        `INSERT INTO ai_voice_recipients (campaign_id, guardian_id, phone, status)
+         VALUES ($1, $2, $3, 'queued') RETURNING id`,
         [campaign.id, r.guardian_id, r.phone]
       );
+
+      const targetLang = languageMode === 'force' ? language : (r.preferred_language || language || 'te-IN');
 
       const payload = {
         student_id: r.student_id,
         student_name: r.student_name,
         admission_number: r.admission_number,
         guardian_name: r.guardian_name,
+        language: targetLang,
         use_case: useCase,
       };
 
@@ -429,18 +598,19 @@ router.post('/voice/campaigns', tenantMiddleware, async (req: Request, res: Resp
       campaignId: campaign.id,
       title: campaign.name,
       recipientsQueued: recipientsRes.rows.length,
+      singleParentTest,
       status: 'SCHEDULED',
-    }, 'Campaign created and recipients queued');
+    }, singleParentTest ? 'Test campaign created (1 parent queued)' : 'Campaign created and recipients queued');
   } catch (error: any) {
     sendError(res, error.message, 500);
   }
 });
 
-// POST /api/v1/ai-yantra/voice/campaigns/:id/launch (Dispatch / Launch Campaign)
+// POST /api/v1/ai-yantra/voice/campaigns/:id/launch (Dispatch / Launch Campaign via Sequential Worker)
 router.post('/voice/campaigns/:id/launch', tenantMiddleware, async (req: Request, res: Response) => {
   try {
     const instId = req.institutionId!;
-    const campaignId = req.params.id;
+    const campaignId = String(req.params.id);
 
     // Verify campaign belongs to institution
     const campCheck = await db.query(
@@ -451,40 +621,57 @@ router.post('/voice/campaigns/:id/launch', tenantMiddleware, async (req: Request
       return sendError(res, 'Campaign not found', 404);
     }
 
-    // Find all queued calls for this campaign
-    const callsRes = await db.query(
-      `SELECT vc.id as call_id, vr.phone, vc.conversation_payload
-       FROM ai_voice_calls vc
-       JOIN ai_voice_recipients vr ON vr.id = vc.recipient_id
-       WHERE vr.campaign_id = $1 AND vc.status = 'queued'`,
-      [campaignId]
-    );
-
-    let completedCount = 0;
-    for (const c of callsRes.rows) {
-      // Simulate realistic call completion (45 - 75 seconds) and save transcript
-      const duration = Math.floor(Math.random() * 30) + 45;
-      const payload = typeof c.conversation_payload === 'string'
-        ? JSON.parse(c.conversation_payload)
-        : (c.conversation_payload || {});
-
-      payload.transcript = `Automated notification delivered successfully to guardian regarding ${payload.student_name || 'student'}. Parent acknowledged announcement.`;
-      payload.callAttempt = 1;
-
-      await db.query(
-        `UPDATE ai_voice_calls
-         SET status = 'completed', duration_seconds = $1, conversation_payload = $2, ended_at = now()
-         WHERE id = $3`,
-        [duration, JSON.stringify(payload), c.call_id]
-      );
-      completedCount++;
-    }
+    // Launch real sequential dialer worker (processes 1 parent at a time)
+    await campaignWorkerService.startCampaignDialer(campaignId);
 
     sendSuccess(res, {
       campaignId,
-      dispatchedCount: completedCount,
       status: 'ACTIVE_DISPATCH',
-    }, `Successfully launched campaign and dispatched ${completedCount} voice calls`);
+    }, 'Campaign launched; sequential outbound dialer started');
+  } catch (error: any) {
+    sendError(res, error.message, 500);
+  }
+});
+
+// GET /api/v1/ai-yantra/voice/campaigns/:id/progress (Live Campaign Dialing Progress)
+router.get('/voice/campaigns/:id/progress', tenantMiddleware, async (req: Request, res: Response) => {
+  try {
+    const campaignId = String(req.params.id);
+    const progress = await campaignWorkerService.getProgress(campaignId);
+    sendSuccess(res, progress);
+  } catch (error: any) {
+    sendError(res, error.message, 500);
+  }
+});
+
+// POST /api/v1/ai-yantra/voice/campaigns/:id/pause
+router.post('/voice/campaigns/:id/pause', tenantMiddleware, async (req: Request, res: Response) => {
+  try {
+    const campaignId = String(req.params.id);
+    await campaignWorkerService.pauseCampaign(campaignId);
+    sendSuccess(res, { campaignId, status: 'PAUSED' }, 'Campaign dialer paused');
+  } catch (error: any) {
+    sendError(res, error.message, 500);
+  }
+});
+
+// POST /api/v1/ai-yantra/voice/campaigns/:id/resume
+router.post('/voice/campaigns/:id/resume', tenantMiddleware, async (req: Request, res: Response) => {
+  try {
+    const campaignId = String(req.params.id);
+    await campaignWorkerService.startCampaignDialer(campaignId);
+    sendSuccess(res, { campaignId, status: 'ACTIVE_DISPATCH' }, 'Campaign dialer resumed');
+  } catch (error: any) {
+    sendError(res, error.message, 500);
+  }
+});
+
+// POST /api/v1/ai-yantra/voice/campaigns/:id/cancel
+router.post('/voice/campaigns/:id/cancel', tenantMiddleware, async (req: Request, res: Response) => {
+  try {
+    const campaignId = String(req.params.id);
+    await campaignWorkerService.cancelCampaign(campaignId);
+    sendSuccess(res, { campaignId, status: 'CANCELLED' }, 'Campaign dialer cancelled');
   } catch (error: any) {
     sendError(res, error.message, 500);
   }
@@ -494,7 +681,7 @@ router.post('/voice/campaigns/:id/launch', tenantMiddleware, async (req: Request
 router.get('/voice/campaigns/:id/calls', tenantMiddleware, async (req: Request, res: Response) => {
   try {
     const instId = req.institutionId!;
-    const campaignId = req.params.id;
+    const campaignId = String(req.params.id);
 
     const result = await db.query(
       `SELECT vc.id, vc.status, vc.duration_seconds, vc.started_at, vc.ended_at, vc.conversation_payload,
@@ -545,7 +732,13 @@ router.post('/voice/synthesize-preview', tenantMiddleware, async (req: Request, 
 router.post('/voice/chat-preview', tenantMiddleware, async (req: Request, res: Response) => {
   try {
     const instId = req.institutionId!;
-    const { message, history = [], studentAdmissionNumber = 'SIA-2026-0101', synthesizeAudio = false } = req.body;
+    const {
+      message,
+      history = [],
+      studentAdmissionNumber = 'SIA-2026-0101',
+      synthesizeAudio = false,
+      language = 'te-IN'
+    } = req.body;
 
     if (!message) {
       return sendError(res, 'message is required', 400);
@@ -556,19 +749,158 @@ router.post('/voice/chat-preview', tenantMiddleware, async (req: Request, res: R
       { role: 'user', content: message },
     ];
 
-    const result = await callGroqChatWithTools(instId, fullHistory, studentAdmissionNumber);
+    const result = await callGroqChatWithTools(instId, fullHistory, studentAdmissionNumber, language);
 
     let audioBase64: string | null = null;
     if (synthesizeAudio && result.reply) {
-      audioBase64 = await callSarvamTTS(result.reply, 'te-IN', 'priya');
+      audioBase64 = await callSarvamTTS(result.reply, language, 'priya');
     }
 
     sendSuccess(res, {
       reply: result.reply,
       audioBase64,
+      language,
       toolUsed: result.toolUsed || null,
       toolData: result.toolData || null,
     });
+  } catch (error: any) {
+    sendError(res, error.message, 500);
+  }
+});
+
+export async function sendWhatsAppRecap(toPhone: string, messageText: string): Promise<{ sent: boolean; status: string; reason?: string; messageId?: string }> {
+  if (!env.WHATSAPP_API_TOKEN || !env.WHATSAPP_PHONE_NUMBER_ID) {
+    console.log(`[WHATSAPP] WhatsApp NOT sent: token missing (recipient: ${maskPhoneNumber(toPhone)})`);
+    return {
+      sent: false,
+      status: 'NOT_SENT_TOKEN_MISSING',
+      reason: 'WHATSAPP_API_TOKEN or WHATSAPP_PHONE_NUMBER_ID is not configured in backend/.env',
+    };
+  }
+
+  const cleanPhone = toPhone.replace(/[^0-9]/g, '');
+  try {
+    const url = `https://graph.facebook.com/v19.0/${env.WHATSAPP_PHONE_NUMBER_ID}/messages`;
+    const payload = {
+      messaging_product: 'whatsapp',
+      recipient_type: 'individual',
+      to: cleanPhone,
+      type: 'text',
+      text: { preview_url: false, body: messageText },
+    };
+
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${env.WHATSAPP_API_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      console.warn(`[WHATSAPP META ERROR ${res.status}]`, errText);
+      return { sent: false, status: 'FAILED', reason: `Meta API Error (${res.status}): ${errText}` };
+    }
+
+    const data: any = await res.json();
+    console.log(`[WHATSAPP DISPATCHED] Message ID: ${data.messages?.[0]?.id} to ${maskPhoneNumber(toPhone)}`);
+    return { sent: true, status: 'SENT', messageId: data.messages?.[0]?.id };
+  } catch (err: any) {
+    console.error(`[WHATSAPP EXCEPTION]`, err.message);
+    return { sent: false, status: 'FAILED', reason: err.message };
+  }
+}
+
+export async function triggerPostCallRecovery(
+  instId: string,
+  recipientPhone: string,
+  guardianName: string,
+  studentName: string,
+  durationSeconds: number,
+  useCase: string,
+  marksQueried?: { subject: string; score: string; grade: string }
+) {
+  let messageText = `*Narayana e-Techno School Update*\n\n`;
+  messageText += `Namaskaram andi ${guardianName}! This is a quick follow-up to our call regarding *${studentName}*.\n\n`;
+  messageText += `*Notice:* We attempted an automated update call that concluded in ${durationSeconds}s.\n\n`;
+
+  if (marksQueried && marksQueried.subject) {
+    messageText += `*Academic Query Answered:*\n`;
+    messageText += `• Subject: ${marksQueried.subject}\n`;
+    messageText += `• Score: ${marksQueried.score} (Grade: ${marksQueried.grade})\n\n`;
+  }
+
+  messageText += `For complete academic records, please visit: https://school.vidplatform.edu/parent\n\n`;
+  messageText += `Have a wonderful day!`;
+
+  return sendWhatsAppRecap(recipientPhone, messageText);
+}
+
+// POST /api/v1/ai-yantra/voice/call-test (Dispatch Single Outbound Test Call via Telephony Provider)
+router.post('/voice/call-test', tenantMiddleware, async (req: Request, res: Response) => {
+  try {
+    const {
+      phone = '+919876543210',
+      studentAdmissionNumber = 'SIA-2026-0101',
+      useCase = 'event_notice',
+      language = 'te-IN',
+      provider: requestedProvider,
+    } = req.body;
+
+    const normalizedPhone = normalizeE164(phone);
+    const telephonyProvider = getTelephonyProvider(requestedProvider);
+
+    let streamUrl: string | undefined;
+    let webhookUrl: string | undefined;
+    if (env.PUBLIC_BASE_URL) {
+      const cleanBase = env.PUBLIC_BASE_URL.replace(/\/$/, '');
+      const wsHost = cleanBase.replace(/^http/, 'ws');
+      streamUrl = `${wsHost}/api/v1/ai-yantra/voice/stream`;
+      webhookUrl = `${cleanBase}/api/v1/ai-yantra/voice/webhook/call-ended`;
+    }
+
+    const speechScript = language === 'te-IN'
+      ? 'నమస్కారం అండి! నారాయణ స్కూల్ నుంచి ప్రియ మాట్లాడుతున్నాను. వచ్చే శనివారం మన పాఠశాలలో వార్షిక క్రీడా దినోత్సవం జరుగుతుంది. మీకు ఏవైనా సందేహాలు ఉంటే నన్ను అడగవచ్చు అండి.'
+      : language === 'hi-IN'
+      ? 'नमस्ते! मैं नारायण स्कूल से प्रिया बोल रही हूँ। अगले शनिवार हमारे स्कूल में वार्षिक खेल दिवस आयोजित किया जा रहा है। यदि आपके कोई प्रश्न हैं तो आप मुझसे पूछ सकते हैं।'
+      : 'Hello! This is Priya calling from Narayana e-Techno School regarding our upcoming Annual Sports Day celebration. Please let me know if you have any questions.';
+
+    // Synthesize clean audio for in-browser playback preview
+    const audioBase64 = await callSarvamTTS(speechScript, language, 'priya');
+
+    // Place call through selected Telephony Provider
+    const callResult = await telephonyProvider.placeCall(normalizedPhone, {
+      institutionId: req.institutionId!,
+      studentId: studentAdmissionNumber,
+      studentName: 'Sai Teja Chary',
+      language,
+      useCase,
+      initialMessage: speechScript,
+      streamUrl,
+      webhookUrl,
+    });
+
+    const isLive = callResult.status === 'initiated';
+
+    sendSuccess(res, {
+      status: isLive ? 'DIALED_LIVE' : 'CARRIER_REJECTED',
+      carrier: callResult.provider,
+      callSid: callResult.callSid,
+      phone: callResult.phone || maskPhoneNumber(normalizedPhone),
+      studentAdmissionNumber,
+      useCase,
+      language,
+      carrierError: callResult.errorMessage || null,
+      carrierMessage: callResult.errorMessage || null,
+      actionRequired: callResult.actionRequired || null,
+      httpStatus: callResult.httpStatus || (isLive ? 200 : 400),
+      audioBase64,
+      audioScript: speechScript,
+      initialMessage: speechScript,
+      timestamp: new Date().toISOString(),
+    }, isLive ? 'Live phone call dispatched successfully' : (callResult.errorMessage || 'Carrier rejected call dispatch'));
   } catch (error: any) {
     sendError(res, error.message, 500);
   }
@@ -639,69 +971,120 @@ router.post('/voice/webhook/call-ended', tenantMiddleware, async (req: Request, 
     messageText += `For complete schedules and report cards, please visit the parent mobile portal: https://school.vidplatform.edu/parent\n\n`;
     messageText += `Have a wonderful day!`;
 
+    // Dispatch WhatsApp recap if call dropped early (<25s) or was interrupted
+    let whatsappResult: { sent: boolean; status: string; reason?: string; messageId?: string } = {
+      sent: false,
+      status: 'NOT_APPLICABLE',
+    };
+    if (isInterrupted) {
+      whatsappResult = await sendWhatsAppRecap(recipientPhone, messageText);
+    }
+
     sendSuccess(res, {
-      recoveryDispatched: true,
+      recoveryDispatched: isInterrupted,
       channel: 'WHATSAPP_CLOUD_API',
-      recipientPhone,
+      recipientPhone: maskPhoneNumber(recipientPhone),
       isInterrupted,
       durationSeconds,
       deliveredMessage: messageText,
-    }, 'Post-call interruption recovery message queued successfully');
+      whatsapp: whatsappResult,
+    }, isInterrupted ? 'Post-call interruption recovery evaluated' : 'Call completed normally');
   } catch (error: any) {
     sendError(res, error.message, 500);
   }
 });
 
-// POST /api/v1/ai-yantra/voice/call-test (Exotel Outbound Call Test Dispatch)
-router.post('/voice/call-test', tenantMiddleware, async (req: Request, res: Response) => {
+// POST /api/v1/ai-yantra/voice/inbound (Inbound Guardian Call Webhook)
+router.post('/voice/inbound', async (req: Request, res: Response) => {
   try {
-    const { phone = '+919701011223', studentAdmissionNumber = 'SIA-2026-0101', useCase = 'event_notice' } = req.body;
+    const fromPhone = req.body.From || req.body.Caller || req.query.From || '';
+    const cleanFrom = (fromPhone as string).replace(/[^0-9]/g, '');
+    const last10 = cleanFrom.slice(-10);
 
-    if (!env.EXOTEL_API_KEY || !env.EXOTEL_API_TOKEN || !env.EXOTEL_ACCOUNT_SID) {
-      return sendSuccess(res, {
-        simulated: true,
-        phone,
-        status: 'DISPATCHED_SIMULATED',
-        message: 'Exotel credentials not fully configured; simulated dispatch completed',
-      });
+    // Look up caller in guardians by phone
+    const guardianRes = await db.query(
+      `SELECT g.id as guardian_id, g.full_name as guardian_name,
+              COALESCE(g.preferred_language, 'te-IN') as preferred_language,
+              s.id as student_id, (s.first_name || ' ' || s.last_name) as student_name, s.admission_number,
+              s.institution_id, i.name as institution_name
+       FROM guardians g
+       JOIN student_guardians sg ON sg.guardian_id = g.id
+       JOIN students s ON s.id = sg.student_id
+       JOIN institutions i ON i.id = s.institution_id
+       WHERE g.phone LIKE '%' || $1 || '%'
+       LIMIT 1`,
+      [last10 || cleanFrom]
+    );
+
+    let streamUrl: string | undefined;
+    if (env.PUBLIC_BASE_URL) {
+      const cleanBase = env.PUBLIC_BASE_URL.replace(/\/$/, '');
+      const wsHost = cleanBase.replace(/^http/, 'ws');
+      streamUrl = `${wsHost}/api/v1/ai-yantra/voice/stream`;
     }
 
-    // Call Exotel API
-    const auth = Buffer.from(`${env.EXOTEL_API_KEY}:${env.EXOTEL_API_TOKEN}`).toString('base64');
-    const exotelUrl = `https://${env.EXOTEL_SUBDOMAIN}/v1/Accounts/${env.EXOTEL_ACCOUNT_SID}/Calls/connect.json`;
+    if (guardianRes.rows.length > 0) {
+      const g = guardianRes.rows[0];
+      const lang = g.preferred_language || 'te-IN';
+      const greeting = lang === 'te-IN'
+        ? `నమస్కారం ${g.guardian_name} గారు! ${g.institution_name} నుండి ప్రియను మాట్లాడుతున్నాను. మీ బిడ్డ ${g.student_name} గురించి మీకు ఏ సమాచారం కావాలండి?`
+        : lang === 'hi-IN'
+        ? `नमस्ते ${g.guardian_name} जी! मैं ${g.institution_name} से प्रिया बोल रही हूँ। आपके बच्चे ${g.student_name} के बारे में आपको क्या जानकारी चाहिए?`
+        : `Hello ${g.guardian_name}! This is Priya from ${g.institution_name}. How can I assist you regarding your child ${g.student_name}?`;
 
-    // Attempt real call connection; fallback gracefully if trial account restrictions apply
-    let exotelStatus = 'QUEUED';
-    try {
-      const exoRes = await fetch(exotelUrl, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Basic ${auth}`,
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-          From: env.EXOTEL_CALLER_ID || '+918047123456',
-          To: phone.replace(/[^0-9]/g, ''),
-          CallerId: env.EXOTEL_CALLER_ID || '+918047123456',
-        }).toString(),
-      });
-      const exoBody = await exoRes.text();
-      exotelStatus = exoRes.ok ? 'CONNECTING' : 'TRIAL_RESTRICTED_FALLBACK';
-      console.log('[EXOTEL DISPATCH RESPONSE]', exoRes.status, exoBody.slice(0, 200));
-    } catch (e) {
-      console.warn('[EXOTEL DISPATCH ATTEMPT]', e);
+      if (streamUrl) {
+        const twiml = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Connect>
+    <Stream url="${streamUrl}">
+      <Parameter name="institutionId" value="${g.institution_id}" />
+      <Parameter name="studentId" value="${g.admission_number}" />
+      <Parameter name="studentName" value="${g.student_name}" />
+      <Parameter name="guardianId" value="${g.guardian_id}" />
+      <Parameter name="guardianName" value="${g.guardian_name}" />
+      <Parameter name="language" value="${lang}" />
+      <Parameter name="useCase" value="inbound_query" />
+      <Parameter name="initialGreeting" value="${greeting}" />
+    </Stream>
+  </Connect>
+</Response>`;
+        res.type('text/xml');
+        return res.send(twiml);
+      } else {
+        const pollyLang = lang === 'te-IN' ? 'te-IN' : lang === 'hi-IN' ? 'hi-IN' : 'en-IN';
+        const twiml = `<Response><Say voice="Polly.Aditi" language="${pollyLang}">${greeting}</Say></Response>`;
+        res.type('text/xml');
+        return res.send(twiml);
+      }
+    } else {
+      // Unknown caller: ask for admission number
+      const greeting = 'నమస్కారం అండి! నారాయణ విద్యా సంస్థలకు స్వాగతం. మీ విద్యార్థి వివరాల కోసం దయచేసి అడ్మిషన్ నంబర్ చెప్పండి.';
+      if (streamUrl) {
+        const twiml = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Connect>
+    <Stream url="${streamUrl}">
+      <Parameter name="institutionId" value="${env.DEFAULT_TENANT_ID}" />
+      <Parameter name="studentId" value="unknown" />
+      <Parameter name="language" value="te-IN" />
+      <Parameter name="useCase" value="inbound_unknown" />
+      <Parameter name="initialGreeting" value="${greeting}" />
+    </Stream>
+  </Connect>
+</Response>`;
+        res.type('text/xml');
+        return res.send(twiml);
+      } else {
+        const twiml = `<Response><Say voice="Polly.Aditi" language="te-IN">${greeting}</Say></Response>`;
+        res.type('text/xml');
+        return res.send(twiml);
+      }
     }
-
-    sendSuccess(res, {
-      phone,
-      studentAdmissionNumber,
-      useCase,
-      telephonyGateway: 'EXOTEL_PSTN',
-      status: exotelStatus,
-      durationSimulatedSeconds: 52,
-    }, 'Test call dispatched successfully');
-  } catch (error: any) {
-    sendError(res, error.message, 500);
+  } catch (err: any) {
+    console.error('[INBOUND CALL ERROR]', err.message);
+    const twiml = `<Response><Say>An error occurred connecting your call. Please try again later.</Say></Response>`;
+    res.type('text/xml');
+    res.send(twiml);
   }
 });
 

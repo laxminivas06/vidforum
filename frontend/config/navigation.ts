@@ -73,7 +73,7 @@ export const NAVIGATION_CONFIG: Record<RoleType, NavGroup[]> = {
       label: "AI YANTRA",
       items: [
         { title: "Voice Agent", href: "/voice-agent/campaigns", iconName: "PhoneCall", badge: "AI" },
-        { title: "AI Attendance", href: "/ai-attendance/monitoring", iconName: "ScanFace", badge: "Live" },
+        { title: "AI Attendance", href: "/attendance/face", iconName: "ScanFace", badge: "Live" },
         { title: "AI Tutor Insights", href: "/ai-tutor/analytics", iconName: "Bot" },
       ],
     },

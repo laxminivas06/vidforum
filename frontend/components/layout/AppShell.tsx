@@ -38,7 +38,6 @@ const INSTITUTION_WORKSPACES = [
   "/students",
   "/app",
   "/voice-agent",
-  "/ai-attendance",
   "/ai-tutor",
   "/events",
   "/transport",

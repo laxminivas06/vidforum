@@ -6,6 +6,7 @@ import admissionsRoutes from '../modules/admissions/admissions.routes';
 import studentRoutes from '../modules/students/student.routes';
 import facultyRoutes from '../modules/faculty/faculty.routes';
 import attendanceRoutes from '../modules/attendance/attendance.routes';
+import { faceDeviceRouter } from '../modules/attendance/face.routes';
 import examRoutes from '../modules/examinations/examinations.routes';
 import financeRoutes from '../modules/finance/finance.routes';
 import documentRoutes from '../modules/documents/documents.routes';
@@ -58,6 +59,8 @@ router.use('/students', authMiddleware, studentRoutes);
 router.use('/academics', authMiddleware, requireWorkspace('academics'), academicRoutes);
 router.use('/admissions', authMiddleware, requireWorkspace('admissions'), admissionsRoutes);
 router.use('/faculty', authMiddleware, requireWorkspace(['faculty', 'hrms']), facultyRoutes);
+// Biometric terminals push with a per-device key (no JWT); must precede the JWT-protected /attendance router
+router.use('/attendance/face/device-events', faceDeviceRouter);
 router.use('/attendance', authMiddleware, requireWorkspace('attendance'), attendanceRoutes);
 router.use('/examinations', authMiddleware, requireWorkspace('examinations'), examRoutes);
 router.use('/finance', authMiddleware, requireWorkspace('finance'), financeRoutes);

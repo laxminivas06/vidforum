@@ -1,0 +1,224 @@
+import { PoolClient } from 'pg';
+import { db } from '../../config/database';
+
+const MAX_VERIFIED_TEMPLATES = 4;
+
+export interface FaceEventInput {
+  clientEventId: string;
+  studentId: string | null;
+  confidence: number | null;
+  detectedAt: string;
+}
+
+export class FaceRepository {
+  async listSections(institutionId: string) {
+    const res = await db.query(
+      `SELECT sec.id, sec.name AS "sectionName", c.name AS "className",
+              count(s.id)::int AS "studentCount",
+              count(fp.id)::int AS "enrolledCount"
+       FROM sections sec
+       JOIN classes c ON c.id = sec.class_id
+       LEFT JOIN students s ON s.current_section_id = sec.id AND s.institution_id = sec.institution_id
+                            AND s.status = 'active' AND s.deleted_at IS NULL
+       LEFT JOIN face_profiles fp ON fp.student_id = s.id
+       WHERE sec.institution_id = $1
+       GROUP BY sec.id, sec.name, c.name
+       ORDER BY c.name, sec.name`,
+      [institutionId]
+    );
+    return res.rows;
+  }
+
+  // Section roster + face templates (latest enrollment + newest teacher-verified captures)
+  async getSectionGallery(institutionId: string, sectionId: string) {
+    const res = await db.query(
+      `SELECT s.id, trim(s.first_name || ' ' || s.last_name) AS name, s.roll_number AS "rollNumber",
+              s.admission_number AS "admissionNumber", fp.id AS "faceProfileId",
+              COALESCE(
+                (SELECT json_agg(t.embedding_vector ORDER BY t.kind, t.created_at DESC)
+                 FROM (SELECT fe.embedding_vector, fe.kind, fe.created_at
+                       FROM face_embeddings fe
+                       WHERE fe.face_profile_id = fp.id
+                       ORDER BY fe.created_at DESC
+                       LIMIT ${1 + MAX_VERIFIED_TEMPLATES}) t),
+                '[]'::json) AS templates
+       FROM students s
+       LEFT JOIN face_profiles fp ON fp.student_id = s.id AND fp.institution_id = s.institution_id
+       WHERE s.institution_id = $1 AND s.current_section_id = $2
+         AND s.status = 'active' AND s.deleted_at IS NULL
+       ORDER BY NULLIF(regexp_replace(s.roll_number, '\\D', '', 'g'), '')::int NULLS LAST, s.first_name`,
+      [institutionId, sectionId]
+    );
+    return res.rows;
+  }
+
+  async findStudentsInInstitution(institutionId: string, studentIds: string[]) {
+    const res = await db.query(
+      `SELECT id, current_section_id AS "sectionId" FROM students
+       WHERE institution_id = $1 AND id = ANY($2::uuid[]) AND deleted_at IS NULL`,
+      [institutionId, studentIds]
+    );
+    return res.rows as Array<{ id: string; sectionId: string | null }>;
+  }
+
+  async upsertEnrollments(
+    institutionId: string,
+    items: Array<{ studentId: string; embedding: number[]; quality: number | null; photoKey: string | null }>,
+    modelVersion: string,
+    actorId: string | null
+  ) {
+    return db.transaction(async (client) => {
+      for (const item of items) {
+        const profileRes = await client.query(
+          `INSERT INTO face_profiles (institution_id, student_id, registered_by, reference_photo_storage_key)
+           VALUES ($1, $2, $3, $4)
+           ON CONFLICT (student_id) DO UPDATE
+             SET registered_by = EXCLUDED.registered_by,
+                 reference_photo_storage_key = COALESCE(EXCLUDED.reference_photo_storage_key, face_profiles.reference_photo_storage_key),
+                 updated_at = now()
+           WHERE face_profiles.institution_id = EXCLUDED.institution_id
+           RETURNING id`,
+          [institutionId, item.studentId, actorId, item.photoKey]
+        );
+        if (profileRes.rows.length === 0) throw new Error('Face profile belongs to another institution');
+        const profileId = profileRes.rows[0].id;
+
+        // Re-enrollment resets every template, including learned ones
+        await client.query('DELETE FROM face_embeddings WHERE face_profile_id = $1', [profileId]);
+        await client.query(
+          `INSERT INTO face_embeddings (face_profile_id, embedding_vector, model_version, quality, kind)
+           VALUES ($1, $2, $3, $4, 'enrolled')`,
+          [profileId, item.embedding, modelVersion, item.quality]
+        );
+      }
+      return items.length;
+    });
+  }
+
+  async addVerifiedTemplates(
+    client: PoolClient,
+    institutionId: string,
+    items: Array<{ studentId: string; embedding: number[] }>,
+    modelVersion: string
+  ) {
+    for (const item of items) {
+      const profileRes = await client.query(
+        'SELECT id FROM face_profiles WHERE institution_id = $1 AND student_id = $2',
+        [institutionId, item.studentId]
+      );
+      if (profileRes.rows.length === 0) continue;
+      const profileId = profileRes.rows[0].id;
+      await client.query(
+        `INSERT INTO face_embeddings (face_profile_id, embedding_vector, model_version, kind)
+         VALUES ($1, $2, $3, 'verified')`,
+        [profileId, item.embedding, modelVersion]
+      );
+      await client.query(
+        `DELETE FROM face_embeddings WHERE id IN (
+           SELECT id FROM face_embeddings WHERE face_profile_id = $1 AND kind = 'verified'
+           ORDER BY created_at DESC OFFSET $2)`,
+        [profileId, MAX_VERIFIED_TEMPLATES]
+      );
+    }
+  }
+
+  async deleteEnrollment(institutionId: string, studentId: string) {
+    const res = await db.query(
+      'DELETE FROM face_profiles WHERE institution_id = $1 AND student_id = $2 RETURNING reference_photo_storage_key AS "photoKey"',
+      [institutionId, studentId]
+    );
+    return res.rows[0] || null;
+  }
+
+  // ================= DEVICES =================
+  async registerDevice(
+    institutionId: string,
+    data: { deviceCode: string; deviceType: 'web' | 'terminal'; roomId?: string | null; metadata?: object; apiKeyHash?: string | null }
+  ) {
+    const res = await db.query(
+      `INSERT INTO camera_devices (institution_id, room_id, device_code, device_type, metadata, api_key_hash, last_seen_at)
+       VALUES ($1, $2, $3, $4, $5, $6, now())
+       ON CONFLICT (institution_id, device_code) DO UPDATE
+         SET metadata = EXCLUDED.metadata,
+             room_id = COALESCE(EXCLUDED.room_id, camera_devices.room_id),
+             api_key_hash = COALESCE(EXCLUDED.api_key_hash, camera_devices.api_key_hash),
+             last_seen_at = now()
+       WHERE camera_devices.device_type = EXCLUDED.device_type
+       RETURNING id, device_code AS "deviceCode", device_type AS "deviceType"`,
+      [institutionId, data.roomId || null, data.deviceCode, data.deviceType, data.metadata || {}, data.apiKeyHash || null]
+    );
+    if (res.rows.length === 0) throw new Error('Device code is already used by a device of another type');
+    return res.rows[0];
+  }
+
+  async findDeviceById(institutionId: string, deviceId: string) {
+    const res = await db.query(
+      `SELECT id FROM camera_devices WHERE id = $1 AND institution_id = $2 AND status = 'active'`,
+      [deviceId, institutionId]
+    );
+    return res.rows[0] || null;
+  }
+
+  async findTerminalByKeyHash(keyHash: string) {
+    const res = await db.query(
+      `UPDATE camera_devices SET last_seen_at = now()
+       WHERE api_key_hash = $1 AND device_type = 'terminal' AND status = 'active'
+       RETURNING id, institution_id AS "institutionId"`,
+      [keyHash]
+    );
+    return res.rows[0] || null;
+  }
+
+  // ================= EVENTS =================
+  // Idempotent on client_event_id so offline queues can be retried safely.
+  // Returns clientEventId -> { id, inserted } (inserted=false when the event was already synced).
+  async insertEvents(
+    client: { query: (text: string, params?: any[]) => Promise<any> },
+    institutionId: string,
+    deviceId: string,
+    sessionId: string | null,
+    events: FaceEventInput[]
+  ) {
+    const ids = new Map<string, { id: string; inserted: boolean }>();
+    for (const ev of events) {
+      const res = await client.query(
+        `INSERT INTO ai_attendance_events
+           (institution_id, camera_device_id, student_id, face_profile_id, session_id, confidence, detected_at, client_event_id)
+         VALUES ($1, $2, $3, (SELECT id FROM face_profiles WHERE student_id = $3 AND institution_id = $1), $4, $5, $6, $7)
+         ON CONFLICT (client_event_id) DO UPDATE SET session_id = COALESCE(EXCLUDED.session_id, ai_attendance_events.session_id)
+         WHERE ai_attendance_events.institution_id = EXCLUDED.institution_id
+         RETURNING id, (xmax = 0) AS inserted`,
+        [institutionId, deviceId, ev.studentId, sessionId, ev.confidence, ev.detectedAt, ev.clientEventId]
+      );
+      if (res.rows[0]) ids.set(ev.clientEventId, res.rows[0]);
+    }
+    return ids;
+  }
+
+  async resolveStudentsByAdmission(institutionId: string, refs: string[]) {
+    const res = await db.query(
+      `SELECT id, admission_number AS "admissionNumber" FROM students
+       WHERE institution_id = $1 AND admission_number = ANY($2::text[]) AND deleted_at IS NULL`,
+      [institutionId, refs]
+    );
+    return new Map<string, string>(res.rows.map((r: any) => [r.admissionNumber, r.id]));
+  }
+
+  // Terminal (and other device) detections for a section within a time window, for the review screen
+  async listSectionEvents(institutionId: string, sectionId: string, from: string, to: string) {
+    const res = await db.query(
+      `SELECT DISTINCT ON (ae.student_id) ae.id, ae.student_id AS "studentId", ae.confidence,
+              ae.detected_at AS "detectedAt", cd.device_code AS "deviceCode", cd.device_type AS "deviceType"
+       FROM ai_attendance_events ae
+       JOIN students s ON s.id = ae.student_id AND s.institution_id = ae.institution_id
+       JOIN camera_devices cd ON cd.id = ae.camera_device_id
+       WHERE ae.institution_id = $1 AND s.current_section_id = $2 AND cd.device_type = 'terminal'
+         AND ae.detected_at >= $3 AND ae.detected_at < $4
+       ORDER BY ae.student_id, ae.confidence DESC NULLS LAST`,
+      [institutionId, sectionId, from, to]
+    );
+    return res.rows;
+  }
+}
+
+export const faceRepository = new FaceRepository();

@@ -122,7 +122,7 @@ export class AdmissionsService {
       sectionId,
       admissionNumber,
       firstName: names[0] || 'Student',
-      lastName: names.slice(1).join(' ') || 'Enrolled',
+      lastName: names.slice(1).join(' '), // single-word names have no last name (never invent one)
       rollNumber: `${count + 1}`,
       actorId,
     });

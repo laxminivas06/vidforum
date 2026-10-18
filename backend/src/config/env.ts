@@ -2,6 +2,8 @@ import dotenv from 'dotenv';
 import path from 'path';
 dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+// Fall back to the monorepo root .env (dotenv never overrides keys already set above)
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
 
 export const env = {
   PORT: parseInt(process.env.PORT || '5000', 10),
@@ -40,4 +42,8 @@ export const env = {
   WHATSAPP_API_TOKEN: process.env.WHATSAPP_API_TOKEN || '',
   WHATSAPP_PHONE_NUMBER_ID: process.env.WHATSAPP_PHONE_NUMBER_ID || '',
   DEFAULT_TENANT_ID: process.env.DEFAULT_TENANT_ID || '00000000-0000-0000-0000-000000000001',
+  // Optional: private object storage for face reference photos (fail-open when unset)
+  SUPABASE_URL: process.env.SUPABASE_URL || '',
+  SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY || '',
+  FACE_PHOTO_BUCKET: process.env.FACE_PHOTO_BUCKET || 'face-photos',
 };

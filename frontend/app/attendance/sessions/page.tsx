@@ -230,13 +230,13 @@ export default function AttendanceSessionsPage() {
       breadcrumbs={[{ label: "Core" }, { label: "Attendance Roll" }]}
       rightHeaderAction={
         <div className="flex items-center gap-2">
-          <Link href="/ai-attendance/monitoring">
+          <Link href="/attendance/face">
             <Button
               size="dense"
               variant="secondary"
               leadingIcon={<Camera className="w-3.5 h-3.5" />}
             >
-              Open AI Vision Monitor
+              Take Face Attendance
             </Button>
           </Link>
           <Button

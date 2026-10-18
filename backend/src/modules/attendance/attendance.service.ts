@@ -93,8 +93,9 @@ export class AttendanceService {
   async submitRollCall(
     institutionId: string,
     sessionId: string,
-    records: Array<{ studentId: string; status: string; remarks?: string }>,
-    caller: { id: string; role: string }
+    records: Array<{ studentId: string; status: string; remarks?: string; source?: string; aiEventId?: string | null }>,
+    caller: { id: string; role: string },
+    options: { finalize?: boolean } = {}
   ) {
     if (!sessionId) throw new Error('sessionId is required');
     if (!Array.isArray(records) || records.length === 0) {
@@ -112,7 +113,7 @@ export class AttendanceService {
       }
     }
 
-    const result = await attendanceRepository.recordRollCall(institutionId, sessionId, records, caller.id);
+    const result = await attendanceRepository.recordRollCall(institutionId, sessionId, records, caller.id, options);
 
     // Audit event dispatch
     await AuditDispatcher.dispatch({

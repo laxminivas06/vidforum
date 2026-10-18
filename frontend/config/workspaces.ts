@@ -143,7 +143,8 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     routes: ["/attendance"],
     navItems: [
       { title: "Daily Roll Call", href: "/attendance/sessions", iconName: "CalendarCheck" },
-      { title: "Biometric Vision Stream", href: "/attendance/sessions?filter=BIOMETRIC_VISION", iconName: "Clock", badge: "Vision" },
+      { title: "Face Attendance", href: "/attendance/face", iconName: "ScanFace", badge: "AI" },
+      { title: "Face Enrollment", href: "/attendance/face/enroll", iconName: "UserPlus" },
       { title: "Teacher Manual Entry", href: "/attendance/sessions?filter=MANUAL_TEACHER", iconName: "CheckCircle2" },
       { title: "Attendance Anomalies", href: "/attendance/sessions?filter=ANOMALY", iconName: "AlertTriangle", badgeVariant: "warning" },
     ],
@@ -221,10 +222,10 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     description: "Multilingual conversational voice agent, biometric facial attendance, and intelligent tutoring insights",
     iconName: "Cpu",
     primaryRoute: "/voice-agent/campaigns",
-    routes: ["/voice-agent", "/ai-attendance", "/ai-tutor"],
+    routes: ["/voice-agent", "/ai-tutor"],
     navItems: [
       { title: "Voice Agent", href: "/voice-agent/campaigns", iconName: "PhoneCall", badge: "AI" },
-      { title: "AI Attendance", href: "/ai-attendance/monitoring", iconName: "ScanFace", badge: "Live" },
+      { title: "AI Attendance", href: "/attendance/face", iconName: "ScanFace", badge: "Live" },
       { title: "AI Tutor Insights", href: "/ai-tutor/analytics", iconName: "Bot" },
     ],
   },

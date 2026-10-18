@@ -262,8 +262,9 @@ export class AttendanceRepository {
   async recordRollCall(
     institutionId: string,
     sessionId: string,
-    records: Array<{ studentId: string; status: string; remarks?: string }>,
-    verifiedBy?: string | null
+    records: Array<{ studentId: string; status: string; remarks?: string; source?: string; aiEventId?: string | null }>,
+    verifiedBy?: string | null,
+    options: { finalize?: boolean } = {}
   ) {
     return await db.transaction(async (client) => {
       // 1. Verify session belongs to this institution
@@ -285,12 +286,20 @@ export class AttendanceRepository {
         if (!validStatuses.includes(cleanStatus)) {
           throw new Error(`Invalid attendance status: ${rec.status}`);
         }
+        const source = rec.source || 'manual';
+        if (!['manual', 'ai_face', 'cctv'].includes(source)) {
+          throw new Error(`Invalid attendance source: ${rec.source}`);
+        }
 
         const upsertRes = await client.query(
-          `INSERT INTO attendance_records (institution_id, session_id, student_id, status, source, verified_by, verified_at, remarks, updated_at)
-           VALUES ($1, $2, $3, $4::attendance_status, 'manual', $5, now(), $6, now())
+          `INSERT INTO attendance_records (institution_id, session_id, student_id, status, source, ai_event_id, is_final, verified_by, verified_at, remarks, updated_at)
+           VALUES ($1, $2, $3, $4::attendance_status, $7::attendance_source, $8, $9, $5, now(), $6, now())
            ON CONFLICT (session_id, student_id)
            DO UPDATE SET status = EXCLUDED.status, 
+                         source = EXCLUDED.source,
+                         ai_event_id = CASE WHEN EXCLUDED.source = 'manual' THEN NULL
+                                            ELSE COALESCE(EXCLUDED.ai_event_id, attendance_records.ai_event_id) END,
+                         is_final = attendance_records.is_final OR EXCLUDED.is_final,
                          remarks = COALESCE(EXCLUDED.remarks, attendance_records.remarks),
                          verified_by = EXCLUDED.verified_by,
                          verified_at = now(),
@@ -298,7 +307,8 @@ export class AttendanceRepository {
            RETURNING id, institution_id as "institutionId", session_id as "sessionId",
                      student_id as "studentId", status, source, is_final as "isFinal",
                      remarks, created_at as "createdAt", updated_at as "updatedAt"`,
-          [institutionId, sessionId, rec.studentId, cleanStatus, verifiedBy || null, rec.remarks || null]
+          [institutionId, sessionId, rec.studentId, cleanStatus, verifiedBy || null, rec.remarks || null,
+           source, rec.aiEventId || null, Boolean(options.finalize)]
         );
 
         updatedRecords.push(upsertRes.rows[0]);

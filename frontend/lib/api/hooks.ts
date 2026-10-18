@@ -14,6 +14,7 @@ import {
   EnrolledApplicantItem,
 } from "@/types"
 import { sortWorkspaceIds } from "@/config/workspaces"
+import { usableTemplates } from "@/lib/face/engine"
 
 function getApiBaseUrl(): string {
   if (process.env.NEXT_PUBLIC_API_URL) return process.env.NEXT_PUBLIC_API_URL
@@ -2830,3 +2831,81 @@ export function useVoiceAllCalls() {
 
 
 
+
+// ================= FACE ATTENDANCE =================
+export interface FaceSection {
+  id: string
+  sectionName: string
+  className: string
+  studentCount: number
+  enrolledCount: number
+}
+
+async function faceApi<T>(path: string, init?: RequestInit): Promise<T> {
+  const res = await fetch(`${API_BASE_URL}/attendance/face${path}`, { ...init, headers: getAuthHeaders() })
+  const json = await res.json().catch(() => ({}))
+  if (!res.ok || !json.success) throw new Error(json.message || `Request failed (${res.status})`)
+  return json.data as T
+}
+
+export function useFaceSections() {
+  return useQuery({
+    queryKey: ["face-sections"],
+    queryFn: () => faceApi<FaceSection[]>("/sections"),
+  })
+}
+
+export interface FaceGalleryStudent {
+  id: string
+  name: string
+  rollNumber: string | null
+  admissionNumber: string
+  templates: number[][]
+}
+
+// Templates from an older face model (different size) can't be compared, so they count as "not enrolled"
+export const fetchFaceGallery = async (sectionId: string) =>
+  (await faceApi<FaceGalleryStudent[]>(`/gallery/${sectionId}`)).map((st) => ({ ...st, templates: usableTemplates(st.templates) }))
+
+export function useFaceGalleryAdmin(sectionId?: string) {
+  return useQuery({
+    queryKey: ["face-gallery", sectionId],
+    queryFn: () => fetchFaceGallery(sectionId!),
+    enabled: !!sectionId,
+  })
+}
+
+export function useEnrollFaces() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: {
+      modelVersion: string
+      items: Array<{ studentId: string; embedding: number[]; quality?: number; photo?: string }>
+    }) => faceApi<{ enrolled: number }>("/enroll", { method: "POST", body: JSON.stringify(data) }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["face-sections"] })
+      queryClient.invalidateQueries({ queryKey: ["face-gallery"] })
+    },
+  })
+}
+
+export function useDeleteFaceEnrollment() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (studentId: string) => faceApi<{ deleted: boolean }>(`/enroll/${studentId}`, { method: "DELETE" }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["face-sections"] })
+      queryClient.invalidateQueries({ queryKey: ["face-gallery"] })
+    },
+  })
+}
+
+export function useRegisterTerminal() {
+  return useMutation({
+    mutationFn: (data: { deviceCode: string; roomId?: string }) =>
+      faceApi<{ id: string; deviceCode: string; apiKey: string }>("/devices", {
+        method: "POST",
+        body: JSON.stringify({ ...data, deviceType: "terminal" }),
+      }),
+  })
+}

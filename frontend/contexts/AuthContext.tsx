@@ -4,6 +4,9 @@ import React, { createContext, useContext, useState } from "react"
 import { RoleType } from "@/config/navigation"
 import { PermissionDenied } from "@/components/ui"
 import { sortWorkspaceIds } from "@/config/workspaces"
+import { startTokenAutoRefresh } from "@/lib/api/auth-refresh"
+import { startFaceQueueSync } from "@/lib/face/sync"
+import { clearAuthMirror } from "@/lib/face/offline-store"
 
 export interface UserProfile {
   id: string
@@ -193,6 +196,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [])
 
+  // Keep the 15-minute access token renewed while a user is signed in, and push any
+  // face attendance that was saved offline (e.g. during a power/internet cut) from any page
+  React.useEffect(() => {
+    if (!user) return
+    const stopRefresh = startTokenAutoRefresh()
+    const stopFaceSync = startFaceQueueSync()
+    return () => {
+      stopRefresh()
+      stopFaceSync()
+    }
+  }, [user])
+
   const hasPermission = (permission: string): boolean => {
     if (role === "SUPER_ADMIN") {
       return (
@@ -267,6 +282,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       }
       if (data.data?.refreshToken) {
         localStorage.setItem("vid_refresh_token", data.data.refreshToken)
+        localStorage.setItem("vid_auth_updated_at", String(Date.now()))
       }
     }
 
@@ -327,6 +343,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.removeItem("vid_session_role")
       localStorage.removeItem("vid_auth_token")
       localStorage.removeItem("vid_refresh_token")
+      localStorage.removeItem("vid_auth_updated_at")
+      clearAuthMirror().catch(() => undefined)
       window.location.href = "/login"
     }
   }

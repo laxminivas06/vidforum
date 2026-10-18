@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { attendanceController } from './attendance.controller';
 import { authMiddleware } from '../../middleware/auth.middleware';
 import { tenantMiddleware } from '../../middleware/tenant.middleware';
+import { faceRouter } from './face.routes';
 
 const router = Router();
 
@@ -30,6 +31,9 @@ router.post('/leaves/:id/decide', attendanceController.decideStudentLeave.bind(a
 // ================= STAFF ATTENDANCE =================
 router.post('/staff', attendanceController.recordStaffAttendance.bind(attendanceController));
 router.get('/staff', attendanceController.listStaffAttendance.bind(attendanceController));
+
+// ================= FACE ATTENDANCE =================
+router.use('/face', faceRouter);
 
 // ================= INSTITUTION SUMMARY DASHBOARD =================
 router.get('/summary', attendanceController.getInstitutionSummary.bind(attendanceController));

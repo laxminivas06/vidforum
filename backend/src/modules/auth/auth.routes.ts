@@ -12,6 +12,36 @@ import { AuditDispatcher } from '../../common/audit-dispatcher';
 
 const router = Router();
 
+type LoginSubject = NonNullable<Awaited<ReturnType<typeof AuthRepository.findLoginSubject>>>;
+
+/** Access-token claims, shared by login and refresh so a refreshed token keeps permissions + workspaces. */
+async function buildAccessTokenPayload(subject: LoginSubject) {
+  const permissions = await AuthRepository.getUserPermissions(subject.id, subject.roleName);
+
+  // 9. Resolve assigned workspaces
+  const assignedWorkspaces: string[] =
+    (subject.scope && Array.isArray((subject.scope as any).workspaces))
+      ? (subject.scope as any).workspaces
+      : (subject.rawUserMetaData?.workspaces && Array.isArray(subject.rawUserMetaData.workspaces))
+      ? subject.rawUserMetaData.workspaces
+      : (subject.roleName === 'SUPER_ADMIN'
+        ? ['platform']
+        : subject.roleName === 'FACULTY'
+        ? ['faculty', 'academics', 'attendance', 'examinations', 'timetable']
+        : []);
+
+  return {
+    id: subject.id,
+    email: subject.email,
+    fullName: subject.fullName,
+    role: subject.roleName,
+    institutionId: subject.defaultInstitutionId,
+    assignedWorkspaces,
+    permissions,
+    mustChangePassword: subject.mustChangePassword,
+  };
+}
+
 const PASSWORD_DENYLIST = [
   'admin123',
   'password',
@@ -164,33 +194,9 @@ router.post('/login', async (req: Request, res: Response) => {
     // 7. Successful login: reset failure counter
     await AuthRateLimiter.reset(clientIp, loginIdentifier, subject.id);
 
-    // 8. Resolve permissions
-    const permissions = await AuthRepository.getUserPermissions(subject.id, subject.roleName);
-
-    // 9. Resolve assigned workspaces
-    const assignedWorkspaces: string[] =
-      (subject.scope && Array.isArray((subject.scope as any).workspaces))
-        ? (subject.scope as any).workspaces
-        : (subject.rawUserMetaData?.workspaces && Array.isArray(subject.rawUserMetaData.workspaces))
-        ? subject.rawUserMetaData.workspaces
-        : (subject.roleName === 'SUPER_ADMIN'
-          ? ['platform']
-          : subject.roleName === 'FACULTY'
-          ? ['faculty', 'academics', 'attendance', 'examinations', 'timetable']
-          : []);
-
-    // 10. Issue short-lived access token (15 minutes per ADR-017 / Section 15)
-    const tokenPayload = {
-      id: subject.id,
-      email: subject.email,
-      fullName: subject.fullName,
-      role: subject.roleName,
-      institutionId: subject.defaultInstitutionId,
-      assignedWorkspaces,
-      permissions,
-      mustChangePassword: subject.mustChangePassword,
-    };
-
+    // 8-10. Resolve permissions + assigned workspaces, issue short-lived access token (15 minutes per ADR-017 / Section 15)
+    const tokenPayload = await buildAccessTokenPayload(subject);
+    const { permissions, assignedWorkspaces } = tokenPayload;
     const token = jwt.sign(tokenPayload, env.JWT_SECRET, { expiresIn: '15m' });
 
     // 11. Issue refresh token
@@ -415,6 +421,15 @@ router.post('/refresh', async (req: Request, res: Response) => {
       return;
     }
 
+    // Re-resolve the user so the new token carries current role, permissions and workspaces,
+    // and deactivated/suspended accounts cannot keep refreshing.
+    const subject = await AuthRepository.findLoginSubject(row.user_id, { byUserId: true });
+    if (!subject || subject.status === 'inactive' || subject.status === 'suspended') {
+      await db.query(`UPDATE refresh_tokens SET revoked = true WHERE id = $1`, [row.id]);
+      sendError(res, 'Account is deactivated or suspended', 401);
+      return;
+    }
+
     // Revoke old refresh token (rotation)
     await db.query(`UPDATE refresh_tokens SET revoked = true WHERE id = $1`, [row.id]);
 
@@ -429,14 +444,7 @@ router.post('/refresh', async (req: Request, res: Response) => {
     );
 
     // Issue new access token (15m)
-    const tokenPayload = {
-      id: row.user_id,
-      email: row.email,
-      fullName: row.full_name,
-      role: AuthRepository.normalizeRole(row.role_name),
-      institutionId: row.default_institution_id,
-      mustChangePassword: Boolean(row.must_change_password),
-    };
+    const tokenPayload = await buildAccessTokenPayload(subject);
 
     const newAccessToken = jwt.sign(tokenPayload, env.JWT_SECRET, { expiresIn: '15m' });
 

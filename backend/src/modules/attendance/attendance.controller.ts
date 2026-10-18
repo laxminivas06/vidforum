@@ -82,7 +82,11 @@ export class AttendanceController {
         role: req.user!.role,
       };
 
-      const result = await attendanceService.submitRollCall(instId, sessionId, records, caller);
+      // Manual roll call is always source='manual'; AI-sourced records only arrive via /face/submit
+      const manualRecords = Array.isArray(records)
+        ? records.map(({ studentId, status, remarks }: any) => ({ studentId, status, remarks }))
+        : records;
+      const result = await attendanceService.submitRollCall(instId, sessionId, manualRecords, caller);
       sendSuccess(res, result, 'Attendance roll-call saved successfully');
     } catch (err: any) {
       const status = err.message.includes('RESOURCE_ACCESS_DENIED') ? 403 : 400;

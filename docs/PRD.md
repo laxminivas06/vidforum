@@ -206,7 +206,7 @@ Following Section 29 of the specification, development is structured into 4 sequ
 | # | Question / Topic | Assumption Made for v1 Implementation |
 | :--- | :--- | :--- |
 | 1 | **Database Multi-Tenancy Strategy** | Single shared PostgreSQL database with `institution_id` column-level discriminator enforced by automatic query filters and row-level security (RLS) policies. This maximizes efficiency while maintaining strict isolation. |
-| 2 | **Biometric Face Embeddings** | OpenCV / Face recognition models compute 512-dimension vector embeddings. Raw biometric vectors are encrypted at rest; facial photos are stored in private object storage. |
+| 2 | **Biometric Face Embeddings** | On-device face recognition: SFace (OpenCV Zoo, Apache-2.0) 128-dimension embeddings on 5-point aligned crops, run in the browser via onnxruntime-web; detection/anti-spoof/liveness by `@vladmandic/human`. Every vector is stored with `model_version`, so the model can be swapped. Raw biometric vectors are encrypted at rest; facial photos are stored in private object storage. |
 | 3 | **Voice Agent Telephony** | Integrated with standard WebRTC / Twilio / mock telephony gateway for campaign dispatch simulation with real-time text-to-speech dialog playback. |
 | 4 | **Payment Gateways** | Multi-institution payment credentials supported (Stripe / Razorpay mock integration with webhook signatures and receipt PDF generation). |
 

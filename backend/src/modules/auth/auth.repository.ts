@@ -39,11 +39,21 @@ export class AuthRepository {
    * Finds login subject matching email, login_id, user_id, or employee_code case-insensitively.
    * Does NOT query student table (students have no ERP workspace login per Rule 1).
    */
-  public static async findLoginSubject(identifier: string): Promise<LoginSubject | null> {
+  public static async findLoginSubject(identifier: string, opts: { byUserId?: boolean } = {}): Promise<LoginSubject | null> {
     const cleanId = (identifier || '').trim();
     if (!cleanId) return null;
+    // Token refresh passes the exact user id; login passes whatever the user typed (email / login id / employee code)
+    const where = opts.byUserId
+      ? 'u.id::text = $1 AND $2 = $2'
+      : `LOWER(TRIM(u.email)) = LOWER(TRIM($1))
+          OR LOWER(TRIM(COALESCE(p.email, ''))) = LOWER(TRIM($1))
+          OR LOWER(TRIM(COALESCE(u.raw_user_meta_data->>'login_id', ''))) = LOWER(TRIM($1))
+          OR LOWER(TRIM(COALESCE(u.raw_user_meta_data->>'user_id', ''))) = LOWER(TRIM($1))
+          OR LOWER(TRIM(COALESCE(u.raw_user_meta_data->>'userId', ''))) = LOWER(TRIM($1))
+          OR LOWER(TRIM(COALESCE(st.employee_code, ''))) = LOWER(TRIM($1))
+          OR ($2 = true AND LOWER(TRIM(COALESCE(u.email, p.email, ''))) = 'superadmin@vid.edu')`;
 
-    const isSuperAdminAlias = ['superadmin', 'superadmin@vid.edu', 'sa-001', 'superadmin@vid.platform'].includes(cleanId.toLowerCase());
+    const isSuperAdminAlias = !opts.byUserId && ['superadmin', 'superadmin@vid.edu', 'sa-001', 'superadmin@vid.platform'].includes(cleanId.toLowerCase());
 
     const res = await db.query(
       `SELECT 
@@ -68,13 +78,7 @@ export class AuthRepository {
        LEFT JOIN user_roles ur ON ur.profile_id = p.id
        LEFT JOIN roles r ON r.id = ur.role_id
        LEFT JOIN staff st ON st.profile_id = p.id
-       WHERE LOWER(TRIM(u.email)) = LOWER(TRIM($1))
-          OR LOWER(TRIM(COALESCE(p.email, ''))) = LOWER(TRIM($1))
-          OR LOWER(TRIM(COALESCE(u.raw_user_meta_data->>'login_id', ''))) = LOWER(TRIM($1))
-          OR LOWER(TRIM(COALESCE(u.raw_user_meta_data->>'user_id', ''))) = LOWER(TRIM($1))
-          OR LOWER(TRIM(COALESCE(u.raw_user_meta_data->>'userId', ''))) = LOWER(TRIM($1))
-          OR LOWER(TRIM(COALESCE(st.employee_code, ''))) = LOWER(TRIM($1))
-          OR ($2 = true AND LOWER(TRIM(COALESCE(u.email, p.email, ''))) = 'superadmin@vid.edu')
+       WHERE ${where}
        ORDER BY (CASE WHEN r.name IS NOT NULL THEN 1 ELSE 2 END), u.created_at DESC
        LIMIT 1`,
       [cleanId, isSuperAdminAlias]

@@ -10,6 +10,8 @@ export interface CallContext {
   streamUrl?: string;
   webhookUrl?: string;
   initialMessage?: string;
+  enableAmd?: boolean; // Answering Machine Detection
+  amdTimeoutSeconds?: number;
 }
 
 export interface CallResult {
@@ -21,6 +23,30 @@ export interface CallResult {
   actionRequired?: string;
   errorMessage?: string;
   phone: string;
+  amdResult?: 'human' | 'machine_start' | 'unknown';
+}
+
+export interface StreamPacket {
+  event: 'connected' | 'start' | 'media' | 'clear' | 'stop' | 'mark';
+  streamSid: string;
+  sequenceNumber?: string;
+  media?: {
+    track?: 'inbound' | 'outbound';
+    chunk?: string;
+    timestamp?: string;
+    payload: string; // base64 encoded G.711 mu-law 8kHz audio
+  };
+  start?: {
+    streamSid: string;
+    accountSid?: string;
+    callSid?: string;
+    tracks?: string[];
+    customParameters?: Record<string, string>;
+  };
+  stop?: {
+    accountSid?: string;
+    callSid?: string;
+  };
 }
 
 export interface TelephonyProvider {

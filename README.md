@@ -6,7 +6,7 @@
 [![PostgreSQL / Supabase](https://img.shields.io/badge/PostgreSQL-Supabase-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-06B6D4?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 
-VID (Virtual Identification) is a next-generation, multi-tenant enterprise educational operating ecosystem that unifies every academic, administrative, and financial operational domain around a **Single Student Master Entity**.
+VID (Virtual Identification) is a multi-tenant enterprise educational operating ecosystem that unifies academic, administrative, and financial workflows around a **Single Student Master Entity**.
 
 ---
 
@@ -14,198 +14,178 @@ VID (Virtual Identification) is a next-generation, multi-tenant enterprise educa
 
 ```mermaid
 graph TD
-    Client["Client (Browser / Mobile / Tablet)<br/>Next.js 14 + React 18 + Tailwind"]
+    Client["Client (Browser / Mobile / Tablet)<br/>Next.js 14 App Router + React 18 + Tailwind"]
     API["API Gateway / Backend Server<br/>Node.js 22 + Express + TypeScript (Port 5000)"]
     DB[("Supabase Cloud PostgreSQL (Port 5432)<br/>127 Tables, RLS, Triggers, Views")]
+    AI["AI Yantra Services<br/>Voice Agent, On-Device Face Biometrics, AI Tutor"]
 
     Client -->|HTTP / JSON REST API| API
     API -->|Tenant Isolation & RLS| DB
+    Client -->|On-Device WebAssembly Inference| AI
+    API -->|Telephony & AI Services| AI
 ```
 
 ### Stack Highlights
 - **Frontend**: Next.js 14 App Router, React 18, TypeScript 5, Tailwind CSS, TanStack Query v5, Radix UI & Lucide Icons.
 - **Backend**: Node.js 22, Express.js, TypeScript, Layered MVC architecture (`Routes -> Controllers -> Services -> Repositories -> PostgreSQL`).
-- **Database**: Supabase PostgreSQL with 127 tables across 16 architectural domains, Row-Level Security (RLS), custom audit triggers, cross-tenant consistency triggers, and SSL connection pooling.
-- **AI Yantra**: Strictly bounded to 3 isolated workspaces (AI Voice Agent, AI Attendance, AI Tutor).
+- **Database**: Supabase PostgreSQL across 16 architectural domains, Row-Level Security (RLS), custom audit triggers, cross-tenant consistency triggers, and SSL connection pooling.
+- **AI Yantra**: Isolated intelligent services encompassing multilingual parent voice notifications, on-device edge facial attendance, and bounded academic tutoring.
 
 ---
 
-## 🛡️ Core Architectural Pillars & Non-Negotiables
+## 🛡️ Core Architectural Principles
 
-1. **Single Student Master Entity (PRD Rule 1)**: Student is **never** a standalone workspace. A single immutable master record (`students`) serves as the relational anchor across Admissions, Academics, Attendance, Examinations, Finance, Documents, Timetable, and AI Yantra.
-2. **Tenant Isolation (PRD Rule 2)**: Strict tenant segmentation enforced at both application layer (`TenantMiddleware`) and database layer (`institution_id` indexed on all tables + PostgreSQL RLS).
-3. **Dynamic Module Activation (PRD Rule 5)**: Optional modules (Hostel, Transport, Library, Sports, Events, Inventory) dynamically toggle on/off per institution, automatically pruning routes and navigation links.
+1. **Single Student Master Entity**: Student is never a standalone workspace. A single immutable master record (`students`) serves as the relational anchor across Admissions, Academics, Attendance, Examinations, Finance, Documents, Timetable, and AI Yantra.
+2. **Strict Multi-Tenant Isolation**: Multi-tenant segmentation is enforced at both the application layer (`TenantMiddleware`) and database layer (`institution_id` indexed on all tables with PostgreSQL RLS).
+3. **Dynamic Module Activation**: Optional modules (Hostel, Transport, Library, Sports, Events, Inventory) toggle per institution, automatically pruning routes and navigation.
 4. **Pre-Commit Verification Pipeline**: Examinations marks imports and attendance finalization require pre-commit validation to eliminate silent data corruption.
-5. **Layered MVC Architecture**: Complete decoupling of HTTP routing, request validation, business logic, and database persistence.
+5. **Decoupled Edge AI & Cloud State**: Biometric recognition runs entirely on-device via WebAssembly/ONNX (privacy-first, zero raw biometric uploads required), while operational state syncs to the centralized cloud database.
 
 ---
 
-## 📁 Repository Directory Structure
+## 📁 Repository Structure
 
 ```text
-vidforum/
-├── backend/                  # Node.js 22 + Express + TypeScript Backend
-│   ├── db/                   # Database migrations, triggers, and seed data
-│   │   ├── schema.sql        # 127 tables, extensions, enums, views, RLS
-│   │   ├── patch_triggers.sql# Table-aware audit & consistency triggers
-│   │   └── seed.sql          # Multi-tenant demo dataset
+VID_School/
+├── backend/                  # Node.js 22 + Express + TypeScript API Server
+│   ├── db/                   # Database schemas, migrations, and triggers
 │   ├── src/
 │   │   ├── config/           # Database pool (pg SSL) and environment config
-│   │   ├── middleware/       # Auth, Tenant, RBAC, and Error Interceptor
-│   │   ├── modules/          # Domain modules (Routes, Controller, Service, Repository)
-│   │   │   ├── academics/    # Hierarchy, departments, courses, classes, sections
-│   │   │   ├── admissions/   # Applications, enquiries, approval pipeline
+│   │   ├── middleware/       # Auth, Tenant, RBAC, and error handlers
+│   │   ├── modules/          # Modular domain services (Academics, Admissions, Finance, etc.)
+│   │   │   ├── academics/    # Class hierarchy, departments, sections, subjects
+│   │   │   ├── admissions/   # Applications, enquiry funnel, enrollment pipeline
 │   │   │   ├── faculty/      # Roster, teaching assignments, workload
-│   │   │   ├── finance/      # Fee structures, ledger, invoices, receipts
+│   │   │   ├── finance/      # Fee structures, student ledgers, invoicing
 │   │   │   ├── institutions/ # Multi-tenant directory, plans, module toggles
 │   │   │   ├── students/     # Central Student Master Entity (360° profile)
-│   │   │   ├── attendance/   # Roll-call, daily absentee logs, corrections
-│   │   │   ├── examinations/ # Exam schedules, marks entry, report cards
-│   │   │   ├── documents/    # Private uploads, verifiable certificates
-│   │   │   ├── timetable/    # Period scheduling, clash detection
+│   │   │   ├── attendance/   # Class sessions, roll-call, biometric sync
+│   │   │   ├── examinations/ # Schedules, grading scales, marks entry
 │   │   │   ├── hrms/         # Staff directory, leaves, payroll
-│   │   │   ├── ai-yantra/    # Voice agent, biometric attendance, AI tutor
-│   │   │   └── optional-modules/ # Events, Transport, Hostel, Library, Sports, Inventory
-│   │   ├── routes/           # Versioned API router (/api/v1)
-│   │   └── server.ts         # Server bootstrap & lifecycle hooks
-│   ├── nodemon.json          # Development watcher configuration
-│   └── package.json          # Backend dependencies & scripts
+│   │   │   └── ai-yantra/    # Voice agent, telephony providers, AI services
+│   │   └── routes/           # Versioned REST router (/api/v1)
+│   └── package.json
 ├── frontend/                 # Next.js 14 + React 18 App Router
-│   ├── app/                  # Application routes (32 static pages)
-│   │   ├── (institution-admin)/ # Institution administration workspace
-│   │   ├── (super-admin)/       # Super Admin global control center
-│   │   ├── academics/           # Curriculum & class hierarchy
-│   │   ├── admissions/          # Admissions funnel & Kanban board
-│   │   ├── faculty/             # Faculty dashboard & roster
-│   │   ├── finance/             # Fee management & invoices
-│   │   └── students/            # Student 360° profile view
-│   ├── components/           # Component Design System
-│   │   ├── student/          # Single StudentProfile (Rule 1, 8 tabs)
-│   │   └── ui/               # Button, Table, Card, Form, SlideOver, etc.
-│   ├── lib/                  # TanStack Query hooks & API client with mock fallback
-│   └── package.json          # Frontend dependencies & scripts
-└── docs/                     # Canonical System Specifications
-    ├── PRD.md                # Product Requirements Document (30 Rules)
-    ├── TECH_SPEC.md          # Technical Architecture & Schema Spec
-    ├── TASKS.md              # Milestone & Task Tracking Ledger
-    ├── DECISIONS.md          # Architecture Decision Records (ADR-001 to ADR-010)
-    ├── MEMORY.md             # Persistent Agent Memory & Context
-    ├── Design.md             # Visual Design System Tokens
-    ├── AppFlow.md            # Route Hierarchy & Navigation Matrix
-    └── VID_Database_Architecture.md # 16 PostgreSQL Domain Schemas
+│   ├── app/                  # Application route workspaces
+│   │   ├── (auth)/           # Authentication & multi-tenant login
+│   │   ├── academics/        # Curriculum & class hierarchy
+│   │   ├── admissions/       # Admissions funnel & application review
+│   │   ├── attendance/       # Roll-call, daily registers, biometric attendance
+│   │   ├── faculty/          # Faculty dashboard & roster
+│   │   ├── finance/          # Fee collection, invoices, receipts
+│   │   ├── students/         # Student 360° profile view
+│   │   └── voice-agent/      # Voice agent campaigns, call history & setup
+│   ├── components/           # UI design system & workspace layouts
+│   ├── lib/                  # TanStack Query hooks, API client, face engine
+│   ├── public/               # Static assets & vendor model binaries
+│   └── package.json
+├── docs/                     # Architecture & Product Specifications
+└── packages/                 # Shared TypeScript libraries & API schemas
 ```
 
 ---
 
-## 📊 Current Implementation Progress (As of 2026-09-25)
+## 🌟 Primary Workspaces & Capabilities
 
-| Subsystem | Milestone Target | Status | Deliverables & Verification |
-| :--- | :--- | :---: | :--- |
-| **Supabase Database** | 16 Domains, 127 Tables | **100% Deployed** | All tables, triggers, indexes, RLS policies, views, and seed data live on Supabase PostgreSQL. |
-| **Backend Core** | Layered MVC in TypeScript | **100% Active** | Node.js 22 + Express running on port `5000`. Centralized error handling, tenant isolation, and connection pooling. |
-| **Admissions Module** | Full Layered MVC | **Complete** | Endpoints for enquiries, Kanban status shifts, document verification, and atomic student enrollment pipeline. |
-| **Students Module** | Single Student Master | **Complete** | 360° profile aggregator fetching demographics, guardians, academic enrollments, attendance, and fees in one call. |
-| **Institutions Module** | Full Layered MVC | **Complete** | Multi-tenant tenant directory, plan tiers, and dynamic module toggle flags. |
-| **Academics Module** | Full Layered MVC | **Complete** | Department, course, class, section, subject hierarchy and syllabus management. |
-| **Faculty Module** | Full Layered MVC | **Complete** | Faculty directory, subject specialization, class mapping, and workload counters. |
-| **Finance Module** | Full Layered MVC | **Complete** | Fee structures, student fee ledgers, payment checkout, invoices, and instant PDF receipts. |
-| **Operational Routes** | REST Endpoints | **Complete** | Attendance, Examinations, Documents, Timetable, HRMS, AI Yantra, and Optional Modules. |
-| **Frontend UI** | Next.js 14 App Router | **100% Built** | 32/32 static routes, component design system, role-adaptive sidebar, single Student Master view. |
-| **Data Synchronization** | Frontend $\leftrightarrow$ Backend | **Connected** | TanStack Query custom hooks wired to `http://localhost:5000/api/v1/` with zero-downtime mock fallback. |
+| Workspace | Scope & Key Capabilities |
+| :--- | :--- |
+| **Student 360° Master** | Single comprehensive record aggregating demographics, guardians, enrollments, attendance records, academic performance, and financial balances in one place. |
+| **Admissions Pipeline** | Application lifecycle from enquiry to document verification and atomic enrollment into the student master table. |
+| **Academics & Timetable** | Department hierarchies, course offerings, grade sections, timetable clash detection, and period scheduling. |
+| **Attendance & Biometrics** | Multi-modal attendance tracking: standard roll-call registers and privacy-preserving on-device facial recognition running locally in the browser with offline capability. |
+| **Finance & Fee Ledger** | Transparent fee schedules, installment tracking, online payment receipts, and automated parent billing summaries. |
+| **Parent Voice Outreach** | Multilingual outbound communication for school event announcements, fee reminders, and attendance alerts with automated WhatsApp follow-ups. |
+| **Examinations & Grading** | Exam timetables, multi-assessor marks entry, weighted grading structures, and automated report card generation. |
+| **HRMS & Faculty** | Staff profiles, subject specialization mapping, leave tracking, and teaching workload management. |
 
 ---
 
 ## 🚀 Getting Started
 
 ### 1. Prerequisites
-- **Node.js**: v20.x or v22.x+
+- **Node.js**: v20.x or v22.x LTS
 - **Package Manager**: `npm`
-- **Git**
+- **PostgreSQL / Supabase Database instance**
 
-### 2. Environment Variables
-In `backend/.env`:
+### 2. Environment Configuration
+
+Copy the example environment file in `backend/`:
+```bash
+cp backend/.env.example backend/.env
+```
+
+Configure your database and security credentials in `backend/.env`:
 ```env
 PORT=5000
 NODE_ENV=development
-DATABASE_URL=postgresql://postgres.cyvckmjocomqzipbvbpv:[PASSWORD]@aws-0-ap-northeast-2.pooler.supabase.com:5432/postgres?sslmode=require
-JWT_SECRET=super-secret-jwt-key-for-vid-platform-2026
-JWT_EXPIRES_IN=1d
+DATABASE_URL=postgresql://postgres.[REF]:[PASSWORD]@aws-0-ap-northeast-2.pooler.supabase.com:5432/postgres?sslmode=require
+JWT_SECRET=your-secure-random-jwt-secret-key-min-32-chars
+JWT_EXPIRES_IN=7d
 CORS_ORIGIN=http://localhost:3000
 ```
 
----
+### 3. Installation
 
-### 3. Running the Development Servers
+Install backend dependencies:
+```bash
+cd backend
+npm install
+```
 
-#### Running Backend
-```powershell
-# In vidforum/backend:
+Install frontend dependencies (this automatically sets up the self-hosted AI models and vendor runtimes):
+```bash
+cd ../frontend
+npm install
+```
+
+### 4. Running the Development Environment
+
+Start the Backend API Server:
+```bash
+cd backend
 npm run dev
-# Or using nodemon:
-nodemon
 ```
-The backend starts at `http://localhost:5000`.  
-Health check: `http://localhost:5000/api/v1/health`
+*API server runs at `http://localhost:5000` (Health check: `http://localhost:5000/api/v1/health`)*
 
-#### Running Frontend
-```powershell
-# In vidforum/frontend:
+Start the Frontend Web Application:
+```bash
+cd frontend
 npm run dev
 ```
-The frontend starts at `http://localhost:3000`.
+*Application runs at `http://localhost:3000`*
 
 ---
 
-### 4. Running in Production
-
-#### Build and Start Backend
-```powershell
-# In vidforum/backend:
-npm run build    # Compiles TypeScript (src/ -> dist/)
-npm start        # Executes node dist/server.js
-```
-
-#### Build and Start Frontend
-```powershell
-# In vidforum/frontend:
-npm run build    # Compiles Next.js production bundle
-npm start        # Starts production Next.js server
-```
-
----
-
-## 📡 API Reference Snapshot (`/api/v1/`)
+## 📡 API Reference Overview (`/api/v1/`)
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `GET` | `/health` | Server health check and database connection status |
-| `GET` | `/institutions` | List all registered tenants with subscription tier |
-| `GET` | `/students` | Query students with 360° profile aggregation |
-| `GET` | `/admissions/applications` | Kanban admission applications list |
+| `GET` | `/health` | Server health check and database connectivity verification |
+| `GET` | `/institutions` | List registered tenants and active module configuration |
+| `GET` | `/students` | Query students with 360° aggregated master profile |
+| `GET` | `/admissions/applications` | Retrieve admission applicant pipeline |
 | `POST`| `/admissions/applications/:id/approve` | Transition applicant to enrolled student master |
-| `GET` | `/academics/hierarchy` | Full academic tree (departments, classes, sections) |
-| `GET` | `/faculty` | Faculty roster with assigned subjects and workload |
-| `GET` | `/finance/fees` | Fee structures and student billing ledger |
-| `POST`| `/finance/payments` | Record fee payment and issue receipt |
-| `GET` | `/attendance/sessions` | Class attendance roll-call sessions |
+| `GET` | `/academics/hierarchy` | Full academic structure (departments, classes, sections) |
+| `GET` | `/attendance/sessions` | Fetch class attendance sessions and daily logs |
+| `POST`| `/attendance/sessions` | Finalize attendance submission |
+| `GET` | `/finance/fees` | Fee structures, student ledgers, and billing records |
 | `GET` | `/examinations/schedules` | Examination timetables and marks entry |
-| `POST`| `/ai-yantra/voice/call` | Dispatch AI voice campaign call |
-| `POST`| `/ai-yantra/attendance/verify` | Face biometric attendance verification |
-| `POST`| `/ai-yantra/tutor/chat` | Context-bounded AI tutoring query |
+| `GET` | `/ai-yantra/voice/health` | Telephony line, voice synthesis, and service health check |
+| `GET` | `/ai-yantra/voice/campaigns` | List parent notification campaigns and progress |
+| `POST`| `/ai-yantra/voice/call-test` | Dispatch a single test call |
 
 ---
 
-## 📚 Complete Specifications & Documentation
+## 📚 Documentation & Specifications
 
-- [PRD.md](file:///c:/Users/Jagan%20Mohan%20Reddy/OneDrive/Desktop/VID_School/vidforum/docs/PRD.md) — 30 Non-Negotiable Rules, 10 Personas, Feature Matrix
-- [TECH_SPEC.md](file:///c:/Users/Jagan%20Mohan%20Reddy/OneDrive/Desktop/VID_School/vidforum/docs/TECH_SPEC.md) — System Architecture, Node.js + Express + PostgreSQL Spec
-- [TASKS.md](file:///c:/Users/Jagan%20Mohan%20Reddy/OneDrive/Desktop/VID_School/vidforum/docs/TASKS.md) — Milestone breakdown, verification checklist, progress ledger
-- [DECISIONS.md](file:///c:/Users/Jagan%20Mohan%20Reddy/OneDrive/Desktop/VID_School/vidforum/docs/DECISIONS.md) — Architecture Decision Records (ADR-001 through ADR-010)
-- [MEMORY.md](file:///c:/Users/Jagan%20Mohan%20Reddy/OneDrive/Desktop/VID_School/vidforum/docs/MEMORY.md) — Persistent memory, plugin matrix, and conversion logs
-- [AppFlow.md](file:///c:/Users/Jagan%20Mohan%20Reddy/OneDrive/Desktop/VID_School/vidforum/docs/AppFlow.md) — Screen inventory and route navigation hierarchy
-- [Design.md](file:///c:/Users/Jagan%20Mohan%20Reddy/OneDrive/Desktop/VID_School/vidforum/docs/Design.md) — Design system tokens and component guidelines
-- [VID_Database_Architecture.md](file:///c:/Users/Jagan%20Mohan%20Reddy/OneDrive/Desktop/VID_School/vidforum/docs/VID_Database_Architecture.md) — 16 PostgreSQL domains and 127 table schemas
-- [about_plugins.md](file:///c:/Users/Jagan%20Mohan%20Reddy/OneDrive/Desktop/VID_School/vidforum/docs/about_plugins.md) — 28 Custom Agent Plugins, Workflows, and Skills Matrix
+Detailed architectural documents and system specifications are available in the [`docs/`](docs/) directory:
+
+- [PRD.md](docs/PRD.md) — Product Requirements Document & Non-Negotiable System Invariants
+- [TECH_SPEC.md](docs/TECH_SPEC.md) — Technical Architecture & Domain Schemas
+- [TASKS.md](docs/TASKS.md) — System Roadmap & Milestone Ledger
+- [DECISIONS.md](docs/DECISIONS.md) — Architecture Decision Records (ADRs)
+- [Design.md](docs/Design.md) — Visual Design Tokens & Component System Guidelines
+- [VID_Database_Architecture.md](docs/VID_Database_Architecture.md) — PostgreSQL Domain Schemas
 
 ---
 

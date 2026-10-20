@@ -1,15 +1,15 @@
 import { WebSocket } from 'ws';
 import { db } from '../../config/database';
 import { env } from '../../config/env';
-import {
-  muLawToLinear16Buffer,
-  resample8kTo16k,
-  createWavBuffer,
-  wavToTelephonyMuLaw,
-  chunkMuLawFrames,
-  calculatePcmEnergy,
-} from './audio-codec';
+import { muLawToLinear16Buffer } from './audio/mulaw';
+import { resample8kTo16k, createWavBuffer, StereoCallRecorder } from './audio/wav';
+import { SessionVadTracker } from './audio/vad';
+import { getComfortNoiseFrame, ACOUSTIC_FILLER_SCRIPTS } from './audio/comfortNoise';
 import { maskPhoneNumber } from './telephony';
+import { prefetchStudentContext } from './intelligence/tools';
+import { synthesizeToMuLawFrames } from './intelligence/sarvamTtsStream';
+import { transcribeWithSarvam } from './intelligence/sarvamStt';
+import { processConversationalTurn } from './intelligence/groqBrain';
 
 export interface VoiceSessionState {
   callSid: string;
@@ -30,51 +30,28 @@ export interface VoiceSessionState {
   silenceTimer?: NodeJS.Timeout;
   maxCallTimer?: NodeJS.Timeout;
   audioPlaybackTimer?: NodeJS.Timeout;
+  comfortNoiseTimer?: NodeJS.Timeout;
   inboundAudioChunks: Buffer[];
   isProcessingTurn: boolean;
   ws: WebSocket;
   provider: 'twilio' | 'exotel';
+  vadTracker: SessionVadTracker;
+  recorder: StereoCallRecorder;
+  studentContext?: any;
 }
 
 export class VoiceSessionManager {
   private sessions = new Map<string, VoiceSessionState>();
 
-  // Sarvam Saaras STT API Caller
+  // Sarvam Saaras STT API Caller (delegates to transcribeWithSarvam)
   async transcribeAudio(wavBuffer: Buffer, language: string): Promise<string> {
-    if (!env.SARVAM_API_KEY) {
-      console.warn('[STT] SARVAM_API_KEY missing, skipping transcription');
-      return '';
-    }
-
-    try {
-      const formData = new FormData();
-      formData.append('file', new Blob([new Uint8Array(wavBuffer)], { type: 'audio/wav' }), 'audio.wav');
-      formData.append('model', 'saaras:v3');
-      formData.append('language_code', language || 'te-IN');
-
-      const res = await fetch('https://api.sarvam.ai/speech-to-text', {
-        method: 'POST',
-        headers: {
-          'api-subscription-key': env.SARVAM_API_KEY,
-        },
-        body: formData,
-      });
-
-      if (!res.ok) {
-        const err = await res.text();
-        console.warn(`[STT ERROR ${res.status}]`, err);
-        return '';
-      }
-
-      const data: any = await res.json();
-      return data.transcript?.trim() || '';
-    } catch (err: any) {
-      console.error('[STT EXCEPTION]', err.message);
-      return '';
-    }
+    return await transcribeWithSarvam(wavBuffer, {
+      language,
+      mode: 'codemix',
+    });
   }
 
-  // Handle WebSocket Connection
+  // Handle WebSocket Connection from Carrier Gateway
   handleConnection(ws: WebSocket) {
     let currentSession: VoiceSessionState | null = null;
 
@@ -124,9 +101,23 @@ export class VoiceSessionManager {
             isProcessingTurn: false,
             ws,
             provider: msg.start?.accountSid ? 'twilio' : 'exotel',
+            vadTracker: new SessionVadTracker(),
+            recorder: new StereoCallRecorder(),
           };
 
           this.sessions.set(streamSid, currentSession);
+
+          // Pre-fetch student academic & fee dossier in the background
+          prefetchStudentContext(currentSession.institutionId, currentSession.studentId)
+            .then((dossier) => {
+              if (dossier && currentSession) {
+                currentSession.studentContext = dossier;
+                if (dossier.studentName) currentSession.studentName = dossier.studentName;
+                if (dossier.guardianName) currentSession.guardianName = dossier.guardianName;
+                console.log(`[VOICE WS:DOSSIER] Pre-warmed academic report card loaded for ${dossier.studentName}`);
+              }
+            })
+            .catch(() => {});
 
           // Setup Hard Limits: 5 min max call duration
           currentSession.maxCallTimer = setTimeout(() => {
@@ -146,28 +137,53 @@ export class VoiceSessionManager {
 
           const rawMuLaw = Buffer.from(payload, 'base64');
           const pcmLinear = muLawToLinear16Buffer(rawMuLaw);
-          const energy = calculatePcmEnergy(pcmLinear);
+
+          // Record inbound audio on Left Channel
+          currentSession.recorder.recordLeft(pcmLinear);
+
+          // Voice Activity & Barge-In Evaluation
+          const { isSpeech, bargeInTriggered, energy } = currentSession.vadTracker.processFrame(
+            pcmLinear,
+            currentSession.isAgentSpeaking
+          );
 
           currentSession.lastAudioReceivedAt = Date.now();
 
-          // BARGE-IN DETECTION: If caller speaks with significant energy while assistant is speaking
-          if (currentSession.isAgentSpeaking && energy > 650) {
-            console.log(`[VOICE WS:BARGE-IN] Interruption detected (energy: ${energy.toFixed(0)}). Clearing outbound audio queue.`);
+          // INSTANT BARGE-IN: If caller speaks with vocal energy while assistant is speaking
+          if (bargeInTriggered && currentSession.isAgentSpeaking) {
+            console.log(
+              `[VOICE WS:BARGE-IN] Interruption detected (energy: ${energy.toFixed(0)}). Clearing outbound audio queue.`
+            );
             this.interruptAssistant(currentSession);
           }
 
-          // Accumulate audio when not speaking
-          if (!currentSession.isAgentSpeaking && energy > 250) {
-            currentSession.inboundAudioChunks.push(rawMuLaw);
-          } else if (!currentSession.isAgentSpeaking && currentSession.inboundAudioChunks.length > 0) {
-            // Buffer trailing silence
-            currentSession.inboundAudioChunks.push(rawMuLaw);
+          // Accumulate audio when agent is not speaking
+          if (!currentSession.isAgentSpeaking) {
+            if (isSpeech) {
+              currentSession.inboundAudioChunks.push(rawMuLaw);
+              currentSession.silenceCount = 0; // Reset silence counter on active speech
+            } else if (currentSession.inboundAudioChunks.length > 0) {
+              // Caller has spoken and is currently pausing
+              currentSession.inboundAudioChunks.push(rawMuLaw);
+              currentSession.silenceCount = (currentSession.silenceCount || 0) + 1;
 
-            // If we have accumulated at least ~1.2s of audio and now have silence -> process utterance
-            if (currentSession.inboundAudioChunks.length >= 60 && !currentSession.isProcessingTurn) {
-              const audioToProcess = Buffer.concat(currentSession.inboundAudioChunks);
-              currentSession.inboundAudioChunks = [];
-              this.processCallerUtterance(currentSession, audioToProcess);
+              // Natural turn completion requires:
+              // 1. Continuous silence for at least 600ms (30 consecutive frames)
+              // 2. Total accumulated speech of at least 500ms (25 frames)
+              // This guarantees the caller is never cut off mid-thought!
+              if (
+                currentSession.silenceCount >= 30 &&
+                currentSession.inboundAudioChunks.length >= 25 &&
+                !currentSession.isProcessingTurn
+              ) {
+                console.log(
+                  `[VOICE WS:VAD] Natural end-of-turn detected. Processing ${currentSession.inboundAudioChunks.length} frames (${currentSession.inboundAudioChunks.length * 20}ms audio).`
+                );
+                const audioToProcess = Buffer.concat(currentSession.inboundAudioChunks);
+                currentSession.inboundAudioChunks = [];
+                currentSession.silenceCount = 0;
+                this.processCallerUtterance(currentSession, audioToProcess);
+              }
             }
           }
           return;
@@ -208,10 +224,22 @@ export class VoiceSessionManager {
 
     // Send Twilio "clear" event to empty carrier audio buffer immediately
     if (session.ws.readyState === WebSocket.OPEN) {
-      session.ws.send(JSON.stringify({
-        event: 'clear',
-        streamSid: session.streamSid,
-      }));
+      session.ws.send(
+        JSON.stringify({
+          event: 'clear',
+          streamSid: session.streamSid,
+        })
+      );
+    }
+
+    // Mark previous assistant turn with [Agent Interrupted] so the LLM brain knows it was cut short
+    for (let i = session.transcript.length - 1; i >= 0; i--) {
+      if (session.transcript[i].role === 'assistant') {
+        if (!session.transcript[i].content.includes('[Agent Interrupted]')) {
+          session.transcript[i].content += ' [Agent Interrupted]';
+        }
+        break;
+      }
     }
   }
 
@@ -229,7 +257,6 @@ export class VoiceSessionManager {
 
   // Get Pure Language Opening Script
   private getOpeningScript(session: VoiceSessionState): string {
-    const name = session.guardianName || 'తల్లిదండ్రులు';
     const student = session.studentName || 'మీ విద్యార్థి';
 
     if (session.language === 'te-IN') {
@@ -261,7 +288,7 @@ export class VoiceSessionManager {
       const pcm16k = resample8kTo16k(pcm8k);
       const wav = createWavBuffer(pcm16k, 16000);
 
-      // 2. Call Sarvam Saaras STT
+      // 2. Call Sarvam Saaras v3 STT in 'codemix' mode
       const userText = await this.transcribeAudio(wav, session.language);
       if (!userText || userText.trim().length === 0) {
         session.isProcessingTurn = false;
@@ -275,23 +302,32 @@ export class VoiceSessionManager {
         timestamp: new Date().toISOString(),
       });
 
-      // 3. Dynamic Import of Groq Chat with Tools (circular avoidance)
-      const { callGroqChatWithTools } = await import('./ai-yantra.routes');
-      const chatHistory = session.transcript.map(t => ({ role: t.role, content: t.content }));
+      // 3. Conversational Reasoning via Groq LPU with Counselor Persona
+      const chatHistory = session.transcript.map((t) => ({ role: t.role, content: t.content }));
 
-      const aiResponse = await callGroqChatWithTools(
-        session.institutionId,
-        chatHistory,
-        session.studentId,
-        session.language,
-        session.studentName
-      );
+      const aiResponse = await processConversationalTurn(chatHistory, {
+        institutionId: session.institutionId,
+        studentId: session.studentId,
+        studentName: session.studentName,
+        guardianName: session.guardianName,
+        language: session.language,
+        useCase: session.useCase,
+        studentDossier: session.studentContext?.dossierSummary,
+        onToolStart: (toolName) => {
+          console.log(`[VOICE WS:TOOL] Live lookup triggered: ${toolName}`);
+          // Send pre-cached acoustic filler clip so caller never hears dead air
+          const filler =
+            ACOUSTIC_FILLER_SCRIPTS[session.language as keyof typeof ACOUSTIC_FILLER_SCRIPTS] ||
+            ACOUSTIC_FILLER_SCRIPTS['te-IN'];
+          this.speakText(session, filler).catch(() => {});
+        },
+      });
 
-      const replyText = aiResponse.reply || (
-        session.language === 'te-IN'
+      const replyText =
+        aiResponse.reply ||
+        (session.language === 'te-IN'
           ? 'సరేనండి, వివరాలు సరిచూసి మీకు త్వరలోనే సమాచారం తెలియజేస్తాము.'
-          : 'Thank you, I will confirm the records and update you.'
-      );
+          : 'Thank you, I will confirm the details and update you.');
 
       console.log(`[VOICE WS:AGENT] Spoken response: "${replyText}"`);
       session.transcript.push({
@@ -300,7 +336,7 @@ export class VoiceSessionManager {
         timestamp: new Date().toISOString(),
       });
 
-      // 4. Synthesize & Stream Back
+      // 4. Synthesize & Stream Back in Native 8kHz Frames (Zero Pitch Distortion)
       await this.speakText(session, replyText);
     } catch (err: any) {
       console.error('[VOICE WS UTTERANCE ERROR]', err.message);
@@ -309,42 +345,92 @@ export class VoiceSessionManager {
     }
   }
 
-  // Speak Text Aloud via Sarvam Bulbul v2 and Stream in 20ms Frames
+  // Speak Text Aloud via Sarvam Bulbul and Stream with Pre-buffered Jitter-free Cadence @ 8kHz
   async speakText(session: VoiceSessionState, text: string) {
     if (!text || !text.trim()) return;
 
+    // 1. Immediately cancel any prior audio playback timer to prevent stream overlap/clashing
+    if (session.audioPlaybackTimer) {
+      clearTimeout(session.audioPlaybackTimer);
+      clearInterval(session.audioPlaybackTimer);
+      session.audioPlaybackTimer = undefined;
+    }
+
     try {
-      const { callSarvamTTS } = await import('./ai-yantra.routes');
-      const base64Wav = await callSarvamTTS(text, session.language, 'priya');
+      // 2. Synthesize directly to native 8kHz mu-law frames (zero 7350Hz decimation pitch-warp)
+      const frames = await synthesizeToMuLawFrames(text, {
+        language: session.language,
+        speaker: 'priya',
+        sampleRate: 8000,
+      });
 
-      if (!base64Wav) return;
-
-      const wavBuffer = Buffer.from(base64Wav, 'base64');
-      const muLawAudio = wavToTelephonyMuLaw(wavBuffer);
-      const frames = chunkMuLawFrames(muLawAudio, 160); // 20ms frames @ 8kHz
+      if (!frames || frames.length === 0) return;
 
       session.isAgentSpeaking = true;
+
+      // 3. Initial Pre-Buffer Burst (300ms = 15 frames)
+      // Immediately primes Twilio's carrier jitter buffer, completely eliminating stutter and micro-drops!
+      const PREBUFFER_FRAMES = Math.min(15, frames.length);
       let frameIndex = 0;
 
-      session.audioPlaybackTimer = setInterval(() => {
+      for (let i = 0; i < PREBUFFER_FRAMES; i++) {
+        const frame = frames[frameIndex++];
+        session.recorder.recordRight(muLawToLinear16Buffer(frame));
+
+        if (session.ws.readyState === WebSocket.OPEN) {
+          session.ws.send(
+            JSON.stringify({
+              event: 'media',
+              streamSid: session.streamSid,
+              media: {
+                payload: frame.toString('base64'),
+              },
+            })
+          );
+        }
+      }
+
+      if (frameIndex >= frames.length) {
+        session.isAgentSpeaking = false;
+        return;
+      }
+
+      // 4. Drift-Compensated High-Resolution Pacer for Remaining Frames
+      const startTime = Date.now();
+      const intervalMs = 20;
+
+      const scheduleNextFrame = () => {
         if (!session.isAgentSpeaking || frameIndex >= frames.length) {
-          clearInterval(session.audioPlaybackTimer);
           session.audioPlaybackTimer = undefined;
           session.isAgentSpeaking = false;
           return;
         }
 
         const frame = frames[frameIndex++];
+        session.recorder.recordRight(muLawToLinear16Buffer(frame));
+
         if (session.ws.readyState === WebSocket.OPEN) {
-          session.ws.send(JSON.stringify({
-            event: 'media',
-            streamSid: session.streamSid,
-            media: {
-              payload: frame.toString('base64'),
-            },
-          }));
+          session.ws.send(
+            JSON.stringify({
+              event: 'media',
+              streamSid: session.streamSid,
+              media: {
+                payload: frame.toString('base64'),
+              },
+            })
+          );
         }
-      }, 20); // 20ms cadence matches telephony packetizer
+
+        // Calculate expected elapsed time relative to frames paced
+        const framesPaced = frameIndex - PREBUFFER_FRAMES;
+        const expectedElapsed = framesPaced * intervalMs;
+        const actualElapsed = Date.now() - startTime;
+        const delay = Math.max(0, expectedElapsed - actualElapsed);
+
+        session.audioPlaybackTimer = setTimeout(scheduleNextFrame, delay);
+      };
+
+      session.audioPlaybackTimer = setTimeout(scheduleNextFrame, intervalMs);
     } catch (err: any) {
       console.error('[VOICE WS SPEAK ERROR]', err.message);
       session.isAgentSpeaking = false;
@@ -353,11 +439,12 @@ export class VoiceSessionManager {
 
   // Polite Goodbye and Hangup
   private async speakAndHangup(session: VoiceSessionState, reason: string) {
-    const goodbye = session.language === 'te-IN'
-      ? 'నారాయణ పాఠశాలకు సమయం ఇచ్చినందుకు ధన్యవాదాలు అండి. సెలవు.'
-      : session.language === 'hi-IN'
-      ? 'नारायण स्कूल को समय देने के लिए धन्यवाद। आपका दिन शुभ हो।'
-      : 'Thank you for your time. Have a wonderful day.';
+    const goodbye =
+      session.language === 'te-IN'
+        ? 'నారాయణ పాఠశాలకు సమయం ఇచ్చినందుకు ధన్యవాదాలు అండి. సెలవు.'
+        : session.language === 'hi-IN'
+        ? 'नारायण स्कूल को समय देने के लिए धन्यवाद। आपका दिन शुभ हो।'
+        : 'Thank you for your time. Have a wonderful day.';
 
     await this.speakText(session, goodbye);
 
@@ -422,6 +509,7 @@ export class VoiceSessionManager {
       if (s.silenceTimer) clearTimeout(s.silenceTimer);
       if (s.maxCallTimer) clearTimeout(s.maxCallTimer);
       if (s.audioPlaybackTimer) clearInterval(s.audioPlaybackTimer);
+      if (s.comfortNoiseTimer) clearInterval(s.comfortNoiseTimer);
       this.sessions.delete(streamSid);
     }
   }

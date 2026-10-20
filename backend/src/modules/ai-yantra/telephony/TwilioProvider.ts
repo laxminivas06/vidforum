@@ -23,18 +23,19 @@ export class TwilioProvider implements TelephonyProvider {
       const auth = Buffer.from(`${env.TWILIO_ACCOUNT_SID}:${env.TWILIO_AUTH_TOKEN}`).toString('base64');
       const twilioUrl = `https://api.twilio.com/2010-04-01/Accounts/${env.TWILIO_ACCOUNT_SID}/Calls.json`;
 
+      const spokenText = ctx.initialMessage || (
+        ctx.language === 'te-IN'
+          ? 'నమస్కారం అండి! నారాయణ పాఠశాల నుండి ప్రియను మాట్లాడుతున్నాను.'
+          : ctx.language === 'hi-IN'
+          ? 'नमस्ते! मैं नारायण स्कूल से प्रिया बोल रही हूँ।'
+          : 'Hello! This is Priya calling from Narayana High School.'
+      );
+      const pollyLang = ctx.language === 'te-IN' ? 'te-IN' : ctx.language === 'hi-IN' ? 'hi-IN' : 'en-IN';
+
       let twiml: string;
       if (ctx.streamUrl) {
-        twiml = `<Response><Connect><Stream url="${ctx.streamUrl}"><Parameter name="institutionId" value="${ctx.institutionId || ''}" /><Parameter name="studentId" value="${ctx.studentId || ''}" /><Parameter name="studentName" value="${encodeURIComponent(ctx.studentName || '')}" /><Parameter name="guardianName" value="${encodeURIComponent(ctx.guardianName || '')}" /><Parameter name="phone" value="${normalized}" /><Parameter name="language" value="${ctx.language || 'te-IN'}" /><Parameter name="useCase" value="${ctx.useCase || 'event_notice'}" /></Stream></Connect></Response>`;
+        twiml = `<Response><Connect><Stream url="${ctx.streamUrl}"><Parameter name="institutionId" value="${ctx.institutionId || ''}" /><Parameter name="studentId" value="${ctx.studentId || ''}" /><Parameter name="studentName" value="${encodeURIComponent(ctx.studentName || '')}" /><Parameter name="guardianName" value="${encodeURIComponent(ctx.guardianName || '')}" /><Parameter name="phone" value="${normalized}" /><Parameter name="language" value="${ctx.language || 'te-IN'}" /><Parameter name="useCase" value="${ctx.useCase || 'event_notice'}" /></Stream></Connect><Say voice="Polly.Aditi" language="${pollyLang}">${spokenText}</Say></Response>`;
       } else {
-        const spokenText = ctx.initialMessage || (
-          ctx.language === 'te-IN'
-            ? 'నమస్కారం అండి! నారాయణ పాఠశాల నుండి ప్రియను మాట్లాడుతున్నాను.'
-            : ctx.language === 'hi-IN'
-            ? 'नमस्ते! मैं नारायण स्कूल से प्रिया बोल रही हूँ।'
-            : 'Hello! This is Priya calling from Narayana High School.'
-        );
-        const pollyLang = ctx.language === 'te-IN' ? 'te-IN' : ctx.language === 'hi-IN' ? 'hi-IN' : 'en-IN';
         twiml = `<Response><Say voice="Polly.Aditi" language="${pollyLang}">${spokenText}</Say></Response>`;
       }
 
@@ -42,6 +43,11 @@ export class TwilioProvider implements TelephonyProvider {
       params.append('From', env.TWILIO_PHONE_NUMBER);
       params.append('To', normalized);
       params.append('Twiml', twiml);
+
+      if (ctx.enableAmd) {
+        params.append('MachineDetection', 'Enable');
+        params.append('MachineDetectionTimeout', String(ctx.amdTimeoutSeconds || 5));
+      }
 
       if (ctx.webhookUrl) {
         params.append('StatusCallback', ctx.webhookUrl);

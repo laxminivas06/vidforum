@@ -38,9 +38,14 @@ export const env = {
   TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN || '',
   TWILIO_PHONE_NUMBER: process.env.TWILIO_PHONE_NUMBER || '',
   TELEPHONY_PROVIDER: process.env.TELEPHONY_PROVIDER || 'auto',
-  PUBLIC_BASE_URL: process.env.PUBLIC_BASE_URL || '',
-  WHATSAPP_API_TOKEN: process.env.WHATSAPP_API_TOKEN || '',
-  WHATSAPP_PHONE_NUMBER_ID: process.env.WHATSAPP_PHONE_NUMBER_ID || '',
+  get PUBLIC_BASE_URL(): string {
+    return process.env.PUBLIC_BASE_URL || '';
+  },
+  WHATSAPP_API_TOKEN: process.env.WHATSAPP_API_TOKEN || process.env.META_WHATSAPP_TOKEN || '',
+  WHATSAPP_PHONE_NUMBER_ID: process.env.WHATSAPP_PHONE_NUMBER_ID || process.env.META_PHONE_NUMBER_ID || '',
+  META_WHATSAPP_TOKEN: process.env.META_WHATSAPP_TOKEN || process.env.WHATSAPP_API_TOKEN || '',
+  META_PHONE_NUMBER_ID: process.env.META_PHONE_NUMBER_ID || process.env.WHATSAPP_PHONE_NUMBER_ID || '',
+  REDIS_URL: process.env.REDIS_URL || 'redis://localhost:6379',
   DEFAULT_TENANT_ID: process.env.DEFAULT_TENANT_ID || '00000000-0000-0000-0000-000000000001',
   // Optional: private object storage for face reference photos (fail-open when unset)
   SUPABASE_URL: process.env.SUPABASE_URL || '',

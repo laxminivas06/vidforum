@@ -5,6 +5,13 @@ import { sendSuccess, sendError } from '../../utils/api-response';
 import { tenantMiddleware } from '../../middleware/tenant.middleware';
 import { getTelephonyProvider, normalizeE164, maskPhoneNumber } from './telephony';
 import { campaignWorkerService } from './campaign-worker.service';
+import {
+  getStudentMarksTool,
+  getStudentAttendanceTool,
+  getFeeStatusTool,
+  normalizeSubjectName,
+} from './intelligence/tools';
+import { processConversationalTurn } from './intelligence/groqBrain';
 
 const router = Router();
 
@@ -13,139 +20,20 @@ const router = Router();
 // ==========================================
 
 export async function executeDatabaseTool(instId: string, toolName: string, parameters: any) {
+  const { student_id } = parameters || {};
+  const targetStudentId = student_id || 'SIA-2026-0101';
+
   if (toolName === 'get_student_marks') {
-    const { student_id, subject = 'Science' } = parameters || {};
-    const targetSubject = (subject && subject.toLowerCase() !== 'all') ? `%${subject}%` : '%';
-    const result = await db.query(
-      `SELECT m.marks_obtained, es.max_marks, es.pass_marks, sub.name as subject_name, e.name as exam_name
-       FROM marks m
-       JOIN exam_subjects es ON es.id = m.exam_subject_id
-       JOIN subjects sub ON sub.id = es.subject_id
-       JOIN exams e ON e.id = es.exam_id
-       JOIN students s ON s.id = m.student_id
-       WHERE m.institution_id = $1
-         AND (s.id::text = $2 OR s.admission_number = $2)
-         AND LOWER(sub.name) LIKE LOWER($3)
-       ORDER BY e.created_at DESC, sub.name ASC LIMIT 5`,
-      [instId, student_id || 'SIA-2026-0101', targetSubject]
-    );
-
-    let rows = result.rows;
-    if (rows.length === 0) {
-      // Fallback: fetch all available recent marks for this student
-      const allRes = await db.query(
-        `SELECT m.marks_obtained, es.max_marks, es.pass_marks, sub.name as subject_name, e.name as exam_name
-         FROM marks m
-         JOIN exam_subjects es ON es.id = m.exam_subject_id
-         JOIN subjects sub ON sub.id = es.subject_id
-         JOIN exams e ON e.id = es.exam_id
-         JOIN students s ON s.id = m.student_id
-         WHERE m.institution_id = $1
-           AND (s.id::text = $2 OR s.admission_number = $2)
-         ORDER BY e.created_at DESC, sub.name ASC LIMIT 5`,
-        [instId, student_id || 'SIA-2026-0101']
-      );
-      rows = allRes.rows;
-    }
-
-    if (rows.length === 0) {
-      return {
-        found: false,
-        subject: subject.charAt(0).toUpperCase() + subject.slice(1),
-        message: `No exam record found in database for student ${student_id} in ${subject}.`,
-      };
-    }
-
-    if (rows.length > 1) {
-      const summary = rows.map((r: any) => `${r.subject_name}: ${parseFloat(r.marks_obtained)}/${parseFloat(r.max_marks)}`).join(', ');
-      return {
-        found: true,
-        exam: rows[0].exam_name,
-        summary,
-        records: rows.map((r: any) => ({
-          subject: r.subject_name,
-          score: `${r.marks_obtained}/${r.max_marks}`,
-          grade: (parseFloat(r.marks_obtained) / parseFloat(r.max_marks)) >= 0.85 ? 'A' : 'B',
-        })),
-      };
-    }
-
-    const row = rows[0];
-    const maxMarks = parseFloat(row.max_marks || '100');
-    const marksObt = parseFloat(row.marks_obtained || '0');
-    const pct = (marksObt / maxMarks) * 100;
-    const grade = pct >= 85 ? 'A' : pct >= 70 ? 'B' : pct >= 50 ? 'C' : 'D';
-
-    return {
-      found: true,
-      subject: row.subject_name,
-      exam: row.exam_name,
-      score: `${row.marks_obtained}/${row.max_marks}`,
-      grade,
-    };
+    const rawSubject = parameters?.subject || 'General Science';
+    return await getStudentMarksTool(instId, targetStudentId, rawSubject);
   }
 
   if (toolName === 'get_student_attendance') {
-    const { student_id } = parameters || {};
-    const stats = await db.query(
-      `SELECT count(*) filter (where ar.status = 'present') as present_days,
-              count(*) as total_days
-       FROM attendance_records ar
-       JOIN students s ON s.id = ar.student_id
-       WHERE ar.institution_id = $1 AND (s.id::text = $2 OR s.admission_number = $2)`,
-      [instId, student_id || 'SIA-2026-0101']
-    );
-
-    const total = parseInt(stats.rows[0]?.total_days || '0', 10);
-    const present = parseInt(stats.rows[0]?.present_days || '0', 10);
-
-    if (total === 0) {
-      return {
-        found: false,
-        message: `No recorded attendance sessions found for student ${student_id}.`,
-      };
-    }
-
-    const percentage = ((present / total) * 100).toFixed(1);
-
-    return {
-      found: true,
-      presentDays: present,
-      totalDays: total,
-      attendancePercentage: `${percentage}%`,
-    };
+    return await getStudentAttendanceTool(instId, targetStudentId);
   }
 
   if (toolName === 'get_fee_status') {
-    const { student_id } = parameters || {};
-    const feeRes = await db.query(
-      `SELECT sfs.total_amount, sfs.balance_due, sfs.has_outstanding_balance, sfs.last_payment_at,
-              (s.first_name || ' ' || s.last_name) as student_name
-       FROM students s
-       LEFT JOIN student_fee_status sfs ON sfs.student_id = s.id AND sfs.institution_id = s.institution_id
-       WHERE s.institution_id = $1 AND (s.id::text = $2 OR s.admission_number = $2)
-       LIMIT 1`,
-      [instId, student_id || 'SIA-2026-0101']
-    );
-
-    if (feeRes.rows.length > 0 && feeRes.rows[0].balance_due != null) {
-      const row = feeRes.rows[0];
-      const bal = parseFloat(row.balance_due || '0');
-      return {
-        found: true,
-        studentName: row.student_name,
-        totalFee: `₹${parseFloat(row.total_amount || '65000').toLocaleString('en-IN')}`,
-        balanceDue: `₹${bal.toLocaleString('en-IN')}`,
-        dueDate: 'November 15, 2026',
-        status: bal > 0 ? 'PARTIALLY_PAID' : 'CLEARED',
-        term: 'Term 2 Tuition & Activity Fee',
-      };
-    }
-
-    return {
-      found: false,
-      message: `No fee ledger records found for student ${student_id}.`,
-    };
+    return await getFeeStatusTool(instId, targetStudentId);
   }
 
   throw new Error(`Unsupported tool: ${toolName}`);
@@ -164,6 +52,9 @@ export async function callSarvamTTS(text: string, language = 'te-IN', speaker = 
         inputs: [text],
         target_language_code: language,
         speaker: speaker,
+        model: 'bulbul:v3',
+        speech_sample_rate: 8000,
+        enable_preprocessing: true,
       }),
     });
 
@@ -282,215 +173,12 @@ export async function callGroqChatWithTools(
   language = 'te-IN',
   studentName = 'Sai Teja Chary'
 ) {
-  if (!env.GROQ_API_KEY) {
-    return {
-      reply: language === 'te-IN'
-        ? "నమస్కారం అండి! పాఠశాల యాజమాన్యం నుంచి ప్రియ మాట్లాడుతున్నాను. మీకు ఎలా సహాయపడగలను?"
-        : "Hello! This is Priya from the school administration. How may I assist you today?"
-    };
-  }
-
-  const modelToUse = await getVerifiedGroqModel();
-
-  let languageDirective = '';
-  if (language === 'te-IN') {
-    languageDirective = `CRITICAL LANGUAGE REQUIREMENT: You MUST respond strictly in 100% PURE, NATURAL, POLITE TELUGU (తెలుగు) using proper TELUGU SCRIPT ONLY.
-- ABSOLUTELY ZERO ENGLISH WORDS, ZERO CODE-MIXING, ZERO "TENGLISH".
-- Do NOT output English words like "marks", "Science", "Quarterly", "A grade" in Latin/English script. Write them cleanly in Telugu script: "మార్కులు", "సైన్స్", "త్రైమాసిక పరీక్ష", "ఎ గ్రేడ్".
-- Always maintain warmth and respect with "అండి" and polite Telugu phrasing.
-- Strict limit: Maximum 2-3 spoken sentences.`;
-  } else if (language === 'hi-IN') {
-    languageDirective = `CRITICAL LANGUAGE REQUIREMENT: You MUST respond strictly in 100% PURE, POLITE HINDI (हिंदी) using DEVANAGARI SCRIPT ONLY.
-- ABSOLUTELY ZERO ENGLISH WORDS. NO CODE-MIXING.
-- Strict limit: Maximum 2-3 spoken sentences.`;
-  } else {
-    languageDirective = `CRITICAL LANGUAGE REQUIREMENT: You MUST respond strictly in 100% FLUENT, POLITE, PROFESSIONAL ENGLISH.
-- ABSOLUTELY NO REGIONAL WORDS.
-- Strict limit: Maximum 2-3 spoken sentences.`;
-  }
-
-  const studentDisplayName = studentName || 'Sai Teja Chary';
-  const systemPrompt = `You are Priya, a warm, articulate, caring, and polite senior student counselor at Narayana e-Techno School calling parents.
-${languageDirective}
-CRITICAL PARENT CALL CONTEXT:
-- You personally initiated this phone call directly to the parent of student: ${studentDisplayName} (Admission Number: ${studentId || 'SIA-2026-0101'}).
-- Because YOU called the parent, you ALREADY know who their child is! NEVER ask the parent "What is your child's admission number?" or "What is their student ID?".
-- When the parent asks ANY question about marks, results, attendance, or fees (e.g. "మా అబ్బాయి మార్కులు ఎంత?", "What are my child's marks in Science?", "ఫీజు ఎంత ఉంది?"), IMMEDIATELY invoke the corresponding database tool (get_student_marks, get_student_attendance, get_fee_status) using student_id: "${studentId || 'SIA-2026-0101'}".
-- If the parent asks generally about marks without specifying a subject (e.g., "మా అబ్బాయి మార్కులు ఎంత?"), check get_student_marks with subject: "all".
-- NEVER invent or hallucinate numbers or grades. You may ONLY state the exact values returned by database tools.
-- Speak in warm, conversational sentences suitable for a phone call (2-3 concise sentences). In Telugu, always use respectful honorifics like "అండి" and "గారు".`;
-
-  const groqTools = [
-    {
-      type: 'function',
-      function: {
-        name: 'get_student_marks',
-        description: 'Fetch real-time exam marks, max marks, and grade for a student and subject.',
-        parameters: {
-          type: 'object',
-          properties: {
-            student_id: { type: 'string', description: 'Student admission number or id' },
-            subject: { type: 'string', description: 'Subject name e.g. Science, Mathematics, English' },
-          },
-          required: ['student_id', 'subject'],
-        },
-      },
-    },
-    {
-      type: 'function',
-      function: {
-        name: 'get_student_attendance',
-        description: 'Fetch current attendance percentage and days present for a student.',
-        parameters: {
-          type: 'object',
-          properties: {
-            student_id: { type: 'string', description: 'Student admission number or id' },
-          },
-          required: ['student_id'],
-        },
-      },
-    },
-    {
-      type: 'function',
-      function: {
-        name: 'get_fee_status',
-        description: 'Fetch pending tuition fee dues, total fee, and next due date for a student.',
-        parameters: {
-          type: 'object',
-          properties: {
-            student_id: { type: 'string', description: 'Student admission number or id' },
-          },
-          required: ['student_id'],
-        },
-      },
-    },
-  ];
-
-  const chatMessages: any[] = [
-    { role: 'system', content: systemPrompt },
-    ...messages,
-  ];
-
-  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${env.GROQ_API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: modelToUse,
-      messages: chatMessages,
-      tools: groqTools,
-      tool_choice: 'auto',
-      temperature: 0.2,
-      max_tokens: 250,
-    }),
+  return await processConversationalTurn(messages, {
+    institutionId: instId,
+    studentId,
+    studentName,
+    language,
   });
-
-  if (!res.ok) {
-    throw new Error(`Groq API returned ${res.status}: ${await res.text()}`);
-  }
-
-  const data: any = await res.json();
-  const choice = data.choices && data.choices[0];
-  if (!choice) {
-    return { reply: language === 'te-IN' ? "నమస్కారం అండి! పాఠశాల కార్యక్రమాలకు మీ సహకారం కోరుతున్నాము." : "Thank you for connecting with us." };
-  }
-
-  let finalReply = choice.message.content || '';
-  let toolUsedName: string | undefined;
-  let toolResultData: any;
-
-  if (choice.message.tool_calls && choice.message.tool_calls.length > 0) {
-    const toolCall = choice.message.tool_calls[0];
-    toolUsedName = toolCall.function?.name || '';
-    let args: any = {};
-    try {
-      args = JSON.parse(toolCall.function?.arguments || '{}');
-    } catch (e) {}
-
-    if (!args.student_id) args.student_id = studentId || 'SIA-2026-0101';
-
-    // Execute tool against live database
-    if (toolUsedName) {
-      toolResultData = await executeDatabaseTool(instId, toolUsedName, args);
-    }
-
-    // Call Groq again with tool output
-    const secondRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${env.GROQ_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: modelToUse,
-        messages: [
-          ...chatMessages,
-          choice.message,
-          {
-            role: 'tool',
-            tool_call_id: toolCall.id,
-            content: JSON.stringify(toolResultData),
-          },
-        ],
-        temperature: 0.2,
-        max_tokens: 200,
-      }),
-    });
-
-    const secondData: any = await secondRes.json();
-    finalReply = secondData.choices?.[0]?.message?.content || finalReply;
-  }
-
-  // Language Purity Enforcement: Validate output against target language script
-  let purity = validateScriptPurity(finalReply, language);
-  if (!purity.valid) {
-    console.warn(`[PURITY VALIDATOR] Output failed purity check: ${purity.reason}. Regenerating once with strict enforcement...`);
-    const retryPrompt = [
-      ...chatMessages,
-      { role: 'assistant', content: finalReply },
-      {
-        role: 'user',
-        content: language === 'te-IN'
-          ? 'ముఖ్యమైన ఆదేశం: మీ సమాధానంలో ఇంగ్లీష్ లేదా రోమన్ అక్షరాలు పూర్తిగా నిషేధం. కేవలం 100% స్వచ్ఛమైన తెలుగు లిపి (Telugu Script మాత్రమే) ఉపయోగించి 2-3 చిన్న వాక్యాలలో సమాధానం చెప్పండి.'
-          : language === 'hi-IN'
-          ? 'कड़ा निर्देश: आपके उत्तर में अंग्रेजी शब्द या रोमन लिपि पूरी तरह वर्जित है। केवल 100% शुद्ध देवनागरी हिंदी में 2-3 वाक्यों में उत्तर दें।'
-          : 'Strict instruction: Do not mix regional language words. Speak in 100% pure, professional Indian English in 2-3 short sentences.',
-      },
-    ];
-
-    try {
-      const retryRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${env.GROQ_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: modelToUse,
-          messages: retryPrompt,
-          temperature: 0.1,
-          max_tokens: 250,
-        }),
-      });
-      if (retryRes.ok) {
-        const retryData: any = await retryRes.json();
-        const candidate = retryData.choices?.[0]?.message?.content?.trim();
-        if (candidate) {
-          finalReply = candidate;
-        }
-      }
-    } catch (retryErr) {
-      console.warn('[PURITY RETRY ERROR]', retryErr);
-    }
-  }
-
-  return {
-    reply: finalReply,
-    toolUsed: toolUsedName,
-    toolData: toolResultData,
-  };
 }
 
 // ==========================================

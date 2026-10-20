@@ -988,8 +988,8 @@ function RegisterApplicantModal({
   // Helper to focus the first input of a tab
   const focusTabFirstInput = (tab: "demographics" | "academic" | "guardian" | "notes") => {
     setTimeout(() => {
-      if (tab === "demographics") firstNameRef.current?.focus()
-      else if (tab === "academic") classSelectRef.current?.focus()
+      if (tab === "demographics") classSelectRef.current?.focus() || firstNameRef.current?.focus()
+      else if (tab === "academic") stageRef.current?.focus() || entranceScoreRef.current?.focus()
       else if (tab === "guardian") guardianNameRef.current?.focus()
       else if (tab === "notes") medicalNotesRef.current?.focus()
     }, 50)
@@ -1000,6 +1000,12 @@ function RegisterApplicantModal({
     if (isSubmitting) return
     setErrorMsg(null)
 
+    if (!classId) {
+      setErrorMsg("Please choose the applying grade/class.")
+      setActiveTab("demographics")
+      setTimeout(() => classSelectRef.current?.focus(), 50)
+      return
+    }
     if (!firstName.trim() || !lastName.trim()) {
       setErrorMsg("Please provide both First Name and Last Name.")
       setActiveTab("demographics")
@@ -1013,12 +1019,6 @@ function RegisterApplicantModal({
       setErrorMsg("Please select the applicant's Date of Birth.")
       setActiveTab("demographics")
       setTimeout(() => dobRef.current?.focus(), 50)
-      return
-    }
-    if (!classId) {
-      setErrorMsg("Please choose the applying grade/class.")
-      setActiveTab("academic")
-      setTimeout(() => classSelectRef.current?.focus(), 50)
       return
     }
     if (!guardianName.trim() || !guardianPhone.trim()) {
@@ -1078,6 +1078,11 @@ function RegisterApplicantModal({
   const goToNextTab = () => {
     setErrorMsg(null)
     if (activeTab === "demographics") {
+      if (!classId) {
+        setErrorMsg("Please choose the applying grade/class.")
+        classSelectRef.current?.focus()
+        return
+      }
       if (!firstName.trim() || !lastName.trim()) {
         setErrorMsg("Please provide both First Name and Last Name.")
         if (!firstName.trim()) firstNameRef.current?.focus()
@@ -1092,11 +1097,6 @@ function RegisterApplicantModal({
       setActiveTab("academic")
       focusTabFirstInput("academic")
     } else if (activeTab === "academic") {
-      if (!classId) {
-        setErrorMsg("Please choose the applying grade/class.")
-        classSelectRef.current?.focus()
-        return
-      }
       setActiveTab("guardian")
       focusTabFirstInput("guardian")
     } else if (activeTab === "guardian") {
@@ -1218,7 +1218,7 @@ function RegisterApplicantModal({
       setActiveTab("demographics")
       setErrorMsg(null)
       const timer = setTimeout(() => {
-        firstNameRef.current?.focus()
+        classSelectRef.current?.focus() || firstNameRef.current?.focus()
       }, 60)
       return () => clearTimeout(timer)
     }
@@ -1261,8 +1261,8 @@ function RegisterApplicantModal({
         {/* Tab Navigation */}
         <div className="flex border-b border-border-default bg-canvas px-5 pt-2 gap-2">
           {[
-            { id: "demographics", label: "1. Student Bio", icon: <Users className="w-3.5 h-3.5" /> },
-            { id: "academic", label: "2. Grade & Fees", icon: <GraduationCap className="w-3.5 h-3.5" /> },
+            { id: "demographics", label: "1. Grade & Student Bio", icon: <Users className="w-3.5 h-3.5" /> },
+            { id: "academic", label: "2. Prior School & Fees", icon: <Banknote className="w-3.5 h-3.5" /> },
             { id: "guardian", label: "3. Guardian", icon: <Shield className="w-3.5 h-3.5" /> },
             { id: "notes", label: "4. Notes & Health", icon: <HeartPulse className="w-3.5 h-3.5" /> },
           ].map((tab) => (
@@ -1298,9 +1298,76 @@ function RegisterApplicantModal({
             </div>
           )}
 
-          {/* TAB 1: Demographics */}
+          {/* TAB 1: Grade & Student Bio */}
           {activeTab === "demographics" && (
             <div className="flex flex-col gap-4">
+              {/* Target Academic Placement (Applying Grade & Academic Year) */}
+              <div className="p-3.5 rounded-xl bg-subtle border border-border-default flex flex-col gap-3 shadow-xs">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-xs font-semibold text-text-primary">
+                    <GraduationCap className="w-4 h-4 text-brand-primary" />
+                    <span>Target Academic Placement *</span>
+                  </div>
+                  {selectedClassCapacity && (
+                    <span className="text-[11px] font-mono font-medium text-text-secondary bg-surface px-2 py-0.5 rounded border border-border-default">
+                      Class Capacity: <strong className="text-text-primary">{selectedClassCapacity.enrolled_count}/{selectedClassCapacity.capacity}</strong>
+                    </span>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-xs font-medium text-text-secondary mb-1 block">
+                      Applying for Grade / Class *
+                    </label>
+                    <select
+                      ref={classSelectRef}
+                      required
+                      value={classId}
+                      onChange={(e) => setClassId(e.target.value)}
+                      onKeyDown={(e) => handleFieldKeyDown(e, academicYearRef)}
+                      className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary cursor-pointer font-medium"
+                    >
+                      <option value="">Select Applying Grade</option>
+                      {academicGrades.map((g) => {
+                        const cap = enrollmentCounts.find((c: any) => c.class_id === g.id)
+                        const isFull = cap && cap.available_seats <= 0
+                        return (
+                          <option key={g.id} value={g.id}>
+                            {g.name} {cap ? `(${cap.available_seats} seats free)` : ""} {isFull ? "⚠️ [FULL]" : ""}
+                          </option>
+                        )
+                      })}
+                      {academicGrades.length === 0 && (
+                        <option value="" disabled>No grades configured</option>
+                      )}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-medium text-text-secondary mb-1 block">
+                      Academic Year *
+                    </label>
+                    <select
+                      ref={academicYearRef}
+                      required
+                      value={academicYearId}
+                      onChange={(e) => setAcademicYearId(e.target.value)}
+                      onKeyDown={(e) => handleFieldKeyDown(e, firstNameRef)}
+                      className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary cursor-pointer"
+                    >
+                      {academicYears.map((y: any) => (
+                        <option key={y.id} value={y.id}>
+                          {y.name} {y.is_current ? "• (Current Year)" : ""}
+                        </option>
+                      ))}
+                      {academicYears.length === 0 && (
+                        <option value="" disabled>No academic years configured</option>
+                      )}
+                    </select>
+                  </div>
+                </div>
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="text-xs font-medium text-text-secondary mb-1 block">
@@ -1473,56 +1540,64 @@ function RegisterApplicantModal({
             </div>
           )}
 
-          {/* TAB 2: Academic & Intake */}
+          {/* TAB 2: Prior School & Fees */}
           {activeTab === "academic" && (
             <div className="flex flex-col gap-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <label className="text-xs font-medium text-text-secondary">Applying for Grade / Class *</label>
-                    {selectedClassCapacity && (
-                      <span className="text-[10px] font-mono font-medium text-text-muted">
-                        Capacity: {selectedClassCapacity.enrolled_count}/{selectedClassCapacity.capacity}
-                      </span>
-                    )}
+              <div className="p-3.5 rounded-lg bg-surface border border-border-default flex flex-col gap-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-xs font-semibold text-text-primary">
+                    <GraduationCap className="w-4 h-4 text-brand-primary" />
+                    <span>Target Academic Placement</span>
                   </div>
-                  <select
-                    ref={classSelectRef}
-                    required
-                    value={classId}
-                    onChange={(e) => setClassId(e.target.value)}
-                    onKeyDown={(e) => handleFieldKeyDown(e, academicYearRef)}
-                    className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary cursor-pointer font-medium"
-                  >
-                    <option value="">Select Applying Grade</option>
-                    {academicGrades.map((g) => {
-                      const cap = enrollmentCounts.find((c: any) => c.class_id === g.id)
-                      const isFull = cap && cap.available_seats <= 0
-                      return (
-                        <option key={g.id} value={g.id}>
-                          {g.name} {cap ? `(${cap.available_seats} seats free)` : ""} {isFull ? "⚠️ [FULL]" : ""}
-                        </option>
-                      )
-                    })}
-                  </select>
+                  {selectedClassCapacity && (
+                    <span className="text-[10px] font-mono font-medium text-text-muted">
+                      Capacity: {selectedClassCapacity.enrolled_count}/{selectedClassCapacity.capacity}
+                    </span>
+                  )}
                 </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-xs font-medium text-text-secondary mb-1 block">Applying for Grade / Class *</label>
+                    <select
+                      value={classId}
+                      onChange={(e) => setClassId(e.target.value)}
+                      onKeyDown={(e) => handleFieldKeyDown(e, stageRef)}
+                      className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary cursor-pointer font-medium"
+                    >
+                      <option value="">Select Applying Grade</option>
+                      {academicGrades.map((g) => {
+                        const cap = enrollmentCounts.find((c: any) => c.class_id === g.id)
+                        const isFull = cap && cap.available_seats <= 0
+                        return (
+                          <option key={g.id} value={g.id}>
+                            {g.name} {cap ? `(${cap.available_seats} seats free)` : ""} {isFull ? "⚠️ [FULL]" : ""}
+                          </option>
+                        )
+                      })}
+                      {academicGrades.length === 0 && (
+                        <option value="" disabled>No grades configured</option>
+                      )}
+                    </select>
+                  </div>
 
-                <div>
-                  <label className="text-xs font-medium text-text-secondary mb-1 block">Academic Year *</label>
-                  <select
-                    ref={academicYearRef}
-                    required
-                    value={academicYearId}
-                    onChange={(e) => setAcademicYearId(e.target.value)}
-                    onKeyDown={(e) => handleFieldKeyDown(e, stageRef)}
-                    className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary cursor-pointer"
-                  >
-                    {academicYears.map((y: any) => (
-                      <option key={y.id} value={y.id}>
-                        {y.name} {y.is_current ? "• (Current Year)" : ""}
-                      </option>
-                    ))}
-                  </select>
+                  <div>
+                    <label className="text-xs font-medium text-text-secondary mb-1 block">Academic Year *</label>
+                    <select
+                      value={academicYearId}
+                      onChange={(e) => setAcademicYearId(e.target.value)}
+                      onKeyDown={(e) => handleFieldKeyDown(e, stageRef)}
+                      className="w-full px-3 py-2 text-xs bg-canvas border border-border-default rounded-lg focus:outline-none focus:border-brand-primary text-text-primary cursor-pointer"
+                    >
+                      {academicYears.map((y: any) => (
+                        <option key={y.id} value={y.id}>
+                          {y.name} {y.is_current ? "• (Current Year)" : ""}
+                        </option>
+                      ))}
+                      {academicYears.length === 0 && (
+                        <option value="" disabled>No academic years configured</option>
+                      )}
+                    </select>
+                  </div>
                 </div>
               </div>
 
@@ -2240,11 +2315,15 @@ function BulkApplicantsModal({
                     onChange={(e) => setDefaultClassId(e.target.value)}
                     className="w-full px-2.5 py-1.5 text-xs bg-surface border border-border-default rounded-lg text-text-primary cursor-pointer font-medium focus:outline-none focus:border-brand-primary"
                   >
+                    <option value="">Select Class</option>
                     {academicGrades.map((g: any) => (
                       <option key={g.id} value={g.id}>
                         {g.name}
                       </option>
                     ))}
+                    {academicGrades.length === 0 && (
+                      <option value="" disabled>No grades configured</option>
+                    )}
                   </select>
                 </div>
 

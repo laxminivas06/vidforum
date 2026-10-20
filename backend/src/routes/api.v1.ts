@@ -56,7 +56,7 @@ router.use('/audit-logs', auditRoutes);
 router.use('/students', authMiddleware, studentRoutes);
 
 // Strict Workspace Enforcement
-router.use('/academics', authMiddleware, requireWorkspace('academics'), academicRoutes);
+router.use('/academics', authMiddleware, requireWorkspace(['academics', 'admissions', 'examinations', 'timetable', 'attendance', 'faculty']), academicRoutes);
 router.use('/admissions', authMiddleware, requireWorkspace('admissions'), admissionsRoutes);
 router.use('/faculty', authMiddleware, requireWorkspace(['faculty', 'hrms']), facultyRoutes);
 // Biometric terminals push with a per-device key (no JWT); must precede the JWT-protected /attendance router

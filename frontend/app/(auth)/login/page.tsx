@@ -11,7 +11,7 @@ const ROLE_WORKSPACE_MAP: Record<RoleType, string> = {
   SUPER_ADMIN: "/dashboard",
   INSTITUTION_ADMIN: "/dashboard",
   FACULTY: "/faculty/dashboard",
-  STUDENT: "/dashboard",
+  STUDENT: "/app/home",
   PARENT: "/dashboard",
   ADMISSION_TEAM: "/admissions",
   FINANCE_TEAM: "/finance/dashboard",

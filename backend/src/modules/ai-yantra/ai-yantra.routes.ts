@@ -943,35 +943,6 @@ router.post('/voice/inbound', async (req: Request, res: Response) => {
 });
 
 // AI Attendance lives in the attendance module: /api/v1/attendance/face/*
-
-// ==========================================
-// 2. AI Tutor Workspace
-// ==========================================
-
-// POST /api/v1/ai-yantra/tutor/chat
-router.post('/tutor/chat', tenantMiddleware, async (req: Request, res: Response) => {
-  try {
-    const { studentId, message, subject = 'Mathematics' } = req.body;
-
-    // Simulated contextual RAG response based on syllabus and inquiry
-    let reply = `Here is a step-by-step breakdown for ${subject}: To solve this problem, first identify the given variables, apply the standard theorem, and simplify the algebraic terms carefully. Would you like a practice problem to test your understanding?`;
-
-    if (message.toLowerCase().includes('calculus') || message.toLowerCase().includes('derivative')) {
-      reply = `In differential calculus, the derivative represents the instantaneous rate of change of a function. For polynomial f(x) = x^n, using the power rule d/dx[x^n] = n*x^(n-1). Let me know if you would like to differentiate a specific equation together!`;
-    }
-
-    sendSuccess(res, {
-      reply,
-      suggestedQuestions: [
-        'Can you show me an example problem?',
-        'What are the real-world applications of this?',
-        'Give me a 3-question quiz on this topic.',
-      ],
-      subject,
-    });
-  } catch (error: any) {
-    sendError(res, error.message, 500);
-  }
-});
+// AI Tutor lives in ./tutor (mounted at /api/v1/ai-yantra/tutor)
 
 export default router;

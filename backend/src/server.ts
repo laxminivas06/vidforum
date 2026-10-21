@@ -6,6 +6,7 @@ import { WebSocketServer } from 'ws';
 import { voiceSessionManager } from './modules/ai-yantra/voice-agent.service';
 import { campaignWorkerService } from './modules/ai-yantra/campaign-worker.service';
 import { initializeCampaignQueue } from './modules/ai-yantra/queue/campaignQueue';
+import { startTextbookWorker } from './modules/ai-yantra/tutor/ingest.worker';
 
 async function bootstrap() {
   console.log(' Starting VID Platform Backend Server...');
@@ -21,6 +22,7 @@ async function bootstrap() {
     initializeCampaignQueue().catch((err) => {
       console.warn('[CAMPAIGN QUEUE] Startup notice:', err.message);
     });
+    startTextbookWorker();
   }
 
   const server = app.listen(env.PORT, () => {

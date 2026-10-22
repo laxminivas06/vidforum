@@ -13,7 +13,7 @@ interface TestCallDrawerProps {
 type CallStep = "idle" | "dialing" | "ringing" | "in_conversation" | "completed" | "failed"
 
 export const TestCallDrawer: React.FC<TestCallDrawerProps> = ({ isOpen, onClose }) => {
-  const [phoneNumber, setPhoneNumber] = useState("9553706650")
+  const [phoneNumber, setPhoneNumber] = useState("8050453043")
   const [studentAdmission, setStudentAdmission] = useState("SIA-2026-0101")
   const [messageType, setMessageType] = useState("event_notice")
   const [language, setLanguage] = useState("te-IN")
@@ -43,7 +43,7 @@ export const TestCallDrawer: React.FC<TestCallDrawerProps> = ({ isOpen, onClose 
         language: language,
       })
 
-      if (res && res.callSid) {
+      if (res && (res.status === "DIALED_LIVE" || (res.callSid && !res.callSid.startsWith("twi_err_")))) {
         setCallSid(res.callSid)
         setCallStep("ringing")
 
@@ -52,7 +52,13 @@ export const TestCallDrawer: React.FC<TestCallDrawerProps> = ({ isOpen, onClose 
           setCallStep("in_conversation")
         }, 3500)
       } else {
-        throw new Error(res?.message || "Carrier did not return a valid call identifier.")
+        setCallStep("failed")
+        const carrierErr = res?.carrierError || res?.carrierMessage || "Call was rejected by the carrier."
+        setErrorMessage(carrierErr)
+        setFixAdvice(
+          res?.actionRequired ||
+          "On Twilio Trial accounts, outbound calls can ONLY be placed to verified numbers. Add and verify this number in Twilio Console under Verified Caller IDs."
+        )
       }
     } catch (err: any) {
       setCallStep("failed")
@@ -60,7 +66,7 @@ export const TestCallDrawer: React.FC<TestCallDrawerProps> = ({ isOpen, onClose 
       setErrorMessage(rawError)
 
       // Verbatim carrier fix advice
-      if (rawError.includes("unverified") || rawError.includes("Trial")) {
+      if (rawError.includes("unverified") || rawError.includes("Trial") || rawError.includes("verified recipient")) {
         setFixAdvice(
           "This phone number is unverified on your trial Twilio account. Please add and verify this phone number in your Twilio Console under Verified Caller IDs, or upgrade to a full production account."
         )
@@ -137,13 +143,25 @@ export const TestCallDrawer: React.FC<TestCallDrawerProps> = ({ isOpen, onClose 
                   type="tel"
                   maxLength={10}
                   required
-                  placeholder="9553706650"
+                  placeholder="8050453043"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ""))}
                   className="flex-1 px-3 py-2 text-xs text-gray-900 focus:outline-hidden"
                 />
               </div>
               <p className="text-[11px] text-gray-500 mt-1">Enter your 10-digit mobile number</p>
+              <div className="mt-1.5 p-2.5 rounded-md bg-amber-50 border border-amber-200 text-amber-900 text-[11px] space-y-1">
+                <div className="flex items-center gap-1.5 font-semibold text-amber-900">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-600 shrink-0" />
+                  <span>Twilio Free Trial Account Notice</span>
+                </div>
+                <p className="text-amber-800 leading-relaxed">
+                  1. <strong>Keypress Required:</strong> When answering, Twilio will state: <em>&ldquo;You have a trial account... press any key to execute your code&rdquo;</em>. <strong>Press 1 (or any key on your dialpad)</strong> so Twilio begins speaking the voice agent script. If no key is pressed, Twilio hangs up after 5 seconds.
+                </p>
+                <p className="text-amber-800 leading-relaxed">
+                  2. <strong>Verified Numbers Only:</strong> Outbound calls can only reach numbers verified in your Twilio Console under <em>Verified Caller IDs</em> (e.g. <strong>8050453043</strong>).
+                </p>
+              </div>
             </div>
 
             {/* Test Student */}

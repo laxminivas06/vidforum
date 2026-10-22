@@ -694,7 +694,8 @@ router.post('/voice/call-test', tenantMiddleware, async (req: Request, res: Resp
 
     let streamUrl: string | undefined;
     let webhookUrl: string | undefined;
-    if (env.PUBLIC_BASE_URL) {
+    // Only attach live WebSocket media streaming if explicitly requested and a valid public tunnel is present
+    if (req.body.interactiveStream && env.PUBLIC_BASE_URL) {
       const cleanBase = env.PUBLIC_BASE_URL.replace(/\/$/, '');
       const wsHost = cleanBase.replace(/^http/, 'ws');
       streamUrl = `${wsHost}/api/v1/ai-yantra/voice/stream`;
@@ -905,8 +906,10 @@ router.post('/voice/inbound', async (req: Request, res: Response) => {
         res.type('text/xml');
         return res.send(twiml);
       } else {
-        const pollyLang = lang === 'te-IN' ? 'te-IN' : lang === 'hi-IN' ? 'hi-IN' : 'en-IN';
-        const twiml = `<Response><Say voice="Polly.Aditi" language="${pollyLang}">${greeting}</Say></Response>`;
+        const say = lang === 'te-IN'
+          ? `<Say voice="Google.te-IN-Standard-A" language="te-IN">${greeting}</Say>`
+          : `<Say voice="Polly.Aditi" language="${lang === 'hi-IN' ? 'hi-IN' : 'en-IN'}">${greeting}</Say>`;
+        const twiml = `<Response><Pause length="1"/>${say}</Response>`;
         res.type('text/xml');
         return res.send(twiml);
       }
@@ -929,7 +932,7 @@ router.post('/voice/inbound', async (req: Request, res: Response) => {
         res.type('text/xml');
         return res.send(twiml);
       } else {
-        const twiml = `<Response><Say voice="Polly.Aditi" language="te-IN">${greeting}</Say></Response>`;
+        const twiml = `<Response><Pause length="1"/><Say voice="Google.te-IN-Standard-A" language="te-IN">${greeting}</Say></Response>`;
         res.type('text/xml');
         return res.send(twiml);
       }

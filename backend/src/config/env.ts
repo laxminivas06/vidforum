@@ -39,7 +39,9 @@ export const env = {
   TWILIO_PHONE_NUMBER: process.env.TWILIO_PHONE_NUMBER || '',
   TELEPHONY_PROVIDER: process.env.TELEPHONY_PROVIDER || 'auto',
   get PUBLIC_BASE_URL(): string {
-    return process.env.PUBLIC_BASE_URL || '';
+    const raw = process.env.PUBLIC_BASE_URL || '';
+    if (raw.includes('alberta-milton-special-ana')) return '';
+    return raw;
   },
   WHATSAPP_API_TOKEN: process.env.WHATSAPP_API_TOKEN || process.env.META_WHATSAPP_TOKEN || '',
   WHATSAPP_PHONE_NUMBER_ID: process.env.WHATSAPP_PHONE_NUMBER_ID || process.env.META_PHONE_NUMBER_ID || '',

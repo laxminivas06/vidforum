@@ -13,6 +13,7 @@ import documentRoutes from '../modules/documents/documents.routes';
 import hrmsRoutes from '../modules/hrms/hrms.routes';
 import timetableRoutes from '../modules/timetable/timetable.routes';
 import aiYantraRoutes from '../modules/ai-yantra/ai-yantra.routes';
+import tutorRoutes from '../modules/ai-yantra/tutor/tutor.routes';
 import optionalRoutes from '../modules/optional-modules/optional-modules.routes';
 import usersRoutes from '../modules/users/users.routes';
 import notificationRoutes from '../modules/notifications/notification.routes';
@@ -67,6 +68,7 @@ router.use('/finance', authMiddleware, requireWorkspace('finance'), financeRoute
 router.use('/documents', authMiddleware, requireWorkspace('documents'), documentRoutes);
 router.use('/hrms', authMiddleware, requireWorkspace('hrms'), hrmsRoutes);
 router.use('/timetable', authMiddleware, requireWorkspace('timetable'), timetableRoutes);
+router.use('/ai-yantra/tutor', authMiddleware, tutorRoutes);
 router.use('/ai-yantra', aiYantraRoutes);
 router.use('/optional-modules', optionalRoutes);
 

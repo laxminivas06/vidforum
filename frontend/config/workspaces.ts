@@ -226,6 +226,8 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     navItems: [
       { title: "Voice Agent", href: "/voice-agent/campaigns", iconName: "PhoneCall", badge: "AI" },
       { title: "AI Attendance", href: "/attendance/face", iconName: "ScanFace", badge: "Live" },
+      { title: "AI Tutor", href: "/ai-tutor/chat", iconName: "Bot" },
+      { title: "Tutor Textbooks", href: "/ai-tutor/textbooks", iconName: "BookOpen" },
       { title: "AI Tutor Insights", href: "/ai-tutor/analytics", iconName: "Bot" },
     ],
   },

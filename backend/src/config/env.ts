@@ -51,4 +51,14 @@ export const env = {
   SUPABASE_URL: process.env.SUPABASE_URL || '',
   SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY || '',
   FACE_PHOTO_BUCKET: process.env.FACE_PHOTO_BUCKET || 'face-photos',
+  // Yantra AI Tutor (free-tier Gemini demo; provider swaps behind modules/ai-yantra/tutor/llm.ts)
+  TUTOR_LLM_PROVIDER: process.env.TUTOR_LLM_PROVIDER || 'gemini',
+  GEMINI_API_KEY: process.env.GEMINI_API_KEY || '',
+  GEMINI_FAST_MODEL: process.env.GEMINI_FAST_MODEL || 'gemini-3.5-flash-lite',
+  GEMINI_SMART_MODEL: process.env.GEMINI_SMART_MODEL || 'gemini-3.5-flash',
+  GEMINI_EMBED_MODEL: process.env.GEMINI_EMBED_MODEL || 'gemini-embedding-001',
+  TUTOR_RPM: parseInt(process.env.TUTOR_RPM || '10', 10),
+  TUTOR_DAILY_MESSAGES: parseInt(process.env.TUTOR_DAILY_MESSAGES || '30', 10),
+  TUTOR_DAILY_TESTS: parseInt(process.env.TUTOR_DAILY_TESTS || '5', 10),
+  TEXTBOOK_BUCKET: process.env.TEXTBOOK_BUCKET || 'textbooks',
 };

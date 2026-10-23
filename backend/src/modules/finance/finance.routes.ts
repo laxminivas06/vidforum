@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { financeController } from './finance.controller';
+import { academicFeeController } from './academic-fees.controller';
 import { authMiddleware } from '../../middleware/auth.middleware';
 import { tenantMiddleware } from '../../middleware/tenant.middleware';
 
@@ -12,6 +13,11 @@ router.post('/webhook', financeController.handleGatewayWebhook.bind(financeContr
 // All subsequent finance routes require authentication and tenant context
 router.use(authMiddleware);
 router.use(tenantMiddleware);
+
+// ================= ACADEMIC FEES (MODULE 5) =================
+router.get('/academic-fees', academicFeeController.listStructures.bind(academicFeeController));
+router.post('/academic-fees', academicFeeController.saveStructure.bind(academicFeeController));
+router.get('/academic-fees/:id', academicFeeController.getStructureById.bind(academicFeeController));
 
 // ================= SUMMARY & SCOPED ACCESS =================
 router.get('/summary', financeController.getSummary.bind(financeController));

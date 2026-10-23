@@ -2,7 +2,7 @@ import React from "react"
 import { cn } from "@/lib/utils"
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: "neutral" | "positive" | "warning" | "error" | "info"
+  variant?: "neutral" | "positive" | "warning" | "error" | "info" | "outline" | "secondary" | "success" | "destructive" | "primary"
   showDot?: boolean
   size?: "sm" | "default"
 }
@@ -20,7 +20,23 @@ export const Badge: React.FC<BadgeProps> = ({
       wrapper: "bg-badge-neutral text-text-secondary border border-border-default/60",
       dot: "bg-text-muted",
     },
+    outline: {
+      wrapper: "bg-transparent text-text-secondary border border-border-default/80",
+      dot: "bg-text-muted",
+    },
+    secondary: {
+      wrapper: "bg-muted text-muted-foreground border border-border-default/60",
+      dot: "bg-muted-foreground",
+    },
+    primary: {
+      wrapper: "bg-primary/10 text-primary border border-primary/20",
+      dot: "bg-primary",
+    },
     positive: {
+      wrapper: "bg-emerald-50 text-emerald-700 border border-emerald-200/60",
+      dot: "bg-emerald-600",
+    },
+    success: {
       wrapper: "bg-emerald-50 text-emerald-700 border border-emerald-200/60",
       dot: "bg-emerald-600",
     },
@@ -29,6 +45,10 @@ export const Badge: React.FC<BadgeProps> = ({
       dot: "bg-amber-600",
     },
     error: {
+      wrapper: "bg-rose-50 text-rose-700 border border-rose-200/60",
+      dot: "bg-rose-600",
+    },
+    destructive: {
       wrapper: "bg-rose-50 text-rose-700 border border-rose-200/60",
       dot: "bg-rose-600",
     },

@@ -41,14 +41,31 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     name: "Institute Admin Workspace",
     shortName: "Institute Admin",
     category: "OVERVIEW",
-    description: "Multi-tenant institutional administration, user management, and faculty account provisioning",
+    description: "Multi-tenant institutional administration, academic configurations, admission control, fee management, and user provisioning",
     iconName: "ShieldCheck",
     primaryRoute: "/dashboard",
-    routes: ["/dashboard"],
+    routes: [
+      "/dashboard",
+      "/admin",
+      "/admin/settings",
+      "/admin/academic-configuration",
+      "/admin/admission-information",
+      "/admin/admission-control",
+      "/admin/admission-fees",
+      "/admin/academic-fees",
+      "/admin/payments",
+      "/academics/configuration",
+      "/admissions/information",
+      "/admissions/control",
+      "/admissions/fees",
+      "/finance/academic-fees",
+    ],
     navItems: [
-      { title: "Admin Overview", href: "/dashboard", iconName: "LayoutDashboard" },
+      { title: "Dashboard", href: "/dashboard", iconName: "LayoutDashboard" },
+      { title: "Academic Configuration", href: "/admin/academic-configuration", iconName: "Layers" },
+      { title: "Admission Control", href: "/admin/admission-control", iconName: "UserPlus" },
+      { title: "Institute Settings", href: "/admin/settings", iconName: "Sliders" },
       { title: "Faculty & User Accounts", href: "/dashboard?tab=users", iconName: "Users" },
-      { title: "Student Master 360°", href: "/students/cccccccc-cccc-cccc-cccc-cccccccccc01", iconName: "User" },
     ],
   },
   {
@@ -75,9 +92,10 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     description: "Grade hierarchies, sections, subjects and curriculum catalog",
     iconName: "GraduationCap",
     primaryRoute: "/academics",
-    routes: ["/academics"],
+    routes: ["/academics", "/academics/configuration"],
     navItems: [
       { title: "Classes or Grades", href: "/academics", iconName: "Layers" },
+      { title: "Academic Configuration", href: "/academics/configuration", iconName: "Settings", badge: "Base" },
       { title: "Subject Master", href: "/academics?tab=subjects", iconName: "BookOpen" },
       { title: "Curriculum Mapping", href: "/academics?tab=mapping", iconName: "GraduationCap" },
       { title: "Year Exam Schedule", href: "/academics?tab=exams", iconName: "CalendarCheck" },
@@ -91,12 +109,18 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     name: "Admissions & Enrollment",
     shortName: "Admissions",
     category: "CORE",
-    description: "Applicant Kanban, inquiry management and student enrollment pipeline",
+    description: "Unified admissions evaluation, registration, and student onboarding ecosystem",
     iconName: "UserPlus",
     primaryRoute: "/admissions",
-    routes: ["/admissions"],
+    routes: [
+      "/admissions",
+      "/admissions/control",
+      "/admissions/documents",
+      "/admissions/enrolled",
+    ],
     navItems: [
-      { title: "Applications Kanban", href: "/admissions", iconName: "LayoutDashboard" },
+      { title: "Admissions & Enrollment", href: "/admissions", iconName: "UserPlus", badge: "Active" },
+      { title: "Applications Pipeline", href: "/admissions?tab=pipeline", iconName: "LayoutDashboard" },
       { title: "Document Verification", href: "/admissions/documents", iconName: "FileText", badge: "Desk" },
       { title: "Enrolled Students", href: "/admissions/enrolled", iconName: "CheckCircle2", badge: "Roster" },
     ],
@@ -140,10 +164,11 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     description: "Daily roll-call sessions, period-wise attendance and student leave",
     iconName: "CalendarCheck",
     primaryRoute: "/attendance/sessions",
-    routes: ["/attendance"],
+    routes: ["/attendance", "/attendance/face", "/attendance/reports"],
     navItems: [
       { title: "Daily Roll Call", href: "/attendance/sessions", iconName: "CalendarCheck" },
       { title: "Face Attendance", href: "/attendance/face", iconName: "ScanFace", badge: "AI" },
+      { title: "Attendance Reports", href: "/attendance/reports", iconName: "Activity" },
       { title: "Face Enrollment", href: "/attendance/face/enroll", iconName: "UserPlus" },
       { title: "Teacher Manual Entry", href: "/attendance/sessions?filter=MANUAL_TEACHER", iconName: "CheckCircle2" },
       { title: "Attendance Anomalies", href: "/attendance/sessions?filter=ANOMALY", iconName: "AlertTriangle", badgeVariant: "warning" },
@@ -172,9 +197,11 @@ export const PLATFORM_WORKSPACES: PlatformWorkspace[] = [
     description: "Fee structures, invoicing, student balances, payments and receipts",
     iconName: "CreditCard",
     primaryRoute: "/finance/dashboard",
-    routes: ["/finance"],
+    routes: ["/finance", "/finance/academic-fees", "/finance/payments"],
     navItems: [
       { title: "All Invoices & Dues", href: "/finance/dashboard", iconName: "CreditCard" },
+      { title: "Academic Fees", href: "/finance/academic-fees", iconName: "Layers", badge: "New" },
+      { title: "Payment Records", href: "/finance/payments", iconName: "Receipt" },
       { title: "Pending Overdue", href: "/finance/dashboard?status=OVERDUE", iconName: "AlertTriangle", badgeVariant: "warning", badge: "Due" },
       { title: "Paid Receipts", href: "/finance/dashboard?status=PAID", iconName: "FileCheck" },
       { title: "Counter POS Collection", href: "/finance/dashboard?tab=collect", iconName: "Receipt" },
@@ -291,9 +318,22 @@ export const SUPER_ADMIN_WORKSPACES: PlatformWorkspace[] = [
 export function getWorkspaceForPath(path?: string): PlatformWorkspace | undefined {
   if (!path) return undefined
   const cleanPath = path.split("?")[0].replace(/\/$/, "") || "/"
-  if (cleanPath === "/dashboard" || cleanPath === "") {
-    return PLATFORM_WORKSPACES.find((w) => w.id === "dashboard")
+  
+  // 1. Institute Admin Workspace check first (so /admin and integrated pages remain inside Institute Admin)
+  const dashboardWs = PLATFORM_WORKSPACES.find((w) => w.id === "dashboard")
+  if (
+    cleanPath === "/dashboard" ||
+    cleanPath === "" ||
+    cleanPath.startsWith("/admin") ||
+    (dashboardWs &&
+      dashboardWs.routes.some((r) => {
+        const cleanRoute = r.replace(/\/$/, "")
+        return cleanPath === cleanRoute || cleanPath.startsWith(cleanRoute + "/")
+      }))
+  ) {
+    return dashboardWs
   }
+
   return PLATFORM_WORKSPACES.find((w) =>
     w.id !== "dashboard" &&
     w.routes.some((r) => {

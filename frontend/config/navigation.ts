@@ -49,50 +49,18 @@ export const NAVIGATION_CONFIG: Record<RoleType, NavGroup[]> = {
 
   INSTITUTION_ADMIN: [
     {
-      label: "OVERVIEW",
+      label: "INSTITUTE ADMIN WORKSPACE",
       items: [
-        { title: "Institute Admin Workspace", href: "/dashboard", iconName: "ShieldCheck" },
+        { title: "Dashboard", href: "/dashboard", iconName: "LayoutDashboard" },
+        { title: "Academic Configuration", href: "/admin/academic-configuration", iconName: "Layers" },
+        { title: "Admission Control", href: "/admin/admission-control", iconName: "UserPlus" },
+        { title: "Institute Settings", href: "/admin/settings", iconName: "Sliders" },
+      ],
+    },
+    {
+      label: "SYSTEM & USERS",
+      items: [
         { title: "Faculty & User Accounts", href: "/dashboard?tab=users", iconName: "Users" },
-      ],
-    },
-    {
-      label: "CORE",
-      items: [
-        { title: "Admissions", href: "/admissions", iconName: "UserPlus" },
-        { title: "Academics", href: "/academics", iconName: "GraduationCap" },
-        { title: "Faculty Management", href: "/faculty/dashboard", iconName: "BookOpen" },
-        { title: "Attendance Roll", href: "/attendance/sessions", iconName: "CalendarCheck" },
-        { title: "Examinations", href: "/examinations/schedules", iconName: "FileSpreadsheet" },
-        { title: "Finance & Fees", href: "/finance/dashboard", iconName: "CreditCard" },
-        { title: "Documents Vault", href: "/documents/vault", iconName: "FileText" },
-        { title: "Staff / HRMS", href: "/hrms/staff", iconName: "Briefcase" },
-        { title: "Timetable", href: "/timetable/matrix", iconName: "Clock" },
-      ],
-    },
-    {
-      label: "AI YANTRA",
-      items: [
-        { title: "Voice Agent", href: "/voice-agent/campaigns", iconName: "PhoneCall", badge: "AI" },
-        { title: "AI Attendance", href: "/attendance/face", iconName: "ScanFace", badge: "Live" },
-        { title: "AI Tutor", href: "/ai-tutor/chat", iconName: "Bot" },
-        { title: "Tutor Textbooks", href: "/ai-tutor/textbooks", iconName: "BookOpen" },
-        { title: "AI Tutor Insights", href: "/ai-tutor/analytics", iconName: "Bot" },
-      ],
-    },
-    {
-      label: "OPTIONAL",
-      items: [
-        { title: "Events", href: "/events", iconName: "Calendar", optionalModuleKey: "events" },
-        { title: "Transport", href: "/transport", iconName: "Bus", optionalModuleKey: "transport" },
-        { title: "Hostel", href: "/hostel", iconName: "Home", optionalModuleKey: "hostel" },
-        { title: "Library", href: "/library", iconName: "Library", optionalModuleKey: "library" },
-        { title: "Sports", href: "/sports", iconName: "Trophy", optionalModuleKey: "sports" },
-        { title: "Inventory & Assets", href: "/inventory", iconName: "Package", optionalModuleKey: "inventory" },
-      ],
-    },
-    {
-      label: "CONFIGURATION",
-      items: [
         { title: "Settings Shell", href: "/settings", iconName: "Settings" },
       ],
     },
@@ -114,7 +82,8 @@ export const NAVIGATION_CONFIG: Record<RoleType, NavGroup[]> = {
     {
       label: "ADMISSIONS",
       items: [
-        { title: "Applications Kanban", href: "/admissions", iconName: "LayoutDashboard" },
+        { title: "Admissions & Enrollment", href: "/admissions", iconName: "UserPlus" },
+        { title: "Applications Pipeline", href: "/admissions?tab=pipeline", iconName: "LayoutDashboard" },
         { title: "Document Verification", href: "/admissions/documents", iconName: "FileText" },
         { title: "Enrolled Students", href: "/admissions/enrolled", iconName: "CheckCircle2" },
       ],

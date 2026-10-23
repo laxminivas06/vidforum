@@ -309,6 +309,27 @@ export class FaceAttendanceService {
 
     return { ...result, sessionId: session.id, skipped, learnedTemplates: learn.length };
   }
+
+  // =========================================================================
+  // ZERO-CONFIG GROUP FACE ATTENDANCE (MODULES 13 - 16)
+  // =========================================================================
+
+  async getInstitutionGallery(institutionId: string) {
+    return await faceRepository.getInstitutionGallery(institutionId);
+  }
+
+  async recordGroupFaceAttendance(institutionId: string, detections: any[]) {
+    return await faceRepository.recordGroupFaceAttendance(institutionId, detections);
+  }
+
+  async listLiveRecords(institutionId: string, filters: any) {
+    return await faceRepository.listLiveRecords(institutionId, filters);
+  }
+
+  async getAttendanceReports(institutionId: string, date?: string) {
+    return await faceRepository.getAttendanceReports(institutionId, date);
+  }
 }
 
 export const faceAttendanceService = new FaceAttendanceService();
+

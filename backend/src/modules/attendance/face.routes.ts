@@ -59,6 +59,53 @@ faceRouter.post('/submit', async (req, res) => {
   } catch (err) { fail(res, err); }
 });
 
+// =========================================================================
+// AUTOMATED ZERO-CONFIG GROUP FACE ATTENDANCE (MODULES 13 - 16)
+// =========================================================================
+
+faceRouter.get('/institution-gallery', async (req, res) => {
+  try {
+    const gallery = await faceAttendanceService.getInstitutionGallery(req.institutionId!);
+    sendSuccess(res, gallery);
+  } catch (err) { fail(res, err); }
+});
+
+faceRouter.post('/group-record', async (req, res) => {
+  try {
+    const { detections } = req.body;
+    if (!Array.isArray(detections) || detections.length === 0) {
+      sendError(res, 'detections array is required', 400);
+      return;
+    }
+    const recorded = await faceAttendanceService.recordGroupFaceAttendance(req.institutionId!, detections);
+    sendSuccess(res, recorded, 'Group face attendance recorded');
+  } catch (err) { fail(res, err); }
+});
+
+faceRouter.get('/live-records', async (req, res) => {
+  try {
+    const { date, sessionType, classId, sectionId, status } = req.query;
+    const records = await faceAttendanceService.listLiveRecords(req.institutionId!, {
+      date: date ? String(date) : undefined,
+      sessionType: sessionType ? String(sessionType) : undefined,
+      classId: classId ? String(classId) : undefined,
+      sectionId: sectionId ? String(sectionId) : undefined,
+      status: status ? String(status) : undefined,
+    });
+    sendSuccess(res, records);
+  } catch (err) { fail(res, err); }
+});
+
+faceRouter.get('/reports', async (req, res) => {
+  try {
+    const reports = await faceAttendanceService.getAttendanceReports(
+      req.institutionId!,
+      req.query.date ? String(req.query.date) : undefined
+    );
+    sendSuccess(res, reports);
+  } catch (err) { fail(res, err); }
+});
+
 // Public (device-key authenticated) push endpoint for dedicated biometric terminals.
 // Mounted in api.v1.ts BEFORE the JWT-protected /attendance router.
 export const faceDeviceRouter = Router();

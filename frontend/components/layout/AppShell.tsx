@@ -17,7 +17,7 @@ import { ArrowLeft } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface AppShellProps {
-  pageTitle: string
+  pageTitle?: string
   breadcrumbs?: { label: string; href?: string }[]
   children: React.ReactNode
   rightHeaderAction?: React.ReactNode
@@ -45,6 +45,11 @@ const INSTITUTION_WORKSPACES = [
   "/library",
   "/sports",
   "/inventory",
+  "/academic-fees",
+  "/academic-info",
+  "/admission-fees",
+  "/payments",
+  "/admin/payments",
 ]
 
 // Platform-level workspaces that non-Super Admins CANNOT access
@@ -59,7 +64,7 @@ const PLATFORM_SUPER_ADMIN_WORKSPACES = [
 import { isPathAllowedForWorkspaces } from "@/config/workspaces"
 
 export const AppShell: React.FC<AppShellProps> = ({
-  pageTitle,
+  pageTitle = "VID Platform",
   breadcrumbs = [],
   children,
   rightHeaderAction,

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { academicsController } from './academics.controller';
+import { academicConfigController } from './academic-config.controller';
 import { tenantMiddleware } from '../../middleware/tenant.middleware';
 
 const router = Router();
@@ -89,6 +90,25 @@ router.delete(
   tenantMiddleware,
   academicsController.deleteClass.bind(academicsController)
 );
+
+// =========================================================================
+// ACADEMIC CONFIGURATION (MODULE 2)
+// =========================================================================
+
+router.get('/boards', tenantMiddleware, academicConfigController.getBoards.bind(academicConfigController));
+router.post('/boards', tenantMiddleware, academicConfigController.createBoard.bind(academicConfigController));
+router.put('/boards/:id', tenantMiddleware, academicConfigController.updateBoard.bind(academicConfigController));
+
+router.get('/streams', tenantMiddleware, academicConfigController.getStreams.bind(academicConfigController));
+router.post('/streams', tenantMiddleware, academicConfigController.createStream.bind(academicConfigController));
+router.put('/streams/:id', tenantMiddleware, academicConfigController.updateStream.bind(academicConfigController));
+
+router.get('/configurations', tenantMiddleware, academicConfigController.getConfigurations.bind(academicConfigController));
+router.post('/configurations', tenantMiddleware, academicConfigController.createConfiguration.bind(academicConfigController));
+router.put('/configurations/:id', tenantMiddleware, academicConfigController.updateConfiguration.bind(academicConfigController));
+router.delete('/configurations/:id', tenantMiddleware, academicConfigController.deleteConfiguration.bind(academicConfigController));
+
+router.post('/custom-grade', tenantMiddleware, academicConfigController.createCustomGrade.bind(academicConfigController));
 
 router.post(
   '/classes/matrix-generate',

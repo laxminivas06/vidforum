@@ -203,3 +203,96 @@ export function startFaceQueueSync(): () => void {
   window.addEventListener("online", run)
   return () => window.removeEventListener("online", run)
 }
+
+// =========================================================================
+// ZERO-CONFIGURATION GROUP FACE ATTENDANCE (MODULES 13 - 16)
+// =========================================================================
+
+export interface InstitutionGalleryStudent extends GalleryStudent {
+  classId?: string
+  className?: string
+  sectionId?: string
+  sectionName?: string
+}
+
+export interface LiveAttendanceRecord {
+  id: string
+  institution_id: string
+  student_id: string
+  student_name: string
+  roll_number: string | null
+  admission_number: string
+  class_name: string
+  section_name: string
+  attendance_date: string
+  session_type: "AM" | "PM"
+  detected_at: string
+  confidence: number
+  proof_thumbnail_url?: string | null
+  status: "PRESENT" | "NEEDS_REVIEW"
+}
+
+export interface AttendanceReportSummary {
+  date: string
+  totalStudents: number
+  presentCount: number
+  absentCount: number
+  attendanceRate: number
+  amCount: number
+  pmCount: number
+  classBreakdown: Array<{
+    class_name: string
+    total_students: number
+    present_students: number
+  }>
+}
+
+export async function loadInstitutionGallery(): Promise<InstitutionGalleryStudent[]> {
+  try {
+    const raw = await api<InstitutionGalleryStudent[]>("/institution-gallery")
+    return raw.map((st) => ({
+      ...st,
+      templates: usableTemplates(st.templates),
+    }))
+  } catch (err) {
+    console.warn("Failed to load institution face gallery:", err)
+    return []
+  }
+}
+
+export async function recordGroupAttendance(detections: Array<{
+  studentId: string
+  confidence: number
+  detectedAt?: string
+  proofThumbnailUrl?: string
+  sessionType?: "AM" | "PM"
+  status?: "PRESENT" | "NEEDS_REVIEW"
+}>): Promise<LiveAttendanceRecord[]> {
+  return await api<LiveAttendanceRecord[]>("/group-record", {
+    method: "POST",
+    body: JSON.stringify({ detections }),
+  })
+}
+
+export async function loadLiveRecords(filters?: {
+  date?: string
+  sessionType?: string
+  classId?: string
+  sectionId?: string
+  status?: string
+}): Promise<LiveAttendanceRecord[]> {
+  const params = new URLSearchParams()
+  if (filters?.date) params.append("date", filters.date)
+  if (filters?.sessionType && filters.sessionType !== "all") params.append("sessionType", filters.sessionType)
+  if (filters?.classId && filters.classId !== "all") params.append("classId", filters.classId)
+  if (filters?.sectionId && filters.sectionId !== "all") params.append("sectionId", filters.sectionId)
+  if (filters?.status && filters.status !== "all") params.append("status", filters.status)
+
+  return await api<LiveAttendanceRecord[]>(`/live-records?${params.toString()}`)
+}
+
+export async function loadAttendanceReports(date?: string): Promise<AttendanceReportSummary> {
+  const qs = date ? `?date=${encodeURIComponent(date)}` : ""
+  return await api<AttendanceReportSummary>(`/reports${qs}`)
+}
+

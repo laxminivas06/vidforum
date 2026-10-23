@@ -219,6 +219,202 @@ export class FaceRepository {
     );
     return res.rows;
   }
+
+  // =========================================================================
+  // AUTOMATED MULTI-FACE GROUP ATTENDANCE (MODULES 13 - 16)
+  // =========================================================================
+
+  async getInstitutionGallery(institutionId: string) {
+    const res = await db.query(
+      `SELECT s.id, 
+              trim(s.first_name || ' ' || s.last_name) AS name, 
+              s.roll_number AS "rollNumber",
+              s.admission_number AS "admissionNumber",
+              c.id AS "classId",
+              c.name AS "className", 
+              sec.id AS "sectionId",
+              COALESCE(sec.name, 'A') AS "sectionName",
+              fp.id AS "faceProfileId",
+              COALESCE(
+                (SELECT json_agg(t.embedding_vector ORDER BY t.kind, t.created_at DESC)
+                 FROM (SELECT fe.embedding_vector, fe.kind, fe.created_at
+                       FROM face_embeddings fe
+                       WHERE fe.face_profile_id = fp.id
+                       ORDER BY fe.created_at DESC
+                       LIMIT 5) t),
+                '[]'::json) AS templates
+       FROM students s
+       JOIN classes c ON c.id = s.current_class_id
+       LEFT JOIN sections sec ON sec.id = s.current_section_id
+       JOIN face_profiles fp ON fp.student_id = s.id AND fp.institution_id = s.institution_id
+       WHERE s.institution_id = $1 AND s.status = 'active' AND s.deleted_at IS NULL
+       ORDER BY c.sequence_order ASC, s.first_name ASC`,
+      [institutionId]
+    );
+    return res.rows;
+  }
+
+  async recordGroupFaceAttendance(institutionId: string, items: Array<{
+    studentId: string;
+    detectedAt: string;
+    confidence: number;
+    proofThumbnailUrl?: string;
+    sessionType?: 'AM' | 'PM';
+    status?: 'PRESENT' | 'NEEDS_REVIEW';
+  }>) {
+    const results = [];
+    for (const item of items) {
+      // Server-authoritative AM/PM calculation if not provided
+      const now = new Date(item.detectedAt || Date.now());
+      const sessionType = item.sessionType || (now.getHours() < 12 ? 'AM' : 'PM');
+      const status = item.status || 'PRESENT';
+
+      const res = await db.query(
+        `INSERT INTO automated_face_attendance_records (
+          institution_id, student_id, attendance_date, session_type,
+          detected_at, confidence, proof_thumbnail_url, status
+         ) VALUES ($1, $2, CURRENT_DATE, $3, $4, $5, $6, $7)
+         ON CONFLICT (institution_id, student_id, attendance_date, session_type) DO NOTHING
+         RETURNING *`,
+        [
+          institutionId,
+          item.studentId,
+          sessionType,
+          item.detectedAt || new Date().toISOString(),
+          item.confidence,
+          item.proofThumbnailUrl || null,
+          status,
+        ]
+      );
+      if (res.rows[0]) {
+        results.push(res.rows[0]);
+      }
+    }
+    return results;
+  }
+
+  async listLiveRecords(institutionId: string, filters?: {
+    date?: string;
+    sessionType?: string;
+    classId?: string;
+    sectionId?: string;
+    status?: string;
+  }) {
+    const values: any[] = [institutionId];
+    let idx = 2;
+    let where = 'ar.institution_id = $1';
+
+    if (filters?.date) {
+      where += ` AND ar.attendance_date = $${idx++}::date`;
+      values.push(filters.date);
+    } else {
+      where += ' AND ar.attendance_date = CURRENT_DATE';
+    }
+
+    if (filters?.sessionType && filters.sessionType !== 'all') {
+      where += ` AND ar.session_type = $${idx++}`;
+      values.push(filters.sessionType);
+    }
+
+    if (filters?.classId && filters.classId !== 'all') {
+      where += ` AND c.id = $${idx++}`;
+      values.push(filters.classId);
+    }
+
+    if (filters?.sectionId && filters.sectionId !== 'all') {
+      where += ` AND sec.id = $${idx++}`;
+      values.push(filters.sectionId);
+    }
+
+    if (filters?.status && filters.status !== 'all') {
+      where += ` AND ar.status = $${idx++}`;
+      values.push(filters.status);
+    }
+
+    const res = await db.query(
+      `SELECT 
+        ar.id,
+        ar.institution_id,
+        ar.student_id,
+        trim(s.first_name || ' ' || s.last_name) as student_name,
+        s.roll_number,
+        s.admission_number,
+        c.name as class_name,
+        COALESCE(sec.name, 'A') as section_name,
+        ar.attendance_date,
+        ar.session_type,
+        ar.detected_at,
+        ar.confidence,
+        ar.proof_thumbnail_url,
+        ar.status
+       FROM automated_face_attendance_records ar
+       JOIN students s ON s.id = ar.student_id
+       JOIN classes c ON c.id = s.current_class_id
+       LEFT JOIN sections sec ON sec.id = s.current_section_id
+       WHERE ${where}
+       ORDER BY ar.detected_at DESC`,
+      values
+    );
+    return res.rows;
+  }
+
+  async getAttendanceReports(institutionId: string, date?: string) {
+    const targetDate = date || new Date().toISOString().split('T')[0];
+
+    const totalStudentsRes = await db.query(
+      `SELECT count(*)::int as count FROM students WHERE institution_id = $1 AND status = 'active' AND deleted_at IS NULL`,
+      [institutionId]
+    );
+    const totalStudents = totalStudentsRes.rows[0]?.count || 0;
+
+    const presentRes = await db.query(
+      `SELECT count(DISTINCT student_id)::int as count 
+       FROM automated_face_attendance_records 
+       WHERE institution_id = $1 AND attendance_date = $2::date AND status = 'PRESENT'`,
+      [institutionId, targetDate]
+    );
+    const presentCount = presentRes.rows[0]?.count || 0;
+
+    const amRes = await db.query(
+      `SELECT count(DISTINCT student_id)::int as count 
+       FROM automated_face_attendance_records 
+       WHERE institution_id = $1 AND attendance_date = $2::date AND session_type = 'AM' AND status = 'PRESENT'`,
+      [institutionId, targetDate]
+    );
+
+    const pmRes = await db.query(
+      `SELECT count(DISTINCT student_id)::int as count 
+       FROM automated_face_attendance_records 
+       WHERE institution_id = $1 AND attendance_date = $2::date AND session_type = 'PM' AND status = 'PRESENT'`,
+      [institutionId, targetDate]
+    );
+
+    const classBreakdownRes = await db.query(
+      `SELECT 
+        c.name as class_name,
+        count(DISTINCT s.id)::int as total_students,
+        count(DISTINCT ar.student_id)::int as present_students
+       FROM classes c
+       JOIN students s ON s.current_class_id = c.id AND s.status = 'active' AND s.deleted_at IS NULL
+       LEFT JOIN automated_face_attendance_records ar ON ar.student_id = s.id AND ar.attendance_date = $2::date AND ar.status = 'PRESENT'
+       WHERE c.institution_id = $1
+       GROUP BY c.id, c.name, c.sequence_order
+       ORDER BY c.sequence_order ASC`,
+      [institutionId, targetDate]
+    );
+
+    return {
+      date: targetDate,
+      totalStudents,
+      presentCount,
+      absentCount: Math.max(0, totalStudents - presentCount),
+      attendanceRate: totalStudents > 0 ? Math.round((presentCount / totalStudents) * 100) : 0,
+      amCount: amRes.rows[0]?.count || 0,
+      pmCount: pmRes.rows[0]?.count || 0,
+      classBreakdown: classBreakdownRes.rows,
+    };
+  }
 }
 
 export const faceRepository = new FaceRepository();
+

@@ -267,5 +267,16 @@ To eliminate token waste and avoid repeatedly loading raw source files into LLM 
 - **Power cuts / Background Sync:** the unsubmitted scan/review is autosaved encrypted (`draft`) and offered for Resume on reopen. Queued submissions upload from any open page (`startFaceQueueSync` in `AuthContext`) and, on Chromium browsers, from `public/sw.js` via Background Sync with the app closed, using an encrypted auth-token mirror (`auth` key; adopted back by `lib/api/auth-refresh.ts`, both sides serialised by the `vid-token-refresh` Web Lock). Safari/iOS and Firefox upload on next app open.
 - **Schema:** `backend/db/migrations/017_face_attendance.sql`. The old simulated AI Attendance demo (`/ai-attendance/monitoring`, `/ai-yantra/attendance/*` endpoints, `seed-ai-attendance-sessions.ts`) was removed; all AI attendance goes through `/attendance/face`.
 
+## 10. AI Yantra v3.0 Voice Agent Architecture
+- **PSTN Telephony & TwiML Endpoint:** Integrated bidirectional audio via Twilio/Exotel Media Streams (`<Connect><Stream>`). Uses self-hosted `/api/v1/ai-yantra/voice/outbound-twiml` endpoint equipped with a 40-second `<Pause>` keepalive fallback to prevent carrier termination before first turn audio arrival.
+- **Twilio Trial Account Mandate:** Outbound calls on Twilio Trial accounts play the trial verification prompt (*"Press any key to execute your code"*). Callers must press `1` (or any dialpad digit) within ~2-3 seconds upon answer to bridge audio to the media stream. Upgrading the Twilio account removes this requirement.
+- **Sarvam Bulbul TTS Voice Routing:** `bulbul:v4-flash` requires conversational regional speaker codes (`kavitha_te_conversation` for Telugu, `kavya_hi_conversational` for Hindi, `aparna_en_companion` for English). Legacy `priya` speaker is exclusively for `bulbul:v3`. Slices native 8000 Hz $\mu$-law audio directly into 160-byte (20ms) frames to prevent resampling pitch distortion.
+- **0ms Pre-Warmed Counselor Greeting:** The counselor opening script and student dossier are pre-computed in RAM (`prewarmGreetingAudio`) during the dialing/ringing phase, eliminating TTS latency upon caller answer.
+- **Neural VAD & Real-Time Barge-In:** Silero VAD v5 ONNX runtime (`@ricky0123/vad-node`) on 16kHz linear PCM with speech probability > 0.65. Triggers instantaneous barge-in after 6 consecutive speech frames (120ms). Dynamic semantic turn detection switches between 400ms (complete question/clause) and 1000ms (mid-thought trail-off).
+- **Comfort Noise Generation (CNG):** Streams -55 dBFS warm pink noise frames every 20ms during LLM thinking gaps and deploys pre-cached acoustic fillers ("ఒక్క నిమిషం అండి...") during live database tool queries.
+- **Dual-Channel Stereo Recording:** Left channel records incoming parent voice; right channel records counselor speech. Finalized stereo WAV is stored in-memory and in `ai_voice_calls.conversation_payload`, accessible via `GET /calls/:id/audio` with waveform player in the dashboard.
+- **TRAI Calling Windows:** Outbound calls strictly constrained to 08:00 AM – 08:00 PM IST with automatic queue pause at 19:58 IST and BullMQ rate limiting (10 calls/sec, max 10 concurrent).
+
 ---
 *End of MEMORY.md*
+

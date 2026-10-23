@@ -3,6 +3,7 @@
  * Enforces the strict 08:00 AM – 08:00 PM IST calling boundary.
  * Automatically triggers auto-pause at 07:58 PM IST to prevent in-flight calls
  * from violating the hard 08:00 PM cutoff.
+ * Automatically schedules resume at 08:00 AM IST next morning.
  */
 
 export interface TraiWindowStatus {
@@ -30,7 +31,6 @@ export function getNowInIst(): Date {
 export function isInsideTraiWindow(): boolean {
   const ist = getNowInIst();
   const hours = ist.getHours();
-  const minutes = ist.getMinutes();
 
   // 08:00 AM <= current time < 20:00 (08:00 PM)
   if (hours < 8) return false;
@@ -67,8 +67,8 @@ export function getTraiWindowStatus(): TraiWindowStatus {
   });
 
   let nextWindowStart = '08:00 AM IST';
-  if (!isOpen) {
-    if (hours >= 20) {
+  if (!isOpen || nearing) {
+    if (hours >= 20 || nearing) {
       nextWindowStart = 'Tomorrow at 08:00 AM IST';
     } else {
       nextWindowStart = 'Today at 08:00 AM IST';
@@ -77,7 +77,7 @@ export function getTraiWindowStatus(): TraiWindowStatus {
 
   let reason: string | undefined;
   if (nearing) {
-    reason = 'Approaching 08:00 PM IST cutoff. Queue is auto-pausing in-flight calls.';
+    reason = 'Approaching 08:00 PM IST cutoff (19:58 IST). Campaign queues are auto-pausing.';
   } else if (!isOpen) {
     reason = 'Outside TRAI calling hours (08:00 AM – 08:00 PM IST). Automated outbound calls are prohibited by DoT.';
   }
@@ -100,11 +100,56 @@ export function getMsUntilNextWindowOpen(): number {
   const ist = getNowInIst();
   const target = new Date(ist.getTime());
 
-  if (ist.getHours() >= 20) {
+  if (ist.getHours() >= 20 || (ist.getHours() === 19 && ist.getMinutes() >= 58)) {
     // Tomorrow at 8 AM
     target.setDate(target.getDate() + 1);
   }
   target.setHours(8, 0, 0, 0);
 
   return Math.max(1000, target.getTime() - ist.getTime());
+}
+
+/**
+ * Active TRAI Compliance Monitor:
+ * Checks every 30 seconds. At 19:58 IST, calls onAutoPause().
+ * At 08:00 AM IST, calls onAutoResume().
+ */
+export function startTraiComplianceMonitor(callbacks: {
+  onAutoPause: () => void | Promise<void>;
+  onAutoResume: () => void | Promise<void>;
+}) {
+  let wasPausedByTrai = false;
+
+  const check = async () => {
+    const ist = getNowInIst();
+    const hours = ist.getHours();
+    const minutes = ist.getMinutes();
+
+    // 19:58 IST auto-pause
+    if (hours === 19 && minutes >= 58 && !wasPausedByTrai) {
+      console.warn('[TRAI GUARD] 07:58 PM IST reached. Executing mandatory regulatory auto-pause on active calling queues.');
+      wasPausedByTrai = true;
+      try {
+        await callbacks.onAutoPause();
+      } catch (err: any) {
+        console.error('[TRAI GUARD ERROR onAutoPause]', err.message);
+      }
+    }
+
+    // 08:00 AM IST auto-resume
+    if (hours === 8 && minutes === 0 && wasPausedByTrai) {
+      console.log('[TRAI GUARD] 08:00 AM IST reached. Permitted calling window open. Resuming active queues.');
+      wasPausedByTrai = false;
+      try {
+        await callbacks.onAutoResume();
+      } catch (err: any) {
+        console.error('[TRAI GUARD ERROR onAutoResume]', err.message);
+      }
+    }
+  };
+
+  // Run initial check and register interval
+  check().catch(() => {});
+  const timer = setInterval(check, 30000);
+  return () => clearInterval(timer);
 }

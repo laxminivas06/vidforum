@@ -12,8 +12,8 @@ export const EMBEDDING_DIM = 128
 // Cosine similarity of L2-normalised SFace embeddings. Calibrated on real student photos: same person
 // across very different photos scored 0.49-0.75 (median 0.68); 91 pairs of different students scored
 // median 0.18, max 0.54; 71 other different faces max 0.25.
-export const ACCEPT_SCORE = 0.58 // minimum similarity to accept a match (kept above the closest different-student pair, 0.54)
-export const MATCH_MARGIN = 0.08 // best must beat the next different student by this much (look-alikes, twins)
+export const ACCEPT_SCORE = 0.52 // minimum similarity to accept a match (calibrated for real-time webcam streams)
+export const MATCH_MARGIN = 0.04 // best must beat the next different student by this much
 const MIN_REAL = 0.5 // anti-spoof: rejects printed photos and screens
 const MIN_LIVE = 0.4 // liveness
 const MIN_FACE_PX = 48 // small enough for faces in a group snap

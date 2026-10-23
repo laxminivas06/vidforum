@@ -49,7 +49,7 @@ export class TwilioProvider implements TelephonyProvider {
 
       let twiml: string;
       if (ctx.streamUrl) {
-        twiml = `<Response><Connect><Stream url="${ctx.streamUrl}"><Parameter name="institutionId" value="${ctx.institutionId || ''}" /><Parameter name="studentId" value="${ctx.studentId || ''}" /><Parameter name="studentName" value="${encodeURIComponent(ctx.studentName || '')}" /><Parameter name="guardianName" value="${encodeURIComponent(ctx.guardianName || '')}" /><Parameter name="phone" value="${normalized}" /><Parameter name="language" value="${ctx.language || 'te-IN'}" /><Parameter name="useCase" value="${ctx.useCase || 'event_notice'}" /></Stream></Connect><Pause length="2"/>${sayTag}</Response>`;
+        twiml = `<Response><Connect><Stream url="${ctx.streamUrl}"><Parameter name="institutionId" value="${ctx.institutionId || ''}" /><Parameter name="studentId" value="${ctx.studentId || ''}" /><Parameter name="studentName" value="${encodeURIComponent(ctx.studentName || '')}" /><Parameter name="guardianName" value="${encodeURIComponent(ctx.guardianName || '')}" /><Parameter name="phone" value="${normalized}" /><Parameter name="language" value="${ctx.language || 'te-IN'}" /><Parameter name="useCase" value="${ctx.useCase || 'event_notice'}" /></Stream></Connect><Pause length="40"/></Response>`;
       } else {
         twiml = `<Response><Pause length="2"/>${sayTag}</Response>`;
       }
@@ -58,11 +58,22 @@ export class TwilioProvider implements TelephonyProvider {
       params.append('From', env.TWILIO_PHONE_NUMBER);
       params.append('To', normalized);
 
-      // Twilio Free Trial accounts strictly forbid inline 'Twiml' parameter on POST /Calls.json.
-      // Twilio's official stateless twimlets.com/echo URL service serves the exact TwiML XML
-      // and is fully supported on BOTH Trial and Production/Paid accounts.
-      const echoUrl = `https://twimlets.com/echo?Twiml=${encodeURIComponent(twiml)}`;
-      params.append('Url', echoUrl);
+      // Prefer self-hosted TwiML route on PUBLIC_BASE_URL for lower latency and detailed access logs
+      if (env.PUBLIC_BASE_URL && ctx.streamUrl) {
+        const cleanBase = env.PUBLIC_BASE_URL.replace(/\/$/, '');
+        const twimlUrl = new URL(`${cleanBase}/api/v1/ai-yantra/voice/outbound-twiml`);
+        twimlUrl.searchParams.set('institutionId', ctx.institutionId || '');
+        twimlUrl.searchParams.set('studentId', ctx.studentId || '');
+        twimlUrl.searchParams.set('studentName', ctx.studentName || '');
+        twimlUrl.searchParams.set('guardianName', ctx.guardianName || '');
+        twimlUrl.searchParams.set('phone', normalized);
+        twimlUrl.searchParams.set('language', ctx.language || 'te-IN');
+        twimlUrl.searchParams.set('useCase', ctx.useCase || 'event_notice');
+        params.append('Url', twimlUrl.toString());
+      } else {
+        const echoUrl = `https://twimlets.com/echo?Twiml=${encodeURIComponent(twiml)}`;
+        params.append('Url', echoUrl);
+      }
 
       // Note: On Twilio Free Trial accounts, 'MachineDetection' causes Twilio to return HTTP 400 (error 0).
       // Only include it if AMD is requested and we know trial won't reject it.

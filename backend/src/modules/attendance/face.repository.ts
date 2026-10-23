@@ -224,14 +224,22 @@ export class FaceRepository {
   // AUTOMATED MULTI-FACE GROUP ATTENDANCE (MODULES 13 - 16)
   // =========================================================================
 
-  async getInstitutionGallery(institutionId: string) {
+  async getInstitutionGallery(institutionId?: string) {
+    let targetId = institutionId;
+    if (!targetId) {
+      const activeRes = await db.query(
+        `SELECT institution_id FROM face_profiles LIMIT 1`
+      );
+      targetId = activeRes.rows[0]?.institution_id || '18b3b9a6-0791-47f4-bbd0-bf7c0221e18f';
+    }
+
     const res = await db.query(
       `SELECT s.id, 
               trim(s.first_name || ' ' || s.last_name) AS name, 
               s.roll_number AS "rollNumber",
               s.admission_number AS "admissionNumber",
               c.id AS "classId",
-              c.name AS "className", 
+              COALESCE(c.name, 'Unassigned') AS "className", 
               sec.id AS "sectionId",
               COALESCE(sec.name, 'A') AS "sectionName",
               fp.id AS "faceProfileId",
@@ -240,29 +248,38 @@ export class FaceRepository {
                  FROM (SELECT fe.embedding_vector, fe.kind, fe.created_at
                        FROM face_embeddings fe
                        WHERE fe.face_profile_id = fp.id
+                         AND (fe.model_version = 'sface-2021dec' OR array_length(fe.embedding_vector, 1) = 128)
                        ORDER BY fe.created_at DESC
                        LIMIT 5) t),
                 '[]'::json) AS templates
        FROM students s
-       JOIN classes c ON c.id = s.current_class_id
+       LEFT JOIN classes c ON c.id = s.current_class_id
        LEFT JOIN sections sec ON sec.id = s.current_section_id
        JOIN face_profiles fp ON fp.student_id = s.id AND fp.institution_id = s.institution_id
        WHERE s.institution_id = $1 AND s.status = 'active' AND s.deleted_at IS NULL
-       ORDER BY c.sequence_order ASC, s.first_name ASC`,
-      [institutionId]
+       ORDER BY c.sequence_order ASC NULLS LAST, s.first_name ASC`,
+      [targetId]
     );
     return res.rows;
   }
 
   async recordGroupFaceAttendance(institutionId: string, items: Array<{
     studentId: string;
-    detectedAt: string;
+    detectedAt?: string;
     confidence: number;
     proofThumbnailUrl?: string;
     sessionType?: 'AM' | 'PM';
     status?: 'PRESENT' | 'NEEDS_REVIEW';
   }>) {
-    const results = [];
+    let targetInstId = institutionId;
+    if (!targetInstId) {
+      const activeRes = await db.query(
+        `SELECT institution_id FROM face_profiles LIMIT 1`
+      );
+      targetInstId = activeRes.rows[0]?.institution_id || '18b3b9a6-0791-47f4-bbd0-bf7c0221e18f';
+    }
+
+    const ids: string[] = [];
     for (const item of items) {
       // Server-authoritative AM/PM calculation if not provided
       const now = new Date(item.detectedAt || Date.now());
@@ -274,10 +291,14 @@ export class FaceRepository {
           institution_id, student_id, attendance_date, session_type,
           detected_at, confidence, proof_thumbnail_url, status
          ) VALUES ($1, $2, CURRENT_DATE, $3, $4, $5, $6, $7)
-         ON CONFLICT (institution_id, student_id, attendance_date, session_type) DO NOTHING
-         RETURNING *`,
+         ON CONFLICT (institution_id, student_id, attendance_date, session_type) 
+         DO UPDATE SET 
+           confidence = GREATEST(automated_face_attendance_records.confidence, EXCLUDED.confidence),
+           detected_at = EXCLUDED.detected_at,
+           proof_thumbnail_url = COALESCE(EXCLUDED.proof_thumbnail_url, automated_face_attendance_records.proof_thumbnail_url)
+         RETURNING id`,
         [
-          institutionId,
+          targetInstId,
           item.studentId,
           sessionType,
           item.detectedAt || new Date().toISOString(),
@@ -286,11 +307,39 @@ export class FaceRepository {
           status,
         ]
       );
-      if (res.rows[0]) {
-        results.push(res.rows[0]);
+      if (res.rows[0]?.id) {
+        ids.push(res.rows[0].id);
       }
     }
-    return results;
+
+    if (ids.length === 0) return [];
+
+    const fullRes = await db.query(
+      `SELECT 
+        ar.id,
+        ar.institution_id,
+        ar.student_id,
+        trim(s.first_name || ' ' || s.last_name) as student_name,
+        s.roll_number,
+        s.admission_number,
+        COALESCE(c.name, 'Unassigned') as class_name,
+        COALESCE(sec.name, 'A') as section_name,
+        ar.attendance_date,
+        ar.session_type,
+        ar.detected_at,
+        ar.confidence,
+        ar.proof_thumbnail_url,
+        ar.status
+       FROM automated_face_attendance_records ar
+       JOIN students s ON s.id = ar.student_id
+       LEFT JOIN classes c ON c.id = s.current_class_id
+       LEFT JOIN sections sec ON sec.id = s.current_section_id
+       WHERE ar.id = ANY($1::uuid[])
+       ORDER BY ar.detected_at DESC`,
+      [ids]
+    );
+
+    return fullRes.rows;
   }
 
   async listLiveRecords(institutionId: string, filters?: {
@@ -300,7 +349,15 @@ export class FaceRepository {
     sectionId?: string;
     status?: string;
   }) {
-    const values: any[] = [institutionId];
+    let targetInstId = institutionId;
+    if (!targetInstId) {
+      const activeRes = await db.query(
+        `SELECT institution_id FROM face_profiles LIMIT 1`
+      );
+      targetInstId = activeRes.rows[0]?.institution_id || '18b3b9a6-0791-47f4-bbd0-bf7c0221e18f';
+    }
+
+    const values: any[] = [targetInstId];
     let idx = 2;
     let where = 'ar.institution_id = $1';
 
@@ -339,7 +396,7 @@ export class FaceRepository {
         trim(s.first_name || ' ' || s.last_name) as student_name,
         s.roll_number,
         s.admission_number,
-        c.name as class_name,
+        COALESCE(c.name, 'Unassigned') as class_name,
         COALESCE(sec.name, 'A') as section_name,
         ar.attendance_date,
         ar.session_type,
@@ -349,7 +406,7 @@ export class FaceRepository {
         ar.status
        FROM automated_face_attendance_records ar
        JOIN students s ON s.id = ar.student_id
-       JOIN classes c ON c.id = s.current_class_id
+       LEFT JOIN classes c ON c.id = s.current_class_id
        LEFT JOIN sections sec ON sec.id = s.current_section_id
        WHERE ${where}
        ORDER BY ar.detected_at DESC`,
@@ -359,11 +416,19 @@ export class FaceRepository {
   }
 
   async getAttendanceReports(institutionId: string, date?: string) {
+    let targetInstId = institutionId;
+    if (!targetInstId) {
+      const activeRes = await db.query(
+        `SELECT institution_id FROM face_profiles LIMIT 1`
+      );
+      targetInstId = activeRes.rows[0]?.institution_id || '18b3b9a6-0791-47f4-bbd0-bf7c0221e18f';
+    }
+
     const targetDate = date || new Date().toISOString().split('T')[0];
 
     const totalStudentsRes = await db.query(
       `SELECT count(*)::int as count FROM students WHERE institution_id = $1 AND status = 'active' AND deleted_at IS NULL`,
-      [institutionId]
+      [targetInstId]
     );
     const totalStudents = totalStudentsRes.rows[0]?.count || 0;
 
@@ -371,7 +436,7 @@ export class FaceRepository {
       `SELECT count(DISTINCT student_id)::int as count 
        FROM automated_face_attendance_records 
        WHERE institution_id = $1 AND attendance_date = $2::date AND status = 'PRESENT'`,
-      [institutionId, targetDate]
+      [targetInstId, targetDate]
     );
     const presentCount = presentRes.rows[0]?.count || 0;
 
@@ -379,14 +444,14 @@ export class FaceRepository {
       `SELECT count(DISTINCT student_id)::int as count 
        FROM automated_face_attendance_records 
        WHERE institution_id = $1 AND attendance_date = $2::date AND session_type = 'AM' AND status = 'PRESENT'`,
-      [institutionId, targetDate]
+      [targetInstId, targetDate]
     );
 
     const pmRes = await db.query(
       `SELECT count(DISTINCT student_id)::int as count 
        FROM automated_face_attendance_records 
        WHERE institution_id = $1 AND attendance_date = $2::date AND session_type = 'PM' AND status = 'PRESENT'`,
-      [institutionId, targetDate]
+      [targetInstId, targetDate]
     );
 
     const classBreakdownRes = await db.query(
@@ -400,7 +465,7 @@ export class FaceRepository {
        WHERE c.institution_id = $1
        GROUP BY c.id, c.name, c.sequence_order
        ORDER BY c.sequence_order ASC`,
-      [institutionId, targetDate]
+      [targetInstId, targetDate]
     );
 
     return {

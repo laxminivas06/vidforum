@@ -13,7 +13,7 @@ interface TestCallDrawerProps {
 type CallStep = "idle" | "dialing" | "ringing" | "in_conversation" | "completed" | "failed"
 
 export const TestCallDrawer: React.FC<TestCallDrawerProps> = ({ isOpen, onClose }) => {
-  const [phoneNumber, setPhoneNumber] = useState("8050453043")
+  const [phoneNumber, setPhoneNumber] = useState("")
   const [studentAdmission, setStudentAdmission] = useState("SIA-2026-0101")
   const [messageType, setMessageType] = useState("event_notice")
   const [language, setLanguage] = useState("te-IN")
@@ -143,7 +143,7 @@ export const TestCallDrawer: React.FC<TestCallDrawerProps> = ({ isOpen, onClose 
                   type="tel"
                   maxLength={10}
                   required
-                  placeholder="8050453043"
+                  placeholder="9876543210"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ""))}
                   className="flex-1 px-3 py-2 text-xs text-gray-900 focus:outline-hidden"
@@ -159,7 +159,7 @@ export const TestCallDrawer: React.FC<TestCallDrawerProps> = ({ isOpen, onClose 
                   1. <strong>Keypress Required:</strong> When answering, Twilio will state: <em>&ldquo;You have a trial account... press any key to execute your code&rdquo;</em>. <strong>Press 1 (or any key on your dialpad)</strong> so Twilio begins speaking the voice agent script. If no key is pressed, Twilio hangs up after 5 seconds.
                 </p>
                 <p className="text-amber-800 leading-relaxed">
-                  2. <strong>Verified Numbers Only:</strong> Outbound calls can only reach numbers verified in your Twilio Console under <em>Verified Caller IDs</em> (e.g. <strong>8050453043</strong>).
+                  2. <strong>Verified Numbers Only:</strong> Outbound calls can only reach numbers verified in your Twilio Console under <em>Verified Caller IDs</em> (e.g. your verified phone number).
                 </p>
               </div>
             </div>

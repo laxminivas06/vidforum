@@ -1,6 +1,7 @@
 /**
  * Conversational Reasoning Engine (Groq LPU / Llama 3.3 70B & Qwen 2.5)
- * Enforces the natural human counselor persona, zero robotic vocabulary, and tool execution.
+ * Enforces the natural human counselor persona, zero robotic vocabulary, clause streaming,
+ * and seamless [Agent Interrupted] handling.
  */
 
 import { env } from '../../../config/env';
@@ -8,10 +9,11 @@ import {
   getStudentMarksTool,
   getStudentAttendanceTool,
   getFeeStatusTool,
+  lookupStudentRecordTool,
   GROQ_TOOL_DEFINITIONS,
   normalizeSubjectName,
 } from './tools';
-import { validateScriptPurity, normalizeSpokenText } from '../audio/normalizer';
+import { normalizeSpokenText } from '../audio/normalizer';
 
 export interface GroqBrainOptions {
   institutionId: string;
@@ -22,6 +24,7 @@ export interface GroqBrainOptions {
   useCase?: string;
   studentDossier?: string;
   onToolStart?: (toolName: string) => void;
+  onClauseStream?: (clause: string) => void;
 }
 
 export interface GroqChatResult {
@@ -29,6 +32,36 @@ export interface GroqChatResult {
   toolUsed?: string;
   toolData?: any;
   interrupted?: boolean;
+}
+
+/**
+ * Punctuation regex for real-time clause streaming
+ */
+const CLAUSE_BOUNDARY_REGEX = /([.?!,।\n]+)/;
+
+/**
+ * Splits text into clauses based on natural conversational punctuation boundaries
+ */
+export function extractClauses(text: string): string[] {
+  const parts = text.split(CLAUSE_BOUNDARY_REGEX);
+  const clauses: string[] = [];
+  let current = '';
+
+  for (let i = 0; i < parts.length; i++) {
+    current += parts[i];
+    if (CLAUSE_BOUNDARY_REGEX.test(parts[i])) {
+      if (current.trim().length > 0) {
+        clauses.push(current.trim());
+      }
+      current = '';
+    }
+  }
+
+  if (current.trim().length > 0) {
+    clauses.push(current.trim());
+  }
+
+  return clauses;
 }
 
 export async function processConversationalTurn(
@@ -42,64 +75,94 @@ export async function processConversationalTurn(
   const instId = options.institutionId;
 
   if (!env.GROQ_API_KEY) {
-    return {
-      reply:
-        language === 'te-IN'
-          ? 'నమస్కారం అండి! నారాయణ పాఠశాల నుండి ప్రియను మాట్లాడుతున్నాను. మీకు ఎలా సహాయపడగలను?'
-          : 'Hello! This is Priya from Narayana School. How can I help you today?',
-    };
+    const fallback =
+      language === 'te-IN'
+        ? 'నమస్కారం అండి! Narayana School నుండి Priya ని మాట్లాడుతున్నాను. మీకు ఎలా help చేయగలను?'
+        : 'Hello! This is Priya from Narayana School. How can I help you today?';
+    if (options.onClauseStream) {
+      options.onClauseStream(fallback);
+    }
+    return { reply: fallback };
   }
 
-  // Language Directives
+  // Language & Tone Guidelines
   let languageDirective = '';
   if (language === 'te-IN') {
-    languageDirective = `CRITICAL LANGUAGE REQUIREMENT: You MUST respond strictly in 100% PURE, NATURAL, POLITE TELUGU (తెలుగు) using proper TELUGU SCRIPT ONLY.
-- ABSOLUTELY ZERO ENGLISH WORDS, ZERO CODE-MIXING, ZERO "TENGLISH".
-- Do NOT output English words like "marks", "Science", "Quarterly", "A grade" in Latin script. Write them cleanly in Telugu script: "మార్కులు", "సైన్స్", "గణితం", "త్రైమాసిక పరీక్ష", "ఎ గ్రేడ్".
-- Always maintain warmth and respect with "అండి" and polite Telugu phrasing.
-- Strict limit: Maximum 2 concise spoken sentences.`;
+    languageDirective = `LANGUAGE & TONE MANDATE (CONVERSATIONAL TENGLISH):
+You are a warm, human school counselor speaking in natural everyday Telugu mixed with English ("Tenglish").
+1. Avoid Pure or Literary Telugu: Speak the way teachers and parents naturally converse in Hyderabad/Telangana/Andhra Pradesh. Keep English school terms in English (Science, Maths, Marks, Exam, Attendance, Fee, Report Card, Sports, Leave).
+2. Human Counselor Presence: Speak as if you are holding the student's physical report card on your table. Never say words like "database", "querying", "records", "system", "fetching", or "tool".
+3. Voice & Interruption Etiquette: If previous turn contains "[Agent Interrupted]", immediately and warmly address the parent's new query directly without repeatedly apologizing.
+4. Voice-Optimized Output: Zero bullet points, asterisks (*), markdown formatting, hashes, or tables.
+5. Strict limit: Maximum 1 to 2 concise spoken sentences per turn.`;
   } else if (language === 'hi-IN') {
-    languageDirective = `CRITICAL LANGUAGE REQUIREMENT: You MUST respond strictly in 100% PURE, POLITE HINDI (हिंदी) using DEVANAGARI SCRIPT ONLY.
-- ABSOLUTELY ZERO ENGLISH WORDS. NO CODE-MIXING.
-- Strict limit: Maximum 2 concise spoken sentences.`;
+    languageDirective = `CRITICAL LANGUAGE & TONE GUIDELINES:
+- Output strictly in warm, polite conversational Hindi.
+- Voice-optimized: zero symbols, markdown, bullet points, or tables.
+- Polite honorifics: "जी", "बताइए".
+- Counselor Persona: Never say "database", "system", or "fetching".
+- Strict limit: Maximum 2 concise spoken sentences per turn.`;
   } else {
-    languageDirective = `CRITICAL LANGUAGE REQUIREMENT: You MUST respond strictly in 100% FLUENT, POLITE, PROFESSIONAL ENGLISH.
-- Strict limit: Maximum 2 concise spoken sentences.`;
+    languageDirective = `CRITICAL LANGUAGE & TONE GUIDELINES:
+- Output in clear, warm, natural conversational English as a school counselor.
+- Voice-optimized: zero symbols, markdown, bullet points, or tables.
+- Strict limit: Maximum 2 concise spoken sentences per turn.`;
   }
 
-  // Pre-warmed Student Dossier or Fallback Tool Calling
-  const recordsSection = options.studentDossier ? `
+  const useCaseDesc =
+    options.useCase === 'fee_reminder'
+      ? 'Term-2 tuition fee reminder and fee balance inquiry'
+      : options.useCase === 'attendance_alert'
+      ? 'Morning assembly absence notification and parent leave confirmation'
+      : options.useCase === 'exam_announcement'
+      ? 'Quarterly examination results release notice'
+      : 'School event announcement (Annual Sports Day celebration)';
+
+  // Report Card Dossier or Fallback Lookup
+  const recordsSection = options.studentDossier
+    ? `
 ${options.studentDossier}
 
-CRITICAL RULES FOR FAST CONVERSATION:
-1. The student's complete examination marks, attendance, and fee records are ALREADY ON YOUR DESK above.
-2. When the caller asks about ANY marks (whether a single subject like Mathematics, Science, or "all subjects" / "అన్ని సబ్జెక్టులు"), attendance, or fees:
-   - Directly answer from the record above in 1 warm sentence in pure spoken Telugu!
-   - DO NOT call any tool functions when the details are already in the record above!
-3. Only invoke a tool function if the caller asks for something that is NOT in the record above.` : `
-2. When the parent asks ANY question regarding marks, attendance, or fees:
-   - Call the appropriate function (get_student_marks, get_student_attendance, get_fee_status).
-   - If they ask for "Maths", "Math", "Science", or any subject, pass the canonical subject name.
-   - If the subject is not yet finalized, state it warmly: "గణితం మార్కులు ఇంకా ఖరారు కాలేదు అండి, త్వరలోనే తెలియజేస్తాము."`;
+COUNSELOR INFORMATION RULES:
+1. STRICT REFERENCE-ONLY RULE: The student report card above is for YOUR REFERENCE ONLY. NEVER recite or dump marks, grades, attendance, or fees unprompted!
+2. If the caller asks about leave or makes an announcement, respond directly with warm confirmation and DO NOT recite marks!
+3. If the caller specifically asks for marks (e.g., "marks ఎంత?", "Science లో ఎంత వచ్చింది?"), answer directly with the exact score in 1 concise sentence.`
+    : `
+COUNSELOR INFORMATION RULES:
+1. If the parent asks for marks, attendance, or fees, check the report card via the appropriate lookup function.
+2. Deliver only the specific fact requested in 1-2 warm sentences in natural Tenglish.
+3. If not found: "Sorry అండి, ఈ వివరాలు రిపోర్ట్ కార్డులో ఇంకా నమోదు కాలేదు."`;
 
-  // Strict Human Counselor Persona Prompt (Zero Robotic Vocabulary)
-  const systemPrompt = `You are Priya, a warm, polite, articulate, and caring senior student counselor at Narayana e-Techno School. You are talking over a real phone call with ${guardianName}, the parent of ${studentName} (Admission Number: ${studentId}).
-${languageDirective}
+  const systemPrompt = `# Role & Identity
+You are Priya, a warm, caring, and helpful human School Counselor at Narayana e-Techno School.
+You are on a phone call with ${guardianName}, parent of student ${studentName} (Admission/Roll Number: ${studentId}).
+Current Call Purpose: ${useCaseDesc}.
 
-CRITICAL CONVERSATIONAL & PERSONA RULES:
-1. NEVER use technical, robotic, or database words.
-   - FORBIDDEN WORDS: "database", "records", "querying", "fetching", "system", "tool", "API", "backend", "డేటాబేస్", "సిస్టమ్".
-   - Speak naturally as if you are a real school counselor holding the student's physical paper report card in front of you.
-   - Example (Good): "మీ బాబు సాయి తేజకు గణితంలో 100 కి 94 మార్కులు వచ్చాయి అండి. చాలా బాగా చదువుతున్నాడు."
-   - Example (Forbidden): "మా డేటాబేస్ లో చూసి చెప్తున్నాను..." or "I am fetching marks from the database."
+---
+## CORE CONVERSATIONAL RULES:
+1. LISTEN & CONFIRM PARENT ANNOUNCEMENTS:
+   - If the parent makes ANY announcement (student has fever, sick, taking leave tomorrow, attending event, bus change, etc.), LISTEN CAREFULLY and WARMLY CONFIRM IT (e.g., "సరే అండి, leave note చేసుకున్నాను. Class teacher కి inform చేస్తాను. Thank you for informing us!").
+   - NEVER ignore the parent's announcement!
+2. STRICTLY DO NOT RECITE MARKS UNPROMPTED:
+   - NEVER recite marks or fees UNLESS the parent EXPLICITLY asks for them (e.g. "marks entha?", "maths lo enni vachayi?", "what are his marks?").
+3. NEVER HANG UP ABRUPTLY:
+   - Always keep the conversation open with a warm follow-up:
+     - In Telugu: "ఇంకేమైనా details కావాలా అండి?"
+     - In Hindi: "क्या आप कुछ और जानकारी जानना चाहते हैं जी?"
+     - In English: "Do you have any other questions regarding the student?"
+4. ZERO ROBOTIC VOCABULARY:
+   - Strictly forbid words like "database", "querying", "records", "system", "fetching", "tool", "API", "డేటాబేస్", "సిస్టమ్". Speak naturally as a school counselor holding a physical report card.
+5. AGENT INTERRUPTED PROTOCOL:
+   - If previous message contains "[Agent Interrupted]", it means the caller interrupted you. Acknowledge their new query directly and answer without long apologies.
 
+---
 ${recordsSection}
 
-3. Call Flow & Interruption Context:
-   - If previous assistant message contains "[Agent Interrupted]", it means the caller spoke while you were speaking. Acknowledge and answer their new question directly without apologizing repeatedly.`;
+---
+${languageDirective}`;
 
   const chatMessages: any[] = [{ role: 'system', content: systemPrompt }, ...messages];
-  const model = env.GROQ_MODEL || 'qwen/qwen3.8-27b';
+  const model = env.GROQ_MODEL || 'llama-3.3-70b-versatile';
 
   // 1. Initial LLM Call with Tool Declarations
   const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -125,12 +188,12 @@ ${recordsSection}
   const data: any = await res.json();
   const choice = data.choices && data.choices[0];
   if (!choice) {
-    return {
-      reply:
-        language === 'te-IN'
-          ? 'ధన్యవాదాలు అండి, మీకు ఇంకేమైనా వివరాలు కావాలా?'
-          : 'Thank you, do you need any other details?',
-    };
+    const fallback =
+      language === 'te-IN'
+        ? 'థ్యాంక్స్ అండి, మీకు ఇంకేమైనా details కావాలా?'
+        : 'Thank you, do you need any other details?';
+    if (options.onClauseStream) options.onClauseStream(fallback);
+    return { reply: fallback };
   }
 
   let finalReply = choice.message.content || '';
@@ -158,6 +221,8 @@ ${recordsSection}
       toolResultData = await getStudentAttendanceTool(instId, targetStudentId);
     } else if (toolUsedName === 'get_fee_status') {
       toolResultData = await getFeeStatusTool(instId, targetStudentId);
+    } else if (toolUsedName === 'lookup_student_record') {
+      toolResultData = await lookupStudentRecordTool(instId, args.roll_number_or_name || targetStudentId);
     }
 
     // Secondary LLM Call to Formulate Spoken Counselor Response
@@ -185,42 +250,23 @@ ${recordsSection}
 
     if (secondRes.ok) {
       const secondData: any = await secondRes.json();
-      finalReply = secondData.choices?.[0]?.message?.content || finalReply;
+      const content = secondData.choices?.[0]?.message?.content;
+      if (content && content.trim()) {
+        finalReply = content;
+      }
+    } else {
+      console.warn(`[GROQ SECOND CALL ERROR ${secondRes.status}]`, await secondRes.text());
     }
   }
 
-  // 3. Spoken Normalization & Script Purity Validation
+  // 3. Spoken Normalization
   finalReply = normalizeSpokenText(finalReply, language);
-  const purity = validateScriptPurity(finalReply, language);
-  if (!purity.valid) {
-    console.warn(`[PURITY RE-TRY] Output contained Latin leaks (${purity.reason}). Re-prompting...`);
-    const retryRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${env.GROQ_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model,
-        messages: [
-          ...chatMessages,
-          { role: 'assistant', content: finalReply },
-          {
-            role: 'user',
-            content:
-              language === 'te-IN'
-                ? 'ముఖ్యమైన ఆదేశం: ఎట్టి పరిస్థితుల్లోనూ ఇంగ్లీష్ లేదా రోమన్ లిపి ఉపయోగించవద్దు. కేవలం 100% తెలుగు లిపిలో మాత్రమే గౌరవంగా 2 వాక్యాలలో సమాధానం చెప్పండి.'
-                : 'कड़ा निर्देश: उत्तर केवल 100% शुद्ध देवनागरी हिंदी में दें।',
-          },
-        ],
-        temperature: 0.1,
-        max_tokens: 220,
-      }),
-    });
 
-    if (retryRes.ok) {
-      const retryData: any = await retryRes.json();
-      finalReply = normalizeSpokenText(retryData.choices?.[0]?.message?.content?.trim() || finalReply, language);
+  // 4. Stream clauses to caller if callback is registered
+  if (options.onClauseStream && finalReply) {
+    const clauses = extractClauses(finalReply);
+    for (const clause of clauses) {
+      options.onClauseStream(clause);
     }
   }
 

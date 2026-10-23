@@ -62,9 +62,12 @@ export default function AutomatedFaceAttendancePage() {
   // Refs for video & loop
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const overlayCanvasRef = useRef<HTMLCanvasElement | null>(null)
   const streamRef = useRef<MediaStream | null>(null)
   const loopActiveRef = useRef(false)
   const markedTodaySetRef = useRef<Set<string>>(new Set())
+  const galleryRef = useRef<InstitutionGalleryStudent[]>([])
+  const runDetectionLoopRef = useRef<() => Promise<void>>()
 
   // Load Gallery and Initial Records on mount
   useEffect(() => {
@@ -77,6 +80,7 @@ export default function AutomatedFaceAttendancePage() {
           loadLiveRecords({ date: new Date().toISOString().split("T")[0] }),
         ])
         if (mounted) {
+          galleryRef.current = gal
           setGallery(gal)
           setLiveRecords(recs)
           // Pre-populate marked student IDs to prevent duplicate requests
@@ -114,9 +118,10 @@ export default function AutomatedFaceAttendancePage() {
         await videoRef.current.play()
       }
 
-      // Ensure gallery is loaded
-      if (gallery.length === 0) {
+      // Ensure gallery is loaded across all students
+      if (galleryRef.current.length === 0) {
         const gal = await loadInstitutionGallery()
+        galleryRef.current = gal
         setGallery(gal)
       }
 
@@ -127,7 +132,7 @@ export default function AutomatedFaceAttendancePage() {
       setSessionNewPresentCount(0)
 
       // Begin continuous multi-face recognition loop
-      runDetectionLoop()
+      requestAnimationFrame(() => runDetectionLoopRef.current?.())
     } catch (err: any) {
       setCameraLoading(false)
       setIsRunning(false)
@@ -149,6 +154,11 @@ export default function AutomatedFaceAttendancePage() {
       videoRef.current.srcObject = null
     }
 
+    if (overlayCanvasRef.current) {
+      const oCtx = overlayCanvasRef.current.getContext("2d")
+      oCtx?.clearRect(0, 0, overlayCanvasRef.current.width, overlayCanvasRef.current.height)
+    }
+
     if (sessionDetectedCount > 0) {
       setShowSummaryModal(true)
     }
@@ -160,6 +170,7 @@ export default function AutomatedFaceAttendancePage() {
 
     const video = videoRef.current
     const canvas = canvasRef.current
+    const overlayCanvas = overlayCanvasRef.current
 
     if (video.readyState >= 2 && video.videoWidth > 0) {
       canvas.width = video.videoWidth
@@ -172,6 +183,18 @@ export default function AutomatedFaceAttendancePage() {
         try {
           // Detect all faces concurrently in the current frame
           const detected = await detectFaces(canvas, { liveCheck: false })
+          const currentGallery = galleryRef.current.length > 0 ? galleryRef.current : gallery
+
+          // Prepare overlay canvas
+          let oCtx: CanvasRenderingContext2D | null = null
+          if (overlayCanvas) {
+            if (overlayCanvas.width !== video.videoWidth || overlayCanvas.height !== video.videoHeight) {
+              overlayCanvas.width = video.videoWidth
+              overlayCanvas.height = video.videoHeight
+            }
+            oCtx = overlayCanvas.getContext("2d")
+            oCtx?.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height)
+          }
 
           if (detected.length > 0) {
             setSessionDetectedCount((prev) => prev + detected.length)
@@ -185,7 +208,52 @@ export default function AutomatedFaceAttendancePage() {
             }> = []
 
             for (const face of detected) {
-              const match = await matchFace(face.embedding, gallery)
+              const match = await matchFace(face.embedding, currentGallery)
+              const [bx, by, bw, bh] = face.box
+              const isMatch = Boolean(match && match.accepted)
+
+              // Draw live HUD tracking badge on overlay canvas
+              if (oCtx) {
+                oCtx.save()
+                oCtx.strokeStyle = isMatch ? "#10b981" : "#f59e0b"
+                oCtx.fillStyle = isMatch ? "rgba(16, 185, 129, 0.16)" : "rgba(245, 158, 11, 0.12)"
+                oCtx.lineWidth = 2.5
+                oCtx.shadowColor = isMatch ? "#10b981" : "#f59e0b"
+                oCtx.shadowBlur = 8
+
+                oCtx.beginPath()
+                if (typeof oCtx.roundRect === "function") {
+                  oCtx.roundRect(bx, by, bw, bh, 8)
+                } else {
+                  oCtx.rect(bx, by, bw, bh)
+                }
+                oCtx.stroke()
+                oCtx.fill()
+
+                const labelText = isMatch && match
+                  ? `✓ ${match.student.name} (${Math.round(match.score * 100)}%)`
+                  : "Scanning face..."
+                oCtx.font = "bold 13px system-ui, -apple-system, sans-serif"
+                const textWidth = oCtx.measureText(labelText).width
+                const pillWidth = textWidth + 16
+                const pillHeight = 22
+                const pillX = Math.max(4, bx + (bw - pillWidth) / 2)
+                const pillY = Math.max(4, by - 26)
+
+                oCtx.fillStyle = isMatch ? "#10b981" : "rgba(245, 158, 11, 0.9)"
+                oCtx.beginPath()
+                if (typeof oCtx.roundRect === "function") {
+                  oCtx.roundRect(pillX, pillY, pillWidth, pillHeight, 5)
+                } else {
+                  oCtx.rect(pillX, pillY, pillWidth, pillHeight)
+                }
+                oCtx.fill()
+
+                oCtx.fillStyle = "#ffffff"
+                oCtx.fillText(labelText, pillX + 8, pillY + 16)
+                oCtx.restore()
+              }
+
               if (match && match.accepted) {
                 const key = `${match.student.id}_${currentSession}`
                 if (!markedTodaySetRef.current.has(key)) {
@@ -197,7 +265,6 @@ export default function AutomatedFaceAttendancePage() {
                   thumbCanvas.height = 160
                   const tCtx = thumbCanvas.getContext("2d")
                   if (tCtx) {
-                    const [bx, by, bw, bh] = face.box
                     tCtx.drawImage(
                       canvas,
                       Math.max(0, bx - 20),
@@ -226,8 +293,20 @@ export default function AutomatedFaceAttendancePage() {
               // Commit newly recognized faces to cloud database
               const created = await recordGroupAttendance(newHits)
               if (created && created.length > 0) {
-                setLiveRecords((prev) => [...created, ...prev])
-                setSessionNewPresentCount((prev) => prev + created.length)
+                // Defensive enrichment with gallery metadata to guarantee student_name is never undefined
+                const enriched = created.map((rec) => {
+                  const sMatch = galleryRef.current.find((s) => s.id === rec.student_id)
+                  return {
+                    ...rec,
+                    student_name: rec.student_name || sMatch?.name || "Student",
+                    admission_number: rec.admission_number || sMatch?.admissionNumber || "—",
+                    roll_number: rec.roll_number || sMatch?.rollNumber || null,
+                    class_name: rec.class_name || (sMatch as any)?.className || "Class",
+                    section_name: rec.section_name || (sMatch as any)?.sectionName || "A",
+                  }
+                })
+                setLiveRecords((prev) => [...enriched, ...prev])
+                setSessionNewPresentCount((prev) => prev + enriched.length)
               }
             }
           }
@@ -237,13 +316,18 @@ export default function AutomatedFaceAttendancePage() {
       }
     }
 
-    // Next frame tick with 400ms throttle to prevent CPU thrashing
+    // Next frame tick with 350ms throttle to prevent CPU thrashing
     if (loopActiveRef.current) {
       setTimeout(() => {
-        requestAnimationFrame(runDetectionLoop)
-      }, 400)
+        requestAnimationFrame(() => runDetectionLoopRef.current?.())
+      }, 350)
     }
   }, [gallery])
+
+  // Synchronize detection loop ref on every render
+  useEffect(() => {
+    runDetectionLoopRef.current = runDetectionLoop
+  }, [runDetectionLoop])
 
   // Distinct classes for filtering
   const distinctClasses = React.useMemo(() => {
@@ -254,13 +338,17 @@ export default function AutomatedFaceAttendancePage() {
     return Array.from(set)
   }, [liveRecords])
 
-  // Filtered live records
+  // Filtered live records - Safe search filtering avoiding undefined toLowerCase errors
   const filteredRecords = React.useMemo(() => {
     return liveRecords.filter((r) => {
+      const studentName = r.student_name || ""
+      const admissionNumber = r.admission_number || ""
+      const rollNumber = r.roll_number || ""
+
       const matchesSearch =
-        r.student_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        r.admission_number.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (r.roll_number || "").toLowerCase().includes(searchQuery.toLowerCase())
+        studentName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        admissionNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        rollNumber.toLowerCase().includes(searchQuery.toLowerCase())
 
       const matchesClass = filterClass === "all" || r.class_name === filterClass
       const matchesSession = filterSession === "all" || r.session_type === filterSession
@@ -351,6 +439,12 @@ export default function AutomatedFaceAttendancePage() {
               muted
               className={`w-full max-h-[500px] object-cover ${!isRunning ? "hidden" : "block"}`}
             />
+            {/* Live Facial Detection Overlay */}
+            <canvas
+              ref={overlayCanvasRef}
+              className={`absolute inset-0 w-full h-full object-cover pointer-events-none ${!isRunning ? "hidden" : "block"}`}
+            />
+            {/* Hidden analysis canvas */}
             <canvas ref={canvasRef} className="hidden" />
 
             {/* Standby Placeholder */}

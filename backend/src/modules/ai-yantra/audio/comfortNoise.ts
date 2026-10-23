@@ -1,9 +1,10 @@
 /**
  * Comfort Noise Generator (CNG) & Pre-Cached Acoustic Fillers
  * Injects -55 dBFS warm room tone during thinking gaps to eliminate digital-zero dead air.
+ * Caches pre-synthesized acoustic fillers in RAM for zero-latency tool-call coverage.
  */
 
-import { linear16ToMuLaw } from './mulaw';
+import { linear16ToMuLaw, chunkMuLawFrames } from './mulaw';
 
 const FRAME_SIZE = 160; // 20ms @ 8000 Hz mu-law
 
@@ -31,10 +32,10 @@ export function getComfortNoiseFrame(): Buffer {
 }
 
 /**
- * In-memory acoustic filler clips for zero-latency thinking masks
+ * In-memory acoustic filler scripts for zero-latency thinking masks
  */
 export interface AcousticFillerClips {
-  'te-IN': string; // "ఒక్క నిమిషం అండి, రికార్డులు చూసి చెప్తాను..."
+  'te-IN': string; // "ఒక్క నిమిషం అండి, చూసి చెప్తాను..."
   'hi-IN': string; // "एक मिनट जी, मैं अभी देखकर बताती हूँ..."
   'en-IN': string; // "One moment please, let me check that for you..."
 }
@@ -42,21 +43,61 @@ export interface AcousticFillerClips {
 export const ACOUSTIC_FILLER_SCRIPTS: AcousticFillerClips = {
   'te-IN': 'ఒక్క నిమిషం అండి, చూసి చెప్తాను.',
   'hi-IN': 'एक मिनट जी, मैं अभी देखकर बताती हूँ।',
-  'en-IN': 'One moment please, let me verify that for you.',
+  'en-IN': 'One moment please, let me check that for you.',
 };
 
 /**
- * In-memory pre-synthesized audio buffers for instant filler delivery
+ * Generates an acoustic vocalized filler tone (gentle human "umm/hmm" resonance)
+ * as an instantaneous zero-latency fallback if network TTS has not pre-warmed
+ */
+function generateSyntheticFillerFrames(durationSeconds = 1.2): Buffer[] {
+  const sampleRate = 8000;
+  const totalSamples = Math.floor(sampleRate * durationSeconds);
+  const pcm = Buffer.alloc(totalSamples * 2);
+
+  // 180Hz fundamental with 360Hz & 540Hz harmonics shaped with a Hann window
+  for (let i = 0; i < totalSamples; i++) {
+    const t = i / sampleRate;
+    const window = 0.5 * (1 - Math.cos((2 * Math.PI * i) / totalSamples));
+    const wave =
+      0.6 * Math.sin(2 * Math.PI * 180 * t) +
+      0.25 * Math.sin(2 * Math.PI * 360 * t) +
+      0.15 * Math.sin(2 * Math.PI * 540 * t);
+    const sample = Math.round(wave * 4000 * window);
+    pcm.writeInt16LE(sample, i * 2);
+  }
+
+  const muLaw = Buffer.alloc(totalSamples);
+  for (let i = 0; i < totalSamples; i++) {
+    muLaw[i] = linear16ToMuLaw(pcm.readInt16LE(i * 2));
+  }
+
+  return chunkMuLawFrames(muLaw, 160);
+}
+
+const DEFAULT_FALLBACK_FILLER = generateSyntheticFillerFrames(1.2);
+
+/**
+ * In-memory pre-synthesized audio buffers for instant filler delivery from RAM
  */
 class FillerAudioCache {
   private cache = new Map<string, Buffer[]>();
 
-  store(language: string, frames: Buffer[]) {
-    this.cache.set(language, frames);
+  constructor() {
+    // Populate default synthetic fillers immediately
+    this.cache.set('te-IN', DEFAULT_FALLBACK_FILLER);
+    this.cache.set('hi-IN', DEFAULT_FALLBACK_FILLER);
+    this.cache.set('en-IN', DEFAULT_FALLBACK_FILLER);
   }
 
-  get(language: string): Buffer[] | null {
-    return this.cache.get(language) || null;
+  store(language: string, frames: Buffer[]) {
+    if (frames && frames.length > 0) {
+      this.cache.set(language, frames);
+    }
+  }
+
+  get(language: string): Buffer[] {
+    return this.cache.get(language) || this.cache.get('te-IN') || DEFAULT_FALLBACK_FILLER;
   }
 
   has(language: string): boolean {
@@ -65,3 +106,20 @@ class FillerAudioCache {
 }
 
 export const fillerAudioCache = new FillerAudioCache();
+
+/**
+ * Pre-warms acoustic filler clips from Sarvam TTS at server startup
+ */
+export async function prewarmAcousticFillers(synthesizer: (text: string, options: any) => Promise<Buffer[]>) {
+  for (const [lang, script] of Object.entries(ACOUSTIC_FILLER_SCRIPTS)) {
+    try {
+      const frames = await synthesizer(script, { language: lang, speaker: 'priya' });
+      if (frames && frames.length > 0) {
+        fillerAudioCache.store(lang, frames);
+        console.log(`[ACOUSTIC FILLER] Pre-warmed ${frames.length} frames (${frames.length * 20}ms) for ${lang}`);
+      }
+    } catch (err: any) {
+      console.warn(`[ACOUSTIC FILLER] Pre-warm failed for ${lang}:`, err.message);
+    }
+  }
+}

@@ -13,16 +13,16 @@ interface VoicePreviewProps {
 }
 
 const SAMPLE_SCRIPTS: Record<string, string> = {
-  "te-IN": "నమస్కారం అండి! నేను నారాయణ పాఠశాల నుండి ప్రియను మాట్లాడుతున్నాను. రాబోయే శనివారం మన పాఠశాలలో వార్షిక క్రీడా దినోత్సవం నిర్వహించబడుతుంది. మీ పిల్లల చదువు లేదా మార్కుల వివరాలు తెలుసుకోవడానికి మీరు నన్ను అడగవచ్చు.",
+  "te-IN": "నమస్కారం అండి! నేను Narayana School నుండి Priya ని మాట్లాడుతున్నాను. Next Saturday మన school లో Annual Sports Day ఉంది అండి. మీ పిల్లల marks, attendance లేదా fee details గురించి ఏమైనా తెలుసుకోవాలంటే నన్ను అడగవచ్చు.",
   "en-IN": "Good morning! This is Priya calling from Narayana High School. A gentle reminder that the Term Two tuition fee installment is due soon. You can ask me about your pending balance or payment options right now.",
   "hi-IN": "नमस्ते! मैं नारायणा स्कूल से प्रिया बोल रही हूँ। आगामी शनिवार को हमारे स्कूल में वार्षिक खेल दिवस का आयोजन किया जा रहा है। आप अपने बच्चे के अंक या उपस्थिति के बारे में मुझसे पूछ सकते हैं।",
 }
 
 const SUGGESTED_CHIPS: Record<string, string[]> = {
   "te-IN": [
-    "నా బిడ్డకు సైన్స్ లో ఎన్ని మార్కులు వచ్చాయి?",
-    "హాజరు ఎంత శాతం ఉంది?",
-    "ఫీజు ఎంత బకాయి ఉంది?",
+    "Sai Teja కి Science లో ఎన్ని marks వచ్చాయి?",
+    "Attendance percentage ఎంత ఉంది?",
+    "Pending fee details చెప్పండి",
   ],
   "en-IN": [
     "What are my child's marks in Science?",

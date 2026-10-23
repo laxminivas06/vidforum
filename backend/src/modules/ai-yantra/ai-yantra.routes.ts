@@ -9,9 +9,11 @@ import {
   getStudentMarksTool,
   getStudentAttendanceTool,
   getFeeStatusTool,
+  lookupStudentRecordTool,
   normalizeSubjectName,
 } from './intelligence/tools';
 import { processConversationalTurn } from './intelligence/groqBrain';
+import { voiceSessionManager } from './voice-agent.service';
 
 const router = Router();
 
@@ -34,6 +36,10 @@ export async function executeDatabaseTool(instId: string, toolName: string, para
 
   if (toolName === 'get_fee_status') {
     return await getFeeStatusTool(instId, targetStudentId);
+  }
+
+  if (toolName === 'lookup_student_record') {
+    return await lookupStudentRecordTool(instId, parameters?.roll_number_or_name || targetStudentId);
   }
 
   throw new Error(`Unsupported tool: ${toolName}`);
@@ -694,19 +700,27 @@ router.post('/voice/call-test', tenantMiddleware, async (req: Request, res: Resp
 
     let streamUrl: string | undefined;
     let webhookUrl: string | undefined;
-    // Only attach live WebSocket media streaming if explicitly requested and a valid public tunnel is present
-    if (req.body.interactiveStream && env.PUBLIC_BASE_URL) {
+    // Attach live WebSocket media streaming if PUBLIC_BASE_URL is present (unless explicitly disabled)
+    if (env.PUBLIC_BASE_URL && req.body.interactiveStream !== false) {
       const cleanBase = env.PUBLIC_BASE_URL.replace(/\/$/, '');
       const wsHost = cleanBase.replace(/^http/, 'ws');
       streamUrl = `${wsHost}/api/v1/ai-yantra/voice/stream`;
       webhookUrl = `${cleanBase}/api/v1/ai-yantra/voice/webhook/call-ended`;
     }
 
-    const speechScript = language === 'te-IN'
-      ? 'నమస్కారం అండి! నారాయణ స్కూల్ నుంచి ప్రియ మాట్లాడుతున్నాను. వచ్చే శనివారం మన పాఠశాలలో వార్షిక క్రీడా దినోత్సవం జరుగుతుంది. మీకు ఏవైనా సందేహాలు ఉంటే నన్ను అడగవచ్చు అండి.'
-      : language === 'hi-IN'
-      ? 'नमस्ते! मैं नारायण स्कूल से प्रिया बोल रही हूँ। अगले शनिवार हमारे स्कूल में वार्षिक खेल दिवस आयोजित किया जा रहा है। यदि आपके कोई प्रश्न हैं तो आप मुझसे पूछ सकते हैं।'
-      : 'Hello! This is Priya calling from Narayana e-Techno School regarding our upcoming Annual Sports Day celebration. Please let me know if you have any questions.';
+    const speechScript = req.body.initialMessage || (
+      language === 'te-IN'
+        ? useCase === 'fee_reminder'
+          ? 'నమస్కారం అండి! నేను Narayana School నుండి Priya ని మాట్లాడుతున్నాను. Term-2 tuition fee installment due date దగ్గరపడుతోంది అండి. Pending fee balance లేదా payment details కోసం మీరు నన్ను అడగవచ్చు.'
+          : useCase === 'attendance_alert'
+          ? 'నమస్కారం అండి! Narayana School నుండి Priya ని మాట్లాడుతున్నాను. మీ student ఈ రోజు morning assembly కి absent అయ్యారు. Student leave లో ఉన్నారా అని ఒకసారి confirm చేయండి అండి.'
+          : useCase === 'exam_announcement'
+          ? 'నమస్కారం అండి! Narayana School quarterly exam results release అయ్యాయి. Marks మరియు grades వివరాలు తెలుసుకోవడానికి మీరు నన్ను అడగవచ్చు అండి.'
+          : 'నమస్కారం అండి! నేను Narayana School నుండి Priya ని మాట్లాడుతున్నాను. వచ్చే శనివారం మన school లో Annual Sports Day celebration ఉంది అండి. Parents అందరికీ hearty welcome. ఈ event గురించి ఏవైనా doubts ఉంటే నన్ను అడగవచ్చు అండి.'
+        : language === 'hi-IN'
+        ? 'नमस्ते! मैं Narayana School से Priya बोल रही हूँ। आगामी शनिवार को हमारे school में Annual Sports Day का आयोजन किया जा रहा है। यदि आपके कोई प्रश्न हैं तो आप मुझसे पूछ सकते हैं।'
+        : 'Hello! This is Priya calling from Narayana e-Techno School regarding our upcoming Annual Sports Day celebration. Please let me know if you have any questions.'
+    );
 
     // Synthesize clean audio for in-browser playback preview
     const audioBase64 = await callSarvamTTS(speechScript, language, 'priya');
@@ -724,9 +738,17 @@ router.post('/voice/call-test', tenantMiddleware, async (req: Request, res: Resp
     const studentName = studentRes.rows[0]?.student_name || 'Sai Teja Chary';
     const guardianName = studentRes.rows[0]?.guardian_name || 'Jagan Garu';
 
+    const instId = req.institutionId || env.DEFAULT_TENANT_ID || '18b3b9a6-0791-47f4-bbd0-bf7c0221e18f';
+
+    // Ring-State Pre-warming: Pre-fetch dossier and pre-synthesize greeting frames in RAM for 0ms pickup latency
+    voiceSessionManager.prefetchCallContext(normalizedPhone, instId, studentAdmissionNumber).catch(() => {});
+    voiceSessionManager.prefetchCallContext(studentAdmissionNumber, instId, studentAdmissionNumber).catch(() => {});
+    voiceSessionManager.prewarmGreetingAudio(normalizedPhone, speechScript, language).catch(() => {});
+    voiceSessionManager.prewarmGreetingAudio(studentAdmissionNumber, speechScript, language).catch(() => {});
+
     // Place call through selected Telephony Provider
     const callResult = await telephonyProvider.placeCall(normalizedPhone, {
-      institutionId: req.institutionId!,
+      institutionId: instId,
       studentId: studentAdmissionNumber,
       studentName,
       guardianName,
@@ -736,6 +758,11 @@ router.post('/voice/call-test', tenantMiddleware, async (req: Request, res: Resp
       streamUrl,
       webhookUrl,
     });
+
+    if (callResult.callSid) {
+      voiceSessionManager.prefetchCallContext(callResult.callSid, instId, studentAdmissionNumber).catch(() => {});
+      voiceSessionManager.prewarmGreetingAudio(callResult.callSid, speechScript, language).catch(() => {});
+    }
 
     const isLive = callResult.status === 'initiated';
 
@@ -846,6 +873,61 @@ router.post('/voice/webhook/call-ended', tenantMiddleware, async (req: Request, 
     }, isInterrupted ? 'Post-call interruption recovery evaluated' : 'Call completed normally');
   } catch (error: any) {
     sendError(res, error.message, 500);
+  }
+});
+
+// ALL /api/v1/ai-yantra/voice/outbound-twiml (Twilio Outbound TwiML with Keepalive)
+router.all('/voice/outbound-twiml', async (req: Request, res: Response) => {
+  try {
+    const q = { ...req.query, ...req.body };
+    const institutionId = (q.institutionId as string) || env.DEFAULT_TENANT_ID || '00000000-0000-0000-0000-000000000001';
+    const studentId = (q.studentId as string) || 'SIA-2026-0101';
+    const studentName = (q.studentName as string) || 'Student';
+    const guardianName = (q.guardianName as string) || 'Parent';
+    const phone = (q.phone as string) || (q.To as string) || '';
+    const language = (q.language as string) || 'te-IN';
+    const useCase = (q.useCase as string) || 'fee_reminder';
+
+    console.log(`[TWILIO OUTBOUND TWIML] Carrier requested TwiML for CallSid: ${q.CallSid || q.callSid}, To: ${phone}`);
+
+    let streamUrl: string | undefined;
+    if (env.PUBLIC_BASE_URL) {
+      const cleanBase = env.PUBLIC_BASE_URL.replace(/\/$/, '');
+      const wsHost = cleanBase.replace(/^http/, 'ws');
+      streamUrl = `${wsHost}/api/v1/ai-yantra/voice/stream`;
+    }
+
+    if (streamUrl) {
+      const twiml = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Connect>
+    <Stream url="${streamUrl}">
+      <Parameter name="institutionId" value="${institutionId}" />
+      <Parameter name="studentId" value="${studentId}" />
+      <Parameter name="studentName" value="${encodeURIComponent(studentName)}" />
+      <Parameter name="guardianName" value="${encodeURIComponent(guardianName)}" />
+      <Parameter name="phone" value="${phone}" />
+      <Parameter name="language" value="${language}" />
+      <Parameter name="useCase" value="${useCase}" />
+    </Stream>
+  </Connect>
+  <Pause length="40" />
+</Response>`;
+      res.type('text/xml');
+      return res.send(twiml);
+    } else {
+      const say = language === 'te-IN'
+        ? `<Say voice="Google.te-IN-Standard-A" language="te-IN">నమస్కారం అండి</Say>`
+        : `<Say voice="Polly.Aditi" language="en-IN">Hello</Say>`;
+      const twiml = `<?xml version="1.0" encoding="UTF-8"?><Response><Pause length="1"/>${say}<Pause length="30"/></Response>`;
+      res.type('text/xml');
+      return res.send(twiml);
+    }
+  } catch (err: any) {
+    console.error('[OUTBOUND TWIML ERROR]', err.message);
+    const twiml = `<?xml version="1.0" encoding="UTF-8"?><Response><Say>Connection error.</Say></Response>`;
+    res.type('text/xml');
+    res.send(twiml);
   }
 });
 

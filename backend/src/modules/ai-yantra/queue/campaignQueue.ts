@@ -1,16 +1,22 @@
 /**
  * BullMQ + Redis Campaign Pacer & Pacing Queue Worker
- * Enforces rate-limiting (max 10 calls/sec), concurrency limits, and retry policies.
+ * Enforces rate-limiting (max 10 calls/sec), concurrency limits (10 concurrent calls),
+ * Answering Machine Detection (AMD) with exponential backoff (45m later, max 2 retries)
+ * for busy/no-answer, and strict 08:00 AM - 08:00 PM IST TRAI regulatory guard (auto-pause at 19:58 IST).
  * Fail-Open Architecture: If Redis is unavailable, automatically runs in degraded
  * PostgreSQL/memory pacer mode without crashing or blocking teammates.
  */
 
-import { Queue, Worker, QueueEvents } from 'bullmq';
+import { Queue, Worker } from 'bullmq';
 import IORedis from 'ioredis';
 import { db } from '../../../config/database';
 import { env } from '../../../config/env';
-import { isInsideTraiWindow, isNearingCutoff, getMsUntilNextWindowOpen } from './traiGuard';
-import { getTelephonyProvider, maskPhoneNumber, CallContext } from '../telephony';
+import {
+  isInsideTraiWindow,
+  isNearingCutoff,
+  startTraiComplianceMonitor,
+} from './traiGuard';
+import { getTelephonyProvider, maskPhoneNumber } from '../telephony';
 
 export interface CampaignJobData {
   campaignId: string;
@@ -35,6 +41,7 @@ let redisClient: IORedis | null = null;
 let campaignQueue: Queue<CampaignJobData> | null = null;
 let campaignWorker: Worker<CampaignJobData> | null = null;
 let isRedisAvailable = false;
+let isTraiPausedGlobally = false;
 
 // Active in-memory tracking for fallback mode
 const activeFallbackIntervals = new Map<string, NodeJS.Timeout>();
@@ -52,7 +59,7 @@ function getRedisConnection(): IORedis | null {
       retryStrategy: (times) => {
         if (times > 3) {
           console.warn('[CAMPAIGN QUEUE:REDIS] Redis unreachable after 3 attempts. Failing open to database pacer.');
-          return null; // Stop reconnecting, fail open
+          return null;
         }
         return Math.min(times * 1000, 3000);
       },
@@ -75,12 +82,14 @@ function getRedisConnection(): IORedis | null {
 }
 
 /**
- * Executes a single outbound telephone call for a recipient
+ * Executes a single outbound telephone call for a recipient with AMD and Retry handling
  */
 async function executeRecipientDial(jobData: CampaignJobData): Promise<{ status: string; errorMessage?: string }> {
   // 1. TRAI Calling Window Guard (08:00 AM - 08:00 PM IST)
-  if (!isInsideTraiWindow() || isNearingCutoff()) {
-    console.log(`[CAMPAIGN PACER] Pausing dial to ${maskPhoneNumber(jobData.phone)}: Outside TRAI hours or nearing 07:58 PM cutoff.`);
+  if (!isInsideTraiWindow() || isNearingCutoff() || isTraiPausedGlobally) {
+    console.log(
+      `[CAMPAIGN PACER] Postponing dial to ${maskPhoneNumber(jobData.phone)}: Outside TRAI window or nearing 07:58 PM cutoff.`
+    );
     return { status: 'trai_paused', errorMessage: 'Call postponed to next TRAI window (08:00 AM IST).' };
   }
 
@@ -98,12 +107,13 @@ async function executeRecipientDial(jobData: CampaignJobData): Promise<{ status:
   const telephony = getTelephonyProvider();
 
   // 3. Mark recipient status as dialing in DB
-  await db.query(
-    `UPDATE ai_voice_recipients SET status = 'dialing', last_call_at = now() WHERE id = $1`,
-    [jobData.recipientId]
-  );
+  await db.query(`UPDATE ai_voice_recipients SET status = 'dialing', last_call_at = now() WHERE id = $1`, [
+    jobData.recipientId,
+  ]);
 
-  console.log(`[CAMPAIGN PACER:DIAL] Dialing ${maskPhoneNumber(jobData.phone)} for student ${jobData.studentName} [${jobData.language}]`);
+  console.log(
+    `[CAMPAIGN PACER:DIAL] Dialing ${maskPhoneNumber(jobData.phone)} for student ${jobData.studentName} [${jobData.language}] (Attempt ${jobData.attemptNumber + 1})`
+  );
 
   const callResult = await telephony.placeCall(jobData.phone, {
     institutionId: jobData.institutionId,
@@ -120,16 +130,16 @@ async function executeRecipientDial(jobData: CampaignJobData): Promise<{ status:
     amdTimeoutSeconds: 4,
   });
 
-  // 4. Update Database based on result
+  // 4. Update Database based on result with AMD Retry Policy
   if (callResult.status === 'initiated' || callResult.status === 'queued') {
-    await db.query(
-      `UPDATE ai_voice_recipients SET status = 'in_progress', last_call_at = now() WHERE id = $1`,
-      [jobData.recipientId]
-    );
+    await db.query(`UPDATE ai_voice_recipients SET status = 'in_progress', last_call_at = now() WHERE id = $1`, [
+      jobData.recipientId,
+    ]);
     return { status: 'in_progress' };
   } else {
+    // Schedule retry with exponential backoff (45 minutes, max 2 retries)
     const nextAttempt = jobData.attemptNumber + 1;
-    const canRetry = nextAttempt < 2;
+    const isRetryable = nextAttempt < 2;
 
     await db.query(
       `UPDATE ai_voice_recipients
@@ -140,9 +150,9 @@ async function executeRecipientDial(jobData: CampaignJobData): Promise<{ status:
        WHERE id = $1`,
       [
         jobData.recipientId,
-        canRetry ? 'no_answer' : 'failed',
+        isRetryable ? 'no_answer' : 'failed',
         nextAttempt,
-        canRetry ? new Date(Date.now() + RETRY_BACKOFF_MS) : null,
+        isRetryable ? new Date(Date.now() + RETRY_BACKOFF_MS) : null,
       ]
     );
 
@@ -155,6 +165,7 @@ async function executeRecipientDial(jobData: CampaignJobData): Promise<{ status:
           error: callResult.errorMessage,
           actionRequired: callResult.actionRequired,
           provider: callResult.provider,
+          amdResult: callResult.amdResult || 'unknown',
         }),
       ]
     );
@@ -164,9 +175,31 @@ async function executeRecipientDial(jobData: CampaignJobData): Promise<{ status:
 }
 
 /**
- * Starts BullMQ Queue & Worker with fail-open fallback
+ * Starts BullMQ Queue, Worker & TRAI Monitor with fail-open fallback
  */
 export async function initializeCampaignQueue() {
+  // Start active TRAI compliance monitor (07:58 PM auto-pause, 08:00 AM auto-resume)
+  startTraiComplianceMonitor({
+    onAutoPause: async () => {
+      isTraiPausedGlobally = true;
+      if (campaignQueue) {
+        await campaignQueue.pause();
+      }
+      for (const [campaignId, interval] of activeFallbackIntervals.entries()) {
+        clearInterval(interval);
+        activeFallbackIntervals.delete(campaignId);
+      }
+      console.log('[CAMPAIGN QUEUE:TRAI] All active calling queues paused for regulatory cutoff.');
+    },
+    onAutoResume: async () => {
+      isTraiPausedGlobally = false;
+      if (campaignQueue) {
+        await campaignQueue.resume();
+      }
+      console.log('[CAMPAIGN QUEUE:TRAI] Calling queues resumed for morning window.');
+    },
+  });
+
   const connection = getRedisConnection();
   if (!connection) {
     console.log('[CAMPAIGN QUEUE] Redis not configured. Using high-efficiency PostgreSQL pacer worker.');
@@ -226,7 +259,9 @@ export async function initializeCampaignQueue() {
 /**
  * Dispatches an entire campaign's pending recipients into the pacer queue
  */
-export async function dispatchCampaignToQueue(campaignId: string): Promise<{ queuedCount: number; mode: 'bullmq' | 'database_fallback' }> {
+export async function dispatchCampaignToQueue(
+  campaignId: string
+): Promise<{ queuedCount: number; mode: 'bullmq' | 'database_fallback' }> {
   // Fetch pending recipients from database
   const res = await db.query(
     `SELECT r.id, r.phone, r.retry_count,
@@ -278,7 +313,6 @@ export async function dispatchCampaignToQueue(campaignId: string): Promise<{ que
       });
       queuedCount++;
     } else {
-      // In database fallback mode, queue is tracked directly via PostgreSQL statuses
       queuedCount++;
     }
   }
@@ -302,7 +336,7 @@ function startFallbackDatabasePacer(campaignId: string) {
 
   const interval = setInterval(async () => {
     // 1. TRAI Window check
-    if (!isInsideTraiWindow() || isNearingCutoff()) {
+    if (!isInsideTraiWindow() || isNearingCutoff() || isTraiPausedGlobally) {
       return;
     }
 
@@ -321,14 +355,20 @@ function startFallbackDatabasePacer(campaignId: string) {
        LEFT JOIN student_guardians sg ON sg.guardian_id = g.id
        LEFT JOIN students s ON s.id = sg.student_id
        WHERE r.campaign_id = $1
-         AND (r.status = 'queued' OR (r.status IN ('no_answer', 'busy') AND COALESCE(r.retry_count, 0) < 2 AND (r.next_retry_at IS NULL OR r.next_retry_at <= now())))
+         AND (
+           r.status = 'queued'
+           OR (
+             r.status IN ('no_answer', 'busy')
+             AND COALESCE(r.retry_count, 0) < 2
+             AND (r.next_retry_at IS NULL OR r.next_retry_at <= now())
+           )
+         )
        ORDER BY r.created_at ASC
        LIMIT 1`,
       [campaignId]
     );
 
     if (recipientRes.rows.length === 0) {
-      // Check if finished
       const remaining = await db.query(
         `SELECT count(*) FROM ai_voice_recipients WHERE campaign_id = $1 AND status IN ('queued', 'dialing', 'in_progress')`,
         [campaignId]
@@ -354,7 +394,7 @@ function startFallbackDatabasePacer(campaignId: string) {
       scriptText: row.script_text,
       attemptNumber: row.retry_count || 0,
     });
-  }, 2500); // Calm 2.5s pacing interval per dial
+  }, 2500); // 2.5s pacing interval per dial
 
   activeFallbackIntervals.set(campaignId, interval);
 }
